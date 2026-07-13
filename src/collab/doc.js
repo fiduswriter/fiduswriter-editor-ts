@@ -643,7 +643,7 @@ export class ModCollabDoc {
         // Initialize snapshot manager now that we have the key
         if (!this.mod.editor.e2ee.snapshotManager) {
             const {E2EESnapshotManager} = await import(
-                "../e2ee/snapshot-manager"
+                "../e2ee/snapshot-manager.js"
             )
             this.mod.editor.e2ee.snapshotManager = new E2EESnapshotManager(
                 this.mod.editor
@@ -685,7 +685,7 @@ export class ModCollabDoc {
         let decryptedImages = doc.images
         if (doc.images) {
             decryptedImages = {}
-            const {E2EEEncryptor} = await import("../e2ee/encryptor")
+            const {E2EEEncryptor} = await import("../e2ee/encryptor.js")
             for (const [id, image] of Object.entries(doc.images)) {
                 decryptedImages[id] = image
                 if (typeof image.copyright === "string") {

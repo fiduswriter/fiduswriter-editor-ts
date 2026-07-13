@@ -44,7 +44,7 @@ export class ImageSelectionDialog {
                     text: gettext("Add new image"),
                     icon: "plus-circle",
                     click: () => {
-                        import("../edit_dialog").then(({ImageEditDialog}) => {
+                        import("../edit_dialog/index.js").then(({ImageEditDialog}) => {
                             const targetDB = this.isE2EE()
                                 ? this.imageDB
                                 : this.userImageDB

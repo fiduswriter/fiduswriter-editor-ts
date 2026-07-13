@@ -13,6 +13,8 @@ import {
     enterPasswordDialog
 } from "../e2ee/password-dialog.js"
 
+export {serializeHelp} from "./schema.js"
+
 export class ModDocumentTemplate {
     constructor(editor) {
         editor.mod.documentTemplate = this

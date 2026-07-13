@@ -435,7 +435,7 @@ export const headerbarModel = () => ({
                                                 editor.e2ee.encryptionIterations
                                             )
                                         const {E2EEEncryptor} = await import(
-                                            "../../e2ee/encryptor"
+                                            "../../e2ee/encryptor.js"
                                         )
                                         const testValue = "test"
                                         const encryptedTest =

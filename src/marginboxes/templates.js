@@ -1,5 +1,5 @@
 import {avatarTemplate, escapeText, localizeDate} from "fwtoolkit"
-import {READ_ONLY_ROLES} from "..//index.js"
+import {READ_ONLY_ROLES} from "../index.js"
 import {serializeHelp} from "../document_template/index.js"
 import {serializeComment} from "../comments/editors/index.js"
 
