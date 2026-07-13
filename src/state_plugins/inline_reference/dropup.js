@@ -1,5 +1,5 @@
 import {escapeText} from "fwtoolkit"
-import {dateToYear, litToText, nameToText} from "../../../bibliography/tools"
+import {dateToYear, litToText, nameToText} from "@fiduswriter/bibliography-manager/tools"
 import {getInternalTargets} from "../links"
 
 /**

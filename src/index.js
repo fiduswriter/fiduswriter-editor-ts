@@ -36,7 +36,7 @@ import {E2EESnapshotManager} from "./e2ee/snapshot-manager"
 
 import {getSettings} from "@fiduswriter/document/schema/convert"
 import {docSchema} from "@fiduswriter/document/schema/document/index"
-import {plugins} from "../../plugins/editor"
+import {plugins} from "./plugins/editor"
 import {ModCitations} from "./citations"
 import {ModCollab} from "./collab"
 import {ModComments} from "./comments"
@@ -60,8 +60,8 @@ import {ModNavigator} from "./navigator"
 import {NoCollabSave} from "./no_collab_save"
 import {ModTrack, acceptAllNoInsertions, amendTransaction} from "./track"
 
-import {ExportFidusFile} from "../exporter/native/file"
-import {imageEditModel} from "../images/edit_dialog/model"
+import {ExportFidusFile} from "./exporter/native/file"
+import {imageEditModel} from "./images/edit_dialog/model"
 import {buildEditorKeymap} from "./keymap"
 import {
     accessRightsPlugin,

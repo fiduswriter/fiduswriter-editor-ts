@@ -1,6 +1,6 @@
 import {avatarTemplate, escapeText, localizeDate} from "fwtoolkit"
 import {READ_ONLY_ROLES} from "../"
-import {serializeHelp} from "../../document_template"
+import {serializeHelp} from "../document_template"
 import {serializeComment} from "../comments/editors"
 
 /** A template for an answer to a comment */

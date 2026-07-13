@@ -22,7 +22,7 @@ import {
     ReplaceStep
 } from "prosemirror-transform"
 import {EditorView} from "prosemirror-view"
-import {RenderCitations} from "../../../citations/render"
+import {RenderCitations} from "../../citations/render"
 import {buildEditorKeymap} from "../../keymap"
 import {jumpHiddenNodesPlugin, searchPlugin} from "../../state_plugins"
 import {trackedTransaction} from "../../track"

@@ -12,7 +12,7 @@ export class TextPaste {
     }
 
     init() {
-        import("../../../bibliography/import").then(
+        import("@fiduswriter/bibliography-manager/import").then(
             ({BibliographyImporter}) => {
                 const importer = new BibliographyImporter(
                     this.text,

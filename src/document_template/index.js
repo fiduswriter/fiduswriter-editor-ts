@@ -6,7 +6,7 @@ import {
     get,
     shortFileTitle
 } from "fwtoolkit"
-import {SaveCopy} from "../../exporter/native"
+import {SaveCopy} from "../exporter/native"
 import {E2EEKeyManager} from "../e2ee/key-manager"
 import {
     createPasswordDialog,

@@ -5,10 +5,10 @@ import {
     postJson,
     shortFileTitle
 } from "fwtoolkit"
-import {CopyrightDialog} from "../../../copyright_dialog"
-import {DocumentAccessRightsDialog} from "../../../documents/access_rights"
-import {SaveCopy, SaveRevision} from "../../../exporter/native"
-import {ExportFidusFile} from "../../../exporter/native/file"
+import {CopyrightDialog} from "../../copyright_dialog"
+import {DocumentAccessRightsDialog} from "../../documents/access_rights"
+import {SaveCopy, SaveRevision} from "../../exporter/native"
+import {ExportFidusFile} from "../../exporter/native/file"
 import {LanguageDialog, RevisionDialog} from "../../dialogs"
 import {E2EEKeyManager} from "../../e2ee/key-manager"
 import {PassphraseManager} from "../../e2ee/passphrase-manager"

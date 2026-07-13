@@ -1,4 +1,4 @@
-import {CopyrightDialog} from "../../../copyright_dialog"
+import {CopyrightDialog} from "../../copyright_dialog"
 
 export const imageMenuModel = () => ({
     content: [

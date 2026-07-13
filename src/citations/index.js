@@ -1,6 +1,6 @@
 import {BIBLIOGRAPHY_HEADERS} from "@fiduswriter/document/schema/i18n"
 import {Dialog, cancelPromise} from "fwtoolkit"
-import {RenderCitations} from "../../citations/render"
+import {RenderCitations} from "./render"
 
 export class ModCitations {
     constructor(editor) {
@@ -262,7 +262,7 @@ export class ModCitations {
                         el.dataset.reference
                 )
                 this.checkTrackingDialog()
-                    .then(() => import("../../bibliography/form"))
+                    .then(() => import("@fiduswriter/bibliography-manager/form"))
                     .then(({BibEntryForm}) => {
                         const form = new BibEntryForm(
                             this.editor.mod.db.bibDB,
