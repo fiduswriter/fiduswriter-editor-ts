@@ -171,7 +171,7 @@ export class CitationDialog {
     }
 
     registerNewSource() {
-        import("@fiduswriter/bibliography-manager/form/index.js").then(({BibEntryForm}) => {
+        import("@fiduswriter/bibliography-manager/form").then(({BibEntryForm}) => {
             const form = new BibEntryForm(this.editor.mod.db.bibDB)
             form.init().then(idTranslations => {
                 const ids = idTranslations.map(idTrans => idTrans[1])
