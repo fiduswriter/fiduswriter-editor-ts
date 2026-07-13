@@ -1,7 +1,7 @@
 import {Plugin, PluginKey} from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 
-import {findSelectedChanges} from "./find_selected_changes"
+import {findSelectedChanges} from "./find_selected_changes.js"
 
 export const key = new PluginKey("track")
 export const selectedInsertionSpec = {}

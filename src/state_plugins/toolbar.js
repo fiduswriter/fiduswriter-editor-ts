@@ -1,6 +1,6 @@
 import {Plugin, PluginKey} from "prosemirror-state"
 
-import {ToolbarView} from "../menus"
+import {ToolbarView} from "../menus/index.js"
 
 const key = new PluginKey("toolbar")
 export const toolbarPlugin = options =>

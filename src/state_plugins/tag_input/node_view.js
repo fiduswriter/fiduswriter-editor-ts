@@ -1,9 +1,9 @@
 import {GapCursor} from "prosemirror-gapcursor"
 import {TextSelection} from "prosemirror-state"
-import {addDeletedPartWidget} from "../document_template"
+import {addDeletedPartWidget} from "../document_template.js"
 
-import {shouldPreventTagInputFocus} from "./plugin"
-import {createTagEditor} from "./tag_editor"
+import {shouldPreventTagInputFocus} from "./plugin.js"
+import {createTagEditor} from "./tag_editor.js"
 
 export class TagsPartView {
     constructor(node, view, getPos) {

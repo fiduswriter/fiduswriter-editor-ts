@@ -1,7 +1,7 @@
 import {keyName} from "w3c-keyname"
-import {addDeletedPartWidget} from "../document_template"
+import {addDeletedPartWidget} from "../document_template.js"
 
-import {AddButton} from "./add_button"
+import {AddButton} from "./add_button.js"
 
 export class ContributorsPartView {
     constructor(node, view, getPos) {

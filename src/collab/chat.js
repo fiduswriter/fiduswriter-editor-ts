@@ -1,6 +1,6 @@
 import {localizeDate, whenReady} from "fwtoolkit"
-import {E2EEEncryptor} from "../e2ee/encryptor"
-import {messageTemplate} from "./templates"
+import {E2EEEncryptor} from "../e2ee/encryptor.js"
+import {messageTemplate} from "./templates.js"
 
 /*
  * Functions for chat between users who access a document simultaneously.

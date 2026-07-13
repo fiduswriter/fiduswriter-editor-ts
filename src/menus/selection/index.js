@@ -1,2 +1,2 @@
-export {selectionMenuModel} from "./model"
-export {SelectionMenuView} from "./view"
+export {selectionMenuModel} from "./model.js"
+export {SelectionMenuView} from "./view.js"

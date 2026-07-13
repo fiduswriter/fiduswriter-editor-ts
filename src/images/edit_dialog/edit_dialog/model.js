@@ -1,6 +1,6 @@
 import Cropper from "cropperjs"
 
-import {CopyrightDialog} from "../../../copyright_dialog"
+import {CopyrightDialog} from "../../../copyright_dialog/index.js"
 
 let mediaPreviewerImg = false
 

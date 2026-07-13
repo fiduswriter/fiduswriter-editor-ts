@@ -5,8 +5,8 @@ import {NodeSelection, TextSelection} from "prosemirror-state"
 import {EditorState} from "prosemirror-state"
 import {EditorView} from "prosemirror-view"
 
-import {nextSelection, submitTag} from "./helpers"
-import {pastePlugin, placeholderPlugin} from "./tag_editor_plugins"
+import {nextSelection, submitTag} from "./helpers.js"
+import {pastePlugin, placeholderPlugin} from "./tag_editor_plugins.js"
 
 // WeakMap to store tag input references for access from the plugin
 export const tagInputReferences = new WeakMap()

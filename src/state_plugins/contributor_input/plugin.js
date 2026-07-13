@@ -11,10 +11,10 @@
 import {NodeSelection, Plugin, PluginKey} from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 
-import {ContributorDialog} from "../../dialogs"
-import {createDropUp} from "./dropup"
-import {nextSelection} from "./helpers"
-import {ContributorsPartView} from "./node_view"
+import {ContributorDialog} from "../../dialogs/index.js"
+import {createDropUp} from "./dropup.js"
+import {nextSelection} from "./helpers.js"
+import {ContributorsPartView} from "./node_view.js"
 
 const key = new PluginKey("contributorInput")
 

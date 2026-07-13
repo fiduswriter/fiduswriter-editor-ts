@@ -22,21 +22,21 @@ import {
     ReplaceStep
 } from "prosemirror-transform"
 import {EditorView} from "prosemirror-view"
-import {RenderCitations} from "../../citations/render"
-import {buildEditorKeymap} from "../../keymap"
-import {jumpHiddenNodesPlugin, searchPlugin} from "../../state_plugins"
-import {trackedTransaction} from "../../track"
-import {changeSet} from "./changeset"
-import {FootnoteView} from "./footnotes"
-import {recreateTransform} from "./recreate_transform"
-import {createDiffSchema} from "./schema"
-import {clipboardPlugin, diffPlugin} from "./state_plugins"
+import {RenderCitations} from "../../citations/render.js"
+import {buildEditorKeymap} from "../../keymap.js"
+import {jumpHiddenNodesPlugin, searchPlugin} from "../../state_plugins/index.js"
+import {trackedTransaction} from "../../track/index.js"
+import {changeSet} from "./changeset.js"
+import {FootnoteView} from "./footnotes.js"
+import {recreateTransform} from "./recreate_transform.js"
+import {createDiffSchema} from "./schema.js"
+import {clipboardPlugin, diffPlugin} from "./state_plugins/index.js"
 import {
     checkPresenceOfdiffdata,
     dispatchRemoveDiffdata,
     removeDiffFromJson,
     simplifyTransform
-} from "./tools"
+} from "./tools.js"
 
 export class MergeEditor {
     constructor(editor, cpDoc, offlineDoc, onlineDoc, offlineTr, onlineTr, db) {

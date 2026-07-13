@@ -1,61 +1,61 @@
-export {accessRightsPlugin} from "./access_rights"
+export {accessRightsPlugin} from "./access_rights.js"
 export {
     contributorInputPlugin,
     ContributorsPartView
-} from "./contributor_input"
-export {citationRenderPlugin} from "./citation_render"
-export {clipboardPlugin} from "./clipboard"
+} from "./contributor_input/index.js"
+export {citationRenderPlugin} from "./citation_render.js"
+export {clipboardPlugin} from "./clipboard.js"
 export {
     getSelectionUpdate,
     updateCollaboratorSelection,
     removeCollaboratorSelection,
     collabCaretsPlugin
-} from "./collab_carets"
+} from "./collab_carets.js"
 export {
     addCommentDuringCreationDecoration,
     removeCommentDuringCreationDecoration,
     getCommentDuringCreationDecoration,
     commentsPlugin
-} from "./comments"
+} from "./comments.js"
 export {
     documentTemplatePlugin,
     checkProtectedInSelection,
     getProtectedRanges,
     getAllowedElementsAndMarks
-} from "./document_template"
+} from "./document_template.js"
 export {
     findFootnoteMarkers,
     getFootnoteMarkerContents,
     updateFootnoteMarker,
     getFootnoteMarkers,
     footnoteMarkersPlugin
-} from "./footnote_markers"
-export {headerbarPlugin} from "./headerbar"
-export {jumpHiddenNodesPlugin} from "./jump_hidden_nodes"
+} from "./footnote_markers.js"
+export {headerbarPlugin} from "./headerbar.js"
+export {jumpHiddenNodesPlugin} from "./jump_hidden_nodes.js"
 export {
     linksPlugin,
     getInternalTargets
-} from "./links"
-export {marginboxesPlugin} from "./marginboxes"
-export {orderedListMenuPlugin} from "./ordered_list_menu"
-export {placeholdersPlugin} from "./placeholders"
-export {selectionMenuPlugin} from "./selection_menu"
-export {settingsPlugin} from "./settings"
-export {tablePlugin} from "./table"
-export {figurePlugin} from "./figure"
-export {codeBlockPlugin} from "./code_block"
+} from "./links.js"
+export {marginboxesPlugin} from "./marginboxes.js"
+export {orderedListMenuPlugin} from "./ordered_list_menu.js"
+export {placeholdersPlugin} from "./placeholders.js"
+export {selectionMenuPlugin} from "./selection_menu.js"
+export {settingsPlugin} from "./settings.js"
+export {tablePlugin} from "./table.js"
+export {figurePlugin} from "./figure.js"
+export {codeBlockPlugin} from "./code_block.js"
 export {
     tagInputPlugin,
     TagsPartView
-} from "./tag_input"
-export {tocRenderPlugin} from "./toc_render"
-export {toolbarPlugin} from "./toolbar"
+} from "./tag_input/index.js"
+export {tocRenderPlugin} from "./toc_render.js"
+export {toolbarPlugin} from "./toolbar.js"
 export {
     trackPlugin,
     getSelectedChanges,
     setSelectedChanges,
     deactivateAllSelectedChanges
-} from "./track"
+} from "./track/index.js"
 export {
     searchPlugin,
     setSearchTerm,
@@ -64,10 +64,10 @@ export {
     selectNextSearchMatch,
     deselectSearchMatch,
     endSearch
-} from "./search"
+} from "./search.js"
 export {
     inlineReferencePlugin,
     getInlineReferenceState,
     setInlineReferenceState
-} from "./inline_reference"
-export {inlineMathPlugin} from "./inline_math"
+} from "./inline_reference/index.js"
+export {inlineMathPlugin} from "./inline_math.js"

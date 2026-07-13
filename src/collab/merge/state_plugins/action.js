@@ -1,7 +1,7 @@
 import {showSystemMessage} from "fwtoolkit"
 import {TextSelection} from "prosemirror-state"
 import {AddMarkStep, Mapping, RemoveMarkStep, Step} from "prosemirror-transform"
-import {dispatchRemoveDiffdata} from "../tools"
+import {dispatchRemoveDiffdata} from "../tools.js"
 
 export const copyChange = (view, from, to) => {
     /* when a certain change cannot be applied automatically,

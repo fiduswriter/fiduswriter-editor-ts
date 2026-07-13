@@ -1,6 +1,6 @@
 import {Plugin, PluginKey} from "prosemirror-state"
 
-import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../.."
+import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../../index.js"
 
 const key = new PluginKey("accessRights")
 

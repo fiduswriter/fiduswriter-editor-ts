@@ -1,5 +1,5 @@
-import {ModBibliographyDB} from "./bibliography"
-import {ModImageDB} from "./images"
+import {ModBibliographyDB} from "./bibliography.js"
+import {ModImageDB} from "./images.js"
 
 export class ModDB {
     constructor(editor) {

@@ -1,7 +1,7 @@
 import {addAlert, postJson} from "fwtoolkit"
 import {receiveTransaction} from "prosemirror-collab"
 import {Transform} from "prosemirror-transform"
-import {recreateTransform} from "../collab/merge/recreate_transform"
+import {recreateTransform} from "../collab/merge/recreate_transform.js"
 
 /**
  * Handles periodic saving and conflict resolution for the editor

@@ -1,5 +1,5 @@
 import {Dialog} from "fwtoolkit"
-import {keyBindingsTemplate} from "./templates"
+import {keyBindingsTemplate} from "./templates.js"
 /* This is an adaptation of question.mark for Fidus Writer http://fiduswriter.org
  * originally by Gabriel Lopez <gabriel.marcos.lopez@gmail.com>
  */

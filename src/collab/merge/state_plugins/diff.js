@@ -3,14 +3,14 @@ import {DOMSerializer} from "prosemirror-model"
 import {NodeSelection, Plugin, PluginKey} from "prosemirror-state"
 import {Mapping} from "prosemirror-transform"
 import {Decoration, DecorationSet} from "prosemirror-view"
-import {changeSet} from "../changeset"
-import {readOnlyFnEditor} from "../footnotes"
+import {changeSet} from "../changeset.js"
+import {readOnlyFnEditor} from "../footnotes.js"
 import {
     addDeletionMarks,
     dispatchRemoveDiffdata,
     removeDiffFromJson,
     updateMarkData
-} from "../tools"
+} from "../tools.js"
 import {
     acceptChanges,
     addDeletedContentBack,
@@ -18,7 +18,7 @@ import {
     deleteContent,
     handleMarks,
     removeDecoration
-} from "./action"
+} from "./action.js"
 
 function createHiglightDecoration(from, to, state) {
     /* Creates a yellow coloured highlight decoration when the user

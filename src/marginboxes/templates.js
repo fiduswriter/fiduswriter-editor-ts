@@ -1,7 +1,7 @@
 import {avatarTemplate, escapeText, localizeDate} from "fwtoolkit"
-import {READ_ONLY_ROLES} from "../"
-import {serializeHelp} from "../document_template"
-import {serializeComment} from "../comments/editors"
+import {READ_ONLY_ROLES} from "..//index.js"
+import {serializeHelp} from "../document_template/index.js"
+import {serializeComment} from "../comments/editors/index.js"
 
 /** A template for an answer to a comment */
 const answerCommentTemplate = ({

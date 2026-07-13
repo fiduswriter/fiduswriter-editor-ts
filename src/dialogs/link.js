@@ -1,9 +1,9 @@
 import {TextSelection} from "prosemirror-state"
 
-import {linkDialogTemplate} from "./templates"
+import {linkDialogTemplate} from "./templates.js"
 
 import {Dialog} from "fwtoolkit"
-import {getInternalTargets} from "../state_plugins"
+import {getInternalTargets} from "../state_plugins/index.js"
 
 export class LinkDialog {
     constructor(editor) {

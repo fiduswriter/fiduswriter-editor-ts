@@ -11,7 +11,7 @@ import {EditorView} from "prosemirror-view"
 
 import {fnSchema} from "@fiduswriter/document/schema/footnotes"
 import {fnNodeToPmNode} from "@fiduswriter/document/schema/footnotes_convert"
-import {E2EEEncryptor} from "../e2ee/encryptor"
+import {E2EEEncryptor} from "../e2ee/encryptor.js"
 import {
     citationRenderPlugin,
     clipboardPlugin,
@@ -26,9 +26,9 @@ import {
     toolbarPlugin,
     trackPlugin,
     updateFootnoteMarker
-} from "../state_plugins"
-import {amendTransaction} from "../track"
-import {accessRightsPlugin} from "./state_plugins"
+} from "../state_plugins/index.js"
+import {amendTransaction} from "../track/index.js"
+import {accessRightsPlugin} from "./state_plugins/index.js"
 
 /* Functions related to the footnote editor instance */
 export class ModFootnoteEditor {

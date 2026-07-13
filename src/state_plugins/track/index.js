@@ -1,6 +1,6 @@
-export {trackPlugin} from "./plugin"
+export {trackPlugin} from "./plugin.js"
 export {
     getSelectedChanges,
     setSelectedChanges,
     deactivateAllSelectedChanges
-} from "./helpers"
+} from "./helpers.js"

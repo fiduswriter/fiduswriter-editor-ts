@@ -12,7 +12,7 @@ import {
 } from "fwtoolkit"
 
 ensureCSS(staticUrl("css/checkable_list.css"))
-import {AddContactDialog} from "../../contacts/add_dialog"
+import {AddContactDialog} from "../../contacts/add_dialog.js"
 import {
     collaboratorsTemplate,
     contactsTemplate,
@@ -21,7 +21,7 @@ import {
     shareLinkTabTemplate,
     shareTokenListTemplate,
     shareTokenRowTemplate
-} from "./templates"
+} from "./templates.js"
 
 /**
  * Build the collaborators list from raw access rights and document IDs.

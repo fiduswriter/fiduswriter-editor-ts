@@ -1,6 +1,6 @@
 import {BIBLIOGRAPHY_HEADERS} from "@fiduswriter/document/schema/i18n"
 import {Dialog, cancelPromise} from "fwtoolkit"
-import {RenderCitations} from "./render"
+import {RenderCitations} from "./render.js"
 
 export class ModCitations {
     constructor(editor) {

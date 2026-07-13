@@ -7,11 +7,11 @@ import {
     findTarget,
     setCheckableLabel
 } from "fwtoolkit"
-import {plugins} from "../plugins/citation_dialog"
+import {plugins} from "../plugins/citation_dialog/index.js"
 import {dateToYear, litToText, nameToText} from "@fiduswriter/bibliography-manager/tools"
 
 ensureCSS(staticUrl("css/checkable_list.css"))
-import {configureCitationTemplate, selectedCitationTemplate} from "./templates"
+import {configureCitationTemplate, selectedCitationTemplate} from "./templates.js"
 
 export class CitationDialog {
     constructor(editor) {

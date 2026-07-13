@@ -2,12 +2,12 @@ import {GapCursor} from "prosemirror-gapcursor"
 import {TextSelection} from "prosemirror-state"
 
 import {findTarget, post} from "fwtoolkit"
-import {READ_ONLY_ROLES} from ".."
+import {READ_ONLY_ROLES} from "../index.js"
 import {
     deactivateAllSelectedChanges,
     getCommentDuringCreationDecoration
-} from "../state_plugins"
-import {CommentAnswerEditor, CommentEditor, serializeComment} from "./editors"
+} from "../state_plugins/index.js"
+import {CommentAnswerEditor, CommentEditor, serializeComment} from "./editors/index.js"
 
 /* Functions related to user interactions with comments */
 export class ModCommentInteractions {

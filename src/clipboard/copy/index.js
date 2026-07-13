@@ -1,1 +1,1 @@
-export {docClipboardSerializer, fnClipboardSerializer} from "./serializers"
+export {docClipboardSerializer, fnClipboardSerializer} from "./serializers.js"

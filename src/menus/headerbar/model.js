@@ -5,19 +5,19 @@ import {
     postJson,
     shortFileTitle
 } from "fwtoolkit"
-import {CopyrightDialog} from "../../copyright_dialog"
-import {DocumentAccessRightsDialog} from "../../documents/access_rights"
-import {SaveCopy, SaveRevision} from "../../exporter/native"
-import {ExportFidusFile} from "../../exporter/native/file"
-import {LanguageDialog, RevisionDialog} from "../../dialogs"
-import {E2EEKeyManager} from "../../e2ee/key-manager"
-import {PassphraseManager} from "../../e2ee/passphrase-manager"
-import {changePasswordDialog} from "../../e2ee/password-dialog"
+import {CopyrightDialog} from "../../copyright_dialog/index.js"
+import {DocumentAccessRightsDialog} from "../../documents/access_rights/index.js"
+import {SaveCopy, SaveRevision} from "../../exporter/native/index.js"
+import {ExportFidusFile} from "../../exporter/native/file.js"
+import {LanguageDialog, RevisionDialog} from "../../dialogs/index.js"
+import {E2EEKeyManager} from "../../e2ee/key-manager.js"
+import {PassphraseManager} from "../../e2ee/passphrase-manager.js"
+import {changePasswordDialog} from "../../e2ee/password-dialog.js"
 import {
     KeyBindingsDialog,
     SearchReplaceDialog,
     WordCountDialog
-} from "../../tools"
+} from "../../tools/index.js"
 
 const exportProgress = doc => {
     const title = shortFileTitle(doc.title, doc.path || "")

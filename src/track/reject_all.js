@@ -6,9 +6,9 @@ import {
     ReplaceStep
 } from "prosemirror-transform"
 
-import {deactivateAllSelectedChanges} from "../state_plugins"
+import {deactivateAllSelectedChanges} from "../state_plugins/index.js"
 
-import {deleteNode} from "./delete"
+import {deleteNode} from "./delete.js"
 
 export const rejectAll = (view, from = 0, to = false) => {
     if (!to) {

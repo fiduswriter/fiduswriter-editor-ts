@@ -1,1 +1,1 @@
-export {accessRightsPlugin} from "./access_rights"
+export {accessRightsPlugin} from "./access_rights.js"

@@ -10,7 +10,7 @@ import {
 } from "@fiduswriter/document/schema/common/index"
 import {CATS} from "@fiduswriter/document/schema/i18n"
 import {addAlert, noSpaceTmp} from "fwtoolkit"
-import {CitationDialog, LinkDialog} from "../dialogs"
+import {CitationDialog, LinkDialog} from "../dialogs/index.js"
 
 const key = new PluginKey("links")
 

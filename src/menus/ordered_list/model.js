@@ -1,4 +1,4 @@
-import {OrderedListStartDialog} from "../../dialogs"
+import {OrderedListStartDialog} from "../../dialogs/index.js"
 
 export const orderedListMenuModel = () => ({
     content: [

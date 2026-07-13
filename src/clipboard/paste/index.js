@@ -1,2 +1,2 @@
-export {HTMLPaste} from "./html"
-export {TextPaste} from "./text"
+export {HTMLPaste} from "./html.js"
+export {TextPaste} from "./text.js"

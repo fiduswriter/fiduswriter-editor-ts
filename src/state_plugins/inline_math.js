@@ -6,9 +6,9 @@ import {
 } from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 
-import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from ".."
-import {MathDialog} from "../dialogs"
-import {elementDisabled} from "../menus/toolbar/model"
+import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../index.js"
+import {MathDialog} from "../dialogs/index.js"
+import {elementDisabled} from "../menus/toolbar/model.js"
 
 const key = new PluginKey("inlineMath")
 

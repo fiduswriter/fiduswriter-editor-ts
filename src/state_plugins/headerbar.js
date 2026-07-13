@@ -1,6 +1,6 @@
 import {Plugin, PluginKey} from "prosemirror-state"
 
-import {HeaderbarView} from "../menus"
+import {HeaderbarView} from "../menus/index.js"
 
 const key = new PluginKey("header")
 export const headerbarPlugin = options =>

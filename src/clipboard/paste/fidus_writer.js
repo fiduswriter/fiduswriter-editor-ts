@@ -1,4 +1,4 @@
-import {GeneralPasteHandler} from "./general"
+import {GeneralPasteHandler} from "./general.js"
 
 // Fidus Writer paste handler
 export class FidusWriterPasteHandler extends GeneralPasteHandler {

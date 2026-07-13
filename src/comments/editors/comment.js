@@ -8,8 +8,8 @@ import {EditorView} from "prosemirror-view"
 
 import {avatarTemplate, escapeText, findTarget} from "fwtoolkit"
 
-import {notifyMentionedUser} from "./notify"
-import {commentSchema} from "./schema"
+import {notifyMentionedUser} from "./notify.js"
+import {commentSchema} from "./schema.js"
 
 export class CommentEditor {
     constructor(mod, id, dom, text, options = {}) {

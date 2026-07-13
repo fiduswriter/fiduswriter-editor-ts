@@ -2,4 +2,4 @@ export {
     inlineReferencePlugin,
     getInlineReferenceState,
     setInlineReferenceState
-} from "./plugin"
+} from "./plugin.js"

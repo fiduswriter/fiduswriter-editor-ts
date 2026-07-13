@@ -1,6 +1,6 @@
 import {ExportFidusFile as GenericExportFidusFile} from "@fiduswriter/document/exporter/native"
 import {addProgress, gettext, shortFileTitle} from "fwtoolkit"
-import {DocumentTemplateExporter} from "../../document_template/exporter"
+import {DocumentTemplateExporter} from "../../document_template/exporter.js"
 
 export class ExportFidusFile extends GenericExportFidusFile {
     constructor(doc, bibDB, imageDB, includeTemplate = true, token = false) {

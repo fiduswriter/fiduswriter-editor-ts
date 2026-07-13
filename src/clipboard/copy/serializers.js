@@ -1,7 +1,7 @@
 import {BIBLIOGRAPHY_HEADERS} from "@fiduswriter/document/schema/i18n"
 import {DOMSerializer} from "prosemirror-model"
-import {RenderCitations} from "../../citations/render"
-import {createDocCopySchema, fnCopySchema} from "./schema"
+import {RenderCitations} from "../../citations/render.js"
+import {createDocCopySchema, fnCopySchema} from "./schema.js"
 
 // Wrap around DOMSerializer, allowing post processing.
 class ClipboardDOMSerializer {

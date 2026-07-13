@@ -1,2 +1,2 @@
-export {figureMenuModel} from "./model"
-export {figureWidthMenuModel} from "./model"
+export {figureMenuModel} from "./model.js"
+export {figureWidthMenuModel} from "./model.js"

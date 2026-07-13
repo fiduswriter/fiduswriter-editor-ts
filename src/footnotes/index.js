@@ -1,5 +1,5 @@
-import {ModFootnoteEditor} from "./editor"
-import {ModFootnoteLayout} from "./layout"
+import {ModFootnoteEditor} from "./editor.js"
+import {ModFootnoteLayout} from "./layout.js"
 
 export class ModFootnotes {
     constructor(editor) {

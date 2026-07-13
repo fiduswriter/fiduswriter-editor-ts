@@ -1,7 +1,7 @@
 import {SaveRevision as GenericSaveRevision} from "@fiduswriter/document/exporter/native"
 import {createSlug} from "@fiduswriter/document/exporter/tools/file"
 import {addAlert, addProgress, gettext, post, shortFileTitle} from "fwtoolkit"
-import {DocumentTemplateExporter} from "../../document_template/exporter"
+import {DocumentTemplateExporter} from "../../document_template/exporter.js"
 
 export class SaveRevision extends GenericSaveRevision {
     constructor(doc, imageDB, bibDB, note, app) {

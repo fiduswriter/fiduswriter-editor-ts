@@ -1,4 +1,4 @@
-import {GeneralPasteHandler} from "./general"
+import {GeneralPasteHandler} from "./general.js"
 
 // Google Docs (the writing component) paste handler
 export class GoogleDocsPasteHandler extends GeneralPasteHandler {

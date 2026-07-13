@@ -2,20 +2,20 @@ import {toggleMark, wrapIn} from "prosemirror-commands"
 import {redo, redoDepth, undo, undoDepth} from "prosemirror-history"
 import {wrapInList} from "prosemirror-schema-list"
 
-import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../.."
+import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../../index.js"
 import {
     CitationDialog,
     FigureDialog,
     LinkDialog,
     MathDialog,
     TableDialog
-} from "../../dialogs"
-import {setBlockType} from "../../keymap"
+} from "../../dialogs/index.js"
+import {setBlockType} from "../../keymap.js"
 import {
     checkProtectedInSelection,
     getInlineReferenceState,
     setInlineReferenceState
-} from "../../state_plugins"
+} from "../../state_plugins/index.js"
 
 const BLOCK_LABELS = {
     paragraph: gettext("Normal Text"),

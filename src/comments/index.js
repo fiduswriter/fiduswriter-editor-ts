@@ -1,5 +1,5 @@
-import {ModCommentInteractions} from "./interactions"
-import {ModCommentStore} from "./store"
+import {ModCommentInteractions} from "./interactions.js"
+import {ModCommentStore} from "./store.js"
 
 export class ModComments {
     constructor(editor) {

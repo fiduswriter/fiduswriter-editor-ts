@@ -1,4 +1,4 @@
-import {GeneralPasteHandler} from "./general"
+import {GeneralPasteHandler} from "./general.js"
 
 // LibreOffice Writer paste handler
 export class LibreOfficeWriterPasteHandler extends GeneralPasteHandler {

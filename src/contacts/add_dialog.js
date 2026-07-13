@@ -1,5 +1,5 @@
 import {Dialog, cancelPromise, escapeText, postJson} from "fwtoolkit"
-import {addContactTemplate} from "./templates"
+import {addContactTemplate} from "./templates.js"
 
 //dialog for adding a user to contacts
 export class AddContactDialog {

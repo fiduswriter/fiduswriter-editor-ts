@@ -1,4 +1,4 @@
-import {getFromToMark} from "./helpers"
+import {getFromToMark} from "./helpers.js"
 
 export function findSelectedChanges(state) {
     const selection = state.selection,

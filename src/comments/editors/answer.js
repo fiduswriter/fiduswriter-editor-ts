@@ -1,5 +1,5 @@
 import {TextSelection} from "prosemirror-state"
-import {CommentEditor} from "./comment"
+import {CommentEditor} from "./comment.js"
 
 export class CommentAnswerEditor extends CommentEditor {
     constructor(mod, id, dom, text, options = {}) {

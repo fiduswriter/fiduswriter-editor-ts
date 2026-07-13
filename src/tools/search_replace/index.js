@@ -1,5 +1,5 @@
 import {Dialog, addAlert} from "fwtoolkit"
-import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../.."
+import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../../index.js"
 import {
     deselectSearchMatch,
     endSearch,
@@ -8,8 +8,8 @@ import {
     selectNextSearchMatch,
     selectPreviousSearchMatch,
     setSearchTerm
-} from "../../state_plugins"
-import {searchDialogTemplate} from "./templates"
+} from "../../state_plugins/index.js"
+import {searchDialogTemplate} from "./templates.js"
 
 export class SearchReplaceDialog {
     constructor(editor) {

@@ -1,4 +1,4 @@
-import {GeneralPasteHandler} from "./general"
+import {GeneralPasteHandler} from "./general.js"
 
 // Microsoft Word 2016 paste handler
 export class MicrosoftWordPasteHandler extends GeneralPasteHandler {

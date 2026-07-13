@@ -11,8 +11,8 @@
  */
 
 import {getJson, post, postJson} from "fwtoolkit"
-import {E2EEKeyManager} from "./key-manager"
-import {PassphraseCrypto} from "./passphrase-crypto"
+import {E2EEKeyManager} from "./key-manager.js"
+import {PassphraseCrypto} from "./passphrase-crypto.js"
 
 export class PassphraseManager {
     /**

@@ -1,6 +1,6 @@
 import {DiffDOM} from "diff-dom"
 
-import {READ_ONLY_ROLES} from "../.."
+import {READ_ONLY_ROLES} from "../../index.js"
 
 export class SelectionMenuView {
     constructor(editorView, options) {

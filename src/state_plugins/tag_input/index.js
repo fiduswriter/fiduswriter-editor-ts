@@ -1,2 +1,2 @@
-export {tagInputPlugin} from "./plugin"
-export {TagsPartView} from "./node_view"
+export {tagInputPlugin} from "./plugin.js"
+export {TagsPartView} from "./node_view.js"

@@ -1,2 +1,2 @@
-export {contributorInputPlugin} from "./plugin"
-export {ContributorsPartView} from "./node_view"
+export {contributorInputPlugin} from "./plugin.js"
+export {ContributorsPartView} from "./node_view.js"

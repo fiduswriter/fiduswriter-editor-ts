@@ -6,9 +6,9 @@ import {
     TextSelection
 } from "prosemirror-state"
 
-import {nextSelection, submitTag} from "./helpers"
-import {TagsPartView} from "./node_view"
-import {tagInputReferences} from "./tag_editor"
+import {nextSelection, submitTag} from "./helpers.js"
+import {TagsPartView} from "./node_view.js"
+import {tagInputReferences} from "./tag_editor.js"
 
 const key = new PluginKey("tagInput")
 

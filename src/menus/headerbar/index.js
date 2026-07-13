@@ -1,2 +1,2 @@
-export {headerbarModel} from "./model"
-export {HeaderbarView} from "./view"
+export {headerbarModel} from "./model.js"
+export {HeaderbarView} from "./view.js"

@@ -1,2 +1,2 @@
-export {toolbarModel} from "./model"
-export {ToolbarView} from "./view"
+export {toolbarModel} from "./model.js"
+export {ToolbarView} from "./view.js"

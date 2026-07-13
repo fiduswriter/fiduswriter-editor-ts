@@ -1,5 +1,5 @@
 import {Dialog} from "fwtoolkit"
-import {revisionDialogTemplate} from "./templates"
+import {revisionDialogTemplate} from "./templates.js"
 
 export class RevisionDialog {
     constructor(dir) {

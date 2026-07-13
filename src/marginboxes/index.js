@@ -2,18 +2,18 @@ import {DiffDOM, stringToObj} from "diff-dom"
 import fastdom from "fastdom"
 
 import {cancelPromise, findTarget} from "fwtoolkit"
-import {READ_ONLY_ROLES} from ".."
+import {READ_ONLY_ROLES} from "../index.js"
 import {
     getCommentDuringCreationDecoration,
     getFootnoteMarkers,
     getSelectedChanges
-} from "../state_plugins"
+} from "../state_plugins/index.js"
 import {
     globalCommentsTemplate,
     marginBoxOptions,
     marginBoxesTemplate,
     marginboxFilterTemplate
-} from "./templates"
+} from "./templates.js"
 
 /* Functions related to layouting of comments */
 export class ModMarginboxes {

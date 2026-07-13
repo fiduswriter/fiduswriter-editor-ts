@@ -1,8 +1,8 @@
 import {keyName} from "w3c-keyname"
 
 import {NodeSelection} from "prosemirror-state"
-import {ContributorDialog} from "../../dialogs"
-import {nextSelection} from "./helpers"
+import {ContributorDialog} from "../../dialogs/index.js"
+import {nextSelection} from "./helpers.js"
 
 export class AddButton {
     constructor(dom, getNode, getPos, view, idTypes) {

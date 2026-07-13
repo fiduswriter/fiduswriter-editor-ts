@@ -1,6 +1,6 @@
 import {escapeText} from "fwtoolkit"
 import {dateToYear, litToText, nameToText} from "@fiduswriter/bibliography-manager/tools"
-import {getInternalTargets} from "../links"
+import {getInternalTargets} from "../links.js"
 
 /**
  * Create a drop-up widget for the inline reference editor.

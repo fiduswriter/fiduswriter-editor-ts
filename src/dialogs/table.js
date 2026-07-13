@@ -1,5 +1,5 @@
 import {Dialog, dropdownSelect} from "fwtoolkit"
-import {tableConfigurationTemplate, tableInsertTemplate} from "./templates"
+import {tableConfigurationTemplate, tableInsertTemplate} from "./templates.js"
 
 export class TableDialog {
     constructor(editor) {

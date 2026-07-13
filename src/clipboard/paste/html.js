@@ -1,10 +1,10 @@
-import {FidusWriterPasteHandler} from "./fidus_writer"
-import {GeneralPasteHandler} from "./general"
-import {GoogleDocsPasteHandler} from "./google_docs"
-import {LibreOfficeWriterPasteHandler} from "./libreoffice_writer"
-import {MicrosoftWordPasteHandler} from "./microsoft_word"
+import {FidusWriterPasteHandler} from "./fidus_writer.js"
+import {GeneralPasteHandler} from "./general.js"
+import {GoogleDocsPasteHandler} from "./google_docs.js"
+import {LibreOfficeWriterPasteHandler} from "./libreoffice_writer.js"
+import {MicrosoftWordPasteHandler} from "./microsoft_word.js"
 
-import {resetPasteRange} from "../../state_plugins/clipboard"
+import {resetPasteRange} from "../../state_plugins/clipboard.js"
 
 // Some pasted HTML will need slight conversions to work correctly.
 // We try to sniff whether paste comes from MsWord, LibreOffice or Google Docs

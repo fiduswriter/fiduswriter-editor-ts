@@ -1,5 +1,5 @@
 import {escapeText, noSpaceTmp} from "fwtoolkit"
-import {ContributorDialog} from "../../dialogs"
+import {ContributorDialog} from "../../dialogs/index.js"
 
 /** @typedef {{text: string, className: string, action: Function}} MenuOption */
 

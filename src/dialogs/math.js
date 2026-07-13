@@ -1,6 +1,6 @@
 import {Dialog} from "fwtoolkit"
-import {sub, subChars, sup, supChars} from "./subsup"
-import {mathDialogTemplate} from "./templates"
+import {sub, subChars, sup, supChars} from "./subsup.js"
+import {mathDialogTemplate} from "./templates.js"
 
 /**
  * Class to work with formula dialog

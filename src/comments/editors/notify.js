@@ -1,5 +1,5 @@
 import {post} from "fwtoolkit"
-import {serializeCommentNode} from "./schema"
+import {serializeCommentNode} from "./schema.js"
 
 export const notifyMentionedUser = (docId, userId, comment) => {
     const {html, text} = serializeCommentNode(comment)

@@ -6,12 +6,12 @@ import {
     get,
     shortFileTitle
 } from "fwtoolkit"
-import {SaveCopy} from "../exporter/native"
-import {E2EEKeyManager} from "../e2ee/key-manager"
+import {SaveCopy} from "../exporter/native/index.js"
+import {E2EEKeyManager} from "../e2ee/key-manager.js"
 import {
     createPasswordDialog,
     enterPasswordDialog
-} from "../e2ee/password-dialog"
+} from "../e2ee/password-dialog.js"
 
 export class ModDocumentTemplate {
     constructor(editor) {

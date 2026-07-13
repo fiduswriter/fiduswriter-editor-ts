@@ -4,9 +4,9 @@ import {Fragment, Slice} from "prosemirror-model"
 import {Plugin, PluginKey, TextSelection} from "prosemirror-state"
 import {ReplaceStep} from "prosemirror-transform"
 
-import {docClipboardSerializer, fnClipboardSerializer} from "../clipboard/copy"
-import {HTMLPaste, TextPaste} from "../clipboard/paste"
-import {getAllowedElementsAndMarks} from "./document_template"
+import {docClipboardSerializer, fnClipboardSerializer} from "../clipboard/copy/index.js"
+import {HTMLPaste, TextPaste} from "../clipboard/paste/index.js"
+import {getAllowedElementsAndMarks} from "./document_template.js"
 
 const key = new PluginKey("clipboard")
 

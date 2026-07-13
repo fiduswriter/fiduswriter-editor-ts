@@ -5,7 +5,7 @@ import {
     copyrightTemplate,
     licenseInputTemplate,
     licenseSelectTemplate
-} from "./templates"
+} from "./templates.js"
 
 export const LICENSE_URLS = [
     ["CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/"],

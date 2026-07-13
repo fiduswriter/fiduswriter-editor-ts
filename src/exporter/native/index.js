@@ -1,3 +1,3 @@
-export {ExportFidusFile} from "./file"
-export {SaveRevision} from "./revision"
-export {SaveCopy} from "./copy"
+export {ExportFidusFile} from "./file.js"
+export {SaveRevision} from "./revision.js"
+export {SaveCopy} from "./copy.js"

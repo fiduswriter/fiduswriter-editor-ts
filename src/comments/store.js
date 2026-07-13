@@ -2,8 +2,8 @@ import {randomCommentId} from "@fiduswriter/document/schema/common/index"
 import {
     addCommentDuringCreationDecoration,
     removeCommentDuringCreationDecoration
-} from "../state_plugins"
-import {Comment} from "./comment"
+} from "../state_plugins/index.js"
+import {Comment} from "./comment.js"
 
 export class ModCommentStore {
     constructor(mod) {

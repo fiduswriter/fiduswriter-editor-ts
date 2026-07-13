@@ -2,9 +2,9 @@ import deepEqual from "fast-deep-equal"
 
 import {randomFigureId} from "@fiduswriter/document/schema/common/index"
 import {ContentMenu, Dialog, addAlert, dropdownSelect} from "fwtoolkit"
-import {ImageSelectionDialog} from "../images/selection_dialog"
-import {E2EEEncryptor} from "../e2ee/encryptor"
-import {configureFigureTemplate} from "./templates"
+import {ImageSelectionDialog} from "../images/selection_dialog/index.js"
+import {E2EEEncryptor} from "../e2ee/encryptor.js"
+import {configureFigureTemplate} from "./templates.js"
 
 export class FigureDialog {
     constructor(editor) {

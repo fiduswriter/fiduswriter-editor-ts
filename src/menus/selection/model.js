@@ -1,9 +1,9 @@
 import {toggleMark} from "prosemirror-commands"
 
 import {randomAnchorId} from "@fiduswriter/document/schema/common/index"
-import {COMMENT_ONLY_ROLES} from "../.."
-import {checkProtectedInSelection} from "../../state_plugins"
-import {acceptAll, rejectAll} from "../../track"
+import {COMMENT_ONLY_ROLES} from "../../index.js"
+import {checkProtectedInSelection} from "../../state_plugins/index.js"
+import {acceptAll, rejectAll} from "../../track/index.js"
 
 const tracksInSelection = view => {
     // Check whether track marks are present within the range of selection

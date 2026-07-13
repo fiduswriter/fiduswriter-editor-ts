@@ -1,7 +1,7 @@
 import {AddMarkStep, Mapping, RemoveMarkStep} from "prosemirror-transform"
 
-import {deactivateAllSelectedChanges} from "../state_plugins"
-import {deleteNode} from "./delete"
+import {deactivateAllSelectedChanges} from "../state_plugins/index.js"
+import {deleteNode} from "./delete.js"
 
 export const reject = (type, pos, view) => {
     const tr = view.state.tr.setMeta("track", true),

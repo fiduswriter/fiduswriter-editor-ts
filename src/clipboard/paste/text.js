@@ -1,7 +1,7 @@
 import {TextSelection} from "prosemirror-state"
 import {__parseFromClipboard} from "prosemirror-view"
 
-import {getPasteRange, resetPasteRange} from "../../state_plugins/clipboard"
+import {getPasteRange, resetPasteRange} from "../../state_plugins/clipboard.js"
 
 export class TextPaste {
     constructor(editor, text, view) {

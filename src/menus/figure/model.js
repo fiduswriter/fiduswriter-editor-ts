@@ -1,5 +1,5 @@
-import {FigureDialog} from "../../dialogs"
-import {figureMenuAction} from "./utils"
+import {FigureDialog} from "../../dialogs/index.js"
+import {figureMenuAction} from "./utils.js"
 
 export const figureMenuModel = () => ({
     content: [

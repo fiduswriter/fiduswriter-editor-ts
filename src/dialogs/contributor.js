@@ -1,6 +1,6 @@
 import {Dialog, addAlert} from "fwtoolkit"
 import {NodeSelection} from "prosemirror-state"
-import {contributorTemplate} from "./templates"
+import {contributorTemplate} from "./templates.js"
 /*
     Source for email regexp:
     https://html.spec.whatwg.org/multipage/input.html#e-mail-state-(type%3Demail)

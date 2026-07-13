@@ -5,15 +5,15 @@ import {
     TextSelection
 } from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
-import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../.."
-import {elementDisabled} from "../../menus/toolbar/model"
+import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../../index.js"
+import {elementDisabled} from "../../menus/toolbar/model.js"
 import {
     buildBibliographyList,
     buildCrossRefList,
     createInlineReferenceDropUp,
     filterBibliography,
     filterCrossRefs
-} from "./dropup"
+} from "./dropup.js"
 
 const key = new PluginKey("inlineReference")
 

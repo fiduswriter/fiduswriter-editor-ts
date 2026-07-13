@@ -2,7 +2,7 @@ import {Mapping, RemoveMarkStep, Transform} from "prosemirror-transform"
 
 import {fnSchema} from "@fiduswriter/document/schema/footnotes"
 
-import {deleteNode} from "./delete"
+import {deleteNode} from "./delete.js"
 
 export function acceptAllNoInsertions(doc) {
     // Same as accept all and additionally remove insertion marks/tracks

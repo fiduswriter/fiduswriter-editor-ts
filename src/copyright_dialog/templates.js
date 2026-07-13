@@ -1,5 +1,5 @@
 import {escapeText} from "fwtoolkit"
-import {LICENSE_URLS} from "./index"
+import {LICENSE_URLS} from "./index.js"
 
 export const licenseSelectTemplate = ({url}) =>
     `<select class="license">

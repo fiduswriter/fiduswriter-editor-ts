@@ -2,12 +2,12 @@ import {findTarget} from "fwtoolkit"
 import {
     deactivateAllSelectedChanges,
     setSelectedChanges
-} from "../state_plugins"
+} from "../state_plugins/index.js"
 
-import {accept} from "./accept"
-import {acceptAll} from "./accept_all"
-import {reject} from "./reject"
-import {rejectAll} from "./reject_all"
+import {accept} from "./accept.js"
+import {acceptAll} from "./accept_all.js"
+import {reject} from "./reject.js"
+import {rejectAll} from "./reject_all.js"
 
 // Helper functions related to tracked changes
 export class ModTrack {

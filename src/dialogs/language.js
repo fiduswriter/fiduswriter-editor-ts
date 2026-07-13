@@ -1,7 +1,7 @@
 import {Dialog} from "fwtoolkit"
 
 import {LANGUAGES} from "@fiduswriter/document/schema/const"
-import {languageTemplate} from "./templates"
+import {languageTemplate} from "./templates.js"
 
 export class LanguageDialog {
     constructor(editor, language) {

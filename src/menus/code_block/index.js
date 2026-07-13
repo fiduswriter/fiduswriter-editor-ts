@@ -1,1 +1,1 @@
-export {codeBlockMenuModel} from "./model"
+export {codeBlockMenuModel} from "./model.js"

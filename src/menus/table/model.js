@@ -11,7 +11,7 @@ import {
     toggleHeaderColumn,
     toggleHeaderRow
 } from "prosemirror-tables"
-import {TableConfigurationDialog} from "../../dialogs"
+import {TableConfigurationDialog} from "../../dialogs/index.js"
 
 // from https://github.com/ProseMirror/prosemirror-tables/blob/master/src/util.js
 const findTable = state => {

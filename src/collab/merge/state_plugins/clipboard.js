@@ -1,5 +1,5 @@
 import {Plugin, PluginKey, TextSelection} from "prosemirror-state"
-import {docClipboardSerializer} from "../../../clipboard/copy"
+import {docClipboardSerializer} from "../../../clipboard/copy/index.js"
 
 const key = new PluginKey("clipboard")
 export const clipboardPlugin = options => {

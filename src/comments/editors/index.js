@@ -1,4 +1,4 @@
-export {CommentEditor} from "./comment"
-export {CommentAnswerEditor} from "./answer"
+export {CommentEditor} from "./comment.js"
+export {CommentAnswerEditor} from "./answer.js"
 
-export {serializeComment} from "./schema"
+export {serializeComment} from "./schema.js"

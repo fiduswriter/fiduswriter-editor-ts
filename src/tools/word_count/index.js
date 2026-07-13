@@ -1,7 +1,7 @@
 import {getNonDeletedTextContent} from "@fiduswriter/document/schema/text"
 import {Dialog} from "fwtoolkit"
 
-import {wordCounterDialogTemplate} from "./templates"
+import {wordCounterDialogTemplate} from "./templates.js"
 
 export class WordCountDialog {
     constructor(editor) {

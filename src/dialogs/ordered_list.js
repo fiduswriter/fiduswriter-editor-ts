@@ -1,5 +1,5 @@
 import {Dialog} from "fwtoolkit"
-import {orderedListStartTemplate} from "./templates"
+import {orderedListStartTemplate} from "./templates.js"
 
 export class OrderedListStartDialog {
     constructor(editor) {

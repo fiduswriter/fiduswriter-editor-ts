@@ -9,7 +9,7 @@
  */
 
 import {Dialog, escapeText} from "fwtoolkit"
-import {passwordStrength, strengthInfo} from "./password-dialog"
+import {passwordStrength, strengthInfo} from "./password-dialog.js"
 
 /**
  * Show a dialog to set up the personal passphrase for the first time.

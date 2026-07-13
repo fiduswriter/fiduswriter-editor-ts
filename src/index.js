@@ -20,30 +20,30 @@ import {EditorState, TextSelection} from "prosemirror-state"
 import {tableEditing} from "prosemirror-tables"
 import {EditorView} from "prosemirror-view"
 import {FeedbackTab} from "@fiduswriter/common"
-import {E2EEEncryptor} from "./e2ee/encryptor"
-import {E2EEKeyManager} from "./e2ee/key-manager"
+import {E2EEEncryptor} from "./e2ee/encryptor.js"
+import {E2EEKeyManager} from "./e2ee/key-manager.js"
 import {
     enterPassphraseDialog,
     setupPassphraseDialog,
     showRecoveryKeyDialog
-} from "./e2ee/passphrase-dialog"
-import {PassphraseManager} from "./e2ee/passphrase-manager"
+} from "./e2ee/passphrase-dialog.js"
+import {PassphraseManager} from "./e2ee/passphrase-manager.js"
 import {
     changePasswordDialog,
     createPasswordDialog
-} from "./e2ee/password-dialog"
-import {E2EESnapshotManager} from "./e2ee/snapshot-manager"
+} from "./e2ee/password-dialog.js"
+import {E2EESnapshotManager} from "./e2ee/snapshot-manager.js"
 
 import {getSettings} from "@fiduswriter/document/schema/convert"
 import {docSchema} from "@fiduswriter/document/schema/document/index"
-import {plugins} from "./plugins/editor"
-import {ModCitations} from "./citations"
-import {ModCollab} from "./collab"
-import {ModComments} from "./comments"
-import {ModDB} from "./databases"
-import {ModDocumentTemplate} from "./document_template"
-import {ModFootnotes} from "./footnotes"
-import {ModMarginboxes} from "./marginboxes"
+import {plugins} from "./plugins/editor/index.js"
+import {ModCitations} from "./citations/index.js"
+import {ModCollab} from "./collab/index.js"
+import {ModComments} from "./comments/index.js"
+import {ModDB} from "./databases/index.js"
+import {ModDocumentTemplate} from "./document_template/index.js"
+import {ModFootnotes} from "./footnotes/index.js"
+import {ModMarginboxes} from "./marginboxes/index.js"
 import {
     codeBlockMenuModel,
     figureMenuModel,
@@ -55,14 +55,14 @@ import {
     selectionMenuModel,
     tableMenuModel,
     toolbarModel
-} from "./menus"
-import {ModNavigator} from "./navigator"
-import {NoCollabSave} from "./no_collab_save"
-import {ModTrack, acceptAllNoInsertions, amendTransaction} from "./track"
+} from "./menus/index.js"
+import {ModNavigator} from "./navigator/index.js"
+import {NoCollabSave} from "./no_collab_save/index.js"
+import {ModTrack, acceptAllNoInsertions, amendTransaction} from "./track/index.js"
 
-import {ExportFidusFile} from "./exporter/native/file"
-import {imageEditModel} from "./images/edit_dialog/model"
-import {buildEditorKeymap} from "./keymap"
+import {ExportFidusFile} from "./exporter/native/file.js"
+import {imageEditModel} from "./images/edit_dialog/model.js"
+import {buildEditorKeymap} from "./keymap.js"
 import {
     accessRightsPlugin,
     citationRenderPlugin,
@@ -90,7 +90,7 @@ import {
     tocRenderPlugin,
     toolbarPlugin,
     trackPlugin
-} from "./state_plugins"
+} from "./state_plugins/index.js"
 
 // UUID v4 pattern for share tokens
 const uuid4Pattern =

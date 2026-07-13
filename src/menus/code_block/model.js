@@ -1,4 +1,4 @@
-import {CodeBlockDialog} from "../../dialogs"
+import {CodeBlockDialog} from "../../dialogs/index.js"
 
 export const codeBlockMenuModel = () => ({
     content: [

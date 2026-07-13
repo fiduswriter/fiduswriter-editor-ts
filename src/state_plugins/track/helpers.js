@@ -6,7 +6,7 @@ import {
     selectedChangeFormatSpec,
     selectedDeletionSpec,
     selectedInsertionSpec
-} from "./plugin"
+} from "./plugin.js"
 
 export function getSelectedChanges(state) {
     const keyState = key.getState(state)

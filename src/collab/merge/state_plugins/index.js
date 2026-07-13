@@ -1,2 +1,2 @@
-export {clipboardPlugin} from "./clipboard"
-export {diffPlugin} from "./diff"
+export {clipboardPlugin} from "./clipboard.js"
+export {diffPlugin} from "./diff.js"

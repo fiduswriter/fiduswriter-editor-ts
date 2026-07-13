@@ -1,7 +1,7 @@
-import {removeCollaboratorSelection} from "../state_plugins"
-import {ModCollabChat} from "./chat"
-import {ModCollabColors} from "./colors"
-import {ModCollabDoc} from "./doc"
+import {removeCollaboratorSelection} from "../state_plugins/index.js"
+import {ModCollabChat} from "./chat.js"
+import {ModCollabColors} from "./colors.js"
+import {ModCollabDoc} from "./doc.js"
 
 export class ModCollab {
     constructor(editor) {

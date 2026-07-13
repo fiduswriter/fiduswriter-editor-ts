@@ -3,17 +3,17 @@ import {Dialog, activateWait, deactivateWait, makeWorker} from "fwtoolkit"
 import {receiveTransaction, sendableSteps} from "prosemirror-collab"
 import {EditorState} from "prosemirror-state"
 import {Step} from "prosemirror-transform"
-import {E2EEEncryptor} from "../e2ee/encryptor"
-import {E2EEKeyManager} from "../e2ee/key-manager"
-import {enterPassphraseDialog} from "../e2ee/passphrase-dialog"
-import {PassphraseManager} from "../e2ee/passphrase-manager"
-import {enterPasswordDialog} from "../e2ee/password-dialog"
+import {E2EEEncryptor} from "../e2ee/encryptor.js"
+import {E2EEKeyManager} from "../e2ee/key-manager.js"
+import {enterPassphraseDialog} from "../e2ee/passphrase-dialog.js"
+import {PassphraseManager} from "../e2ee/passphrase-manager.js"
+import {enterPasswordDialog} from "../e2ee/password-dialog.js"
 import {
     getSelectionUpdate,
     removeCollaboratorSelection,
     updateCollaboratorSelection
-} from "../state_plugins"
-import {Merge} from "./merge"
+} from "../state_plugins/index.js"
+import {Merge} from "./merge/index.js"
 
 export class ModCollabDoc {
     constructor(mod) {
