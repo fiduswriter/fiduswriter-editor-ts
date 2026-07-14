@@ -7,7 +7,7 @@ import {
     findTarget,
     setCheckableLabel
 } from "fwtoolkit"
-import {plugins} from "../plugins/citation_dialog/index.js"
+import {plugins as defaultCitationPlugins} from "../plugins/citation_dialog/index.js"
 import {dateToYear, litToText, nameToText} from "@fiduswriter/bibliography-manager/tools"
 
 ensureCSS(staticUrl("css/checkable_list.css"))
@@ -84,11 +84,14 @@ export class CitationDialog {
             // Plugins have been activated already
             return
         }
-        // Add plugins.
+        // Add plugins. Prefer plugins injected by the host app; fall back to
+        // the default plugin list bundled with the editor package.
+        const pluginList =
+            this.editor.citationDialogPlugins || defaultCitationPlugins
         this.plugins = {}
 
         return Promise.all(
-            plugins.map(([app, plugin]) => {
+            pluginList.map(([app, plugin]) => {
                 if (!this.editor.app.settings.APPS.includes(app)) {
                     return Promise.resolve()
                 }

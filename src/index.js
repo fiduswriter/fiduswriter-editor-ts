@@ -105,9 +105,10 @@ export class Editor {
     // A class that contains everything that happens on the editor page.
     // It is currently not possible to initialize more than one editor class, as it
     // contains bindings to menu items, etc. that are uniquely defined.
-    constructor({app, user}, path, idString, editorPlugins = defaultEditorPlugins) {
+    constructor({app, user}, path, idString, editorPlugins = defaultEditorPlugins, citationDialogPlugins = null) {
         this.app = app
         this.editorPlugins = editorPlugins
+        this.citationDialogPlugins = citationDialogPlugins
         // For unauthenticated guests, replace the bare config object with a
         // proper placeholder that has all the fields templates expect.
         this.user = user.is_authenticated
