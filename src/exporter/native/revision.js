@@ -83,4 +83,11 @@ export class SaveRevision extends GenericSaveRevision {
             progressCallback
         })
     }
+
+    init() {
+        return super.init().then(result => {
+            addAlert("success", gettext("Revision saved."))
+            return result
+        })
+    }
 }
