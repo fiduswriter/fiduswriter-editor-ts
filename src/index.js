@@ -36,7 +36,7 @@ import {E2EESnapshotManager} from "./e2ee/snapshot-manager.js"
 
 import {getSettings} from "@fiduswriter/document/schema/convert"
 import {docSchema} from "@fiduswriter/document/schema/document/index"
-import {plugins} from "./plugins/editor/index.js"
+import {plugins as defaultEditorPlugins} from "./plugins/editor/index.js"
 import {ModCitations} from "./citations/index.js"
 import {ModCollab} from "./collab/index.js"
 import {ModComments} from "./comments/index.js"
@@ -105,8 +105,9 @@ export class Editor {
     // A class that contains everything that happens on the editor page.
     // It is currently not possible to initialize more than one editor class, as it
     // contains bindings to menu items, etc. that are uniquely defined.
-    constructor({app, user}, path, idString) {
+    constructor({app, user}, path, idString, editorPlugins = defaultEditorPlugins) {
         this.app = app
+        this.editorPlugins = editorPlugins
         // For unauthenticated guests, replace the bare config object with a
         // proper placeholder that has all the fields templates expect.
         this.user = user.is_authenticated
@@ -1112,7 +1113,7 @@ export class Editor {
         this.plugins = {}
 
         return Promise.all(
-            plugins.map(([app, plugin]) => {
+            this.editorPlugins.map(([app, plugin]) => {
                 if (!this.app.settings.APPS.includes(app)) {
                     return Promise.resolve()
                 }
