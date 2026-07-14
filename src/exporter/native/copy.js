@@ -17,7 +17,7 @@ export class SaveCopy extends GenericSaveCopy {
         const task = addProgress(
             "info",
             `${title}: ${gettext("Creating copy...")}`,
-            {autoClose: false}
+            {autoClose: 6000}
         )
         const progressCallback = (message, percentage) =>
             task.update(percentage, message)

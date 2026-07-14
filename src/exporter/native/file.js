@@ -8,7 +8,7 @@ export class ExportFidusFile extends GenericExportFidusFile {
         const task = addProgress(
             "info",
             `${title}: ${gettext("Exporting Fidus file...")}`,
-            {autoClose: false}
+            {autoClose: 6000}
         )
         const progressCallback = (message, percentage) =>
             task.update(percentage, message)

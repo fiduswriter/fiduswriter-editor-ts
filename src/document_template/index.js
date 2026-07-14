@@ -352,7 +352,7 @@ export class ModDocumentTemplate {
                             const task = addProgress(
                                 "info",
                                 `${title}: ${gettext("Exporting DOCX...")}`,
-                                {autoClose: false}
+                                {autoClose: 6000}
                             )
                             const exporter = new DOCXExporter(
                                 doc,
@@ -388,7 +388,7 @@ export class ModDocumentTemplate {
                                 const task = addProgress(
                                     "info",
                                     `${title}: ${gettext("Exporting ODT...")}`,
-                                    {autoClose: false}
+                                    {autoClose: 6000}
                                 )
                                 const exporter = new ODTExporter(
                                     doc,

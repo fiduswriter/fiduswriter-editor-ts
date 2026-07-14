@@ -9,7 +9,7 @@ export class SaveRevision extends GenericSaveRevision {
         const task = addProgress(
             "info",
             `${title}: ${gettext("Saving revision...")}`,
-            {autoClose: false}
+            {autoClose: 6000}
         )
         const progressCallback = (message, percentage) =>
             task.update(percentage, message)
@@ -81,15 +81,6 @@ export class SaveRevision extends GenericSaveRevision {
             getTemplateFiles,
             onError,
             progressCallback
-        })
-        this.task = task
-    }
-
-    init() {
-        return super.init().then(result => {
-            this.task.close()
-            addAlert("success", gettext("Revision saved."))
-            return result
         })
     }
 }

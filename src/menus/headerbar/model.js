@@ -22,14 +22,9 @@ import {
 const exportProgress = doc => {
     const title = shortFileTitle(doc.title, doc.path || "")
     const task = addProgress("info", `${title}: ${gettext("Exporting...")}`, {
-        autoClose: false
+        autoClose: 6000
     })
-    return (message, percentage) => {
-        task.update(percentage, message)
-        if (percentage !== null && percentage >= 100) {
-            task.close()
-        }
-    }
+    return (message, percentage) => task.update(percentage, message)
 }
 
 const languageItem = (language, name, order) => ({
@@ -338,7 +333,7 @@ export const headerbarModel = () => ({
                             const task = addProgress(
                                 "info",
                                 `${title}: ${gettext("Preparing print view...")}`,
-                                {autoClose: false}
+                                {autoClose: 6000}
                             )
                             const exporter = new PrintExporter(
                                 doc,
