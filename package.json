@@ -31,6 +31,7 @@
         "format:check": "prettier --check ."
     },
     "dependencies": {
+        "@fiduswriter/bibliography-manager": "^0.1.6",
         "@fiduswriter/common": "^0.1.4",
         "@fiduswriter/document": "^0.2.20",
         "bibliojson": "^4.0.0",
