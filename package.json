@@ -32,7 +32,7 @@
     },
     "dependencies": {
         "@fiduswriter/bibliography-manager": "^0.1.7",
-        "@fiduswriter/common": "^0.1.4",
+        "@fiduswriter/common": "^0.1.5",
         "@fiduswriter/document": "^0.2.20",
         "@fiduswriter/image-manager": "^0.1.4",
         "bibliojson": "^4.0.0",
