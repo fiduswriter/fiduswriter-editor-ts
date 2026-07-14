@@ -24,7 +24,12 @@ const exportProgress = doc => {
     const task = addProgress("info", `${title}: ${gettext("Exporting...")}`, {
         autoClose: false
     })
-    return (message, percentage) => task.update(percentage, message)
+    return (message, percentage) => {
+        task.update(percentage, message)
+        if (percentage !== null && percentage >= 100) {
+            task.close()
+        }
+    }
 }
 
 const languageItem = (language, name, order) => ({
