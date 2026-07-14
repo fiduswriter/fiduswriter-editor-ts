@@ -11,10 +11,11 @@
 import {NodeSelection, Plugin, PluginKey} from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 
+import {nextSelection} from "@fiduswriter/common/state_plugins/contributor_input"
+
 import {ContributorDialog} from "../../dialogs/index.js"
-import {createDropUp} from "./dropup.js"
-import {nextSelection} from "./helpers.js"
 import {ContributorsPartView} from "./node_view.js"
+import {createDropUp} from "./dropup.js"
 
 const key = new PluginKey("contributorInput")
 

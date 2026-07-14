@@ -6,9 +6,9 @@ import {
     TextSelection
 } from "prosemirror-state"
 
-import {nextSelection, submitTag} from "./helpers.js"
+import {nextSelection, submitTag, tagInputReferences} from "@fiduswriter/common/state_plugins/tag_input"
+
 import {TagsPartView} from "./node_view.js"
-import {tagInputReferences} from "./tag_editor.js"
 
 const key = new PluginKey("tagInput")
 
