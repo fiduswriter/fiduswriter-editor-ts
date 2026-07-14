@@ -82,5 +82,14 @@ export class SaveRevision extends GenericSaveRevision {
             onError,
             progressCallback
         })
+        this.task = task
+    }
+
+    init() {
+        return super.init().then(result => {
+            this.task.close()
+            addAlert("success", gettext("Revision saved."))
+            return result
+        })
     }
 }
