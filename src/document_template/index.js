@@ -7,11 +7,11 @@ import {
     shortFileTitle
 } from "fwtoolkit"
 import {SaveCopy} from "../exporter/native/index.js"
-import {E2EEKeyManager} from "../e2ee/key-manager.js"
+import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {
     createPasswordDialog,
     enterPasswordDialog
-} from "../e2ee/password-dialog.js"
+} from "fwtoolkit/e2ee/password-dialog"
 
 export {serializeHelp} from "./schema.js"
 

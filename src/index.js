@@ -20,18 +20,18 @@ import {EditorState, TextSelection} from "prosemirror-state"
 import {tableEditing} from "prosemirror-tables"
 import {EditorView} from "prosemirror-view"
 import {FeedbackTab} from "@fiduswriter/common"
-import {E2EEEncryptor} from "./e2ee/encryptor.js"
-import {E2EEKeyManager} from "./e2ee/key-manager.js"
+import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
+import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {
     enterPassphraseDialog,
     setupPassphraseDialog,
     showRecoveryKeyDialog
-} from "./e2ee/passphrase-dialog.js"
-import {PassphraseManager} from "./e2ee/passphrase-manager.js"
+} from "fwtoolkit/e2ee/passphrase-dialog"
+import {PassphraseManager} from "fwtoolkit/e2ee/passphrase-manager"
 import {
     changePasswordDialog,
     createPasswordDialog
-} from "./e2ee/password-dialog.js"
+} from "fwtoolkit/e2ee/password-dialog"
 import {E2EESnapshotManager} from "./e2ee/snapshot-manager.js"
 
 import {getSettings} from "@fiduswriter/document/schema/convert"
@@ -794,7 +794,7 @@ export class Editor {
                 } else if (result.action === "recover") {
                     // Recovery flow
                     const {recoverWithKeyDialog} = await import(
-                        "./e2ee/passphrase-dialog.js"
+                        "fwtoolkit/e2ee/passphrase-dialog"
                     )
                     const recoverResult = await new Promise(resolve => {
                         recoverWithKeyDialog(resolve)
@@ -807,7 +807,7 @@ export class Editor {
                                     recoverResult.newPassphrase
                                 )
                             const {showRecoveryKeyDialog} = await import(
-                                "./e2ee/passphrase-dialog.js"
+                                "fwtoolkit/e2ee/passphrase-dialog"
                             )
                             await new Promise(resolve => {
                                 showRecoveryKeyDialog(newRecoveryKey, resolve)

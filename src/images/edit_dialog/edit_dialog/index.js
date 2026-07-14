@@ -1,5 +1,5 @@
 import {CheckableList, ContentMenu, Dialog, addAlert} from "fwtoolkit"
-import {E2EEEncryptor} from "../../../e2ee/encryptor.js"
+import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
 import {imageEditModel} from "./model.js"
 import {imageEditTemplate} from "./templates.js"
 export class ImageEditDialog {

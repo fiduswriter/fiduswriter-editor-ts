@@ -1,7 +1,7 @@
 import {SaveCopy as GenericSaveCopy} from "@fiduswriter/document/exporter/native"
 import {addAlert, addProgress, gettext, postJson, shortFileTitle} from "fwtoolkit"
-import {E2EEEncryptor} from "../../e2ee/encryptor.js"
-import {E2EEKeyManager} from "../../e2ee/key-manager.js"
+import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
+import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {NativeImporter} from "@fiduswriter/document/importer/native"
 
 async function maybeDecryptImage(imageEntry, sourceKey) {

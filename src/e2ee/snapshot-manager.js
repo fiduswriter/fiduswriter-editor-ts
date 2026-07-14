@@ -68,7 +68,7 @@ export class E2EESnapshotManager {
         const bibliography = this.editor.docInfo.bibliography || {}
         const {title} = this.editor.getDoc()
 
-        const {E2EEEncryptor} = await import("./encryptor.js")
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
 
         const encryptedContent = await E2EEEncryptor.encryptObject(
             content,
@@ -129,7 +129,7 @@ export class E2EESnapshotManager {
         const {title} = this.editor.getDoc()
 
         // Dynamically import to avoid circular dependencies
-        const {E2EEEncryptor} = await import("./encryptor.js")
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
 
         // Encrypt all document data
         const encryptedContent = await E2EEEncryptor.encryptObject(
@@ -183,7 +183,7 @@ export class E2EESnapshotManager {
             this.clearKey()
             // Clear cached password and key from sessionStorage so the user
             // is prompted for the new password on next access.
-            const {E2EEKeyManager} = await import("./key-manager.js")
+            const {E2EEKeyManager} = await import("fwtoolkit/e2ee/key-manager")
             E2EEKeyManager.clearKeyFromSession(this.editor.docInfo.id)
             E2EEKeyManager.clearPasswordFromSession(this.editor.docInfo.id)
             // Notify the user that the password has changed.
@@ -213,7 +213,7 @@ export class E2EESnapshotManager {
             return
         }
 
-        const {E2EEEncryptor} = await import("./encryptor.js")
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
 
         const encryptedContent = await E2EEEncryptor.encryptObject(
             content,
@@ -269,7 +269,7 @@ export class E2EESnapshotManager {
         // Extract the current title from the editor
         const {title} = this.editor.getDoc()
 
-        const {E2EEEncryptor} = await import("./encryptor.js")
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
 
         // Encrypt with the new key
         const encryptedContent = await E2EEEncryptor.encryptObject(

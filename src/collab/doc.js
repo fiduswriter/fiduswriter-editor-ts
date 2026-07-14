@@ -3,11 +3,11 @@ import {Dialog, activateWait, deactivateWait, makeWorker} from "fwtoolkit"
 import {receiveTransaction, sendableSteps} from "prosemirror-collab"
 import {EditorState} from "prosemirror-state"
 import {Step} from "prosemirror-transform"
-import {E2EEEncryptor} from "../e2ee/encryptor.js"
-import {E2EEKeyManager} from "../e2ee/key-manager.js"
-import {enterPassphraseDialog} from "../e2ee/passphrase-dialog.js"
-import {PassphraseManager} from "../e2ee/passphrase-manager.js"
-import {enterPasswordDialog} from "../e2ee/password-dialog.js"
+import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
+import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
+import {enterPassphraseDialog} from "fwtoolkit/e2ee/passphrase-dialog"
+import {PassphraseManager} from "fwtoolkit/e2ee/passphrase-manager"
+import {enterPasswordDialog} from "fwtoolkit/e2ee/password-dialog"
 import {
     getSelectionUpdate,
     removeCollaboratorSelection,
@@ -312,7 +312,7 @@ export class ModCollabDoc {
                     } else if (result?.action === "recover") {
                         // Recovery flow
                         const {recoverWithKeyDialog} = await import(
-                            "../e2ee/passphrase-dialog.js"
+                            "fwtoolkit/e2ee/passphrase-dialog"
                         )
                         const recoverResult = await new Promise(resolve => {
                             recoverWithKeyDialog(resolve)
@@ -325,7 +325,7 @@ export class ModCollabDoc {
                                         recoverResult.newPassphrase
                                     )
                                 const {showRecoveryKeyDialog} = await import(
-                                    "../e2ee/passphrase-dialog.js"
+                                    "fwtoolkit/e2ee/passphrase-dialog"
                                 )
                                 await new Promise(resolve => {
                                     showRecoveryKeyDialog(
@@ -685,7 +685,7 @@ export class ModCollabDoc {
         let decryptedImages = doc.images
         if (doc.images) {
             decryptedImages = {}
-            const {E2EEEncryptor} = await import("../e2ee/encryptor.js")
+            const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
             for (const [id, image] of Object.entries(doc.images)) {
                 decryptedImages[id] = image
                 if (typeof image.copyright === "string") {

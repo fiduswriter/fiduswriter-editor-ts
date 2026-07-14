@@ -11,7 +11,7 @@ import {EditorView} from "prosemirror-view"
 
 import {fnSchema} from "@fiduswriter/document/schema/footnotes"
 import {fnNodeToPmNode} from "@fiduswriter/document/schema/footnotes_convert"
-import {E2EEEncryptor} from "../e2ee/encryptor.js"
+import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
 import {
     citationRenderPlugin,
     clipboardPlugin,

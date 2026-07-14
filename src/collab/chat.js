@@ -1,5 +1,5 @@
 import {localizeDate, whenReady} from "fwtoolkit"
-import {E2EEEncryptor} from "../e2ee/encryptor.js"
+import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
 import {messageTemplate} from "./templates.js"
 
 /*
