@@ -820,7 +820,11 @@ export const diffPlugin = (options: {merge: MergeEditorLike}) =>
                 return false
             },
             decorations(state) {
-                const {decos} = key.getState(state)!
+                const pluginState = key.getState(state)
+                if (!pluginState) {
+                    return DecorationSet.empty
+                }
+                const {decos} = pluginState
                 return decos
             }
         },
