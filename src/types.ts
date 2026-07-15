@@ -15,11 +15,12 @@ import type {
     BibDB,
     BibDBEntries,
     CommentData,
+    CSL,
     ImageDB,
     ImageDBEntries
 } from "@fiduswriter/document"
 
-export type {BibDB, BibDBEntries, CommentData, ImageDB, ImageDBEntries}
+export type {BibDB, BibDBEntries, CommentData, CSL, ImageDB, ImageDBEntries}
 export type {User} from "@fiduswriter/common"
 
 /** Image database interface used by the editor (document and user DBs). */
@@ -31,7 +32,7 @@ export interface EditorImageDB extends ImageDB {
 /** Extended app object used by the editor page. */
 export interface App extends CommonApp {
     isOffline(): boolean
-    csl: any
+    csl: CSL
     imageDB: EditorImageDB
 }
 
@@ -88,29 +89,100 @@ export interface DocInfo {
 /** Aggregated editor module namespace (populated by individual modules). */
 export interface EditorMod {
     [key: string]: unknown
-    documentTemplate?: unknown
-    citations?: unknown
-    collab?: unknown
-    comments?: unknown
+    collab?: {
+        doc: {
+            sendToCollaborators(): void
+            confirmVersion(n: number): void
+            receiveDiff(data: unknown): void
+            receiveSelectionChange(data: unknown): void
+            checkVersion(offline?: boolean): void
+            cancelCurrentlyCheckingVersion(): void
+            confirmDiff(rid: number): void
+            rejectDiff(rid: number): void
+            awaitingDiffResponse: boolean
+            footnoteRender: boolean
+        }
+        participants: Array<{id: number; name?: string; session_id?: string; sessionIds?: string[]}>
+        pastParticipants: Array<{id: number; name?: string}>
+        updateParticipantList(participants: unknown[]): void
+        chat: {
+            newMessage(message: unknown): void
+            showChat(participants: unknown[]): void
+        }
+    }
+    marginboxes?: {
+        updateDOM(): void
+        view(view: EditorView): void
+        init(): void
+    }
+    footnotes?: {
+        fnEditor: {
+            view: EditorView
+            renderAllFootnotes(): void
+            applyDiffs(diffs: unknown[], cid: unknown): void
+            schema: {cached: Record<string, unknown>}
+        }
+        init(): void
+        layout?: {updateDOM(): void}
+    }
+    comments?: {
+        store: {
+            reset(): void
+            loadComments(comments: unknown): void
+            unsentEvents(): unknown[]
+            eventsSent(events: unknown[]): void
+            receive(events: unknown[]): void
+            comments: Record<string, unknown>
+        }
+    }
+    documentTemplate?: {
+        documentStyles: Array<{slug: string}>
+        getCitationStyles(): Promise<unknown>
+        setStyles(styles: unknown): void
+        addDocPartSettings(): void
+        addCitationStylesMenuEntries(): void
+    }
+    citations?: {
+        init(): void
+        resetCitations(): void
+        layoutCitations(): void
+    }
+    navigator?: {
+        init(): void
+    }
+    track?: unknown
     db?: {
-        bibDB: {db: BibDBEntries; unsent: unknown[]; setDB(value: BibDB): void}
+        bibDB: {
+            db: BibDBEntries
+            unsent: unknown[]
+            setDB(value: BibDB): void
+            unsentEvents(): unknown[]
+            eventsSent(events: unknown[]): void
+            receive(events: unknown[]): void
+            hasReference(ref: unknown): boolean
+            addReference(ref: unknown, id: number): number
+        }
         imageDB: {
             db: ImageDBEntries
             unsent: unknown[]
             setDB(value: ImageDB): void
             unsentEvents(): unknown[]
+            eventsSent(events: unknown[]): void
+            receive(events: unknown[]): void
         }
+        clean?(): void
     }
-    footnotes?: unknown
-    marginboxes?: unknown
-    navigator?: unknown
-    track?: unknown
 }
 
 /** End-to-end encryption state attached to an editor. */
 export interface EditorE2EE {
     key?: CryptoKey
-    snapshotManager?: unknown
+    snapshotManager?: {
+        setKey(key: CryptoKey): void
+        sendInitialSnapshot(...args: unknown[]): void
+        handleRequestSnapshot(data: unknown): void
+        handleSnapshotReceived(data: unknown): void
+    }
     encrypted?: boolean
     encryptionSalt?: string
     encryptionIterations?: number
@@ -121,7 +193,7 @@ export interface EditorE2EE {
 /** Menu model registry created during editor construction. */
 export interface EditorMenu {
     headerbarModel: unknown
-    headerView?: unknown
+    headerView?: {update(): void; destroy(): void}
     imageMenuModel: unknown
     navigatorFilterModel: unknown
     orderedListMenuModel: unknown
@@ -130,9 +202,10 @@ export interface EditorMenu {
     tableMenuModel: unknown
     figureMenuModel: unknown
     toolbarModel: unknown
-    toolbarViews?: unknown[]
+    toolbarViews?: Array<{update(): void; destroy(): void; onResize?(): void}>
     figureWidthMenuModel: unknown
     codeBlockMenuModel: unknown
+    selectionMenuViews?: Array<{destroy(): void}>
 }
 
 /** User object attached to the editor, extending the common user with an id. */
@@ -159,12 +232,12 @@ export type EditorPluginTuple =
 export interface Editor {
     app: App
     user: EditorUser
-    editorPlugins: unknown[]
-    citationDialogPlugins: unknown[] | null
+    editorPlugins: EditorPluginTuple[]
+    citationDialogPlugins: EditorPluginTuple[] | null
     mod: EditorMod
     waitingForDocument: boolean
     docInfo: DocInfo
-    schema: Schema
+    schema: Schema & {cached: Record<string, unknown>}
     menu: EditorMenu
     client_id: number
     clientTimeAdjustment: number
