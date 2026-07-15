@@ -1,0 +1,336 @@
+/**
+ * E2EE Snapshot Manager - Handles encrypted snapshot requests and saves
+ * for end-to-end encrypted documents.
+ *
+ * For E2EE documents, the server cannot process encrypted content, so clients
+ * are responsible for saving periodic snapshots. When the server's
+ * DOC_SAVE_INTERVAL is reached, it sends a "request_snapshot" message to
+ * one of the write-capable clients. This module handles that request by:
+ *
+ * 1. Collecting the current document state (content, comments, bibliography)
+ * 2. Encrypting each field with the document's AES-GCM key
+ * 3. Sending an "e2ee_snapshot" message to the server for persistence
+ *
+ * The server stores the encrypted snapshot as opaque data and notifies
+ * other clients via an "e2ee_snapshot_received" message.
+ */
+import type {Editor} from "../types.js"
+
+interface SnapshotPayload {
+    content: string
+    comments: string
+    bibliography: string
+    title: string
+    e2ee_salt?: string
+    e2ee_iterations?: number
+    v?: number
+}
+
+export class E2EESnapshotManager {
+    editor: Editor
+    pendingSave: boolean
+    key: CryptoKey | null
+
+    /**
+     * @param editor - The Fidus Writer editor instance
+     */
+    constructor(editor: Editor) {
+        this.editor = editor
+        this.pendingSave = false
+        this.key = null
+    }
+
+    /**
+     * Set the encryption key for this document.
+     * Called after the user enters the password and the key is derived.
+     *
+     * @param key - An AES-GCM key (from E2EEKeyManager.deriveKey)
+     */
+    setKey(key: CryptoKey): void {
+        this.key = key
+    }
+
+    /**
+     * Clear the encryption key (e.g., when the document is closed).
+     */
+    clearKey(): void {
+        this.key = null
+    }
+
+    /**
+     * Check whether the snapshot manager has a key set.
+     *
+     * @returns boolean
+     */
+    get hasKey(): boolean {
+        return this.key !== null
+    }
+
+    /**
+     * Build an encrypted snapshot payload for the current document state.
+     *
+     * Returns the encrypted data without sending it. Used in
+     * non-collaborative mode where snapshots are sent via REST instead
+     * of WebSocket.
+     *
+     * @returns The encrypted snapshot payload or null if no key.
+     */
+    async getEncryptedSnapshot(): Promise<SnapshotPayload | null> {
+        if (!this.key) {
+            return null
+        }
+        const content = ((this.editor.view as any).docView as any).node.toJSON()
+        const comments = (this.editor.docInfo as any).comments || {}
+        const bibliography = (this.editor.docInfo as any).bibliography || {}
+        const {title} = this.editor.getDoc() as {title: string} as {title: string}
+
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
+
+        const encryptedContent = await E2EEEncryptor.encryptObject(
+            content,
+            this.key
+        )
+        const encryptedComments = await E2EEEncryptor.encryptObject(
+            comments,
+            this.key
+        )
+        const encryptedBibliography = await E2EEEncryptor.encryptObject(
+            bibliography,
+            this.key
+        )
+        const encryptedTitle = await E2EEEncryptor.encrypt(title, this.key)
+
+        return {
+            content: encryptedContent,
+            comments: encryptedComments,
+            bibliography: encryptedBibliography,
+            title: encryptedTitle,
+            e2ee_salt: this.editor.e2ee?.encryptionSalt,
+            e2ee_iterations: this.editor.e2ee?.encryptionIterations,
+            v: this.editor.docInfo.version
+        }
+    }
+
+    /**
+     * Handle a "request_snapshot" message from the server.
+     *
+     * The server sends this message when it needs a client to save
+     * an encrypted snapshot (typically after DOC_SAVE_INTERVAL diffs).
+     * Only write-capable clients should respond.
+     *
+     * @param request - The request_snapshot message
+     * @param request.v - The server's current document version
+     */
+    async handleRequestSnapshot(_request: {v?: number}): Promise<void> {
+        if (this.pendingSave) {
+            return
+        }
+        if (!this.key) {
+            return
+        }
+        if (this.editor.docInfo.access_rights !== "write") {
+            return
+        }
+
+        this.pendingSave = true
+
+        const docInfo = this.editor.docInfo
+
+        // Get the current document content as JSON
+        const content = ((this.editor.view as any).docView as any).node.toJSON()
+        const comments = (docInfo as any).comments || {}
+        const bibliography = (docInfo as any).bibliography || {}
+
+        // Extract the current title from the editor
+        const {title} = this.editor.getDoc() as {title: string}
+
+        // Dynamically import to avoid circular dependencies
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
+
+        // Encrypt all document data
+        const encryptedContent = await E2EEEncryptor.encryptObject(
+            content,
+            this.key
+        )
+        const encryptedComments = await E2EEEncryptor.encryptObject(
+            comments,
+            this.key
+        )
+        const encryptedBibliography = await E2EEEncryptor.encryptObject(
+            bibliography,
+            this.key
+        )
+        const encryptedTitle = await E2EEEncryptor.encrypt(title, this.key)
+
+        // Send snapshot to server
+        this.editor.ws!.send(() => ({
+            type: "e2ee_snapshot",
+            v: docInfo.version,
+            content: encryptedContent,
+            comments: encryptedComments,
+            bibliography: encryptedBibliography,
+            e2ee_salt: this.editor.e2ee?.encryptionSalt,
+            title: encryptedTitle
+        }))
+        this.pendingSave = false
+    }
+
+    /**
+     * Handle an "e2ee_snapshot_received" message from the server.
+     *
+     * The server sends this to all clients (except the one that sent
+     * the snapshot) to notify them that a new snapshot has been saved.
+     * This is informational — clients don't need to take any action
+     * since they already have the latest state from the diffs they've
+     * been receiving.
+     *
+     * @param message - The e2ee_snapshot_received message
+     * @param message.v - The version of the saved snapshot
+     */
+    async handleSnapshotReceived(message: {
+        v?: number
+        e2ee_salt?: string
+        e2ee_iterations?: number
+    }): Promise<void> {
+        // Informational — no action needed for regular snapshots.
+        // If the server included new KDF params, the password was changed
+        // by another client. Update local state so that if we re-fetch
+        // we use the new salt.
+        if (message.e2ee_salt) {
+            if (this.editor.e2ee) {
+                this.editor.e2ee.encryptionSalt = message.e2ee_salt
+                this.editor.e2ee.encryptionIterations = message.e2ee_iterations
+                this.editor.e2ee.key = undefined
+            }
+            this.clearKey()
+            // Clear cached password and key from sessionStorage so the user
+            // is prompted for the new password on next access.
+            const {E2EEKeyManager} = await import("fwtoolkit/e2ee/key-manager")
+            E2EEKeyManager.clearKeyFromSession(this.editor.docInfo.id as number)
+            E2EEKeyManager.clearPasswordFromSession(this.editor.docInfo.id as number)
+            // Notify the user that the password has changed.
+            const {showSystemMessage} = await import("fwtoolkit")
+            showSystemMessage(
+                gettext(
+                    "The document password was changed by another user. You will need to enter the new password to continue editing."
+                )
+            )
+        }
+    }
+
+    /**
+     * Send an initial snapshot for a newly created E2EE document.
+     *
+     * When a new E2EE document is created, the initial content (from
+     * the template) needs to be encrypted and saved as the first snapshot.
+     * This method handles that initial save.
+     *
+     * @param content - The document content (ProseMirror JSON)
+     * @param comments - The comments object (usually empty {})
+     * @param bibliography - The bibliography object (usually {})
+     * @param version - The document version (usually 0)
+     */
+    async sendInitialSnapshot(
+        content: any,
+        comments: any,
+        bibliography: any,
+        version: number
+    ): Promise<void> {
+        if (!this.key) {
+            return
+        }
+
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
+
+        const encryptedContent = await E2EEEncryptor.encryptObject(
+            content,
+            this.key
+        )
+        const encryptedComments = await E2EEEncryptor.encryptObject(
+            comments,
+            this.key
+        )
+        const encryptedBibliography = await E2EEEncryptor.encryptObject(
+            bibliography,
+            this.key
+        )
+
+        // Extract the current title from the editor
+        const {title} = this.editor.getDoc() as {title: string}
+        const encryptedTitle = await E2EEEncryptor.encrypt(title, this.key)
+
+        this.editor.ws!.send(() => ({
+            type: "e2ee_snapshot",
+            v: version,
+            content: encryptedContent,
+            comments: encryptedComments,
+            bibliography: encryptedBibliography,
+            e2ee_salt: this.editor.e2ee?.encryptionSalt,
+            title: encryptedTitle
+        }))
+    }
+
+    /**
+     * Re-encrypt the document with a new key (for password changes).
+     *
+     * When the user changes the document password, a new key is derived
+     * and the entire document must be re-encrypted. This method handles
+     * that by collecting the current document state, encrypting it with
+     * the new key, and sending a snapshot.
+     *
+     * @param newKey - The new AES-GCM key derived from the new password
+     * @param newSaltBase64 - The new salt (Base64-encoded) to send to the server
+     * @param newIterations - The new iteration count
+     */
+    async reEncryptWithNewKey(
+        newKey: CryptoKey,
+        newSaltBase64: string,
+        newIterations: number
+    ): Promise<void> {
+        if (this.pendingSave) {
+            return
+        }
+        this.pendingSave = true
+
+        const docInfo = this.editor.docInfo
+        const content = ((this.editor.view as any).docView as any).node.toJSON()
+        const comments = (docInfo as any).comments || {}
+        const bibliography = (docInfo as any).bibliography || {}
+
+        // Extract the current title from the editor
+        const {title} = this.editor.getDoc() as {title: string}
+
+        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
+
+        // Encrypt with the new key
+        const encryptedContent = await E2EEEncryptor.encryptObject(
+            content,
+            newKey
+        )
+        const encryptedComments = await E2EEEncryptor.encryptObject(
+            comments,
+            newKey
+        )
+        const encryptedBibliography = await E2EEEncryptor.encryptObject(
+            bibliography,
+            newKey
+        )
+        const encryptedTitle = await E2EEEncryptor.encrypt(title, newKey)
+
+        // Update the key
+        this.key = newKey
+
+        // Send the re-encrypted snapshot along with the new KDF parameters
+        this.editor.ws!.send(() => ({
+            type: "e2ee_snapshot",
+            v: docInfo.version,
+            content: encryptedContent,
+            comments: encryptedComments,
+            bibliography: encryptedBibliography,
+            e2ee_salt: newSaltBase64,
+            e2ee_iterations: newIterations,
+            title: encryptedTitle
+        }))
+        this.pendingSave = false
+    }
+}

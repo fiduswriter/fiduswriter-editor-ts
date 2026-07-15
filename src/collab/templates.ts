@@ -1,0 +1,25 @@
+import {avatarTemplate, escapeText, localizeDate} from "fwtoolkit"
+
+interface Chatter {
+    name: string
+}
+
+interface Message {
+    id: number
+    body: string
+}
+
+interface MessageParams {
+    message: Message
+    theChatter: Chatter
+}
+
+export const messageTemplate = ({message, theChatter}: MessageParams) =>
+    `<div class="fw-message" id="m${message.id}">
+        <div class="comment-user">
+            ${avatarTemplate({user: theChatter})}
+            <h5 class="comment-user-name">${escapeText(theChatter.name)}</h5>
+            <p class="comment-date">${localizeDate(Date.now())}</p>
+        </div>
+        <div class="message-body">${escapeText(message.body)}</div>
+    </div>`

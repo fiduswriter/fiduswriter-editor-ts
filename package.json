@@ -10,9 +10,44 @@
     "author": "Johannes Wilm",
     "type": "module",
     "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
-        ".": "./dist/index.js",
-        "./*": "./dist/*.js"
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        },
+        "./state_plugins": {
+            "types": "./dist/state_plugins/index.d.ts",
+            "default": "./dist/state_plugins/index.js"
+        },
+        "./state_plugins/*": {
+            "types": "./dist/state_plugins/*.d.ts",
+            "default": "./dist/state_plugins/*.js"
+        },
+        "./menus": {
+            "types": "./dist/menus/index.d.ts",
+            "default": "./dist/menus/index.js"
+        },
+        "./menus/*": {
+            "types": "./dist/menus/*.d.ts",
+            "default": "./dist/menus/*.js"
+        },
+        "./dialogs": {
+            "types": "./dist/dialogs/index.d.ts",
+            "default": "./dist/dialogs/index.js"
+        },
+        "./dialogs/*": {
+            "types": "./dist/dialogs/*.d.ts",
+            "default": "./dist/dialogs/*.js"
+        },
+        "./keymap": {
+            "types": "./dist/keymap.d.ts",
+            "default": "./dist/keymap.js"
+        },
+        "./*": {
+            "types": "./dist/*.d.ts",
+            "default": "./dist/*.js"
+        }
     },
     "files": [
         "dist/",

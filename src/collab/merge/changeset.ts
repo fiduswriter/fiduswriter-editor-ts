@@ -1,0 +1,116 @@
+import {ChangeSet} from "prosemirror-changeset"
+import {Mapping} from "prosemirror-transform"
+import type {Transaction} from "prosemirror-state"
+
+interface ChangeStep {
+    pos?: number
+    from?: number
+    to?: number
+    data: {step: number}
+}
+
+export class changeSet {
+    tr: Transaction
+
+    constructor(tr: Transaction) {
+        this.tr = tr
+    }
+
+    trDoc(tr: Transaction, index = 0): import("prosemirror-model").Node {
+        return tr.docs.length > index ? tr.docs[index] : tr.doc
+    }
+
+    findConflicts(tr1: Transaction, tr2: Transaction): Array<[number, string, number, string]> {
+        const conflicts: Array<[number, string, number, string]> = []
+        const changes1 = this.findContentChanges(tr1)
+        const changes2 = this.findContentChanges(tr2)
+        changes1.deletedsteps.forEach(deleted => {
+            changes2.insertedsteps.forEach(inserted => {
+                if (
+                    (inserted.pos as number) >= (deleted.from as number) &&
+                    (inserted.pos as number) <= (deleted.to as number)
+                ) {
+                    conflicts.push([
+                        deleted.data.step,
+                        "deletion",
+                        inserted.data.step,
+                        "insertion"
+                    ])
+                }
+            })
+        })
+
+        changes2.deletedsteps.forEach(deleted => {
+            changes1.insertedsteps.forEach(inserted => {
+                if (
+                    (inserted.pos as number) >= (deleted.from as number) &&
+                    (inserted.pos as number) <= (deleted.to as number)
+                ) {
+                    conflicts.push([
+                        inserted.data.step,
+                        "insertion",
+                        deleted.data.step,
+                        "deletion"
+                    ])
+                }
+            })
+        })
+        return conflicts
+    }
+
+    findContentChanges(tr: Transaction): {
+        insertedsteps: ChangeStep[]
+        deletedsteps: ChangeStep[]
+    } {
+        const doc = this.trDoc(tr)
+        let changes = ChangeSet.create(doc)
+        tr.steps.forEach((_step: import("prosemirror-transform").Step, index: number) => {
+            const stepDoc = this.trDoc(tr, index + 1)
+            changes = changes.addSteps(stepDoc, [tr.mapping.maps[index]], {
+                step: index
+            })
+        })
+        const invertedMapping = new Mapping()
+        invertedMapping.appendMappingInverted(tr.mapping)
+
+        const insertedsteps: ChangeStep[] = [],
+            deletedsteps: ChangeStep[] = [],
+            ins: number[] = [],
+            del: number[] = []
+        changes.changes.forEach(change => {
+            change.inserted.forEach(inserted => {
+                if (!ins.includes(inserted.data.step)) {
+                    insertedsteps.push({
+                        pos: invertedMapping.map(change.fromB),
+                        data: inserted.data
+                    })
+                    ins.push(inserted.data.step)
+                }
+            })
+            change.deleted.forEach(deleted => {
+                if (!del.includes(deleted.data.step)) {
+                    del.push(deleted.data.step)
+                    deletedsteps.push({
+                        from: change.fromA,
+                        to: change.toA,
+                        data: deleted.data
+                    })
+                }
+            })
+        })
+        return {insertedsteps, deletedsteps}
+    }
+
+    getChangeSet(): ChangeSet {
+        const tr = this.tr
+        const doc = this.trDoc(tr)
+        let changes = ChangeSet.create(doc)
+        tr.steps.forEach((_step: import("prosemirror-transform").Step, index: number) => {
+            const stepDoc = this.trDoc(tr, index + 1)
+            changes = changes.addSteps(stepDoc, [tr.mapping.maps[index]], {
+                step: index
+            })
+        })
+        return changes
+    }
+}

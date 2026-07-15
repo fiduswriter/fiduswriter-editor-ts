@@ -6,10 +6,17 @@ export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.recommended,
     {
-        files: ["src/**/*.ts", "test/**/*.ts", "test/**/*.js"],
+        files: ["src/**/*.ts", "src/**/*.js", "test/**/*.ts", "test/**/*.js"],
         languageOptions: {
             ecmaVersion: 2020,
-            sourceType: "module"
+            sourceType: "module",
+            globals: {
+                ...globals.browser,
+                gettext: "readonly",
+                interpolate: "readonly",
+                staticUrl: "readonly",
+                csrfToken: "readonly"
+            }
         },
         rules: {
             "@typescript-eslint/no-explicit-any": "off",
