@@ -225,7 +225,8 @@ export class ModFootnoteEditor {
     renderFootnote(content: any, index = 0, tr: Transaction): void {
         const node = fnNodeToPmNode(content) as Node
         let pos = 0
-        for (let i = 0; i < index; i++) {
+        const childCount = tr.doc.childCount
+        for (let i = 0; i < index && i < childCount; i++) {
             pos += tr.doc.child(i).nodeSize
         }
         tr.insert(pos, node)
@@ -236,6 +237,10 @@ export class ModFootnoteEditor {
             return
         }
 
+        const childCount = this.view.state.doc.childCount
+        if (index >= childCount) {
+            return
+        }
         let startPos = 0
         for (let i = 0; i < index; i++) {
             startPos += this.view.state.doc.child(i).nodeSize
