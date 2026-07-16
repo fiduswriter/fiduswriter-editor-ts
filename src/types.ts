@@ -123,11 +123,13 @@ export interface EditorMod {
         fnEditor: {
             view: EditorView
             renderAllFootnotes(): void
+            renderFootnote(content: unknown, index: number, tr: Transaction): void
+            removeFootnote(index: number, tr: Transaction): void
             applyDiffs(diffs: unknown[], cid: unknown): void
             schema: {cached: Record<string, unknown>}
         }
         init(): void
-        layout?: {updateDOM(): void}
+        layout: {updateDOM(): void}
     }
     comments?: {
         store: {

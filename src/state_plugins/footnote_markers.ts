@@ -2,7 +2,9 @@ import {Plugin, PluginKey} from "prosemirror-state"
 import type {EditorState, Transaction} from "prosemirror-state"
 import type {Node} from "prosemirror-model"
 
-const key = new PluginKey("footnoteMarkers")
+import type {Editor} from "../types.js"
+
+const key = new PluginKey<{fnMarkers: FootnoteMarker[]}>("footnoteMarkers")
 
 export interface FootnoteMarker {
     from: number
@@ -29,41 +31,11 @@ export const findFootnoteMarkers = (
     return footnoteMarkers
 }
 
-export const getFootnoteMarkers = (state: EditorState): FootnoteMarker[] =>
-    findFootnoteMarkers(0, state.doc.content.size, state.doc)
-
-export const getFootnoteMarkerContents = (state: EditorState): any[] =>
-    getFootnoteMarkers(state).map(marker => {
-        const node = state.doc.nodeAt(marker.from)
-        return node ? node.attrs.footnote : undefined
-    })
-
-export const updateFootnoteMarker = (
-    state: EditorState,
-    tr: Transaction,
-    index: number,
-    content: any
-): void => {
-    const markers = getFootnoteMarkers(state)
-    const marker = markers[index]
-    if (!marker) {
-        return
-    }
-    const node = state.doc.nodeAt(marker.from)
-    if (!node) {
-        return
-    }
-    tr.setNodeMarkup(marker.from, null, {
-        ...node.attrs,
-        footnote: content
-    })
-}
-
 const getAddedRanges = (tr: Transaction) => {
     /* find ranges of the current document that have been added by means of
      * a transaction.
      */
-    const ranges: Array<{from: number; to: number}> = []
+    let ranges: Array<{from: number; to: number}> = []
     tr.steps.forEach((step, index) => {
         const stepData = step as unknown as Record<string, unknown>
         if (
@@ -76,67 +48,221 @@ const getAddedRanges = (tr: Transaction) => {
             })
         }
         const map = tr.mapping.maps[index]
-        map.forEach((_oldStart, _oldEnd, newStart, newEnd) => {
-            ranges.push({from: newStart, to: newEnd})
-        })
+        ranges = ranges.map(range => ({
+            from: map.map(range.from, -1),
+            to: map.map(range.to, 1)
+        }))
     })
-    return ranges
-}
 
-const getDeletedRanges = (tr: Transaction) => {
-    const ranges: Array<{from: number; to: number}> = []
-    tr.steps.forEach((step, index) => {
-        const stepData = step as unknown as Record<string, unknown>
-        if (
-            stepData.jsonID === "replace" ||
-            stepData.jsonID === "replaceWrap"
-        ) {
-            const map = tr.mapping.maps[index]
-            map.forEach((oldStart, oldEnd, _newStart, _newEnd) => {
-                if (oldStart !== oldEnd) {
-                    ranges.push({from: oldStart, to: oldEnd})
-                }
-            })
+    const nonOverlappingRanges: Array<{from: number; to: number}> = []
+
+    ranges.forEach(range => {
+        let addedRange = false
+        nonOverlappingRanges.forEach(noRange => {
+            if (
+                !addedRange &&
+                range.from <= noRange.from &&
+                range.to >= noRange.from
+            ) {
+                noRange.from = range.from
+                noRange.to = noRange.to > range.to ? noRange.to : range.to
+                addedRange = true
+            } else if (
+                !addedRange &&
+                range.from <= noRange.to &&
+                range.to >= noRange.to
+            ) {
+                noRange.from =
+                    noRange.from < range.from ? noRange.from : range.from
+                noRange.to = range.to
+                addedRange = true
+            }
+        })
+        if (!addedRange) {
+            nonOverlappingRanges.push(range)
         }
     })
-    return ranges
+
+    return nonOverlappingRanges
 }
 
-const getNewFootnotes = (tr: Transaction) => {
-    const addedRanges = getAddedRanges(tr)
-    return addedRanges
-        .map(range => findFootnoteMarkers(range.from, range.to, tr.doc))
-        .flat()
+export const getFootnoteMarkerContents = (state: EditorState): any[] => {
+    const fnState = key.getState(state)
+    if (!fnState || !fnState.fnMarkers) {
+        return []
+    }
+    const fnMarkers = fnState.fnMarkers
+    return fnMarkers.map(
+        fnMarker => (state.doc.nodeAt(fnMarker.from) as Node).attrs.footnote
+    )
 }
 
-const getDeletedFootnotes = (tr: Transaction) => {
-    const deletedRanges = getDeletedRanges(tr)
-    return deletedRanges
-        .map(range => findFootnoteMarkers(range.from, range.to, tr.before))
-        .flat()
+export const updateFootnoteMarker = (
+    state: EditorState,
+    tr: Transaction,
+    index: number,
+    content: any
+): void => {
+    const fnState = key.getState(state)
+    if (!fnState) {
+        return
+    }
+    const {fnMarkers} = fnState
+    const footnote = fnMarkers[index]
+    if (!footnote) {
+        return
+    }
+    const node = state.doc.nodeAt(footnote.from) as Node
+    if (node.attrs.footnote === content) {
+        return
+    }
+    tr.setNodeMarkup(footnote.from, node.type, {
+        footnote: content
+    })
+    tr.setMeta("fromFootnote", true)
 }
 
-export const footnoteMarkersPlugin = (_options: {editor: unknown}) =>
-    new Plugin({
+export const getFootnoteMarkers = (state: EditorState): FootnoteMarker[] => {
+    const fnState = key.getState(state)
+    if (!fnState) {
+        return []
+    }
+    return fnState.fnMarkers
+}
+
+export const footnoteMarkersPlugin = (options: {editor: Editor}) =>
+    new Plugin<{fnMarkers: FootnoteMarker[]}>({
         key,
-        appendTransaction: (trs, _oldState, newState) => {
-            const modified = trs.reduce(
-                (modified, tr) => modified || tr.docChanged,
-                false
-            )
-            if (!modified) {
-                return
-            }
-            const addedFootnotes = trs.map(tr => getNewFootnotes(tr)).flat()
-            const deletedFootnotes = trs.map(tr => getDeletedFootnotes(tr)).flat()
+        state: {
+            init(_config, state) {
+                const fnMarkers: FootnoteMarker[] = []
+                state.doc.descendants((node, pos) => {
+                    if (node.type.name === "footnote") {
+                        fnMarkers.push({
+                            from: pos,
+                            to: pos + node.nodeSize
+                        })
+                    }
+                })
 
-            if (!addedFootnotes.length && !deletedFootnotes.length) {
-                return
+                return {
+                    fnMarkers
+                }
+            },
+            apply(tr, _prev, oldState, state) {
+                const meta = tr.getMeta(key)
+                if (meta) {
+                    return meta
+                }
+
+                let fnMarkers: FootnoteMarker[] = []
+
+                const prevState = key.getState(oldState)
+                if (prevState) {
+                    fnMarkers = prevState.fnMarkers
+                }
+
+                if (!tr.docChanged) {
+                    return {
+                        fnMarkers
+                    }
+                }
+
+                const remote = tr.getMeta("remote"),
+                    fromFootnote = tr.getMeta("fromFootnote"),
+                    ranges = getAddedRanges(tr),
+                    deletedFootnotesIndexes: number[] = []
+                fnMarkers = fnMarkers
+                    .map(marker => ({
+                        from: tr.mapping.map(marker.from, 1),
+                        to: tr.mapping.map(marker.to, -1)
+                    }))
+                    .filter((marker, index) => {
+                        if (marker.from !== marker.to - 1) {
+                            deletedFootnotesIndexes.unshift(index)
+                            return false
+                        }
+                        return true
+                    })
+                if (fromFootnote) {
+                    return {fnMarkers}
+                }
+                const footTr =
+                    options.editor.mod.footnotes!.fnEditor.view.state.tr
+
+                footTr.setMeta("fromMain", true)
+
+                deletedFootnotesIndexes.forEach(index =>
+                    options.editor.mod.footnotes!.fnEditor.removeFootnote(
+                        index,
+                        footTr
+                    )
+                )
+                ranges.forEach(range => {
+                    let newFootnotes = findFootnoteMarkers(
+                        range.from,
+                        range.to,
+                        tr.doc
+                    )
+                    if (newFootnotes.length) {
+                        const firstFn = newFootnotes[0]
+                        let offset = fnMarkers.findIndex(
+                            marker => marker.from > firstFn.from
+                        )
+                        if (offset < 0) {
+                            offset = fnMarkers.length
+                        }
+                        if (remote) {
+                            newFootnotes = newFootnotes.filter(
+                                newMarker =>
+                                    !fnMarkers.find(
+                                        oldMarker =>
+                                            oldMarker.from === newMarker.from
+                                    )
+                            )
+                        } else {
+                            newFootnotes.forEach((footnote, index) => {
+                                const fnContent = (
+                                    state.doc.nodeAt(
+                                        footnote.from
+                                    ) as Node
+                                ).attrs.footnote
+                                options.editor.mod.footnotes!.fnEditor.renderFootnote(
+                                    fnContent,
+                                    offset + index,
+                                    footTr
+                                )
+                            })
+                        }
+                        fnMarkers = fnMarkers
+                            .concat(newFootnotes)
+                            .sort((a, b) => (a.from > b.from ? 1 : -1))
+                    }
+                })
+
+                const footMeta: Record<string, unknown> | undefined =
+                    tr.getMeta("toFoot")
+
+                if (footMeta) {
+                    Object.entries(footMeta).forEach(([key, value]) => {
+                        footTr.setMeta(key, value)
+                    })
+                }
+
+                if (footTr.docChanged || footMeta) {
+                    tr.setMeta("footTr", footTr)
+                }
+
+                return {
+                    fnMarkers
+                }
             }
-            const tr = newState.tr.setMeta("footnoteMarkers", {
-                addedFootnotes,
-                deletedFootnotes
-            })
-            return tr
+        },
+        view(_editorView) {
+            return {
+                update: (_view, _prevState) => {
+                    options.editor.mod.footnotes!.layout.updateDOM()
+                }
+            }
         }
     })
