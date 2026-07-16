@@ -657,7 +657,10 @@ export const diffPlugin = (options: {merge: MergeEditorLike}) =>
                 }
             },
             apply(tr, _prev, oldState, state): DiffPluginState {
-                const oldPluginState = key.getState(oldState)!
+                const oldPluginState = key.getState(oldState)
+                if (!oldPluginState) {
+                    return _prev
+                }
                 let {decos} = oldPluginState
                 const {baseTr, deletionClass} = oldPluginState
 

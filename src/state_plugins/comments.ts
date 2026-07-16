@@ -77,7 +77,11 @@ export const addCommentDuringCreationDecoration = (
     if (!tr.selection.from || tr.selection.from === tr.selection.to) {
         return false
     }
-    let {decos} = key.getState(state) as {decos: DecorationSet}
+    const pluginState = key.getState(state) as {decos: DecorationSet} | undefined
+    if (!pluginState) {
+        return false
+    }
+    let {decos} = pluginState
 
     const commentDuringCreationDeco = (
         decos.find(
@@ -107,7 +111,11 @@ export const removeCommentDuringCreationDecoration = (
     state: EditorState,
     tr: Transaction
 ): Transaction | false => {
-    let {decos} = key.getState(state) as {decos: DecorationSet}
+    const pluginState = key.getState(state) as {decos: DecorationSet} | undefined
+    if (!pluginState) {
+        return false
+    }
+    let {decos} = pluginState
 
     const commentDuringCreationDecos = decos.find(
         undefined,
@@ -126,7 +134,11 @@ export const removeCommentDuringCreationDecoration = (
 export const getCommentDuringCreationDecoration = (
     state: EditorState
 ): Decoration | false => {
-    const {decos} = key.getState(state) as {decos: DecorationSet}
+    const pluginState = key.getState(state) as {decos: DecorationSet} | undefined
+    if (!pluginState) {
+        return false
+    }
+    const {decos} = pluginState
 
     const deco = decos.find(
         undefined,
@@ -157,7 +169,11 @@ export const commentsPlugin = (options: CommentPluginOptions) =>
                     // of previous values
                     return meta
                 }
-                let {decos} = key.getState(oldState) as {decos: DecorationSet}
+                const oldPluginState = key.getState(oldState) as {decos: DecorationSet} | undefined
+                if (!oldPluginState) {
+                    return {decos: DecorationSet.empty}
+                }
+                let {decos} = oldPluginState
 
                 decos = decos.map(tr.mapping, tr.doc, {
                     onRemove: _decoSpec => {
@@ -282,7 +298,11 @@ export const commentsPlugin = (options: CommentPluginOptions) =>
         },
         props: {
             decorations(state: EditorState) {
-                const {decos} = this.getState(state) as {decos: DecorationSet}
+                const pluginState = this.getState(state) as {decos: DecorationSet} | undefined
+                if (!pluginState) {
+                    return DecorationSet.empty
+                }
+                const {decos} = pluginState
                 return decos
             }
         }

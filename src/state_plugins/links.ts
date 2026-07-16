@@ -876,7 +876,11 @@ ${
                 return false
             },
             decorations(state: EditorState) {
-                const {decos} = key.getState(state) as LinksPluginState
+                const pluginState = key.getState(state) as LinksPluginState | undefined
+                if (!pluginState) {
+                    return DecorationSet.empty
+                }
+                const {decos} = pluginState
                 return decos
             }
         }

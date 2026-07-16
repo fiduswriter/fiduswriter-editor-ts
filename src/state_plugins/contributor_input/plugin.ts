@@ -187,8 +187,11 @@ export const contributorInputPlugin = (
         props: {
             nodeViews: {},
             decorations(state: EditorState) {
-                const {decos} = key.getState(state) as ContributorInputState
-
+                const pluginState = key.getState(state) as ContributorInputState | undefined
+                if (!pluginState) {
+                    return DecorationSet.empty
+                }
+                const {decos} = pluginState
                 return decos
             },
             /**

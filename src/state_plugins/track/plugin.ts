@@ -92,7 +92,11 @@ export function trackPlugin(options: {editor: Editor}) {
                     return meta
                 }
 
-                let {decos} = key.getState(state) as {decos: DecorationSet}
+                const oldPluginState = key.getState(state) as {decos: DecorationSet} | undefined
+                if (!oldPluginState) {
+                    return {decos: DecorationSet.empty}
+                }
+                let {decos} = oldPluginState
 
                 if (tr.selectionSet) {
                     const {insertion, deletion, formatChange} =
@@ -147,7 +151,10 @@ export function trackPlugin(options: {editor: Editor}) {
         },
         props: {
             decorations(state) {
-                const pluginState = this.getState(state) as {decos: DecorationSet}
+                const pluginState = this.getState(state) as {decos: DecorationSet} | undefined
+                if (!pluginState) {
+                    return DecorationSet.empty
+                }
                 return pluginState.decos
             },
             handleDOMEvents: {

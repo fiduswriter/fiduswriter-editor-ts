@@ -22,8 +22,8 @@ interface CollabCaretsState {
 export const getSelectionUpdate = (
     state: EditorState
 ): false | {anchor: number; head: number} => {
-    const pluginState = key.getState(state) as CollabCaretsState
-    return pluginState.caretUpdate
+    const pluginState = key.getState(state) as CollabCaretsState | undefined
+    return pluginState?.caretUpdate || false
 }
 
 export const updateCollaboratorSelection = (
@@ -31,7 +31,10 @@ export const updateCollaboratorSelection = (
     collaborator: {id: number; name: string},
     data: {session_id: string; anchor: number; head: number}
 ): Transaction => {
-    let pluginState = key.getState(state) as CollabCaretsState
+    const pluginState = key.getState(state) as CollabCaretsState | undefined
+    if (!pluginState) {
+        return state.tr.setMeta(key, {decos: DecorationSet.empty, caretPositions: [], caretUpdate: false})
+    }
     let {decos, caretPositions} = pluginState
 
     const oldCarPos = caretPositions.find(
@@ -95,7 +98,10 @@ export const removeCollaboratorSelection = (
     state: EditorState,
     data: {session_id: string}
 ): Transaction | false => {
-    let pluginState = key.getState(state) as CollabCaretsState
+    const pluginState = key.getState(state) as CollabCaretsState | undefined
+    if (!pluginState) {
+        return false
+    }
     let {decos, caretPositions} = pluginState
 
     const caretPosition = caretPositions.find(
@@ -138,8 +144,11 @@ export const collabCaretsPlugin = (_options: {editor: unknown}) =>
                     // of previous values
                     return meta
                 }
-                let pluginState = key.getState(oldState) as CollabCaretsState,
-                    {decos, caretPositions} = pluginState,
+                const pluginState = key.getState(oldState) as CollabCaretsState | undefined
+                if (!pluginState) {
+                    return {decos: DecorationSet.empty, caretPositions: [], caretUpdate: false}
+                }
+                let {decos, caretPositions} = pluginState,
                     caretUpdate: false | {anchor: number; head: number} = false
 
                 decos = decos.map(tr.mapping, tr.doc, {
