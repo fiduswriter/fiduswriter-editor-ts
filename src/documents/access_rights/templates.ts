@@ -170,7 +170,7 @@ export const contactsTemplate = ({contacts}: {contacts: Contact[]}) =>
                         ? `${gettext("Invite")}:&nbsp;`
                         : ""
                 }
-                    ${escapeText(contact.name)}
+                    ${escapeText(contact.name || "")}
 
                 </span>
             </td>
@@ -196,7 +196,7 @@ export const collaboratorsTemplate = ({
                 collaborator.holder.type === "userinvite"
                     ? `${gettext("Invite")}: `
                     : ""
-            }${escapeText(collaborator.holder.name)}</span>
+            }${escapeText(collaborator.holder.name || "")}</span>
         </td>
         <td width="50" align="center">
             <div class="fw-inline edit-right-wrapper">
