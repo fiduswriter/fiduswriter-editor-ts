@@ -30,14 +30,6 @@ interface AccessRightLike {
     rights?: string
 }
 
-interface SnapshotManagerLike {
-    reEncryptWithNewKey(
-        newKey: CryptoKey,
-        newSaltBase64: string,
-        newIterations: number
-    ): Promise<void>
-}
-
 interface DocumentStyle {
     slug: string
     contents: string
@@ -61,7 +53,7 @@ function getDB(editor: Editor): {
 }
 
 function getDocumentTemplate(editor: Editor): DocumentTemplateLike {
-    return editor.mod.documentTemplate as DocumentTemplateLike
+    return editor.mod.documentTemplate as unknown as DocumentTemplateLike
 }
 
 function getTrack(editor: Editor): TrackLike {
@@ -407,7 +399,7 @@ export const headerbarModel = () => ({
                                 db.bibDB,
                                 db.imageDB,
                                 editor.app.csl,
-                                editor.docInfo.updated,
+                                editor.docInfo.updated as Date as Date,
                                 getDocumentTemplate(editor).documentStyles,
                                 exportProgress(doc)
                             )
@@ -537,9 +529,8 @@ export const headerbarModel = () => ({
                                         )
 
                                     // Re-encrypt the document with the new key
-                                    await (
-                                        e2ee.snapshotManager as SnapshotManagerLike
-                                    ).reEncryptWithNewKey(
+                                    await e2ee.snapshotManager!
+                                        .reEncryptWithNewKey(
                                         newKey,
                                         newSaltBase64,
                                         newIterations
@@ -638,7 +629,7 @@ export const headerbarModel = () => ({
                                 db.bibDB,
                                 db.imageDB,
                                 editor.app.csl,
-                                editor.docInfo.updated,
+                                editor.docInfo.updated as Date,
                                 getDocumentTemplate(editor).documentStyles
                             )
                             exporter.progressCallback = exportProgress(doc)
@@ -666,7 +657,7 @@ export const headerbarModel = () => ({
                                 db.bibDB,
                                 db.imageDB,
                                 editor.app.csl,
-                                editor.docInfo.updated,
+                                editor.docInfo.updated as Date,
                                 getDocumentTemplate(editor).documentStyles
                             )
                             exporter.progressCallback = exportProgress(doc)
@@ -692,7 +683,7 @@ export const headerbarModel = () => ({
                                 doc,
                                 db.bibDB,
                                 db.imageDB,
-                                editor.docInfo.updated
+                                editor.docInfo.updated as Date
                             )
                             exporter.progressCallback = exportProgress(doc)
                             exporter.init()
@@ -720,7 +711,7 @@ export const headerbarModel = () => ({
                                 db.bibDB,
                                 db.imageDB,
                                 editor.app.csl,
-                                editor.docInfo.updated,
+                                editor.docInfo.updated as Date,
                                 "article"
                             )
                             exporter.progressCallback = exportProgress(doc)
@@ -749,7 +740,7 @@ export const headerbarModel = () => ({
                                 db.bibDB,
                                 db.imageDB,
                                 editor.app.csl,
-                                editor.docInfo.updated,
+                                editor.docInfo.updated as Date,
                                 "book-part-wrapper"
                             )
                             exporter.progressCallback = exportProgress(doc)
@@ -778,7 +769,7 @@ export const headerbarModel = () => ({
                                 db.bibDB,
                                 db.imageDB,
                                 editor.app.csl,
-                                editor.docInfo.updated
+                                editor.docInfo.updated as Date
                             )
                             exporter.progressCallback = exportProgress(doc)
                             exporter.init()

@@ -694,23 +694,23 @@ export class ModCollabDoc {
         }
 
         // Store the E2EE state on the editor
-        this.mod.editor.e2ee = {
+        const e2ee = this.mod.editor.e2ee = {
             encrypted: true,
             encryptionSalt: salt,
             encryptionIterations: iterations || 600000,
             key: key,
-            snapshotManager: this.mod.editor.e2ee?.snapshotManager || null
+            snapshotManager: this.mod.editor.e2ee?.snapshotManager || undefined
         }
         // Initialize snapshot manager now that we have the key
-        if (!this.mod.editor.e2ee.snapshotManager) {
+        if (!e2ee.snapshotManager) {
             const {E2EESnapshotManager} = await import(
                 "../e2ee/snapshot-manager.js"
             )
-            this.mod.editor.e2ee.snapshotManager = new E2EESnapshotManager(
+            e2ee.snapshotManager = new E2EESnapshotManager(
                 this.mod.editor
             )
         }
-        ;(this.mod.editor.e2ee.snapshotManager as any).setKey(key)
+        ;(e2ee.snapshotManager as any).setKey(key)
 
         // Cache the key in sessionStorage so the user doesn't have to
         // re-enter the password when reopening the document this session.
@@ -794,8 +794,8 @@ export class ModCollabDoc {
         // (not a Base64 string) and this is the initial load.
         const isNewE2EEDocument =
             isInitialLoad && typeof doc.content !== "string"
-        if (isNewE2EEDocument && this.mod.editor.e2ee.snapshotManager) {
-            ;(this.mod.editor.e2ee.snapshotManager as any).sendInitialSnapshot(
+        if (isNewE2EEDocument && e2ee.snapshotManager) {
+            ;(e2ee.snapshotManager as any).sendInitialSnapshot(
                 decryptedContent,
                 decryptedComments,
                 decryptedBibliography,

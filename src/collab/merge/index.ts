@@ -1,7 +1,7 @@
 import type {Node} from "prosemirror-model"
 import {EditorState, type Selection, type Transaction} from "prosemirror-state"
 import {Mapping, Step, StepMap, Transform} from "prosemirror-transform"
-import type {BibDB, ExportDoc, ImageDB} from "@fiduswriter/document"
+import type {BibDB, ExportDoc, FidusDoc, ImageDB} from "@fiduswriter/document"
 import {getSettings} from "@fiduswriter/document/schema/convert"
 import {Dialog, addAlert, showSystemMessage} from "fwtoolkit"
 import {receiveTransaction, sendableSteps} from "prosemirror-collab"
@@ -411,7 +411,7 @@ export class Merge {
             content: (pmArticle?.toJSON() || {type: "article"}) as {
                 type: string
             },
-            settings: getSettings(pmArticle as Node),
+            settings: getSettings(pmArticle as unknown as FidusDoc),
             title: title,
             version: String(this.mod.editor.docInfo.version),
             comments: ((this.mod.editor.mod.comments as any).store as any)

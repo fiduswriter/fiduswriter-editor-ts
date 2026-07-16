@@ -105,6 +105,9 @@ export interface EditorMod {
         participants: Array<{id: number; name?: string; session_id?: string; sessionIds?: string[]}>
         pastParticipants: Array<{id: number; name?: string}>
         updateParticipantList(participants: unknown[]): void
+        colors: {
+            ensureUserColor(id: number): void
+        }
         chat: {
             newMessage(message: unknown): void
             showChat(participants: unknown[]): void
@@ -114,6 +117,7 @@ export interface EditorMod {
         updateDOM(): void
         view(view: EditorView): void
         init(): void
+        marginBoxes: Array<{view?: string; type?: string; pos?: number}>
     }
     footnotes?: {
         fnEditor: {
@@ -133,6 +137,12 @@ export interface EditorMod {
             eventsSent(events: unknown[]): void
             receive(events: unknown[]): void
             comments: Record<string, unknown>
+        }
+        interactions: {
+            createNewComment(): void
+            isCurrentlyEditing(): boolean
+            deactivateAll(): void
+            deactivateSelectedChanges(): void
         }
     }
     documentTemplate?: {
@@ -182,6 +192,12 @@ export interface EditorE2EE {
         sendInitialSnapshot(...args: unknown[]): void
         handleRequestSnapshot(data: unknown): void
         handleSnapshotReceived(data: unknown): void
+        getEncryptedSnapshot(): Promise<any | null>
+        reEncryptWithNewKey(
+            newKey: CryptoKey,
+            newSaltBase64: string,
+            newIterations: number
+        ): Promise<void>
     }
     encrypted?: boolean
     encryptionSalt?: string
