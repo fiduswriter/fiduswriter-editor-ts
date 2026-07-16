@@ -1,5 +1,6 @@
 import {Plugin, PluginKey} from "prosemirror-state"
 import {ReplaceAroundStep, ReplaceStep} from "prosemirror-transform"
+import type {Node} from "prosemirror-model"
 
 const key = new PluginKey("citationRender")
 
