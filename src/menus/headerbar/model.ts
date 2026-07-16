@@ -1048,11 +1048,7 @@ export const headerbarModel = () => ({
                             }
                         })
                     },
-                    selected: (editor: Editor) => {
-                        return editor.view.state.doc.attrs.copyright
-                            ? true
-                            : false
-                    }
+                    disabled: (editor: Editor) => editor.docInfo.access_rights !== "write"
                 }
             ]
         },
