@@ -4,7 +4,7 @@ import {ReplaceAroundStep, ReplaceStep} from "prosemirror-transform"
 const key = new PluginKey("citationRender")
 
 interface CitationRenderState {
-    action: boolean
+    action: string | false
 }
 
 export const citationRenderPlugin = (_options: {editor: unknown}) =>
@@ -21,7 +21,11 @@ export const citationRenderPlugin = (_options: {editor: unknown}) =>
                     // of previous values
                     return meta as CitationRenderState
                 }
-                let {action} = key.getState(oldState) as CitationRenderState
+                const oldPluginState = key.getState(oldState) as CitationRenderState | undefined
+                if (!oldPluginState) {
+                    return {action: false}
+                }
+                let {action} = oldPluginState
 
                 if (action || tr.getMeta("settings")) {
                     return {action} // We already need to reset the bibliography or another setting is used. Don't bother checking for more reasons to do so.
@@ -32,28 +36,34 @@ export const citationRenderPlugin = (_options: {editor: unknown}) =>
                         step instanceof ReplaceAroundStep
                     ) {
                         if (step.from !== step.to) {
-                            const map = tr.mapping.maps[index]
-                            map.forEach((_oldStart, _oldEnd, newStart, newEnd) => {
-                                tr.doc.nodesBetween(
-                                    newStart,
-                                    newEnd,
-                                    node => {
-                                        if (node.type.name === "citation") {
-                                            action = true
-                                        }
-                                    }
-                                )
-                            })
-                        } else {
-                            tr.doc.nodesBetween(
+                            ;(tr.docs[index] as Node).nodesBetween(
                                 step.from,
                                 step.to,
                                 node => {
                                     if (node.type.name === "citation") {
-                                        action = true
+                                        // A citation was replaced. We need to reset
+                                        action = "reset"
+                                    } else if (
+                                        !action &&
+                                        node.type.name === "footnote"
+                                    ) {
+                                        action = "numbers"
                                     }
                                 }
                             )
+                        }
+                        if (step.slice?.content) {
+                            step.slice.content.descendants(node => {
+                                if (node.type.name === "citation") {
+                                    // A citation was added. We need to reset
+                                    action = "reset"
+                                } else if (
+                                    !action &&
+                                    node.type.name === "footnote"
+                                ) {
+                                    action = "numbers"
+                                }
+                            })
                         }
                     }
                 })
