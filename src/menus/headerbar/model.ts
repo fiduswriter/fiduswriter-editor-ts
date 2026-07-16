@@ -1061,12 +1061,6 @@ export const headerbarModel = () => ({
                         return editor.view.state.doc.attrs.copyright
                             ? true
                             : false
-                    },
-                    available: (editor: Editor) => {
-                        return editor.view.state.doc.attrs.copyrights &&
-                            editor.view.state.doc.attrs.copyrights.length
-                            ? true
-                            : false
                     }
                 }
             ]
