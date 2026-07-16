@@ -211,7 +211,7 @@ export const documentTemplatePlugin = (
                             initialFragment.lastChild?.isTextblock
                         ) {
                             protectionSize -= 1 // We allow writing at the end of the last text block.
-                            if (initialFragment.lastChild.nodeSize === 2) {
+                            if (initialFragment.lastChild?.nodeSize === 2) {
                                 // The last text block is empty, so we remove all protection from it, even node type
                                 protectionSize -= 1
                             }

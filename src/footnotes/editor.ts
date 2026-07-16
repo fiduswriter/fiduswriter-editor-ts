@@ -176,6 +176,9 @@ export class ModFootnoteEditor {
             ]
 
             fns.forEach(fnIndex => {
+                if (fnIndex >= tr.doc.childCount) {
+                    return
+                }
                 const fnContent = tr.doc.child(fnIndex).toJSON().content
                 updateFootnoteMarker(mainState, mainTr, fnIndex, fnContent)
             })
