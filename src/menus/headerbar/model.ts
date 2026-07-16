@@ -1046,6 +1046,7 @@ export const headerbarModel = () => ({
                                         .setMeta("settings", true)
                                 )
                             }
+                            editor.currentView.focus()
                         })
                     },
                     disabled: (editor: Editor) => editor.docInfo.access_rights !== "write"
