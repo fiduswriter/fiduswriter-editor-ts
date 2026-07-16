@@ -199,8 +199,8 @@ export const documentTemplatePlugin = (
                             1 +
                             1 +
                             1 +
-                            (node.firstChild as ProseMirrorNode).firstChild!
-                                .nodeSize // + 1 for the part node + 1 for the table + 1 for the first row
+                            ((node.firstChild as ProseMirrorNode).firstChild
+                                ?.nodeSize || 0) // + 1 for the part node + 1 for the table + 1 for the first row
                     } else if (node.attrs.locking === "start") {
                         let initialFragment = Fragment.fromJSON(
                             options.editor.schema,
