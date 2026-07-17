@@ -245,9 +245,9 @@ export const toolbarModel = () => ({
                 if (
                     editor.currentView.state.selection.$anchor.node(1) &&
                     !editor.view.state.selection.$anchor.node(1).attrs.elements &&
-                    !(editor.view.state.schema.nodes.richtext_part.spec
-                        .attrs as Record<string, {default?: unknown}>).elements
-                        ?.default
+                    !(editor.view.state.schema.nodes.richtext_part as
+                        | {spec: {attrs: Record<string, {default?: unknown}>}}
+                        | undefined)?.spec?.attrs?.elements?.default
                 ) {
                     return ""
                 }
@@ -303,9 +303,9 @@ export const toolbarModel = () => ({
                 !editor.currentView.state.selection.$anchor.node(1) ||
                 !(editor.currentView.state.selection.$anchor.node(1).attrs
                     .elements ||
-                  (editor.currentView.state.schema.nodes.richtext_part.spec
-                      .attrs as Record<string, {default?: unknown}>).elements
-                      ?.default) ||
+                  (editor.currentView.state.schema.nodes.richtext_part as
+                      | {spec: {attrs: Record<string, {default?: unknown}>}}
+                      | undefined)?.spec?.attrs?.elements?.default) ||
                 (currentSelection(editor).jsonID === "node" &&
                     currentSelection(editor).node?.isBlock &&
                     !currentSelection(editor).node?.isTextblock) ||
