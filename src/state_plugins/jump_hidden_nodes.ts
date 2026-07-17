@@ -22,46 +22,35 @@ export const jumpHiddenNodesPlugin = (_options: {editor: unknown}) =>
     new Plugin({
         key,
         appendTransaction: (trs, oldState, state) => {
-            if (state.selection.from !== state.selection.to) {
+            if (!state.selection.empty) {
                 // Only applies to collapsed selection
                 return
             }
-            const selection = state.selection
-            let $pos = selection.$from
-            if (!posHidden($pos)) {
-                return
-            }
-            let movedRight = false,
-                movedLeft = false
-            const startPos = $pos.pos
-            while ($pos.depth > 1 && posHidden($pos)) {
-                $pos = state.doc.resolve($pos.after())
-                movedRight = true
-            }
-            if (!movedRight) {
-                $pos = selection.$from
-                while ($pos.depth > 1 && posHidden($pos)) {
-                    $pos = state.doc.resolve($pos.before())
-                    movedLeft = true
+            const selectionSet = trs.find(tr => tr.selectionSet)
+            if (selectionSet && posHidden(state.selection.$from)) {
+                const dir =
+                    state.selection.from > oldState.selection.from ? 1 : -1
+                let newPos = state.selection.from,
+                    hidden = true,
+                    validTextSelection = false,
+                    validGapCursor = false
+                let $pos: ResolvedPos = state.selection.$from
+                while (hidden || (!validGapCursor && !validTextSelection)) {
+                    newPos += dir
+                    if (newPos === 0 || newPos === state.doc.nodeSize) {
+                        // Could not find any valid position
+                        return
+                    }
+                    $pos = state.doc.resolve(newPos)
+                    validTextSelection = $pos.parent.inlineContent
+                    validGapCursor = (GapCursor as any).valid($pos)
+                    hidden = posHidden($pos)
                 }
+                const selection = validTextSelection
+                    ? new TextSelection($pos)
+                    : new GapCursor($pos)
+                return state.tr.setSelection(selection)
             }
-            if (!movedRight && !movedLeft) {
-                return
-            }
-            let tr = state.tr
-            if (
-                $pos.node().isTextblock &&
-                $pos.pos >= startPos &&
-                $pos.pos <= startPos
-            ) {
-                // Try to set text selection
-                tr = tr.setSelection(TextSelection.near($pos))
-            } else if ($pos.pos !== startPos) {
-                tr = tr.setSelection(new GapCursor($pos))
-            }
-            if (trs[trs.length - 1].doc.eq(tr.doc)) {
-                return tr
-            }
-            return
+            return undefined
         }
     })
