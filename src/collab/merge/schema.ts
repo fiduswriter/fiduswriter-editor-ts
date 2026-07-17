@@ -1,5 +1,5 @@
 import {Schema} from "prosemirror-model"
-import type {Node, NodeSpec, NodeType, MarkSpec, Mark} from "prosemirror-model"
+import type {Node, NodeSpec, MarkSpec, Mark} from "prosemirror-model"
 
 export function parseDiff(str: string | undefined): unknown[] {
     if (!str) {
@@ -21,17 +21,17 @@ export const createDiffSchema = (docSchema: Schema): Schema => {
     let specNodes = docSchema.spec.nodes
 
     specNodes.forEach((nodeTypeName: string) => {
-        const nodeType = specNodes.get(nodeTypeName) as NodeType
-        if (nodeType.spec.group !== "block") {
+        const nodeSpec = specNodes.get(nodeTypeName) as NodeSpec | undefined
+        if (!nodeSpec || nodeSpec.group !== "block") {
             return
         }
-        const attrs = nodeType.spec.attrs
+        const attrs = nodeSpec.attrs
         specNodes = specNodes.update(
             nodeTypeName,
-            Object.assign({}, nodeType.spec, {
+            Object.assign({}, nodeSpec, {
                 attrs: Object.assign({diffdata: {default: []}}, attrs),
                 toDOM: (node: Node) => {
-                    let dom = nodeType.spec.toDOM?.(node) as [
+                    let dom = nodeSpec.toDOM?.(node) as [
                         string,
                         Record<string, unknown>,
                         number
@@ -62,7 +62,7 @@ export const createDiffSchema = (docSchema: Schema): Schema => {
                     }
                     return dom
                 },
-                parseDOM: nodeType.spec.parseDOM?.map(tag => ({
+                parseDOM: nodeSpec.parseDOM?.map(tag => ({
                     tag: tag.tag,
                     getAttrs: (dom: HTMLElement) => {
                         const attrs = tag.getAttrs
