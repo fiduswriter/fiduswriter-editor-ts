@@ -1,6 +1,8 @@
-import {Plugin, PluginKey} from "prosemirror-state"
+import {Plugin, PluginKey, type EditorState} from "prosemirror-state"
 import {ReplaceAroundStep, ReplaceStep} from "prosemirror-transform"
+import type {EditorView} from "prosemirror-view"
 import type {Node} from "prosemirror-model"
+import type {ModCitations} from "../citations/index.js"
 
 const key = new PluginKey("citationRender")
 
@@ -8,7 +10,11 @@ interface CitationRenderState {
     action: string | false
 }
 
-export const citationRenderPlugin = (_options: {editor: unknown}) =>
+interface CitationRenderOptions {
+    editor: {mod: {citations: ModCitations}}
+}
+
+export const citationRenderPlugin = (options: CitationRenderOptions) =>
     new Plugin<CitationRenderState>({
         key,
         state: {
@@ -40,7 +46,7 @@ export const citationRenderPlugin = (_options: {editor: unknown}) =>
                             ;(tr.docs[index] as Node).nodesBetween(
                                 step.from,
                                 step.to,
-                                node => {
+                                (node: Node) => {
                                     if (node.type.name === "citation") {
                                         // A citation was replaced. We need to reset
                                         action = "reset"
@@ -54,7 +60,7 @@ export const citationRenderPlugin = (_options: {editor: unknown}) =>
                             )
                         }
                         if (step.slice?.content) {
-                            step.slice.content.descendants(node => {
+                            step.slice.content.descendants((node: Node) => {
                                 if (node.type.name === "citation") {
                                     // A citation was added. We need to reset
                                     action = "reset"
@@ -69,6 +75,29 @@ export const citationRenderPlugin = (_options: {editor: unknown}) =>
                     }
                 })
                 return {action}
+            }
+        },
+        view(_view: EditorView): {update: (view: EditorView, prevState: EditorState) => void; destroy: () => void} {
+            options.editor.mod.citations.resetCitations()
+            return {
+                update: (view: EditorView, _prevState: EditorState) => {
+                    const stateAction = key.getState(view.state) as CitationRenderState | undefined
+                    const action = stateAction?.action
+                    if (action === "reset") {
+                        options.editor.mod.citations.resetCitations()
+                        const tr = view.state.tr.setMeta(key, {action: false})
+                        view.dispatch(tr)
+                    } else if (action === "numbers") {
+                        options.editor.mod.citations.footnoteNumberOverride()
+                        const tr = view.state.tr.setMeta(key, {action: false})
+                        view.dispatch(tr)
+                    } else if (view.dom.querySelector(".citation:empty")) {
+                        options.editor.mod.citations.resetCitations()
+                    }
+                },
+                destroy: () => {
+                    options.editor.mod.citations.resetCitations()
+                }
             }
         }
     })
