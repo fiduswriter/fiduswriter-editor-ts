@@ -69,13 +69,12 @@ export class ToolbarView {
         this.dd = new DiffDOM({
             valueDiffing: false
         })
-        this.sideMargins = 20 + 20 // CSS sets left margin to 14px + 46 px for left most button and we want the same margin on both sides
+        this.sideMargins = 20 + 20
         this.availableWidth = window.innerWidth - this.sideMargins
         this.openedMenu = false
         this.listeners = {}
 
         if (editorView === this.options.editor.view) {
-            // only do this when called for the main editor (not footnote editor)
             this.removeUnavailable(this.options.editor.menu.toolbarModel as ToolbarModel)
         }
 
@@ -84,9 +83,6 @@ export class ToolbarView {
     }
 
     removeUnavailable(menu: ToolbarModel): void {
-        // Remove those menu items from the menu model that are not available for this document.
-        // Used for example for mark or element buttons that aren't permitted according to the
-        // document template.
         menu.content = menu.content.filter(item => {
             if (item.available && !item.available(this.editor)) {
                 return false
@@ -116,10 +112,6 @@ export class ToolbarView {
     }
 
     onmousedown(event: MouseEvent): void {
-        // When the citation inline editor is active, a toolbar click causes a DOM
-        // selectionchange event that makes ProseMirror deactivate the plugin via
-        // appendTransaction — before the click event fires. Preventing focus
-        // transfer here (standard content-editable toolbar pattern) stops that.
         const target = event.target as HTMLElement | null
         if (
             target?.closest(".editor-toolbar") &&
@@ -130,14 +122,12 @@ export class ToolbarView {
     }
 
     onResize(): void {
-        // recalculate menu if needed
         this.availableWidth = window.innerWidth - this.sideMargins
         this.update()
     }
 
     onclick(event: MouseEvent): void {
         if (this.editorView !== this.editor.currentView) {
-            // the other editor must be active
             return
         }
         const target = event.target as HTMLElement | null
@@ -163,8 +153,6 @@ export class ToolbarView {
                 seekItem = seekItem.previousElementSibling
             }
             const menuItem = toolbarModel.content[menuNumber]
-            // if it is a menu, open it. Otherwise execute an
-            // associated action.
             if (menuItem?.type === "menu") {
                 menuItem.open = true
                 this.openedMenu = menuNumber
@@ -197,8 +185,6 @@ export class ToolbarView {
                 ".editor-toolbar li:not(.fw-disabled), .editor-toolbar li:not(.fw-disabled) *"
             )
         ) {
-            // A toolbar menu item was clicked. We just need to
-            // find out which one
             let itemNumber = 0
             let seekItem: Element | null = target.closest("li")
             while (seekItem?.previousElementSibling) {
@@ -225,35 +211,6 @@ export class ToolbarView {
                 this.editor.currentView.focus()
             }
         } else if (
-            target.matches(
-                ".editor-toolbar > div:not(.fw-disabled), .editor-toolbar > div:not(.fw-disabled) *"
-            )
-        ) {
-            // A menu item has been clicked, lets find out which one.
-            let menuNumber = 0
-            let seekItem: Element | null = target.closest("div.ui-buttonset")
-            while (seekItem?.previousElementSibling) {
-                menuNumber++
-                seekItem = seekItem.previousElementSibling
-            }
-            const menuItem = toolbarModel.content[menuNumber]
-            // if it is a menu, open it. Otherwise execute an
-            // associated action.
-            if (menuItem?.type === "menu") {
-                menuItem.open = true
-                this.openedMenu = menuNumber
-                toolbarModel.openMore = false
-                event.preventDefault()
-                this.update()
-            } else if (menuItem?.type === "button") {
-                event.preventDefault()
-                const focus = menuItem.action(this.editor)
-                this.update()
-                if (focus !== false) {
-                    this.editor.currentView.focus()
-                }
-            }
-        } else if (
             this.openedMenu !== false ||
             toolbarModel.openMore
         ) {
@@ -266,12 +223,41 @@ export class ToolbarView {
             toolbarModel.openMore = false
             this.openedMenu = false
             this.update()
+        } else if (
+            target.matches(
+                ".editor-toolbar > div:not(.fw-disabled), .editor-toolbar > div:not(.fw-disabled) *"
+            )
+        ) {
+            let menuNumber = 0
+            let seekItem: Element | null = target.closest("div.ui-buttonset")
+            if (!seekItem) {
+                return
+            }
+            while (seekItem?.previousElementSibling) {
+                menuNumber++
+                seekItem = seekItem.previousElementSibling
+            }
+            const menuItem = toolbarModel.content[menuNumber]
+            if (menuItem?.type === "menu") {
+                menuItem.open = true
+                this.openedMenu = menuNumber
+                toolbarModel.openMore = false
+                event.preventDefault()
+                this.update()
+            } else if (menuItem?.type === "button" && menuItem.action) {
+                event.preventDefault()
+                const focus = menuItem.action(this.editor)
+                toolbarModel.openMore = false
+                this.update()
+                if (focus !== false) {
+                    this.editor.currentView.focus()
+                }
+            }
         }
     }
 
     update(): void {
         if (this.editorView !== this.editor.currentView) {
-            // the other editor must be active
             return
         }
         let spaceCounter = this.availableWidth
@@ -289,7 +275,7 @@ export class ToolbarView {
                     spaceCounter -= 52
             }
             if (spaceCounter < 0) {
-                menuIndexToDrop = Math.max(index - 2, 3) // We need the space of two buttons for the more button
+                menuIndexToDrop = Math.max(index - 2, 3)
                 return true
             }
             return false

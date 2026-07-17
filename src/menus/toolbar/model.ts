@@ -81,7 +81,12 @@ function elementAvailable(editor: Editor, elementName: string): boolean {
             elementInDocParts = true
         }
     })
+    const partElements =
+        editor.view.state.selection.$anchor.node(1)?.attrs.elements ||
+        (editor.view.state.selection.$anchor.node(1)?.type.spec.attrs
+            ?.elements as {default?: string[]})?.default
     return (
+        partElements?.includes(elementName) ||
         (editor.view.state.doc.attrs.footnote_elements as string[]).includes(elementName) ||
         elementInDocParts
     )
@@ -96,11 +101,14 @@ export function elementDisabled(
         const anchorDocPart =
                 editor.currentView.state.selection.$anchor.node(1),
             headDocPart = editor.currentView.state.selection.$head.node(1)
+        const partElements =
+            anchorDocPart?.attrs.elements ||
+            (anchorDocPart?.type.spec.attrs?.elements as {default?: string[]})?.default
 
         return (
             !anchorDocPart ||
             headDocPart !== anchorDocPart ||
-            !(anchorDocPart.attrs.elements as string[] | undefined)?.includes(elementName) ||
+            !partElements?.includes(elementName) ||
             checkProtectedInSelection(editor.view.state)
         )
     } else {
@@ -236,7 +244,10 @@ export const toolbarModel = () => ({
                 const selection = currentSelection(editor)
                 if (
                     editor.currentView.state.selection.$anchor.node(1) &&
-                    !editor.view.state.selection.$anchor.node(1).attrs.elements
+                    !editor.view.state.selection.$anchor.node(1).attrs.elements &&
+                    !(editor.view.state.schema.nodes.richtext_part.spec
+                        .attrs as Record<string, {default?: unknown}>).elements
+                        ?.default
                 ) {
                     return ""
                 }
@@ -290,8 +301,11 @@ export const toolbarModel = () => ({
                 READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
                 COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
                 !editor.currentView.state.selection.$anchor.node(1) ||
-                !editor.currentView.state.selection.$anchor.node(1).attrs
+                !(editor.currentView.state.selection.$anchor.node(1).attrs
                     .elements ||
+                  (editor.currentView.state.schema.nodes.richtext_part.spec
+                      .attrs as Record<string, {default?: unknown}>).elements
+                      ?.default) ||
                 (currentSelection(editor).jsonID === "node" &&
                     currentSelection(editor).node?.isBlock &&
                     !currentSelection(editor).node?.isTextblock) ||
