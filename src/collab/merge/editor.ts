@@ -509,7 +509,7 @@ export class MergeEditor {
                     })
                     insertionMarksTr.addMark(from, to, insertionMark)
                     stepsTrackedByChangeset.push(index)
-                } else if (stepOne.slice.content[0].type === "figure") {
+                } else if (stepOne.slice && stepOne.slice.content[0].type === "figure") {
                     if (stepOne.from == stepOne.to) {
                         this.markBlockDiffs(
                             insertionMarksTr,

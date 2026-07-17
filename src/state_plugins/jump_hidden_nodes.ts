@@ -51,6 +51,46 @@ export const jumpHiddenNodesPlugin = (_options: {editor: unknown}) =>
                     : new GapCursor($pos)
                 return state.tr.setSelection(selection)
             }
+            // Handle boundary crossing: cursor is at the start of a visible
+            // doc-level part whose preceding sibling is hidden. Use
+            // childBefore to check whether the previous doc child is hidden.
+            if (
+                selectionSet &&
+                !posHidden(state.selection.$from) &&
+                state.selection.$from.depth >= 2
+            ) {
+                const $pos = state.selection.$from
+                const prevChild = state.doc.childBefore($pos.pos)
+                if (
+                    prevChild &&
+                    prevChild.node &&
+                    prevChild.node.attrs.hidden
+                ) {
+                    const dir = -1
+                    let newPos = state.selection.from,
+                        hidden = true,
+                        validTextSelection = false,
+                        validGapCursor = false
+                    let new$pos: ResolvedPos = state.selection.$from
+                    while (
+                        hidden ||
+                        (!validGapCursor && !validTextSelection)
+                    ) {
+                        newPos += dir
+                        if (newPos === 0) {
+                            return
+                        }
+                        new$pos = state.doc.resolve(newPos)
+                        validTextSelection = new$pos.parent.inlineContent
+                        validGapCursor = (GapCursor as any).valid(new$pos)
+                        hidden = posHidden(new$pos)
+                    }
+                    const selection = validTextSelection
+                        ? new TextSelection(new$pos)
+                        : new GapCursor(new$pos)
+                    return state.tr.setSelection(selection)
+                }
+            }
             return undefined
         }
     })
