@@ -35,8 +35,8 @@ export const linkDialogTemplate = ({
             <label class="cross-reference-label">${gettext("Cross reference")}</label>
         </div>
         <div class="fw-select-container">
-            <select class="cross-reference-selector fw-button fw-light fw-large" required="/>
-                <option class="fw-placeholder" selected="" disabled="" value="/>
+            <select class="cross-reference-selector fw-button fw-light fw-large" required="">
+                <option class="fw-placeholder" selected="" disabled="" value="">
                     ${gettext("Select Target")}
                 </option>
                 ${internalTargets
@@ -58,8 +58,8 @@ export const linkDialogTemplate = ({
             <label class="link-internal-label">${gettext("Internal")}</label>
         </div>
         <div class="fw-select-container">
-            <select class="internal-link-selector fw-button fw-light fw-large" required="/>
-                <option class="fw-placeholder" selected="" disabled="" value="/>
+            <select class="internal-link-selector fw-button fw-light fw-large" required="">
+                <option class="fw-placeholder" selected="" disabled="" value="">
                     ${gettext("Select Target")}
                 </option>
                 ${internalTargets
@@ -347,7 +347,7 @@ export const configureCitationTemplate = ({
         <div id="cited-items" class="fw-ar-container">
             <h3 class="fw-green-title">${gettext("Citation format")}</h3>
             <div class="fw-select-container">
-                <select id="citation-style-selector" class="fw-button fw-light fw-large" required="/>
+                <select id="citation-style-selector" class="fw-button fw-light fw-large" required="">
                     <option value="autocite" ${citeFormat === "autocite" ? "selected" : ""}>${gettext("(Author, 1998)")}</option>
                     <option value="textcite" ${citeFormat === "textcite" ? "selected" : ""}>${gettext("Author (1998)")}</option>
                 </select>
@@ -466,7 +466,7 @@ export const contributorTemplate = ({
             idTypeField = `<span class="id-type-label">${escapeText(type.label)}:</span><input type="hidden" name="id_type" value="${escapeText(type.label)}">`
         } else {
             idTypeField = `<select name="id_type">
-                <option value="/>${gettext("Select ID Type")}</option>
+                <option value="">${gettext("Select ID Type")}</option>
                 ${idTypes.map(t => `<option value="${escapeText(t.label)}" ${contributor.id_type === t.label ? "selected" : ""}>${escapeText(t.label)}</option>`).join("")}
             </select>`
         }
