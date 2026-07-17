@@ -156,8 +156,8 @@ export class ModCommentInteractions {
                 this.mod,
                 id as string,
                 answerEditorDOM as HTMLElement,
-                text,
-                {answerId: answerId ? Number(answerId) : undefined}
+                 text,
+                {answerId: answerId ? String(answerId) : undefined}
             )
         }
 

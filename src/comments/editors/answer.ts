@@ -3,7 +3,7 @@ import {TextSelection} from "prosemirror-state"
 import {CommentEditor, type CommentMod} from "./comment.js"
 
 interface CommentAnswerOptions {
-    answerId?: number
+    answerId?: string
     isMajor?: boolean
 }
 
@@ -55,11 +55,11 @@ export class CommentAnswerEditor extends CommentEditor {
         if (!text) {
             return
         }
-        const interactions = (this.mod as {interactions?: {submitAnswerUpdate?: (commentId: string, answerId: number, text: unknown[]) => void; createNewAnswer?: (commentId: string, text: unknown[]) => void}}).interactions
+        const interactions = (this.mod as {interactions?: {submitAnswerUpdate?: (commentId: string, answerId: string, text: unknown[]) => void; createNewAnswer?: (commentId: string, text: unknown[]) => void}}).interactions
         if ((this.options as CommentAnswerOptions).answerId) {
             interactions?.submitAnswerUpdate?.(
                 this.id,
-                (this.options as CommentAnswerOptions).answerId as number,
+                (this.options as CommentAnswerOptions).answerId as string,
                 text
             )
         } else {

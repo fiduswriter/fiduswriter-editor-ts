@@ -306,7 +306,11 @@ export class ModCommentStore {
         if (this.comments[commentData.id]) {
             Object.assign(this.comments[commentData.id], commentData)
         }
-        if (local || !this.mod.interactions.isCurrentlyEditing()) {
+        if (local) {
+            if (!this.mod.interactions.isCurrentlyEditing()) {
+                ;(this.mod.editor.mod as any).marginboxes.updateDOM()
+            }
+        } else {
             ;(this.mod.editor.mod as any).marginboxes.updateDOM()
         }
     }
@@ -441,9 +445,13 @@ export class ModCommentStore {
                 answer.answer = answerText
             }
         }
-        if (local || !this.mod.interactions.isCurrentlyEditing()) {
+        if (local) {
+            if (!this.mod.interactions.isCurrentlyEditing()) {
+                ;(this.mod.editor.mod as any).marginboxes.updateDOM()
+            }
+        } else {
             ;(this.mod.editor.mod as any).marginboxes.updateDOM()
-            if (!local && this.mod.interactions.activeCommentId === id) {
+            if (this.mod.interactions.activeCommentId === id) {
                 this.mod.interactions.activateComment(id)
             }
         }
