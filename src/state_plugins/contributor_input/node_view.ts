@@ -1,7 +1,7 @@
 import {
     AddButton,
     ContributorsPartView as CommonContributorsPartView
-} from "@fiduswriter/common/state_plugins/contributor_input"
+} from "@fiduswriter/document/state_plugins/contributor_input"
 import type {Node} from "prosemirror-model"
 import type {EditorView} from "prosemirror-view"
 

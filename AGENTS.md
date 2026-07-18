@@ -94,9 +94,9 @@ npm run typecheck
 
 ## Notes
 
-- This package depends on `@fiduswriter/common` for shared page chrome
-  (`FeedbackTab`) and on `@fiduswriter/document` for the document model and
-  import/export helpers.
+- This package depends on `@fiduswriter/document` for the document model and
+  import/export helpers. It no longer depends on `@fiduswriter/common` — the
+  `App`/`User` types and `FeedbackTab` have been removed or inlined.
 - The `bibliojson` dependency used indirectly via `@fiduswriter/document` and
   `@fiduswriter/bibliography-manager` was previously published as
   `biblatex-csl-converter`. Its JSON format is referred to as the BiblioJSON

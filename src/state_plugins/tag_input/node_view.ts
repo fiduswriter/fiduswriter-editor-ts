@@ -1,7 +1,7 @@
 import {
     TagsPartView as CommonTagsPartView,
     createTagEditor as commonCreateTagEditor
-} from "@fiduswriter/common/state_plugins/tag_input"
+} from "@fiduswriter/document/state_plugins/tag_input"
 import type {Node} from "prosemirror-model"
 import type {EditorView} from "prosemirror-view"
 

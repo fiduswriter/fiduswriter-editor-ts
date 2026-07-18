@@ -2,7 +2,7 @@ import type {BibDB, ExportDoc, ImageDB, UploadRevision} from "@fiduswriter/docum
 import {SaveRevision as GenericSaveRevision} from "@fiduswriter/document/exporter/native"
 import {createSlug} from "@fiduswriter/document/exporter/tools/file"
 import {addAlert, addProgress, gettext, post, shortFileTitle} from "fwtoolkit"
-import type {App} from "../../types.js"
+import type {EditorApp} from "../../types.js"
 import {DocumentTemplateExporter} from "../../document_template/exporter.js"
 
 export class SaveRevision extends GenericSaveRevision {
@@ -11,7 +11,7 @@ export class SaveRevision extends GenericSaveRevision {
         imageDB: ImageDB,
         bibDB: BibDB,
         note: string,
-        app: App
+        app: EditorApp
     ) {
         const title = shortFileTitle(doc.title, doc.path || "")
         const task = addProgress(

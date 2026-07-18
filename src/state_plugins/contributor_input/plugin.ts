@@ -8,7 +8,7 @@ import {
     type Transaction
 } from "prosemirror-state"
 import {Decoration, DecorationSet, type EditorView} from "prosemirror-view"
-import {nextSelection} from "@fiduswriter/common/state_plugins/contributor_input"
+import {nextSelection} from "@fiduswriter/document/state_plugins/contributor_input"
 
 import type {Editor} from "../../types.js"
 import {ContributorDialog} from "../../dialogs/index.js"

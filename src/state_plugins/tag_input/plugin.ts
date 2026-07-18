@@ -11,7 +11,7 @@ import {
     nextSelection,
     submitTag,
     tagInputReferences
-} from "@fiduswriter/common/state_plugins/tag_input"
+} from "@fiduswriter/document/state_plugins/tag_input"
 
 import {TagsPartView} from "./node_view.js"
 import type {Editor} from "../../types.js"

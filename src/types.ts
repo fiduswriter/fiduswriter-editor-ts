@@ -10,7 +10,7 @@
 import type {Node, Schema} from "prosemirror-model"
 import type {Plugin, Transaction} from "prosemirror-state"
 import type {EditorView} from "prosemirror-view"
-import type {App as CommonApp, User} from "@fiduswriter/common"
+// @fiduswriter/frontend types have been inlined — no runtime dependency
 import type {
     BibDB,
     BibDBEntries,
@@ -21,7 +21,6 @@ import type {
 } from "@fiduswriter/document"
 
 export type {BibDB, BibDBEntries, CommentData, CSL, ImageDB, ImageDBEntries}
-export type {User} from "@fiduswriter/common"
 
 /** Image database interface used by the editor (document and user DBs). */
 export interface EditorImageDB extends ImageDB {
@@ -29,14 +28,17 @@ export interface EditorImageDB extends ImageDB {
     setImage(id: number, imageData: Record<string, unknown>): void
 }
 
-/** Extended app object used by the editor page. */
-export interface App extends CommonApp {
+/** Minimal app interface — only the fields the Editor actually uses. */
+export interface EditorApp {
+    routes: Record<string, {app: string; [key: string]: unknown}>
+    goTo: (url: string) => void
+    settings: {APPS: string[]; [key: string]: unknown}
+    menuPlugins?: Array<[string, Record<string, {new (...args: unknown[]): {init(): void}}>]>
+    name?: string
     isOffline(): boolean
     csl: CSL
     imageDB: EditorImageDB
 }
-
-export type {App as EditorApp}
 
 /** Document access role constants. */
 export type CommentOnlyRole = "review" | "comment"
@@ -226,15 +228,19 @@ export interface EditorMenu {
     selectionMenuViews?: Array<{destroy(): void}>
 }
 
-/** User object attached to the editor, extending the common user with an id. */
-export interface EditorUser extends User {
+/** User object attached to the editor. */
+export interface EditorUser {
     id: number
+    username: string
+    emails: Array<{address: string; primary?: boolean}>
+    name?: string
+    avatar?: string
     is_authenticated?: boolean
 }
 
 /** Constructor options for the Editor class. */
 export interface EditorOptions {
-    app: App
+    app: EditorApp
     user: EditorUser
 }
 
@@ -248,7 +254,7 @@ export type EditorPluginTuple =
 
 /** Main Editor instance shape used by modules, state plugins and menus. */
 export interface Editor {
-    app: App
+    app: EditorApp
     user: EditorUser
     editorPlugins: EditorPluginTuple[]
     citationDialogPlugins: EditorPluginTuple[] | null

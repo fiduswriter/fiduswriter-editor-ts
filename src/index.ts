@@ -1,4 +1,3 @@
-import {FeedbackTab} from "@fiduswriter/common"
 import {getSettings} from "@fiduswriter/document/schema/convert"
 import {docSchema} from "@fiduswriter/document/schema/document/index"
 import {
@@ -93,7 +92,7 @@ import {
     trackPlugin
 } from "./state_plugins/index.js"
 import {ModTrack, acceptAllNoInsertions, amendTransaction} from "./track/index.js"
-import type {App, EditorUser} from "./types.js"
+import type {EditorApp, EditorUser} from "./types.js"
 
 // UUID v4 pattern for share tokens
 const uuid4Pattern =
@@ -105,7 +104,7 @@ export const REVIEW_ROLES = ["review", "review-tracked"]
 export const WRITE_ROLES = ["write", "write-tracked", "review-tracked"]
 
 export class Editor {
-    app: App
+    app: EditorApp
     user: EditorUser
     editorPlugins: any[]
     citationDialogPlugins: any[] | null
@@ -135,7 +134,7 @@ export class Editor {
     noCollabSave?: NoCollabSave
 
     constructor(
-        {app, user}: {app: App; user: EditorUser},
+        {app, user}: {app: EditorApp; user: EditorUser},
         path: string,
         idString: string,
         editorPlugins = defaultEditorPlugins,
@@ -1070,8 +1069,6 @@ export class Editor {
             </div>
         </div>
         <div id="unobtrusive-messages"></div>`
-        const feedbackTab = new FeedbackTab()
-        feedbackTab.init()
     }
 
     onResize(): void {
