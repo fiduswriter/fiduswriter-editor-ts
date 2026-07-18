@@ -492,6 +492,23 @@ export class ModDocumentTemplate {
             })
     }
 
+    private citationStyleFallbackTitle(citationstyle: string): string {
+        if (citationstyle.includes("author-date")) {
+            return "Chicago (author-date) [fallback style]"
+        }
+        if (citationstyle.includes("note")) {
+            return "Chicago (notes) [fallback style]"
+        }
+        return "Chicago (author-date) [fallback style]"
+    }
+
+    private citationStyleFallbackId(citationstyle: string): string {
+        if (citationstyle.includes("note")) {
+            return "chicago-notes-bibliography"
+        }
+        return "chicago-author-date"
+    }
+
     addCitationStylesMenuEntries(): void {
         const headerbarModel = (this.editor.menu as any).headerbarModel
         const settingsMenu = headerbarModel.content.find(
@@ -504,21 +521,28 @@ export class ModDocumentTemplate {
             citationStyleMenu.content =
                 this.editor.view.state.doc.attrs.citationstyles.map(
                     (citationstyle: string) => ({
-                        title: this.citationStyles[citationstyle],
+                        title: this.citationStyles[citationstyle] ||
+                            this.citationStyleFallbackTitle(citationstyle),
                         type: "setting",
                         action: (editor: Editor) => {
+                            const actualStyle = this.citationStyles[citationstyle]
+                                ? citationstyle
+                                : this.citationStyleFallbackId(citationstyle)
                             editor.view.dispatch(
                                 editor.view.state.tr
                                     .setDocAttribute(
                                         "citationstyle",
-                                        citationstyle
+                                        actualStyle
                                     )
                                     .setMeta("settings", true)
                             )
                         },
-                        selected: (editor: Editor) =>
-                            editor.view.state.doc.attrs.citationstyle ===
-                            citationstyle
+                        selected: (editor: Editor) => {
+                            const current = editor.view.state.doc.attrs.citationstyle
+                            return current === citationstyle ||
+                                (!this.citationStyles[citationstyle] &&
+                                    current === this.citationStyleFallbackId(citationstyle))
+                        }
                     })
                 )
         }
