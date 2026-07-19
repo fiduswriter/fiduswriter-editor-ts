@@ -1,4 +1,5 @@
 import {getPasteRange, resetPasteRange} from "../../state_plugins/clipboard.js"
+import type {BibDBCollection} from "@fiduswriter/bibliography-manager/types/biblio"
 import type {Editor} from "../../types.js"
 import type {EditorView} from "prosemirror-view"
 
@@ -18,10 +19,11 @@ export class TextPaste {
     init(): void {
         import("@fiduswriter/bibliography-manager/import").then(
             ({BibliographyImporter}) => {
+                const bibDB = this.editor.mod.db?.bibDB as unknown as BibDBCollection
                 const importer = new BibliographyImporter(
                     this.text,
-                    this.editor.mod.db?.bibDB,
-                    (newIds: string[]) => {
+                    bibDB,
+                    (newIds: number[]) => {
                         this.foundBibEntries = true
                         const format = "autocite",
                             references = newIds.map(id => ({id}))

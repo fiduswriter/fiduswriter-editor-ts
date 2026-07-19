@@ -211,7 +211,10 @@ export class CitationDialog {
     registerNewSource(): void {
         import("@fiduswriter/bibliography-manager/form").then(({BibEntryForm}) => {
             const form = new BibEntryForm((this.editor.mod.db as any).bibDB)
-            form.init().then((idTranslations: [number, number][]) => {
+            form.init().then(idTranslations => {
+                if (!idTranslations) {
+                    return
+                }
                 const ids = idTranslations.map(idTrans => idTrans[1])
                 this.addToCitableItems(ids)
             })

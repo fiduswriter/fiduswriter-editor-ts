@@ -1,6 +1,6 @@
 {
   "name": "@fiduswriter/editor",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "description": "Fidus Writer browser editor",
   "repository": {
     "type": "git",
@@ -68,11 +68,9 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js"
   },
   "dependencies": {
-    "@fiduswriter/bibliography-manager": "^0.1.7",
-    "@fiduswriter/document": "^0.2.20",
+    "@fiduswriter/bibliography-manager": "^0.1.17",
+    "@fiduswriter/document": "^0.2.27",
     "@fiduswriter/image-manager": "^0.1.4",
-    "bibliojson": "^4.0.0",
-    "citeproc-plus": "^1.0.2",
     "cropperjs": "^1.6.2",
     "diff": "^5.0.0",
     "diff-dom": "^5.2.1",
@@ -125,7 +123,8 @@
       "prettier --write"
     ],
     "*.{ts,js,mjs}": [
-      "eslint --fix"
+      "eslint --fix",
+      "sh -c 'npm run typecheck'"
     ]
   }
 }

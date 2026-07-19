@@ -1,4 +1,4 @@
-import {edtfParse} from "bibliojson"
+import {edtfParse} from "@fiduswriter/document/bibliojson"
 import deepEqual from "fast-deep-equal"
 import {Dialog, InputList, TypeSwitch, escapeText} from "fwtoolkit"
 import {
