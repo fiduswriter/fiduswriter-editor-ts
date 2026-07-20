@@ -4,6 +4,7 @@ import type {JSONValue} from "@fiduswriter/document"
 import type {ContentMenuInit} from "fwtoolkit/content_menu"
 import {ContentMenu, Dialog, addAlert, dropdownSelect} from "fwtoolkit"
 import {ImageSelectionDialog} from "@fiduswriter/image-manager/selection_dialog"
+import type {ImageDB as ImageManagerImageDB} from "@fiduswriter/image-manager"
 import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
 
 import {configureFigureTemplate} from "./templates.js"
@@ -157,45 +158,44 @@ export class FigureDialog {
 
     selectImage(): void {
         const imageSelection = new ImageSelectionDialog(
-            this.imageDB,
-            this.userImageDB,
+            this.imageDB as unknown as ImageManagerImageDB,
+            this.userImageDB as unknown as ImageManagerImageDB,
             this.imgId,
-            this.editor
+            this.editor as any
         )
         imageSelection
             .init()
-            .then(
-                ({
+            .then((result) => {
+                const {
                     id,
                     db
-                }: {
+                } = result as {
                     id: number | false
                     db: "document" | "user"
-                }) => {
-                    if (id) {
-                        this.imgId = id
-                        this.imgDb = db
-                        // We take a copy of the object in case of the image coming from the user db in order
-                        // not to overwrite the copyright info from the user's image db.
-                        this.copyright =
-                            db === "document"
-                                ? (this.imageDB.db[String(id)].copyright as
-                                      | Record<string, JSONValue>
-                                      | undefined) || false
-                                : JSON.parse(
-                                      JSON.stringify(
-                                          this.userImageDB.db[String(id)]
-                                              .copyright
-                                      )
-                                  )
-                        this.layoutImagePreview()
-                    } else {
-                        this.imgId = false
-                        this.imgDb = false
-                        this.layoutMathEditor()
-                    }
                 }
-            )
+                if (id) {
+                    this.imgId = id
+                    this.imgDb = db
+                    // We take a copy of the object in case of the image coming from the user db in order
+                    // not to overwrite the copyright info from the user's image db.
+                    this.copyright =
+                        db === "document"
+                            ? (this.imageDB.db[String(id)].copyright as
+                                  | Record<string, JSONValue>
+                                  | undefined) || false
+                            : JSON.parse(
+                                  JSON.stringify(
+                                      this.userImageDB.db[String(id)]
+                                          .copyright
+                                  )
+                              )
+                    this.layoutImagePreview()
+                } else {
+                    this.imgId = false
+                    this.imgDb = false
+                    this.layoutMathEditor()
+                }
+            })
     }
 
     async layoutImagePreview(): Promise<void> {
