@@ -69,7 +69,7 @@
     "install-hooks": "husky"
   },
   "dependencies": {
-    "@fiduswriter/bibliography-manager": "^0.1.21",
+    "@fiduswriter/bibliography-manager": "^0.1.22",
     "@fiduswriter/document": "^0.2.30",
     "@fiduswriter/image-manager": "^0.1.14",
     "cropperjs": "^1.6.2",
