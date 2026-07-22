@@ -1,5 +1,6 @@
-import {Dialog, cancelPromise, escapeText, postJson} from "fwtoolkit"
+import {Dialog, cancelPromise, escapeText} from "fwtoolkit"
 import {addContactTemplate} from "./templates.js"
+import type {EditorContactsApi} from "../types.js"
 
 interface ContactResponse {
     contact?: unknown
@@ -9,9 +10,14 @@ interface ContactResponse {
 //dialog for adding a user to contacts
 export class AddContactDialog {
     settings: Record<string, unknown>
+    contactsApi: EditorContactsApi
 
-    constructor(settings: Record<string, unknown>) {
+    constructor(
+        settings: Record<string, unknown>,
+        contactsApi: EditorContactsApi
+    ) {
         this.settings = settings
+        this.contactsApi = contactsApi
     }
 
     init(): Promise<unknown[]> {
@@ -91,24 +97,25 @@ export class AddContactDialog {
             return cancelPromise()
         }
 
-        const {json, status} = (await postJson("/api/user/invites/add/", {
+        const {json, status} = await this.contactsApi.add({
             user_string: userString
-        })) as {json: ContactResponse; status: number}
+        })
+        const data = json as ContactResponse
         if (status == 201) {
             //user added to the contacts
-            return json.contact
+            return data.contact
         } else {
             //user not found
             let responseHtml
-            if (json.error === 1) {
+            if (data.error === 1) {
                 responseHtml = gettext(
                     "You cannot add yourself to your contacts!"
                 )
-            } else if (json.error === 2) {
+            } else if (data.error === 2) {
                 responseHtml = gettext(
                     "This person is already in your contacts!"
                 )
-            } else if (json.error === 3) {
+            } else if (data.error === 3) {
                 responseHtml = gettext("Invalid email!")
             }
             document

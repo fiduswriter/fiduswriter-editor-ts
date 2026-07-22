@@ -6,13 +6,12 @@ import {
     enableDatePicker,
     ensureCSS,
     findTarget,
-    post,
-    postJson,
     setCheckableLabel
 } from "fwtoolkit"
 import type {ContentMenuInit} from "fwtoolkit/content_menu"
 
 import {AddContactDialog} from "../../contacts/add_dialog.js"
+import type {EditorContactsApi, EditorDocumentApi} from "../../types.js"
 import {
     collaboratorsTemplate,
     contactsTemplate,
@@ -66,6 +65,8 @@ interface AccessRightsTabOptions {
     onShareSuccess?: (accessRights: AccessRight[]) => void
     settings: Record<string, unknown>
     container?: HTMLElement | null
+    documentApi: EditorDocumentApi
+    contactsApi: EditorContactsApi
 }
 
 interface AccessRightMenuItem {
@@ -146,6 +147,8 @@ export class AccessRightsTab {
     container: HTMLElement | null
     accessRights: AccessRight[]
     dialogTabs!: DialogTabs
+    documentApi: EditorDocumentApi
+    contactsApi: EditorContactsApi
 
     constructor({
         documentIds,
@@ -155,7 +158,9 @@ export class AccessRightsTab {
         documentPassword = "",
         onShareSuccess,
         settings,
-        container = null
+        container = null,
+        documentApi,
+        contactsApi
     }: AccessRightsTabOptions) {
         this.documentIds = documentIds
         this.contacts = contacts
@@ -168,12 +173,15 @@ export class AccessRightsTab {
         this.settings = settings
         this.container = container || null
         this.accessRights = []
+        this.documentApi = documentApi
+        this.contactsApi = contactsApi
     }
 
     load(): Promise<void> {
-        return postJson("/api/document/get_access_rights/", {
-            document_ids: this.documentIds
-        })
+        return this.documentApi
+            .getAccessRights({
+                document_ids: this.documentIds
+            })
             .catch(error => {
                 addAlert("error", gettext("Cannot load document access data."))
                 throw error
@@ -521,9 +529,8 @@ export class AccessRightsTab {
             return
         }
         listEl.innerHTML = `<p class="fw-ar-loading">${gettext("Loading…")}</p>`
-        postJson("/api/document/share_token/list/", {
-            document_id: this.singleDocumentId
-        })
+        this.documentApi
+            .listShareTokens(this.singleDocumentId as number)
             .then(({json}: {json: unknown}) => {
                 const data = json as {tokens: ShareToken[]}
                 listEl.innerHTML = shareTokenListTemplate({
@@ -564,12 +571,13 @@ export class AccessRightsTab {
                                 "#share-token-note"
                             ) as HTMLInputElement
                         ).value.trim()
-                        postJson("/api/document/share_token/create/", {
-                            document_id: this.singleDocumentId,
-                            rights,
-                            expires_at: expiresRaw || "",
-                            note
-                        })
+                        this.documentApi
+                            .createShareToken({
+                                document_id: this.singleDocumentId,
+                                rights,
+                                expires_at: expiresRaw || "",
+                                note
+                            } as Record<string, unknown>)
                             .then(({json}: {json: unknown}) => {
                                 const data = json as ShareToken
                                 let shareUrl = data.share_url
@@ -624,7 +632,8 @@ export class AccessRightsTab {
     }
 
     revokeShareToken(tokenId: number, rowEl: HTMLElement): void {
-        postJson("/api/document/share_token/revoke/", {token_id: tokenId})
+        this.documentApi
+            .revokeShareToken(tokenId)
             .then(({json}: {json: unknown}) => {
                 const data = json as {success: boolean}
                 if (data.success) {
@@ -648,10 +657,11 @@ export class AccessRightsTab {
 
     submit(): Promise<void> {
         const accessRights = collectAccessRights(this.container!)
-        return post("/api/document/save_access_rights/", {
-            document_ids: this.documentIds,
-            access_rights: accessRights
-        })
+        return this.documentApi
+            .saveAccessRights({
+                document_ids: this.documentIds,
+                access_rights: accessRights
+            })
             .then(() => {
                 addAlert("success", gettext("Access rights have been saved"))
                 if (this.onShareSuccess) {
@@ -676,6 +686,8 @@ export class DocumentAccessRightsDialog {
     documentPassword: string
     onShareSuccess?: (accessRights: AccessRight[]) => void
     settings: Record<string, unknown>
+    contactsApi: EditorContactsApi
+    documentApi: EditorDocumentApi
     tab!: AccessRightsTab
     dialog!: Dialog
 
@@ -686,7 +698,9 @@ export class DocumentAccessRightsDialog {
         e2ee: boolean,
         documentPassword = "",
         onShareSuccess?: (accessRights: AccessRight[]) => void,
-        settings: Record<string, unknown> = {}
+        settings: Record<string, unknown> = {},
+        contactsApi?: EditorContactsApi,
+        documentApi?: EditorDocumentApi
     ) {
         this.documentIds = documentIds
         this.contacts = contacts
@@ -695,6 +709,8 @@ export class DocumentAccessRightsDialog {
         this.documentPassword = documentPassword
         this.onShareSuccess = onShareSuccess
         this.settings = settings
+        this.contactsApi = contactsApi as EditorContactsApi
+        this.documentApi = documentApi as EditorDocumentApi
     }
 
     init(): void {
@@ -705,7 +721,9 @@ export class DocumentAccessRightsDialog {
             e2ee: this.e2ee,
             documentPassword: this.documentPassword,
             onShareSuccess: this.onShareSuccess,
-            settings: this.settings
+            settings: this.settings,
+            documentApi: this.documentApi,
+            contactsApi: this.contactsApi
         })
         this.tab.load().then(() => this.createDialog())
     }
@@ -722,7 +740,10 @@ export class DocumentAccessRightsDialog {
                         : gettext("Add contact"),
                 classes: "fw-light fw-add-button",
                 click: () => {
-                    const dialog = new AddContactDialog(this.settings)
+                    const dialog = new AddContactDialog(
+                        this.settings,
+                        this.contactsApi
+                    )
                     dialog.init().then(contactsData => {
                         ;(contactsData as Contact[]).forEach(contactData => {
                             if (contactData.id) {

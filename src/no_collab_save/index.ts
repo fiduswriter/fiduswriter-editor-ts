@@ -1,4 +1,4 @@
-import {addAlert, postJson} from "fwtoolkit"
+import {addAlert} from "fwtoolkit"
 import {receiveTransaction} from "prosemirror-collab"
 import {recreateTransform} from "../collab/merge/recreate_transform.js"
 import type {Editor} from "../types.js"
@@ -10,7 +10,7 @@ import type {Node} from "prosemirror-model"
  */
 export class NoCollabSave {
     editor: Editor
-    saveInterval: ReturnType<typeof setInterval> | null
+    saveInterval: number | null
     savePromise: Promise<void> | null
     _beforeUnloadHandler: (() => void) | null
     _lastSaveTime: number
@@ -126,20 +126,19 @@ export class NoCollabSave {
         }
 
         try {
-            const {json, status} = (await postJson(
-                "/api/document/save/",
+            const {json, status} = await this.editor.app.apiConnectors.document.saveDocument(
                 payload,
-                {},
                 {keepalive}
-            )) as {json: Record<string, unknown>; status: number}
+            )
             if (status === 409) {
                 if (!keepalive) {
                     await this._handleVersionConflict()
                 }
                 return
             }
-            if (json.version !== undefined) {
-                this.editor.docInfo.version = json.version as number
+            const saveData = json as {version?: number}
+            if (saveData.version !== undefined) {
+                this.editor.docInfo.version = saveData.version
             }
             this.editor.docInfo.updated = new Date()
             this.editor.docInfo.confirmedDoc = this.editor.view.state.doc
@@ -167,15 +166,15 @@ export class NoCollabSave {
             payload.token = this.editor.docInfo.token
         }
         try {
-            const {json} = (await postJson(
-                "/api/document/get_doc_data/",
-                payload
-            )) as {json: Record<string, unknown>}
+            const {json} = await this.editor.app.apiConnectors.document.getDocumentData(
+                payload as {id: number; token?: string}
+            )
+            const data = json as {
+                doc: Record<string, unknown>
+                time: string
+            }
             const serverDoc = this.editor.schema.nodeFromJSON(
-                (json.doc as Record<string, unknown>).content as Record<
-                    string,
-                    unknown
-                >
+                (data.doc.content as Record<string, unknown>) || {}
             )
             const currentDoc = this.editor.view.state.doc
             const confirmedDoc = this.editor.docInfo.confirmedDoc as Node
@@ -203,18 +202,17 @@ export class NoCollabSave {
 
             // Update metadata from server
             ;(this.editor.mod.db?.bibDB as {setDB(value: unknown): void}).setDB(
-                (json.doc as Record<string, unknown>).bibliography
+                data.doc.bibliography
             )
             ;(this.editor.mod.db?.imageDB as {setDB(value: unknown): void}).setDB(
-                (json.doc as Record<string, unknown>).images
+                data.doc.images
             )
             ;(this.editor.mod.comments as any).store.loadComments(
-                (json.doc as Record<string, unknown>).comments
+                data.doc.comments
             )
-            this.editor.docInfo.version = (json.doc as Record<string, unknown>)
-                .v as number
+            this.editor.docInfo.version = data.doc.v as number
             this.editor.docInfo.confirmedDoc = this.editor.view.state.doc
-            this.editor.docInfo.updated = new Date(json.time as string)
+            this.editor.docInfo.updated = new Date(data.time)
             ;(this.editor.mod.footnotes as any).fnEditor.renderAllFootnotes()
 
             // Retry save with the merged document

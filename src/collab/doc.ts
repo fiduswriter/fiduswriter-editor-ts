@@ -1439,7 +1439,7 @@ export class ModCollabDoc {
                 rid: data["rid"],
                 footnoterender: data["footnoterender"],
                 reject_request_id: data["reject_request_id"],
-                ...decryptedPayload
+                ...(decryptedPayload as Record<string, unknown>)
             }
 
             // Process the decrypted diff normally

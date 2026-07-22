@@ -1,7 +1,7 @@
 import type {BibDB, ExportDoc, ImageDB, UploadRevision} from "@fiduswriter/document"
 import {SaveRevision as GenericSaveRevision} from "@fiduswriter/document/exporter/native"
 import {createSlug} from "@fiduswriter/document/exporter/tools/file"
-import {addAlert, addProgress, gettext, post, shortFileTitle} from "fwtoolkit"
+import {addAlert, addProgress, gettext, shortFileTitle} from "fwtoolkit"
 import type {EditorApp} from "../../types.js"
 import {DocumentTemplateExporter} from "../../document_template/exporter.js"
 
@@ -40,7 +40,7 @@ export class SaveRevision extends GenericSaveRevision {
         const getTemplateFiles = (docId: number | string, token: string | boolean) => {
             const templateExporter = new DocumentTemplateExporter(
                 docId,
-                "/api/document/get_template_for_doc/",
+                app.apiConnectors.document.getTemplateForDoc,
                 false,
                 token as string | false
             )
@@ -51,21 +51,21 @@ export class SaveRevision extends GenericSaveRevision {
         }
 
         const uploadRevision: UploadRevision = (blob, doc) => {
-            return post(
-                "/api/document/upload/",
-                {
-                    note,
-                    document_id: doc.id
-                },
-                {
-                    file: {
-                        file: blob,
-                        filename: `${createSlug(
-                            shortFileTitle(doc.title as string, doc.path as string)
-                        )}.fidus`
+            return app.apiConnectors.document
+                .uploadRevision(
+                    {
+                        note,
+                        document_id: doc.id as number
+                    },
+                    {
+                        file: {
+                            file: blob,
+                            filename: `${createSlug(
+                                shortFileTitle(doc.title as string, doc.path as string)
+                            )}.fidus`
+                        }
                     }
-                }
-            )
+                )
                 .then(
                     () => {},
                     () => {

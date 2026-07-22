@@ -2,7 +2,6 @@ import download from "downloadjs"
 
 import {createSlug} from "@fiduswriter/document/exporter/tools/file"
 import {ZipFileCreator} from "fwtoolkit/file/zip"
-import {postJson} from "fwtoolkit"
 
 interface HttpFile {
     filename: string
@@ -33,7 +32,10 @@ interface TemplateResponse {
 
 export class DocumentTemplateExporter {
     id: number | string
-    getUrl: string
+    getTemplateForDoc: (
+        id: number | string,
+        token: string | false
+    ) => Promise<{json: unknown; status: number}>
     download: boolean
     token: string | false
     zipFileName: string | false
@@ -43,12 +45,15 @@ export class DocumentTemplateExporter {
 
     constructor(
         id: number | string,
-        getUrl = "/api/document/admin/get_template/",
+        getTemplateForDoc: (
+            id: number | string,
+            token: string | false
+        ) => Promise<{json: unknown; status: number}>,
         download = true,
         token: string | false = false
     ) {
         this.id = id
-        this.getUrl = getUrl
+        this.getTemplateForDoc = getTemplateForDoc
         this.download = download
         this.token = token
 
@@ -59,10 +64,7 @@ export class DocumentTemplateExporter {
     }
 
     init(): Promise<void> {
-        const params = this.token
-            ? {id: this.id, token: this.token}
-            : {id: this.id}
-        return postJson(this.getUrl, params).then(({json}) => {
+        return this.getTemplateForDoc(this.id, this.token).then(({json}) => {
             const data = json as TemplateResponse
             this.docVersion = data.doc_version
             this.zipFileName = `${createSlug(data.title)}.fidustemplate`

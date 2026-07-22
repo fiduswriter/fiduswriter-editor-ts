@@ -224,7 +224,8 @@ export class ModDocumentTemplate {
                                                 "select"
                                             ) as HTMLSelectElement
                                         ).value as any,
-                                        e2eeOptions
+                                        e2eeOptions,
+                                        editor.app.apiConnectors.documentImport
                                     )
                                     copier
                                         .init()
@@ -232,7 +233,7 @@ export class ModDocumentTemplate {
                                             const url = targetE2EE
                                                 ? `/document/${docInfo.id}/?e2ee=1`
                                                 : `/document/${docInfo.id}/`
-                                            ;(editor.app as any).goTo(url)
+                                            editor.app.goTo(url)
                                         })
                                         .catch(() => false)
                                     selectTemplateDialog.close()

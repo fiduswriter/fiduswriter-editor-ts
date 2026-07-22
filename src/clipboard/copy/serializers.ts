@@ -43,7 +43,7 @@ class ClipboardDOMSerializer {
             settings.citationstyle,
             bibliographyHeader,
             (this.editor.mod.db as any).bibDB,
-            (this.editor.app as any).csl,
+            this.editor.app.csl,
             true // synchronous. Should work as the editor has used the same style previously.
         )
         const fm = citRenderer.fm as any

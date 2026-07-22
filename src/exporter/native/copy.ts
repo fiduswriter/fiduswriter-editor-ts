@@ -9,9 +9,10 @@ import type {
 } from "@fiduswriter/document"
 import {SaveCopy as GenericSaveCopy} from "@fiduswriter/document/exporter/native"
 import {NativeImporter} from "@fiduswriter/document/importer/native"
-import {addAlert, addProgress, gettext, postJson, shortFileTitle} from "fwtoolkit"
+import {addAlert, addProgress, gettext, shortFileTitle} from "fwtoolkit"
 import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
 import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
+import type {EditorDocumentImportApi} from "../../types.js"
 
 type ProgressCallback = (message: string, percentage?: number | null) => void
 
@@ -115,7 +116,8 @@ async function maybeDecryptImage(
 
 function createNativeImporterBackend(
     _user: User,
-    _e2eeOptions: E2EEOptions | null
+    _e2eeOptions: E2EEOptions | null,
+    documentImportApi: EditorDocumentImportApi
 ): NativeImporterBackend {
     return {
         createDoc: (template, importId, path, e2ee, files) => {
@@ -140,7 +142,8 @@ function createNativeImporterBackend(
                     jsonData.e2ee_iterations = e2ee.iterations
                 }
             }
-            return postJson("/api/document/import/create/", jsonData, files)
+            return documentImportApi
+                .createDoc(jsonData, files)
                 .then(({json}) => {
                     const data = json as Record<string, unknown>
                     return {
@@ -157,9 +160,6 @@ function createNativeImporterBackend(
         },
         saveImages: async (images, docId, e2ee) => {
             const isE2EE = e2ee?.enabled
-            const endpoint = isE2EE
-                ? "/api/document/e2ee_image/"
-                : "/api/document/import/image/"
             const imageTranslationTable: Record<number | string, number> = {}
             await Promise.all(
                 Object.values(images.db).map(async imageEntry => {
@@ -184,7 +184,9 @@ function createNativeImporterBackend(
                             filename: entry.image.split("/").pop() as string
                         }
                     }
-                    const {json} = await postJson(endpoint, jsonData, files)
+                    const {json} = isE2EE
+                        ? await documentImportApi.saveE2EEImage(jsonData, files)
+                        : await documentImportApi.saveImage(jsonData, files)
                     const response = json as Record<string, unknown>
                     imageTranslationTable[entry.id] = response.id as number
                 })
@@ -210,7 +212,8 @@ function createNativeImporterBackend(
                     e2ee.key
                 )
             }
-            return postJson("/api/document/import/", saveData)
+            return documentImportApi
+                .saveDocument(saveData)
                 .then(({json}) => {
                     const data = json as Record<string, unknown>
                     return {
@@ -243,7 +246,8 @@ export class SaveCopy extends GenericSaveCopy {
         imageDB: ImageDB,
         newUser: User,
         importId: string | number | null = null,
-        e2eeOptions: E2EEOptions | null = null
+        e2eeOptions: E2EEOptions | null = null,
+        documentImportApi?: EditorDocumentImportApi
     ) {
         const title = shortFileTitle(doc.title as string, (doc.path as string) || "")
         const task = addProgress(
@@ -282,7 +286,11 @@ export class SaveCopy extends GenericSaveCopy {
                     content: Blob | ArrayBuffer | string
                 }>,
                 opts.user,
-                createNativeImporterBackend(opts.user, opts.e2eeOptions ?? null),
+                createNativeImporterBackend(
+                    opts.user,
+                    opts.e2eeOptions ?? null,
+                    documentImportApi as EditorDocumentImportApi
+                ),
                 {
                     importId: opts.importId,
                     requestedPath: opts.requestedPath,

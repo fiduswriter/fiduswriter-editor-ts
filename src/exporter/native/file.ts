@@ -2,9 +2,17 @@ import type {BibDB, ExportDoc, ImageDB} from "@fiduswriter/document"
 import {ExportFidusFile as GenericExportFidusFile} from "@fiduswriter/document/exporter/native"
 import {addProgress, gettext, shortFileTitle} from "fwtoolkit"
 import {DocumentTemplateExporter} from "../../document_template/exporter.js"
+import type {EditorDocumentApi} from "../../types.js"
+
+interface ExportFidusFileApp {
+    apiConnectors: {
+        document: Pick<EditorDocumentApi, "getTemplateForDoc">
+    }
+}
 
 export class ExportFidusFile extends GenericExportFidusFile {
     constructor(
+        app: ExportFidusFileApp,
         doc: ExportDoc,
         bibDB: BibDB,
         imageDB: ImageDB,
@@ -22,7 +30,7 @@ export class ExportFidusFile extends GenericExportFidusFile {
         const getTemplateFiles = (docId: number | string, token: string | boolean) => {
             const templateExporter = new DocumentTemplateExporter(
                 docId,
-                "/api/document/get_template_for_doc/",
+                app.apiConnectors.document.getTemplateForDoc,
                 false,
                 token as string | false
             )

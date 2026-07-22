@@ -9,7 +9,7 @@
  For E2EE documents, images are encrypted client-side and uploaded directly
  via a dedicated endpoint to an EncryptedDocumentImage model.
 */
-import {addAlert, get, post, postJson} from "fwtoolkit"
+import {addAlert, get} from "fwtoolkit"
 
 import type {Editor} from "../types.js"
 
@@ -60,7 +60,7 @@ export class ModImageDB {
         // Set a timeout so that the update can be combines with other updates
         // if they happen more or less simultaneously.
         window.setTimeout(
-            () => (this.mod as any).editor.mod.collab.doc.sendToCollaborators(),
+            () => this.mod.editor.mod.collab!.doc.sendToCollaborators(),
             100
         )
     }
@@ -79,7 +79,9 @@ export class ModImageDB {
         const isE2EE = this.mod.editor.e2ee?.encrypted === true
         if (!isE2EE) {
             // Non-E2EE documents must use the user's imageDB
-            return (this.mod.editor.app as any).imageDB.saveImage(imageData)
+            return this.mod.editor.app.imageDB.saveImage(
+                imageData as unknown as Record<string, unknown>
+            )
         }
 
         // E2EE path: upload encrypted image directly to the document
@@ -103,7 +105,8 @@ export class ModImageDB {
             }
         }
 
-        return postJson("/api/document/e2ee_image/", jsonData, files)
+        return this.mod.editor.app.apiConnectors.document
+            .saveE2EEImage(jsonData, files)
             .then(({json}: {json: any}) => {
                 const dbEntry: ImageEntry = {
                     id: json.id,
@@ -122,7 +125,7 @@ export class ModImageDB {
                 this.setImage(json.id, dbEntry)
                 return json.id
             })
-            .catch(error => {
+            .catch((error: unknown) => {
                 addAlert("error", gettext("Could not save encrypted image"))
                 throw error
             })
@@ -160,12 +163,14 @@ export class ModImageDB {
     }
 
     deleteE2EEImageFromServer(id: number): void {
-        post("/api/document/delete_e2ee_image/", {
-            doc_id: this.mod.editor.docInfo.id,
-            image_id: id
-        }).catch(() => {
-            // Silently ignore — orphaned image records are acceptable
-        })
+        this.mod.editor.app.apiConnectors.document
+            .deleteE2EEImage({
+                doc_id: this.mod.editor.docInfo.id as number,
+                image_id: id
+            })
+            .catch(() => {
+                // Silently ignore — orphaned image records are acceptable
+            })
     }
 
     deleteLocalImage(id: number): void {
@@ -186,10 +191,10 @@ export class ModImageDB {
             // document's unique key and are not reusable across documents.
             return
         }
-        const appImageDB = (this.mod.editor.app as any).imageDB
+        const appImageDB = this.mod.editor.app.imageDB
         if (Object.keys(appImageDB.db).includes(String(id))) {
             // Just directly reset the image as we already have the image present in user Image DB
-            this.setImage(id, appImageDB.db[id])
+            this.setImage(id, appImageDB.db[id] as unknown as ImageEntry)
         } else {
             // If image is not present in both the userImage DB and docDB we can safely assume that we have to upload again.
             this.reUploadImage(
@@ -256,15 +261,13 @@ export class ModImageDB {
                             cats: [],
                             copyright: copyright
                         }
-                        ;(this.mod.editor.app as any).imageDB.saveImage(x).then(
+                        this.mod.editor.app.imageDB.saveImage(x).then(
                             (newId: number) => {
                                 const imageData = JSON.parse(
                                     JSON.stringify(
-                                        (this.mod.editor.app as any).imageDB.db[
-                                            newId
-                                        ]
+                                        this.mod.editor.app.imageDB.db[newId]
                                     )
-                                )
+                                ) as unknown as ImageEntry
                                 this.setImage(newId, imageData)
                                 this.mod.editor.view.state.doc.descendants(
                                     (node, pos) => {

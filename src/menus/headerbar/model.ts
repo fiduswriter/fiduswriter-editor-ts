@@ -2,7 +2,6 @@ import {
     Dialog,
     addAlert,
     addProgress,
-    postJson,
     shortFileTitle
 } from "fwtoolkit"
 import type {BibDB, ExportDoc, ImageDB} from "@fiduswriter/document"
@@ -137,10 +136,11 @@ export const headerbarModel = () => ({
                             !editor.docInfo.is_owner
                         ) {
                             // TokenUser requesting access
-                            postJson("/api/document/request_access/", {
-                                document_id: editor.docInfo.id,
-                                rights: "write"
-                            })
+                            editor.app.apiConnectors.document
+                                .requestAccess({
+                                    document_id: editor.docInfo.id as number,
+                                    rights: "write"
+                                })
                                 .then(({json}: {json: unknown}) => {
                                     const data = json as {
                                         success?: boolean
@@ -189,9 +189,10 @@ export const headerbarModel = () => ({
                                 const noPassphraseUsers: string[] = []
                                 for (const ar of userRecipients) {
                                     try {
+                                        const holderId = ar.holder?.id as number
                                         const hasKeys =
                                             await PassphraseManager.userHasEncryptionKeys(
-                                                ar.holder?.id as number
+                                                holderId
                                             )
                                         if (hasKeys) {
                                             // Recipient has passphrase keys —
@@ -199,7 +200,7 @@ export const headerbarModel = () => ({
                                             await PassphraseManager.saveDocumentPassword(
                                                 editor.docInfo.id as number,
                                                 editor.e2ee.password,
-                                                ar.holder?.id as number,
+                                                holderId,
                                                 "user",
                                                 false
                                             )
@@ -252,7 +253,9 @@ export const headerbarModel = () => ({
                             editor.e2ee?.encrypted || false,
                             editor.e2ee?.password || "",
                             onShareSuccess,
-                            editor.app.settings
+                            editor.app.settings,
+                            editor.app.apiConnectors.contacts,
+                            editor.app.apiConnectors.document
                         )
                         shareDialog.init()
                     },
@@ -343,7 +346,10 @@ export const headerbarModel = () => ({
                             getExportDoc(editor),
                             db.bibDB,
                             db.imageDB,
-                            editor.user
+                            editor.user,
+                            null,
+                            null,
+                            editor.app.apiConnectors.documentImport
                         )
                         copier
                             .init()
@@ -368,6 +374,7 @@ export const headerbarModel = () => ({
                     action: (editor: Editor) => {
                         const db = getDB(editor)
                         new ExportFidusFile(
+                            editor.app,
                             getExportDoc(editor),
                             db.bibDB,
                             db.imageDB,
@@ -787,6 +794,7 @@ export const headerbarModel = () => ({
                     action: (editor: Editor) => {
                         const db = getDB(editor)
                         new ExportFidusFile(
+                            editor.app,
                             getExportDoc(editor),
                             db.bibDB,
                             db.imageDB,

@@ -156,8 +156,8 @@ export function buildBibliographyList(editor: Editor): BibliographyEntry[] {
     if (editor.mod?.db?.bibDB?.db) {
         addEntries(editor.mod.db.bibDB.db as Record<number, any>, "doc")
     }
-    if ((editor.app as any).bibDB?.db) {
-        addEntries((editor.app as any).bibDB.db as Record<number, any>, "user")
+    if (editor.app.bibDB?.db) {
+        addEntries(editor.app.bibDB.db as Record<string, any>, "user")
     }
 
     return entries

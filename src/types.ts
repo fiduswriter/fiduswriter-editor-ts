@@ -14,18 +14,101 @@ import type {EditorView} from "prosemirror-view"
 import type {
     BibDB,
     BibDBEntries,
+    BibDBEntry,
     CommentData,
     CSL,
     ImageDB,
     ImageDBEntries
 } from "@fiduswriter/document"
+import type {ImageApi} from "@fiduswriter/image-manager"
 
-export type {BibDB, BibDBEntries, CommentData, CSL, ImageDB, ImageDBEntries}
+export type {BibDB, BibDBEntries, BibDBEntry, CommentData, CSL, ImageDB, ImageDBEntries}
 
 /** Image database interface used by the editor (document and user DBs). */
 export interface EditorImageDB extends ImageDB {
     saveImage(imageData: Record<string, unknown>): Promise<number>
     setImage(id: number, imageData: Record<string, unknown>): void
+}
+
+/** Bibliography database interface used by the editor. */
+export interface EditorBibDB {
+    db: Record<string, BibDBEntry>
+}
+
+/** API connector for document-level operations used by the editor. */
+export interface EditorDocumentApi {
+    createDocument(
+        data: Record<string, unknown>
+    ): Promise<{json: unknown; status: number}>
+    getWebSocketBase(
+        data: {id: number; token?: string}
+    ): Promise<{json: unknown; status: number}>
+    getDocumentStyles(
+        data: {id: number; token?: string}
+    ): Promise<{json: unknown; status: number}>
+    getDocumentData(
+        data: {id: number; token?: string; v?: number}
+    ): Promise<{json: unknown; status: number}>
+    saveDocument(
+        data: Record<string, unknown>,
+        options?: {keepalive?: boolean}
+    ): Promise<{json: unknown; status: number}>
+    commentNotify(data: Record<string, unknown>): Promise<unknown>
+    requestAccess(
+        data: {document_id: number; rights: string}
+    ): Promise<{json: unknown; status: number}>
+    validateShareToken(
+        token: string
+    ): Promise<{json: unknown; status: number}>
+    listShareTokens(document_id: number): Promise<{json: unknown; status: number}>
+    createShareToken(
+        data: Record<string, unknown>
+    ): Promise<{json: unknown; status: number}>
+    revokeShareToken(token_id: number): Promise<{json: unknown; status: number}>
+    getAccessRights(
+        data: {document_ids: number[]}
+    ): Promise<{json: unknown; status: number}>
+    saveAccessRights(data: {
+        document_ids: number[]
+        access_rights: unknown[]
+    }): Promise<unknown>
+    saveE2EEImage(
+        data: Record<string, unknown>,
+        files?: Record<string, unknown>
+    ): Promise<{json: unknown; status: number}>
+    deleteE2EEImage(data: {doc_id: number; image_id: number}): Promise<unknown>
+    uploadRevision(
+        data: {note: string; document_id: number},
+        files: Record<string, unknown>
+    ): Promise<unknown>
+    getTemplateForDoc(
+        id: number | string,
+        token: string | false
+    ): Promise<{json: unknown; status: number}>
+}
+
+/** API connector for contact operations used by the editor. */
+export interface EditorContactsApi {
+    add(data: {user_string: string}): Promise<{json: unknown; status: number}>
+}
+
+/** API connector for document import/copy operations used by the editor. */
+export interface EditorDocumentImportApi {
+    createDoc(
+        data: Record<string, unknown>,
+        files?: Record<string, unknown>
+    ): Promise<{json: unknown; status: number}>
+    saveImage(
+        data: Record<string, unknown>,
+        files: Record<string, unknown>
+    ): Promise<{json: unknown; status: number}>
+    saveE2EEImage(
+        data: Record<string, unknown>,
+        files: Record<string, unknown>
+    ): Promise<{json: unknown; status: number}>
+    saveDocument(
+        data: Record<string, unknown>
+    ): Promise<{json: unknown; status: number}>
 }
 
 /** Minimal app interface — only the fields the Editor actually uses. */
@@ -34,10 +117,17 @@ export interface EditorApp {
     goTo: (url: string) => void
     settings: {APPS: string[]; [key: string]: unknown}
     menuPlugins?: Array<[string, Record<string, {new (...args: unknown[]): {init(): void}}>]>
-    name?: string
+    name: string
     isOffline(): boolean
     csl: CSL
+    bibDB?: EditorBibDB
     imageDB: EditorImageDB
+    apiConnectors: {
+        document: EditorDocumentApi
+        documentImport: EditorDocumentImportApi
+        image: ImageApi
+        contacts: EditorContactsApi
+    }
 }
 
 /** Document access role constants. */

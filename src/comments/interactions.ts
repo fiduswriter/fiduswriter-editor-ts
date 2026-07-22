@@ -3,7 +3,7 @@ import {TextSelection} from "prosemirror-state"
 import {GapCursor} from "prosemirror-gapcursor"
 import type {EditorView} from "prosemirror-view"
 
-import {findTarget, post} from "fwtoolkit"
+import {findTarget} from "fwtoolkit"
 import {READ_ONLY_ROLES} from "../index.js"
 import type {Editor} from "../types.js"
 import {
@@ -389,7 +389,7 @@ export class ModCommentInteractions {
         const comment = this.mod.store.findComment(id)
         const {html, text} = serializeComment(comment.comment)
 
-        post("/api/document/comment_notify/", {
+        this.mod.editor.app.apiConnectors.document.commentNotify({
             doc_id: this.mod.editor.docInfo.id,
             collaborator_id: user,
             comment_html: html,

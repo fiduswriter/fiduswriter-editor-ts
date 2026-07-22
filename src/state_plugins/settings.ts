@@ -243,7 +243,7 @@ export const settingsPlugin = (options: SettingsOptions) => {
                     )
                     setDocTitle(
                         view.state.doc.firstChild?.textContent || "",
-                        options.editor.app as any
+                        options.editor.app
                     )
                 }
             }

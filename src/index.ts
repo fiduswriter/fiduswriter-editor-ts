@@ -7,7 +7,6 @@ import {
     addAlert,
     deactivateWait,
     ensureCSS,
-    postJson,
     showSystemMessage,
     whenReady
 } from "fwtoolkit"
@@ -309,19 +308,21 @@ export class Editor {
                 initPromises.push(this._createE2EEDocument())
             } else {
                 initPromises.push(
-                    postJson("/api/document/create_doc/", {
-                        template_id: this.docInfo.templateId,
-                        path: this.docInfo.path
-                    }).then(({json}: {json: any}) => {
-                        this.docInfo.id = json.id
-                        window.history.replaceState(
-                            "",
-                            "",
-                            `/document/${this.docInfo.id}/`
-                        )
-                        delete this.docInfo.templateId
-                        return Promise.resolve()
-                    })
+                    this.app.apiConnectors.document
+                        .createDocument({
+                            template_id: this.docInfo.templateId,
+                            path: this.docInfo.path
+                        })
+                        .then(({json}: {json: any}) => {
+                            this.docInfo.id = json.id
+                            window.history.replaceState(
+                                "",
+                                "",
+                                `/document/${this.docInfo.id}/`
+                            )
+                            delete this.docInfo.templateId
+                            return Promise.resolve()
+                        })
                 )
             }
         }
@@ -329,9 +330,9 @@ export class Editor {
         if (uuid4Pattern.test(this.docInfo.id)) {
             this.docInfo.token = this.docInfo.id
             initPromises.push(
-                postJson(
-                    `/api/document/share_token/validate/${this.docInfo.token}/`
-                ).then(({json, status}: {json: any; status: number}) => {
+                this.app.apiConnectors.document
+                    .validateShareToken(this.docInfo.token as string)
+                    .then(({json, status}: {json: any; status: number}) => {
                     if (status === 200 && json.document_id) {
                         this.docInfo.id = json.document_id
                         this.docInfo.access_rights = json.rights
@@ -362,22 +363,22 @@ export class Editor {
                 }
                 const editorSaveMode = this.app.settings.EDITOR_SAVE_MODE
                 const collaborativeEditing = editorSaveMode === "collaborative"
+                const documentApi = this.app.apiConnectors.document
                 const wsBasePromise = collaborativeEditing
                     ? this.docInfo.wsBase
                         ? Promise.resolve({
                               json: {ws_base: this.docInfo.wsBase}
                           })
-                        : postJson("/api/document/get_ws_base/", {
-                              id: this.docInfo.id
+                        : documentApi.getWebSocketBase({
+                              id: this.docInfo.id as number,
+                              token: this.docInfo.token
                           })
                     : Promise.resolve({json: {ws_base: ""}})
-                const stylesPromise = postJson(
-                    "/api/document/get_doc_styles/",
-                    stylesPayload
+                const stylesPromise = documentApi.getDocumentStyles(
+                    stylesPayload as {id: number; token?: string}
                 )
-                const docDataPromise = postJson(
-                    "/api/document/get_doc_data/",
-                    stylesPayload
+                const docDataPromise = documentApi.getDocumentData(
+                    stylesPayload as {id: number; token?: string}
                 )
                 return Promise.all([
                     wsBasePromise,
@@ -538,11 +539,13 @@ export class Editor {
                                     // our version (v) lets the endpoint include the
                                     // covering diffs as `m` so adjustDocument can
                                     // do a precise merge.
-                                    postJson("/api/document/get_doc_data/", {
-                                        id: this.docInfo.id,
-                                        token: this.docInfo.token,
-                                        v: this.docInfo.version
-                                    }).then(({json}) => {
+                                    this.app.apiConnectors.document
+                                        .getDocumentData({
+                                            id: this.docInfo.id as number,
+                                            token: this.docInfo.token,
+                                            v: this.docInfo.version as number
+                                        })
+                                        .then(({json}) => {
                                         this.mod.collab.doc.receiveDocument(
                                             json
                                         )
@@ -707,6 +710,7 @@ export class Editor {
                                                     use_current_view: true
                                                 })
                                                 new ExportFidusFile(
+                                                    this.app,
                                                     doc,
                                                     this.mod.db.bibDB,
                                                     this.mod.db.imageDB,
@@ -776,6 +780,7 @@ export class Editor {
     handleAccessRightModification(): void {
         // This function when invoked creates a copy of document in FW format and closes editor operation.
         new ExportFidusFile(
+            this.app,
             this.getDoc({use_current_view: true}),
             this.mod.db.bibDB,
             this.mod.db.imageDB
@@ -896,24 +901,25 @@ export class Editor {
         )
 
         // Create the document on the server with E2EE parameters
-        const {json, status} = await postJson("/api/document/create_doc/", {
+        const {json, status} = await this.app.apiConnectors.document.createDocument({
             template_id: this.docInfo.templateId,
             path: this.docInfo.path,
             e2ee: true,
             e2ee_salt: saltBase64,
             e2ee_iterations: iterations
-        }) as {json: any; status: number}
+        })
 
+        const createData = json as {id: number; error?: string}
         if (status === 403) {
             addAlert(
                 "error",
-                json.error || gettext("E2EE is not enabled on this server.")
+                createData.error || gettext("E2EE is not enabled on this server.")
             )
             window.location.href = "/"
             return
         }
 
-        this.docInfo.id = json.id
+        this.docInfo.id = createData.id
         window.history.replaceState("", "", `/document/${this.docInfo.id}/`)
         delete this.docInfo.templateId
 
@@ -1310,3 +1316,9 @@ export class Editor {
         return
     }
 }
+
+export type {
+    EditorDocumentApi,
+    EditorDocumentImportApi,
+    EditorContactsApi
+} from "./types.js"

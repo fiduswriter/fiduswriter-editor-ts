@@ -444,6 +444,7 @@ export class Merge {
 
         // Prepare Export
         new ExportFidusFile(
+            this.mod.editor.app,
             this.getDocData(offlineDoc),
             this.mod.editor.mod.db!.bibDB,
             this.mod.editor.mod.db!.imageDB
