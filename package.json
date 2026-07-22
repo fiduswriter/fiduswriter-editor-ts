@@ -65,7 +65,8 @@
     "lint:fix": "eslint src --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js",
+    "install-hooks": "husky"
   },
   "dependencies": {
     "@fiduswriter/bibliography-manager": "^0.1.19",
@@ -116,7 +117,9 @@
     "ts-jest": "^29.4.11",
     "ts-jest-resolver": "^2.0.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0"
+    "typescript-eslint": "^8.62.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8"
   },
   "lint-staged": {
     "*.{ts,js,mjs,css,md,json,html}": [
