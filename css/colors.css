@@ -1,0 +1,97 @@
+/*
+ * Editor-specific custom properties — load after fwtoolkit/css/colors.css
+ * and @fiduswriter/frontend/css/colors.css.
+ * Does NOT duplicate fwtoolkit's base; only adds editor-related variables.
+ */
+
+:root {
+    /* -----------------------------------------------------------------
+     * Chat
+     * ----------------------------------------------------------------- */
+    --chat-highlight-background-color: #6495ed;
+
+    /* -----------------------------------------------------------------
+     * Input error state
+     * ----------------------------------------------------------------- */
+    --input-error-background-color: #f34141;
+
+    /* -----------------------------------------------------------------
+     * Track changes
+     * ----------------------------------------------------------------- */
+    --editor-track-background-color: 45 82 144 / 0.63;
+    --editor-track-active-background-color: #788fb4;
+    --editor-track-text-color: #ffffff;
+
+    /* -----------------------------------------------------------------
+     * Review
+     * ----------------------------------------------------------------- */
+    --editor-reviewed: #81f781;
+    --editor-text-content-item-background-color: #d3d3d3;
+    --editor-text-content-item-hover-background-color: #808080;
+    --editor-navigator-background-color: 0 0 0 / 0.8;
+    --editor-navigator-color: #ffffff;
+    --editor-navigator-scrollbar-background-color: #181818;
+    --editor-navigator-scrollbar-background-color-hover: #0f0f0f;
+    --editor-navigator-checkbox-color: #444444;
+    --editor-navigator-focus-color: #dddddd;
+
+    /* -----------------------------------------------------------------
+     * Comments
+     * ----------------------------------------------------------------- */
+    --editor-active-comment-background-color: #fffacf;
+    --editor-active-help-background-color: #fafafa;
+    --editor-active-help-arrow-color: #fafafa;
+    --editor-active-track-background-color: #afbed4;
+    --editor-major-comment-background-color: #f4c9d9;
+    --editor-resolved-comment-icon-color: #3c3c3c;
+    --editor-major-comment-icon-color: #af3515;
+    --editor-comment-resolved-opacity: 0.7;
+    --editor-comment-resolved-text-color: #ffffff;
+    --editor-comment-resolved-border-color: #ffffff;
+
+    /* -----------------------------------------------------------------
+     * E2EE — strength meter, badges, banners, info/warning panels
+     * ----------------------------------------------------------------- */
+
+    /* Strength meter */
+    --e2ee-strength-very-weak-color: var(--error-border-color, #af3515);
+    --e2ee-strength-weak-color: var(--cs-3-background-from, #d3421c);
+    --e2ee-strength-fair-color: var(
+        --warning-background-color,
+        rgb(221 208 63 / 80%)
+    );
+    --e2ee-strength-strong-color: var(--cs-6-background, #5a7e73);
+    --e2ee-strength-very-strong-color: var(--cs-5-background, #4c6860);
+
+    /* Badge / indicator */
+    --e2ee-badge-text-color: var(--cs-4-text, #4c6860);
+    --e2ee-badge-icon-color: var(--cs-6-background, #5a7e73);
+    --e2ee-badge-encrypted-background-color: var(
+        --cs-6-background-hover,
+        #96c6b8
+    );
+    --e2ee-badge-encrypted-text-color: var(--cs-6-background, #5a7e73);
+
+    /* Warning (share link) */
+    --e2ee-warning-background-color: var(--cs-light-background, #f9f9f9);
+    --e2ee-warning-border-color: var(--cs-3-background-from, #d3421c);
+    --e2ee-warning-text-color: var(--cs-3-background-to, #b13615);
+
+    /* Info (password reminder) */
+    --e2ee-info-background-color: var(--cs-light-background, #f9f9f9);
+    --e2ee-info-border-color: var(--cs-2-box-shadow, #3c9fdf);
+    --e2ee-info-text-color: var(--cs-2-background, #0d78be);
+
+    /* Mode banner */
+    --e2ee-banner-background-color: var(--cs-6-background-hover, #96c6b8);
+    --e2ee-banner-border-color: var(--cs-6-border, #7d948e);
+    --e2ee-banner-text-color: var(--cs-6-background, #5a7e73);
+    --e2ee-banner-link-color: var(--cs-2-background, #0d78be);
+
+    /* Encrypted placeholder */
+    --e2ee-encrypted-title-color: var(--cs-light-text-secondary, #6e6e6e);
+
+    /* Input focus */
+    --e2ee-input-focus-border-color: var(--cs-2-background, #0d78be);
+    --e2ee-input-focus-shadow-color: var(--cs-2-box-shadow, #3c9fdf);
+}

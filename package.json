@@ -50,10 +50,12 @@
     }
   },
   "files": [
+    "css/",
     "dist/",
     "src/",
-    "README.md",
+    "static/",
     "LICENSE",
+    "README.md",
     "logo.svg"
   ],
   "scripts": {
@@ -66,12 +68,13 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js",
-    "install-hooks": "husky"
+    "install-hooks": "husky",
+    "demo": "echo 'Open demo/standalone/index.html in a browser or run: npx http-server demo/standalone -p 8080 -c-1'"
   },
   "dependencies": {
-    "@fiduswriter/bibliography-manager": "^0.1.22",
-    "@fiduswriter/document": "^0.2.30",
-    "@fiduswriter/image-manager": "^0.1.14",
+    "@fiduswriter/bibliography-manager": "^0.1.24",
+    "@fiduswriter/document": "^0.2.31",
+    "@fiduswriter/image-manager": "^0.1.17",
     "cropperjs": "^1.6.2",
     "diff": "^5.0.0",
     "diff-dom": "^5.2.1",
@@ -79,7 +82,7 @@
     "fast-xml-parser": "^4.5.0",
     "fastdom": "^1.0.11",
     "fix-utf8": "^2.0.1",
-    "fwtoolkit": "^0.2.1",
+    "fwtoolkit": "^0.2.3",
     "jszip": "^3.10.1",
     "mathml-to-latex": "^1.4.3",
     "mathml2omml": "^0.5.0",
@@ -110,16 +113,59 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
     "eslint": "^10.6.0",
+    "gettext-parser": "^9.1.1",
     "globals": "^15.15.0",
     "happy-dom": "^20.10.6",
+    "husky": "^9.1.7",
     "jest": "^30.4.2",
+    "lint-staged": "^17.0.8",
     "prettier": "^3.5.3",
     "ts-jest": "^29.4.11",
     "ts-jest-resolver": "^2.0.1",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.8"
+    "typescript-eslint": "^8.62.0"
+  },
+  "fiduswriter": {
+    "css": {
+      "fwtoolkit": [
+        "colors.css",
+        "forms.css",
+        "buttons.css",
+        "dialog.css",
+        "loader.css",
+        "alerts.css",
+        "pulldown.css",
+        "data_table.css",
+        "content_menu.css",
+        "dialog_table.css",
+        "common.css",
+        "inline_tools.css",
+        "add_remove_dialog.css"
+      ],
+      "own": {
+        "additive": [
+          "colors.css"
+        ],
+        "component": [
+          "editor.css",
+          "document.css",
+          "access_rights_dialog.css",
+          "carets.css",
+          "chat.css",
+          "citation_dialog.css",
+          "contributors.css",
+          "dot_menu.css",
+          "e2ee.css",
+          "footnotes.css",
+          "margin_boxes.css",
+          "merge.css",
+          "review.css",
+          "table.css",
+          "tags.css",
+          "tracking.css"
+        ]
+      }
+    }
   },
   "lint-staged": {
     "*.{ts,js,mjs,css,md,json,html}": [
