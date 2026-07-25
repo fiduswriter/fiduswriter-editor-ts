@@ -84,8 +84,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js",
+    "deploy-pages": "./scripts/deploy-pages.sh",
     "install-hooks": "husky",
-    "demo": "echo 'Open demo/standalone/index.html in a browser or run: npx http-server demo/standalone -p 8080 -c-1'"
+    "demo": "echo 'Open demo/editor/index.html or run: npx http-server .pages-build -p 8080 -c-1'"
   },
   "dependencies": {
     "@fiduswriter/bibliography-manager": "^0.1.25",
@@ -94,6 +95,7 @@
     "cropperjs": "^1.6.2",
     "diff": "^5.0.0",
     "diff-dom": "^5.2.1",
+    "downloadjs": "^1.4.7",
     "fast-deep-equal": "^3.1.3",
     "fast-xml-parser": "^4.5.0",
     "fastdom": "^1.0.11",
@@ -128,6 +130,7 @@
     "@eslint/js": "^10.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
+    "esbuild": "^0.25.12",
     "eslint": "^10.6.0",
     "gettext-parser": "^9.1.1",
     "globals": "^15.15.0",

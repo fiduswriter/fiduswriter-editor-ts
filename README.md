@@ -62,6 +62,24 @@ const editor = new Editor({
 })
 ```
 
+## Demo
+
+A standalone browser demo is published on Codeberg Pages:
+
+**https://fiduswriter.codeberg.page/fiduswriter-editor-js/**
+
+The demo loads the editor without a Django backend. On startup it shows a
+dialog where you can:
+
+- Choose a language from the bundled `locale/*/messages.json` catalogs
+  (defaults to English).
+- Import an existing document in `.fidus`, `.docx`, `.odt`, or Pandoc `.json`
+  format, with drag-and-drop support.
+- Start a new document from a built-in default template.
+- Optionally apply a `.fidustemplate` document template to a new document.
+
+Changes are saved locally and can be downloaded as a `.fidus` file.
+
 ## Development
 
 ```bash

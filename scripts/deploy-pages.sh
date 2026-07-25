@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+# Build the demo site and push it to the Codeberg Pages branch.
 set -e
+
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 
@@ -13,13 +15,45 @@ mkdir "$BUILD_DIR"
 
 cp -r "$ROOT/demo/"* "$BUILD_DIR/"
 cp -r "$ROOT/dist" "$BUILD_DIR/"
-cp "$ROOT/logo.svg" "$BUILD_DIR/" 2>/dev/null || true
+
+# Bundle demo entry points into the pages build.
+echo "Bundling demos..."
+PAGES_BUILD_DIR="$BUILD_DIR" node "$ROOT/scripts/build-demo.js"
+
+# Copy fwtoolkit CSS and editor CSS so the demo has consistent styling
+# without a CDN.
+mkdir -p "$BUILD_DIR/css"
+cp "$ROOT/node_modules/fwtoolkit/css/fwtoolkit.css" "$BUILD_DIR/css/"
+cp "$ROOT/node_modules/prosemirror-view/style/prosemirror.css" "$BUILD_DIR/css/"
+cp "$ROOT/node_modules/cropperjs/dist/cropper.min.css" "$BUILD_DIR/css/"
+for css in "$ROOT/css/"*.css; do
+    cp "$css" "$BUILD_DIR/css/"
+done
+
+# Copy static assets (fonts, images, audio) referenced by the editor.
+mkdir -p "$BUILD_DIR/static"
+cp -r "$ROOT/static/"* "$BUILD_DIR/static/"
+
+# Copy MathLive static assets bundled by @fiduswriter/document.
+mkdir -p "$BUILD_DIR/css/libs"
+cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/css/"* "$BUILD_DIR/css/libs/"
+
+# Copy localization catalogs used by the startup dialog and gettext fallback.
+mkdir -p "$BUILD_DIR/locale"
+cp -r "$ROOT/locale/"* "$BUILD_DIR/locale/"
+
+# Copy the package logo used by the landing page and favicon.
+cp "$ROOT/logo.svg" "$BUILD_DIR/logo.svg"
+
+# Remove TypeScript sources and declaration/source-map files from the pages build.
+find "$BUILD_DIR" -name "*.ts" -delete
+find "$BUILD_DIR/dist" \( -name "*.d.ts" -o -name "*.map" \) -delete
 
 cd "$BUILD_DIR"
 git init
 git checkout -b pages
 git add .
-git commit -m "Deploy @fiduswriter/editor to Codeberg Pages"
+git commit -m "Deploy @fiduswriter/editor demo to Codeberg Pages"
 
 REMOTE=$(cd "$ROOT" && git remote get-url origin)
 echo "Pushing to $REMOTE pages branch..."
@@ -28,4 +62,4 @@ git push -f origin pages
 
 cd "$ROOT"
 rm -rf "$BUILD_DIR"
-echo "Done. Available at https://fiduswriter.codeberg.page/editor/"
+echo "Done. The demo should be available at https://fiduswriter.codeberg.page/fiduswriter-editor-js/"
