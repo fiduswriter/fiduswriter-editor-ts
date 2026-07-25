@@ -92,6 +92,7 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
     return {
         name: "fiduswriter-editor-demo",
         routes: {
+            "": {app: "document"},
             document: {app: "document"}
         },
         goTo: () => {},

@@ -37,7 +37,7 @@ async function main() {
     const autostart = params.get("autostart") === "1"
 
     const startup = autostart
-        ? {locale: "en", username: gettext("Demo User"), result: {mode: "new" as const}}
+        ? {locale: "en", username: "Demo User", result: {mode: "new" as const}}
         : await showStartupDialog()
     const locale = startup.locale
     const username = startup.username
