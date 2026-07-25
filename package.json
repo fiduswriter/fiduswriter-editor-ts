@@ -54,6 +54,7 @@
     "dist/",
     "src/",
     "static/",
+    "locale/*/messages.json",
     "LICENSE",
     "README.md",
     "logo.svg"
@@ -72,9 +73,9 @@
     "demo": "echo 'Open demo/standalone/index.html in a browser or run: npx http-server demo/standalone -p 8080 -c-1'"
   },
   "dependencies": {
-    "@fiduswriter/bibliography-manager": "^0.1.24",
-    "@fiduswriter/document": "^0.2.31",
-    "@fiduswriter/image-manager": "^0.1.17",
+    "@fiduswriter/bibliography-manager": "^0.1.25",
+    "@fiduswriter/document": "^0.2.32",
+    "@fiduswriter/image-manager": "^0.1.19",
     "cropperjs": "^1.6.2",
     "diff": "^5.0.0",
     "diff-dom": "^5.2.1",
@@ -82,7 +83,7 @@
     "fast-xml-parser": "^4.5.0",
     "fastdom": "^1.0.11",
     "fix-utf8": "^2.0.1",
-    "fwtoolkit": "^0.2.3",
+    "fwtoolkit": "^0.2.4",
     "jszip": "^3.10.1",
     "mathml-to-latex": "^1.4.3",
     "mathml2omml": "^0.5.0",
