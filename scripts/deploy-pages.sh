@@ -34,6 +34,12 @@ done
 mkdir -p "$BUILD_DIR/static"
 cp -r "$ROOT/static/"* "$BUILD_DIR/static/"
 
+# Copy Font Awesome CSS and webfonts used by fwtoolkit and the editor.
+mkdir -p "$BUILD_DIR/css/fontawesome/css"
+mkdir -p "$BUILD_DIR/css/fontawesome/webfonts"
+cp "$ROOT/node_modules/@fortawesome/fontawesome-free/css/all.css" "$BUILD_DIR/css/fontawesome/css/"
+cp "$ROOT/node_modules/@fortawesome/fontawesome-free/webfonts/"* "$BUILD_DIR/css/fontawesome/webfonts/"
+
 # Copy MathLive static assets bundled by @fiduswriter/document.
 mkdir -p "$BUILD_DIR/css/libs"
 cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/css/"* "$BUILD_DIR/css/libs/"

@@ -160,16 +160,8 @@ async function main() {
         )
     }
 
-    // Wire local save/download: intercept NoCollabSave calls and offer a
-    // downloadable .fidus file instead.
-    const originalSaveDocument = app.apiConnectors.document.saveDocument
-    app.apiConnectors.document.saveDocument = async (data, options) => {
-        const response = await originalSaveDocument(data, options)
-        if (!options?.keepalive) {
-            downloadDocument()
-        }
-        return response
-    }
+    // The editor runs in EDITOR_SAVE_MODE="external", so it never auto-saves.
+    // Downloads are triggered only by the File > Download menu or this helper.
 
     // Make download available for debugging/tests.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -17,6 +17,9 @@ importers:
       '@fiduswriter/image-manager':
         specifier: ^0.1.19
         version: 0.1.19(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      '@fortawesome/fontawesome-free':
+        specifier: ^7.2.0
+        version: 7.3.1
       cropperjs:
         specifier: ^1.6.2
         version: 1.6.2
@@ -553,6 +556,10 @@ packages:
 
   '@fiduswriter/image-manager@0.1.19':
     resolution: {integrity: sha512-C3y+E7nYfRQTfImVEJbs19UY+4IIYeRLIr43mr42I/RoF5hwtDKDQTXl4iDajjmh34aLf1OMV3dwfAKSdQqGcw==}
+
+  '@fortawesome/fontawesome-free@7.3.1':
+    resolution: {integrity: sha512-wmglKKPDIkgV3aWlZzWECCPoGIkYCulzBwxG9+w7rc5BGapZ6cPMpoPOT8k36J0Ni7PPX6c/rsoMWfS4d1MUMg==}
+    engines: {node: '>=6'}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -2866,6 +2873,8 @@ snapshots:
       - prosemirror-model
       - prosemirror-state
       - prosemirror-view
+
+  '@fortawesome/fontawesome-free@7.3.1': {}
 
   '@humanfs/core@0.19.2':
     dependencies:

@@ -92,6 +92,7 @@
     "@fiduswriter/bibliography-manager": "^0.1.25",
     "@fiduswriter/document": "^0.2.33",
     "@fiduswriter/image-manager": "^0.1.19",
+    "@fortawesome/fontawesome-free": "^7.2.0",
     "cropperjs": "^1.6.2",
     "diff": "^5.0.0",
     "diff-dom": "^5.2.1",

@@ -98,7 +98,7 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
         isOffline: () => false,
         settings: {
             APPS: [],
-            EDITOR_SAVE_MODE: "direct",
+            EDITOR_SAVE_MODE: "external",
             E2EE_MODE: "disabled",
             LANGUAGE: config.locale
         },
