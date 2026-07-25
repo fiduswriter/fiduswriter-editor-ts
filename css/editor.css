@@ -886,20 +886,22 @@ html[hc="a5"] #toolbar {
 
 #close-document-top {
     position: fixed;
-    right: 30px;
-    top: 28px;
+    right: 20px;
+    top: 20px;
     z-index: 100;
 }
 
 #close-document-top a,
 #close-document-top .fw-link-text {
-    width: 10px;
-    height: 10px;
+    display: block;
+    width: 30px;
+    height: 30px;
     opacity: 0.6;
     color: var(--cs-5-text);
     font-size: 14px;
     font-weight: 400;
-    line-height: 25px;
+    line-height: 30px;
+    text-align: center;
     letter-spacing: -0.35px;
 }
 

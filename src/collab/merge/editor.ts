@@ -122,7 +122,7 @@ export class MergeEditor {
 
     init(): void {
         /* Create the diff editors */
-        ensureCSS([staticUrl("css/merge.css")])
+        ensureCSS([staticUrl("css/editor/merge.css")])
         // Activate wait overlay
         activateWait()
 

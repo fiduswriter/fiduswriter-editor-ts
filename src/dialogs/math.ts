@@ -157,7 +157,7 @@ export class MathDialog {
             this.mathField = new (MathfieldElement as unknown as new (
                 options: Record<string, unknown>
             ) => {getValue: () => string})({
-                mathVirtualKeyboardPolicy: "manual"
+                mathVirtualKeyboardPolicy: "auto"
             })
             ;(this.mathField as {value: string}).value = this.equation
             ;(this.mathliveDOM as HTMLElement).appendChild(

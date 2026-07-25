@@ -267,25 +267,25 @@ export class Editor {
     init(): Promise<void> {
         ensureCSS([
             staticUrl("css/libs/mathlive/mathlive.css"),
-            staticUrl("css/editor.css"),
-            staticUrl("css/tags.css"),
-            staticUrl("css/contributors.css"),
-            staticUrl("css/document.css"),
-            staticUrl("css/carets.css"),
-            staticUrl("css/tracking.css"),
-            staticUrl("css/margin_boxes.css"),
+            staticUrl("css/editor/editor.css"),
+            staticUrl("css/editor/tags.css"),
+            staticUrl("css/editor/contributors.css"),
+            staticUrl("css/editor/document.css"),
+            staticUrl("css/editor/carets.css"),
+            staticUrl("css/editor/tracking.css"),
+            staticUrl("css/editor/margin_boxes.css"),
             staticUrl("css/prosemirror.css"),
-            staticUrl("css/footnotes.css"),
-            staticUrl("css/chat.css"),
-            staticUrl("css/access_rights_dialog.css"),
-            staticUrl("css/citation_dialog.css"),
-            staticUrl("css/review.css"),
+            staticUrl("css/editor/footnotes.css"),
+            staticUrl("css/editor/chat.css"),
+            staticUrl("css/editor/access_rights_dialog.css"),
+            staticUrl("css/editor/citation_dialog.css"),
+            staticUrl("css/editor/review.css"),
             staticUrl("css/add_remove_dialog.css"),
-            staticUrl("css/bibliography.css"),
-            staticUrl("css/dot_menu.css"),
+            staticUrl("css/bibliography/bibliography.css"),
+            staticUrl("css/editor/dot_menu.css"),
             staticUrl("css/cropper.min.css"),
             staticUrl("css/inline_tools.css"),
-            staticUrl("css/e2ee.css")
+            staticUrl("css/editor/e2ee.css")
         ])
         new ModDocumentTemplate(this)
         const initPromises: Promise<unknown>[] = [
