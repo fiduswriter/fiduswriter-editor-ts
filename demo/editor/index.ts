@@ -37,9 +37,10 @@ async function main() {
     const autostart = params.get("autostart") === "1"
 
     const startup = autostart
-        ? {locale: "en", result: {mode: "new" as const}}
+        ? {locale: "en", username: gettext("Demo User"), result: {mode: "new" as const}}
         : await showStartupDialog()
     const locale = startup.locale
+    const username = startup.username
     const result = startup.result
 
     const catalog = await loadLocaleCatalog(locale)
@@ -103,9 +104,9 @@ async function main() {
     const csl = createMockCSL()
     const user: EditorUser = {
         id: 1,
-        username: "demo",
+        username: username.toLowerCase().replace(/\s+/g, "_") || "demo",
         emails: [{address: "demo@example.com", primary: true}],
-        name: "Demo User",
+        name: username,
         is_authenticated: true
     }
 

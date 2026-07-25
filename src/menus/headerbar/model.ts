@@ -264,7 +264,9 @@ export const headerbarModel = () => ({
                             editor.app.isOffline() ||
                             !editor.user.is_authenticated
                         )
-                    }
+                    },
+                    available: (editor: Editor) =>
+                        editor.app.settings.EDITOR_SAVE_MODE !== "external"
                 },
                 {
                     title: (editor: Editor) =>
@@ -332,7 +334,9 @@ export const headerbarModel = () => ({
                     disabled: (editor: Editor) =>
                         editor.docInfo.access_rights !== "write" ||
                         editor.app.isOffline() ||
-                        !!editor.docInfo.token
+                        !!editor.docInfo.token,
+                    available: (editor: Editor) =>
+                        editor.app.settings.EDITOR_SAVE_MODE !== "external"
                 },
                 {
                     title: gettext("Create copy"),
@@ -361,7 +365,9 @@ export const headerbarModel = () => ({
                     disabled: (editor: Editor) =>
                         editor.app.isOffline() ||
                         (!!editor.docInfo.token &&
-                            !editor.user.is_authenticated)
+                            !editor.user.is_authenticated),
+                    available: (editor: Editor) =>
+                        editor.app.settings.EDITOR_SAVE_MODE !== "external"
                 },
                 {
                     title: gettext("Download"),

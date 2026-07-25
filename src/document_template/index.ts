@@ -157,6 +157,8 @@ export class ModDocumentTemplate {
                 "Create copy of the current document with a specific template."
             ),
             order: 3.5,
+            available: (editor: Editor) =>
+                editor.app.settings.EDITOR_SAVE_MODE !== "external",
             action: (editor: Editor) => {
                 const isE2EE = (editor.docInfo as any).e2ee
                 const e2eeMode = (editor.app.settings as any).E2EE_MODE

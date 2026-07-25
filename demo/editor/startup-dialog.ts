@@ -4,6 +4,12 @@ export type StartupResult =
     | {mode: "import"; file: File}
     | {mode: "new"; templateFile?: File}
 
+export interface StartupDialogResult {
+    locale: string
+    username: string
+    result: StartupResult
+}
+
 const LOCALES = [
     {code: "en", name: "English"},
     {code: "ar", name: "العربية"},
@@ -28,10 +34,7 @@ const LOCALES = [
     {code: "zh_Hans", name: "简体中文"}
 ]
 
-export function showStartupDialog(): Promise<{
-    locale: string
-    result: StartupResult
-}> {
+export function showStartupDialog(): Promise<StartupDialogResult> {
     return new Promise(resolve => {
         const overlay = document.createElement("div")
         overlay.className = "demo-startup-overlay"
@@ -39,6 +42,9 @@ export function showStartupDialog(): Promise<{
             <div class="demo-startup-dialog">
                 <h1>${gettext("Fidus Writer Editor")}</h1>
                 <p>${gettext("Open or create a document to start editing.")}</p>
+
+                <label for="demo-username">${gettext("Username (optional)")}</label>
+                <input type="text" id="demo-username" class="fw-input" placeholder="${gettext("Demo User")}" />
 
                 <label for="demo-locale">${gettext("Language")}</label>
                 <select id="demo-locale" class="fw-input"></select>
@@ -86,12 +92,21 @@ export function showStartupDialog(): Promise<{
             "#demo-template-input"
         ) as HTMLInputElement
         const newDocButton = overlay.querySelector("#demo-new-doc")!
+        const usernameInput = overlay.querySelector(
+            "#demo-username"
+        ) as HTMLInputElement
 
         const close = () => overlay.remove()
 
+        const getUsername = () => usernameInput.value.trim() || gettext("Demo User")
+
         const handleImportFile = (file: File) => {
             close()
-            resolve({locale: select.value, result: {mode: "import", file}})
+            resolve({
+                locale: select.value,
+                username: getUsername(),
+                result: {mode: "import", file}
+            })
         }
 
         const handleNewDocument = () => {
@@ -99,6 +114,7 @@ export function showStartupDialog(): Promise<{
             close()
             resolve({
                 locale: select.value,
+                username: getUsername(),
                 result: {mode: "new", templateFile}
             })
         }

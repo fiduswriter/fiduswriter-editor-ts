@@ -18,27 +18,14 @@
   "content": [
     {
       "type": "title",
-      "attrs": {"id": "title"},
-      "content": [{"type": "text", "text": "Untitled Document"}]
+      "attrs": {"id": "title"}
     },
     {
       "type": "richtext_part",
       "attrs": {
         "id": "body",
         "title": "Body"
-      },
-      "content": [
-        {
-          "type": "paragraph",
-          "attrs": {"track": []},
-          "content": [
-            {
-              "type": "text",
-              "text": "Start typing your document here."
-            }
-          ]
-        }
-      ]
+      }
     }
   ]
 }
