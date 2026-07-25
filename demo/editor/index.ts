@@ -63,7 +63,21 @@ async function main() {
                 return value !== undefined ? String(value) : ""
             })
         },
-        staticUrl: path => `../static/${path}`
+        staticUrl: path => {
+            // CSS files are deployed under css/; other static assets under static/.
+            // The editor source requests some CSS paths with virtual prefixes that
+            // the Django static-file collector provides; remap them for the demo.
+            if (path.startsWith("css/editor/")) {
+                return `../css/${path.slice("css/editor/".length)}`
+            }
+            if (path === "css/bibliography/bibliography.css") {
+                return "../css/bibliography.css"
+            }
+            if (path.startsWith("css/")) {
+                return `../${path}`
+            }
+            return `../static/${path}`
+        }
     })
 
     // Editor modules must be loaded after the globals above have been set,

@@ -21,14 +21,18 @@ echo "Bundling demos..."
 PAGES_BUILD_DIR="$BUILD_DIR" node "$ROOT/scripts/build-demo.js"
 
 # Copy fwtoolkit CSS and editor CSS so the demo has consistent styling
-# without a CDN.
+# without a CDN. The demo's staticUrl() maps "css/..." paths to this directory.
 mkdir -p "$BUILD_DIR/css"
-cp "$ROOT/node_modules/fwtoolkit/css/fwtoolkit.css" "$BUILD_DIR/css/"
+for css in "$ROOT/node_modules/fwtoolkit/css/"*.css; do
+    cp "$css" "$BUILD_DIR/css/"
+done
 cp "$ROOT/node_modules/prosemirror-view/style/prosemirror.css" "$BUILD_DIR/css/"
 cp "$ROOT/node_modules/cropperjs/dist/cropper.min.css" "$BUILD_DIR/css/"
 for css in "$ROOT/css/"*.css; do
     cp "$css" "$BUILD_DIR/css/"
 done
+# Bibliography styles are provided by @fiduswriter/bibliography-manager.
+cp "$ROOT/node_modules/@fiduswriter/bibliography-manager/css/bibliography.css" "$BUILD_DIR/css/"
 
 # Copy static assets (fonts, images, audio) referenced by the editor.
 mkdir -p "$BUILD_DIR/static"
@@ -42,7 +46,7 @@ cp "$ROOT/node_modules/@fortawesome/fontawesome-free/webfonts/"* "$BUILD_DIR/css
 
 # Copy MathLive static assets bundled by @fiduswriter/document.
 mkdir -p "$BUILD_DIR/css/libs"
-cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/css/"* "$BUILD_DIR/css/libs/"
+cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/css/libs/"* "$BUILD_DIR/css/libs/"
 
 # Copy localization catalogs used by the startup dialog and gettext fallback.
 mkdir -p "$BUILD_DIR/locale"
