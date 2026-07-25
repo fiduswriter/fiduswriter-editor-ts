@@ -112,7 +112,7 @@ async function main() {
 
     let docContent: Record<string, unknown>
     let docId = 1
-    let docPath = "untitled"
+    let docPath = ""
 
     if (result.mode === "import") {
         const {doc} = await importDocument(result.file, user, locale)
