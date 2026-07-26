@@ -1,4 +1,7 @@
-import type {CSL, EditorBibDB, EditorImageDB} from "@fiduswriter/editor"
+import type {CSL, EditorImageDB} from "@fiduswriter/editor"
+import {BibliographyDB} from "@fiduswriter/bibliography-manager/database"
+import type {BibliographyApi} from "@fiduswriter/bibliography-manager"
+import {ImageDB} from "@fiduswriter/image-manager/database"
 import type {ImageApi} from "@fiduswriter/image-manager"
 import type {EditorApp, EditorContactsApi, EditorDocumentApi, EditorDocumentImportApi} from "@fiduswriter/editor"
 
@@ -14,14 +17,6 @@ export interface DemoAppConfig {
 }
 
 export function createDemoApp(config: DemoAppConfig): EditorApp {
-    const bibDB: EditorBibDB = {db: {}}
-    const imageDB: EditorImageDB = {
-        db: {},
-        saveImage: async () => 1,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        setImage: (_id, _data) => {}
-    }
-
     const documentApi: EditorDocumentApi = {
         createDocument: async () => ({json: {id: 1}, status: 200}),
         getWebSocketBase: async () => ({json: {ws_base: ""}, status: 200}),
@@ -85,11 +80,35 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
         deleteImages: async () => Promise.resolve()
     }
 
+    const bibliographyApi: BibliographyApi = {
+        getDB: async () => ({
+            bib_categories: [],
+            bib_list: [],
+            last_modified: -1,
+            number_of_entries: 0,
+            user_id: 1
+        }),
+        saveBibEntries: async tmpDB => ({
+            id_translations: Object.keys(tmpDB).map(tmpId => [
+                Number.parseInt(tmpId),
+                Number.parseInt(tmpId)
+            ])
+        }),
+        saveCategories: async () => ({entries: []}),
+        deleteCategory: async () =>
+            new Response(JSON.stringify({}), {status: 200}),
+        deleteBibEntries: async () =>
+            new Response(JSON.stringify({}), {status: 200})
+    }
+
     const contactsApi: EditorContactsApi = {
         add: async () => ({json: {}, status: 200})
     }
 
-    return {
+    // Build a partial app object first; the real bibliography/image DB classes
+    // need the app reference (including the API connectors) in their
+    // constructors.
+    const app = {
         name: "fiduswriter-editor-demo",
         routes: {
             "": {app: "document"},
@@ -98,20 +117,31 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
         goTo: () => {},
         isOffline: () => false,
         settings: {
-            APPS: [],
+            APPS: ["demo"],
             EDITOR_SAVE_MODE: "external",
             EDITOR_ONLY_MODE: true,
             E2EE_MODE: "disabled",
             LANGUAGE: config.locale
         },
         csl: config.csl,
-        bibDB,
-        imageDB,
         apiConnectors: {
             document: documentApi,
             documentImport: documentImportApi,
             image: imageApi,
+            bibliography: bibliographyApi,
             contacts: contactsApi
         }
-    }
+    } as unknown as EditorApp
+
+    const bibDB = new BibliographyDB(app as any)
+    const imageDB = new ImageDB(app as any) as unknown as EditorImageDB
+    // The editor's type expects `setImage` on the user image DB, but the
+    // image-manager class only stores images that have been uploaded. Add the
+    // noop expected by the editor interface.
+    imageDB.setImage = (_id, _data) => {}
+
+    ;(app as any).bibDB = bibDB
+    ;(app as any).imageDB = imageDB
+
+    return app
 }

@@ -2,15 +2,44 @@ import type {EditorUser} from "@fiduswriter/editor"
 import {gettext, initSettings, interpolate, staticUrl} from "fwtoolkit"
 
 import {showStartupDialog} from "./startup-dialog.js"
+import apaStyle from "./styles/apa.json" assert {type: "json"}
+import chicagoAuthorDateStyle from "./styles/chicago-author-date.json" assert {type: "json"}
+import ieeeStyle from "./styles/ieee.json" assert {type: "json"}
+import enUSLocale from "./locales/en-us.json" assert {type: "json"}
+
+function expandCslNode(node: any): any {
+    if (typeof node !== "object" || node === null) {
+        return node
+    }
+    if ("name" in node) {
+        return {
+            ...node,
+            children: node.children?.map(expandCslNode)
+        }
+    }
+    const result = {
+        name: node.n,
+        attrs: node.a ?? {},
+        children: [] as any[]
+    }
+    if (node.c) {
+        result.children = node.c.map((child: any) =>
+            typeof child === "string" ? child : expandCslNode(child)
+        )
+    } else if (node.n === "term") {
+        result.children = [""]
+    }
+    return result
+}
 
 // The editor source expects these Fidus Writer runtime helpers as globals.
 // They must be present before any editor module is evaluated, because some
 // editor modules call them at the top level.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 ;(window as any).gettext = gettext
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 ;(window as any).interpolate = interpolate
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 ;(window as any).staticUrl = staticUrl
 
 async function loadLocaleCatalog(locale: string): Promise<Record<string, string>> {
@@ -100,16 +129,30 @@ async function main() {
             import("./document-helpers.js")
         ])
 
+    const [{createCSL}, {ConfirmedDocEditorPlugin}] = await Promise.all([
+        import("@fiduswriter/document/citations/create_csl"),
+        import("./plugins/confirmed_doc")
+    ])
+
     const {
         applyTemplate,
-        createMockCSL,
         createDefaultDocument,
         createEmptyBibDB,
         createEmptyImageDB,
         importDocument
     } = documentHelpers
 
-    const csl = createMockCSL()
+    const csl = await createCSL({
+        apa: apaStyle,
+        "chicago-author-date": chicagoAuthorDateStyle,
+        ieee: ieeeStyle
+    })
+    // Keep citeproc-plus from trying to load its bundled locale data at
+    // runtime; the demo ships the en-US locale directly.
+    ;(csl as any).getLocale = async () => {
+        // The demo only ships en-US; fall back to it for any locale.
+        return expandCslNode(enUSLocale)
+    }
     const user: EditorUser = {
         id: 1,
         username: username.toLowerCase().replace(/\s+/g, "_") || "demo",
@@ -170,7 +213,19 @@ async function main() {
         documentData
     })
 
-    const editor = new Editor({app, user}, docPath, String(docId))
+    // Prime the user bibliography and image databases so dialogs that read
+    // from them see empty but valid stores.
+    await Promise.all([
+        (app.bibDB as any).getDB(),
+        (app.imageDB as any).getDB()
+    ])
+
+    const editor = new Editor(
+        {app, user},
+        docPath,
+        String(docId),
+        [["demo", {ConfirmedDocEditorPlugin}]]
+    )
 
     function downloadDocument(): void {
         const doc = editor.getDoc({use_current_view: true})
@@ -187,9 +242,9 @@ async function main() {
     // Downloads are triggered only by the File > Download menu or this helper.
 
     // Make download available for debugging/tests.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     ;(window as any).downloadDocument = downloadDocument
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     ;(window as any).startDemoEditor = main
 
     await editor.init()

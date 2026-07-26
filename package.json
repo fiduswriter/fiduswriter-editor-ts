@@ -86,7 +86,8 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js",
     "deploy-pages": "./scripts/deploy-pages.sh",
     "install-hooks": "husky",
-    "demo": "echo 'Open demo/editor/index.html or run: npx http-server .pages-build -p 8080 -c-1'"
+    "demo": "echo 'Open demo/editor/index.html or run: npx http-server .pages-build -p 8080 -c-1'",
+    "testserver": "node scripts/serve-demo.js"
   },
   "dependencies": {
     "@fiduswriter/bibliography-manager": "^0.1.25",
@@ -133,6 +134,7 @@
     "@types/node": "^26.0.1",
     "esbuild": "^0.25.12",
     "eslint": "^10.6.0",
+    "events": "^3.3.0",
     "gettext-parser": "^9.1.1",
     "globals": "^15.15.0",
     "happy-dom": "^20.10.6",
