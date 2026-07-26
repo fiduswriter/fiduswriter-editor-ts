@@ -13,6 +13,57 @@ interface DialogButtonSpec {
     icon?: string
 }
 
+function namePartToString(part: unknown): string {
+    if (typeof part === "string") {
+        return part
+    }
+    if (part && typeof part === "object" && "text" in part) {
+        return String((part as {text?: string}).text || "")
+    }
+    return ""
+}
+
+function authorName(author: Record<string, unknown>): string {
+    const family = Array.isArray(author.family)
+        ? author.family.map(namePartToString).join("")
+        : namePartToString(author.family)
+    const given = Array.isArray(author.given)
+        ? author.given.map(namePartToString).join("")
+        : namePartToString(author.given)
+    if (family || given) {
+        return `${family}, ${given}`.replace(/^,\s*|,\s*$/g, "")
+    }
+
+    const lastName = Array.isArray(author.lastName)
+        ? author.lastName.map(namePartToString).join("")
+        : namePartToString(author.lastName)
+    const firstname = Array.isArray(author.firstname)
+        ? author.firstname.map(namePartToString).join("")
+        : namePartToString(author.firstname)
+    const literal = Array.isArray(author.literal)
+        ? author.literal.map(namePartToString).join("")
+        : namePartToString(author.literal)
+    return lastName || firstname || literal || ""
+}
+
+function itemDateYear(item: Record<string, unknown>): string {
+    const fields = (item.fields as Record<string, unknown>) || {}
+    const date = fields.date || fields.issued
+    if (typeof date === "string") {
+        return date.substring(0, 4)
+    }
+    if (date && typeof date === "object") {
+        const parts = (date as Record<string, unknown>)["date-parts"]
+        if (Array.isArray(parts) && parts.length > 0) {
+            const firstPart = parts[0]
+            if (Array.isArray(firstPart) && firstPart.length > 0) {
+                return String(firstPart[0])
+            }
+        }
+    }
+    return ""
+}
+
 export class ModCitations {
     editor: Editor
     citationType: string
@@ -125,28 +176,17 @@ export class ModCitations {
                         }
 
                         // Extract basic author info
-                        let authorText = ""
+                        let authorText = "Unknown Author"
                         if (item.fields.author && item.fields.author.length) {
-                            const author = item.fields.author[0]
-                            authorText =
-                                (
-                                    author.lastName ||
-                                    author.firstname ||
-                                    author.literal
-                                )
-                                    ?.map((part: {text?: string}) => part.text || "")
-                                    .join("") || "Unknown Author"
+                            const name = authorName(item.fields.author[0])
+                            authorText = name || "Unknown Author"
                             if (item.fields.author.length > 1) {
                                 authorText += " et al."
                             }
-                        } else {
-                            authorText = "Unknown Author"
                         }
 
                         // Extract year
-                        const year = item.fields.date
-                            ? item.fields.date.substring(0, 4)
-                            : "n.d."
+                        const year = itemDateYear(item) || "n.d."
 
                         // Add locator if present
                         const locator = ref.locator ? `, ${ref.locator}` : ""
@@ -201,28 +241,16 @@ export class ModCitations {
                             return
                         }
 
-                        let authors = ""
-                        if (item.fields.author && item.fields.author.length) {
-                            authors = item.fields.author
-                                .map((author: any) => {
-                                    return (
-                                        (
-                                            author.lastName ||
-                                            author.firstname ||
-                                            author.literal
-                                        )
-                                            ?.map((part: {text?: string}) => part.text || "")
-                                            .join("") || "Unknown"
-                                    )
-                                })
-                                .join(", ")
-                        } else {
-                            authors = "Unknown Author"
-                        }
+                        const authors = item.fields.author?.length
+                            ? item.fields.author
+                                  .map((author: Record<string, unknown>) =>
+                                      authorName(author) || "Unknown"
+                                  )
+                                  .join(", ")
+                            : "Unknown Author"
 
-                        const year = item.fields.date
-                            ? `(${item.fields.date.substring(0, 4)})`
-                            : "(n.d.)"
+                        const itemYear = itemDateYear(item)
+                        const year = itemYear ? `(${itemYear})` : "(n.d.)"
                         const title = item.fields.title
                             ?.map((part: {text?: string}) => part.text || "")
                             .join("") || "Untitled"

@@ -66,6 +66,13 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
                 </div>
 
                 <div class="demo-section">
+                    <h2>${gettext("Try a sample document")}</h2>
+                    <button id="demo-load-sample" class="fw-button fw-light" type="button">
+                        ${gettext("Load sample document")}
+                    </button>
+                </div>
+
+                <div class="demo-section">
                     <h2>${gettext("Apply document template")}</h2>
                     <p>${gettext("Optional: select a .fidustemplate file to use with a new document.")}</p>
                     <input type="file" id="demo-template-input" accept=".fidustemplate" />
@@ -92,11 +99,29 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
             "#demo-template-input"
         ) as HTMLInputElement
         const newDocButton = overlay.querySelector("#demo-new-doc")!
+        const sampleButton = overlay.querySelector("#demo-load-sample")!
         const usernameInput = overlay.querySelector(
             "#demo-username"
         ) as HTMLInputElement
 
         const close = () => overlay.remove()
+
+        const loadSampleDocument = async () => {
+            try {
+                const response = await fetch("../static/demo.fidus")
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`)
+                }
+                const blob = await response.blob()
+                const file = new File([blob], "demo.fidus", {
+                    type: "application/fidus+zip"
+                })
+                handleImportFile(file)
+            } catch (error) {
+                console.error("Failed to load sample document:", error)
+                window.alert(gettext("Could not load the sample document."))
+            }
+        }
 
         const getUsername = () => usernameInput.value.trim() || gettext("Demo User")
 
@@ -143,6 +168,7 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
         })
 
         newDocButton.addEventListener("click", handleNewDocument)
+        sampleButton.addEventListener("click", loadSampleDocument)
 
         document.body.appendChild(overlay)
     })

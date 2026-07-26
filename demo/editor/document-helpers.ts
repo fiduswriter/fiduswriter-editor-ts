@@ -15,6 +15,40 @@ import templateData from "./document-template-data.json" assert {type: "json"}
 
 let nextDocId = 1
 
+export interface ImportedDocument {
+    doc: Record<string, unknown>
+    docInfo: Record<string, unknown>
+    bibliography?: Record<string, Record<string, unknown>>
+    images?: Record<string, Record<string, unknown>>
+}
+
+async function readFidusZipTextFiles(
+    file: File
+): Promise<Record<string, string>> {
+    const zip = await JSZip.loadAsync(file)
+    const textFiles: Record<string, string> = {}
+    const filenames: string[] = []
+    zip.forEach(filename => filenames.push(filename))
+
+    await Promise.all(
+        filenames
+            .filter(filename => !filename.endsWith("/"))
+            .map(async filename => {
+                const isText =
+                    ["mimetype", "filetype-version"].includes(filename) ||
+                    filename.endsWith(".json")
+                const content = await zip
+                    .file(filename)
+                    ?.async(isText ? "string" : "blob")
+                if (content !== undefined) {
+                    textFiles[filename] = content as string
+                }
+            })
+    )
+
+    return textFiles
+}
+
 export function createImportBackend(
     user: User,
     path: string,
@@ -57,7 +91,17 @@ export async function importFidusFile(
     file: File,
     user: User,
     locale: string
-): Promise<{doc: Record<string, unknown>; docInfo: Record<string, unknown>}> {
+): Promise<ImportedDocument> {
+    const textFiles = await readFidusZipTextFiles(file)
+    const bibliography = JSON.parse(textFiles["bibliography.json"] || "{}") as Record<
+        string,
+        Record<string, unknown>
+    >
+    const images = JSON.parse(textFiles["images.json"] || "{}") as Record<
+        string,
+        Record<string, unknown>
+    >
+
     const path = file.name.replace(/\.fidus$/i, "")
     const backend = createImportBackend(user, path, locale)
     const importer = new FidusFileImporter(file, user, path, backend, {
@@ -67,7 +111,12 @@ export async function importFidusFile(
     if (!result.ok || !result.doc) {
         throw new Error(result.statusText || "Failed to import Fidus file.")
     }
-    return {doc: result.doc as Record<string, unknown>, docInfo: result.docInfo as Record<string, unknown>}
+    return {
+        doc: result.doc as Record<string, unknown>,
+        docInfo: result.docInfo as Record<string, unknown>,
+        bibliography,
+        images
+    }
 }
 
 export async function importDocxFile(
@@ -150,7 +199,7 @@ export async function importDocument(
     file: File,
     user: User,
     locale: string
-): Promise<{doc: Record<string, unknown>; docInfo: Record<string, unknown>}> {
+): Promise<ImportedDocument> {
     const ext = file.name.split(".").pop()?.toLowerCase()
     switch (ext) {
         case "fidus":

@@ -2,35 +2,6 @@ import type {EditorUser} from "@fiduswriter/editor"
 import {gettext, initSettings, interpolate, staticUrl} from "fwtoolkit"
 
 import {showStartupDialog} from "./startup-dialog.js"
-import apaStyle from "./styles/apa.json" assert {type: "json"}
-import chicagoAuthorDateStyle from "./styles/chicago-author-date.json" assert {type: "json"}
-import ieeeStyle from "./styles/ieee.json" assert {type: "json"}
-import enUSLocale from "./locales/en-us.json" assert {type: "json"}
-
-function expandCslNode(node: any): any {
-    if (typeof node !== "object" || node === null) {
-        return node
-    }
-    if ("name" in node) {
-        return {
-            ...node,
-            children: node.children?.map(expandCslNode)
-        }
-    }
-    const result = {
-        name: node.n,
-        attrs: node.a ?? {},
-        children: [] as any[]
-    }
-    if (node.c) {
-        result.children = node.c.map((child: any) =>
-            typeof child === "string" ? child : expandCslNode(child)
-        )
-    } else if (node.n === "term") {
-        result.children = [""]
-    }
-    return result
-}
 
 // The editor source expects these Fidus Writer runtime helpers as globals.
 // They must be present before any editor module is evaluated, because some
@@ -139,17 +110,15 @@ async function main() {
         importDocument
     } = documentHelpers
 
-    const csl = await createCSL({
-        apa: apaStyle,
-        "chicago-author-date": chicagoAuthorDateStyle,
-        ieee: ieeeStyle
-    })
-    // Keep citeproc-plus from trying to load its bundled locale data at
-    // runtime; the demo ships the en-US locale directly.
-    ;(csl as any).getLocale = async () => {
-        // The demo only ships en-US; fall back to it for any locale.
-        return expandCslNode(enUSLocale)
-    }
+    // Use citeproc-plus's bundled style and locale data so any citation style
+    // referenced by an imported document can be resolved at runtime.
+    const csl = await createCSL()
+    // createCSL replaces getStyle/getLocale with versions that only look at
+    // pre-registered styles. Restore the prototype methods so the bundled
+    // style/locale chunks are loaded dynamically.
+    const cslProto = Object.getPrototypeOf(csl)
+    ;(csl as any).getStyle = cslProto.getStyle
+    ;(csl as any).getLocale = cslProto.getLocale
     const user: EditorUser = {
         id: 1,
         username: username.toLowerCase().replace(/\s+/g, "_") || "demo",
@@ -161,12 +130,20 @@ async function main() {
     let docContent: Record<string, unknown>
     let docId = 1
     let docPath = ""
+    let importedBibDB: Record<string, Record<string, unknown>> | undefined
+    let importedImageDB: Record<string, Record<string, unknown>> | undefined
 
     if (result.mode === "import") {
-        const {doc} = await importDocument(result.file, user, locale)
+        const {doc, bibliography, images} = await importDocument(
+            result.file,
+            user,
+            locale
+        )
         docContent = doc.content as Record<string, unknown>
         docId = (doc.id as number) || 1
         docPath = (doc.path as string) || docPath
+        importedBibDB = bibliography
+        importedImageDB = images
     } else {
         if (result.templateFile) {
             const template = await applyTemplate(result.templateFile)
@@ -181,8 +158,8 @@ async function main() {
             v: 0,
             content: docContent,
             comments: {},
-            bibliography: createEmptyBibDB().db,
-            images: createEmptyImageDB().db
+            bibliography: importedBibDB ?? createEmptyBibDB().db,
+            images: importedImageDB ?? createEmptyImageDB().db
         },
         doc_info: {
             id: docId,
