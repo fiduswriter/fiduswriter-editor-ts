@@ -4,7 +4,7 @@
 
 <h1 align="center">@fiduswriter/editor</h1>
 
-<p align="center">Browser-based ProseMirror editor for Fidus Writer</p>
+<p align="center">The ProseMirror-based editor component of Fidus Writer</p>
 
 ---
 
