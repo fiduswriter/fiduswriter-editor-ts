@@ -65,19 +65,27 @@ async function main() {
             })
         },
         staticUrl: path => {
+            // Compute the demo's base path so that assets resolve to absolute
+            // URLs. This is required for stylesheets loaded by Vivliostyle
+            // during printing, because the print document is a blob and
+            // relative URLs inside it resolve against the blob origin.
+            const basePath = window.location.pathname.replace(
+                /\/(?:editor\/(?:index\.html)?|index\.html)$/,
+                "/"
+            )
             // CSS files are deployed under css/; other static assets under static/.
             // The editor source requests some CSS paths with virtual prefixes that
             // the Django static-file collector provides; remap them for the demo.
             if (path.startsWith("css/editor/")) {
-                return `../css/${path.slice("css/editor/".length)}`
+                return `${basePath}css/${path.slice("css/editor/".length)}`
             }
             if (path === "css/bibliography/bibliography.css") {
-                return "../css/bibliography.css"
+                return `${basePath}css/bibliography.css`
             }
             if (path.startsWith("css/")) {
-                return `../${path}`
+                return `${basePath}${path}`
             }
-            return `../static/${path}`
+            return `${basePath}static/${path}`
         }
     })
 

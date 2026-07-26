@@ -282,6 +282,8 @@ export const headerbarModel = () => ({
                               )
                             : gettext("Sign up for an account or log in."),
                     order: 1,
+                    available: (editor: Editor) =>
+                        editor.app.settings.EDITOR_ONLY_MODE !== true,
                     action: (editor: Editor) => {
                         if (editor.user.is_authenticated) {
                             const folderPath = editor.docInfo.path.slice(

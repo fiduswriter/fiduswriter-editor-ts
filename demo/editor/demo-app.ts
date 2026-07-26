@@ -100,6 +100,7 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
         settings: {
             APPS: [],
             EDITOR_SAVE_MODE: "external",
+            EDITOR_ONLY_MODE: true,
             E2EE_MODE: "disabled",
             LANGUAGE: config.locale
         },

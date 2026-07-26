@@ -623,31 +623,36 @@ export class HeaderbarView {
             // header is closed
             return "<div></div>"
         }
-        let exitUrl: string
-        if (this.editor.docInfo.token) {
-            // Guest user — send to sign-up if open, otherwise to login
-            exitUrl =
-                this.editor.app.settings?.REGISTRATION_OPEN ||
-                this.editor.app.settings?.SOCIALACCOUNT_OPEN
-                    ? "/account/sign-up/"
-                    : "/"
-        } else {
-            const folderPath = this.editor.docInfo.path.slice(
-                0,
-                this.editor.docInfo.path.lastIndexOf("/")
-            )
-            exitUrl =
-                !folderPath.length &&
-                this.editor.app.routes[""].app === "document"
-                    ? "/"
-                    : `/documents${encodeURI(folderPath)}/`
-        }
-        return `<div>
-            <div id="close-document-top" title="${this.editor.docInfo.token ? gettext("Sign up or log in") : gettext("Close the document and return to the document overview menu.")}">
+        const editorOnlyMode = this.editor.app.settings.EDITOR_ONLY_MODE === true
+        let closeTop = ""
+        if (!editorOnlyMode) {
+            let exitUrl: string
+            if (this.editor.docInfo.token) {
+                // Guest user — send to sign-up if open, otherwise to login
+                exitUrl =
+                    this.editor.app.settings?.REGISTRATION_OPEN ||
+                    this.editor.app.settings?.SOCIALACCOUNT_OPEN
+                        ? "/account/sign-up/"
+                        : "/"
+            } else {
+                const folderPath = this.editor.docInfo.path.slice(
+                    0,
+                    this.editor.docInfo.path.lastIndexOf("/")
+                )
+                exitUrl =
+                    !folderPath.length &&
+                    this.editor.app.routes[""].app === "document"
+                        ? "/"
+                        : `/documents${encodeURI(folderPath)}/`
+            }
+            closeTop = `<div id="close-document-top" title="${this.editor.docInfo.token ? gettext("Sign up or log in") : gettext("Close the document and return to the document overview menu.")}">
                 <a href="${exitUrl}" aria-label="${this.editor.docInfo.token ? gettext("Sign up or log in") : gettext("Close document")}" title="${this.editor.docInfo.token ? gettext("Sign up or log in") : gettext("Close the document and return to the document overview menu.")}">
                     <i class="fa-solid fa-times"></i>
                 </a>
-            </div>
+            </div>`
+        }
+        return `<div>
+            ${closeTop}
             <div id="document-top">
                 <h1 id="document-title"${this.editor.app.isOffline() || !this.editor.pathEditable ? "" : ' contenteditable="true"'}>${escapeText(this.getPathText())}</h1>
                 <nav id="header-navigation">
