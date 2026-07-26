@@ -35,11 +35,8 @@ function expandCslNode(node: any): any {
 // The editor source expects these Fidus Writer runtime helpers as globals.
 // They must be present before any editor module is evaluated, because some
 // editor modules call them at the top level.
- 
 ;(window as any).gettext = gettext
- 
 ;(window as any).interpolate = interpolate
- 
 ;(window as any).staticUrl = staticUrl
 
 async function loadLocaleCatalog(locale: string): Promise<Record<string, string>> {
@@ -242,9 +239,7 @@ async function main() {
     // Downloads are triggered only by the File > Download menu or this helper.
 
     // Make download available for debugging/tests.
-     
     ;(window as any).downloadDocument = downloadDocument
-     
     ;(window as any).startDemoEditor = main
 
     await editor.init()

@@ -37,6 +37,7 @@ cp "$ROOT/node_modules/@fiduswriter/bibliography-manager/css/bibliography.css" "
 # Copy static assets (fonts, images, audio) referenced by the editor.
 mkdir -p "$BUILD_DIR/static"
 cp -r "$ROOT/static/"* "$BUILD_DIR/static/"
+cp -r "$ROOT/demo/static/"* "$BUILD_DIR/static/"
 
 # Copy Font Awesome CSS and webfonts used by fwtoolkit and the editor.
 mkdir -p "$BUILD_DIR/css/fontawesome/css"

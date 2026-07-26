@@ -11,6 +11,7 @@ import {PandocImporter} from "@fiduswriter/document/importer/pandoc"
 import JSZip from "jszip"
 
 import defaultTemplate from "./default-template.json" assert {type: "json"}
+import templateData from "./document-template-data.json" assert {type: "json"}
 
 let nextDocId = 1
 
@@ -41,7 +42,15 @@ export function createImportBackend(
 }
 
 export function createDefaultDocument(): Record<string, unknown> {
-    return JSON.parse(JSON.stringify(defaultTemplate))
+    const content = JSON.parse(
+        JSON.stringify(templateData.documentTemplate.content)
+    ) as Record<string, unknown>
+    content.attrs = Object.assign(
+        {},
+        (defaultTemplate as Record<string, unknown>).attrs,
+        content.attrs
+    )
+    return content
 }
 
 export async function importFidusFile(

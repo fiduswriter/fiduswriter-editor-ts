@@ -94,6 +94,7 @@ async function buildDemo() {
 
     console.log("Copying static assets...")
     await fs.cp(join(ROOT, "static"), join(BUILD_DIR, "static"), {recursive: true})
+    await fs.cp(join(ROOT, "demo", "static"), join(BUILD_DIR, "static"), {recursive: true})
 
     console.log("Copying Font Awesome...")
     const faCssDir = join(BUILD_DIR, "css", "fontawesome", "css")

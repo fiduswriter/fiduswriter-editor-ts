@@ -4,6 +4,108 @@ import type {BibliographyApi} from "@fiduswriter/bibliography-manager"
 import {ImageDB} from "@fiduswriter/image-manager/database"
 import type {ImageApi} from "@fiduswriter/image-manager"
 import type {EditorApp, EditorContactsApi, EditorDocumentApi, EditorDocumentImportApi} from "@fiduswriter/editor"
+import type {Image, SaveImageResponse} from "@fiduswriter/image-manager/types"
+
+import templateData from "./document-template-data.json" assert {type: "json"}
+
+function getDemoBasePath(): string {
+    return window.location.pathname.replace(
+        /\/(?:editor\/(?:index\.html)?|index\.html)$/,
+        "/"
+    )
+}
+
+function getAssetUrl(path: string): string {
+    return `${getDemoBasePath()}static/${path}`
+}
+
+const documentStyles = templateData.documentStyles.map(style => ({
+    title: style.title,
+    slug: style.slug,
+    contents: style.contents,
+    documentstylefile_set: style.files.map(filename => [
+        getAssetUrl(`style-files/${filename}`),
+        filename
+    ])
+}))
+
+const exportTemplates = templateData.exportTemplates.map(template => ({
+    title: template.title,
+    file_type: template.file_type,
+    template_file: getAssetUrl(`export-templates/${template.file}`)
+}))
+
+const documentTemplates: Record<string, {title: string}> = {
+    [templateData.documentTemplate.importId]: {
+        title: templateData.documentTemplate.title
+    }
+}
+
+// In-memory store for images uploaded during this demo session. This lets the
+// static demo render images and export them without a server.
+const demoImages: Record<number, Image> = {}
+let nextImageId = 1
+
+function fileToDataUrl(file: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(String(reader.result))
+        reader.onerror = reject
+        reader.readAsDataURL(file)
+    })
+}
+
+function getImageDimensions(dataUrl: string): Promise<{width: number; height: number}> {
+    return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => resolve({width: img.width, height: img.height})
+        img.onerror = reject
+        img.src = dataUrl
+    })
+}
+
+async function storeDemoImage(
+    data: Record<string, unknown>,
+    files: Record<string, unknown>
+): Promise<Image> {
+    const id = data.id ? Number(data.id) : nextImageId++
+    const existing = demoImages[id]
+    const file =
+        (files?.image as {file?: Blob})?.file ??
+        (files?.image as Blob) ??
+        (data.image as Blob)
+
+    let imageUrl = existing?.image ?? ""
+    let fileType = existing?.file_type ?? "png"
+    let width = existing?.width ?? 0
+    let height = existing?.height ?? 0
+
+    if (file) {
+        imageUrl = await fileToDataUrl(file)
+        fileType = (data.original_file_type as string) ||
+            (file as File).type ||
+            "image/png"
+        const dimensions = await getImageDimensions(imageUrl)
+        width = dimensions.width
+        height = dimensions.height
+    }
+
+    const image: Image = {
+        id,
+        title: (data.title as string) || existing?.title || "",
+        file_type: fileType,
+        image: imageUrl,
+        width,
+        height,
+        added: existing?.added || Date.now(),
+        cats: (data.cats as number[]) || existing?.cats || [],
+        copyright:
+            (data.copyright as Image["copyright"]) ||
+            existing?.copyright || {freeToRead: true, licenses: []}
+    }
+    demoImages[id] = image
+    return image
+}
 
 export interface DemoAppConfig {
     locale: string
@@ -22,9 +124,9 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
         getWebSocketBase: async () => ({json: {ws_base: ""}, status: 200}),
         getDocumentStyles: async () => ({
             json: {
-                export_templates: [],
-                document_styles: [],
-                document_templates: {}
+                export_templates: exportTemplates,
+                document_styles: documentStyles,
+                document_templates: documentTemplates
             },
             status: 200
         }),
@@ -52,7 +154,13 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
 
     const documentImportApi: EditorDocumentImportApi = {
         createDoc: async () => ({json: {id: 1}, status: 200}),
-        saveImage: async () => ({json: {}, status: 200}),
+        saveImage: async (data, files) => {
+            const image = await storeDemoImage(
+                data as Record<string, unknown>,
+                (files as Record<string, unknown>) || {}
+            )
+            return {json: {id: image.id}, status: 200}
+        },
         saveE2EEImage: async () => ({json: {}, status: 200}),
         saveDocument: async data => {
             console.log("Import save document:", data)
@@ -61,23 +169,25 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
     }
 
     const imageApi: ImageApi = {
-        getImages: async () => ({imageCategories: [], images: []}),
-        saveImage: async () => ({
-            errormsg: {},
-            values: {
-                id: 1,
-                title: "",
-                file_type: "png",
-                image: "",
-                width: 0,
-                height: 0,
-                added: Date.now(),
-                cats: [],
-                copyright: {freeToRead: true, licenses: []}
-            }
+        getImages: async () => ({
+            imageCategories: [],
+            images: Object.values(demoImages)
         }),
+        saveImage: async (data, files = {}) => {
+            const image = await storeDemoImage(
+                data as Record<string, unknown>,
+                files as Record<string, unknown>
+            )
+            return {
+                errormsg: {},
+                values: image
+            } as SaveImageResponse
+        },
         saveCategories: async () => ({entries: []}),
-        deleteImages: async () => Promise.resolve()
+        deleteImages: async (ids) => {
+            ids.forEach(id => delete demoImages[id])
+            return Promise.resolve()
+        }
     }
 
     const bibliographyApi: BibliographyApi = {
