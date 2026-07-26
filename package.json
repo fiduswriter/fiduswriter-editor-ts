@@ -90,9 +90,9 @@
     "testserver": "node scripts/serve-demo.js"
   },
   "dependencies": {
-    "@fiduswriter/bibliography-manager": "^0.1.25",
-    "@fiduswriter/document": "^0.2.33",
-    "@fiduswriter/image-manager": "^0.1.19",
+    "@fiduswriter/bibliography-manager": "^0.1.28",
+    "@fiduswriter/document": "^0.2.35",
+    "@fiduswriter/image-manager": "^0.1.22",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "cropperjs": "^1.6.2",
     "diff": "^5.0.0",
@@ -102,7 +102,7 @@
     "fast-xml-parser": "^4.5.0",
     "fastdom": "^1.0.11",
     "fix-utf8": "^2.0.1",
-    "fwtoolkit": "^0.2.4",
+    "fwtoolkit": "^0.2.5",
     "jszip": "^3.10.1",
     "mathml-to-latex": "^1.4.3",
     "mathml2omml": "^0.5.0",
