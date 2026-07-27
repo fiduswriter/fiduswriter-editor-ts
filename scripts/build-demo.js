@@ -47,7 +47,12 @@ await build({
     sourcemap: false,
     minify: true,
     target: ["es2020"],
-    publicPath: "/",
+    // Keep all split chunks and file-loader assets next to the editor page so
+    // relative URLs resolve correctly both locally and on Codeberg Pages.
+    // Include the content hash in the names so esbuild does not collide when
+    // multiple chunks share the same basename.
+    chunkNames: "editor/[name]-[hash]",
+    assetNames: "editor/[name]-[hash]",
     loader: {
         ".png": "file",
         ".svg": "file",

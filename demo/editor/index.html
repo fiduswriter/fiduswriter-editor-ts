@@ -98,6 +98,18 @@
         <link rel="icon" type="image/svg+xml" href="../logo.svg" />
     </head>
     <body>
+        <script>
+            // Codeberg Pages can serve this directory index without a trailing
+            // slash, which makes relative module/asset URLs resolve to the wrong
+            // parent directory. Force a trailing slash so ../ paths point at the
+            // site root (local) or repository root (Codeberg Pages).
+            const path = location.pathname
+            if (path.endsWith("/editor") && !path.endsWith("/editor/")) {
+                location.replace(
+                    path + "/" + location.search + location.hash
+                )
+            }
+        </script>
         <script type="module" src="./index.js"></script>
     </body>
 </html>
