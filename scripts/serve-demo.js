@@ -28,7 +28,8 @@ const MIME_TYPES = {
     ".otf": "font/otf",
     ".eot": "application/vnd.ms-fontobject",
     ".ogg": "audio/ogg",
-    ".webmanifest": "application/manifest+json"
+    ".webmanifest": "application/manifest+json",
+    ".gz": "application/gzip"
 }
 
 function run(command, args, env = {}) {

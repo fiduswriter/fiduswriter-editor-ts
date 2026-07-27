@@ -33,23 +33,6 @@ if (entries.length === 0) {
 
 console.log("Bundling demos:", entries.map(e => e.out).join(", "))
 
-/**
- * citeproc-plus ships style/locale data as `.gz` assets that its dynamic
- * loaders fetch at runtime.  The demo pre-registers the APA style and a
- * single locale, so those bundles are never used; this plugin lets esbuild
- * finish the bundle by substituting an empty placeholder for the gzipped
- * assets.
- */
-const gzipPlaceholderPlugin = {
-    name: "gzip-placeholder",
-    setup(build) {
-        build.onLoad({filter: /\.gz$/}, () => ({
-            contents: "export default {}",
-            loader: "js"
-        }))
-    }
-}
-
 // tokenfield (pulled in by the bibliography form) imports Node's `events`
 // built-in.  Alias it to the browser-compatible `events` npm package so the
 // demo bundle works in the browser.
@@ -64,16 +47,17 @@ await build({
     sourcemap: false,
     minify: true,
     target: ["es2020"],
+    publicPath: "/",
     loader: {
         ".png": "file",
         ".svg": "file",
         ".woff2": "file",
-        ".csljson": "json"
+        ".csljson": "json",
+        ".gz": "file"
     },
     define: {
         "process.env.NODE_ENV": '"production"'
     },
-    plugins: [gzipPlaceholderPlugin],
     alias: {
         events: eventsPath
     },
