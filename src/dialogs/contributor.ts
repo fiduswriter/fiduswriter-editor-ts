@@ -24,7 +24,6 @@ export class ContributorDialog {
         this.node = node
         this.view = view
         this.contributor = contributor
-        console.log("ContirbutorDialog", {node, view, contributor, idTypes})
         this.idTypes = idTypes
         this.dialog = false
     }
@@ -32,12 +31,12 @@ export class ContributorDialog {
     init(): void {
         const buttons = []
         // Add Update/Add button
-        const dialogEl = (this.dialog as InstanceType<typeof Dialog>).dialogEl
-
         buttons.push({
             text: this.contributor ? gettext("Update") : gettext("Add"),
             classes: "fw-dark",
             click: () => {
+                const dialogEl = (this.dialog as InstanceType<typeof Dialog>)
+                    .dialogEl
                 // Get form values
                 let firstname: string | false = (
                         dialogEl.querySelector("input[name=firstname]") as
