@@ -3,26 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@fiduswriter/editor v0.1.21</title>
+<title>@fiduswriter/editor</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f6fa; color: #2c3e50; line-height: 1.6; }
-.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+.container { max-width: 860px; margin: 0 auto; padding: 40px 20px; }
 header { text-align: center; margin-bottom: 40px; }
 header img { width: 100px; height: 100px; margin-bottom: 16px; }
 h1 { font-size: 28px; margin-bottom: 8px; }
-h2 { font-size: 20px; margin: 32px 0 16px; color: #1a1a2e; }
+h2 { font-size: 22px; margin: 40px 0 16px; color: #1a1a2e; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+h3 { font-size: 17px; margin: 24px 0 12px; color: #1a1a2e; }
+p { margin-bottom: 12px; }
+ul { margin: 0 0 16px 24px; }
+li { margin-bottom: 6px; }
 .tagline { color: #666; font-size: 16px; margin-bottom: 24px; }
-.table-wrap { overflow-x: auto; }
+.table-wrap { overflow-x: auto; margin-bottom: 24px; }
 table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #eee; }
 th { background: #fafbfc; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: #667; }
-td:first-child { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; color: #1a1a2e; }
+td:first-child { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 14px; color: #1a1a2e; white-space: nowrap; }
 td:last-child { font-size: 14px; color: #444; }
 code { background: #f0f0f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
-.links { margin-top: 32px; padding: 16px; background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 14px; }
+pre { background: #1a1a2e; color: #eee; padding: 16px; border-radius: 6px; overflow-x: auto; margin-bottom: 16px; font-size: 13px; line-height: 1.5; }
+pre code { background: transparent; padding: 0; }
+.links { margin: 24px 0; padding: 16px; background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 14px; }
 .links a { color: #3366cc; text-decoration: none; }
 .links a:hover { text-decoration: underline; }
+.note { background: #eef4ff; border-left: 4px solid #3366cc; padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; font-size: 14px; }
 footer { margin-top: 40px; text-align: center; font-size: 13px; color: #999; }
 </style>
 </head>
@@ -31,33 +38,187 @@ footer { margin-top: 40px; text-align: center; font-size: 13px; color: #999; }
 <header>
 <img src="https://codeberg.org/fiduswriter/fiduswriter-editor-js/raw/branch/main/logo.svg" alt="@fiduswriter/editor">
 <h1>@fiduswriter/editor</h1>
-<p class="tagline">Fidus Writer browser editor</p>
+<p class="tagline">The ProseMirror-based editor component of Fidus Writer</p>
 </header>
 
-<p style="margin-bottom: 16px;">This package is part of the <a href="https://fiduswriter.org">Fidus Writer</a> ecosystem. The API reference below lists every public export with its purpose.</p>
+<p>This package is part of the <a href="https://fiduswriter.org">Fidus Writer</a> ecosystem. It provides the main browser-based collaborative editor: real-time collaboration, comments, tracked changes, footnotes, citations, end-to-end encryption, menus, dialogs, and clipboard import/export.</p>
 
-<p style="margin-bottom: 8px;">Install via npm:</p>
-<code style="display: block; padding: 12px; background: #1a1a2e; color: #eee; border-radius: 6px; margin-bottom: 32px; font-size: 14px;">npm install @fiduswriter/editor</code>
+<h2>Key features</h2>
+<ul>
+<li><strong>Real-time collaboration</strong> — WebSocket-based collaborative editing with participant carets, diffs, and versioning.</li>
+<li><strong>Track changes</strong> — Accept/reject individual changes with full change history.</li>
+<li><strong>Comments</strong> — Threaded commenting with annotation marks and resolution.</li>
+<li><strong>Footnotes</strong> — Inline footnote editing with proper layout.</li>
+<li><strong>Citations</strong> — Citeproc-js based citation rendering with bibliography generation.</li>
+<li><strong>E2EE</strong> — End-to-end encryption with key management and passphrase support.</li>
+<li><strong>Clipboard</strong> — Paste from Word, LibreOffice, Google Docs with format preservation.</li>
+<li><strong>Tables, figures &amp; equations, code blocks</strong> — Full editing support.</li>
+</ul>
 
 <h2>Demo</h2>
-<p>Try the standalone browser demo that runs without a backend:</p>
+<p>Try the standalone browser demo that runs without a backend server:</p>
 <div class="links">
 <a href="./editor/index.html"><strong>Open editor demo →</strong></a>
 </div>
 
-<h2>API Reference</h2>
+<h2>Installation</h2>
+<pre><code>npm install @fiduswriter/editor</code></pre>
+
+<h2>Exports</h2>
 <div class="table-wrap">
-<table><thead><tr><th>Export</th><th>Purpose</th></tr></thead><tbody>
-<tr><td>`Editor`</td><td>Main editor class — orchestrates ProseMirror, collaboration, and all subsystems</td></tr>
-</tbody></table></div>
+<table><thead><tr><th>Export</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>Editor</code></td><td>Main editor class — orchestrates ProseMirror, collaboration, and all subsystems.</td></tr>
+<tr><td><code>createStaticEditor</code></td><td>High-level helper that creates and initializes an editor without a backend server.</td></tr>
+<tr><td><code>createStaticApp</code></td><td>Lower-level helper that builds an in-memory <code>EditorApp</code> for static deployments.</td></tr>
+<tr><td><code>./state_plugins</code></td><td>ProseMirror state plugins.</td></tr>
+<tr><td><code>./state_plugins/*</code></td><td>Individual plugins (inline math, references, links, etc.).</td></tr>
+<tr><td><code>./menus</code></td><td>Editor menus and toolbar.</td></tr>
+<tr><td><code>./dialogs</code></td><td>Editor dialogs (figure, citation, link, table, etc.).</td></tr>
+<tr><td><code>./keymap</code></td><td>Keyboard shortcut bindings.</td></tr>
+<tr><td><code>./exporter/native/file</code></td><td>Download the current document as a <code>.fidus</code> file.</td></tr>
+</tbody></table>
+</div>
+
+<h2>Usage</h2>
+<p>The library can be used in two modes: <strong>static</strong> (no backend server, like the standalone demo) or <strong>server-backed</strong> (the classic Fidus Writer Django setup).</p>
+
+<h3>Static usage</h3>
+<p>For a statically served editor, use <code>createStaticEditor</code>. It sets up the runtime globals, loads locale strings, creates the in-memory app shell, and initializes the editor.</p>
+
+<pre><code>import {createStaticEditor} from "@fiduswriter/editor/static_editor"
+import {ExportFidusFile} from "@fiduswriter/editor/exporter/native/file"
+
+const editor = await createStaticEditor({
+    locale: "en",
+    username: "Demo User",
+    documentData: async () => ({
+        doc: {
+            v: 0,
+            content: { /* ProseMirror document JSON */ },
+            comments: {},
+            bibliography: {},
+            images: {}
+        },
+        doc_info: {
+            id: 1,
+            rights: "write",
+            is_owner: true,
+            path: "",
+            updated: new Date(),
+            dir: "ltr",
+            access_rights: "write",
+            e2ee: false,
+            owner: {id: 1, name: "Demo User", type: "user", contacts: []}
+        },
+        time: Date.now()
+    }),
+    documentStyles: [
+        {
+            title: "Standard article",
+            slug: "standard-article",
+            contents: "",
+            documentstylefile_set: []
+        }
+    ],
+    exportTemplates: [
+        {
+            title: "Fidus Writer",
+            file_type: "fidus",
+            template_file: "/static/export-templates/template.fidus"
+        }
+    ],
+    documentTemplates: {
+        "1": {title: "Standard article"}
+    }
+})
+
+// Download the document as a .fidus file.
+const doc = editor.getDoc({use_current_view: true})
+new ExportFidusFile(
+    editor.app,
+    doc,
+    editor.mod.db.bibDB,
+    editor.mod.db.imageDB,
+    false
+)</code></pre>
+
+<p><code>createStaticEditor</code> accepts a <code>StaticEditorConfig</code>. The most important options are:</p>
+<ul>
+<li><code>locale</code> — locale code, e.g. <code>"en"</code>.</li>
+<li><code>username</code> / <code>user</code> — either a display name or a complete <code>EditorUser</code> object.</li>
+<li><code>documentData</code> — async function returning <code>{doc, doc_info, time}</code>.</li>
+<li><code>documentStyles</code>, <code>exportTemplates</code>, <code>documentTemplates</code> — template/style fixtures used by the document template and export dialogs.</li>
+<li><code>initialImages</code> — optional map of image entries to prime the image database.</li>
+<li><code>getDocContent</code> — optional callback returning the current document content; used to derive the correct document template for downloads.</li>
+<li><code>onSaveDocument</code> — optional callback invoked when the editor tries to save.</li>
+<li><code>staticBasePath</code> — base URL for resolving CSS and static assets.</li>
+<li><code>plugins</code> — extra editor plugins, e.g. <code>[["demo", {MyPlugin}]]</code>.</li>
+</ul>
+
+<div class="note">
+<strong>Note:</strong> Import <code>createStaticEditor</code> from <code>@fiduswriter/editor/static_editor</code> rather than the main package entry. This keeps the <code>Editor</code> class out of the initial bundle and prevents editor modules from being evaluated before the runtime globals are set.
+</div>
+
+<div class="note">
+If you bundle a static page with esbuild, configure a loader for <code>.gz</code> assets — <code>citeproc-plus</code> loads compressed style and locale files:
+<pre style="margin: 8px 0 0 0; padding: 8px; background: #1a1a2e;"><code>loader: { ".gz": "file" }</code></pre>
+</div>
+
+<p>For more control, build the app shell manually with <code>createStaticApp</code> and then instantiate the <code>Editor</code> class yourself:</p>
+
+<pre><code>import {Editor, createStaticApp} from "@fiduswriter/editor"
+
+const app = await createStaticApp({
+    locale: "en",
+    gettext: msgid => msgid,
+    csl,
+    documentData: async () => ({doc, doc_info, time: Date.now()})
+})
+
+const editor = new Editor({app, user}, "", "1", [])
+await editor.init()</code></pre>
+
+<h3>Server-backed usage</h3>
+<p>When a backend server is available, construct <code>Editor</code> directly with an <code>EditorApp</code> object that provides API connectors, settings, and the CSL engine. This is how the main Fidus Writer Django application uses the library.</p>
+
+<pre><code>import {Editor} from "@fiduswriter/editor"
+
+const editor = new Editor(
+    {app, user},
+    "/documents/123",
+    "123",
+    [["my-plugin", {MyPlugin}]]
+)
+await editor.init()</code></pre>
+
+<p>The <code>app</code> object must satisfy the <code>EditorApp</code> interface:</p>
+<ul>
+<li><code>name</code> — application name.</li>
+<li><code>routes</code> — route table used by the editor router.</li>
+<li><code>goTo(url)</code> — navigate to a different route.</li>
+<li><code>isOffline()</code> — return whether the browser is offline.</li>
+<li><code>settings</code> — editor settings such as <code>EDITOR_SAVE_MODE</code>, <code>LANGUAGE</code>, <code>E2EE_MODE</code>, and <code>APPS</code>.</li>
+<li><code>csl</code> — a CSL engine instance.</li>
+<li><code>apiConnectors</code> — connectors for <code>document</code>, <code>documentImport</code>, <code>image</code>, <code>bibliography</code>, and <code>contacts</code> APIs.</li>
+<li><code>bibDB</code> and <code>imageDB</code> — database instances for bibliography and images.</li>
+</ul>
+
+<h2>Development</h2>
+<pre><code>npm install          # Install dependencies
+npm run build        # Compile TypeScript to dist/
+npm run typecheck    # Check types without emitting
+npm run lint         # Lint with ESLint
+npm run format:check # Check formatting with Prettier
+npm test             # Run the test suite</code></pre>
 
 <div class="links">
 <strong>Resources:</strong>
 <a href="https://codeberg.org/fiduswriter/fiduswriter-editor-js">Source Repository</a> ·
-<a href="https://www.npmjs.com/package/@fiduswriter/editor">npm Package</a>
+<a href="https://www.npmjs.com/package/@fiduswriter/editor">npm Package</a> ·
+<a href="https://fiduswriter.org">Fidus Writer</a>
 </div>
 
-<footer>@fiduswriter/editor v0.1.21 · AGPL-3.0 · <a href="https://fiduswriter.org">Fidus Writer</a></footer>
+<footer>@fiduswriter/editor · AGPL-3.0 · <a href="https://fiduswriter.org">Fidus Writer</a></footer>
 </div>
 </body>
 </html>
