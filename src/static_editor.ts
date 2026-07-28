@@ -73,6 +73,24 @@ function defaultStaticUrl(basePath: string): (path: string) => string {
     }
 }
 
+function ensureResetCSS(basePath: string): void {
+    const href = `${basePath}css/reset.css`
+    if (
+        document.querySelector(
+            `link[rel="stylesheet"][href="${href}"]`
+        ) ||
+        document.querySelector(
+            'link[rel="stylesheet"][href$="css/reset.css"]'
+        )
+    ) {
+        return
+    }
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = href
+    document.head.insertBefore(link, document.head.firstChild)
+}
+
 /**
  * Create and initialize a statically served Fidus Writer editor.
  *
@@ -104,6 +122,8 @@ export async function createStaticEditor(
             /\/(?:editor\/(?:index\.html)?|index\.html)$/,
             "/"
         )
+
+    ensureResetCSS(basePath)
 
     initSettings({
         apiUrl: url => url,
