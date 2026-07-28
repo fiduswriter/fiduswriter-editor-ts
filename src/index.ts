@@ -1322,3 +1322,12 @@ export type {
     EditorDocumentImportApi,
     EditorContactsApi
 } from "./types.js"
+export {createStaticEditor} from "./static_editor.js"
+export type {StaticEditorConfig} from "./static_editor.js"
+export {createStaticApp} from "./static_app.js"
+export type {
+    StaticAppConfig,
+    StaticDocumentStyle,
+    StaticExportTemplate,
+    StaticDocumentTemplate
+} from "./static_app.js"

@@ -99,6 +99,48 @@
     </head>
     <body>
         <script>
+            // Several editor dependencies call these globals while their modules
+            // are being evaluated, before the application code has a chance to
+            // set them. Provide simple stubs here so that early evaluation
+            // succeeds; createStaticEditor will replace them with the real
+            // fwtoolkit-backed implementations once it runs.
+            window.gettext = window.gettext || (msgid => msgid)
+            window.interpolate =
+                window.interpolate ||
+                ((fmt, args) => {
+                    if (Array.isArray(args)) {
+                        let i = 0
+                        return String(fmt).replace(/%s/g, () =>
+                            args[i++] !== undefined ? String(args[i - 1]) : ""
+                        )
+                    }
+                    return String(fmt).replace(
+                        /%\(([^)]+)\)s?/g,
+                        (_match, key) =>
+                            args && args[key] !== undefined
+                                ? String(args[key])
+                                : ""
+                    )
+                })
+            window.staticUrl =
+                window.staticUrl ||
+                (path => {
+                    const basePath = location.pathname.replace(
+                        /\/(?:editor\/(?:index\.html)?|index\.html)$/,
+                        "/"
+                    )
+                    if (path.startsWith("css/editor/")) {
+                        return `${basePath}css/${path.slice("css/editor/".length)}`
+                    }
+                    if (path === "css/bibliography/bibliography.css") {
+                        return `${basePath}css/bibliography.css`
+                    }
+                    if (path.startsWith("css/")) {
+                        return `${basePath}${path}`
+                    }
+                    return `${basePath}static/${path}`
+                })
+
             // Codeberg Pages can serve this directory index without a trailing
             // slash, which makes relative module/asset URLs resolve to the wrong
             // parent directory. Force a trailing slash so ../ paths point at the

@@ -17,6 +17,7 @@ encryption.
 Code in this repository should be limited to:
 
 - Editor bootstrap and lifecycle (`src/index.js`).
+- Static editor bootstrap (`src/static_editor.ts`, `src/static_app.ts`).
 - ProseMirror state plugins (`src/state_plugins/`).
 - Editor menus and toolbar (`src/menus/`).
 - Editor dialogs (`src/dialogs/`).
@@ -72,6 +73,8 @@ The following UI patterns are currently here but may be generic enough for
 │   ├── no_collab_save/   # Non-collaborative save
 │   ├── plugins/editor/   # Plugin placeholder
 │   ├── state_plugins/    # ProseMirror state plugins
+│   ├── static_app.ts     # In-memory app shell for static deployments
+│   ├── static_editor.ts  # High-level static editor initializer
 │   ├── tools/            # Editor tools
 │   └── track/            # Track changes
 ├── dist/                 # Compiled JS, .d.ts and source maps (generated)
@@ -91,6 +94,8 @@ npm run typecheck
 ## Consumers
 
 - `fiduswriter/` (the main Fidus Writer Django app).
+- Statically served pages and browser demos that use `createStaticEditor` or
+  `createStaticApp` without a backend server.
 
 ## Notes
 
