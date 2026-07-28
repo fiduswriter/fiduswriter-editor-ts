@@ -35,4 +35,12 @@ globalThis.location = {href: "http://localhost/", protocol: "http:", hostname: "
 globalThis.requestAnimationFrame = (cb) => setTimeout(cb, 0)
 globalThis.cancelAnimationFrame = (id) => clearTimeout(id)
 globalThis.gettext = (msgid) => msgid
+globalThis.staticUrl = (path) => path
+globalThis.interpolate = (fmt, args) => {
+    let index = 0
+    return fmt.replace(/%s/g, () => {
+        const value = args[index++]
+        return value !== undefined ? String(value) : ""
+    })
+}
 

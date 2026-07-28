@@ -100,8 +100,7 @@ export class ModCommentStore {
                 id: "-1",
                 user: (this.mod.editor.user as any).id,
                 username,
-                date: Date.now() - this.mod.editor.clientTimeAdjustment,
-                isGlobal: true
+                date: Date.now() - this.mod.editor.clientTimeAdjustment
             }),
             inDOM: false,
             view
