@@ -46,8 +46,8 @@ class ClipboardDOMSerializer {
             this.editor.app.csl,
             true // synchronous. Should work as the editor has used the same style previously.
         )
-        const fm = citRenderer.fm as any
         if (citRenderer.init()) {
+            const fm = citRenderer.fm as any
             if (fm.bibHTML.length) {
                 const bibDiv = document.createElement("div")
                 bibDiv.classList.add("fiduswriter-clipboard-bibliography")

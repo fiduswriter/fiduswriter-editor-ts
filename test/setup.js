@@ -27,8 +27,12 @@ globalThis.FileReader = window.FileReader
 globalThis.MutationObserver = window.MutationObserver
 globalThis.ResizeObserver = window.ResizeObserver
 globalThis.IntersectionObserver = window.IntersectionObserver
-globalThis.navigator = {userAgent: "node", language: "en-US", platform: "Linux"}
+Object.defineProperty(globalThis, "navigator", {
+    value: {userAgent: "node", language: "en-US", platform: "Linux"},
+    configurable: true
+})
 globalThis.location = {href: "http://localhost/", protocol: "http:", hostname: "localhost"}
 globalThis.requestAnimationFrame = (cb) => setTimeout(cb, 0)
 globalThis.cancelAnimationFrame = (id) => clearTimeout(id)
+globalThis.gettext = (msgid) => msgid
 
