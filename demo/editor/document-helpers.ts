@@ -63,8 +63,8 @@ export function createImportBackend(
         }),
         saveImages: async (images: ImageDB) => {
             const table: Record<number | string, number> = {}
-            Object.keys(images.db).forEach((id, index) => {
-                table[id] = index + 1
+            Object.keys(images.db).forEach(id => {
+                table[id] = Number(id)
             })
             return table
         },
@@ -85,6 +85,41 @@ export function createDefaultDocument(): Record<string, unknown> {
         content.attrs
     )
     return content
+}
+
+async function createImageObjectUrls(
+    images: Record<string, Record<string, unknown>>,
+    file: File
+): Promise<Record<string, Record<string, unknown>>> {
+    const zip = await JSZip.loadAsync(file)
+    const updatedImages: Record<string, Record<string, unknown>> = {}
+    await Promise.all(
+        Object.entries(images).map(async ([id, entry]) => {
+            const imagePath = entry.image as string | undefined
+            if (!imagePath) {
+                updatedImages[id] = entry
+                return
+            }
+            const zipEntry = zip.file(imagePath)
+            if (!zipEntry) {
+                console.warn(`Image file not found in zip: ${imagePath}`)
+                updatedImages[id] = entry
+                return
+            }
+            const blob = await zipEntry.async("blob")
+            const typedBlob = new Blob([blob], {
+                type: (entry.file_type as string) || blob.type || "image/jpeg"
+            })
+            const objectUrl = URL.createObjectURL(typedBlob)
+            updatedImages[id] = {
+                ...entry,
+                image: objectUrl,
+                added: entry.added ?? Date.now(),
+                cats: entry.cats ?? []
+            }
+        })
+    )
+    return updatedImages
 }
 
 export async function importFidusFile(
@@ -111,11 +146,12 @@ export async function importFidusFile(
     if (!result.ok || !result.doc) {
         throw new Error(result.statusText || "Failed to import Fidus file.")
     }
+    const imagesWithUrls = await createImageObjectUrls(images, file)
     return {
         doc: result.doc as Record<string, unknown>,
         docInfo: result.docInfo as Record<string, unknown>,
         bibliography,
-        images
+        images: imagesWithUrls
     }
 }
 

@@ -180,11 +180,21 @@ async function main() {
         time: Date.now()
     })
 
+    const initialImages = importedImageDB
+        ? (Object.fromEntries(
+              Object.entries(importedImageDB).map(([id, entry]) => [
+                  Number(id),
+                  entry as any
+              ])
+          ) as Record<number, any>)
+        : undefined
+
     const app = createDemoApp({
         locale,
         gettext,
         csl,
-        documentData
+        documentData,
+        initialImages
     })
 
     // Prime the user bibliography and image databases so dialogs that read

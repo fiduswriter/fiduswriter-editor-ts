@@ -116,9 +116,15 @@ export interface DemoAppConfig {
         doc_info: Record<string, unknown>
         time: number
     }>
+    initialImages?: Record<number, Image>
 }
 
 export function createDemoApp(config: DemoAppConfig): EditorApp {
+    if (config.initialImages) {
+        Object.entries(config.initialImages).forEach(([id, image]) => {
+            demoImages[Number(id)] = image
+        })
+    }
     const documentApi: EditorDocumentApi = {
         createDocument: async () => ({json: {id: 1}, status: 200}),
         getWebSocketBase: async () => ({json: {ws_base: ""}, status: 200}),
