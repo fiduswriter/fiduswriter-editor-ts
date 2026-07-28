@@ -83,7 +83,7 @@
     "lint:fix": "eslint src --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js && node test/copy-serializer.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js && node test/copy-serializer.js && node test/comment-store.js && node test/import-comments.js && node test/contributor-dialog.js",
     "deploy-pages": "./scripts/deploy-pages.sh",
     "install-hooks": "husky",
     "demo": "echo 'Open demo/editor/index.html or run: npx http-server .pages-build -p 8080 -c-1'",
