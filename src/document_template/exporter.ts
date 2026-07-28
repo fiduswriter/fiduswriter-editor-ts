@@ -77,7 +77,7 @@ export class DocumentTemplateExporter {
                 file_type: string
                 title: string
             }> = []
-            data.export_templates.forEach(
+            ;(data.export_templates || []).forEach(
                 (template: {
                     fields: {template_file: string; file_type: string; title: string}
                 }) => {
@@ -103,7 +103,7 @@ export class DocumentTemplateExporter {
                 title: string
                 files: string[]
             }> = []
-            data.document_styles.forEach(
+            ;(data.document_styles || []).forEach(
                 (docStyle: {
                     fields: {
                         contents: string

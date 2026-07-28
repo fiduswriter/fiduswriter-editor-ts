@@ -194,6 +194,7 @@ async function main() {
         gettext,
         csl,
         documentData,
+        getDocContent: () => docContent,
         initialImages
     })
 

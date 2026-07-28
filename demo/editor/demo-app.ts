@@ -5,6 +5,8 @@ import {ImageDB} from "@fiduswriter/image-manager/database"
 import type {ImageApi} from "@fiduswriter/image-manager"
 import type {EditorApp, EditorContactsApi, EditorDocumentApi, EditorDocumentImportApi} from "@fiduswriter/editor"
 import type {Image, SaveImageResponse} from "@fiduswriter/image-manager/types"
+import {FW_DOCUMENT_VERSION} from "@fiduswriter/document/schema"
+import {extractTemplate} from "@fiduswriter/document/importer/native/extract_template"
 
 import templateData from "./document-template-data.json" assert {type: "json"}
 
@@ -116,6 +118,8 @@ export interface DemoAppConfig {
         doc_info: Record<string, unknown>
         time: number
     }>
+    /** Return the current document content (the doc node) for template extraction. */
+    getDocContent?: () => Record<string, unknown> | undefined
     initialImages?: Record<number, Image>
 }
 
@@ -155,7 +159,41 @@ export function createDemoApp(config: DemoAppConfig): EditorApp {
         saveE2EEImage: async () => ({json: {}, status: 200}),
         deleteE2EEImage: async () => Promise.resolve(),
         uploadRevision: async () => Promise.resolve(),
-        getTemplateForDoc: async () => ({json: {}, status: 200})
+        getTemplateForDoc: async () => {
+            const docContent = config.getDocContent?.()
+            const template = docContent
+                ? extractTemplate(docContent)
+                : null
+            const title =
+                (docContent?.attrs?.template as string) ||
+                templateData.documentTemplate.title
+            return {
+                json: {
+                    id: 1,
+                    title,
+                    content:
+                        template?.content ??
+                        templateData.documentTemplate.content,
+                    doc_version: FW_DOCUMENT_VERSION,
+                    export_templates: exportTemplates.map(template => ({
+                        fields: {
+                            template_file: template.template_file,
+                            file_type: template.file_type,
+                            title: template.title
+                        }
+                    })),
+                    document_styles: documentStyles.map(style => ({
+                        fields: {
+                            contents: style.contents,
+                            slug: style.slug,
+                            title: style.title,
+                            documentstylefile_set: style.documentstylefile_set
+                        }
+                    }))
+                },
+                status: 200
+            }
+        }
     }
 
     const documentImportApi: EditorDocumentImportApi = {
