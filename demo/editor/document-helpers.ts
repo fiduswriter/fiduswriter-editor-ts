@@ -20,6 +20,7 @@ export interface ImportedDocument {
     docInfo: Record<string, unknown>
     bibliography?: Record<string, Record<string, unknown>>
     images?: Record<string, Record<string, unknown>>
+    comments?: Record<string | number, Record<string, unknown>>
 }
 
 async function readFidusZipTextFiles(
@@ -151,7 +152,11 @@ export async function importFidusFile(
         doc: result.doc as Record<string, unknown>,
         docInfo: result.docInfo as Record<string, unknown>,
         bibliography,
-        images: imagesWithUrls
+        images: imagesWithUrls,
+        comments: (result.doc?.comments as Record<
+            string | number,
+            Record<string, unknown>
+        >) || {}
     }
 }
 

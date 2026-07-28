@@ -132,9 +132,10 @@ async function main() {
     let docPath = ""
     let importedBibDB: Record<string, Record<string, unknown>> | undefined
     let importedImageDB: Record<string, Record<string, unknown>> | undefined
+    let importedComments: Record<string | number, Record<string, unknown>> | undefined
 
     if (result.mode === "import") {
-        const {doc, bibliography, images} = await importDocument(
+        const {doc, bibliography, images, comments} = await importDocument(
             result.file,
             user,
             locale
@@ -144,6 +145,7 @@ async function main() {
         docPath = (doc.path as string) || docPath
         importedBibDB = bibliography
         importedImageDB = images
+        importedComments = comments
     } else {
         if (result.templateFile) {
             const template = await applyTemplate(result.templateFile)
@@ -157,7 +159,7 @@ async function main() {
         doc: {
             v: 0,
             content: docContent,
-            comments: {},
+            comments: importedComments ?? {},
             bibliography: importedBibDB ?? createEmptyBibDB().db,
             images: importedImageDB ?? createEmptyImageDB().db
         },
