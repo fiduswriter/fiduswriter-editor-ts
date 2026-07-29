@@ -21,6 +21,7 @@
     --editor-track-background-color: 45 82 144 / 0.63;
     --editor-track-active-background-color: #788fb4;
     --editor-track-text-color: #ffffff;
+    --editor-track-fallback-color: rgb(0, 119, 190);
 
     /* -----------------------------------------------------------------
      * Review

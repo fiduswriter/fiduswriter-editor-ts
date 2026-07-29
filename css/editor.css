@@ -1257,8 +1257,9 @@ body.no-scroll {
         margin-top: 0 !important;
     }
 
-    .footnote-container {
-        margin-top: 0 !important;
+    .footnote-container,
+    .footnote-citation {
+        margin-top: 10px !important;
     }
 
     .margin-box.comment.fw-active .comment-answer-container {
