@@ -1196,13 +1196,25 @@ body.no-scroll {
     }
 
     /* Show footnotes at bottom rather than next to main editor. */
-    #footnote-box-container {
-        display: block !important;
-        width: auto !important;
+    #paper-editable {
+        display: block;
     }
 
     #document-editable {
         display: block;
+        width: 100%;
+    }
+
+    #footnote-box-container {
+        display: block !important;
+        position: relative;
+        width: 100% !important;
+    }
+
+    #citation-footnote-box-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
     }
 
     .margin-box.inactive {

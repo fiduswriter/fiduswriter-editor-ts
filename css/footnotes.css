@@ -79,3 +79,17 @@ because PM needs some content. */
 #footnote-box-container .ProseMirror {
     display: grid;
 }
+
+/* Mobile/tablet layout: stack footnotes under the main text with full width. */
+@media screen and (width <= 1023px) {
+    #footnote-box-container {
+        display: block;
+        width: 100%;
+    }
+
+    #citation-footnote-box-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+    }
+}
