@@ -1165,6 +1165,7 @@ body.no-scroll {
 
     #flow {
         padding: 16px 25px 8px 8px;
+        width: calc(100% - 30px);
     }
 
     #document-top > h1 {
