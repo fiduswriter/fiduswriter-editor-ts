@@ -44,7 +44,7 @@ async function main(): Promise<void> {
     if (result.mode === "import") {
         const user = {
             id: userId,
-            username: username.toLowerCase().replace(/\s+/g, "_") || "demo",
+            username,
             emails: [{address: "demo@example.com", primary: true}],
             name: username,
             is_authenticated: true

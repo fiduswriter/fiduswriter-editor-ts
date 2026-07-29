@@ -191,7 +191,7 @@ export async function createStaticEditor(
         config.user ??
         ({
             id: config.userId ?? 1,
-            username: username.toLowerCase().replace(/\s+/g, "_") || "user",
+            username,
             emails: [{address: "user@example.com", primary: true}],
             name: username,
             is_authenticated: true
