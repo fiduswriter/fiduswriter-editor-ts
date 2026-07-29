@@ -109,13 +109,16 @@ interface MarginBoxOptionComment {
 }
 
 /** A template for an answer to a comment */
+const COMMENT_SHOW_MORE_THRESHOLD = 120
+
 const answerCommentTemplate = ({
     answer,
     author,
     commentId,
     activeCommentAnswerId,
     active,
-    user
+    user,
+    isGlobal
 }: {
     answer: CommentAnswer
     author: ContactPerson | undefined
@@ -123,6 +126,7 @@ const answerCommentTemplate = ({
     activeCommentAnswerId: number | string | undefined
     active: boolean
     user: EditorUser
+    isGlobal: boolean
 }) =>
     `<div class="comment-item comment-answer collapse ${active ? "show" : ""}" id="comment-answer-${answer.id}">
         <div class="comment-user">
@@ -142,7 +146,9 @@ const answerCommentTemplate = ({
            </div>
         <div class="comment-collapsible-buttons">
                 ${
-                    serializeComment(answer.answer).text.length > 68
+                    !isGlobal &&
+                    serializeComment(answer.answer).text.length >
+                        COMMENT_SHOW_MORE_THRESHOLD
                         ? `<a type="button" class="comment-expand-compress show-more-less">${gettext("show more")}</a>`
                         : ""
                 }
@@ -185,7 +191,9 @@ const singleCommentTemplate = ({
         <div class="comment-collapsible-buttons">
                 ${
                     !editComment &&
-                    serializeComment(comment.comment).text.length > 68
+                    !comment.isGlobal &&
+                    serializeComment(comment.comment).text.length >
+                        COMMENT_SHOW_MORE_THRESHOLD
                         ? `<a type="button" class="comment-expand-compress show-more-less">${gettext("show more")}</a>`
                         : ""
                 }
@@ -330,7 +338,8 @@ ${
                           commentId: comment.id,
                           active,
                           activeCommentAnswerId,
-                          user
+                          user,
+                          isGlobal: !!comment.isGlobal
                       })
                   )
                   .join("")

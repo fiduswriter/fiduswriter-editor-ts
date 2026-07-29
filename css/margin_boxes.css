@@ -250,6 +250,11 @@ body.header-closed #margin-box-filter {
     overflow-wrap: break-word;
 }
 
+.global-comment .comment-p,
+.global-comment .comment-answer .comment-p {
+    max-height: none;
+}
+
 .margin-box .ProseMirror-wrapper {
     width: auto;
     max-width: 97%;
