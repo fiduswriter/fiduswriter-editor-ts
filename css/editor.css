@@ -1221,6 +1221,11 @@ body.no-scroll {
         display: none;
     }
 
+    /* Document comments always stay visible at the end of the article on mobile. */
+    #global-comments .margin-box.comment {
+        display: block;
+    }
+
     #margin-box-filter {
         position: fixed !important;
         top: 195px !important;
