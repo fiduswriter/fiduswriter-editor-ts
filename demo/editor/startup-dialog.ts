@@ -7,6 +7,7 @@ export type StartupResult =
 export interface StartupDialogResult {
     locale: string
     username: string
+    preferences: Record<string, boolean>
     result: StartupResult
 }
 
@@ -48,6 +49,18 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
 
                 <label for="demo-locale">${gettext("Language")}</label>
                 <select id="demo-locale" class="fw-input"></select>
+
+                <div class="demo-section">
+                    <h2>${gettext("Editing preferences")}</h2>
+                    <label class="checkable-label">
+                        <input type="checkbox" id="demo-inline-references" />
+                        ${gettext("Enable inline reference typing (@)")}
+                    </label>
+                    <label class="checkable-label">
+                        <input type="checkbox" id="demo-inline-math" />
+                        ${gettext("Enable inline math typing ($)")}
+                    </label>
+                </div>
 
                 <div class="demo-section">
                     <h2>${gettext("Import existing document")}</h2>
@@ -103,6 +116,17 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
         const usernameInput = overlay.querySelector(
             "#demo-username"
         ) as HTMLInputElement
+        const inlineReferencesInput = overlay.querySelector(
+            "#demo-inline-references"
+        ) as HTMLInputElement
+        const inlineMathInput = overlay.querySelector(
+            "#demo-inline-math"
+        ) as HTMLInputElement
+
+        const getPreferences = () => ({
+            inline_references: inlineReferencesInput.checked,
+            inline_math: inlineMathInput.checked
+        })
 
         const close = () => overlay.remove()
 
@@ -130,6 +154,7 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
             resolve({
                 locale: select.value,
                 username: getUsername(),
+                preferences: getPreferences(),
                 result: {mode: "import", file}
             })
         }
@@ -140,6 +165,7 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
             resolve({
                 locale: select.value,
                 username: getUsername(),
+                preferences: getPreferences(),
                 result: {mode: "new", templateFile}
             })
         }

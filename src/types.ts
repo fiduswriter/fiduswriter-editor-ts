@@ -122,6 +122,11 @@ export interface EditorApp {
     csl: CSL
     bibDB?: EditorBibDB
     imageDB: EditorImageDB
+    config?: {
+        user?: {
+            preferences?: Record<string, boolean>
+        }
+    }
     apiConnectors: {
         document: EditorDocumentApi
         documentImport: EditorDocumentImportApi

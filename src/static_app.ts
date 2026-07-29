@@ -77,6 +77,11 @@ export interface StaticAppConfig {
         json: Record<string, unknown>
         status: number
     }>
+    /**
+     * Optional user preferences that control inline editing helpers.
+     * Recognized keys include `inline_references` and `inline_math`.
+     */
+    userPreferences?: Record<string, boolean>
 }
 
 interface StoredImage {
@@ -340,6 +345,11 @@ export async function createStaticApp(
             LANGUAGE: config.locale
         },
         csl: config.csl,
+        config: {
+            user: {
+                preferences: config.userPreferences ?? {}
+            }
+        },
         apiConnectors: {
             document: documentApi,
             documentImport: documentImportApi,

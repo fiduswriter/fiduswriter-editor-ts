@@ -36,6 +36,11 @@ export interface StaticEditorConfig
     }>
     /** Optional extra editor plugins. */
     plugins?: Array<[string, Record<string, unknown>]>
+    /**
+     * Optional user preferences that control inline editing helpers.
+     * Recognized keys include `inline_references` and `inline_math`.
+     */
+    userPreferences?: Record<string, boolean>
 }
 
 async function loadLocaleCatalog(

@@ -11,7 +11,12 @@ async function main(): Promise<void> {
     const autostart = params.get("autostart") === "1"
 
     const startup = autostart
-        ? {locale: "en", username: "Demo User", result: {mode: "new" as const}}
+        ? {
+              locale: "en",
+              username: "Demo User",
+              preferences: {},
+              result: {mode: "new" as const}
+          }
         : await showStartupDialog()
     const locale = startup.locale
     const username = startup.username
@@ -100,6 +105,7 @@ async function main(): Promise<void> {
     const editor: Editor = await createStaticEditor({
         locale,
         username,
+        userPreferences: startup.preferences,
         documentData,
         initialImages,
         getDocContent: () => docContent,

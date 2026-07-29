@@ -153,6 +153,7 @@ new ExportFidusFile(
 <li><code>onSaveDocument</code> — optional callback invoked when the editor tries to save.</li>
 <li><code>staticBasePath</code> — base URL for resolving CSS and static assets.</li>
 <li><code>plugins</code> — extra editor plugins, e.g. <code>[["demo", {MyPlugin}]]</code>.</li>
+<li><code>userPreferences</code> — optional map of user preferences that enable inline editing helpers. Recognized keys are <code>inline_references</code> (type <code>@</code> to insert a citation/cross-reference) and <code>inline_math</code> (type <code>$</code> to insert an equation).</li>
 </ul>
 
 <div class="note">
