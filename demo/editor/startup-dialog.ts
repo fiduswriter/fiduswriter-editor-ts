@@ -7,6 +7,7 @@ export type StartupResult =
 export interface StartupDialogResult {
     locale: string
     username: string
+    userId: number
     preferences: Record<string, boolean>
     result: StartupResult
 }
@@ -46,6 +47,9 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
 
                 <label for="demo-username">${gettext("Username (optional)")}</label>
                 <input type="text" id="demo-username" class="fw-input" placeholder="${gettext("Demo User")}" />
+
+                <label for="demo-userid">${gettext("User id (optional)")}</label>
+                <input type="number" id="demo-userid" class="fw-input" value="1" min="1" />
 
                 <label for="demo-locale">${gettext("Language")}</label>
                 <select id="demo-locale" class="fw-input"></select>
@@ -116,6 +120,9 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
         const usernameInput = overlay.querySelector(
             "#demo-username"
         ) as HTMLInputElement
+        const userIdInput = overlay.querySelector(
+            "#demo-userid"
+        ) as HTMLInputElement
         const inlineReferencesInput = overlay.querySelector(
             "#demo-inline-references"
         ) as HTMLInputElement
@@ -127,6 +134,11 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
             inline_references: inlineReferencesInput.checked,
             inline_math: inlineMathInput.checked
         })
+
+        const getUserId = (): number => {
+            const value = parseInt(userIdInput.value, 10)
+            return Number.isFinite(value) && value > 0 ? value : 1
+        }
 
         const close = () => overlay.remove()
 
@@ -154,6 +166,7 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
             resolve({
                 locale: select.value,
                 username: getUsername(),
+                userId: getUserId(),
                 preferences: getPreferences(),
                 result: {mode: "import", file}
             })
@@ -165,6 +178,7 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
             resolve({
                 locale: select.value,
                 username: getUsername(),
+                userId: getUserId(),
                 preferences: getPreferences(),
                 result: {mode: "new", templateFile}
             })

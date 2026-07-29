@@ -329,8 +329,10 @@ export async function createStaticApp(
         add: async () => ({json: {}, status: 200})
     }
 
+    const appName = config.appName || "fiduswriter-static-editor"
+
     const app = {
-        name: config.appName || "fiduswriter-static-editor",
+        name: appName,
         routes: config.routes || {
             "": {app: "document"},
             document: {app: "document"}
@@ -338,7 +340,7 @@ export async function createStaticApp(
         goTo: () => {},
         isOffline: () => false,
         settings: {
-            APPS: [config.appName || "static"],
+            APPS: [appName],
             EDITOR_SAVE_MODE: "external",
             EDITOR_ONLY_MODE: true,
             E2EE_MODE: "disabled",

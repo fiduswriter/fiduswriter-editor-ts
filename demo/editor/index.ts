@@ -14,16 +14,17 @@ async function main(): Promise<void> {
         ? {
               locale: "en",
               username: "Demo User",
+              userId: 1,
               preferences: {},
               result: {mode: "new" as const}
           }
         : await showStartupDialog()
     const locale = startup.locale
     const username = startup.username
+    const userId = startup.userId
     const result = startup.result
 
     const documentHelpers = await import("./document-helpers.js")
-    const {ConfirmedDocEditorPlugin} = await import("./plugins/confirmed_doc")
 
     const {
         applyTemplate,
@@ -42,7 +43,7 @@ async function main(): Promise<void> {
 
     if (result.mode === "import") {
         const user = {
-            id: 1,
+            id: userId,
             username: username.toLowerCase().replace(/\s+/g, "_") || "demo",
             emails: [{address: "demo@example.com", primary: true}],
             name: username,
@@ -84,7 +85,7 @@ async function main(): Promise<void> {
             access_rights: "write",
             e2ee: false,
             owner: {
-                id: 1,
+                id: userId,
                 name: username,
                 type: "user",
                 contacts: []
@@ -105,6 +106,7 @@ async function main(): Promise<void> {
     const editor: Editor = await createStaticEditor({
         locale,
         username,
+        userId,
         userPreferences: startup.preferences,
         documentData,
         initialImages,
@@ -112,7 +114,7 @@ async function main(): Promise<void> {
         documentStyles: createDemoApp.documentStyles,
         exportTemplates: createDemoApp.exportTemplates,
         documentTemplates: createDemoApp.documentTemplates,
-        plugins: [["demo", {ConfirmedDocEditorPlugin}]]
+        plugins: []
     })
 
     function downloadDocument(): void {

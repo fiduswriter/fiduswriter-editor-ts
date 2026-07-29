@@ -3,9 +3,42 @@ import {gettext, initSettings, interpolate, staticUrl} from "fwtoolkit"
 import type {CSL, EditorUser} from "./types.js"
 import type {StaticAppConfig} from "./static_app.js"
 
+import {Plugin} from "prosemirror-state"
+
 import type {Editor} from "./index.js"
 
 export type {StaticAppConfig} from "./static_app.js"
+
+function confirmedDocPlugin(options: unknown): Plugin {
+    const editor = (options as {editor: Editor}).editor
+    return new Plugin({
+        state: {
+            init: (_config, state) => {
+                editor.docInfo.confirmedDoc = state.doc
+                return null
+            },
+            apply: (_tr, _value, _oldState, newState) => {
+                editor.docInfo.confirmedDoc = newState.doc
+                return null
+            }
+        }
+    })
+}
+
+class ConfirmedDocEditorPlugin {
+    editor: Editor
+
+    constructor(editor: Editor) {
+        this.editor = editor
+    }
+
+    init(): void {
+        this.editor.statePlugins.push([
+            confirmedDocPlugin,
+            () => ({editor: this.editor})
+        ])
+    }
+}
 
 export interface StaticEditorConfig
     extends Omit<StaticAppConfig, "gettext" | "csl"> {
@@ -15,7 +48,9 @@ export interface StaticEditorConfig
     csl?: CSL
     /** Display name for the user. Used to build the user object when `user` is not given. */
     username?: string
-    /** Pre-built user object. Takes precedence over `username`. */
+    /** User id. Used to build the user object when `user` is not given. Defaults to 1. */
+    userId?: number
+    /** Pre-built user object. Takes precedence over `username` and `userId`. */
     user?: EditorUser
     /**
      * Base path for resolving static assets.
@@ -155,7 +190,7 @@ export async function createStaticEditor(
     const user: EditorUser =
         config.user ??
         ({
-            id: 1,
+            id: config.userId ?? 1,
             username: username.toLowerCase().replace(/\s+/g, "_") || "user",
             emails: [{address: "user@example.com", primary: true}],
             name: username,
@@ -199,11 +234,19 @@ export async function createStaticEditor(
 
     const {Editor} = await import("./index.js")
 
+    const plugins: Array<[string, Record<string, unknown>]> =
+        config.plugins ?? ([] as Array<[string, Record<string, unknown>]>)
+
+    // In static mode there is no server to confirm a document version, so keep
+    // the confirmed document in sync with the current editor state. This ensures
+    // exports and printing use the latest edits.
+    plugins.push([app.name, {ConfirmedDocEditorPlugin}])
+
     const editor = new Editor(
         {app, user},
         docPath,
         String(docId),
-        config.plugins ?? ([] as Array<[string, Record<string, unknown>]>)
+        plugins
     )
 
     await editor.init()
