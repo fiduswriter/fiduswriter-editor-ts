@@ -110,7 +110,25 @@ interface MarginBoxOptionComment {
 
 /** A template for an answer to a comment */
 const COMMENT_SHOW_MORE_THRESHOLD = 120
+const COMMENT_TRUNCATE_LENGTH = 110
 
+function commentContentTemplate({
+    serialized,
+    isGlobal
+}: {
+    serialized: {html: string; text: string}
+    isGlobal: boolean
+}): string {
+    if (isGlobal || serialized.text.length <= COMMENT_SHOW_MORE_THRESHOLD) {
+        return `<p class="comment-p">${serialized.html}</p>`
+    }
+    const truncatedText = `${escapeText(
+        serialized.text.slice(0, COMMENT_TRUNCATE_LENGTH - 1)
+    )}…`
+    return `<div class="comment-truncated"><p class="comment-p">${truncatedText}</p></div><div class="comment-full" style="display:none"><p class="comment-p">${serialized.html}</p></div>`
+}
+
+/** A template for an answer to a comment */
 const answerCommentTemplate = ({
     answer,
     author,
@@ -127,8 +145,9 @@ const answerCommentTemplate = ({
     active: boolean
     user: EditorUser
     isGlobal: boolean
-}) =>
-    `<div class="comment-item comment-answer collapse ${active ? "show" : ""}" id="comment-answer-${answer.id}">
+}) => {
+    const serialized = serializeComment(answer.answer)
+    return `<div class="comment-item comment-answer collapse ${active ? "show" : ""}" id="comment-answer-${answer.id}">
         <div class="comment-user">
             ${author ? avatarTemplate({user: author}) : '<span class="fw-string-avatar"></span>'}
             <h5 class="comment-user-name">${escapeText(author?.name || answer.username)}</h5>
@@ -142,12 +161,12 @@ const answerCommentTemplate = ({
                 </div>
            </div>`
                 : `<div class="comment-text-wrapper">
-               <div class="comment-p">${serializeComment(answer.answer).html}</div>
+               ${commentContentTemplate({serialized, isGlobal})}
            </div>
         <div class="comment-collapsible-buttons">
                 ${
                     !isGlobal &&
-                    serializeComment(answer.answer).text.length >
+                    serialized.text.length >
                         COMMENT_SHOW_MORE_THRESHOLD
                         ? `<a type="button" class="comment-expand-compress show-more-less">${gettext("show more")}</a>`
                         : ""
@@ -160,6 +179,7 @@ const answerCommentTemplate = ({
            }`
         }
     </div>`
+}
 
 interface SingleCommentTemplateProps {
     comment: Comment
@@ -174,8 +194,9 @@ const singleCommentTemplate = ({
     author,
     active,
     editComment
-}: SingleCommentTemplateProps) =>
-    `<div class="comment-item">
+}: SingleCommentTemplateProps) => {
+    const serialized = serializeComment(comment.comment)
+    return `<div class="comment-item">
         <div class="comment-user">
             ${author ? avatarTemplate({user: author}) : '<span class="fw-string-avatar"></span>'}
             <h5 class="comment-user-name">${escapeText(author?.name || comment.username)}</h5>
@@ -185,14 +206,17 @@ const singleCommentTemplate = ({
             ${
                 active && editComment
                     ? '<div id="comment-editor"></div>'
-                    : `<p class="comment-p">${serializeComment(comment.comment).html}</p>`
+                    : `${commentContentTemplate({
+                          serialized,
+                          isGlobal: !!comment.isGlobal
+                      })}`
             }
         </div>
         <div class="comment-collapsible-buttons">
                 ${
                     !editComment &&
                     !comment.isGlobal &&
-                    serializeComment(comment.comment).text.length >
+                    serialized.text.length >
                         COMMENT_SHOW_MORE_THRESHOLD
                         ? `<a type="button" class="comment-expand-compress show-more-less">${gettext("show more")}</a>`
                         : ""
@@ -204,6 +228,7 @@ const singleCommentTemplate = ({
                 }
             </div>
     </div>`
+}
 
 /** A template for the editor of a first comment before it has been saved (not an answer to a comment). */
 const firstCommentTemplate = ({

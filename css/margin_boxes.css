@@ -245,14 +245,7 @@ body.header-closed #margin-box-filter {
 
 .comment-p {
     line-height: 18px;
-    max-height: 54px;
-    overflow: hidden;
     overflow-wrap: break-word;
-}
-
-.global-comment .comment-p,
-.global-comment .comment-answer .comment-p {
-    max-height: none;
 }
 
 .margin-box .ProseMirror-wrapper {
@@ -451,10 +444,7 @@ body.header-closed #margin-box-filter {
 .comment-expand-compress {
     text-decoration: none;
     font-weight: bolder;
-}
-
-.show-more:not(.inactive) {
-    max-height: 1000px;
+    cursor: pointer;
 }
 
 .comment-collapsible-buttons {

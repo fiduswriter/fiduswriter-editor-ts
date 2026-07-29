@@ -80,6 +80,7 @@ interface MarginboxesEditorMod {
     collab: CollabMod
     footnotes: FootnotesMod
     track: TrackMod
+    marginboxes: ModMarginboxes
 }
 
 interface MarginBoxPlacement {
@@ -177,10 +178,24 @@ export class ModMarginboxes {
         this.bindEvents()
     }
 
+    findShowMoreButton(event: Event): Element | null {
+        const target = event.target
+        if (target instanceof Element) {
+            return target.closest(".show-more-less")
+        }
+        if (!target) {
+            return null
+        }
+        const parent = (target as {parentElement?: Element | null})
+            .parentElement
+        return parent ? parent.closest(".show-more-less") : null
+    }
+
     bindEvents() {
         // Bind all the click events related to the margin box filter
-        document.body.addEventListener("click", event => {
+        document.body.addEventListener("click", async event => {
             const el: {target?: Element | null} = {}
+            const showMoreButton = this.findShowMoreButton(event)
             switch (true) {
                 case findTarget(event, "#new-global-comment", el):
                     this.editor.mod.comments.interactions.createNewGlobalComment()
@@ -294,6 +309,33 @@ export class ModMarginboxes {
                     this.filterOptions.info = !this.filterOptions.info
                     this.view(this.editor.currentView)
                     break
+                case !!showMoreButton: {
+                    const button = showMoreButton as Element
+                    const marginBox = button.closest(
+                        ".margin-box.comment"
+                    ) as HTMLElement | null | undefined
+                    if (marginBox?.classList.contains("inactive")) {
+                        const commentId = marginBox.dataset.id
+                        if (commentId) {
+                            this.editor.mod.comments.interactions.activateComment(
+                                commentId
+                            )
+                            const update = this.updateDOM()
+                            if (update) {
+                                await update
+                            }
+                            const newButton = document.querySelector(
+                                `#margin-box-${commentId} .show-more-less, #global-comments #margin-box-${commentId} .show-more-less`
+                            )
+                            if (newButton) {
+                                this.toggleShowMore(newButton)
+                                break
+                            }
+                        }
+                    }
+                    this.toggleShowMore(button)
+                    break
+                }
                 case findTarget(event, ".margin-box.comment.inactive", el): {
                     const target = el.target as HTMLElement | null | undefined
                     const commentId = target?.dataset.id
@@ -333,17 +375,6 @@ export class ModMarginboxes {
                             break
                         default:
                             break
-                    }
-                    break
-                }
-                case findTarget(
-                    event,
-                    ".margin-box.comment.fw-active .show-more-less",
-                    el
-                ): {
-                    const target = el.target as HTMLElement | null | undefined
-                    if (target) {
-                        this.toggleShowMore(target)
                     }
                     break
                 }
@@ -1011,13 +1042,23 @@ export class ModMarginboxes {
         return nodeTracks
     }
 
-    closeAllLongComments(selector = ".comment-p.show-more") {
-        document.body.querySelectorAll(selector).forEach(el => {
-            el.classList.remove("show-more")
-            const showMoreButton =
-                el.parentElement?.parentElement?.querySelector(".show-more-less")
-            if (showMoreButton) {
-                showMoreButton.innerHTML = `${gettext("show more")}`
+    closeAllLongComments() {
+        document.body.querySelectorAll(".comment-full").forEach(el => {
+            const full = el as HTMLElement
+            if (full.style.display !== "none") {
+                full.style.display = "none"
+                const truncated = full.parentElement?.querySelector(
+                    ".comment-truncated"
+                ) as HTMLElement | null
+                if (truncated) {
+                    truncated.style.display = ""
+                }
+                const showMoreButton = full
+                    .closest(".comment-item")
+                    ?.querySelector(".show-more-less")
+                if (showMoreButton) {
+                    showMoreButton.innerHTML = `${gettext("show more")}`
+                }
             }
         })
     }
@@ -1076,15 +1117,26 @@ export class ModMarginboxes {
     }
 
     toggleShowMore(element: Element) {
-        const commentText =
-            element.parentElement?.parentElement?.querySelector(".comment-p")
-        if (!commentText) {
+        const commentItem = element.closest(".comment-item")
+        if (!commentItem) {
             return
         }
-        commentText.classList.toggle("show-more")
-        if (commentText.classList.contains("show-more")) {
+        const truncated = commentItem.querySelector(
+            ".comment-truncated"
+        ) as HTMLElement | null
+        const full = commentItem.querySelector(
+            ".comment-full"
+        ) as HTMLElement | null
+        if (!truncated || !full) {
+            return
+        }
+        if (full.style.display === "none") {
+            truncated.style.display = "none"
+            full.style.display = ""
             ;(element as HTMLElement).innerText = `${gettext("show less")}`
         } else {
+            truncated.style.display = ""
+            full.style.display = "none"
             ;(element as HTMLElement).innerText = `${gettext("show more")}`
         }
     }
