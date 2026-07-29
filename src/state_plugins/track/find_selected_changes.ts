@@ -98,7 +98,7 @@ export function findSelectedChanges(state: EditorState): SelectedChanges {
                     }
                 }
             }
-            return false
+            return true
         })
     }
     if (insertionMark && insertionPos !== false) {

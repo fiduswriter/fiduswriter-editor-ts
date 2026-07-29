@@ -84,7 +84,7 @@ export function trackPlugin(options: {editor: Editor}) {
                     decos: DecorationSet.empty
                 }
             },
-            apply(tr, _prev, _oldState, state) {
+            apply(tr, _prev, oldState, state) {
                 const meta = tr.getMeta(key)
                 if (meta) {
                     // There has been an update, return values from meta instead
@@ -92,7 +92,7 @@ export function trackPlugin(options: {editor: Editor}) {
                     return meta
                 }
 
-                const oldPluginState = key.getState(state) as {decos: DecorationSet} | undefined
+                const oldPluginState = key.getState(oldState) as {decos: DecorationSet} | undefined
                 if (!oldPluginState) {
                     return {decos: DecorationSet.empty}
                 }

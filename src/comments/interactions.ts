@@ -176,9 +176,9 @@ export class ModCommentInteractions {
     }
 
     findCommentsAt(node: ProseMirrorNode): (any | false)[] {
-        return this.findCommentIds(node).map(id =>
-            this.mod.store.findComment(id)
-        )
+        return this.findCommentIds(node)
+            .map(id => this.mod.store.findComment(id))
+            .filter(comment => comment) as (any | false)[]
     }
 
     deactivateSelectedChanges(): void {
