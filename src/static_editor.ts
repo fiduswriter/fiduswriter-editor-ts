@@ -200,7 +200,7 @@ export async function createStaticEditor(
     let csl = config.csl
     if (!csl) {
         const {createCSL} = await import(
-            "@fiduswriter/document/citations/create_csl"
+            "@fiduswriter/document/citeproc-plus"
         )
         csl = await createCSL()
         // createCSL replaces getStyle/getLocale with versions that only look at

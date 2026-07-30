@@ -12,8 +12,8 @@ importers:
         specifier: ^0.1.28
         version: 0.1.28(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       '@fiduswriter/document':
-        specifier: ^0.2.37
-        version: 0.2.37
+        specifier: ^0.2.38
+        version: 0.2.38
       '@fiduswriter/image-manager':
         specifier: ^0.1.22
         version: 0.1.22(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
@@ -554,8 +554,8 @@ packages:
   '@fiduswriter/bibliography-manager@0.1.28':
     resolution: {integrity: sha512-AZOtdt972FotewSxLwnuMQqi/siQWhEbNbstV/fRzlV6M/HinCQE20bz8eR3/jGEmSMUy67u2xoRTsHR3IbqmQ==}
 
-  '@fiduswriter/document@0.2.37':
-    resolution: {integrity: sha512-47OlejimLCkfw4BBFrygpv3xp7WdduhciAKmSQ8DWUaIkOrOMcFjEatRE1ZDkVlq6bd4gp4WgmROSBowIjJxTw==}
+  '@fiduswriter/document@0.2.38':
+    resolution: {integrity: sha512-ruBQ61iM0Ut3FyHTzo91MNG18cOA7Sxbk1VvLN34wZn17L5yXfx3/jX6T0wyuwgZUtcaplT+B4fBDDfY2ZGrPA==}
 
   '@fiduswriter/image-manager@0.1.22':
     resolution: {integrity: sha512-UkiAk2mSZcAkvx+zAZYDb1NlSPorBY/2jI7L/a1CRp8wruVwHXkDbqi8HZvnNeKhMbDuZTFWyvT4SMZJO0mORA==}
@@ -2837,7 +2837,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@0.2.37':
+  '@fiduswriter/document@0.2.38':
     dependencies:
       '@prettier/plugin-xml': 3.4.2(prettier@3.9.5)
       '@vivliostyle/print': 2.44.1

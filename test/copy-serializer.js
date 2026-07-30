@@ -2,7 +2,7 @@ import "../test/setup.js"
 import assert from "node:assert"
 
 import {docSchema} from "@fiduswriter/document/schema/document/index"
-import {createCSL} from "@fiduswriter/document/citations/create_csl"
+import {createCSL} from "@fiduswriter/document/citeproc-plus"
 import {docClipboardSerializer} from "../dist/clipboard/copy/serializers.js"
 
 const schema = docSchema

@@ -67,10 +67,9 @@ await build({
         events: eventsPath
     },
     // Mark Node.js built-ins as external so esbuild does not try to bundle
-    // them for the browser.  The create_csl.ts Node.js locale-loader path is
-    // guarded by a `process.versions?.node` check and is never reached at
-    // runtime in the browser, so leaving these as unresolved dynamic imports
-    // is safe.
+    // them for the browser.  citeproc-plus guards its Node.js paths with a
+    // `process.versions?.node` check and they are never reached at runtime in
+    // the browser, so leaving these as unresolved dynamic imports is safe.
     external: [
         "fs",
         "fs/promises",
