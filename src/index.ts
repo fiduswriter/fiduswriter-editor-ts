@@ -41,6 +41,7 @@ import {ModCollab} from "./collab/index.js"
 import {ModComments} from "./comments/index.js"
 import {ModDB} from "./databases/index.js"
 import {ModDocumentTemplate} from "./document_template/index.js"
+import {RequestAccessDialog} from "./documents/access_rights/request_access_dialog.js"
 import {E2EESnapshotManager} from "./e2ee/snapshot-manager.js"
 import {ExportFidusFile} from "./exporter/native/file.js"
 import {ModFootnotes} from "./footnotes/index.js"
@@ -374,46 +375,67 @@ export class Editor {
                               token: this.docInfo.token
                           })
                     : Promise.resolve({json: {ws_base: ""}})
-                const stylesPromise = documentApi.getDocumentStyles(
-                    stylesPayload as {id: number; token?: string}
-                )
-                const docDataPromise = documentApi.getDocumentData(
-                    stylesPayload as {id: number; token?: string}
-                )
+                const stylesPromise = documentApi
+                    .getDocumentStyles(
+                        stylesPayload as {id: number; token?: string}
+                    )
+                    .catch(() => {
+                        return {json: {}}
+                    })
+                const docDataPromise = documentApi
+                    .getDocumentData(
+                        stylesPayload as {id: number; token?: string}
+                    )
+                    .catch(error => {
+                        // Only show "Invalid Share Link" for token validation errors.
+                        // For authenticated users without access, offer to request access.
+                        // This is also shown when the document does not exist so that we
+                        // do not reveal whether a document with the given ID exists.
+                        if (error.message === "Invalid or expired share link") {
+                            deactivateWait()
+                            const errorDialog = new Dialog({
+                                title: gettext("Invalid Share Link"),
+                                id: "invalid_share_link_dialog",
+                                body: gettext(
+                                    "This share link has expired or is invalid. Please ask the document owner for a new link."
+                                ),
+                                buttons: [
+                                    {
+                                        text: gettext("OK"),
+                                        classes: "fw-dark",
+                                        click: () => {
+                                            window.location.href = "/"
+                                        }
+                                    }
+                                ],
+                                canClose: false
+                            })
+                            errorDialog.open()
+                            return Promise.reject(false)
+                        } else if (
+                            error.status === 401 &&
+                            this.user.is_authenticated
+                        ) {
+                            deactivateWait()
+                            const requestAccessDialog = new RequestAccessDialog(
+                                this.docInfo.id as number,
+                                "",
+                                documentApi,
+                                Boolean(this.docInfo.token)
+                            )
+                            requestAccessDialog.open()
+                            return Promise.reject(false)
+                        } else {
+                            deactivateWait()
+                            console.error("Editor initialization failed:", error)
+                        }
+                        return Promise.reject(error)
+                    })
                 return Promise.all([
                     wsBasePromise,
                     stylesPromise,
                     docDataPromise
                 ])
-            })
-            .catch(error => {
-                // Only show "Invalid Share Link" for token validation errors.
-                // Other errors (REST failures, etc.) should not show this dialog.
-                if (error.message === "Invalid or expired share link") {
-                    deactivateWait()
-                    const errorDialog = new Dialog({
-                        title: gettext("Invalid Share Link"),
-                        id: "invalid_share_link_dialog",
-                        body: gettext(
-                            "This share link has expired or is invalid. Please ask the document owner for a new link."
-                        ),
-                        buttons: [
-                            {
-                                text: gettext("OK"),
-                                classes: "fw-dark",
-                                click: () => {
-                                    window.location.href = "/"
-                                }
-                            }
-                        ],
-                        canClose: false
-                    })
-                    errorDialog.open()
-                } else {
-                    deactivateWait()
-                    console.error("Editor initialization failed:", error)
-                }
-                return Promise.reject(error)
             })
             .then(([wsResult, stylesResult, docResult]) => {
                 let resubScribed = false

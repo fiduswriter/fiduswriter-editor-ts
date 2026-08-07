@@ -7,6 +7,7 @@ import {
 import type {BibDB, ExportDoc, ImageDB} from "@fiduswriter/document"
 import {CopyrightDialog} from "../../copyright_dialog/index.js"
 import {DocumentAccessRightsDialog} from "../../documents/access_rights/index.js"
+import {RequestAccessDialog} from "../../documents/access_rights/request_access_dialog.js"
 import {SaveCopy, SaveRevision} from "../../exporter/native/index.js"
 import {ExportFidusFile} from "../../exporter/native/file.js"
 import {LanguageDialog, RevisionDialog} from "../../dialogs/index.js"
@@ -72,6 +73,13 @@ const exportProgress = (doc: {title: string; path?: string}) => {
         task.update(percentage ?? null, message)
 }
 
+const showRequestAccess = (editor: Editor): boolean =>
+    editor.user.is_authenticated === true &&
+    !editor.docInfo.is_owner &&
+    (Boolean(editor.docInfo.token) ||
+        (Boolean(editor.docInfo.access_rights) &&
+            editor.docInfo.access_rights !== "write"))
+
 const languageItem = (
     language: string,
     name: string,
@@ -115,62 +123,26 @@ export const headerbarModel = () => ({
             content: [
                 {
                     title: (editor: Editor) =>
-                        editor.user.is_authenticated &&
-                        editor.docInfo.token &&
-                        !editor.docInfo.is_owner
+                        showRequestAccess(editor)
                             ? gettext("Request Access")
                             : gettext("Share"),
                     type: "action",
                     //icon: 'share',
                     tooltip: (editor: Editor) =>
-                        editor.user.is_authenticated &&
-                        editor.docInfo.token &&
-                        !editor.docInfo.is_owner
+                        showRequestAccess(editor)
                             ? gettext("Request to be added as a collaborator.")
                             : gettext("Share the document with other users."),
                     order: 0,
                     action: (editor: Editor) => {
-                        if (
-                            editor.user.is_authenticated &&
-                            editor.docInfo.token &&
-                            !editor.docInfo.is_owner
-                        ) {
-                            // TokenUser requesting access
-                            editor.app.apiConnectors.document
-                                .requestAccess({
-                                    document_id: editor.docInfo.id as number,
-                                    rights: "write"
-                                })
-                                .then(({json}: {json: unknown}) => {
-                                    const data = json as {
-                                        success?: boolean
-                                        error?: string
-                                    }
-                                    if (data.success) {
-                                        addAlert(
-                                            "success",
-                                            gettext(
-                                                "Your access request has been sent to the document owner."
-                                            )
-                                        )
-                                    } else {
-                                        addAlert(
-                                            "error",
-                                            data.error ||
-                                                gettext(
-                                                    "Could not send access request."
-                                                )
-                                        )
-                                    }
-                                })
-                                .catch(() => {
-                                    addAlert(
-                                        "error",
-                                        gettext(
-                                            "Could not send access request."
-                                        )
-                                    )
-                                })
+                        if (showRequestAccess(editor)) {
+                            // Request higher access rights from the document owner
+                            const requestAccessDialog = new RequestAccessDialog(
+                                editor.docInfo.id as number,
+                                editor.docInfo.access_rights || "",
+                                editor.app.apiConnectors.document,
+                                Boolean(editor.docInfo.token)
+                            )
+                            requestAccessDialog.open()
                             return
                         }
                         const onShareSuccess = async (
@@ -254,19 +226,40 @@ export const headerbarModel = () => ({
                             editor.e2ee?.password || "",
                             onShareSuccess,
                             editor.app.settings,
+                            editor.docInfo.is_owner,
                             editor.app.apiConnectors.contacts,
                             editor.app.apiConnectors.document
                         )
                         shareDialog.init()
                     },
+                    available: (editor: Editor) => {
+                        if (editor.app.settings.EDITOR_SAVE_MODE === "external") {
+                            return false
+                        }
+                        if (!editor.user.is_authenticated) {
+                            return true
+                        }
+                        if (editor.docInfo.is_owner) {
+                            return true
+                        }
+                        if (editor.docInfo.token) {
+                            return true
+                        }
+                        if (!editor.docInfo.access_rights) {
+                            return false
+                        }
+                        return editor.docInfo.access_rights !== "write"
+                    },
                     disabled: (editor: Editor) => {
                         return (
                             editor.app.isOffline() ||
-                            !editor.user.is_authenticated
+                            !editor.user.is_authenticated ||
+                            !editor.docInfo.owner ||
+                            (!editor.docInfo.is_owner &&
+                                !editor.docInfo.token &&
+                                editor.docInfo.access_rights === "write")
                         )
-                    },
-                    available: (editor: Editor) =>
-                        editor.app.settings.EDITOR_SAVE_MODE !== "external"
+                    }
                 },
                 {
                     title: (editor: Editor) =>

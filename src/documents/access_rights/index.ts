@@ -67,6 +67,7 @@ interface AccessRightsTabOptions {
     container?: HTMLElement | null
     documentApi: EditorDocumentApi
     contactsApi: EditorContactsApi
+    isOwner?: boolean
 }
 
 interface AccessRightMenuItem {
@@ -149,6 +150,7 @@ export class AccessRightsTab {
     dialogTabs!: DialogTabs
     documentApi: EditorDocumentApi
     contactsApi: EditorContactsApi
+    isOwner: boolean
 
     constructor({
         documentIds,
@@ -160,7 +162,8 @@ export class AccessRightsTab {
         settings,
         container = null,
         documentApi,
-        contactsApi
+        contactsApi,
+        isOwner = false
     }: AccessRightsTabOptions) {
         this.documentIds = documentIds
         this.contacts = contacts
@@ -172,6 +175,7 @@ export class AccessRightsTab {
         this.onShareSuccess = onShareSuccess
         this.settings = settings
         this.container = container || null
+        this.isOwner = isOwner
         this.accessRights = []
         this.documentApi = documentApi
         this.contactsApi = contactsApi
@@ -205,31 +209,36 @@ export class AccessRightsTab {
             </div>`
             : ""
 
-        this.dialogTabs = new DialogTabs(
-            [
-                {
-                    id: "people",
-                    title: gettext("People"),
-                    template: () =>
-                        peopleTabTemplate({
-                            contacts: this.contacts,
-                            collaborators
-                        })
-                },
-                {
-                    id: "sharelink",
-                    title: gettext("Share link"),
-                    template: () => shareLinkTabTemplate()
-                }
-            ],
+        const tabs = [
             {
-                onShow: index => {
-                    if (index === 1 && this.singleDocumentId) {
-                        this.loadShareTokens()
-                    }
+                id: "people",
+                title: gettext("People"),
+                template: () =>
+                    peopleTabTemplate({
+                        contacts: this.contacts,
+                        collaborators
+                    })
+            }
+        ]
+        if (this.isOwner) {
+            tabs.push({
+                id: "sharelink",
+                title: gettext("Share link"),
+                template: () => shareLinkTabTemplate()
+            })
+        }
+
+        this.dialogTabs = new DialogTabs(tabs, {
+            onShow: index => {
+                if (
+                    this.isOwner &&
+                    index === 1 &&
+                    this.singleDocumentId
+                ) {
+                    this.loadShareTokens()
                 }
             }
-        )
+        })
 
         const html = e2eeWarningBanner + this.dialogTabs.render()
 
@@ -686,6 +695,7 @@ export class DocumentAccessRightsDialog {
     documentPassword: string
     onShareSuccess?: (accessRights: AccessRight[]) => void
     settings: Record<string, unknown>
+    isOwner: boolean
     contactsApi: EditorContactsApi
     documentApi: EditorDocumentApi
     tab!: AccessRightsTab
@@ -699,6 +709,7 @@ export class DocumentAccessRightsDialog {
         documentPassword = "",
         onShareSuccess?: (accessRights: AccessRight[]) => void,
         settings: Record<string, unknown> = {},
+        isOwner = false,
         contactsApi?: EditorContactsApi,
         documentApi?: EditorDocumentApi
     ) {
@@ -709,6 +720,7 @@ export class DocumentAccessRightsDialog {
         this.documentPassword = documentPassword
         this.onShareSuccess = onShareSuccess
         this.settings = settings
+        this.isOwner = isOwner
         this.contactsApi = contactsApi as EditorContactsApi
         this.documentApi = documentApi as EditorDocumentApi
     }
@@ -723,7 +735,8 @@ export class DocumentAccessRightsDialog {
             onShareSuccess: this.onShareSuccess,
             settings: this.settings,
             documentApi: this.documentApi,
-            contactsApi: this.contactsApi
+            contactsApi: this.contactsApi,
+            isOwner: this.isOwner
         })
         this.tab.load().then(() => this.createDialog())
     }
@@ -821,8 +834,8 @@ export class DocumentAccessRightsDialog {
         // Hide the share-link tab when multiple documents are selected
         if (!this.tab.singleDocumentId) {
             const shareTab = this.dialog.dialogEl.querySelector(
-                ".fw-tabs-nav .fw-tab-link:last-child"
-            )
+                ".fw-tabs-nav .fw-tab-link a[href='#sharelink']"
+            )?.parentNode
             if (shareTab) {
                 ;(shareTab as HTMLElement).style.display = "none"
             }

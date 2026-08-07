@@ -54,9 +54,9 @@ export class ModDocumentTemplate {
         document_styles: DocumentStyle[]
         document_templates: Record<string, DocumentTemplate>
     }): void {
-        this.exportTemplates = styles.export_templates
-        this.documentStyles = styles.document_styles
-        this.documentTemplates = styles.document_templates
+        this.exportTemplates = styles.export_templates || []
+        this.documentStyles = styles.document_styles || []
+        this.documentTemplates = styles.document_templates || {}
         this.addExportTemplateMenuEntries()
         this.addDocumentStylesMenuEntries()
         if (Object.keys(this.documentTemplates).length) {
