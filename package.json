@@ -91,7 +91,7 @@
   },
   "dependencies": {
     "@fiduswriter/bibliography-manager": "^0.1.29",
-    "@fiduswriter/document": "^0.2.39",
+    "@fiduswriter/document": "^0.2.40",
     "@fiduswriter/image-manager": "^0.1.22",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "cropperjs": "^1.6.2",
