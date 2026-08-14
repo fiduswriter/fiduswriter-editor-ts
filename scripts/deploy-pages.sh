@@ -73,4 +73,4 @@ git push -f origin pages
 
 cd "$ROOT"
 rm -rf "$BUILD_DIR"
-echo "Done. The demo should be available at https://fiduswriter.codeberg.page/fiduswriter-editor-js/"
+echo "Done. The demo should be available at https://fiduswriter.codeberg.page/fiduswriter-editor-ts/"

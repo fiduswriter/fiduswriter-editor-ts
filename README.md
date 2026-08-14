@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://codeberg.org/fiduswriter/fiduswriter-editor-js/raw/branch/main/logo.svg" alt="@fiduswriter/editor" width="100" height="100">
+  <img src="https://codeberg.org/fiduswriter/fiduswriter-editor-ts/raw/branch/main/logo.svg" alt="@fiduswriter/editor" width="100" height="100">
 </p>
 
 <h1 align="center">@fiduswriter/editor</h1>
@@ -60,13 +60,13 @@ const editor = await createStaticEditor({
 Full API documentation, configuration options, and a complete server-backed
 usage example are available on the project site:
 
-**<https://fiduswriter.codeberg.page/fiduswriter-editor-js/>**
+**<https://fiduswriter.codeberg.page/fiduswriter-editor-ts/>**
 
 ## Demo
 
 A standalone browser demo is published on Codeberg Pages:
 
-**<https://fiduswriter.codeberg.page/fiduswriter-editor-js/editor/>**
+**<https://fiduswriter.codeberg.page/fiduswriter-editor-ts/editor/>**
 
 The demo loads the editor without a Django backend. On startup it lets you
 choose a language, import an existing document, or start from a default
