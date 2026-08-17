@@ -6,7 +6,7 @@ import {FidusFileImporter} from "@fiduswriter/document/importer/native"
 
 const fileBuffer = fs.readFileSync("./demo/static/demo.fidus")
 const file = new File([fileBuffer], "demo.fidus", {
-    type: "application/fidus+zip"
+    type: "application/vnd.fiduswriter+zip"
 })
 
 const backend = {

@@ -150,7 +150,7 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
                 }
                 const blob = await response.blob()
                 const file = new File([blob], "demo.fidus", {
-                    type: "application/fidus+zip"
+                    type: "application/vnd.fiduswriter+zip"
                 })
                 handleImportFile(file)
             } catch (error) {

@@ -149,12 +149,16 @@ export class DocumentTemplateExporter {
             this.textFiles,
             this.httpFiles,
             undefined,
-            "application/fidustemplate+zip"
+            "application/vnd.fiduswriter.template+zip"
         )
         return zipper
             .init()
             .then(blob =>
-                download(blob, this.zipFileName as string, "application/zip")
+                download(
+                    blob,
+                    this.zipFileName as string,
+                    "application/vnd.fiduswriter.template+zip"
+                )
             )
     }
 }
