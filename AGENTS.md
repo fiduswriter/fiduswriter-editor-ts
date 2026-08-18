@@ -9,7 +9,7 @@ encryption.
 
 - Package name: `@fiduswriter/editor`
 - License: `AGPL-3.0`
-- Repository: `https://codeberg.org/fiduswriter/fiduswriter-editor.git`
+- Repository: `https://git.fiduswriter.org/fiduswriter/fiduswriter-editor-ts.git`
 - Author: Johannes Wilm
 
 ## Scope
