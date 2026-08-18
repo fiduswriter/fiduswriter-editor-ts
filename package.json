@@ -13,13 +13,13 @@
     "comments",
     "track-changes"
   ],
-  "homepage": "https://fiduswriter.codeberg.page/fiduswriter-editor-ts/",
+  "homepage": "https://fiduswriter.pages.fiduswriter.org/fiduswriter-editor-ts/",
   "bugs": {
-    "url": "https://codeberg.org/fiduswriter/fiduswriter-editor-ts/issues"
+    "url": "https://git.fiduswriter.org/fiduswriter/fiduswriter-editor-ts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@codeberg.org/fiduswriter/fiduswriter-editor-ts.git"
+    "url": "https://git.fiduswriter.org/fiduswriter/fiduswriter-editor-ts.git"
   },
   "license": "AGPL-3.0",
   "author": "Johannes Wilm",
