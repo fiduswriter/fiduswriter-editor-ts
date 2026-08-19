@@ -17,7 +17,8 @@ export class ExportFidusFile extends GenericExportFidusFile {
         bibDB: BibDB,
         imageDB: ImageDB,
         includeTemplate = true,
-        token: string | boolean = false
+        token: string | boolean = false,
+        download = true
     ) {
         const title = shortFileTitle(doc.title, doc.path || "")
         const task = addProgress(
@@ -46,7 +47,8 @@ export class ExportFidusFile extends GenericExportFidusFile {
             includeTemplate,
             token,
             getTemplateFiles,
-            progressCallback
+            progressCallback,
+            download
         )
     }
 }

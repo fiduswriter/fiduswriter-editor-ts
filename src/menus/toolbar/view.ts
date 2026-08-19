@@ -95,14 +95,14 @@ export class ToolbarView {
 
     bindEvents(): void {
         this.listeners.onclick = event => this.onclick(event)
-        document.body.addEventListener("click", this.listeners.onclick)
+        this.editor.dom.addEventListener("click", this.listeners.onclick)
         this.listeners.onmousedown = event => this.onmousedown(event)
-        document.body.addEventListener("mousedown", this.listeners.onmousedown)
+        this.editor.dom.addEventListener("mousedown", this.listeners.onmousedown)
     }
 
     destroy(): void {
-        document.body.removeEventListener("click", this.listeners.onclick!)
-        document.body.removeEventListener(
+        this.editor.dom.removeEventListener("click", this.listeners.onclick!)
+        this.editor.dom.removeEventListener(
             "mousedown",
             this.listeners.onmousedown!
         )

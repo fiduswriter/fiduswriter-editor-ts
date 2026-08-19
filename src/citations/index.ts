@@ -84,7 +84,7 @@ export class ModCitations {
          * citations to be numbered but they aren't in the same order in the DOM,
          * we need to organize the numbering manually.
          */
-        document.body.insertAdjacentHTML(
+        this.editor.dom.insertAdjacentHTML(
             "beforeend",
             '<style type="text/css" id="footnote-numbering-override"></style>'
         )
@@ -267,7 +267,7 @@ export class ModCitations {
                 // Add basic bibliography styling
                 let styleEl = document.querySelector(".doc-bibliography-style")
                 if (!styleEl) {
-                    document.body.insertAdjacentHTML(
+                    this.editor.dom.insertAdjacentHTML(
                         "beforeend",
                         '<style type="text/css" class="doc-bibliography-style"></style>'
                     )
@@ -371,7 +371,7 @@ export class ModCitations {
         docBibliography.innerHTML = citRenderer.fm.bibHTML
         let styleEl = document.querySelector(".doc-bibliography-style")
         if (!styleEl) {
-            document.body.insertAdjacentHTML(
+            this.editor.dom.insertAdjacentHTML(
                 "beforeend",
                 '<style type="text/css" class="doc-bibliography-style"></style>'
             )

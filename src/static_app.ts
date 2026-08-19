@@ -78,6 +78,17 @@ export interface StaticAppConfig {
         status: number
     }>
     /**
+     * Editor save mode:
+     * - "external" (default): the host drives saving through
+     *   `onSaveDocument`; no autosave runs inside the editor.
+     * - "direct": the editor autosaves (every 10 s and on page hide) via the
+     *   `saveDocument` connector. `onSaveDocument` is used as the save
+     *   connector and should return `{json: {version}, status}` (or
+     *   `{json, status: 409}` on version conflict, which triggers the
+     *   built-in merge).
+     */
+    saveMode?: "external" | "direct"
+    /**
      * Optional user preferences that control inline editing helpers.
      * Recognized keys include `inline_references` and `inline_math`.
      */
@@ -341,7 +352,7 @@ export async function createStaticApp(
         isOffline: () => false,
         settings: {
             APPS: [appName],
-            EDITOR_SAVE_MODE: "external",
+            EDITOR_SAVE_MODE: config.saveMode ?? "external",
             EDITOR_ONLY_MODE: true,
             E2EE_MODE: "disabled",
             LANGUAGE: config.locale

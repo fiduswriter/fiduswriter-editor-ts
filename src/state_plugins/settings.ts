@@ -131,7 +131,7 @@ export const settingsPlugin = (options: SettingsOptions) => {
         if (!docStyleEl) {
             docStyleEl = document.createElement("style")
             docStyleEl.id = "document-style"
-            document.body.appendChild(docStyleEl)
+            options.editor.dom.appendChild(docStyleEl)
         }
 
         docStyleEl.innerHTML = docStyleCSS
@@ -149,7 +149,7 @@ export const settingsPlugin = (options: SettingsOptions) => {
         if (!langStyleEl) {
             langStyleEl = document.createElement("style")
             langStyleEl.id = "language-style"
-            document.body.appendChild(langStyleEl)
+            options.editor.dom.appendChild(langStyleEl)
         }
 
         langStyleEl.innerHTML = `

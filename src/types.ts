@@ -337,6 +337,11 @@ export interface EditorUser {
 export interface EditorOptions {
     app: EditorApp
     user: EditorUser
+    /**
+     * Optional container element to mount the editor into. When omitted, the
+     * editor replaces `document.body` (full-page mode).
+     */
+    mount?: HTMLElement
 }
 
 /** Editor plugin tuple used to build the ProseMirror state. */
@@ -366,6 +371,7 @@ export interface Editor {
     view: EditorView
     currentView: EditorView
     dom: HTMLElement
+    mount?: HTMLElement
     ws?: {
         connectionCount?: number
         online?: boolean

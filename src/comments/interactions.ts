@@ -43,7 +43,7 @@ export class ModCommentInteractions {
 
     bindEvents(): void {
         // Bind all the click events related to comments
-        document.body.addEventListener("click", event => {
+        this.mod.editor.dom.addEventListener("click", event => {
             const el: {target?: HTMLElement} = {}
             let id: string | number
             switch (true) {

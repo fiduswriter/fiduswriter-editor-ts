@@ -46,7 +46,7 @@ export class ModNavigator {
     }
 
     bindEvents(): void {
-        document.body.addEventListener("click", event => {
+        this.editor.dom.addEventListener("click", event => {
             const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, "#navigator-button", el):
@@ -139,17 +139,17 @@ export class ModNavigator {
             }
         })
 
-        document.body
+        this.editor.dom
             .querySelector("#navigator-list")
             ?.addEventListener("mouseover", () => {
-                document.body.classList.add("no-scroll")
+                this.editor.dom.classList.add("no-scroll")
             })
-        document.body
+        this.editor.dom
             .querySelector("#navigator-list")
             ?.addEventListener("mouseout", () => {
-                document.body.classList.remove("no-scroll")
+                this.editor.dom.classList.remove("no-scroll")
             })
-        document.body.addEventListener("keydown", event => {
+        this.editor.dom.addEventListener("keydown", event => {
             // Alt+n shortcut to toggle navigator
             if (event.altKey && event.key.toLowerCase() === "n") {
                 event.preventDefault()
@@ -368,8 +368,8 @@ export class ModNavigator {
         if (this.lastSelectedTarget) {
             const target =
                 this.lastSelectedTarget == "title"
-                    ? document.body.querySelector(`div.doc-title`)
-                    : document.body.querySelector(`#${this.lastSelectedTarget}`)
+                    ? this.editor.dom.querySelector(`div.doc-title`)
+                    : this.editor.dom.querySelector(`#${this.lastSelectedTarget}`)
             if (target) {
                 // Set selection at end of target.
                 const range = document.createRange()
@@ -437,7 +437,7 @@ export class ModNavigator {
     populateNavigator(): string | false {
         const currentPos = this.editor.view.state.selection.$head.pos
         const title =
-            document.body.querySelector("div.doc-title")?.textContent ||
+            this.editor.dom.querySelector("div.doc-title")?.textContent ||
             gettext("Untitled Document")
         const items: NavigatorItem[] = [
             {

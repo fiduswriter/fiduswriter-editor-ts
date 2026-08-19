@@ -130,17 +130,23 @@ export class Editor {
         send(data: string | (() => Record<string, unknown> | false | undefined)): void
     }
     dom!: HTMLElement
+    mount?: HTMLElement
     plugins?: Record<string, any>
     noCollabSave?: NoCollabSave
 
     constructor(
-        {app, user}: {app: EditorApp; user: EditorUser},
+        {app, user, mount}: {
+            app: EditorApp
+            user: EditorUser
+            mount?: HTMLElement
+        },
         path: string,
         idString: string,
         editorPlugins = defaultEditorPlugins,
         citationDialogPlugins = null
     ) {
         this.app = app
+        this.mount = mount
         this.editorPlugins = editorPlugins
         this.citationDialogPlugins = citationDialogPlugins
         // For unauthenticated guests, replace the bare config object with a
@@ -490,7 +496,7 @@ export class Editor {
                             "Disconnected. Attempting to reconnect..."
                         ),
                         receiveData: (data: Record<string, any>) => {
-                            if (document.body !== this.dom) {
+                            if (!this.dom.isConnected) {
                                 return // user navigated away.
                             }
                             switch (data.type) {
@@ -1054,8 +1060,16 @@ export class Editor {
     }
 
     render(): void {
-        this.dom = document.createElement("body")
-        document.body = this.dom
+        if (this.mount) {
+            // Embedded mode: render the editor inside the given container
+            // element instead of replacing the page's <body>.
+            this.dom = document.createElement("div")
+            this.mount.appendChild(this.dom)
+        } else {
+            // Full-page mode (the default): the editor owns the whole page.
+            this.dom = document.createElement("body")
+            document.body = this.dom
+        }
         this.dom.classList.add("editor")
         this.dom.classList.add("fw-scrollable")
         this.dom.innerHTML = `<div id="editor">

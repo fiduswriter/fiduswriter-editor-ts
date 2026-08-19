@@ -149,7 +149,7 @@ export class ModMarginboxes {
 
     init() {
         // Add two elements to hold dynamic CSS info about comments.
-        document.body.insertAdjacentHTML(
+        this.editor.dom.insertAdjacentHTML(
             "beforeend",
             '<style type="text/css" id="active-comment-style"></style><style type="text/css" id="track-options-style"></style><style type="text/css" id="margin-box-placement-style"></style>'
         )
@@ -193,7 +193,7 @@ export class ModMarginboxes {
 
     bindEvents() {
         // Bind all the click events related to the margin box filter
-        document.body.addEventListener("click", async event => {
+        this.editor.dom.addEventListener("click", async event => {
             const el: {target?: Element | null} = {}
             const showMoreButton = this.findShowMoreButton(event)
             switch (true) {
@@ -270,11 +270,11 @@ export class ModMarginboxes {
                             user: Number(elData.commentuser || 0),
                             resolved
                         }
-                        document.body.insertAdjacentHTML(
+                        this.editor.dom.insertAdjacentHTML(
                             "beforeend",
                             marginBoxOptions(comment, user, docInfo)
                         )
-                        const marginboxOptions = document.body.querySelector(
+                        const marginboxOptions = this.editor.dom.querySelector(
                             ".comment-answer-options.fw-marginbox-options"
                         )
                         if (marginboxOptions && target) {
@@ -385,7 +385,7 @@ export class ModMarginboxes {
             }
         })
 
-        document.body.addEventListener(
+        this.editor.dom.addEventListener(
             "change",
             evt => {
                 const target = evt.target as HTMLInputElement | null
@@ -680,7 +680,7 @@ export class ModMarginboxes {
                         resolve()
                         return
                     }
-                    const bodyTop = document.body.getBoundingClientRect().top,
+                    const bodyTop = this.editor.dom.getBoundingClientRect().top,
                         marginBoxPlacements: MarginBoxPlacement[] = Array.from(
                             marginBoxesDOM
                         ).map((mboxDOM, index) => {
@@ -736,7 +736,7 @@ export class ModMarginboxes {
                         activeIndex++
                     }
 
-                    const initialOffset = document.body.classList.contains(
+                    const initialOffset = this.editor.dom.classList.contains(
                         "header-closed"
                     )
                         ? 72 + 90
@@ -1043,7 +1043,7 @@ export class ModMarginboxes {
     }
 
     closeAllLongComments() {
-        document.body.querySelectorAll(".comment-full").forEach(el => {
+        this.editor.dom.querySelectorAll(".comment-full").forEach(el => {
             const full = el as HTMLElement
             if (full.style.display !== "none") {
                 full.style.display = "none"

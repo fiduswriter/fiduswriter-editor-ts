@@ -132,23 +132,23 @@ export class HeaderbarView {
 
     bindEvents(): void {
         this.listeners.onclick = event => this.onclick(event)
-        document.body.addEventListener("click", this.listeners.onclick)
+        this.editor.dom.addEventListener("click", this.listeners.onclick)
         this.listeners.onKeydown = event => this.onKeydown(event)
-        document.body.addEventListener("keydown", this.listeners.onKeydown)
+        this.editor.dom.addEventListener("keydown", this.listeners.onKeydown)
         this.listeners.onKeyup = event => this.onKeyup(event)
-        document.body.addEventListener("keyup", this.listeners.onKeyup)
+        this.editor.dom.addEventListener("keyup", this.listeners.onKeyup)
         this.listeners.onFocusout = event => this.onFocusout(event)
-        document.body.addEventListener("focusout", this.listeners.onFocusout)
+        this.editor.dom.addEventListener("focusout", this.listeners.onFocusout)
     }
 
     destroy(): void {
         if (document.activeElement?.id === "document-title") {
             this.saveFileName()
         }
-        document.body.removeEventListener("click", this.listeners.onclick!)
-        document.body.removeEventListener("keydown", this.listeners.onKeydown!)
-        document.body.removeEventListener("keyup", this.listeners.onKeyup!)
-        document.body.removeEventListener("focusout", this.listeners.onFocusout!)
+        this.editor.dom.removeEventListener("click", this.listeners.onclick!)
+        this.editor.dom.removeEventListener("keydown", this.listeners.onKeydown!)
+        this.editor.dom.removeEventListener("keyup", this.listeners.onKeyup!)
+        this.editor.dom.removeEventListener("focusout", this.listeners.onFocusout!)
     }
 
     onclick(event: MouseEvent): void {
@@ -425,7 +425,7 @@ export class HeaderbarView {
         if (!findTarget(event, "h1#document-title")) {
             return
         }
-        const docTitleEl = document.body.querySelector("h1#document-title")
+        const docTitleEl = this.editor.dom.querySelector("h1#document-title")
         if (
             !docTitleEl?.childNodes.length ||
             (docTitleEl.childNodes.length === 1 &&
@@ -537,7 +537,7 @@ export class HeaderbarView {
             // We are offline. Just reset.
             return this.update()
         }
-        const docTitleEl = document.body.querySelector("h1#document-title") as HTMLElement | null
+        const docTitleEl = this.editor.dom.querySelector("h1#document-title") as HTMLElement | null
         if (!docTitleEl) {
             return
         }
@@ -589,9 +589,9 @@ export class HeaderbarView {
         this.dd.apply(this.headerEl, diff)
         const model = this.editor.menu.headerbarModel as HeaderbarModel
         if (model.open) {
-            document.body.classList.remove("header-closed")
+            this.editor.dom.classList.remove("header-closed")
         } else {
-            document.body.classList.add("header-closed")
+            this.editor.dom.classList.add("header-closed")
         }
     }
 

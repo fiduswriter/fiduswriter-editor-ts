@@ -78,11 +78,11 @@ export class SelectionMenuView {
 
     bindEvents(): void {
         this.listeners.onclick = event => this.onclick(event)
-        document.body.addEventListener("click", this.listeners.onclick as EventListener)
+        this.editor.dom.addEventListener("click", this.listeners.onclick as EventListener)
     }
 
     destroy(): void {
-        document.body.removeEventListener(
+        this.editor.dom.removeEventListener(
             "click",
             this.listeners.onclick as EventListener
         )

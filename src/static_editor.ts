@@ -72,6 +72,11 @@ export interface StaticEditorConfig
     /** Optional extra editor plugins. */
     plugins?: Array<[string, Record<string, unknown>]>
     /**
+     * Optional container element (or selector) to mount the editor into.
+     * When omitted, the editor replaces `document.body` (full-page mode).
+     */
+    mount?: HTMLElement | string
+    /**
      * Optional user preferences that control inline editing helpers.
      * Recognized keys include `inline_references` and `inline_math`.
      */
@@ -242,8 +247,21 @@ export async function createStaticEditor(
     // exports and printing use the latest edits.
     plugins.push([app.name, {ConfirmedDocEditorPlugin}])
 
+    let mount: HTMLElement | undefined
+    if (config.mount) {
+        mount =
+            typeof config.mount === "string"
+                ? (document.querySelector(config.mount) as HTMLElement)
+                : config.mount
+        if (!mount) {
+            throw new Error(
+                `createStaticEditor: mount element not found (${String(config.mount)})`
+            )
+        }
+    }
+
     const editor = new Editor(
-        {app, user},
+        {app, user, mount},
         docPath,
         String(docId),
         plugins

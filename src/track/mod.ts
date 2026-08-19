@@ -30,7 +30,7 @@ export class ModTrack {
 
     bindEvents(): void {
         // Bind all the click events related to track changes
-        document.body.addEventListener("click", event => {
+        this.editor.dom.addEventListener("click", event => {
             const el: {target?: HTMLElement} = {}
             switch (true) {
                 case findTarget(event, ".track-accept", el): {

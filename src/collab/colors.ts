@@ -38,7 +38,7 @@ export class ModCollabColors {
         styleContainers.innerHTML =
             '<style type="text/css" id="user-colors"></style>'
         while (styleContainers.firstElementChild) {
-            document.body.appendChild(styleContainers.firstElementChild)
+            this.mod.editor.dom.appendChild(styleContainers.firstElementChild)
         }
         this.userColorStyle = document.getElementById(
             "user-colors"

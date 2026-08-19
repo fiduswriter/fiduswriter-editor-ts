@@ -30,7 +30,7 @@ export class ModFootnoteLayout {
         styleContainers.innerHTML =
             '<style type="text/css" id="footnote-placement-style"></style>'
         while (styleContainers.firstElementChild) {
-            document.body.appendChild(styleContainers.firstElementChild)
+            this.editor.dom.appendChild(styleContainers.firstElementChild)
         }
     }
 
