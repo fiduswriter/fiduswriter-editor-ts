@@ -58,8 +58,12 @@ export class CitationDialog {
         this.lastSort = {column: 0, dir: "asc"}
     }
 
-    init(): void {
-        this.activatePlugins()
+    async init(): Promise<void> {
+        // Plugins add their buttons (and other state) to this dialog. Await
+        // them before building/opening the Dialog so those buttons are
+        // rendered — otherwise plugin buttons added asynchronously after
+        // dialog.open() never appear.
+        await this.activatePlugins()
         if (this.node?.type && this.node?.type.name === "citation") {
             this.initialFormat = this.node.attrs.format
             this.initialReferences = this.node.attrs.references
