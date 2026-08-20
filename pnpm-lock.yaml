@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@fiduswriter/bibliography-manager':
-        specifier: ^0.1.29
-        version: 0.1.29(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+        specifier: ^0.1.31
+        version: 0.1.31(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       '@fiduswriter/document':
-        specifier: ^0.2.41
-        version: 0.2.41
+        specifier: ^0.2.43
+        version: 0.2.43
       '@fiduswriter/image-manager':
         specifier: ^0.1.22
         version: 0.1.22(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
@@ -45,8 +45,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       fwtoolkit:
-        specifier: ^0.2.10
-        version: 0.2.10(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+        specifier: ^0.2.13
+        version: 0.2.13(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       jszip:
         specifier: ^3.10.1
         version: 3.10.1
@@ -176,6 +176,9 @@ importers:
         version: 8.67.0(@typescript/typescript6@6.0.2)(eslint@10.7.0)
 
 packages:
+
+  '@arnog/colors@0.5.0':
+    resolution: {integrity: sha512-NB7yqrO7qvInsqJdqz6C6mDU+2oiKmbBbk3czMS0E7KkGxLRy538tEHCsB5TKqmaxxXpi6/U120TnGl8NsDePg==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -346,8 +349,8 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@cortex-js/compute-engine@0.28.0':
-    resolution: {integrity: sha512-kGs74P4KVNLSqu+iVhLSAvodScZdVGoZI2kOsUjnBEFCFjlPJ1Nj5TpBz/4nwPT+viguB+g7VseXsmcxWRx23Q==}
+  '@cortex-js/compute-engine@0.58.0':
+    resolution: {integrity: sha512-N0+vXjVZfKwJS7ZIGvq41mojI55m5TrdDXveAXzNjzjZ9iNiNrdEzXL2EmrcP+9GCWCwTonrEeZWAIG78f3INg==}
     engines: {node: '>=21.7.3', npm: '>=10.5.0'}
 
   '@emnapi/core@1.10.0':
@@ -554,11 +557,11 @@ packages:
     resolution: {integrity: sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@fiduswriter/bibliography-manager@0.1.29':
-    resolution: {integrity: sha512-x1saFehEXnnbc/1vIjHNIk0RxNGnigMzsg7UnjuNR5FS93uXqDhF6s+eEMe7SnMHMK++QZznvPvRoPtErfNZ5Q==}
+  '@fiduswriter/bibliography-manager@0.1.31':
+    resolution: {integrity: sha512-SXpVrkMVRdvoAXGEndusudARY7DcAiYfE05H+/R9EavMgOknyWzmT/+2WeWZnpHFjc9aPsHF8f7Ub5rAgAMYsA==}
 
-  '@fiduswriter/document@0.2.41':
-    resolution: {integrity: sha512-VkUjj4r0rooBctiRExT99lV6joHFvA1IYnp1ZR+9BN+ifUHsbiQNW05g4Ikd4GryupbNMV5DsqZh2ya8W+EyTQ==}
+  '@fiduswriter/document@0.2.43':
+    resolution: {integrity: sha512-JQwnxOXjPROft8pSd6M8GizVyReZFi7QecmLWmyOnzZuZZaW2oOrUP+eIYqhGsfR1ydMXvmgPbOcJLNG/uFe+A==}
 
   '@fiduswriter/image-manager@0.1.22':
     resolution: {integrity: sha512-UkiAk2mSZcAkvx+zAZYDb1NlSPorBY/2jI7L/a1CRp8wruVwHXkDbqi8HZvnNeKhMbDuZTFWyvT4SMZJO0mORA==}
@@ -1648,8 +1651,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  fwtoolkit@0.2.10:
-    resolution: {integrity: sha512-P695cTfghXkEgJJBlHHwxdBfi/PgR47qdV7ZBixW4kg3CX+iF4H3rWfPCvhyfO+RVYnuSn/sL5cFlR5muGTRDg==}
+  fwtoolkit@0.2.13:
+    resolution: {integrity: sha512-Ek4gZyymmrhTM8pSTv6egXMdL1bedVRcIB5KZ20Z0P9Dyr3zS7MIk2gTehvvb3dkOHW7bguVkqC9WBI2tYik6A==}
     peerDependencies:
       prosemirror-commands: ^1.7.0
       prosemirror-history: ^1.4.0
@@ -2036,9 +2039,8 @@ packages:
   makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
 
-  mathlive@0.104.2:
-    resolution: {integrity: sha512-5z3B5DEZf20UNf+VPXE/0CD1r2rGkNlzdvCt3muTunWPSFb5aBy6WRPXdeMPdsulSCXDse/EYotr0Mx0R+tX4Q==}
-    engines: {node: '>=21.0.0', npm: '>=10.5.0'}
+  mathlive@0.110.0:
+    resolution: {integrity: sha512-UOpJsQ6h1eeN0xZULGTl1MwUB/lZLCDuzKeHvKEh7Zra8U/rtgDNrssj5PZdJtBTIV48AfEhtv6rv47AeMOxJA==}
 
   mathml-to-latex@1.8.0:
     resolution: {integrity: sha512-gQ0uK3zqB8HwlfaXJkEL5rgaZNbKUiBMmBP/B/W+b+t6KcseLSuYb1b0BjLgS9ZiQa24ePkqTX8/6FaQuDL7wQ==}
@@ -2573,6 +2575,8 @@ packages:
 
 snapshots:
 
+  '@arnog/colors@0.5.0': {}
+
   '@babel/code-frame@7.29.7':
     dependencies:
       '@babel/helper-validator-identifier': 7.29.7
@@ -2766,8 +2770,9 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@cortex-js/compute-engine@0.28.0':
+  '@cortex-js/compute-engine@0.58.0':
     dependencies:
+      '@arnog/colors': 0.5.0
       complex-esm: 2.1.1-esm1
       decimal.js: 10.6.0
 
@@ -2899,14 +2904,14 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fiduswriter/bibliography-manager@0.1.29(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)':
+  '@fiduswriter/bibliography-manager@0.1.31(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)':
     dependencies:
       bibliojson: 4.0.4
       fix-utf8: 2.0.1
-      fwtoolkit: 0.2.10(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      fwtoolkit: 0.2.13(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       prosemirror-commands: 1.7.1
       prosemirror-model: 1.25.11
-      simple-datatables: 10.2.0
+      simple-datatables: 10.3.0
       tokenfield: 1.5.2
     transitivePeerDependencies:
       - prosemirror-history
@@ -2914,7 +2919,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@0.2.41':
+  '@fiduswriter/document@0.2.43':
     dependencies:
       '@prettier/plugin-xml': 3.4.2(prettier@3.9.5)
       '@vivliostyle/print': 2.44.1
@@ -2923,9 +2928,9 @@ snapshots:
       downloadjs: 1.4.7
       fast-deep-equal: 3.1.3
       fast-xml-parser: 5.10.0
-      fwtoolkit: 0.2.10(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      fwtoolkit: 0.2.13(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       jszip: 3.10.1
-      mathlive: 0.104.2
+      mathlive: 0.110.0
       mathml-to-latex: 1.8.0
       mathml2omml: 0.5.0
       orderedmap: 2.1.1
@@ -2948,7 +2953,7 @@ snapshots:
       bibliojson: 4.0.4
       cropperjs: 1.6.2
       fast-deep-equal: 3.1.3
-      fwtoolkit: 0.2.10(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      fwtoolkit: 0.2.13(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       simple-datatables: 10.2.0
     transitivePeerDependencies:
       - prosemirror-commands
@@ -4057,7 +4062,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fwtoolkit@0.2.10(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1):
+  fwtoolkit@0.2.13(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1):
     dependencies:
       diff-dom: 5.2.1
       jszip: 3.10.1
@@ -4619,9 +4624,9 @@ snapshots:
     dependencies:
       tmpl: 1.0.5
 
-  mathlive@0.104.2:
+  mathlive@0.110.0:
     dependencies:
-      '@cortex-js/compute-engine': 0.28.0
+      '@cortex-js/compute-engine': 0.58.0
 
   mathml-to-latex@1.8.0:
     dependencies:

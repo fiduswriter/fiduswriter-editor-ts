@@ -89,6 +89,18 @@ export interface StaticAppConfig {
      */
     saveMode?: "external" | "direct"
     /**
+     * Optional API connector overrides. When provided, these replace the
+     * corresponding in-memory connectors, letting the editor talk to a real
+     * backend (e.g. Django) instead of the static in-memory stores.
+     */
+    apiConnectors?: Partial<{
+        document: EditorDocumentApi
+        documentImport: EditorDocumentImportApi
+        image: ImageApi
+        bibliography: BibliographyApi
+        contacts: EditorContactsApi
+    }>
+    /**
      * Optional user preferences that control inline editing helpers.
      * Recognized keys include `inline_references` and `inline_math`.
      */
@@ -368,7 +380,8 @@ export async function createStaticApp(
             documentImport: documentImportApi,
             image: imageApi,
             bibliography: bibliographyApi,
-            contacts: contactsApi
+            contacts: contactsApi,
+            ...config.apiConnectors
         }
     } as unknown as EditorApp
 
