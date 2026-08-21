@@ -48,7 +48,7 @@ await build({
     minify: true,
     target: ["es2020"],
     // Keep all split chunks and file-loader assets next to the editor page so
-    // relative URLs resolve correctly both locally and on Codeberg Pages.
+    // relative URLs resolve correctly both locally and on Forgejo Pages.
     // Include the content hash in the names so esbuild does not collide when
     // multiple chunks share the same basename.
     chunkNames: "editor/[name]-[hash]",

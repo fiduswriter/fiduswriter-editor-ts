@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build the demo site and push it to the Codeberg Pages branch.
+# Build the demo site and push it to the Forgejo Pages branch.
 set -e
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
@@ -64,7 +64,7 @@ cd "$BUILD_DIR"
 git init
 git checkout -b pages
 git add .
-git commit -m "Deploy @fiduswriter/editor demo to Codeberg Pages"
+git commit -m "Deploy @fiduswriter/editor demo to Forgejo Pages"
 
 REMOTE=$(cd "$ROOT" && git remote get-url origin)
 echo "Pushing to $REMOTE pages branch..."
@@ -73,4 +73,4 @@ git push -f origin pages
 
 cd "$ROOT"
 rm -rf "$BUILD_DIR"
-echo "Done. The demo should be available at https://fiduswriter.codeberg.page/fiduswriter-editor-ts/"
+echo "Done. The demo should be available at https://fiduswriter.pages.fiduswriter.org/fiduswriter-editor-ts/"

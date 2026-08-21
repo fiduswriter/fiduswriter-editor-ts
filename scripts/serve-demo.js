@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Build the demo site the same way Codeberg Pages does and serve it locally.
+// Build the demo site the same way Forgejo Pages does and serve it locally.
 import {spawn} from "node:child_process"
 import {createServer} from "node:http"
 import * as fs from "node:fs/promises"
