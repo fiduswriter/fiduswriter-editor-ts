@@ -1,6 +1,6 @@
 {
   "name": "@fiduswriter/editor",
-  "version": "0.1.81",
+  "version": "0.2.0",
   "description": "Fidus Writer browser editor",
   "keywords": [
     "fiduswriter",
@@ -91,8 +91,8 @@
   },
   "dependencies": {
     "@fiduswriter/bibliography-manager": "^0.1.31",
-    "@fiduswriter/document": "^0.2.43",
-    "@fiduswriter/image-manager": "^0.1.22",
+    "@fiduswriter/document": "^0.3.0",
+    "@fiduswriter/image-manager": "^0.1.23",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "cropperjs": "^1.6.2",
     "diff": "^5.0.0",

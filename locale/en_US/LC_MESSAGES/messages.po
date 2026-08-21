@@ -220,6 +220,12 @@ msgstr "Bibliography"
 msgid "BITS"
 msgstr "BITS"
 
+msgid "Bleed"
+msgstr "Bleed"
+
+msgid "Bleed box"
+msgstr "Bleed box"
+
 msgid "Block change"
 msgstr "Block change"
 
@@ -470,6 +476,9 @@ msgstr "Create share link"
 msgid "Creating copy..."
 msgstr "Creating copy..."
 
+msgid "Crop marks"
+msgstr "Crop marks"
+
 msgid "Cross reference"
 msgstr "Cross reference"
 
@@ -635,6 +644,9 @@ msgstr "Email"
 msgid "Email is in incorrect format!"
 msgstr "Email is in incorrect format!"
 
+msgid "Embed a Fidus Writer file of this document in the PDF"
+msgstr "Embed a Fidus Writer file of this document in the PDF"
+
 msgid "Emphasis"
 msgstr "Emphasis"
 
@@ -684,6 +696,9 @@ msgid ""
 "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
 msgstr ""
 "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+
+msgid "Export the document directly to a PDF file without using the print dialog."
+msgstr "Export the document directly to a PDF file without using the print dialog."
 
 msgid "Export the document to a DOCX file with the given template."
 msgstr "Export the document to a DOCX file with the given template."
@@ -852,6 +867,9 @@ msgstr ""
 
 msgid "Image"
 msgstr "Image"
+
+msgid "Include tracked changes in the PDF"
+msgstr "Include tracked changes in the PDF"
 
 msgid "Incorrect passphrase."
 msgstr "Incorrect passphrase."
@@ -1042,6 +1060,9 @@ msgstr "Merged paragraph"
 msgid "Merging Offline Document"
 msgstr "Merging Offline Document"
 
+msgid "mm"
+msgstr "mm"
+
 msgid "More"
 msgstr "More"
 
@@ -1196,6 +1217,12 @@ msgstr "Paste with content detection"
 msgid "Paste without content detection"
 msgstr "Paste without content detection"
 
+msgid "PDF"
+msgstr "PDF"
+
+msgid "PDF export options"
+msgstr "PDF export options"
+
 msgid "People"
 msgstr "People"
 
@@ -1214,6 +1241,9 @@ msgstr "Previous"
 msgid "Print"
 msgstr "Print"
 
+msgid "Print production"
+msgstr "Print production"
+
 msgid "Print/PDF"
 msgstr "Print/PDF"
 
@@ -1222,6 +1252,9 @@ msgstr "Proceed to Login page"
 
 msgid "Proceed to Merge"
 msgstr "Proceed to Merge"
+
+msgid "Rasterize SVG images"
+msgstr "Rasterize SVG images"
 
 msgid "Read"
 msgstr "Read"
@@ -1333,6 +1366,9 @@ msgstr "Resolve"
 
 msgid "Resolve comment"
 msgstr "Resolve comment"
+
+msgid "Resolve tracked changes (accept all)"
+msgstr "Resolve tracked changes (accept all)"
 
 msgid "Resolved comments"
 msgstr "Resolved comments"
@@ -1471,6 +1507,9 @@ msgstr "Show keyboard shortcuts"
 
 msgid "show less"
 msgstr "show less"
+
+msgid "Show link annotation borders"
+msgstr "Show link annotation borders"
 
 msgid "show more"
 msgstr "show more"
@@ -1665,6 +1704,9 @@ msgstr "Tracking"
 
 msgid "Tracking changes to the document"
 msgstr "Tracking changes to the document"
+
+msgid "Trim box"
+msgstr "Trim box"
 
 msgid "Type formula"
 msgstr "Type formula"

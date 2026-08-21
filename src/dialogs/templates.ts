@@ -93,6 +93,33 @@ export const revisionDialogTemplate = ({dir}: {dir: string}): string =>
         <input type="text" class="revision-note" placeholder="${gettext("Description (optional)")}" dir="${dir}">
     </p>`
 
+export const pdfExportDialogTemplate = (): string => `
+    <h4>${gettext("Tracked changes")}</h4>
+    <div class="fw-radio">
+        <input type="radio" name="pdf-track-changes" value="resolve" class="pdf-track-resolve" checked="">
+        <label class="pdf-track-resolve-label">${gettext("Resolve tracked changes (accept all)")}</label>
+    </div>
+    <div class="fw-radio">
+        <input type="radio" name="pdf-track-changes" value="include" class="pdf-track-include">
+        <label class="pdf-track-include-label">${gettext("Include tracked changes in the PDF")}</label>
+    </div>
+    <p>
+        <label>
+            <input type="checkbox" class="pdf-embed-fidus">
+            ${gettext("Embed a Fidus Writer file of this document in the PDF")}
+        </label>
+    </p>
+    <h4>${gettext("Print production")}</h4>
+    <p>
+        <label><input type="checkbox" class="pdf-crop-marks"> ${gettext("Crop marks")}</label><br>
+        <label><input type="checkbox" class="pdf-trim-box"> ${gettext("Trim box")}</label><br>
+        <label><input type="checkbox" class="pdf-bleed-box"> ${gettext("Bleed box")}</label><br>
+        <label>${gettext("Bleed")}: <input type="number" class="pdf-bleed-mm" value="3" min="0" step="0.5"> ${gettext("mm")}</label><br>
+        <label><input type="checkbox" class="pdf-link-borders"> ${gettext("Show link annotation borders")}</label><br>
+        <label><input type="checkbox" class="pdf-rasterize-svgs"> ${gettext("Rasterize SVG images")}</label>
+    </p>
+`
+
 export const tableInsertTemplate = (): string => `
     <table class="insert-table-selection">
         <tr>

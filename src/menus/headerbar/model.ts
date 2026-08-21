@@ -10,7 +10,7 @@ import {DocumentAccessRightsDialog} from "../../documents/access_rights/index.js
 import {RequestAccessDialog} from "../../documents/access_rights/request_access_dialog.js"
 import {SaveCopy, SaveRevision} from "../../exporter/native/index.js"
 import {ExportFidusFile} from "../../exporter/native/file.js"
-import {LanguageDialog, RevisionDialog} from "../../dialogs/index.js"
+import {LanguageDialog, PdfExportDialog, RevisionDialog} from "../../dialogs/index.js"
 import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {PassphraseManager} from "fwtoolkit/e2ee/passphrase-manager"
 import {changePasswordDialog} from "fwtoolkit/e2ee/password-dialog"
@@ -644,6 +644,65 @@ export const headerbarModel = () => ({
                             exporter.init()
                         })
                     }
+                },
+                {
+                    title: gettext("PDF"),
+                    type: "action",
+                    tooltip: gettext(
+                        "Export the document directly to a PDF file without using the print dialog."
+                    ),
+                    order: 1,
+                    action: (editor: Editor) => {
+                        import(
+                            "@fiduswriter/document/exporter/pdf/index"
+                        ).then(async ({PdfExporter}) => {
+                            const db = getDB(editor)
+                            const dialog = new PdfExportDialog()
+                            const options = await dialog.init()
+                            if (!options) {
+                                return
+                            }
+                            const doc = getExportDoc(
+                                editor,
+                                options.resolveTrackChanges
+                                    ? {changes: "acceptAllNoInsertions"}
+                                    : undefined
+                            )
+                            let fidusFile: Uint8Array | undefined
+                            if (options.embedFidusFile) {
+                                const exporter = new ExportFidusFile(
+                                    editor.app,
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    true,
+                                    editor.docInfo.token,
+                                    false
+                                )
+                                const blob = await exporter.init()
+                                fidusFile = new Uint8Array(
+                                    await blob.arrayBuffer()
+                                )
+                            }
+                            const pdfExporter = new PdfExporter(
+                                doc,
+                                db.bibDB,
+                                db.imageDB,
+                                editor.app.csl,
+                                editor.docInfo.updated as Date,
+                                getDocumentTemplate(editor).documentStyles,
+                                exportProgress(doc),
+                                {
+                                    version: editor.app.settings
+                                        .VERSION as string | undefined,
+                                    fidusFile,
+                                    printOptions: options.printOptions
+                                }
+                            )
+                            pdfExporter.init()
+                        })
+                    },
+                    disabled: (editor: Editor) => editor.app.isOffline()
                 },
                 {
                     title: gettext("Epub"),
