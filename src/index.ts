@@ -287,7 +287,7 @@ export class Editor {
             staticUrl("css/editor/access_rights_dialog.css"),
             staticUrl("css/editor/citation_dialog.css"),
             staticUrl("css/editor/review.css"),
-            staticUrl("css/add_remove_dialog.css"),
+            staticUrl("css/fwtoolkit/add_remove_dialog.css"),
             staticUrl("css/bibliography/bibliography.css"),
             staticUrl("css/editor/dot_menu.css"),
             staticUrl("css/cropper.min.css"),

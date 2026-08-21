@@ -22,7 +22,7 @@ import {
     shareTokenRowTemplate
 } from "./templates.js"
 
-ensureCSS(staticUrl("css/checkable_list.css"))
+ensureCSS(staticUrl("css/fwtoolkit/checkable_list.css"))
 
 interface Contact {
     id: number | string

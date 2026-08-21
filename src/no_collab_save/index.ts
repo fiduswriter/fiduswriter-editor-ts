@@ -94,7 +94,10 @@ export class NoCollabSave {
         let payload: Record<string, unknown> = {
             id: this.editor.docInfo.id,
             content: doc.content,
-            comments: this.editor.mod.comments,
+            // Send the plain comments data, not the ModComments instance —
+            // serializing the instance hits a circular structure (editor ->
+            // app -> bibDB -> app) and breaks JSON.stringify.
+            comments: (this.editor.mod.comments as any)?.store?.comments,
             bibliography: this.editor.mod.db?.bibDB.db,
             title: doc.title,
             version: this.editor.docInfo.version,
