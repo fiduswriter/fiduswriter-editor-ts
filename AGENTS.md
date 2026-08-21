@@ -93,7 +93,7 @@ npm run typecheck
 
 ## Consumers
 
-- `fiduswriter/` (the main Fidus Writer Django app).
+- `fiduswriter-server-backend/` (the main Fidus Writer Django app).
 - Statically served pages and browser demos that use `createStaticEditor` or
   `createStaticApp` without a backend server.
 
