@@ -697,8 +697,8 @@ msgid ""
 msgstr ""
 "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
 
-msgid "Export the document directly to a PDF file without using the print dialog."
-msgstr "Export the document directly to a PDF file without using the print dialog."
+msgid "Export the document directly to a PDF file."
+msgstr "Export the document directly to a PDF file."
 
 msgid "Export the document to a DOCX file with the given template."
 msgstr "Export the document to a DOCX file with the given template."

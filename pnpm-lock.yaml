@@ -12,8 +12,8 @@ importers:
         specifier: ^0.1.31
         version: 0.1.31(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       '@fiduswriter/document':
-        specifier: file:../fiduswriter-document-ts
-        version: file:../fiduswriter-document-ts
+        specifier: ^0.3.1
+        version: 0.3.1
       '@fiduswriter/image-manager':
         specifier: ^0.1.23
         version: 0.1.23(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
@@ -560,8 +560,8 @@ packages:
   '@fiduswriter/bibliography-manager@0.1.31':
     resolution: {integrity: sha512-SXpVrkMVRdvoAXGEndusudARY7DcAiYfE05H+/R9EavMgOknyWzmT/+2WeWZnpHFjc9aPsHF8f7Ub5rAgAMYsA==}
 
-  '@fiduswriter/document@file:../fiduswriter-document-ts':
-    resolution: {directory: ../fiduswriter-document-ts, type: directory}
+  '@fiduswriter/document@0.3.1':
+    resolution: {integrity: sha512-uKSo4K/TLEUmiMj/2TNJ00xi/SM6/ZMEFmtfKmyLyp67pr99NF1zclwsdXildG5mPwNwxYCeUXwsS2Y9dXhvFQ==}
 
   '@fiduswriter/image-manager@0.1.23':
     resolution: {integrity: sha512-u2jJTBLbaOCUlFcM4pI2tyqZL6VF6lB16c09zSroJgiV+9FPU7NulFGLLJe6WMAvlFO8e4gnETLWTKEVIU4acA==}
@@ -2576,8 +2576,8 @@ packages:
     resolution: {integrity: sha512-kiGUalWN+rgBJ/1OHZsBtU4rXZOfj/7rKQxULKlIzwzQSvMJUUNgPwJEEh7gU6xEVxC0ahoOBvN2YI8GH6FNgA==}
     engines: {node: '>=10.12.0'}
 
-  vivliostyle-pdf@file:../vivliostyle-pdf:
-    resolution: {directory: ../vivliostyle-pdf, type: directory}
+  vivliostyle-pdf@0.2.0:
+    resolution: {integrity: sha512-J/PS3UyPvIa5nBYz7kosaR5s6rLQ3rTfbDX2teoAgRtHWT+feQHSoeEDyDbVlofRljxmW7dkn8OIOc3WuMSNNw==}
 
   w3c-keyname@2.2.8:
     resolution: {integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==}
@@ -3002,7 +3002,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@file:../fiduswriter-document-ts':
+  '@fiduswriter/document@0.3.1':
     dependencies:
       '@prettier/plugin-xml': 3.4.2(prettier@3.9.5)
       '@vivliostyle/print': 2.44.1
@@ -3029,7 +3029,7 @@ snapshots:
       prosemirror-tables: 1.8.5
       prosemirror-transform: 1.12.0
       prosemirror-view: 1.42.1
-      vivliostyle-pdf: file:../vivliostyle-pdf
+      vivliostyle-pdf: 0.2.0
       w3c-keyname: 2.2.8
 
   '@fiduswriter/image-manager@0.1.23(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)':
@@ -5297,7 +5297,7 @@ snapshots:
       '@types/istanbul-lib-coverage': 2.0.6
       convert-source-map: 2.0.0
 
-  vivliostyle-pdf@file:../vivliostyle-pdf:
+  vivliostyle-pdf@0.2.0:
     dependencies:
       '@pdfme/pdf-lib': 6.1.12
       '@vivliostyle/print': 2.44.1

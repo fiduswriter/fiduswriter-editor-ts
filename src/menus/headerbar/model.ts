@@ -649,7 +649,7 @@ export const headerbarModel = () => ({
                     title: gettext("PDF"),
                     type: "action",
                     tooltip: gettext(
-                        "Export the document directly to a PDF file without using the print dialog."
+                        "Export the document directly to a PDF file."
                     ),
                     order: 1,
                     action: (editor: Editor) => {

@@ -214,7 +214,7 @@
     "Export": "Export",
     "Export of the document contents": "Export of the document contents",
     "Export the document as a FIDUS file including its template.": "Export the document as a FIDUS file including its template.",
-    "Export the document directly to a PDF file without using the print dialog.": "Export the document directly to a PDF file without using the print dialog.",
+    "Export the document directly to a PDF file.": "Export the document directly to a PDF file.",
     "Export the document to a Book Interchange Tag Set BITS Version 2.1 file.": "Export the document to a Book Interchange Tag Set BITS Version 2.1 file.",
     "Export the document to a DOCX file with the given template.": "Export the document to a DOCX file with the given template.",
     "Export the document to a FIDUS file without its template.": "Export the document to a FIDUS file without its template.",
