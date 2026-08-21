@@ -319,7 +319,7 @@
 }
 
 .e2ee-recovery-key-box code {
-    font-family: "Courier New", Courier, monospace;
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace;
     font-size: 1.1em;
     color: var(--main-text-color, #2c2723);
     letter-spacing: 0.5px;
