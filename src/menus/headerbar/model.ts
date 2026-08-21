@@ -391,11 +391,11 @@ export const headerbarModel = () => ({
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
                 {
-                    title: gettext("Print/PDF"),
+                    title: gettext("Print"),
                     type: "action",
                     //icon: 'print',
                     tooltip: gettext(
-                        "Either print or create a PDF using your browser print dialog."
+                        "Print the document using your browser print dialog."
                     ),
                     order: 5,
                     keys: "Ctrl-p",
