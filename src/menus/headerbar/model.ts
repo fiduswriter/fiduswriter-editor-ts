@@ -698,6 +698,10 @@ export const headerbarModel = () => ({
                                 {
                                     version: editor.app.settings
                                         .VERSION as string | undefined,
+                                    userName:
+                                        editor.user?.name ||
+                                        editor.user?.username ||
+                                        undefined,
                                     fidusFile,
                                     printOptions: options.printOptions
                                 }
