@@ -1222,9 +1222,6 @@ msgstr "Poprzedni"
 msgid "Print"
 msgstr "Drukuj"
 
-msgid "Print/PDF"
-msgstr "Drukuj/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Przejdź do strony logowania"
 

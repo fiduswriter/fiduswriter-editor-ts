@@ -1218,9 +1218,6 @@ msgstr "Tidligere"
 msgid "Print"
 msgstr "Skriv ut"
 
-msgid "Print/PDF"
-msgstr "Print/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Fortsett til påloggingssiden"
 

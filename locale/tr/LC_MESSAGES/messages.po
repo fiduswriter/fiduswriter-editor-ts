@@ -1220,9 +1220,6 @@ msgstr "Öncesi"
 msgid "Print"
 msgstr "Yazdır"
 
-msgid "Print/PDF"
-msgstr "Yazdır/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Giriş sayfasına ilerleyin"
 

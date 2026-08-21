@@ -1212,9 +1212,6 @@ msgstr "Předchozí"
 msgid "Print"
 msgstr "Vytisknout"
 
-msgid "Print/PDF"
-msgstr "Tisk/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Pokračujte na přihlašovací stránku"
 

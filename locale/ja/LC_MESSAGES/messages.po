@@ -1185,9 +1185,6 @@ msgstr "前の"
 msgid "Print"
 msgstr "印刷"
 
-msgid "Print/PDF"
-msgstr "印刷/PDF"
-
 msgid "Proceed to Login page"
 msgstr "ログインページに進む"
 

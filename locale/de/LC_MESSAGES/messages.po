@@ -1234,9 +1234,6 @@ msgstr "Vorheriger"
 msgid "Print"
 msgstr "Drucken"
 
-msgid "Print/PDF"
-msgstr "Drucken / PDF"
-
 msgid "Proceed to Login page"
 msgstr "Weiter zur Anmeldeseite"
 

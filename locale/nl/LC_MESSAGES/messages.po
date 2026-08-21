@@ -1231,9 +1231,6 @@ msgstr "Vorig"
 msgid "Print"
 msgstr "Afdrukken"
 
-msgid "Print/PDF"
-msgstr "Afdrukken/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Ga verder naar de inlogpagina"
 

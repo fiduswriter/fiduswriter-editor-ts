@@ -1244,9 +1244,6 @@ msgstr "Print"
 msgid "Print production"
 msgstr "Print production"
 
-msgid "Print/PDF"
-msgstr "Print/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Proceed to Login page"
 

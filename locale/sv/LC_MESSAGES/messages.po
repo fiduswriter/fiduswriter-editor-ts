@@ -1220,9 +1220,6 @@ msgstr "Tidigare"
 msgid "Print"
 msgstr "Skriva ut"
 
-msgid "Print/PDF"
-msgstr "Skriv ut/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Fortsätt till inloggningssidan"
 

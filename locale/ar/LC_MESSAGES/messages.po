@@ -1207,9 +1207,6 @@ msgstr "سابق"
 msgid "Print"
 msgstr "طباعة"
 
-msgid "Print/PDF"
-msgstr "طباعة/بي دي إف"
-
 msgid "Proceed to Login page"
 msgstr "انتقل إلى صفحة تسجيل الدخول"
 

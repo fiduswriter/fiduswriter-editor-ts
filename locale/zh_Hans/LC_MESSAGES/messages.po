@@ -1176,9 +1176,6 @@ msgstr "以前的"
 msgid "Print"
 msgstr "打印"
 
-msgid "Print/PDF"
-msgstr "打印/PDF"
-
 msgid "Proceed to Login page"
 msgstr "进入登录页面"
 

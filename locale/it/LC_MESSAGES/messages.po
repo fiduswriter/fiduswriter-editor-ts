@@ -1221,9 +1221,6 @@ msgstr "Precedente"
 msgid "Print"
 msgstr "Stampa"
 
-msgid "Print/PDF"
-msgstr "Stampa/PDF"
-
 msgid "Proceed to Login page"
 msgstr "Procedi alla pagina di accesso"
 
