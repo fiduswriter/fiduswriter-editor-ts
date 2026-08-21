@@ -79,6 +79,14 @@ async function buildDemo() {
     const cssDir = join(BUILD_DIR, "css")
     await ensureDir(cssDir)
     await copyCssFiles(join(ROOT, "node_modules", "fwtoolkit", "css"), cssDir)
+    // Runtime component CSS is loaded via staticUrl("css/fwtoolkit/..."),
+    // mirroring how the real app serves fwtoolkit assets.
+    const fwtoolkitCssDir = join(cssDir, "fwtoolkit")
+    await ensureDir(fwtoolkitCssDir)
+    await copyCssFiles(
+        join(ROOT, "node_modules", "fwtoolkit", "css"),
+        fwtoolkitCssDir
+    )
     await fs.copyFile(
         join(ROOT, "node_modules", "prosemirror-view", "style", "prosemirror.css"),
         join(cssDir, "prosemirror.css")
@@ -96,6 +104,34 @@ async function buildDemo() {
     console.log("Copying static assets...")
     await fs.cp(join(ROOT, "static"), join(BUILD_DIR, "static"), {recursive: true})
     await fs.cp(join(ROOT, "demo", "static"), join(BUILD_DIR, "static"), {recursive: true})
+    // vivliostyle-pdf fallback fonts + WOFF2 decoder wasm (bundled in
+    // @fiduswriter/document) so the direct PDF export works in the demo.
+    await ensureDir(join(BUILD_DIR, "static", "fonts"))
+    await ensureDir(join(BUILD_DIR, "static", "woff2"))
+    await fs.cp(
+        join(
+            ROOT,
+            "node_modules",
+            "@fiduswriter",
+            "document",
+            "static-libs",
+            "fonts"
+        ),
+        join(BUILD_DIR, "static", "fonts"),
+        {recursive: true}
+    )
+    await fs.cp(
+        join(
+            ROOT,
+            "node_modules",
+            "@fiduswriter",
+            "document",
+            "static-libs",
+            "woff2"
+        ),
+        join(BUILD_DIR, "static", "woff2"),
+        {recursive: true}
+    )
 
     console.log("Copying Font Awesome...")
     const faCssDir = join(BUILD_DIR, "css", "fontawesome", "css")

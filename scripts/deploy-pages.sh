@@ -26,6 +26,12 @@ mkdir -p "$BUILD_DIR/css"
 for css in "$ROOT/node_modules/fwtoolkit/css/"*.css; do
     cp "$css" "$BUILD_DIR/css/"
 done
+# Runtime component CSS (loaded via staticUrl("css/fwtoolkit/...")) lives
+# under css/fwtoolkit/, mirroring how the real app serves fwtoolkit assets.
+mkdir -p "$BUILD_DIR/css/fwtoolkit"
+for css in "$ROOT/node_modules/fwtoolkit/css/"*.css; do
+    cp "$css" "$BUILD_DIR/css/fwtoolkit/"
+done
 cp "$ROOT/node_modules/prosemirror-view/style/prosemirror.css" "$BUILD_DIR/css/"
 cp "$ROOT/node_modules/cropperjs/dist/cropper.min.css" "$BUILD_DIR/css/"
 for css in "$ROOT/css/"*.css; do
@@ -38,6 +44,15 @@ cp "$ROOT/node_modules/@fiduswriter/bibliography-manager/css/bibliography.css" "
 mkdir -p "$BUILD_DIR/static"
 cp -r "$ROOT/static/"* "$BUILD_DIR/static/"
 cp -r "$ROOT/demo/static/"* "$BUILD_DIR/static/"
+
+# Copy the vivliostyle-pdf fallback fonts and WOFF2 decoder wasm (bundled in
+# @fiduswriter/document) so the direct PDF export works in the demo: the
+# PdfExporter resolves them as staticUrl("")/staticUrl("woff2/woff2.wasm").
+mkdir -p "$BUILD_DIR/static/fonts" "$BUILD_DIR/static/woff2"
+cp "$ROOT/node_modules/@fiduswriter/document/static-libs/fonts/"*.ttf \
+    "$BUILD_DIR/static/fonts/"
+cp "$ROOT/node_modules/@fiduswriter/document/static-libs/woff2/woff2.wasm" \
+    "$BUILD_DIR/static/woff2/"
 
 # Copy Font Awesome CSS and webfonts used by fwtoolkit and the editor.
 mkdir -p "$BUILD_DIR/css/fontawesome/css"
