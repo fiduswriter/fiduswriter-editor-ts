@@ -1906,3 +1906,12 @@ msgstr ""
 
 msgid "YYYY-MM-DD or empty"
 msgstr "YYYY-MM-DD or empty"
+
+msgid "HTML export options"
+msgstr "HTML export options"
+
+msgid "Render formulas as SVG images instead of MathML"
+msgstr "Render formulas as SVG images instead of MathML"
+
+msgid "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."

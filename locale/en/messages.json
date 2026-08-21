@@ -568,5 +568,8 @@
     "Your document was out of sync and has been reset.": "Your document was out of sync and has been reset.",
     "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually.": "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually.",
     "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in.": "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in.",
-    "YYYY-MM-DD or empty": "YYYY-MM-DD or empty"
+    "YYYY-MM-DD or empty": "YYYY-MM-DD or empty",
+    "HTML export options": "HTML export options",
+    "Render formulas as SVG images instead of MathML": "Render formulas as SVG images instead of MathML",
+    "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it.": "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
 }

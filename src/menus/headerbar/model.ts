@@ -10,7 +10,12 @@ import {DocumentAccessRightsDialog} from "../../documents/access_rights/index.js
 import {RequestAccessDialog} from "../../documents/access_rights/request_access_dialog.js"
 import {SaveCopy, SaveRevision} from "../../exporter/native/index.js"
 import {ExportFidusFile} from "../../exporter/native/file.js"
-import {LanguageDialog, PdfExportDialog, RevisionDialog} from "../../dialogs/index.js"
+import {
+    LanguageDialog,
+    PdfExportDialog,
+    RevisionDialog,
+    HtmlExportDialog
+} from "../../dialogs/index.js"
 import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {PassphraseManager} from "fwtoolkit/e2ee/passphrase-manager"
 import {changePasswordDialog} from "fwtoolkit/e2ee/password-dialog"
@@ -627,8 +632,13 @@ export const headerbarModel = () => ({
                     action: (editor: Editor) => {
                         import(
                             "@fiduswriter/document/exporter/html/index"
-                        ).then(({HTMLExporter}) => {
+                        ).then(async ({HTMLExporter}) => {
                             const db = getDB(editor)
+                            const dialog = new HtmlExportDialog()
+                            const options = await dialog.init()
+                            if (!options) {
+                                return
+                            }
                             const doc = getExportDoc(editor, {
                                 changes: "acceptAllNoInsertions"
                             })
@@ -638,7 +648,8 @@ export const headerbarModel = () => ({
                                 db.imageDB,
                                 editor.app.csl,
                                 editor.docInfo.updated as Date,
-                                getDocumentTemplate(editor).documentStyles
+                                getDocumentTemplate(editor).documentStyles,
+                                options.svgMath ? {mathOutput: "svg"} : {}
                             )
                             exporter.progressCallback = exportProgress(doc)
                             exporter.init()

@@ -120,6 +120,18 @@ export const pdfExportDialogTemplate = (): string => `
     </p>
 `
 
+export const htmlExportDialogTemplate = (): string => `
+    <p>
+        <label>
+            <input type="checkbox" class="html-svg-math">
+            ${gettext("Render formulas as SVG images instead of MathML")}
+        </label>
+    </p>
+    <p class="formula-note">${gettext(
+        "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+    )}</p>
+`
+
 export const tableInsertTemplate = (): string => `
     <table class="insert-table-selection">
         <tr>
