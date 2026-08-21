@@ -44,7 +44,7 @@ await build({
     format: "esm",
     splitting: true,
     outdir: BUILD_DIR,
-    sourcemap: false,
+    sourcemap: true,
     minify: true,
     target: ["es2020"],
     // Keep all split chunks and file-loader assets next to the editor page so

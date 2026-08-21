@@ -12,8 +12,8 @@ importers:
         specifier: ^0.1.31
         version: 0.1.31(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       '@fiduswriter/document':
-        specifier: ^0.3.3
-        version: 0.3.3
+        specifier: ^0.3.5
+        version: 0.3.5
       '@fiduswriter/image-manager':
         specifier: ^0.1.23
         version: 0.1.23(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
@@ -129,6 +129,9 @@ importers:
       '@fontsource/source-sans-pro':
         specifier: ^5.3.0
         version: 5.3.0
+      '@playwright/test':
+        specifier: ^1.49.0
+        version: 1.62.1
       '@swc/core':
         specifier: ^1.16.1
         version: 1.16.1(@swc/helpers@0.5.23)
@@ -566,8 +569,8 @@ packages:
   '@fiduswriter/bibliography-manager@0.1.31':
     resolution: {integrity: sha512-SXpVrkMVRdvoAXGEndusudARY7DcAiYfE05H+/R9EavMgOknyWzmT/+2WeWZnpHFjc9aPsHF8f7Ub5rAgAMYsA==}
 
-  '@fiduswriter/document@0.3.3':
-    resolution: {integrity: sha512-Z4aJLju8DU1Pz+2aoklA7s/paWWoFUU+VeHOdg1zDQKfOjn5ZUy42QHeG3/s/oYTUOh4+teZVHPW70/NCchSQw==}
+  '@fiduswriter/document@0.3.5':
+    resolution: {integrity: sha512-84QFf06a9qu8jVqp6CUIUSSmOt94lOkAfKyXFeN96OarnaRuFRzr+SePmxKSfA6qpZivV0wt49j/GLTDO1iPlA==}
 
   '@fiduswriter/image-manager@0.1.23':
     resolution: {integrity: sha512-u2jJTBLbaOCUlFcM4pI2tyqZL6VF6lB16c09zSroJgiV+9FPU7NulFGLLJe6WMAvlFO8e4gnETLWTKEVIU4acA==}
@@ -744,6 +747,11 @@ packages:
   '@pkgr/core@0.3.6':
     resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
     engines: {node: ^14.18.0 || >=16.0.0}
+
+  '@playwright/test@1.62.1':
+    resolution: {integrity: sha512-DTcUc8qii+cpHvtOwggMtBRMjKZHXYWdw8syRYu2vtzuq4Wxphqq4NfCs5Zt44L6mA8rfDfj+PHnxFc/FeK6mQ==}
+    engines: {node: '>=20'}
+    hasBin: true
 
   '@prettier/plugin-xml@3.4.2':
     resolution: {integrity: sha512-/UyNlHfkuLXG6Ed85KB0WBF283xn2yavR+UtRibBRUcvEJId2DSLdGXwJ/cDa1X++SWDPzq3+GSFniHjkNy7yg==}
@@ -1717,6 +1725,11 @@ packages:
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -2277,6 +2290,16 @@ packages:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
 
+  playwright-core@1.62.1:
+    resolution: {integrity: sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw==}
+    engines: {node: '>=20'}
+    hasBin: true
+
+  playwright@1.62.1:
+    resolution: {integrity: sha512-0M+L3LAD8/nm554LOla9Ayx0j0tmFZ0FBcoQ7F1VuVHpM/XpiC8RcDzBQB8W5+hA8L22THxELzeF+2WcUzvcLg==}
+    engines: {node: '>=20'}
+    hasBin: true
+
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
@@ -2514,8 +2537,8 @@ packages:
   svg-for-pdfkit@0.2.1:
     resolution: {integrity: sha512-2vAj/EjcDt98m1PM6cFjlyNTqf4FhDtgtUZksuIz/sH9vQOpKpMcGBqGgljCz3DQDmh/o/qSAEWbOiicFHh1ig==}
 
-  svg4pdf-lib@0.1.1:
-    resolution: {integrity: sha512-h+gX5FZ2wG9fW9/LeTQFW+l3PmAChzzkfh2SbZiwPxm8uhjhalStHYHk6tQ0dEvrnkOCYvUzKTA4xgbE09cpPg==}
+  svg4pdf-lib@0.1.2:
+    resolution: {integrity: sha512-SuWUveOKKK2npwjWoQdcau/CbHDi//CqMYVgXRmRFcwYFpHe1cJiXEC3+UG+lVdKVgU38LZ/z8VsvN3JtljqnA==}
     peerDependencies:
       '@pdfme/pdf-lib': ^6.1.0
 
@@ -2610,8 +2633,8 @@ packages:
     resolution: {integrity: sha512-kiGUalWN+rgBJ/1OHZsBtU4rXZOfj/7rKQxULKlIzwzQSvMJUUNgPwJEEh7gU6xEVxC0ahoOBvN2YI8GH6FNgA==}
     engines: {node: '>=10.12.0'}
 
-  vivliostyle-pdf@0.2.0:
-    resolution: {integrity: sha512-J/PS3UyPvIa5nBYz7kosaR5s6rLQ3rTfbDX2teoAgRtHWT+feQHSoeEDyDbVlofRljxmW7dkn8OIOc3WuMSNNw==}
+  vivliostyle-pdf@0.2.4:
+    resolution: {integrity: sha512-pSzfX2V5SksLBKjZZ50VdW2ZS1JkVBtztHwQ9DeQkbrFopYqmqvhcX2BF6UpFT6IENZDwxcU8vDzxZXdJgW5ig==}
 
   w3c-keyname@2.2.8:
     resolution: {integrity: sha512-dpojBhNsCNN7T82Tm7k26A6G9ML3NkhDsnw9n/eoxSRlVBB4CEtIQ/KTCLI2Fwf3ataSXRhYFkQi3SlnFwPvPQ==}
@@ -3039,7 +3062,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@0.3.3':
+  '@fiduswriter/document@0.3.5':
     dependencies:
       '@prettier/plugin-xml': 3.4.2(prettier@3.9.5)
       '@vivliostyle/print': 2.44.1
@@ -3067,7 +3090,7 @@ snapshots:
       prosemirror-tables: 1.8.5
       prosemirror-transform: 1.12.0
       prosemirror-view: 1.42.1
-      vivliostyle-pdf: 0.2.0
+      vivliostyle-pdf: 0.2.4
       w3c-keyname: 2.2.8
 
   '@fiduswriter/image-manager@0.1.23(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)':
@@ -3358,6 +3381,10 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.3.6': {}
+
+  '@playwright/test@1.62.1':
+    dependencies:
+      playwright: 1.62.1
 
   '@prettier/plugin-xml@3.4.2(prettier@3.9.5)':
     dependencies:
@@ -4253,6 +4280,9 @@ snapshots:
 
   fs.realpath@1.0.0: {}
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -4960,6 +4990,14 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
+  playwright-core@1.62.1: {}
+
+  playwright@1.62.1:
+    dependencies:
+      playwright-core: 1.62.1
+    optionalDependencies:
+      fsevents: 2.3.2
+
   prelude-ls@1.2.1: {}
 
   prettier@3.9.5: {}
@@ -5224,7 +5262,7 @@ snapshots:
 
   svg-for-pdfkit@0.2.1: {}
 
-  svg4pdf-lib@0.1.1(@pdfme/pdf-lib@6.1.12):
+  svg4pdf-lib@0.1.2(@pdfme/pdf-lib@6.1.12):
     dependencies:
       '@pdf-lib/upng': 1.0.1
       '@pdfme/pdf-lib': 6.1.12
@@ -5360,13 +5398,13 @@ snapshots:
       '@types/istanbul-lib-coverage': 2.0.6
       convert-source-map: 2.0.0
 
-  vivliostyle-pdf@0.2.0:
+  vivliostyle-pdf@0.2.4:
     dependencies:
       '@pdfme/pdf-lib': 6.1.12
       '@vivliostyle/print': 2.44.1
       fonteditor-core: 2.6.3
       fontkit: 2.0.4
-      svg4pdf-lib: 0.1.1(@pdfme/pdf-lib@6.1.12)
+      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.1.12)
 
   w3c-keyname@2.2.8: {}
 
