@@ -670,7 +670,11 @@ export const headerbarModel = () => ({
                             )
                             let fidusFile: Uint8Array | undefined
                             if (options.embedFidusFile) {
-                                const exporter = new ExportFidusFile(
+                                // The ExportFidusFile constructor runs init()
+                                // itself and returns the resulting Promise,
+                                // so `new ExportFidusFile(...)` is awaited
+                                // directly to obtain the .fidus Blob.
+                                const blob = (await new ExportFidusFile(
                                     editor.app,
                                     doc,
                                     db.bibDB,
@@ -678,8 +682,7 @@ export const headerbarModel = () => ({
                                     true,
                                     editor.docInfo.token,
                                     false
-                                )
-                                const blob = await exporter.init()
+                                )) as unknown as Blob
                                 fidusFile = new Uint8Array(
                                     await blob.arrayBuffer()
                                 )
