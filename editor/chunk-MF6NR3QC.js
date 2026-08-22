@@ -1,0 +1,2 @@
+function o(e){return e?e.split("/")[0].replace(/[?*u~]/g,""):""}function n(e){let t="";return e.forEach(f=>{f.type==="text"&&(t+=f.text)}),t}function r(e){let t="";return e.family?(t+=n(e.family),e.given&&(t+=`, ${n(e.given)}`)):e.literal&&(t+=n(e.literal)),t}function a(e){let t;switch(e.length){case 0:t="";break;case 1:t=r(e[0]);break;case 2:t=`${r(e[0])} ${gettext("and")} ${r(e[1])}`;break;default:t=`${r(e[0])} ${gettext("and others")}`;break}return t}export{o as a,n as b,a as c};
+//# sourceMappingURL=chunk-MF6NR3QC.js.map

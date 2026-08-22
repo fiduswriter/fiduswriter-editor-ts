@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@fiduswriter/editor — Standalone Demo</title>
+        <link rel="stylesheet" href="../css/fontawesome/css/all.css" />
+        <link rel="stylesheet" href="../css/reset.css" />
+        <link rel="stylesheet" href="../css/fwtoolkit.css" />
+        <link rel="stylesheet" href="../css/prosemirror.css" />
+        <link rel="stylesheet" href="../css/cropper.min.css" />
+        <link rel="stylesheet" href="../css/colors.css" />
+        <link rel="stylesheet" href="../css/editor.css" />
+        <link rel="stylesheet" href="../css/document.css" />
+        <link rel="stylesheet" href="../css/bibliography.css" />
+        <link rel="stylesheet" href="../css/footnotes.css" />
+        <link rel="stylesheet" href="../css/tracking.css" />
+        <link rel="stylesheet" href="../css/carets.css" />
+        <link rel="stylesheet" href="../css/chat.css" />
+        <link rel="stylesheet" href="../css/citation_dialog.css" />
+        <link rel="stylesheet" href="../css/contributors.css" />
+        <link rel="stylesheet" href="../css/access_rights_dialog.css" />
+        <link rel="stylesheet" href="../css/dot_menu.css" />
+        <link rel="stylesheet" href="../css/e2ee.css" />
+        <link rel="stylesheet" href="../css/margin_boxes.css" />
+        <link rel="stylesheet" href="../css/merge.css" />
+        <link rel="stylesheet" href="../css/review.css" />
+        <link rel="stylesheet" href="../css/table.css" />
+        <link rel="stylesheet" href="../css/tags.css" />
+        <style>
+            body {
+                font-family: Lato, sans-serif;
+                margin: 0;
+                padding: 0;
+                background: var(--main-background-color, #f2f2f2);
+                color: var(--main-text-color, #2c2723);
+            }
+            .demo-startup-overlay {
+                position: fixed;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--overlay-color, rgb(170 170 170 / 0.3));
+                z-index: 1000;
+            }
+            .demo-startup-dialog {
+                width: min(90vw, 480px);
+                max-height: 90vh;
+                overflow: auto;
+                padding: 24px;
+                background: var(--cs-white-background, #fff);
+                border: 1px solid var(--cs-white-border, #ccc);
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+            }
+            .demo-startup-dialog h1 {
+                margin: 0 0 8px;
+                font-size: 20px;
+            }
+            .demo-startup-dialog label {
+                display: block;
+                margin: 16px 0 4px;
+                font-weight: 600;
+            }
+            .demo-startup-dialog select,
+            .demo-startup-dialog input[type="file"] {
+                width: 100%;
+            }
+            .demo-section {
+                margin-top: 20px;
+                padding-top: 16px;
+                border-top: 1px solid var(--cs-white-border, #ddd);
+            }
+            .demo-section h2 {
+                margin: 0 0 8px;
+                font-size: 14px;
+                color: var(--cs-4-text, #4c6860);
+            }
+            .demo-section p {
+                margin: 0 0 12px;
+                font-size: 13px;
+                color: var(--cs-light-text-secondary, #6e6e6e);
+            }
+            .demo-dropzone {
+                padding: 24px;
+                border: 2px dashed var(--input-border-color, #c8c8c8);
+                border-radius: 4px;
+                text-align: center;
+                cursor: pointer;
+                transition: border-color 0.2s, background 0.2s;
+            }
+            .demo-dropzone:hover,
+            .demo-dropzone.dragover {
+                border-color: var(--cs-2-background, #0d78be);
+                background: var(--input-focus-background-color, #fbf9d2);
+            }
+        </style>
+        <link rel="icon" type="image/svg+xml" href="../logo.svg" />
+    </head>
+    <body>
+        <script>
+            // Several editor dependencies call these globals while their modules
+            // are being evaluated, before the application code has a chance to
+            // set them. Provide simple stubs here so that early evaluation
+            // succeeds; createStaticEditor will replace them with the real
+            // fwtoolkit-backed implementations once it runs.
+            window.gettext = window.gettext || (msgid => msgid)
+            window.interpolate =
+                window.interpolate ||
+                ((fmt, args) => {
+                    if (Array.isArray(args)) {
+                        let i = 0
+                        return String(fmt).replace(/%s/g, () =>
+                            args[i++] !== undefined ? String(args[i - 1]) : ""
+                        )
+                    }
+                    return String(fmt).replace(
+                        /%\(([^)]+)\)s?/g,
+                        (_match, key) =>
+                            args && args[key] !== undefined
+                                ? String(args[key])
+                                : ""
+                    )
+                })
+            window.staticUrl =
+                window.staticUrl ||
+                (path => {
+                    const basePath = location.pathname.replace(
+                        /\/(?:editor\/(?:index\.html)?|index\.html)$/,
+                        "/"
+                    )
+                    if (path.startsWith("css/editor/")) {
+                        return `${basePath}css/${path.slice("css/editor/".length)}`
+                    }
+                    if (path === "css/bibliography/bibliography.css") {
+                        return `${basePath}css/bibliography.css`
+                    }
+                    if (path.startsWith("css/")) {
+                        return `${basePath}${path}`
+                    }
+                    return `${basePath}static/${path}`
+                })
+
+            // Forgejo Pages can serve this directory index without a trailing
+            // slash, which makes relative module/asset URLs resolve to the wrong
+            // parent directory. Force a trailing slash so ../ paths point at the
+            // site root (local) or repository root (Forgejo Pages).
+            const path = location.pathname
+            if (path.endsWith("/editor") && !path.endsWith("/editor/")) {
+                location.replace(
+                    path + "/" + location.search + location.hash
+                )
+            }
+        </script>
+        <script type="module" src="./index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+.fw-checkable {
+    cursor: pointer;
+}
+
+.fw-checkable-label {
+    position: relative;
+    display: block;
+    width: 462px;
+    height: 36px;
+    line-height: 36px;
+    border: solid 1px var(--cs-light-border);
+    padding-left: 12px;
+    margin-bottom: 10px;
+}
+
+.fw-checkable-input {
+    display: none;
+}
+
+.fw-checkable-label.fw-checked::after {
+    display: inline-block;
+    font-family:
+        "Font Awesome 7 Free", "Font Awesome 6 Free", "FontAwesome", monospace;
+    font-weight: 900;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f00c";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
