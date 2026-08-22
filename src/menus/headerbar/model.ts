@@ -640,9 +640,20 @@ export const headerbarModel = () => ({
                             if (!options) {
                                 return
                             }
-                            const doc = getExportDoc(editor, {
-                                changes: "acceptAllNoInsertions"
-                            })
+                            const doc = getExportDoc(
+                                editor,
+                                options.resolveTrackChanges
+                                    ? {changes: "acceptAllNoInsertions"}
+                                    : undefined
+                            )
+                            const converterOptions: Record<string, unknown> = {}
+                            if (options.svgMath) {
+                                converterOptions.mathOutput = "svg"
+                            }
+                            if (!options.resolveTrackChanges) {
+                                // Keep the marks and render them in the output.
+                                converterOptions.trackChanges = true
+                            }
                             const exporter = new HTMLExporter(
                                 doc,
                                 db.bibDB,
@@ -650,7 +661,7 @@ export const headerbarModel = () => ({
                                 editor.app.csl,
                                 editor.docInfo.updated as Date,
                                 getDocumentTemplate(editor).documentStyles,
-                                options.svgMath ? {mathOutput: "svg"} : {}
+                                converterOptions
                             )
                             exporter.progressCallback = exportProgress(doc)
                             exporter.init()
@@ -740,9 +751,20 @@ export const headerbarModel = () => ({
                             if (!options) {
                                 return
                             }
-                            const doc = getExportDoc(editor, {
-                                changes: "acceptAllNoInsertions"
-                            })
+                            const doc = getExportDoc(
+                                editor,
+                                options.resolveTrackChanges
+                                    ? {changes: "acceptAllNoInsertions"}
+                                    : undefined
+                            )
+                            const converterOptions: Record<string, unknown> = {}
+                            if (options.svgMath) {
+                                converterOptions.mathOutput = "svg"
+                            }
+                            if (!options.resolveTrackChanges) {
+                                // Keep the marks and render them in the output.
+                                converterOptions.trackChanges = true
+                            }
                             const exporter = new EpubExporter(
                                 doc,
                                 db.bibDB,
@@ -750,7 +772,7 @@ export const headerbarModel = () => ({
                                 editor.app.csl,
                                 editor.docInfo.updated as Date,
                                 getDocumentTemplate(editor).documentStyles,
-                                options.svgMath ? {mathOutput: "svg"} : {}
+                                converterOptions
                             )
                             exporter.progressCallback = exportProgress(doc)
                             exporter.init()

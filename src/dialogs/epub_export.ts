@@ -1,10 +1,13 @@
 import {Dialog} from "fwtoolkit"
-import {epubExportDialogTemplate} from "./templates.js"
+import {epubExportDialogTemplate, getExportTrackChangesValue} from "./templates.js"
 
 export interface EpubExportDialogResult {
     /** Render `equation`/`figure_equation` nodes as SVG images (MathJax)
         instead of MathML. */
     svgMath: boolean
+    /** Resolve all tracked changes (accept all) before exporting. When false,
+        the tracked changes are kept and rendered in the export. */
+    resolveTrackChanges: boolean
 }
 
 export class EpubExportDialog {
@@ -28,8 +31,13 @@ export class EpubExportDialog {
                                 ".epub-svg-math"
                             ) as HTMLInputElement
                         )?.checked
+                        const resolveTrackChanges =
+                            getExportTrackChangesValue(
+                                dialogEl,
+                                "epub-track-changes"
+                            ) !== "include"
                         ;(this.dialog as Dialog).close()
-                        return resolve({svgMath: !!svgMath})
+                        return resolve({svgMath: !!svgMath, resolveTrackChanges})
                     }
                 })
 
@@ -46,7 +54,7 @@ export class EpubExportDialog {
         this.dialog = new Dialog({
             title: gettext("EPUB export options"),
             body: epubExportDialogTemplate(),
-            height: 220,
+            height: 330,
             width: 420,
             buttons,
             restoreActiveElement: false

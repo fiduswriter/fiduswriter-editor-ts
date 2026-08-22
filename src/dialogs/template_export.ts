@@ -1,43 +1,43 @@
 import {Dialog} from "fwtoolkit"
-import {getExportTrackChangesValue, htmlExportDialogTemplate} from "./templates.js"
+import {
+    exportTrackChangesTemplate,
+    getExportTrackChangesValue
+} from "./templates.js"
 
-export interface HtmlExportDialogResult {
-    /** Render `equation`/`figure_equation` nodes as SVG images (MathJax)
-        instead of MathML. */
-    svgMath: boolean
+export interface TemplateExportDialogResult {
     /** Resolve all tracked changes (accept all) before exporting. When false,
-        the tracked changes are kept and rendered in the export. */
+        the tracked changes are kept and rendered in the exported file. */
     resolveTrackChanges: boolean
 }
 
-export class HtmlExportDialog {
+/** Ask how tracked changes should be handled before a DOCX/ODT template export. */
+export class TemplateExportDialog {
     dialog: Dialog | false
 
     constructor() {
         this.dialog = false
     }
 
-    init(): Promise<HtmlExportDialogResult | false> {
+    init(fileType: "docx" | "odt"): Promise<TemplateExportDialogResult | false> {
+        const title =
+            fileType === "docx"
+                ? gettext("DOCX export options")
+                : gettext("ODT export options")
         const buttons: Array<Record<string, unknown>> = []
-        const dialogDonePromise = new Promise<HtmlExportDialogResult | false>(
+        const dialogDonePromise = new Promise<TemplateExportDialogResult | false>(
             resolve => {
                 buttons.push({
                     text: gettext("Export"),
                     classes: "fw-dark",
                     click: () => {
                         const dialogEl = (this.dialog as Dialog).dialogEl
-                        const svgMath = (
-                            dialogEl.querySelector(
-                                ".html-svg-math"
-                            ) as HTMLInputElement
-                        )?.checked
                         const resolveTrackChanges =
                             getExportTrackChangesValue(
                                 dialogEl,
-                                "html-track-changes"
+                                "template-track-changes"
                             ) !== "include"
                         ;(this.dialog as Dialog).close()
-                        return resolve({svgMath: !!svgMath, resolveTrackChanges})
+                        return resolve({resolveTrackChanges})
                     }
                 })
 
@@ -52,9 +52,9 @@ export class HtmlExportDialog {
         )
 
         this.dialog = new Dialog({
-            title: gettext("HTML export options"),
-            body: htmlExportDialogTemplate(),
-            height: 330,
+            title,
+            body: exportTrackChangesTemplate("template-track-changes"),
+            height: 220,
             width: 420,
             buttons,
             restoreActiveElement: false

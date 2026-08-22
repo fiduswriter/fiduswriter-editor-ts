@@ -162,7 +162,49 @@ export const pdfExportDialogTemplate = (): string => `
     </p>
 `
 
+/**
+ * Radio group for choosing whether tracked changes are resolved (accepted) or
+ * kept in the exported file. `name` must be unique per dialog; the chosen value
+ * is read back with {@link getExportTrackChangesValue}.
+ */
+export const exportTrackChangesTemplate = (name: string): string => `
+    <h4>${gettext("Tracked changes")}</h4>
+    <div class="fw-radio">
+        <input type="radio" name="${name}" value="resolve" class="export-track-resolve" checked="" aria-describedby="${name}-resolve-help">
+        <label class="export-track-resolve-label">${gettext("Resolve tracked changes (accept all)")}</label>
+        ${infoTooltip(
+            gettext(
+                "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+            ),
+            `${name}-resolve-help`
+        )}
+    </div>
+    <div class="fw-radio">
+        <input type="radio" name="${name}" value="include" class="export-track-include" aria-describedby="${name}-include-help">
+        <label class="export-track-include-label">${gettext("Include tracked changes in the export")}</label>
+        ${infoTooltip(
+            gettext(
+                "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+            ),
+            `${name}-include-help`
+        )}
+    </div>
+`
+
+/** Read the tracked-changes radio group value ("resolve" or "include"). */
+export const getExportTrackChangesValue = (
+    dialogEl: Element,
+    name: string
+): string => {
+    return (
+        dialogEl.querySelector(
+            `input[name="${name}"]:checked`
+        ) as HTMLInputElement | null
+    )?.value || "resolve"
+}
+
 export const htmlExportDialogTemplate = (): string => `
+    ${exportTrackChangesTemplate("html-track-changes")}
     <p>
         <label>
             <input type="checkbox" class="html-svg-math" aria-describedby="html-svg-math-help">
@@ -178,6 +220,7 @@ export const htmlExportDialogTemplate = (): string => `
 `
 
 export const epubExportDialogTemplate = (): string => `
+    ${exportTrackChangesTemplate("epub-track-changes")}
     <p>
         <label>
             <input type="checkbox" class="epub-svg-math" aria-describedby="epub-svg-math-help">

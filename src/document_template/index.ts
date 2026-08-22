@@ -14,6 +14,7 @@ import {
 
 import type {Editor} from "../types.js"
 import {SaveCopy} from "../exporter/native/index.js"
+import {TemplateExportDialog} from "../dialogs/index.js"
 
 export {serializeHelp} from "./schema.js"
 
@@ -388,8 +389,17 @@ export class ModDocumentTemplate {
                     action: (editor: Editor) => {
                         import(
                             "@fiduswriter/document/exporter/docx/index"
-                        ).then(({DOCXExporter}: any) => {
-                            const doc = editor.getDoc() as any
+                        ).then(async ({DOCXExporter}: any) => {
+                            const dialog = new TemplateExportDialog()
+                            const options = await dialog.init("docx")
+                            if (!options) {
+                                return
+                            }
+                            const doc = editor.getDoc({
+                                changes: options.resolveTrackChanges
+                                    ? "acceptAllNoInsertions"
+                                    : undefined
+                            }) as any
                             const title = shortFileTitle(
                                 doc.title,
                                 doc.path || ""
@@ -426,8 +436,17 @@ export class ModDocumentTemplate {
                     ),
                     action: (editor: Editor) => {
                         import("@fiduswriter/document/exporter/odt/index").then(
-                            ({ODTExporter}: any) => {
-                                const doc = editor.getDoc() as any
+                            async ({ODTExporter}: any) => {
+                                const dialog = new TemplateExportDialog()
+                                const options = await dialog.init("odt")
+                                if (!options) {
+                                    return
+                                }
+                                const doc = editor.getDoc({
+                                    changes: options.resolveTrackChanges
+                                        ? "acceptAllNoInsertions"
+                                        : undefined
+                                }) as any
                                 const title = shortFileTitle(
                                     doc.title,
                                     doc.path || ""

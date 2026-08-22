@@ -1939,3 +1939,21 @@ msgstr "Draws a visible border around hyperlinks in the PDF so they are easier t
 
 msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
 msgstr "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+
+msgid "Tracked changes"
+msgstr "Tracked changes"
+
+msgid "Include tracked changes in the export"
+msgstr "Include tracked changes in the export"
+
+msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+msgstr "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+
+msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+msgstr "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+
+msgid "DOCX export options"
+msgstr "DOCX export options"
+
+msgid "ODT export options"
+msgstr "ODT export options"

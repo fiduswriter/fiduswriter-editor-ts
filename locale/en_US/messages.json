@@ -581,5 +581,11 @@
     "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting.": "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting.",
     "How far, in millimeters, images and colors extend beyond the edge of the page.": "How far, in millimeters, images and colors extend beyond the edge of the page.",
     "Draws a visible border around hyperlinks in the PDF so they are easier to find.": "Draws a visible border around hyperlinks in the PDF so they are easier to find.",
-    "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly.": "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+    "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly.": "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly.",
+    "Tracked changes": "Tracked changes",
+    "Include tracked changes in the export": "Include tracked changes in the export",
+    "Applies all tracked changes so the exported file shows the document as if every change had already been accepted.": "Applies all tracked changes so the exported file shows the document as if every change had already been accepted.",
+    "Keeps the tracked changes so reviewers can see what was added, removed or altered.": "Keeps the tracked changes so reviewers can see what was added, removed or altered.",
+    "DOCX export options": "DOCX export options",
+    "ODT export options": "ODT export options"
 }
