@@ -140,7 +140,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "esbuild": "^0.25.12",
+    "esbuild": "^0.28.0",
     "eslint": "^10.6.0",
     "events": "^3.3.0",
     "gettext-parser": "^9.1.1",
