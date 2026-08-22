@@ -3,7 +3,7 @@ import fixUTF8 from "fix-utf8"
 import {Fragment, Slice} from "prosemirror-model"
 import {Plugin, PluginKey, TextSelection} from "prosemirror-state"
 import {ReplaceStep} from "prosemirror-transform"
-import type {Node} from "prosemirror-model"
+import type {Node, ResolvedPos} from "prosemirror-model"
 import type {EditorState, Transaction} from "prosemirror-state"
 import type {EditorView} from "prosemirror-view"
 
@@ -22,6 +22,70 @@ export const getPasteRange = (state: EditorState): number[] | null => {
 
 export const resetPasteRange = (tr: Transaction): void => {
     tr.setMeta(key, {pasteRange: null})
+}
+
+// Document section nodes. When content is copied from within the same editor,
+// prosemirror-view records these in the data-pm-slice attribute of the
+// clipboard HTML and wraps the pasted content in them again while parsing it.
+const sectionNodeTypes = new Set([
+    "richtext_part",
+    "heading_part",
+    "table_part",
+    "contributors_part",
+    "tags_part",
+    "table_of_contents",
+    "separator_part"
+])
+
+// Remove a section node wrapper from pasted content when it corresponds to an
+// ancestor node at the paste position. Content copied within the same document
+// arrives wrapped in such a wrapper. If it was not removed, the wrapper would
+// be treated like foreign content and be flattened during filtering below,
+// losing the structure and formatting of the copied content.
+const unwrapSectionWrapper = (slice: Slice, $pos: ResolvedPos): Slice => {
+    let {content, openStart, openEnd} = slice
+    // The outermost wrapper node corresponds to this ancestor of the position.
+    let wrapperDepth = $pos.depth - openStart + 1
+    while (
+        openStart > 0 &&
+        openEnd > 0 &&
+        wrapperDepth >= 1 &&
+        wrapperDepth <= $pos.depth &&
+        content.childCount === 1 &&
+        sectionNodeTypes.has(content.firstChild!.type.name) &&
+        content.firstChild!.type.name === $pos.node(wrapperDepth).type.name
+    ) {
+        content = content.firstChild!.content
+        openStart -= 1
+        openEnd -= 1
+        wrapperDepth += 1
+    }
+    return new Slice(content, openStart, openEnd)
+}
+
+// The number of node levels that are actually traversable openly at one side
+// of a fragment, limited to maxDepth. Filtering removes nodes from slices,
+// which can make their openStart/openEnd exceed the nesting depth of the
+// remaining content. Slices violating that constraint crash ProseMirror's
+// Selection.replace (it walks into non-existing child nodes when calculating
+// the insertion end position), so the open depths have to be reduced to fit.
+const openChainDepth = (
+    fragment: Fragment,
+    maxDepth: number,
+    side: "start" | "end"
+): number => {
+    let depth = 0
+    let node = side === "start" ? fragment.firstChild : fragment.lastChild
+    while (
+        node &&
+        !node.isLeaf &&
+        !node.type.spec.isolating &&
+        depth < maxDepth
+    ) {
+        depth += 1
+        node = side === "start" ? node.firstChild : node.lastChild
+    }
+    return depth
 }
 
 // Filter a fragment to only include allowed nodes and marks
@@ -271,6 +335,14 @@ export const clipboardPlugin = (options: {editor: Editor; viewType: string}) => 
                     return slice
                 }
 
+                const $pos = view.state.selection.$from
+
+                // Content copied within the same editor arrives wrapped in a
+                // section node corresponding to an ancestor of the paste
+                // position. Unwrap it so that it is handled like other pasted
+                // content rather than being flattened during filtering.
+                slice = unwrapSectionWrapper(slice, $pos)
+
                 // Get allowed elements and marks at the current selection position
                 const {elements, marks} = getAllowedElementsAndMarks(view.state)
 
@@ -280,7 +352,6 @@ export const clipboardPlugin = (options: {editor: Editor; viewType: string}) => 
                 }
 
                 // Get the parent node at the selection position to check compatibility
-                const $pos = view.state.selection.$from
                 const parentNode = $pos.parent
 
                 // Filter the slice content
@@ -292,11 +363,24 @@ export const clipboardPlugin = (options: {editor: Editor; viewType: string}) => 
                     parentNode
                 )
 
-                // Return new slice with filtered content
+                // All content may have been removed by the filtering.
+                if (!filteredContent.size) {
+                    return Slice.empty
+                }
+
+                // Return a new slice with the filtered content. Reduce the
+                // open depths to what the filtered content can actually
+                // provide, so that the slice remains insertable.
                 return new Slice(
                     filteredContent,
-                    slice.openStart,
-                    slice.openEnd
+                    Math.min(
+                        slice.openStart,
+                        openChainDepth(filteredContent, slice.openStart, "start")
+                    ),
+                    Math.min(
+                        slice.openEnd,
+                        openChainDepth(filteredContent, slice.openEnd, "end")
+                    )
                 )
             }
         }
