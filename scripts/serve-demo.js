@@ -100,6 +100,17 @@ async function buildDemo() {
         join(ROOT, "node_modules", "@fiduswriter", "bibliography-manager", "css", "bibliography.css"),
         join(cssDir, "bibliography.css")
     )
+    // The document export stylesheet (css/document/document.css) and its
+    // bundled Libertinus fallback fonts are provided by @fiduswriter/document.
+    // The HTML/EPUB exporters fetch them via staticUrl("css/document/..."),
+    // which the demo's staticUrl maps to this directory.
+    const documentCssDir = join(cssDir, "document")
+    await ensureDir(documentCssDir)
+    await fs.cp(
+        join(ROOT, "node_modules", "@fiduswriter", "document", "css"),
+        documentCssDir,
+        {recursive: true}
+    )
 
     console.log("Copying static assets...")
     await fs.cp(join(ROOT, "static"), join(BUILD_DIR, "static"), {recursive: true})

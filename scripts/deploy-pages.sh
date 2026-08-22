@@ -40,6 +40,13 @@ done
 # Bibliography styles are provided by @fiduswriter/bibliography-manager.
 cp "$ROOT/node_modules/@fiduswriter/bibliography-manager/css/bibliography.css" "$BUILD_DIR/css/"
 
+# The document export stylesheet (css/document/document.css) and its bundled
+# Libertinus fallback fonts are provided by @fiduswriter/document. The
+# HTML/EPUB exporters fetch them via staticUrl("css/document/..."), which the
+# demo's staticUrl maps to this directory.
+mkdir -p "$BUILD_DIR/css/document"
+cp -r "$ROOT/node_modules/@fiduswriter/document/css/." "$BUILD_DIR/css/document/"
+
 # Copy static assets (fonts, images, audio) referenced by the editor.
 mkdir -p "$BUILD_DIR/static"
 cp -r "$ROOT/static/"* "$BUILD_DIR/static/"
