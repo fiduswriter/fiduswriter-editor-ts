@@ -128,7 +128,19 @@ export const htmlExportDialogTemplate = (): string => `
         </label>
     </p>
     <p class="formula-note">${gettext(
-        "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+        "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+    )}</p>
+`
+
+export const epubExportDialogTemplate = (): string => `
+    <p>
+        <label>
+            <input type="checkbox" class="epub-svg-math">
+            ${gettext("Render formulas as SVG images instead of MathML")}
+        </label>
+    </p>
+    <p class="formula-note">${gettext(
+        "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
     )}</p>
 `
 
