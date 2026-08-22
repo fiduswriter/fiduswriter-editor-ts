@@ -1,5 +1,5 @@
 import {CATS} from "@fiduswriter/document/schema/i18n"
-import {escapeText} from "fwtoolkit"
+import {escapeText, infoTooltip} from "fwtoolkit"
 
 interface InternalTarget {
     id: string
@@ -96,52 +96,100 @@ export const revisionDialogTemplate = ({dir}: {dir: string}): string =>
 export const pdfExportDialogTemplate = (): string => `
     <h4>${gettext("Tracked changes")}</h4>
     <div class="fw-radio">
-        <input type="radio" name="pdf-track-changes" value="resolve" class="pdf-track-resolve" checked="">
+        <input type="radio" name="pdf-track-changes" value="resolve" class="pdf-track-resolve" checked="" aria-describedby="pdf-track-resolve-help">
         <label class="pdf-track-resolve-label">${gettext("Resolve tracked changes (accept all)")}</label>
+        ${infoTooltip(
+            gettext(
+                "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+            ),
+            "pdf-track-resolve-help"
+        )}
     </div>
     <div class="fw-radio">
-        <input type="radio" name="pdf-track-changes" value="include" class="pdf-track-include">
+        <input type="radio" name="pdf-track-changes" value="include" class="pdf-track-include" aria-describedby="pdf-track-include-help">
         <label class="pdf-track-include-label">${gettext("Include tracked changes in the PDF")}</label>
+        ${infoTooltip(
+            gettext(
+                "Prints the tracked changes so reviewers can see what was added, removed or altered."
+            ),
+            "pdf-track-include-help"
+        )}
     </div>
     <p>
         <label>
-            <input type="checkbox" class="pdf-embed-fidus">
+            <input type="checkbox" class="pdf-embed-fidus" aria-describedby="pdf-embed-fidus-help">
             ${gettext("Embed a Fidus Writer file of this document in the PDF")}
         </label>
+        ${infoTooltip(
+            gettext(
+                "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+            ),
+            "pdf-embed-fidus-help"
+        )}
     </p>
     <h4>${gettext("Print production")}</h4>
     <p>
-        <label><input type="checkbox" class="pdf-crop-marks"> ${gettext("Crop marks")}</label><br>
-        <label><input type="checkbox" class="pdf-trim-box"> ${gettext("Trim box")}</label><br>
-        <label><input type="checkbox" class="pdf-bleed-box"> ${gettext("Bleed box")}</label><br>
-        <label>${gettext("Bleed")}: <input type="number" class="pdf-bleed-mm" value="3" min="0" step="0.5"> ${gettext("mm")}</label><br>
-        <label><input type="checkbox" class="pdf-link-borders"> ${gettext("Show link annotation borders")}</label><br>
-        <label><input type="checkbox" class="pdf-rasterize-svgs"> ${gettext("Rasterize SVG images")}</label>
+        <label><input type="checkbox" class="pdf-crop-marks" aria-describedby="pdf-crop-marks-help"> ${gettext("Crop marks")}</label>
+        ${infoTooltip(
+            gettext("Small lines at the corners of the page that show printers where to cut the paper."),
+            "pdf-crop-marks-help"
+        )}<br>
+        <label><input type="checkbox" class="pdf-trim-box" aria-describedby="pdf-trim-box-help"> ${gettext("Trim box")}</label>
+        ${infoTooltip(
+            gettext("Marks the final size of the page after it has been cut."),
+            "pdf-trim-box-help"
+        )}<br>
+        <label><input type="checkbox" class="pdf-bleed-box" aria-describedby="pdf-bleed-box-help"> ${gettext("Bleed box")}</label>
+        ${infoTooltip(
+            gettext("Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."),
+            "pdf-bleed-box-help"
+        )}<br>
+        <label>${gettext("Bleed")}: <input type="number" class="pdf-bleed-mm" value="3" min="0" step="0.5" aria-describedby="pdf-bleed-mm-help"> ${gettext("mm")}</label>
+        ${infoTooltip(
+            gettext("How far, in millimeters, images and colors extend beyond the edge of the page."),
+            "pdf-bleed-mm-help"
+        )}<br>
+        <label><input type="checkbox" class="pdf-link-borders" aria-describedby="pdf-link-borders-help"> ${gettext("Show link annotation borders")}</label>
+        ${infoTooltip(
+            gettext("Draws a visible border around hyperlinks in the PDF so they are easier to find."),
+            "pdf-link-borders-help"
+        )}<br>
+        <label><input type="checkbox" class="pdf-rasterize-svgs" aria-describedby="pdf-rasterize-svgs-help"> ${gettext("Rasterize SVG images")}</label>
+        ${infoTooltip(
+            gettext("Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."),
+            "pdf-rasterize-svgs-help"
+        )}
     </p>
 `
 
 export const htmlExportDialogTemplate = (): string => `
     <p>
         <label>
-            <input type="checkbox" class="html-svg-math">
+            <input type="checkbox" class="html-svg-math" aria-describedby="html-svg-math-help">
             ${gettext("Render formulas as SVG images instead of MathML")}
         </label>
+        ${infoTooltip(
+            gettext(
+                "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+            ),
+            "html-svg-math-help"
+        )}
     </p>
-    <p class="formula-note">${gettext(
-        "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
-    )}</p>
 `
 
 export const epubExportDialogTemplate = (): string => `
     <p>
         <label>
-            <input type="checkbox" class="epub-svg-math">
+            <input type="checkbox" class="epub-svg-math" aria-describedby="epub-svg-math-help">
             ${gettext("Render formulas as SVG images instead of MathML")}
         </label>
+        ${infoTooltip(
+            gettext(
+                "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+            ),
+            "epub-svg-math-help"
+        )}
     </p>
-    <p class="formula-note">${gettext(
-        "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
-    )}</p>
 `
 
 export const tableInsertTemplate = (): string => `
