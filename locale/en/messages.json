@@ -570,5 +570,6 @@
     "YYYY-MM-DD or empty": "YYYY-MM-DD or empty",
     "HTML export options": "HTML export options",
     "Render formulas as SVG images instead of MathML": "Render formulas as SVG images instead of MathML",
-    "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it.": "SVG renders consistently across browsers and is used in PDF export; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+    "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it.": "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it.",
+    "EPUB export options": "EPUB export options"
 }

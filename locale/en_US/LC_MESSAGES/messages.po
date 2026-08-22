@@ -683,6 +683,9 @@ msgstr "expires"
 msgid "Expires"
 msgstr "Expires"
 
+msgid "EPUB export options"
+msgstr "EPUB export options"
+
 msgid "Export"
 msgstr "Export"
 
@@ -1570,6 +1573,9 @@ msgstr "Subscript"
 
 msgid "Superscript"
 msgstr "Superscript"
+
+msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
 
 msgid "Symbols and Roman Letters"
 msgstr "Symbols and Roman Letters"
