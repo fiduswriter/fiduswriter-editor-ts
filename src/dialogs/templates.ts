@@ -144,7 +144,7 @@ export const pdfExportDialogTemplate = (): string => `
             gettext("Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."),
             "pdf-bleed-box-help"
         )}<br>
-        <label>${gettext("Bleed")}: <input type="number" class="pdf-bleed-mm" value="3" min="0" step="0.5" aria-describedby="pdf-bleed-mm-help"> ${gettext("mm")}</label>
+        <label>${gettext("Bleed")}: <input type="number" class="pdf-bleed-mm fw-inline" value="3" min="0" step="0.5" aria-describedby="pdf-bleed-mm-help"> ${gettext("mm")}</label>
         ${infoTooltip(
             gettext("How far, in millimeters, images and colors extend beyond the edge of the page."),
             "pdf-bleed-mm-help"
