@@ -156,6 +156,14 @@ async function buildDemo() {
         libsDir,
         {recursive: true}
     )
+    // The MathLive style bundle referenced by HTML exports (staticUrl("zip/…")).
+    const zipDir = join(BUILD_DIR, "static", "zip")
+    await ensureDir(zipDir)
+    await fs.cp(
+        join(ROOT, "node_modules", "@fiduswriter", "document", "static-libs", "zip"),
+        zipDir,
+        {recursive: true}
+    )
 
     console.log("Copying locales...")
     await fs.cp(join(ROOT, "locale"), join(BUILD_DIR, "locale"), {recursive: true})

@@ -63,6 +63,9 @@ cp "$ROOT/node_modules/@fortawesome/fontawesome-free/webfonts/"* "$BUILD_DIR/css
 # Copy MathLive static assets bundled by @fiduswriter/document.
 mkdir -p "$BUILD_DIR/css/libs"
 cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/css/libs/"* "$BUILD_DIR/css/libs/"
+# The MathLive style bundle referenced by HTML exports (staticUrl("zip/…")).
+mkdir -p "$BUILD_DIR/static/zip"
+cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/zip/"* "$BUILD_DIR/static/zip/"
 
 # Copy localization catalogs used by the startup dialog and gettext fallback.
 mkdir -p "$BUILD_DIR/locale"
