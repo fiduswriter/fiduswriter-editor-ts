@@ -1915,3 +1915,33 @@ msgstr "Render formulas as SVG images instead of MathML"
 
 msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
 msgstr "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+
+msgid "More information"
+msgstr "More information"
+
+msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+msgstr "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+
+msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
+msgstr "Prints the tracked changes so reviewers can see what was added, removed or altered."
+
+msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+msgstr "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+
+msgid "Small lines at the corners of the page that show printers where to cut the paper."
+msgstr "Small lines at the corners of the page that show printers where to cut the paper."
+
+msgid "Marks the final size of the page after it has been cut."
+msgstr "Marks the final size of the page after it has been cut."
+
+msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+msgstr "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+
+msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
+msgstr "How far, in millimeters, images and colors extend beyond the edge of the page."
+
+msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+msgstr "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+
+msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgstr "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."

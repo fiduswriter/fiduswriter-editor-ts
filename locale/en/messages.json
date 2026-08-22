@@ -571,5 +571,15 @@
     "HTML export options": "HTML export options",
     "Render formulas as SVG images instead of MathML": "Render formulas as SVG images instead of MathML",
     "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it.": "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it.",
-    "EPUB export options": "EPUB export options"
+    "EPUB export options": "EPUB export options",
+    "More information": "More information",
+    "Applies all tracked changes so the PDF shows the document as if every change had already been accepted.": "Applies all tracked changes so the PDF shows the document as if every change had already been accepted.",
+    "Prints the tracked changes so reviewers can see what was added, removed or altered.": "Prints the tracked changes so reviewers can see what was added, removed or altered.",
+    "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing.": "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing.",
+    "Small lines at the corners of the page that show printers where to cut the paper.": "Small lines at the corners of the page that show printers where to cut the paper.",
+    "Marks the final size of the page after it has been cut.": "Marks the final size of the page after it has been cut.",
+    "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting.": "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting.",
+    "How far, in millimeters, images and colors extend beyond the edge of the page.": "How far, in millimeters, images and colors extend beyond the edge of the page.",
+    "Draws a visible border around hyperlinks in the PDF so they are easier to find.": "Draws a visible border around hyperlinks in the PDF so they are easier to find.",
+    "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly.": "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
 }
