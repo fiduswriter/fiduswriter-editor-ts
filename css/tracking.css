@@ -64,6 +64,51 @@ li [data-track]::before {
     left: -5px;
 }
 
+/* Inline nodes whose content is not plain text do not necessarily show the
+   line-through inherited from the deletion mark (their own styling may
+   prevent inheritance). Re-apply it to the direct children of deletion
+   marks. */
+span.deletion > * {
+    text-decoration: line-through;
+    text-decoration-color: var(--editor-track-fallback-color);
+}
+
+/* Equations are rendered by MathLive, which does not react to
+   text-decoration at all. Draw a line over the rendered equation instead and
+   dim it slightly. */
+span.deletion .equation {
+    position: relative;
+    opacity: 0.75;
+}
+
+span.deletion .equation::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: calc(50% - 1px);
+    border-top: 2px solid var(--editor-track-fallback-color);
+    pointer-events: none;
+}
+
+/* Footnote markers only contain a non-breaking space, so a line-through
+   would be invisible. Give them a background tint instead. */
+span.deletion .footnote-marker {
+    text-decoration: none;
+    background-color: rgb(0 119 190 / 0.3);
+}
+
+/* Block level nodes with a deletion track entry (figures, tables, list
+   items) previously only showed the small [data-track] marker line, which is
+   easy to miss - particularly for figures. Make them clearly recognizable. */
+figure[data-track*='"deletion"'],
+table[data-track*='"deletion"'],
+li[data-track*='"deletion"'] {
+    outline: 2px dashed var(--editor-track-fallback-color);
+    outline-offset: 2px;
+    opacity: 0.55;
+}
+
 .track-ctas {
     display: none;
 }
