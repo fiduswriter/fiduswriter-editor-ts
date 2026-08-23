@@ -1,6 +1,6 @@
 {
   "name": "@fiduswriter/editor",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "Fidus Writer browser editor",
   "keywords": [
     "fiduswriter",
@@ -104,7 +104,7 @@
     "fast-xml-parser": "^4.5.0",
     "fastdom": "^1.0.11",
     "fix-utf8": "^2.0.1",
-    "fwtoolkit": "^0.2.19",
+    "fwtoolkit": "^0.2.20",
     "jszip": "^3.10.1",
     "mathml-to-latex": "^1.4.3",
     "mathml2omml": "^0.5.0",
