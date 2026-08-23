@@ -1068,7 +1068,7 @@ export class Editor {
             this.dom = document.createElement("body")
             document.body = this.dom
         }
-        this.dom.classList.add("editor")
+        this.dom.classList.add("fw-editor")
         this.dom.classList.add("fw-scrollable")
         this.dom.innerHTML = `<div id="editor">
             <div id="fw-wait"><i class="fa-solid fa-spinner fa-pulse"></i></div>

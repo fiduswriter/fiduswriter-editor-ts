@@ -20,7 +20,7 @@
     top: 225px;
 }
 
-body.header-closed #margin-box-filter {
+.fw-editor.header-closed #margin-box-filter {
     top: 72px;
     z-index: 100;
 }

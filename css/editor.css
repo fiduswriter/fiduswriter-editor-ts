@@ -1,4 +1,4 @@
-body.editor {
+.fw-editor {
     height: 100%;
     font-family: Lato, sans-serif;
     font-size: 13px;
@@ -6,7 +6,7 @@ body.editor {
     overflow-x: hidden;
 }
 
-body.editor header {
+.fw-editor header {
     position: fixed;
     width: 100%;
     z-index: 91;
@@ -356,11 +356,11 @@ math-field {
     padding: 0.5in 54px 0 110px;
 }
 
-body.header-closed #toolbar {
+.fw-editor.header-closed #toolbar {
     padding-top: 12px;
 }
 
-body.header-closed #editor-content {
+.fw-editor.header-closed #editor-content {
     top: 72px;
 }
 
@@ -872,9 +872,9 @@ html[hc="a5"] .fw-overlay {
     background-color: rgb(var(--highcontrast-overlay-color));
 }
 
-html[hc="a3"] body,
-html[hc="a4"] body,
-html[hc="a5"] body {
+html[hc="a3"] .fw-editor,
+html[hc="a4"] .fw-editor,
+html[hc="a5"] .fw-editor {
     background-color: var(--highcontrast-background-color);
 }
 
@@ -1124,7 +1124,7 @@ html[hc="a5"] #toolbar {
     display: none;
 }
 
-body.no-scroll {
+.fw-editor.no-scroll {
     overflow: hidden;
 }
 
@@ -1188,11 +1188,11 @@ body.no-scroll {
         line-height: 46px;
     }
 
-    body.header-closed #navigator {
+    .fw-editor.header-closed #navigator {
         top: 64px;
     }
 
-    body.header-closed #editor-content {
+    .fw-editor.header-closed #editor-content {
         top: 96px;
     }
 
@@ -1233,7 +1233,7 @@ body.no-scroll {
         right: 8px;
     }
 
-    body.header-closed #margin-box-filter {
+    .fw-editor.header-closed #margin-box-filter {
         top: 64px !important;
     }
 

@@ -32,6 +32,13 @@ mkdir -p "$BUILD_DIR/css/fwtoolkit"
 for css in "$ROOT/node_modules/fwtoolkit/css/"*.css; do
     cp "$css" "$BUILD_DIR/css/fwtoolkit/"
 done
+
+# Scoped fwtoolkit stylesheets for the embedded demo: the same sheets with the
+# page-context body/html rules scoped to the #fw-editor-app container.
+mkdir -p "$BUILD_DIR/css-scoped"
+node "$ROOT/node_modules/fwtoolkit/scripts/build-scoped-css.js" \
+    --out "$BUILD_DIR/css-scoped" \
+    --prefix "#fw-editor-app .fw-editor"
 cp "$ROOT/node_modules/prosemirror-view/style/prosemirror.css" "$BUILD_DIR/css/"
 cp "$ROOT/node_modules/cropperjs/dist/cropper.min.css" "$BUILD_DIR/css/"
 for css in "$ROOT/css/"*.css; do

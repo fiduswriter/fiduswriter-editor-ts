@@ -62,6 +62,37 @@ usage example are available on the project site:
 
 **<https://fiduswriter.pages.fiduswriter.org/fiduswriter-editor-ts/>**
 
+## Embedding in another application
+
+The editor can be embedded directly into a host page (a CMS, a plugin, another
+application) — no iframe required:
+
+1. Mount the editor into a container element with the `mount` option. The
+   editor renders its UI inside a `div.fw-editor` container (in full-page mode
+   it replaces `document.body` instead, and that body carries the `fw-editor`
+   class).
+2. Load the editor's own stylesheets as-is: they are container-safe
+   (`fw-`-prefixed classes, and the editor root targets `.fw-editor`).
+3. Load fwtoolkit's **scoped** stylesheets for the host page. fwtoolkit ships
+   `scripts/build-scoped-css.js` which writes `css-scoped/` — copies of its
+   sheets with the page-context `body`/`html` rules scoped to a container
+   selector:
+   `node node_modules/fwtoolkit/scripts/build-scoped-css.js --prefix "#my-app .fw-editor"`
+4. Add an inert reset link (`<link rel="stylesheet" href=".../css/reset.css" disabled />`)
+   so the editor does not inject the global (unscoped) reset.
+5. If the editor opens dialogs that should stay inside the container, the
+   host can additionally scope stylesheets with bare element selectors
+   (`document.css`) via `scopeCss(css, {prefix, elements: true})` (exported by
+   `fwtoolkit`).
+
+A working reference implementation is the **embedded demo**:
+
+**<https://fiduswriter.pages.fiduswriter.org/fiduswriter-editor-ts/embedded/>**
+
+`demo/embedded/` shows the editor running inside a page that has its own
+header and content — the pattern that a WordPress/Drupal/Joomla plugin or any
+other host would use.
+
 ## Demo
 
 A standalone browser demo is published on Forgejo Pages:
