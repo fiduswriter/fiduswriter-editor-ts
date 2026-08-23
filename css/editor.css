@@ -1503,3 +1503,13 @@ pre[data-language] {
     color: var(--cs-light-text-secondary);
     word-break: break-all;
 }
+
+/* The MathLive virtual keyboard defaults to a z-index around 105, which puts
+   it below fwtoolkit dialogs (z-index ≥ 1000) and their overlays — the
+   keyboard would be invisible while a math/figure dialog is open. Raise it
+   above the current dialog stack: fwtoolkit's Dialog.open() sets
+   --highest-dialog-z-index inline on <body>, which inherits into the
+   keyboard element (appended to document.body). */
+math-virtual-keyboard {
+    --keyboard-zindex: calc(var(--highest-dialog-z-index, 1000) + 1);
+}

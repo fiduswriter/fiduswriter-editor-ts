@@ -3,7 +3,8 @@ import {
     Plugin,
     PluginKey,
     TextSelection,
-    type EditorState
+    type EditorState,
+    type Transaction
 } from "prosemirror-state"
 import {Decoration, DecorationSet, type EditorView} from "prosemirror-view"
 import type {Node as ProseMirrorNode} from "prosemirror-model"
@@ -11,6 +12,7 @@ import type {Node as ProseMirrorNode} from "prosemirror-model"
 import {COMMENT_ONLY_ROLES, READ_ONLY_ROLES} from "../index.js"
 import {MathDialog} from "../dialogs/index.js"
 import {elementDisabled} from "../menus/toolbar/model.js"
+import {amendTransaction} from "../track/index.js"
 import type {Editor} from "../types.js"
 
 const key = new PluginKey("inlineMath")
@@ -551,6 +553,18 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                 | undefined
             const meta = trs.find(tr => tr.getMeta(key))?.getMeta(key)
 
+            /* Transactions appended here are applied by ProseMirror directly
+               and never pass through EditorView.dispatchTransaction, which is
+               where amendTransaction normally converts edits into tracked
+               changes. Run the amendment here so that inline math edits are
+               tracked like edits made through the math dialog. The plugin's
+               own meta is attached only after amendment — amendTransaction
+               ignores transactions carrying foreign metadata. */
+            const tracked = (tr: Transaction): Transaction =>
+                amendTransaction(tr, newState, editor).setMeta(key, {
+                    action: "deactivate"
+                })
+
             /* ── commit / commitAndRight ── */
             if (
                 meta?.action === "commit" ||
@@ -579,7 +593,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                                 oldPluginState.mathNodePos
                             )
                         )
-                        return tr.setMeta(key, {action: "deactivate"})
+                        return tracked(tr)
                     } else {
                         // Insert the literal "$" and move cursor past it.
                         const tr = newState.tr.insertText(
@@ -592,7 +606,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                                 oldPluginState.from + 1
                             )
                         )
-                        return tr.setMeta(key, {action: "deactivate"})
+                        return tracked(tr)
                     }
                 }
 
@@ -616,7 +630,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                             oldPluginState.mathNodePos + equationNode.nodeSize
                         )
                     )
-                    return tr.setMeta(key, {action: "deactivate"})
+                    return tracked(tr)
                 } else {
                     const tr = newState.tr.insert(
                         oldPluginState.from,
@@ -628,7 +642,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                             oldPluginState.from + equationNode.nodeSize
                         )
                     )
-                    return tr.setMeta(key, {action: "deactivate"})
+                    return tracked(tr)
                 }
             }
 
@@ -646,14 +660,14 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                             oldPluginState.mathNodePos + (node?.nodeSize || 1)
                         )
                     )
-                    return tr.setMeta(key, {action: "deactivate"})
+                    return tracked(tr)
                 } else {
                     // Restore the literal "$" at the original position.
                     const tr = newState.tr.insertText("$", oldPluginState.from)
                     tr.setSelection(
                         TextSelection.create(tr.doc, oldPluginState.from + 1)
                     )
-                    return tr.setMeta(key, {action: "deactivate"})
+                    return tracked(tr)
                 }
             }
 
@@ -675,7 +689,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                     tr.setSelection(
                         TextSelection.create(tr.doc, oldPluginState.mathNodePos)
                     )
-                    return tr.setMeta(key, {action: "deactivate"})
+                    return tracked(tr)
                 } else {
                     // New node: just deactivate — don't insert anything.
                     return newState.tr.setMeta(key, {action: "deactivate"})
@@ -694,7 +708,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                             oldPluginState.mathNodePos
                         )
                     )
-                    return tr.setMeta(key, {action: "deactivate"})
+                    return tracked(tr)
                 } else {
                     const tr = newState.tr.insertText(
                         "$",
@@ -703,7 +717,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                     tr.setSelection(
                         TextSelection.create(tr.doc, oldPluginState.from)
                     )
-                    return tr.setMeta(key, {action: "deactivate"})
+                    return tracked(tr)
                 }
             }
 
@@ -726,18 +740,21 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                             const existingNode = newState.doc.nodeAt(
                                 oldPluginState.mathNodePos
                             )
-                            return newState.tr
-                                .replaceWith(
+                            return tracked(
+                                newState.tr.replaceWith(
                                     oldPluginState.mathNodePos,
                                     oldPluginState.mathNodePos +
                                         (existingNode?.nodeSize || 1),
                                     equationNode
                                 )
-                                .setMeta(key, {action: "deactivate"})
+                            )
                         } else {
-                            return newState.tr
-                                .insert(oldPluginState.from, equationNode)
-                                .setMeta(key, {action: "deactivate"})
+                            return tracked(
+                                newState.tr.insert(
+                                    oldPluginState.from,
+                                    equationNode
+                                )
+                            )
                         }
                     } else {
                         return newState.tr.setMeta(key, {action: "deactivate"})
