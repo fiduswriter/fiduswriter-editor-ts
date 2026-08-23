@@ -7,10 +7,12 @@ import assert from "node:assert"
 
 import {docSchema} from "@fiduswriter/document/schema/document/index"
 import {Fragment, Slice} from "prosemirror-model"
-import {EditorState, TextSelection} from "prosemirror-state"
+import {EditorState, NodeSelection, TextSelection} from "prosemirror-state"
 
 import {acceptAll, rejectAll} from "../dist/track/index.js"
 import {trackedTransaction} from "../dist/track/index.js"
+import {accept} from "../dist/track/accept.js"
+import {reject} from "../dist/track/reject.js"
 
 const USER = {id: 1, username: "tester"}
 const DATE = 1755000000000
@@ -279,6 +281,145 @@ check("pasted content receives insertion marks under track changes", () => {
     const inserted = getTextsIncluding(newState.doc, "NEW")
     assert.strictEqual(inserted.length > 0, true)
     assert.strictEqual(inserted[0].marks.includes("insertion"), true)
+})
+
+function makeFigureDoc() {
+    const bodyPart = docSchema.nodes.richtext_part.create(
+        {title: "Body", id: "body", marks: ["strong", "em", "link"]},
+        Fragment.fromArray([
+            para([text("Before the figure")]),
+            docSchema.nodes.figure.create(
+                {category: "figure", caption: false},
+                Fragment.fromArray([
+                    docSchema.nodes.image.create({src: "test.png"}),
+                    docSchema.nodes.figure_caption.create(
+                        null,
+                        Fragment.fromArray([para([text("Caption")])])
+                    )
+                ])
+            ),
+            para([text("After the figure")])
+        ])
+    )
+    return docSchema.nodes.doc.create({}, Fragment.fromArray([
+        docSchema.nodes.title.create(null, text("Title")),
+        docSchema.nodes.contributors_part.create({id: "authors"}),
+        bodyPart
+    ]))
+}
+
+// Selecting a figure (NodeSelection) and deleting it under track changes
+// stores the change in the figure's track attribute. Accept/reject from the
+// margin box have to work on those block level changes as well - they used to
+// bail out silently because they only looked for marks.
+function trackedFigureDeletion() {
+    const doc = makeFigureDoc()
+    let figPos = -1
+    doc.descendants((node, pos) => {
+        if (figPos === -1 && node.type.name === "figure") {
+            figPos = pos
+        }
+    })
+    assert.strictEqual(figPos !== -1, true)
+    const state = EditorState.create({doc})
+    const trackedState = applyTracked(state, tr =>
+        tr.setSelection(NodeSelection.create(tr.doc, figPos)).deleteSelection()
+    )
+    const figNode = trackedState.doc.nodeAt(figPos)
+    assert.strictEqual(figNode?.type.name, "figure")
+    assert.strictEqual(
+        (figNode.attrs.track || []).some(track => track.type === "deletion"),
+        true
+    )
+    return {state: trackedState, figPos}
+}
+
+check("tracked figure deletion is accepted and removes the figure", () => {
+    const {state, figPos} = trackedFigureDeletion()
+    const view = makeView(state)
+    accept("deletion", figPos, view)
+    let found = 0
+    view.state.doc.descendants(node => {
+        if (node.type.name === "figure") {
+            found++
+        }
+    })
+    assert.strictEqual(found, 0, "figure should be gone after accepting deletion")
+    assert.strictEqual(
+        view.state.doc.textContent.includes("Caption"),
+        false,
+        "figure caption should be gone as well"
+    )
+    assert.strictEqual(
+        view.state.doc.textContent.includes("After the figure"),
+        true,
+        "surrounding text should remain"
+    )
+})
+
+check("tracked figure deletion is rejected and restores the figure", () => {
+    const {state, figPos} = trackedFigureDeletion()
+    const view = makeView(state)
+    reject("deletion", figPos, view)
+    const figNode = view.state.doc.nodeAt(figPos)
+    assert.strictEqual(figNode?.type.name, "figure", "figure should still be present")
+    assert.strictEqual(figNode.attrs.track.length, 0, "deletion track entry should be removed")
+    assert.strictEqual(
+        view.state.doc.textContent.includes("Caption"),
+        true,
+        "caption should remain"
+    )
+})
+
+check("block level block_change can be accepted and rejected", () => {
+    const makeDocWithBlockChange = () => {
+        const bodyPart = docSchema.nodes.richtext_part.create(
+            {title: "Body", id: "body", marks: ["strong", "em", "link"]},
+            Fragment.fromArray([
+                Object.assign(
+                    para([text("Once a heading")]),
+                    {
+                        attrs: Object.assign({}, para([]).attrs, {
+                            track: [
+                                {
+                                    type: "block_change",
+                                    user: USER.id,
+                                    username: USER.username,
+                                    date: DATE / 60000,
+                                    before: {type: "heading1", attrs: {}}
+                                }
+                            ]
+                        })
+                    }
+                )
+            ])
+        )
+        return docSchema.nodes.doc.create({}, Fragment.fromArray([
+            docSchema.nodes.title.create(null, text("Title")),
+            docSchema.nodes.contributors_part.create({id: "authors"}),
+            bodyPart
+        ]))
+    }
+
+    // Reject restores the previous node type.
+    const rejectedView = makeView(EditorState.create({doc: makeDocWithBlockChange()}))
+    let changedPos = -1
+    rejectedView.state.doc.descendants((node, pos) => {
+        if (changedPos === -1 && node.type.name === "paragraph" && node.attrs.track.length) {
+            changedPos = pos
+        }
+    })
+    reject("block_change", changedPos, rejectedView)
+    const restored = rejectedView.state.doc.nodeAt(changedPos)
+    assert.strictEqual(restored.type.name, "heading1", "previous type should be restored")
+    assert.strictEqual(restored.attrs.track.length, 0)
+
+    // Accept keeps the current type but removes the track entry.
+    const acceptedView = makeView(EditorState.create({doc: makeDocWithBlockChange()}))
+    accept("block_change", changedPos, acceptedView)
+    const kept = acceptedView.state.doc.nodeAt(changedPos)
+    assert.strictEqual(kept.type.name, "paragraph")
+    assert.strictEqual(kept.attrs.track.length, 0)
 })
 
 console.log(`\ntracked-changes: ${passed} passed, ${failed} failed`)

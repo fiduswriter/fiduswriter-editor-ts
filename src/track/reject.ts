@@ -19,7 +19,12 @@ export const reject = (
         return
     }
     const trackMark = nodeAtPos.marks.find(mark => mark.type.name === type)
-    if (!trackMark) {
+    // Block level track changes are stored in the node's track attribute
+    // rather than in marks (figures, tables, text blocks).
+    const blockTrack = (
+        nodeAtPos.attrs.track as Array<{type: string}> | undefined
+    )?.find(track => track.type === type)
+    if (!trackMark && !blockTrack) {
         return
     }
     view.state.doc.nodesBetween(
@@ -38,10 +43,17 @@ export const reject = (
                     // Change has already affected inline node. Don't apply to block level.
                     return false
                 }
-            } else if (!trackMark.isInSet(node.marks)) {
-                reachedEnd = true
-                return false
-            } else {
+            } else if (trackMark && !trackMark.isInSet(node.marks)) {
+                if (
+                    !(
+                        node.attrs.track as Array<{type: string}> | undefined
+                    )?.some(track => track.type === type)
+                ) {
+                    reachedEnd = true
+                    return false
+                }
+                inlineChange = true
+            } else if (trackMark) {
                 inlineChange = true
             }
             if (type === "insertion") {
@@ -66,6 +78,12 @@ export const reject = (
                     )
                 }
             } else if (type === "format_change") {
+                // format_change only exists as a mark, so trackMark is
+                // guaranteed to be set here (the guard above would have
+                // returned otherwise).
+                if (!trackMark) {
+                    return
+                }
                 ;(trackMark.attrs.before as string[]).forEach(oldMark =>
                     tr.step(
                         new AddMarkStep(

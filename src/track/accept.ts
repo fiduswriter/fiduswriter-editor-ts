@@ -19,7 +19,12 @@ export const accept = (
         return
     }
     const trackMark = nodeAtPos.marks.find(mark => mark.type.name === type)
-    if (!trackMark) {
+    // Block level track changes are stored in the node's track attribute
+    // rather than in marks (figures, tables, text blocks).
+    const blockTrack = (
+        nodeAtPos.attrs.track as Array<{type: string}> | undefined
+    )?.find(track => track.type === type)
+    if (!trackMark && !blockTrack) {
         return
     }
     view.state.doc.nodesBetween(
@@ -34,13 +39,22 @@ export const accept = (
             }
             if (!node.isInline) {
                 reachedEnd = true
-            } else if (!trackMark.isInSet(node.marks)) {
+            } else if (
+                trackMark &&
+                !trackMark.isInSet(node.marks) &&
+                !(
+                    node.attrs.track as Array<{type: string}> | undefined
+                )?.some(track => track.type === type)
+            ) {
                 reachedEnd = true
                 return false
             }
-            // Traverse only those nodes which have the track marks.
+            // Traverse only those nodes which have the track marks or
+            // corresponding block level track entries.
             if (
-                trackMark === undefined ||
+                (node.attrs.track as Array<{type: string}> | undefined)?.some(
+                    track => track.type === type
+                ) ||
                 (trackMark && trackMark.isInSet(node.marks))
             ) {
                 if (type === "deletion") {
@@ -68,6 +82,11 @@ export const accept = (
                             reachedEnd = false
                         }
                     } else {
+                        // The gate above guarantees the insertion mark is set
+                        // on nodes without a track attribute.
+                        if (!trackMark) {
+                            return true
+                        }
                         tr.step(
                             new AddMarkStep(
                                 map.map(nodePos),
@@ -81,6 +100,12 @@ export const accept = (
                         )
                     }
                 } else if (type === "format_change") {
+                    // format_change only exists as a mark, so trackMark is
+                    // guaranteed to be set here (the guard above would have
+                    // returned otherwise).
+                    if (!trackMark) {
+                        return
+                    }
                     tr.step(
                         new RemoveMarkStep(
                             map.map(nodePos),
