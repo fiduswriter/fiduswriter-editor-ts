@@ -45,7 +45,6 @@ import {RequestAccessDialog} from "./documents/access_rights/request_access_dial
 import {E2EESnapshotManager} from "./e2ee/snapshot-manager.js"
 import {ExportFidusFile} from "./exporter/native/file.js"
 import {ModFootnotes} from "./footnotes/index.js"
-import {imageEditModel} from "./images/edit_dialog/model.js"
 import {buildEditorKeymap} from "./keymap.js"
 import {
     codeBlockMenuModel,
@@ -215,7 +214,6 @@ export class Editor {
             navigatorFilterModel: navigatorFilterModel(),
             orderedListMenuModel: orderedListMenuModel(),
             selectionMenuModel: selectionMenuModel(),
-            imageEditModel: imageEditModel(),
             tableMenuModel: tableMenuModel(),
             figureMenuModel: figureMenuModel(),
             toolbarModel: toolbarModel(),
@@ -291,7 +289,7 @@ export class Editor {
             staticUrl("css/bibliography/bibliography.css"),
             staticUrl("css/editor/dot_menu.css"),
             staticUrl("css/cropper.min.css"),
-            staticUrl("css/inline_tools.css"),
+            staticUrl("css/fwtoolkit/inline_tools.css"),
             staticUrl("css/editor/e2ee.css")
         ])
         new ModDocumentTemplate(this)

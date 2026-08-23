@@ -40,6 +40,12 @@ done
 # Bibliography styles are provided by @fiduswriter/bibliography-manager.
 cp "$ROOT/node_modules/@fiduswriter/bibliography-manager/css/bibliography.css" "$BUILD_DIR/css/"
 
+# Image dialog styles are loaded at runtime via
+# ensureCSS(staticUrl("css/dialog_usermedia.css")).
+for css in "$ROOT"/node_modules/@fiduswriter/image-manager/css/*.css; do
+    cp "$css" "$BUILD_DIR/css/"
+done
+
 # The document export stylesheet (css/document/document.css) and its bundled
 # Libertinus fallback fonts are provided by @fiduswriter/document. The
 # HTML/EPUB exporters fetch them via staticUrl("css/document/..."), which the

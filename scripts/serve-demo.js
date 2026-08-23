@@ -100,6 +100,25 @@ async function buildDemo() {
         join(ROOT, "node_modules", "@fiduswriter", "bibliography-manager", "css", "bibliography.css"),
         join(cssDir, "bibliography.css")
     )
+    // The image dialogs load their CSS at runtime via
+    // ensureCSS(staticUrl("css/dialog_usermedia.css")).
+    const imageManagerCssDir = join(
+        ROOT,
+        "node_modules",
+        "@fiduswriter",
+        "image-manager",
+        "css"
+    )
+    if (existsSync(imageManagerCssDir)) {
+        for (const entry of await fs.readdir(imageManagerCssDir)) {
+            if (entry.endsWith(".css")) {
+                await fs.copyFile(
+                    join(imageManagerCssDir, entry),
+                    join(cssDir, entry)
+                )
+            }
+        }
+    }
     // The document export stylesheet (css/document/document.css) and its
     // bundled Libertinus fallback fonts are provided by @fiduswriter/document.
     // The HTML/EPUB exporters fetch them via staticUrl("css/document/..."),

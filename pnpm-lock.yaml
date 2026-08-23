@@ -15,8 +15,8 @@ importers:
         specifier: ^0.3.12
         version: 0.3.12
       '@fiduswriter/image-manager':
-        specifier: ^0.1.24
-        version: 0.1.24(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+        specifier: ^0.1.26
+        version: 0.1.26(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       '@fortawesome/fontawesome-free':
         specifier: ^7.2.0
         version: 7.3.1
@@ -572,8 +572,8 @@ packages:
   '@fiduswriter/document@0.3.12':
     resolution: {integrity: sha512-34O0UV/8oepP+6RE8LpGnwSQf90QcbBbr2UOXBL7JtIBMyE/mg1azRMab5c99zphq+7H1S4DMgghZD7+JU1ZYA==}
 
-  '@fiduswriter/image-manager@0.1.24':
-    resolution: {integrity: sha512-cIHzMgyw45vb+dcV9kwBp0SeLs+dth0A5W4uxU8j8vZiO+tle7J4FjSIW5DP8kZSo2vHD2zcP8yyGmGlVaUq9A==}
+  '@fiduswriter/image-manager@0.1.26':
+    resolution: {integrity: sha512-04OkXL1TW5YfJccIh5JgF9ZtrkKNp423UDMD8wol3rbcDntr1JoNXmJnZwIlqrmdZkTmcxTQl9Fm6aaGQL1mWA==}
 
   '@fontsource/jetbrains-mono@5.3.0':
     resolution: {integrity: sha512-fqDfB5I9f1p1TV486aUgB9t8zP84P0O1FtQR5Ol9vjwPy+S+EIGlVYm1cvj2W5shcZMTg2nZFdVMoH5wFu8a1A==}
@@ -3110,7 +3110,7 @@ snapshots:
       vivliostyle-pdf: 0.2.5
       w3c-keyname: 2.2.8
 
-  '@fiduswriter/image-manager@0.1.24(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)':
+  '@fiduswriter/image-manager@0.1.26(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)':
     dependencies:
       bibliojson: 4.0.4
       cropperjs: 1.6.2

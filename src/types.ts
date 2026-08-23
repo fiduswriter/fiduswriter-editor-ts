@@ -313,7 +313,6 @@ export interface EditorMenu {
     navigatorFilterModel: unknown
     orderedListMenuModel: unknown
     selectionMenuModel: unknown
-    imageEditModel: unknown
     tableMenuModel: unknown
     figureMenuModel: unknown
     toolbarModel: unknown
