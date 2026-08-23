@@ -16,6 +16,10 @@ export interface PdfExportDialogResult {
     resolveTrackChanges: boolean
     /** Embed a .fidus file of the document as a PDF attachment. */
     embedFidusFile: boolean
+    /** Place figures as page floats (moved to the top of the page). */
+    figurePageFloats: boolean
+    /** Place tables as page floats (moved to the top of the page). */
+    tablePageFloats: boolean
     /** Print-production options passed to the vivliostyle-pdf emitter. */
     printOptions: PdfExportPrintOptions
 }
@@ -49,6 +53,10 @@ export class PdfExportDialog {
                             resolveTrackChanges:
                                 trackChangesValue !== "include",
                             embedFidusFile: checked(".pdf-embed-fidus"),
+                            figurePageFloats: checked(
+                                ".pdf-figure-page-floats"
+                            ),
+                            tablePageFloats: checked(".pdf-table-page-floats"),
                             printOptions: {
                                 cropMarks: checked(".pdf-crop-marks"),
                                 trimBox: checked(".pdf-trim-box"),
@@ -85,7 +93,7 @@ export class PdfExportDialog {
         this.dialog = new Dialog({
             title: gettext("PDF export options"),
             body: pdfExportDialogTemplate(),
-            height: 380,
+            height: 470,
             width: 420,
             buttons,
             restoreActiveElement: false

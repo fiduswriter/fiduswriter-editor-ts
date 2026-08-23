@@ -30,7 +30,11 @@
             "marks": [
               "strong",
               "em",
-              "link"
+              "underline",
+              "sup",
+              "sub",
+              "link",
+              "code"
             ],
             "metadata": "subtitle"
           },
@@ -64,7 +68,11 @@
             "marks": [
               "strong",
               "em",
-              "link"
+              "underline",
+              "sup",
+              "sub",
+              "link",
+              "code"
             ],
             "metadata": "abstract"
           },
@@ -93,7 +101,11 @@
             "marks": [
               "strong",
               "em",
-              "link"
+              "underline",
+              "sup",
+              "sub",
+              "link",
+              "code"
             ]
           },
           "content": [

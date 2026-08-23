@@ -726,6 +726,9 @@ export const headerbarModel = () => ({
                                         editor.user?.username ||
                                         undefined,
                                     fidusFile,
+                                    figurePageFloats:
+                                        options.figurePageFloats,
+                                    tablePageFloats: options.tablePageFloats,
                                     printOptions: options.printOptions
                                 }
                             )

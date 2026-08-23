@@ -127,6 +127,23 @@ export const pdfExportDialogTemplate = (): string => `
             "pdf-embed-fidus-help"
         )}
     </p>
+    <h4>${gettext("Figures and tables")}</h4>
+    <p>
+        <label><input type="checkbox" class="pdf-figure-page-floats" checked="" aria-describedby="pdf-figure-page-floats-help"> ${gettext("Place figures as page floats")}</label>
+        ${infoTooltip(
+            gettext(
+                "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
+            ),
+            "pdf-figure-page-floats-help"
+        )}<br>
+        <label><input type="checkbox" class="pdf-table-page-floats" checked="" aria-describedby="pdf-table-page-floats-help"> ${gettext("Place tables as page floats")}</label>
+        ${infoTooltip(
+            gettext(
+                "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
+            ),
+            "pdf-table-page-floats-help"
+        )}
+    </p>
     <h4>${gettext("Print production")}</h4>
     <p>
         <label><input type="checkbox" class="pdf-crop-marks" aria-describedby="pdf-crop-marks-help"> ${gettext("Crop marks")}</label>
