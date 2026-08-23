@@ -12,8 +12,8 @@ importers:
         specifier: ^0.1.33
         version: 0.1.33(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       '@fiduswriter/document':
-        specifier: ^0.3.13
-        version: 0.3.13
+        specifier: ^0.3.14
+        version: 0.3.14
       '@fiduswriter/image-manager':
         specifier: ^0.1.26
         version: 0.1.26(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
@@ -45,8 +45,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       fwtoolkit:
-        specifier: ^0.2.19
-        version: 0.2.19(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+        specifier: ^0.2.20
+        version: 0.2.20(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       jszip:
         specifier: ^3.10.1
         version: 3.10.1
@@ -569,8 +569,8 @@ packages:
   '@fiduswriter/bibliography-manager@0.1.33':
     resolution: {integrity: sha512-JYRrmVPs1BOYv9DRX/Zb8iwxjYSp9xIZsXscdGJ3aUkOkAjkdfneXHU46gAXS/X26K/lJW26foSyq+w+c/KftA==}
 
-  '@fiduswriter/document@0.3.13':
-    resolution: {integrity: sha512-m++CdDEG958/KALZy3eQU8a3/46NFcY6TyDRq4djL9p9b2nmVtuwuxWvrIPM22K9wjuMus0LSZgdYR4YNvS4Sw==}
+  '@fiduswriter/document@0.3.14':
+    resolution: {integrity: sha512-pesYPCSMJckc681bvNxaQ85G6yAhILkGZ18apjpuj/kXGBIo15EInJhpCkfBeD/75kr5zaMmjMn+e1pGi6vROw==}
 
   '@fiduswriter/image-manager@0.1.26':
     resolution: {integrity: sha512-04OkXL1TW5YfJccIh5JgF9ZtrkKNp423UDMD8wol3rbcDntr1JoNXmJnZwIlqrmdZkTmcxTQl9Fm6aaGQL1mWA==}
@@ -1738,8 +1738,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  fwtoolkit@0.2.19:
-    resolution: {integrity: sha512-e2rkHmehL36MkEBl3h5/QdZ4rCxjr0HA/At7AzxmcKCZCnrBqj62dLIOSvUkcw+Ev0VzsaijpcQ+PnXHPoOTEA==}
+  fwtoolkit@0.2.20:
+    resolution: {integrity: sha512-bJHUKU6muXWQiO67xHSDfKmU6Z07Xmn2vyKUKn5Ut4b0mZLeZaewdIF3skzD6phmJMG8L6lOXKggUOIZCMKItQ==}
     peerDependencies:
       prosemirror-commands: ^1.7.0
       prosemirror-history: ^1.4.0
@@ -3067,7 +3067,7 @@ snapshots:
     dependencies:
       bibliojson: 4.0.4
       fix-utf8: 2.0.1
-      fwtoolkit: 0.2.19(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      fwtoolkit: 0.2.20(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       prosemirror-commands: 1.7.1
       prosemirror-model: 1.25.11
       simple-datatables: 10.3.0
@@ -3078,7 +3078,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@0.3.13':
+  '@fiduswriter/document@0.3.14':
     dependencies:
       '@mathjax/mathjax-newcm-font': 4.1.3
       '@mathjax/src': 4.1.3
@@ -3089,7 +3089,7 @@ snapshots:
       downloadjs: 1.4.7
       fast-deep-equal: 3.1.3
       fast-xml-parser: 5.11.0
-      fwtoolkit: 0.2.19(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      fwtoolkit: 0.2.20(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       jszip: 3.10.1
       mathlive: 0.110.0
       mathml-to-latex: 1.8.0
@@ -3115,7 +3115,7 @@ snapshots:
       bibliojson: 4.0.4
       cropperjs: 1.6.2
       fast-deep-equal: 3.1.3
-      fwtoolkit: 0.2.19(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
+      fwtoolkit: 0.2.20(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1)
       simple-datatables: 10.3.0
     transitivePeerDependencies:
       - prosemirror-commands
@@ -4310,7 +4310,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fwtoolkit@0.2.19(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1):
+  fwtoolkit@0.2.20(prosemirror-commands@1.7.1)(prosemirror-history@1.5.0)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.1):
     dependencies:
       diff-dom: 5.2.1
       jszip: 3.10.1
