@@ -89,6 +89,13 @@ export interface StaticAppConfig {
      */
     saveMode?: "external" | "direct"
     /**
+     * Whether to show the file-menu items that require a Fidus Writer
+     * backend (Share, Save revision, Create copy). Defaults to `true`.
+     * Standalone hosts (embedded editor without a backend) set this to
+     * `false` to match the behavior of a normal external-mode editor.
+     */
+    fileMenuItems?: boolean
+    /**
      * Optional API connector overrides. When provided, these replace the
      * corresponding in-memory connectors, letting the editor talk to a real
      * backend (e.g. Django) instead of the static in-memory stores.
@@ -367,7 +374,11 @@ export async function createStaticApp(
             EDITOR_SAVE_MODE: config.saveMode ?? "external",
             EDITOR_ONLY_MODE: true,
             E2EE_MODE: "disabled",
-            LANGUAGE: config.locale
+            LANGUAGE: config.locale,
+            // Hosts without a Fidus Writer backend (embedded / standalone
+            // editor) hide the file-menu items that need one: Share, Save
+            // revision, Create copy.
+            SHOW_FILE_MENU_ITEMS: config.fileMenuItems ?? true
         },
         csl: config.csl,
         config: {

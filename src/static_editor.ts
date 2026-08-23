@@ -9,6 +9,23 @@ import type {Editor} from "./index.js"
 
 export type {StaticAppConfig} from "./static_app.js"
 
+// The citeproc-plus browser build references its bundled CSL style/locale
+// files as relative "./assets/..." strings and fetches them against the
+// *document* base URL (it only resolves them via `import.meta.url` in the
+// Node build). In an embedded/static host the document base differs from the
+// module location, so resolve those fetches against this module's URL
+// instead. Guarded to only rewrite the citeproc asset pattern.
+if (typeof window !== "undefined") {
+    const moduleBase = new URL(".", import.meta.url).href
+    const originalFetch = window.fetch.bind(window)
+    window.fetch = ((input: RequestInfo | URL, init?: RequestInit) => {
+        if (typeof input === "string" && input.startsWith("./assets/")) {
+            input = new URL(input, moduleBase).href
+        }
+        return originalFetch(input as RequestInfo, init)
+    }) as typeof window.fetch
+}
+
 function confirmedDocPlugin(options: unknown): Plugin {
     const editor = (options as {editor: Editor}).editor
     return new Plugin({
