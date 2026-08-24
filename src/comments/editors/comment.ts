@@ -381,12 +381,14 @@ export class CommentEditor {
         }
 
         // scroll to bottom of the margin-box-container or global-comment-container
-        // when new comments are added when the screens width is less than 1024px
-        const currentScreenWidth =
-            window.innerWidth ||
-            document.documentElement.clientWidth ||
-            document.body.clientWidth
-        if (currentScreenWidth < 1024) {
+        // when new comments are added while the compact layout (margin boxes
+        // as a bottom overlay) is active — signaled by #margin-box-filter
+        // switching to position:fixed, same convention the margin box
+        // placement code uses.
+        const filter = document.getElementById("margin-box-filter")
+        const compactLayout =
+            !!filter && getComputedStyle(filter).position === "fixed"
+        if (compactLayout) {
             const activeMarginBoxContainer = document.querySelector(
                 "#margin-box-container, #global-comment-container"
             )

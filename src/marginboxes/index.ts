@@ -106,6 +106,7 @@ export class ModMarginboxes {
     globalCommentsContainer: HTMLElement | null
     activeCommentStyleElement: HTMLElement | null
     trackOptionsStyleElement: HTMLElement | null
+    placementStyleElement: HTMLElement | null
 
     constructor(editor: Editor) {
         this.editor = editor as Editor & {mod: MarginboxesEditorMod}
@@ -145,6 +146,7 @@ export class ModMarginboxes {
         this.globalCommentsContainer = null
         this.activeCommentStyleElement = null
         this.trackOptionsStyleElement = null
+        this.placementStyleElement = null
     }
 
     init() {
@@ -164,6 +166,9 @@ export class ModMarginboxes {
         )
         this.trackOptionsStyleElement = document.getElementById(
             "track-options-style"
+        )
+        this.placementStyleElement = document.getElementById(
+            "margin-box-placement-style"
         )
         const newGlobalCommentButton =
             document.getElementById("new-global-comment")
@@ -654,6 +659,21 @@ export class ModMarginboxes {
             marginBoxFilterElement.innerHTML = marginBoxFilterHTML
         }
 
+        // Reset previously applied placement margins before measuring: the
+        // margin boxes have no separating padding/border towards their
+        // container, so an applied margin-top collapses through it and
+        // shifts the container itself. Measuring a shifted container would
+        // feed the old margin back into the next calculation (the boxes
+        // would oscillate around their reference position). Clearing first
+        // means the container is always measured at its natural position.
+        if (
+            this.placementStyleElement &&
+            this.marginBoxesPlacementStyle !== ""
+        ) {
+            this.placementStyleElement.innerHTML = ""
+            this.marginBoxesPlacementStyle = ""
+        }
+
         return new Promise(resolve => {
             const fd = fastdom as unknown as {
                 measure(cb: () => void): void
@@ -736,11 +756,19 @@ export class ModMarginboxes {
                         activeIndex++
                     }
 
-                    const initialOffset = this.editor.dom.classList.contains(
-                        "header-closed"
-                    )
-                        ? 72 + 90
-                        : 225 + 90
+                    // Where the first margin box must land so that it lines
+                    // up with a reference at the very top of the text: the
+                    // container's own top edge, measured relative to the
+                    // editor root. Measuring (rather than assuming header
+                    // heights) keeps placement correct in every host layout
+                    // — full-page frame, CMS admin embeds, header open or
+                    // closed.
+                    const initialOffset = this.marginBoxesContainer
+                        ? this.marginBoxesContainer.getBoundingClientRect().top -
+                          bodyTop
+                        : this.editor.dom.classList.contains("header-closed")
+                            ? 72 + 90
+                            : 225 + 90
                     const $head = this.editor.view.state.selection.$head
                     const selectionInTitle =
                         $head.depth > 0 &&
@@ -800,11 +828,9 @@ export class ModMarginboxes {
                         this.marginBoxesPlacementStyle !==
                         marginBoxesPlacementStyle
                     ) {
-                        const placementStyleEl = document.getElementById(
-                            "margin-box-placement-style"
-                        )
-                        if (placementStyleEl) {
-                            placementStyleEl.innerHTML = marginBoxesPlacementStyle
+                        if (this.placementStyleElement) {
+                            this.placementStyleElement.innerHTML =
+                                marginBoxesPlacementStyle
                         }
                         this.marginBoxesPlacementStyle =
                             marginBoxesPlacementStyle

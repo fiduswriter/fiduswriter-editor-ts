@@ -70,7 +70,7 @@ export class ToolbarView {
             valueDiffing: false
         })
         this.sideMargins = 20 + 20
-        this.availableWidth = window.innerWidth - this.sideMargins
+        this.availableWidth = this.availableEditorWidth()
         this.openedMenu = false
         this.listeners = {}
 
@@ -122,8 +122,18 @@ export class ToolbarView {
     }
 
     onResize(): void {
-        this.availableWidth = window.innerWidth - this.sideMargins
+        this.availableWidth = this.availableEditorWidth()
         this.update()
+    }
+
+    /**
+     * The width the toolbar can occupy: the editor element's own width, not
+     * the browser window's. The two differ whenever the editor is embedded
+     * in a narrower host container (CMS admin pages, split views).
+     */
+    availableEditorWidth(): number {
+        return (this.editor.dom?.clientWidth || window.innerWidth) -
+            this.sideMargins
     }
 
     onclick(event: MouseEvent): void {
