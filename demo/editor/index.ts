@@ -9,6 +9,10 @@ async function main(): Promise<void> {
     console.log("Demo main starting")
     const params = new URLSearchParams(window.location.search)
     const autostart = params.get("autostart") === "1"
+    // Opt-in header title editing (?title-editing=1): demonstrates the
+    // static editor's pathEditable/onPathChange configuration. Without it,
+    // the header title is plain text, as in every static deployment.
+    const titleEditing = params.get("title-editing") === "1"
 
     const startup = autostart
         ? {
@@ -103,6 +107,9 @@ async function main(): Promise<void> {
           ) as Record<number, any>)
         : undefined
 
+    const titleChanges: string[] = []
+    ;(window as unknown as Record<string, unknown>).titleChanges = titleChanges
+
     const editor: Editor = await createStaticEditor({
         locale,
         username,
@@ -114,7 +121,15 @@ async function main(): Promise<void> {
         documentStyles: createDemoApp.documentStyles,
         exportTemplates: createDemoApp.exportTemplates,
         documentTemplates: createDemoApp.documentTemplates,
-        plugins: []
+        plugins: [],
+        ...(titleEditing
+            ? {
+                  pathEditable: true,
+                  onPathChange: (path: string) => {
+                      titleChanges.push(path)
+                  }
+              }
+            : {})
     })
 
     function downloadDocument(): void {

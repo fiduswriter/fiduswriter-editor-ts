@@ -543,6 +543,7 @@ export class HeaderbarView {
         }
         const path = cleanPath(this.getTitle(), docTitleEl.innerText.trim())
         this.editor.docInfo.path = path
+        this.editor.onPathChange?.(path)
         if (this.editor.ws) {
             this.editor.ws.send(() => {
                 return {

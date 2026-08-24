@@ -86,6 +86,22 @@ export interface StaticEditorConfig
         json: Record<string, unknown>
         status: number
     }>
+    /**
+     * Whether the document title/path shown in the header is editable.
+     *
+     * With the Fidus Writer server backend, editing the header title
+     * changes the document's path via a `path_change` WebSocket message.
+     * Static deployments have no such concept by default, so editing is
+     * disabled unless the host opts in (e.g. a WebDAV host that renames
+     * the underlying file).
+     */
+    pathEditable?: boolean
+    /**
+     * Optional callback invoked after the user edited the header title
+     * (i.e. the document path). Only called when `pathEditable` is
+     * enabled and only on the host that received the edit.
+     */
+    onPathChange?: (path: string) => void
     /** Optional extra editor plugins. */
     plugins?: Array<[string, Record<string, unknown>]>
     /**
@@ -283,6 +299,13 @@ export async function createStaticEditor(
         String(docId),
         plugins
     )
+
+    // Static deployments normally have no document-overview path concept,
+    // so header title editing is disabled unless the host opts in.
+    editor.pathEditable = config.pathEditable ?? false
+    if (config.onPathChange) {
+        editor.onPathChange = config.onPathChange
+    }
 
     await editor.init()
     return editor

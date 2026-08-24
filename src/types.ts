@@ -366,6 +366,8 @@ export interface Editor {
     clientTimeAdjustment: number
     e2ee: EditorE2EE | null
     pathEditable: boolean
+    /** Optional callback invoked after the user edited the document title/path in the header. */
+    onPathChange?: (path: string) => void
     statePlugins: EditorPluginTuple[]
     view: EditorView
     currentView: EditorView
