@@ -80,8 +80,9 @@ because PM needs some content. */
     display: grid;
 }
 
-/* Mobile/tablet layout: stack footnotes under the main text with full width. */
-@media screen and (width <= 1023px) {
+/* Mobile/tablet layout: stack footnotes under the main text with full width.
+   Container query: measured against the editor element (see editor.css). */
+@container fw-editor (width <= 1023px) {
     #footnote-box-container {
         display: block;
         width: 100%;

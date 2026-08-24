@@ -361,6 +361,13 @@ export async function createStaticApp(
 
     const appName = config.appName || "fiduswriter-static-editor"
 
+    // Hosts may override individual connectors (e.g. to talk to a real
+    // backend). Merge per-connector so that a host which only overrides some
+    // methods of a connector (e.g. document.getDocumentData/saveDocument)
+    // keeps the in-memory defaults for the rest (getDocumentStyles,
+    // getTemplateForDoc, ...) instead of losing them.
+    const overrides = config.apiConnectors || {}
+
     const app = {
         name: appName,
         routes: config.routes || {
@@ -387,12 +394,11 @@ export async function createStaticApp(
             }
         },
         apiConnectors: {
-            document: documentApi,
-            documentImport: documentImportApi,
-            image: imageApi,
-            bibliography: bibliographyApi,
-            contacts: contactsApi,
-            ...config.apiConnectors
+            document: {...documentApi, ...overrides.document},
+            documentImport: {...documentImportApi, ...overrides.documentImport},
+            image: {...imageApi, ...overrides.image},
+            bibliography: overrides.bibliography ?? bibliographyApi,
+            contacts: overrides.contacts ?? contactsApi
         }
     } as unknown as EditorApp
 

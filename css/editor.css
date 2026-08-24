@@ -4,6 +4,13 @@
     font-size: 13px;
     width: 100%;
     overflow-x: hidden;
+    /* Responsive queries below key off the width of the editor itself (not
+       the browser window), so the compact layout also engages when the
+       editor is embedded in a narrower host container (CMS admin pages,
+       iframes, split views). Layout containment re-anchors position:fixed
+       descendants (header, margin-box overlay) to the editor root, which is
+       what those rules intend anyway. */
+    container: fw-editor / inline-size;
 }
 
 .fw-editor header {
@@ -1128,8 +1135,10 @@ html[hc="a5"] #toolbar {
     overflow: hidden;
 }
 
-/* Additions for tablets + mobile */
-@media screen and (width <= 1279px) {
+/* Additions for tablets + mobile. Container queries: measured against the
+   editor element itself so embedding contexts get the compact layout when
+   the editor (not the window) is narrow. */
+@container fw-editor (width <= 1279px) {
     #document-top > h1 {
         padding-left: 52px;
         background-position: 14px 0;
@@ -1153,7 +1162,7 @@ html[hc="a5"] #toolbar {
     }
 }
 
-@media screen and (width <= 1023px) {
+@container fw-editor (width <= 1023px) {
     #toolbar {
         padding-bottom: 6px;
     }
@@ -1273,7 +1282,7 @@ html[hc="a5"] #toolbar {
     }
 }
 
-@media screen and (width <= 420px) {
+@container fw-editor (width <= 420px) {
     .editor-toolbar div.ui-buttonset {
         margin-right: 0;
     }
