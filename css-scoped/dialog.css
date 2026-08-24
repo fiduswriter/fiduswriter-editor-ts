@@ -1,0 +1,153 @@
+.fw-dialog{
+    position: absolute;
+    background-color: var(--cs-light-background);
+    font-size: 14px;
+    overflow: visible;
+    outline: 0;
+    padding: 0 19px 19px;
+    box-shadow: none;
+    border: 0 none;
+    border-image: initial;
+    border-radius: 0;
+    z-index: 1000; /* Ensure dialog stays on top */
+    user-select: none; /* Prevent interaction with background content */
+}.fw-dialog-fullpage{
+    position: initial !important;
+}.fw-dialog-content.fw-scrollable{
+    overflow-y: auto;
+}.fw-dialog-titlebar{
+    position: relative;
+    margin: 0 -19px;
+    padding: 19px 40px 19px 19px;
+    background: var(--cs-dark-background);
+    color: var(--cs-dark-text);
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    user-select: none;
+}.fw-dialog-title{
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: none;
+}.fw-dialog-titlebar-close{
+    right: 19px;
+}.fw-dialog-titlebar-help{
+    right: 39px;
+}.fw-dialog-button-icon-only{
+    width: 2em;
+    box-sizing: border-box;
+    text-indent: -9999px;
+    white-space: nowrap;
+}.fw-dialog-titlebar .fw-dialog-button-icon-only{
+    color: var(--cs-dark-text);
+}.fw-dialog-titlebar .fw-dialog-button-icon-only:hover{
+    color: var(--cs-dark-hover);
+}.fw-dialog-button-icon-only .fw-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: -2px;
+    margin-left: 0;
+}.fw-dialog-content{
+    position: relative;
+    margin-top: 24px;
+    /* Tooltips escape the scroll container because they are portal-rendered
+       in document.body (see src/tooltip.ts). `visible auto` would be coerced
+       by browsers to `auto auto` (visible + auto is not representable), so
+       hidden on the x-axis avoids a horizontal scrollbar while the y-axis
+       scrolls when the content grows too tall. */
+    overflow: hidden auto;
+    padding: 6px;
+    max-height: calc(100vh - 133px);
+    min-height: 20px;
+    max-width: calc(100vw - 4px);
+}.fw-input-list-wrapper > tbody > tr:last-child > td{
+    padding-bottom: 0;
+}.fw-input-list-wrapper td.fw-input-field-list-ctrl{
+    padding-right: 20px;
+    text-align: right;
+    vertical-align: middle;
+}.fw-input-list-wrapper td.fw-input-field-list-ctrl .fa{
+    display: inline;
+}.fw-entry-field input[type="text"],.fw-entry-field input[type="number"]{
+    margin: 0;
+}.fw-dialog-buttonpane{
+    padding-top: 20px;
+}.fw-dialog-buttonset{
+    position: relative;
+    text-align: right;
+}.fw-dialog-buttonset .fw-button{
+    margin-left: 6px;
+}.fw-overlay{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(var(--overlay-color));
+    z-index: 100;
+    backdrop-filter: blur(2px);
+}.fw-overlay.fw-no-blur{
+    backdrop-filter: none;
+}.fw-dialog-content textarea{
+    min-height: 112px;
+    min-width: 350px;
+    height: auto;
+}.fw-media-file-input{
+    display: none;
+}.fw-dialog-content .fw-note-el{
+    margin-bottom: 10px;
+    font-size: smaller;
+    color: var(--error-background-color);
+}.fw-dialog-content .fw-note-el.fw-hide{
+    display: none;
+}.fw-dialog form{
+    padding: 8px;
+}/* Rules migrated from the old ui_dialogs.css so that dialogs render correctly
+   without loading a separate stylesheet. */
+.fw-dialog-titlebar .fw-dialog-titlebar-button{
+    font-size: 14px;
+    line-height: 1em;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}.fw-dialog-titlebar-close,.fw-dialog-titlebar-help{
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0;
+    padding: 1px;
+}.fw-dialog-button-icon-only .fw-icon::before{
+    display: inline-block;
+    font-family:
+        "Font Awesome 7 Free", "Font Awesome 6 Free", "FontAwesome", monospace;
+    font-weight: 900;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-indent: 5019px;
+}.fw-icon-close::before{
+    width: 0.7em;
+    height: 1em;
+    padding-top: 5px;
+    content: "\f00d";
+}.fw-icon-help::before{
+    width: 0.7em;
+    height: 1em;
+    padding-top: 5px;
+    content: "\f128";
+}.fw-dialog-titlebar .fw-dialog-button-icon-only{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px;
+    background: transparent;
+    border: none;
+}.fw-dialog-titlebar .fw-dialog-button-icon-only:focus{
+    outline: 2px solid var(--cs-dark-text);
+    outline-offset: 2px;
+    border-radius: 4px;
+}

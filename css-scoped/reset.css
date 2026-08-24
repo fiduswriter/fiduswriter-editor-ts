@@ -1,0 +1,45 @@
+/* =============================================================================
+   HTML5 Boilerplate CSS: h5bp.com/css
+   ========================================================================== */
+
+article,:where(#fw-editor-app .fw-editor) aside,:where(#fw-editor-app .fw-editor) details,:where(#fw-editor-app .fw-editor) figcaption,:where(#fw-editor-app .fw-editor) figure,:where(#fw-editor-app .fw-editor) footer,:where(#fw-editor-app .fw-editor) header,:where(#fw-editor-app .fw-editor) hgroup,:where(#fw-editor-app .fw-editor) nav,:where(#fw-editor-app .fw-editor) section{
+    display: block;
+}:where(#fw-editor-app .fw-editor) audio,:where(#fw-editor-app .fw-editor) canvas,:where(#fw-editor-app .fw-editor) video{
+    display: inline-block;
+}[hidden]{
+    display: none;
+}/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,:where(#fw-editor-app .fw-editor),:where(#fw-editor-app .fw-editor) div,:where(#fw-editor-app .fw-editor) span,:where(#fw-editor-app .fw-editor) applet,:where(#fw-editor-app .fw-editor) object,:where(#fw-editor-app .fw-editor) iframe,:where(#fw-editor-app .fw-editor) h1,:where(#fw-editor-app .fw-editor) h2,:where(#fw-editor-app .fw-editor) h3,:where(#fw-editor-app .fw-editor) h4,:where(#fw-editor-app .fw-editor) h5,:where(#fw-editor-app .fw-editor) h6,:where(#fw-editor-app .fw-editor) p,:where(#fw-editor-app .fw-editor) blockquote,:where(#fw-editor-app .fw-editor) pre,:where(#fw-editor-app .fw-editor) a,:where(#fw-editor-app .fw-editor) abbr,:where(#fw-editor-app .fw-editor) acronym,:where(#fw-editor-app .fw-editor) address,:where(#fw-editor-app .fw-editor) big,:where(#fw-editor-app .fw-editor) cite,:where(#fw-editor-app .fw-editor) code,:where(#fw-editor-app .fw-editor) del,:where(#fw-editor-app .fw-editor) dfn,:where(#fw-editor-app .fw-editor) em,:where(#fw-editor-app .fw-editor) img,:where(#fw-editor-app .fw-editor) ins,:where(#fw-editor-app .fw-editor) kbd,:where(#fw-editor-app .fw-editor) q,:where(#fw-editor-app .fw-editor) s,:where(#fw-editor-app .fw-editor) samp,:where(#fw-editor-app .fw-editor) small,:where(#fw-editor-app .fw-editor) strike,:where(#fw-editor-app .fw-editor) strong,:where(#fw-editor-app .fw-editor) sub,:where(#fw-editor-app .fw-editor) sup,:where(#fw-editor-app .fw-editor) tt,:where(#fw-editor-app .fw-editor) var,:where(#fw-editor-app .fw-editor) b,:where(#fw-editor-app .fw-editor) u,:where(#fw-editor-app .fw-editor) i,:where(#fw-editor-app .fw-editor) center,:where(#fw-editor-app .fw-editor) dl,:where(#fw-editor-app .fw-editor) dt,:where(#fw-editor-app .fw-editor) dd,:where(#fw-editor-app .fw-editor) ol,:where(#fw-editor-app .fw-editor) ul,:where(#fw-editor-app .fw-editor) li,:where(#fw-editor-app .fw-editor) fieldset,:where(#fw-editor-app .fw-editor) form,:where(#fw-editor-app .fw-editor) label,:where(#fw-editor-app .fw-editor) legend,:where(#fw-editor-app .fw-editor) table,:where(#fw-editor-app .fw-editor) caption,:where(#fw-editor-app .fw-editor) tbody,:where(#fw-editor-app .fw-editor) tfoot,:where(#fw-editor-app .fw-editor) thead,:where(#fw-editor-app .fw-editor) tr,:where(#fw-editor-app .fw-editor) th,:where(#fw-editor-app .fw-editor) td,:where(#fw-editor-app .fw-editor) article,:where(#fw-editor-app .fw-editor) aside,:where(#fw-editor-app .fw-editor) canvas,:where(#fw-editor-app .fw-editor) details,:where(#fw-editor-app .fw-editor) embed,:where(#fw-editor-app .fw-editor) figure,:where(#fw-editor-app .fw-editor) figcaption,:where(#fw-editor-app .fw-editor) footer,:where(#fw-editor-app .fw-editor) header,:where(#fw-editor-app .fw-editor) hgroup,:where(#fw-editor-app .fw-editor) menu,:where(#fw-editor-app .fw-editor) nav,:where(#fw-editor-app .fw-editor) output,:where(#fw-editor-app .fw-editor) ruby,:where(#fw-editor-app .fw-editor) section,:where(#fw-editor-app .fw-editor) summary,:where(#fw-editor-app .fw-editor) time,:where(#fw-editor-app .fw-editor) mark,:where(#fw-editor-app .fw-editor) audio,:where(#fw-editor-app .fw-editor) video{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}audio:not([controls]){
+    display: none;
+}/* HTML5 display-role reset for older browsers */
+article,:where(#fw-editor-app .fw-editor) aside,:where(#fw-editor-app .fw-editor) details,:where(#fw-editor-app .fw-editor) figcaption,:where(#fw-editor-app .fw-editor) figure,:where(#fw-editor-app .fw-editor) footer,:where(#fw-editor-app .fw-editor) header,:where(#fw-editor-app .fw-editor) hgroup,:where(#fw-editor-app .fw-editor) menu,:where(#fw-editor-app .fw-editor) nav,:where(#fw-editor-app .fw-editor) section{
+    display: block;
+}:where(#fw-editor-app .fw-editor){
+    line-height: 1;
+}:where(#fw-editor-app .fw-editor) ol,:where(#fw-editor-app .fw-editor) ul{
+    list-style: none;
+}:where(#fw-editor-app .fw-editor) blockquote,:where(#fw-editor-app .fw-editor) q{
+    quotes: none;
+}blockquote::before,blockquote::after,q::before,q::after{
+    content: "";
+    content: none;
+}:where(#fw-editor-app .fw-editor) table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}:where(#fw-editor-app .fw-editor) a{
+    text-decoration: none;
+    outline: none;
+}::placeholder{
+    color: #a9abaa;
+    font-size: 14px;
+}

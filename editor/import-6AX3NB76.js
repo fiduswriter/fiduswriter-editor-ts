@@ -1,0 +1,11 @@
+import{a as h}from"./chunk-7XPDDP25.js";import"./chunk-ADOOI6TI.js";import"./chunk-LL2EWV7X.js";import{k as m,o as b,p as c,q as l}from"./chunk-LUSWO74V.js";import{e as r}from"./chunk-GADWB3Y5.js";var f=()=>`<form id="import-bib-form" method="post" enctype="multipart/form-data" class="ajax-upload">
+        <input type="file" id="bib-uploader" name="bib" required />
+        <span id="import-bib-btn" class="fw-button fw-light fw-large">
+            ${gettext("Select a file")}
+        </span>
+        <label id="import-bib-name" class="ajax-upload-label"></label>
+        <div class="import-format-info" style="margin-top: 10px; font-size: 0.9em; color: #666;">
+            ${gettext("Supported formats: BibTeX/BibLaTeX, CSL-JSON, RIS, EndNote XML, EndNote Tagged, Citavi XML, Citavi JSON, NBIB/PubMed, ODT citations, DOCX citations")}
+        </div>
+    </form>`;var n=class{constructor(o,e,i){r(this,"bibDB");r(this,"addToListCall");r(this,"tmpDB");r(this,"app");this.bibDB=o,this.addToListCall=e,this.tmpDB=!1,this.app=i}init(){if(this.app.isOffline()){l("info",gettext("You are currently offline. Please try again when you are back online."));return}let o=[{text:gettext("Import"),classes:"fw-dark submit-import",click:()=>{let t=document.getElementById("bib-uploader")?.files;if(!t||t.length===0)return!1;let a=t[0];if(10485760<a.size)return!1;if(this.app.isOffline())return l("info",gettext("You are currently offline. Please try again when you are back online.")),e.close(),!1;b();let d=new window.FileReader;return d.onload=u=>{import("./bibliography_import-YKA4H74D.js").then(({BibliographyImporter:g})=>{new g(u.target.result,this.bibDB,this.addToListCall,()=>c()).init()})},d.readAsText(a),e.close(),!1}},{type:"cancel"}],e=new m({id:"importbibtex",title:gettext("Import a bibliography"),body:f(),height:200,buttons:o});e.open();let i=document.getElementById("bib-uploader");i&&i.addEventListener("change",()=>{let t=i,a=document.getElementById("import-bib-name");a&&(a.innerHTML=t.value.replace(/C:\\fakepath\\/i,""))});let s=document.getElementById("import-bib-btn");s&&s.addEventListener("click",()=>{let t=document.getElementById("bib-uploader");t&&t.click()})}};function v(p,o,e){new n(p,o,e).init()}export{n as BibliographyFileImportDialog,h as BibliographyImporter,v as importBibFile};
+//# sourceMappingURL=import-6AX3NB76.js.map

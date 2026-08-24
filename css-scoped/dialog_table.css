@@ -1,0 +1,132 @@
+.fw-dialog-table td{
+    padding-bottom: 7px;
+    position: relative;
+}.fw-tablerow-title{
+    display: table-cell;
+    padding-top: 10px;
+    font-size: 11px;
+    line-height: 15px;
+    font-weight: bold;
+}.fw-dialog-table tr > td .fa-minus-circle,.fw-dialog-table tr > td .fa-plus-circle{
+    cursor: pointer;
+}.fw-input-list-wrapper > tbody > tr:last-child > td > .fa-minus-circle{
+    display: none;
+}.fw-tablerow-title.fw-wtooltip{
+    position: relative;
+}.fw-tablerow-title.fw-wtooltip::after{
+    display: inline-block;
+    vertical-align: baseline;
+    content: "?";
+    line-height: 1;
+    color: white;
+    background-color: rgb(var(--tooltip-background-color));
+    width: 12px;
+    height: 10px;
+    border-radius: 6px;
+    margin-left: 5px;
+    text-align: center;
+    padding-top: 2px;
+}/* Shared tooltip box styling. Standalone selectors so the styles also apply
+   when the tooltip is portal-rendered in document.#fw-editor-app .fw-editor (see src/tooltip.ts). */
+.fw-tooltip{
+    min-width: 260px;
+    background-color: var(--cs-dark-background);
+    color: var(--cs-dark-text);
+    border-radius: 6px;
+    line-height: 1.5;
+    padding: 14px 18px;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 1s;
+    z-index: 1;
+}/* In-place positioning only (no-JS fallback). Portal-rendered tooltips are
+   positioned by src/tooltip.ts instead,so this rule stays scoped to the
+   trigger. */
+.fw-tablerow-title .fw-tooltip{
+    position: absolute;
+    top: calc(100% + 2px);
+    left: calc(100% - 13px);
+}/* These rules are the no-JS fallback. When src/tooltip.ts is active it adds
+   `fw-tooltip-active` to the trigger and renders the tooltip in
+   document.#fw-editor-app .fw-editor,so it no longer matches these descendant selectors. */
+.fw-tablerow-title.fw-wtooltip:not(.fw-tooltip-active):hover .fw-tooltip{
+    visibility: visible;
+    opacity: 1;
+}/* Show the table-row tooltip on keyboard focus as well as hover. */
+.fw-tablerow-title.fw-wtooltip:not(.fw-tooltip-active):focus .fw-tooltip,.fw-tablerow-title.fw-wtooltip:not(.fw-tooltip-active):focus-within
+    .fw-tooltip{
+    visibility: visible;
+    opacity: 1;
+}.fw-tooltip em{
+    font-style: italic;
+}/* Inline info tooltip (e.g. for dialog options) */
+.fw-info-tooltip{
+    position: relative;
+    display: inline-block;
+    margin-left: 4px;
+    color: var(--cs-2-background);
+    cursor: help;
+}/* The trigger is a real button so it is keyboard focusable. */
+.fw-info-tooltip-trigger{
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    line-height: inherit;
+    color: inherit;
+    cursor: help;
+    border-radius: 4px;
+}.fw-info-tooltip-trigger:hover,.fw-info-tooltip-trigger:focus-visible{
+    color: var(--cs-link-color, var(--cs-2-background));
+}/* Shared tooltip box styling (applies in-place and portal-rendered). */
+.fw-info-tooltip-text{
+    min-width: 280px;
+    max-width: 360px;
+    background-color: var(--cs-dark-background);
+    color: var(--cs-dark-text);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 100;
+    pointer-events: none;
+    text-align: left;
+    font-weight: normal;
+    font-style: normal;
+    white-space: normal;
+}/* In-place positioning only (no-JS fallback). */
+.fw-info-tooltip .fw-info-tooltip-text{
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+}.fw-info-tooltip:not(.fw-tooltip-active):hover .fw-info-tooltip-text,.fw-info-tooltip:not(.fw-tooltip-active):focus-within .fw-info-tooltip-text{
+    visibility: visible;
+    opacity: 1;
+}.fw-info-tooltip-text::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--cs-dark-background) transparent transparent transparent;
+}/* When the portal tooltip is flipped below its trigger because there was no
+   room above,point the arrow up instead of down. */
+.fw-info-tooltip-text.fw-tooltip-flipped::after{
+    top: auto;
+    bottom: 100%;
+    border-color: transparent transparent var(--cs-dark-background) transparent;
+}.fw-info-tooltip-text ul{
+    margin: 6px 0 0 16px;
+    padding: 0;
+    list-style-type: disc;
+}.fw-info-tooltip-text li{
+    margin-bottom: 4px;
+}

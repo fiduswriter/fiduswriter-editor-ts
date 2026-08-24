@@ -1,0 +1,72 @@
+#fw-alerts-outer-wrapper {
+    position: fixed;
+    right: 22px;
+    bottom: 10px;
+    direction: rtl;
+    column-width: 328px;
+    z-index: calc(var(--highest-dialog-z-index, 100) + 2);
+}
+
+#fw-alerts-wrapper {
+    z-index: 1600;
+    direction: ltr;
+}
+
+#fw-alerts-wrapper li {
+    display: block; /* else several of them will stack horizontally. */
+    position: relative;
+    width: 247px;
+    height: auto;
+    padding: 20px 20px 20px 60px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgb(var(--alert-box-shadow-color));
+    margin-bottom: 5px;
+    font-size: 15px;
+    line-height: 20px;
+    opacity: 1;
+    -webkit-column-break-inside: avoid;
+}
+
+#fw-alerts-wrapper li::before {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 20px;
+    display: inline-block;
+    font-family:
+        "Font Awesome 7 Free", "Font Awesome 6 Free", "FontAwesome", monospace;
+    font-weight: 900;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: var(--fa, "");
+}
+
+#fw-alerts-wrapper .alerts-error {
+    color: var(--error-text-color);
+    background-color: var(--error-background-color);
+}
+
+#fw-alerts-wrapper .alerts-warning {
+    color: var(--warning-text-color);
+    background-color: rgb(var(--warning-background-color));
+}
+
+#fw-alerts-wrapper .alerts-info {
+    color: var(--info-text-color);
+    background-color: rgb(var(--info-background-color));
+}
+
+#fw-alerts-wrapper .alerts-success {
+    color: var(--success-text-color);
+    background-color: rgb(var(--success-background-color));
+}
+
+/* A form wasn't filled out correctly and the warning was added to the form. */
+div.fw-warning {
+    margin: 0 0 5px;
+    border: 1px solid rgb(var(--warning-border-color));
+    background-color: rgb(var(--warning-background-color));
+    padding: 6px;
+}
