@@ -325,17 +325,24 @@ export class CitationDialog {
             classes: ["fw-data-table", "fw-large"],
             columns: [
                 {
-                    select: [0, 2, 3],
-                    type: "string"
-                },
-                {
                     select: 0,
-                    hidden: true
+                    hidden: true,
+                    type: "string",
                 },
                 {
-                    select: 4,
-                    sortable: false
-                }
+                    select: 1,
+                    name: gettext("Title"),
+                },
+                {
+                    select: 2,
+                    name: gettext("Author"),
+                    type: "string",
+                },
+                {
+                    select: 3,
+                    name: gettext("Year"),
+                    type: "string",
+                },
             ],
             data: this.createAllTableRows(),
             idColumn: 0,

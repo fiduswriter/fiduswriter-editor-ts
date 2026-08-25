@@ -500,31 +500,31 @@ export const configureCitationTemplate = ({
     citeFormat: string
 }): string =>
     `<div id="my-sources" class="fw-ar-container">
-            <h3 class="fw-green-title">${gettext("My sources")}</h3>
+        <h3 class="fw-green-title">${gettext("My sources")}</h3>
+    </div>
+    <span id="add-cite-source" class="fw-button fw-large fw-square fw-light fw-ar-button"><i class="fa-solid fa-caret-right"></i></span>
+    <div id="cited-items" class="fw-ar-container">
+        <h3 class="fw-green-title">${gettext("Citation format")}</h3>
+        <div class="fw-select-container">
+            <select id="citation-style-selector" class="fw-button fw-light fw-large" required="">
+                <option value="autocite" ${citeFormat === "autocite" ? "selected" : ""}>${gettext("(Author, 1998)")}</option>
+                <option value="textcite" ${citeFormat === "textcite" ? "selected" : ""}>${gettext("Author (1998)")}</option>
+            </select>
+            <div class="fw-select-arrow fa-solid fa-caret-down"></div>
         </div>
-        <span id="add-cite-source" class="fw-button fw-large fw-square fw-light fw-ar-button"><i class="fa-solid fa-caret-right"></i></span>
-        <div id="cited-items" class="fw-ar-container">
-            <h3 class="fw-green-title">${gettext("Citation format")}</h3>
-            <div class="fw-select-container">
-                <select id="citation-style-selector" class="fw-button fw-light fw-large" required="">
-                    <option value="autocite" ${citeFormat === "autocite" ? "selected" : ""}>${gettext("(Author, 1998)")}</option>
-                    <option value="textcite" ${citeFormat === "textcite" ? "selected" : ""}>${gettext("Author (1998)")}</option>
-                </select>
-                <div class="fw-select-arrow fa-solid fa-caret-down"></div>
-            </div>
-            <table id="selected-cite-source-table" class="fw-data-table tablesorter">
-                <thead class="fw-data-table-header"><tr>
-                    <th width="110">${gettext("Title")}</th>
-                    <th width="110">${gettext("Author")}</th>
-                    <th width="50">${gettext("Year")}</th>
-                    <th width="50" align="center">${gettext("Order")}</th>
-                    <th width="50" align="center">${gettext("Remove")}</th>
-                </tr></thead>
-                <tbody class="fw-data-table-body fw-min">
-                  ${citedItemsHTML}
-                </tbody>
-            </table>
-        </div>`
+        <table id="selected-cite-source-table" class="fw-data-table tablesorter">
+            <thead class="fw-data-table-header"><tr>
+                <th width="110">${gettext("Title")}</th>
+                <th width="110">${gettext("Author")}</th>
+                <th width="50">${gettext("Year")}</th>
+                <th width="50" align="center">${gettext("Order")}</th>
+                <th width="50" align="center">${gettext("Remove")}</th>
+            </tr></thead>
+            <tbody class="fw-data-table-body fw-min">
+              ${citedItemsHTML}
+            </tbody>
+        </table>
+    </div>`
 
 /** A template for each selected citation item inside the citation configuration
     dialog of the editor. */
