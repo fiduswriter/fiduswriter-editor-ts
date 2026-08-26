@@ -115,7 +115,22 @@ export interface EditorDocumentImportApi {
 export interface EditorApp {
     routes: Record<string, {app: string; [key: string]: unknown}>
     goTo: (url: string) => void
-    settings: {APPS: string[]; [key: string]: unknown}
+    settings: {
+        APPS: string[]
+        /**
+         * Hosts without a Fidus Writer backend (embedded editors) can hide
+         * the file menu items that require one: Share, Save revision,
+         * Create copy. Defaults to showing them.
+         */
+        SHOW_FILE_MENU_ITEMS?: boolean
+        /**
+         * "external" disables autosaving; the host persists changes through
+         * its own UI. "direct" saves without WebSocket collaboration.
+         * "collaborative" (or unset) means normal WebSocket-based saving.
+         */
+        EDITOR_SAVE_MODE?: "collaborative" | "direct" | "external"
+        [key: string]: unknown
+    }
     menuPlugins?: Array<[string, Record<string, {new (...args: unknown[]): {init(): void}}>]>
     name: string
     isOffline(): boolean

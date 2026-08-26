@@ -368,7 +368,10 @@ export class Editor {
                 if (this.docInfo.token) {
                     stylesPayload.token = this.docInfo.token
                 }
-                const editorSaveMode = this.app.settings.EDITOR_SAVE_MODE
+                // Unset means the regular backend-driven collaborative
+                // flow; only static hosts set an explicit mode.
+                const editorSaveMode =
+                    this.app.settings.EDITOR_SAVE_MODE ?? "collaborative"
                 const collaborativeEditing = editorSaveMode === "collaborative"
                 const documentApi = this.app.apiConnectors.document
                 const wsBasePromise = collaborativeEditing
@@ -447,7 +450,10 @@ export class Editor {
                 let resubScribed = false
                 this.render()
                 this.initEditor()
-                const editorSaveMode = this.app.settings.EDITOR_SAVE_MODE
+                // Unset means the regular backend-driven collaborative
+                // flow; only static hosts set an explicit mode.
+                const editorSaveMode =
+                    this.app.settings.EDITOR_SAVE_MODE ?? "collaborative"
                 const collaborativeEditing = editorSaveMode === "collaborative"
                 if (collaborativeEditing) {
                     // Include token in WebSocket path if present

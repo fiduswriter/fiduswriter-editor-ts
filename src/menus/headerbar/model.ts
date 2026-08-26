@@ -239,7 +239,7 @@ export const headerbarModel = () => ({
                         shareDialog.init()
                     },
                     available: (editor: Editor) => {
-                        if (!editor.app.settings.SHOW_FILE_MENU_ITEMS) {
+                        if (editor.app.settings.SHOW_FILE_MENU_ITEMS === false) {
                             return false
                         }
                         if (editor.app.settings.EDITOR_SAVE_MODE === "external") {
@@ -341,7 +341,7 @@ export const headerbarModel = () => ({
                         !!editor.docInfo.token,
                     available: (editor: Editor) =>
                         editor.app.settings.EDITOR_SAVE_MODE !== "external" &&
-                        editor.app.settings.SHOW_FILE_MENU_ITEMS
+                        editor.app.settings.SHOW_FILE_MENU_ITEMS !== false
                 },
                 {
                     title: gettext("Create copy"),
@@ -373,7 +373,7 @@ export const headerbarModel = () => ({
                             !editor.user.is_authenticated),
                     available: (editor: Editor) =>
                         editor.app.settings.EDITOR_SAVE_MODE !== "external" &&
-                        editor.app.settings.SHOW_FILE_MENU_ITEMS
+                        editor.app.settings.SHOW_FILE_MENU_ITEMS !== false
                 },
                 {
                     title: gettext("Download"),

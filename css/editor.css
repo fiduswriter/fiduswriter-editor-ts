@@ -13,6 +13,16 @@
     container: fw-editor / inline-size;
 }
 
+/* Full-page editors take over <body>. Nothing in the loaded stylesheets
+   gives <html> a definite height, so body{height:100%} would resolve
+     against auto and collapse the editor to its content height, pushing
+   most of the document below the scroll fold. Give the body an explicit
+   viewport height in that case; embedded editors (.fw-editor on an inner
+   element) keep sizing against their host container. */
+body.fw-editor {
+    height: 100vh;
+}
+
 .fw-editor header {
     position: fixed;
     width: 100%;
