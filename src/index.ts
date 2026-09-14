@@ -1,5 +1,6 @@
 import {getSettings} from "@fiduswriter/document/schema/convert"
 import {docSchema} from "@fiduswriter/document/schema/document/index"
+import type {ImagePicker} from "@fiduswriter/image-manager"
 import {
     Dialog,
     WebSocketConnector,
@@ -118,6 +119,13 @@ export class Editor {
     pathEditable: boolean
     /** Optional callback invoked after the user edited the document title/path in the header. */
     onPathChange?: (path: string) => void
+    /**
+     * Optional host-provided image picker. When set, the image selection
+     * dialog invokes it instead of the built-in upload dialog when the user
+     * activates "Add new image" (platform file pickers such as the Nextcloud
+     * file picker or the WordPress media library).
+     */
+    imagePicker?: ImagePicker
     statePlugins: any[]
     view!: EditorView
     currentView!: EditorView

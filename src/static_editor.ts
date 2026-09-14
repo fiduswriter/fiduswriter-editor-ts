@@ -1,5 +1,6 @@
 import {gettext, initSettings, interpolate, staticUrl} from "fwtoolkit"
 
+import type {ImagePicker} from "@fiduswriter/image-manager"
 import type {CSL, EditorUser} from "./types.js"
 import type {StaticAppConfig} from "./static_app.js"
 
@@ -102,6 +103,14 @@ export interface StaticEditorConfig
      * enabled and only on the host that received the edit.
      */
     onPathChange?: (path: string) => void
+    /**
+     * Optional host-provided image picker. When set, the image selection
+     * dialog invokes it instead of the built-in upload dialog when the user
+     * activates "Add new image" — for example the Nextcloud file picker or
+     * the WordPress media library. It must resolve with the picked image
+     * File, or with null/undefined when the user cancelled.
+     */
+    imagePicker?: ImagePicker
     /** Optional extra editor plugins. */
     plugins?: Array<[string, Record<string, unknown>]>
     /**
@@ -305,6 +314,11 @@ export async function createStaticEditor(
     editor.pathEditable = config.pathEditable ?? false
     if (config.onPathChange) {
         editor.onPathChange = config.onPathChange
+    }
+    if (config.imagePicker) {
+        // Consumed by the image selection dialog (the editor is passed as
+        // the dialog's `page` object), replacing the built-in upload dialog.
+        editor.imagePicker = config.imagePicker
     }
 
     await editor.init()

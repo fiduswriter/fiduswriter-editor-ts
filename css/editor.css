@@ -904,7 +904,7 @@ html[hc="a5"] #toolbar {
 #close-document-top {
     position: fixed;
     right: 20px;
-    top: 20px;
+    top: calc(var(--fw-fixed-top-offset, 0px) + 20px);
     z-index: 100;
 }
 
@@ -949,8 +949,11 @@ html[hc="a5"] #toolbar {
     padding: 10px;
 }
 
+/* Host pages that mount the editor below the viewport top (e.g. under an
+   integration chrome bar) set --fw-fixed-top-offset to push the
+   viewport-anchored fixed chrome down by the same amount. */
 #navigator {
-    top: 250px;
+    top: calc(var(--fw-fixed-top-offset, 0px) + 250px);
     left: 0;
     position: fixed;
     z-index: 9;

@@ -20,7 +20,7 @@ import type {
     ImageDB,
     ImageDBEntries
 } from "@fiduswriter/document"
-import type {ImageApi} from "@fiduswriter/image-manager"
+import type {ImageApi, ImagePicker} from "@fiduswriter/image-manager"
 
 export type {BibDB, BibDBEntries, BibDBEntry, CommentData, CSL, ImageDB, ImageDBEntries}
 
@@ -383,6 +383,13 @@ export interface Editor {
     pathEditable: boolean
     /** Optional callback invoked after the user edited the document title/path in the header. */
     onPathChange?: (path: string) => void
+    /**
+     * Optional host-provided image picker. When set, the image selection
+     * dialog invokes it instead of the built-in upload dialog when the user
+     * activates "Add new image" (platform file pickers such as the Nextcloud
+     * file picker or the WordPress media library).
+     */
+    imagePicker?: ImagePicker
     statePlugins: EditorPluginTuple[]
     view: EditorView
     currentView: EditorView

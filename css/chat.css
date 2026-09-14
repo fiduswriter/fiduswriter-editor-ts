@@ -47,7 +47,7 @@
 #connected-collaborators {
     position: fixed;
     right: 85px;
-    top: 16px;
+    top: calc(var(--fw-fixed-top-offset, 0px) + 16px);
 }
 
 #connected-collaborators .fw-string-avatar,

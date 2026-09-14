@@ -14,6 +14,14 @@ export class NoCollabSave {
     savePromise: Promise<void> | null
     _beforeUnloadHandler: (() => void) | null
     _lastSaveTime: number
+    /**
+     * The document state as last confirmed by the server (at load or after
+     * a successful save). Acts as the common base for the three-way merge
+     * on version conflicts. `docInfo.confirmedDoc` cannot be used for this:
+     * in static deployments a plugin keeps it equal to the live document,
+     * which would make the local side of the merge empty.
+     */
+    _savedBaseDoc: Node | null
 
     constructor(editor: Editor) {
         this.editor = editor
@@ -21,12 +29,14 @@ export class NoCollabSave {
         this.savePromise = null
         this._beforeUnloadHandler = null
         this._lastSaveTime = 0
+        this._savedBaseDoc = null
     }
 
     start(): void {
         if (this.saveInterval) {
             return
         }
+        this._savedBaseDoc = this.editor.view.state.doc
         // Save every 10 seconds when the document is loaded and writable.
         this.saveInterval = window.setInterval(() => {
             if (
@@ -86,7 +96,7 @@ export class NoCollabSave {
         return (this.editor.docInfo.updated as Date).getTime() > this._lastSaveTime
     }
 
-    async _save(keepalive = false): Promise<void> {
+    async _save(keepalive = false, fromMerge = false): Promise<void> {
         if (this.editor.docInfo.access_rights !== "write") {
             return
         }
@@ -134,9 +144,22 @@ export class NoCollabSave {
                 {keepalive}
             )
             if (status === 409) {
-                if (!keepalive) {
-                    await this._handleVersionConflict()
+                if (keepalive) {
+                    return
                 }
+                if (fromMerge) {
+                    // The merged document still conflicts — another session
+                    // is actively writing. Stay on the merged state and let
+                    // the next interval tick retry instead of recursing.
+                    addAlert(
+                        "error",
+                        gettext(
+                            "The document is being edited in another session. Your latest changes could not be saved automatically."
+                        )
+                    )
+                    return
+                }
+                await this._handleVersionConflict()
                 return
             }
             const saveData = json as {version?: number}
@@ -145,6 +168,7 @@ export class NoCollabSave {
             }
             this.editor.docInfo.updated = new Date()
             this.editor.docInfo.confirmedDoc = this.editor.view.state.doc
+            this._savedBaseDoc = this.editor.view.state.doc
             this._lastSaveTime = Date.now()
             // Clear unsent event queues since the full state has been saved.
             if (this.editor.mod.db) {
@@ -155,7 +179,19 @@ export class NoCollabSave {
         } catch (error) {
             if (!keepalive) {
                 console.error("Failed to save document:", error)
-                addAlert("error", gettext("Could not save document."))
+                if (
+                    error instanceof Error &&
+                    error.name === "LockError"
+                ) {
+                    addAlert(
+                        "error",
+                        gettext(
+                            "The file is locked by another session. Changes cannot be saved until the lock is released."
+                        )
+                    )
+                } else {
+                    addAlert("error", gettext("Could not save document."))
+                }
             }
         }
     }
@@ -180,10 +216,13 @@ export class NoCollabSave {
                 (data.doc.content as Record<string, unknown>) || {}
             )
             const currentDoc = this.editor.view.state.doc
-            const confirmedDoc = this.editor.docInfo.confirmedDoc as Node
+            // The common ancestor of both sides: the document as it was when
+            // the server last confirmed it to us. Fall back to the current
+            // document (empty local diff) when no base exists yet.
+            const baseDoc = this._savedBaseDoc || currentDoc
 
-            const remoteTr = recreateTransform(confirmedDoc, serverDoc)
-            const localTr = recreateTransform(confirmedDoc, currentDoc)
+            const remoteTr = recreateTransform(baseDoc, serverDoc)
+            const localTr = recreateTransform(baseDoc, currentDoc)
 
             const mappedSteps: Array<import("prosemirror-transform").Step> = []
             remoteTr.steps.forEach(step => {
@@ -215,11 +254,14 @@ export class NoCollabSave {
             )
             this.editor.docInfo.version = data.doc.v as number
             this.editor.docInfo.confirmedDoc = this.editor.view.state.doc
+            this._savedBaseDoc = serverDoc
             this.editor.docInfo.updated = new Date(data.time)
             ;(this.editor.mod.footnotes as any).fnEditor.renderAllFootnotes()
 
-            // Retry save with the merged document
-            await this.save()
+            // Retry the save with the merged document. fromMerge bounds the
+            // conflict handling: another immediate 409 alerts instead of
+            // recursing into merge handling again.
+            await this._save(false, true)
         } catch (error) {
             console.error("Failed to handle version conflict:", error)
             addAlert(
