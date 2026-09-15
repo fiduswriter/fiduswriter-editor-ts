@@ -170,6 +170,9 @@ export async function createStaticApp(
         Object.entries(config.initialImages).forEach(([id, image]) => {
             sessionImages[Number(id)] = image as StoredImage
         })
+        // Advance the session id counter past the seeded ids so a new
+        // upload cannot overwrite a seeded image.
+        nextImageId = Math.max(0, ...Object.keys(sessionImages).map(Number)) + 1
     }
 
     async function storeImage(

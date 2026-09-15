@@ -1,4 +1,4 @@
-import download from "downloadjs"
+import {saveFile} from "@fiduswriter/document/exporter/save"
 
 import {createSlug} from "@fiduswriter/document/exporter/tools/file"
 import {ZipFileCreator} from "fwtoolkit/file/zip"
@@ -151,14 +151,12 @@ export class DocumentTemplateExporter {
             undefined,
             "application/vnd.fiduswriter.template+zip"
         )
-        return zipper
-            .init()
-            .then(blob =>
-                download(
-                    blob,
-                    this.zipFileName as string,
-                    "application/vnd.fiduswriter.template+zip"
-                )
-            )
+        return zipper.init().then(blob => {
+            void saveFile(blob, this.zipFileName as string, {
+                description: "Fidus Writer document template",
+                mimeType: "application/vnd.fiduswriter.template+zip",
+                extensions: [".fidustemplate"]
+            })
+        })
     }
 }

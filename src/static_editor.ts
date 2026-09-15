@@ -11,16 +11,22 @@ import type {Editor} from "./index.js"
 export type {StaticAppConfig} from "./static_app.js"
 
 // The citeproc-plus browser build references its bundled CSL style/locale
-// files as relative "./assets/..." strings and fetches them against the
-// *document* base URL (it only resolves them via `import.meta.url` in the
-// Node build). In an embedded/static host the document base differs from the
-// module location, so resolve those fetches against this module's URL
-// instead. Guarded to only rewrite the citeproc asset pattern.
+// files as relative strings and fetches them against the *document* base
+// URL (it only resolves them via `import.meta.url` in the Node build): as
+// "./assets/..." paths and, in citeproc-plus 2.x, as co-located "./<id>.gz"
+// files next to the module. In an embedded/static host the document base
+// differs from the module location (e.g. a Nextcloud app page), so resolve
+// those fetches against this module's URL instead. Guarded to only rewrite
+// the citeproc asset patterns.
 if (typeof window !== "undefined") {
     const moduleBase = new URL(".", import.meta.url).href
     const originalFetch = window.fetch.bind(window)
     window.fetch = ((input: RequestInfo | URL, init?: RequestInit) => {
-        if (typeof input === "string" && input.startsWith("./assets/")) {
+        if (
+            typeof input === "string" &&
+            (input.startsWith("./assets/") ||
+                (input.startsWith("./") && input.endsWith(".gz")))
+        ) {
             input = new URL(input, moduleBase).href
         }
         return originalFetch(input as RequestInfo, init)

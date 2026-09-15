@@ -106,3 +106,16 @@ npm run typecheck
   `@fiduswriter/bibliography-manager` was previously published as
   `biblatex-csl-converter`. Its JSON format is referred to as the BiblioJSON
   format.
+- `static_editor.ts` installs a `window.fetch` interceptor at module load
+  that resolves citeproc-plus's relative CSL style/locale asset URLs
+  (`./assets/…` and, for citeproc-plus 2.x, co-located `./<id>.gz`) against
+  the module URL — embedded hosts (e.g. the Nextcloud app) serve the page
+  from a URL that is not the bundle directory, and their server may refuse
+  to serve `.gz` statically. Hosts whose entry chunk lives one directory
+  above the assets (esbuild `assetNames: "assets/[name]-[hash]"`) need a
+  second rewrite pass on top; see `src/fetch-shim.ts` in fiduswriter-nextcloud.
+- The static session image store (`static_app.ts`) ids must not collide with
+  document image ids: `nextImageId` starts above any `initialImages` entries,
+  and the image selection dialog only treats a user-DB image as a duplicate
+  of a document-DB image when id AND image payload match (the two DBs use
+  independent id namespaces).
