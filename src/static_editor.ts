@@ -82,6 +82,19 @@ export interface StaticEditorConfig
      */
     staticBasePath?: string
     /**
+     * Optional resolver for static asset URLs, overriding the default
+     * mapping derived from `staticBasePath` (which strips the `css/editor/`
+     * prefix and falls back to `static/` for non-CSS paths).
+     *
+     * Embedded hosts use this to add a cache buster to the stylesheet URLs
+     * the editor loads at runtime: the host page links the same stylesheets
+     * with busters, and the editor's `ensureCSS` only skips a stylesheet
+     * when the href matches exactly. Without the override the runtime loads
+     * un-bustered duplicates that hosting platforms may serve from a
+     * long-lived cache, leaving stale CSS after an app upgrade.
+     */
+    staticUrl?: (path: string) => string
+    /**
      * Optional locale catalog. When omitted, the catalog is fetched from
      * `../locale/{locale}/messages.json` relative to the current page.
      */
@@ -166,14 +179,20 @@ function defaultStaticUrl(basePath: string): (path: string) => string {
     }
 }
 
-function ensureResetCSS(basePath: string): void {
-    const href = `${basePath}css/reset.css`
+function ensureResetCSS(staticUrlFn: (path: string) => string): void {
+    const href = staticUrlFn("css/reset.css")
     if (
         document.querySelector(
             `link[rel="stylesheet"][href="${href}"]`
         ) ||
-        document.querySelector(
-            'link[rel="stylesheet"][href$="css/reset.css"]'
+        // Also match host-linked copies that only differ by a cache-busting
+        // query string.
+        Array.from(
+            document.querySelectorAll('link[rel="stylesheet"]')
+        ).some(link =>
+            (link.getAttribute("href") || "")
+                .split("?")[0]
+                .endsWith("css/reset.css")
         )
     ) {
         return
@@ -215,8 +234,9 @@ export async function createStaticEditor(
             /\/(?:editor\/(?:index\.html)?|index\.html)$/,
             "/"
         )
+    const staticUrlFn = config.staticUrl ?? defaultStaticUrl(basePath)
 
-    ensureResetCSS(basePath)
+    ensureResetCSS(staticUrlFn)
 
     initSettings({
         apiUrl: url => url,
@@ -236,7 +256,7 @@ export async function createStaticEditor(
                 return value !== undefined ? String(value) : ""
             })
         },
-        staticUrl: defaultStaticUrl(basePath)
+        staticUrl: staticUrlFn
     })
 
     const username = config.username || "User"

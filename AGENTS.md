@@ -119,3 +119,12 @@ npm run typecheck
   and the image selection dialog only treats a user-DB image as a duplicate
   of a document-DB image when id AND image payload match (the two DBs use
   independent id namespaces).
+- `createStaticEditor` accepts an optional `staticUrl` override for
+  resolving asset URLs (default mapping derived from `staticBasePath`).
+  Embedded hosts should use it to append their cache buster: the editor
+  loads its stylesheets at runtime via fwtoolkit `ensureCSS`, which only
+  skips a stylesheet when the href matches exactly, so un-bustered runtime
+  URLs both duplicate host-linked stylesheets and can be served stale from
+  a platform's long-lived static cache after an upgrade. `ensureResetCSS`
+  uses the same resolver and also matches host links that differ only by a
+  `?v=` query.
