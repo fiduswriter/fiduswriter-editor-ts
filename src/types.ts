@@ -21,6 +21,7 @@ import type {
     ImageDBEntries
 } from "@fiduswriter/document"
 import type {ImageApi, ImagePicker} from "@fiduswriter/image-manager"
+import type {PollingOptions} from "./no_collab_save/scheduling.js"
 
 export type {BibDB, BibDBEntries, BibDBEntry, CommentData, CSL, ImageDB, ImageDBEntries}
 
@@ -139,6 +140,12 @@ export interface EditorApp {
          * "collaborative" (or unset) means normal WebSocket-based saving.
          */
         EDITOR_SAVE_MODE?: "collaborative" | "direct" | "external"
+        /**
+         * Optional overrides for the direct-save polling/autosave cadence
+         * (see `no_collab_save/scheduling.ts`). Hosts normally set this via
+         * `StaticAppConfig.savePolling`.
+         */
+        SAVE_POLLING?: Partial<PollingOptions>
         [key: string]: unknown
     }
     menuPlugins?: Array<[string, Record<string, {new (...args: unknown[]): {init(): void}}>]>

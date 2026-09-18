@@ -94,9 +94,13 @@ export function createConfirmTransaction(
     if (!steps.length) {
         return null
     }
-    return receiveTransaction(
+    const tr = receiveTransaction(
         state,
         steps,
         steps.map(() => clientId)
     )
+    // Mark the transaction so the editor does not treat a save confirmation
+    // as new local editing activity (see the dispatchTransaction hook).
+    tr.setMeta("noCollabConfirm", true)
+    return tr
 }

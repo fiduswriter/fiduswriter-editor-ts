@@ -13,6 +13,7 @@ import type {
     EditorDocumentApi,
     EditorDocumentImportApi
 } from "./types.js"
+import type {PollingOptions} from "./no_collab_save/scheduling.js"
 
 export interface StaticDocumentStyle {
     title: string
@@ -86,13 +87,21 @@ export interface StaticAppConfig {
      * Editor save mode:
      * - "external" (default): the host drives saving through
      *   `onSaveDocument`; no autosave runs inside the editor.
-     * - "direct": the editor autosaves (every 10 s and on page hide) via the
-     *   `saveDocument` connector. `onSaveDocument` is used as the save
-     *   connector and should return `{json: {version}, status}` (or
-     *   `{json, status: 409}` on version conflict, which triggers the
+     * - "direct": the editor autosaves with an adaptive cadence (frequent
+     *   while editing, slower while idle/blurred, paused while hidden or
+     *   offline) via the `saveDocument` connector. `onSaveDocument` is used
+     *   as the save connector and should return `{json: {version}, status}`
+     *   (or `{json, status: 409}` on version conflict, which triggers the
      *   built-in merge).
      */
     saveMode?: "external" | "direct"
+    /**
+     * Optional overrides for the direct-save polling/autosave cadence.
+     * Defaults: 10 s while editing, idle ramp 20/40/80 s up to 120 s,
+     * blurred up to 300 s, paused while hidden with a 5-minute safety
+     * probe. See `no_collab_save/scheduling.ts` for all fields.
+     */
+    savePolling?: Partial<PollingOptions>
     /**
      * Whether to show the file-menu items that require a Fidus Writer
      * backend (Share, Save revision, Create copy). Defaults to `true`.
@@ -387,6 +396,7 @@ export async function createStaticApp(
         settings: {
             APPS: [appName],
             EDITOR_SAVE_MODE: config.saveMode ?? "external",
+            SAVE_POLLING: config.savePolling,
             EDITOR_ONLY_MODE: true,
             E2EE_MODE: "disabled",
             LANGUAGE: config.locale,

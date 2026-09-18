@@ -62,6 +62,7 @@ import {
 import {ModMarginboxes} from "./marginboxes/index.js"
 import {ModNavigator} from "./navigator/index.js"
 import {NoCollabSave} from "./no_collab_save/index.js"
+import type {PollingOptions} from "./no_collab_save/scheduling.js"
 import {plugins as defaultEditorPlugins} from "./plugins/editor/index.js"
 import {
     accessRightsPlugin,
@@ -795,7 +796,12 @@ export class Editor {
                 }
                 if (editorSaveMode === "direct") {
                     if (!this.noCollabSave) {
-                        this.noCollabSave = new NoCollabSave(this)
+                        this.noCollabSave = new NoCollabSave(
+                            this,
+                            this.app.settings.SAVE_POLLING as
+                                | Partial<PollingOptions>
+                                | undefined
+                        )
                     }
                     this.noCollabSave.start()
                 }
@@ -1192,6 +1198,17 @@ export class Editor {
                     })
                     if (tr.steps.length) {
                         this.docInfo.updated = new Date()
+                    }
+                    if (
+                        this.noCollabSave &&
+                        tr.docChanged &&
+                        !tr.getMeta("remote") &&
+                        !tr.getMeta("noCollabConfirm")
+                    ) {
+                        // Local activity, including footnote edits forwarded
+                        // by the footnote editor. Remote merges and the
+                        // confirmation dispatch after a save are not edits.
+                        this.noCollabSave.notifyEdit()
                     }
                     // Update the header bar to reflect any title changes
                     if (this.menu.headerView) {

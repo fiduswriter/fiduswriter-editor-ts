@@ -143,3 +143,17 @@ npm run typecheck
   `apiConnectors.document.getDocumentVersion()` probe so the periodic check
   does not need to download the full document; see the tests in
   `test/no-collab-save-merge.js`.
+- The direct-save cadence is adaptive, computed by the pure
+  `computeNextDelayMs()` in `src/no_collab_save/scheduling.ts`: ~10 s while
+  the user is editing (also the base cadence after a save), a 20/40/80 s
+  ramp up to 120 s while idle, slower ramps while the window is blurred,
+  a 5-minute safety probe while hidden, and no periodic network access
+  while offline. Focus/visibility/online events trigger an immediate
+  (throttled to ≥2 s) check or save, hidden tabs flush-save on hide, and
+  every delay gets ±15 % jitter so editors do not poll in lockstep. The
+  editor calls `NoCollabSave.notifyEdit()` from `dispatchTransaction` for
+  local doc changes (remote merges and save confirmations set
+  `remote`/`noCollabConfirm` meta and are excluded). Hosts can override
+  timing constants with `StaticAppConfig.savePolling`; the DAV mount
+  forwards it as `MountFidusEditorConfig.savePolling`. Scheduling tests are
+  in `test/no-collab-save-scheduling.js`.
