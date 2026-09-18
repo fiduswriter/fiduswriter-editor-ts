@@ -47,7 +47,17 @@ export interface EditorDocumentApi {
         data: {id: number; token?: string}
     ): Promise<{json: unknown; status: number}>
     getDocumentData(
-        data: {id: number; token?: string; v?: number}
+        data: {id: number | string; token?: string; v?: number}
+    ): Promise<{json: unknown; status: number}>
+    /**
+     * Optional cheap version probe used by the direct-save mode to detect
+     * changes by other users without downloading the whole document. Hosts
+     * with a versioned backend (etag, document version, …) should provide
+     * this; when it is missing or does not return a numeric version, the
+     * editor falls back to fetching the full document.
+     */
+    getDocumentVersion?(
+        data: {id: number | string; token?: string}
     ): Promise<{json: unknown; status: number}>
     saveDocument(
         data: Record<string, unknown>,

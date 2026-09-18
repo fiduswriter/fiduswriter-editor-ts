@@ -235,16 +235,28 @@ export const settingsPlugin = (options: SettingsOptions) => {
                     view.dispatch(tr)
                 }, 0)
             }
+            setDocTitle(
+                view.state.doc.firstChild?.textContent || "",
+                options.editor.app
+            )
             return {
-                update: (view, _prevState) => {
+                update: (view, prevState) => {
                     updateSettings(
                         view.state.doc.attrs as Record<string, any>,
-                        _prevState.doc.attrs as Record<string, any>
+                        prevState.doc.attrs as Record<string, any>
                     )
-                    setDocTitle(
-                        view.state.doc.firstChild?.textContent || "",
-                        options.editor.app
-                    )
+                    // Only update the window title when the document title
+                    // actually changed. Hosts use document.title to show
+                    // save status ("Saved", …), which must survive unrelated
+                    // transactions such as remote merges or saves confirming
+                    // local steps.
+                    const title =
+                        view.state.doc.firstChild?.textContent || ""
+                    const prevTitle =
+                        prevState.doc.firstChild?.textContent || ""
+                    if (title !== prevTitle) {
+                        setDocTitle(title, options.editor.app)
+                    }
                 }
             }
         }

@@ -71,9 +71,14 @@ export interface StaticAppConfig {
     routes?: Record<string, {app: string}>
     /**
      * Optional handler called when the editor tries to save the document.
-     * Defaults to a no-op that returns version 0.
+     * Defaults to a no-op that returns version 0. Receives the editor's
+     * save options (e.g. `keepalive` for unload saves) so hosts can forward
+     * them to their transport.
      */
-    onSaveDocument?: (data: Record<string, unknown>) => Promise<{
+    onSaveDocument?: (
+        data: Record<string, unknown>,
+        options?: {keepalive?: boolean}
+    ) => Promise<{
         json: Record<string, unknown>
         status: number
     }>
@@ -269,9 +274,9 @@ export async function createStaticApp(
             const data = await config.documentData()
             return {json: data, status: 200}
         },
-        saveDocument: async data => {
+        saveDocument: async (data, options) => {
             if (config.onSaveDocument) {
-                return config.onSaveDocument(data)
+                return config.onSaveDocument(data, options)
             }
             return {json: {version: 0}, status: 200}
         },

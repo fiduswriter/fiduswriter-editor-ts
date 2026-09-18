@@ -100,9 +100,13 @@ export interface StaticEditorConfig
      */
     localeCatalog?: Record<string, string>
     /**
-     * Optional callback for save attempts. Receives the document payload.
+     * Optional callback for save attempts. Receives the document payload
+     * and the editor's save options (e.g. `keepalive` for unload saves).
      */
-    onSaveDocument?: (data: Record<string, unknown>) => Promise<{
+    onSaveDocument?: (
+        data: Record<string, unknown>,
+        options?: {keepalive?: boolean}
+    ) => Promise<{
         json: Record<string, unknown>
         status: number
     }>

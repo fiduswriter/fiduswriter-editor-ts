@@ -128,3 +128,18 @@ npm run typecheck
   a platform's long-lived static cache after an upgrade. `ensureResetCSS`
   uses the same resolver and also matches host links that differ only by a
   `?v=` query.
+- Direct (non-WebSocket) saving is handled by `src/no_collab_save/`. It keeps
+  `_savedBaseDoc` (last server-confirmed document) plus the collab plugin's
+  unconfirmed queue as the local diff, and merges third-party changes on 409
+  or during the periodic remote check by rebasing with
+  `prosemirror-collab`'s `receiveTransaction` (helpers in
+  `src/no_collab_save/merge.ts`). Server-provided covering steps (`m`) are
+  only used when replaying them from `_savedBaseDoc` reproduces the server
+  document exactly; otherwise `recreateTransform` recreates them. After a
+  successful save exactly the sent steps/events are confirmed
+  (`createConfirmTransaction`, `eventsSent`) — never blanket-clear the
+  queues, or edits made while the request was in flight would be marked as
+  saved. Hosts can provide an optional
+  `apiConnectors.document.getDocumentVersion()` probe so the periodic check
+  does not need to download the full document; see the tests in
+  `test/no-collab-save-merge.js`.
