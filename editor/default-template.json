@@ -1,0 +1,31 @@
+{
+  "type": "doc",
+  "attrs": {
+    "documentstyle": "",
+    "tracked": false,
+    "citationstyle": "apa",
+    "language": "en-US",
+    "papersize": "A4",
+    "template": "",
+    "import_id": "",
+    "copyright": {
+      "holder": false,
+      "year": false,
+      "freeToRead": true,
+      "licenses": []
+    }
+  },
+  "content": [
+    {
+      "type": "title",
+      "attrs": {"id": "title"}
+    },
+    {
+      "type": "richtext_part",
+      "attrs": {
+        "id": "body",
+        "title": "Body"
+      }
+    }
+  ]
+}

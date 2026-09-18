@@ -1,0 +1,33 @@
+.fw-input-list-wrapper {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fw-input-list-wrapper tr {
+    vertical-align: top;
+}
+
+.fw-input-list-wrapper td {
+    padding: 2px 0;
+}
+
+.fw-input-list-item-cell {
+    width: 100%;
+}
+
+.fw-input-field-list-ctrl {
+    white-space: nowrap;
+    padding-left: 8px;
+    padding-top: 10px;
+    color: var(--cs-light-text);
+}
+
+.fw-input-field-list-ctrl .fa-minus-circle,
+.fw-input-field-list-ctrl .fa-plus-circle {
+    cursor: pointer;
+}
+
+.fw-input-list-wrapper tr.fw-form-error .fw-input-list-item-cell input,
+.fw-input-list-wrapper tr.fw-form-error .fw-input-list-item-cell textarea {
+    background-color: var(--input-error-background-color);
+}
