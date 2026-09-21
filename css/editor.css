@@ -113,7 +113,7 @@ body.fw-editor {
     font-style: italic;
     padding: 0 48px 0 110px;
     background: url("../static/img/fidus_face.avif") no-repeat 42px 0;
-    background-size: 23px auto;
+    background-size: 26px auto;
     line-height: 32px;
     overflow: hidden;
     white-space: nowrap;
