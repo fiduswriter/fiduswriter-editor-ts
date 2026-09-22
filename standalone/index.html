@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@fiduswriter/editor — Standalone Demo</title>
+
+  <!--
+    CSS loading order (standalone — no @fiduswriter/frontend):
+    Layer 1: fwtoolkit design tokens
+    Layer 3: fwtoolkit components (subset used by editor)
+    Layer 4: Editor additive overrides
+    Layer 6: Editor component CSS
+  -->
+
+  <!-- Layer 1: fwtoolkit base custom properties -->
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/colors.css" />
+
+  <!-- Layer 3: fwtoolkit component CSS (subset) -->
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/forms.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/text.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/buttons.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/dialog.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/loader.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/alerts.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/pulldown.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/data_table.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/content_menu.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/dialog_table.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/common.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/inline_tools.css" />
+  <link rel="stylesheet" href="../../node_modules/fwtoolkit/css/add_remove_dialog.css" />
+
+  <!-- Layer 4: Editor additive color overrides -->
+  <link rel="stylesheet" href="../../css/colors.css" />
+
+  <!-- Layer 6: Editor component CSS -->
+  <link rel="stylesheet" href="../../css/editor.css" />
+  <link rel="stylesheet" href="../../css/document.css" />
+  <link rel="stylesheet" href="../../css/footnotes.css" />
+  <link rel="stylesheet" href="../../css/tracking.css" />
+  <link rel="stylesheet" href="../../css/carets.css" />
+  <link rel="stylesheet" href="../../css/chat.css" />
+  <link rel="stylesheet" href="../../css/citation_dialog.css" />
+  <link rel="stylesheet" href="../../css/contributors.css" />
+  <link rel="stylesheet" href="../../css/access_rights_dialog.css" />
+  <link rel="stylesheet" href="../../css/dot_menu.css" />
+  <link rel="stylesheet" href="../../css/e2ee.css" />
+  <link rel="stylesheet" href="../../css/margin_boxes.css" />
+  <link rel="stylesheet" href="../../css/merge.css" />
+  <link rel="stylesheet" href="../../css/review.css" />
+  <link rel="stylesheet" href="../../css/table.css" />
+  <link rel="stylesheet" href="../../css/tags.css" />
+
+  <style>
+    body {
+      font-family: Lato, sans-serif;
+      padding: 20px;
+      background: var(--main-background-color, #f2f2f2);
+      color: var(--main-text-color, #2c2723);
+    }
+    .demo-section {
+      margin: 24px 0;
+      padding: 16px;
+      background: var(--cs-white-background, #fff);
+      border: 1px solid var(--cs-white-border, #ccc);
+      border-radius: 4px;
+    }
+    .demo-section h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      color: var(--cs-4-text, #4c6860);
+    }
+  </style>
+</head>
+<body>
+  <h1>@fiduswriter/editor — Standalone CSS Verification</h1>
+  <p>
+    This page loads all CSS files from the editor package and its fwtoolkit
+    dependency. No <code>@fiduswriter/frontend</code> is needed. The CSS
+    custom properties defined in each layer should cascade correctly.
+  </p>
+
+  <div class="demo-section">
+    <h2>Custom property verification</h2>
+    <p>These boxes should be colored using fwtoolkit + editor CSS variables:</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="width:100px;height:40px;background:var(--cs-1-text,#b73717);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:4px;">cs-1</div>
+      <div style="width:100px;height:40px;background:var(--cs-2-background,#0d78be);color:var(--cs-2-text,#fff);display:flex;align-items:center;justify-content:center;border-radius:4px;">cs-2</div>
+      <div style="width:100px;height:40px;background:var(--cs-5-background,#4c6860);color:var(--cs-5-text,#fff);display:flex;align-items:center;justify-content:center;border-radius:4px;">cs-5</div>
+      <div style="width:100px;height:40px;background:var(--editor-track-active-background-color,#788fb4);color:var(--editor-track-text-color,#fff);display:flex;align-items:center;justify-content:center;border-radius:4px;">track</div>
+      <div style="width:100px;height:40px;background:var(--chat-highlight-background-color,#6495ed);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:4px;">chat</div>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h2>Form input (fw-input)</h2>
+    <input type="text" class="fw-input" placeholder="Type here..." style="width:300px;" />
+    <p style="margin-top:8px;font-size:13px;color:var(--cs-light-text-secondary,#6e6e6e);">
+      Input should have background <code>var(--input-background-color)</code> and
+      focus background <code>var(--input-focus-background-color)</code>.
+    </p>
+  </div>
+
+  <div class="demo-section">
+    <h2>E2EE custom properties</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="width:80px;height:30px;background:var(--e2ee-strength-very-weak-color);border-radius:4px;"></div>
+      <div style="width:80px;height:30px;background:var(--e2ee-strength-weak-color);border-radius:4px;"></div>
+      <div style="width:80px;height:30px;background:var(--e2ee-strength-fair-color);border-radius:4px;"></div>
+      <div style="width:80px;height:30px;background:var(--e2ee-strength-strong-color);border-radius:4px;"></div>
+      <div style="width:80px;height:30px;background:var(--e2ee-strength-very-strong-color);border-radius:4px;"></div>
+    </div>
+    <p style="margin-top:8px;font-size:13px;color:var(--cs-light-text-secondary);">
+      E2EE strength meter colors (very weak → very strong)
+    </p>
+  </div>
+
+  <script type="module">
+    // Initialize fwtoolkit with mock settings (standalone — no Django)
+    import { initSettings, addAlert } from '../../node_modules/fwtoolkit/dist/index.js'
+
+    initSettings({
+      staticUrl: (path) => `/static/${path}`,
+      getCsrfToken: () => null,
+      gettext: (msgid) => msgid,  // identity fallback (English)
+    })
+
+    // Show a success alert to verify fwtoolkit JS + CSS are working
+    addAlert('success', '@fiduswriter/editor standalone demo loaded successfully.')
+    console.log('✅ fwtoolkit initialized. Editor CSS loaded from local css/ directory.')
+    console.log('   No @fiduswriter/frontend dependency required.')
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+.fw-type-switch {
+    position: relative;
+    width: 140px;
+    height: 38px;
+    float: left;
+    margin-right: 5px;
+    font-size: 14px;
+    color: var(--cs-6-text);
+    background-color: var(--cs-6-background);
+    border: 0 none;
+    border-radius: 19px;
+    white-space: nowrap;
+    padding: 0;
+    line-height: 38px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.fw-type-switch.fw-disabled {
+    color: var(--cs-disabled);
+    background-color: var(--cs-disabled-background);
+}
+
+.fw-type-switch-inner {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    width: calc(200% - 38px);
+    transition: left 0.3s;
+}
+
+.fw-type-switch-inner::after {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: calc(50% - 19px);
+    top: 0;
+    content: "";
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    background-color: var(--cs-light-background);
+    border: 1px solid var(--cs-light-border);
+}
+
+.fw-value2 .fw-type-switch-inner {
+    left: calc(-100% + 38px);
+}
+
+.fw-type-switch-label {
+    box-sizing: border-box;
+    display: block;
+    width: 50%;
+    float: left;
+}
+
+.fw-type-switch-label:first-child {
+    padding-right: 12px;
+}
+
+.fw-type-switch-label:last-child {
+    padding-left: 12px;
+}
+
+.fw-type-switch-input-wrapper {
+    width: 686px;
+    max-width: 80vw;
+}
+
+.fw-type-switch-input-wrapper::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.fw-type-switch-input-inner {
+    position: relative;
+    float: left;
+    width: calc(100% - 145px);
+}

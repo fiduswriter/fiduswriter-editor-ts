@@ -1,0 +1,47 @@
+/* Horizontal pulldown menu bar */
+
+.fw-pulldown-menu-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+}
+
+.fw-pulldown-menu-header {
+    position: relative;
+}
+
+.fw-pulldown-menu-title {
+    display: inline-block;
+    padding: 8px 12px;
+    color: var(--cs-white-text-secondary);
+    cursor: pointer;
+    border-radius: 4px;
+    user-select: none;
+}
+
+.fw-pulldown-menu-title:hover,
+.fw-pulldown-menu-title:focus {
+    color: var(--cs-white-text);
+    background-color: var(--cs-white-background-hover);
+    outline: none;
+}
+
+.fw-pulldown-menu-title.fw-disabled {
+    color: var(--cs-disabled);
+    cursor: not-allowed;
+}
+
+.fw-pulldown-menu-title .fw-access-key {
+    text-decoration: underline;
+}
+
+.fw-pulldown-menu-header > .fw-pulldown {
+    top: 100%;
+    margin-top: 4px;
+}
+
+.fw-pulldown-menu-item.fw-cursor {
+    background-color: var(--cs-white-background-hover);
+}
