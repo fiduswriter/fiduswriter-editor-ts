@@ -135,6 +135,14 @@ export interface EditorApp {
          */
         SHOW_FILE_MENU_ITEMS?: boolean
         /**
+         * The pagination engine used by the print and PDF exporters
+         * ("paged-with-floats" or "vivliostyle-pdf"). Hosts that select
+         * "vivliostyle-pdf" must also bundle and register that engine
+         * (see `@fiduswriter/document/exporter/print/engines/`). Defaults
+         * to "paged-with-floats".
+         */
+        PRINT_ENGINE?: string
+        /**
          * "external" disables autosaving; the host persists changes through
          * its own UI. "direct" saves without WebSocket collaboration.
          * "collaborative" (or unset) means normal WebSocket-based saving.

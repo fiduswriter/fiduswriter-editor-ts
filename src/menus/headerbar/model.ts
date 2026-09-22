@@ -420,7 +420,11 @@ export const headerbarModel = () => ({
                                 editor.app.csl,
                                 editor.docInfo.updated as Date as Date,
                                 getDocumentTemplate(editor).documentStyles,
-                                exportProgress(doc)
+                                exportProgress(doc),
+                                {
+                                    printEngine:
+                                        editor.app.settings.PRINT_ENGINE
+                                }
                             )
                             exporter.init()
                         })
@@ -731,10 +735,17 @@ export const headerbarModel = () => ({
                                         editor.user?.username ||
                                         undefined,
                                     fidusFile,
+                                    pdfA: options.pdfA,
+                                    pdfUa: options.pdfUa,
+                                    embedSourceHtml:
+                                        options.embedSourceHtml ||
+                                        undefined,
                                     figurePageFloats:
                                         options.figurePageFloats,
                                     tablePageFloats: options.tablePageFloats,
-                                    printOptions: options.printOptions
+                                    printOptions: options.printOptions,
+                                    printEngine:
+                                        editor.app.settings.PRINT_ENGINE
                                 }
                             )
                             pdfExporter.init()

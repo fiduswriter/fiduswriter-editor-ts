@@ -5,21 +5,22 @@ import {test, expect} from "@playwright/test"
  *
  * Print (menu "Print"/Ctrl+P) runs the whole client-side print stack:
  *   HTML export with MathJax TeX→SVG (mathOutput: "svg")
- *   → @vivliostyle/print pagination in a hidden iframe → window.print().
+ *   → pagination by the selected print engine in a hidden iframe
+ *   → window.print().
  *
- * It used to fail before reaching vivliostyle with
+ * It used to fail before reaching pagination with
  * "TypeError: h is not a function" — a CJS→ESM interop bug: esbuild code-splits
  * the dynamically imported CommonJS `mathjax-full` modules into chunks that
  * only expose a `default` export, so destructured named imports
  * (`browserAdaptor`, `liteAdaptor`, …) were `undefined`. The exporter now reads
  * those imports through `.default ?? mod`.
  *
- * We detect success by `window.printInstance`, which @vivliostyle/print's
- * `VivliostylePrint.init()` sets on the top window right after the HTML has been
- * generated (i.e. after the MathJax conversion succeeded) and only clears after
- * the print callback ran. Note: pagination itself may never finish when a piece
- * of content cannot fit on any page (a separate vivliostyle issue), so we assert
- * that the pipeline reached the pagination stage rather than that it completed.
+ * We detect success by `window.printInstance`, which the print exporter sets on
+ * the top window right after the HTML has been generated (i.e. after the
+ * MathJax conversion succeeded), independent of the pagination engine in use.
+ * Note: pagination itself may never finish when a piece of content cannot fit
+ * on any page, so we assert that the pipeline reached the pagination stage
+ * rather than that it completed.
  *
  * This test requires the fixed `@fiduswriter/document` (the version that ships
  * the interop fix in `src/exporter/html/math.ts`); it fails on the buggy one.

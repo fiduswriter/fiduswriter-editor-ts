@@ -144,6 +144,35 @@ export const pdfExportDialogTemplate = (): string => `
             "pdf-table-page-floats-help"
         )}
     </p>
+    <h4>${gettext("Archiving and accessibility")}</h4>
+    <p>
+        <label><input type="checkbox" class="pdf-pdf-a" aria-describedby="pdf-pdf-a-help"> ${gettext("PDF/A-4 (archival)")}</label>
+        ${infoTooltip(
+            gettext(
+                "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+            ),
+            "pdf-pdf-a-help"
+        )}<br>
+        <label><input type="checkbox" class="pdf-pdf-ua" aria-describedby="pdf-pdf-ua-help"> ${gettext("PDF/UA (accessible, tagged)")}</label>
+        ${infoTooltip(
+            gettext(
+                "Tags the PDF with a logical structure tree so screen readers can navigate the document."
+            ),
+            "pdf-pdf-ua-help"
+        )}
+    </p>
+    <p>
+        <label>
+            <input type="checkbox" class="pdf-embed-source" aria-describedby="pdf-embed-source-help">
+            ${gettext("Embed the source HTML in the PDF")}
+        </label>
+        ${infoTooltip(
+            gettext(
+                "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+            ),
+            "pdf-embed-source-help"
+        )}
+    </p>
     <h4>${gettext("Print production")}</h4>
     <p>
         <label><input type="checkbox" class="pdf-crop-marks" aria-describedby="pdf-crop-marks-help"> ${gettext("Crop marks")}</label>
