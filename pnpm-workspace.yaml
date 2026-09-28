@@ -10,5 +10,11 @@ minimumReleaseAgeExclude:
     - "@fiduswriter/document@0.3.17"
     - paged-with-floats@0.11.0
     - pages-to-pdf@0.3.10
-    - lingotweaker-data@0.2.1 || 0.2.2
-    - lingotweaker-wasm@0.2.1 || 0.2.2
+    - lingotweaker-data@0.2.1 || 0.2.2 || 0.2.3
+    - lingotweaker-wasm@0.2.1 || 0.2.2 || 0.2.3
+    - lingotweaker-data-de@0.2.2
+    - lingotweaker-data-en@0.2.2
+    - lingotweaker-data-es@0.2.2
+    - lingotweaker-data-fr@0.2.2
+    - lingotweaker-data-it@0.2.2
+    - lingotweaker-data-pt@0.2.2

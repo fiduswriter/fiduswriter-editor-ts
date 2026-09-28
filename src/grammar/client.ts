@@ -69,12 +69,22 @@ export class GrammarClient {
         return this.worker !== null
     }
 
-    load(language: GrammarLanguage): Promise<void> {
-        this.loadChain = this.loadChain.then(() => this.loadEngine(language))
+    /**
+     * Load the engine for `language`. `packBaseUrl` is the URL (ending in
+     * "/") under which the host serves the gzipped language packs as
+     * `<packBaseUrl><pack>.pack.gz`.
+     */
+    load(language: GrammarLanguage, packBaseUrl: string): Promise<void> {
+        this.loadChain = this.loadChain.then(() =>
+            this.loadEngine(language, packBaseUrl)
+        )
         return this.loadChain
     }
 
-    private loadEngine(language: GrammarLanguage): Promise<void> {
+    private loadEngine(
+        language: GrammarLanguage,
+        packBaseUrl: string
+    ): Promise<void> {
         if (
             this.loadedLanguage === language.code &&
             (this.worker || this.engine)
@@ -89,27 +99,33 @@ export class GrammarClient {
                     type: "load",
                     lang: language.code,
                     pack: language.pack,
+                    packBaseUrl,
                     variant: language.variant
                 })
             })
         }
-        return this.loadEngineInline(language)
+        return this.loadEngineInline(language, packBaseUrl)
     }
 
-    private async loadEngineInline(language: GrammarLanguage): Promise<void> {
+    private async loadEngineInline(
+        language: GrammarLanguage,
+        packBaseUrl: string
+    ): Promise<void> {
         const {default: init, LtEngine} = await import("lingotweaker-wasm")
-        const {fetchPack} = await import("lingotweaker-wasm/pack")
+        const {decompressPack} = await import("lingotweaker-wasm/pack")
         await init()
-        let packBytes
-        try {
-            packBytes = await fetchPack(language.pack)
-        } catch (error) {
-            const base = language.pack.split("-")[0]
-            if (base === language.pack) {
-                throw error
-            }
-            packBytes = await fetchPack(base)
+        const packUrl = `${packBaseUrl}${language.pack}.pack.gz`
+        const response = await fetch(packUrl)
+        if (!response.ok) {
+            throw new Error(`cannot load ${packUrl}: HTTP ${response.status}`)
         }
+        const bytes = new Uint8Array(await response.arrayBuffer())
+        // Some servers transparently gunzip .gz responses (Content-Encoding);
+        // only inflate when the gzip magic bytes are actually present.
+        const packBytes =
+            bytes[0] === 0x1f && bytes[1] === 0x8b
+                ? await decompressPack(bytes)
+                : bytes
         const options = JSON.stringify({
             variant: language.variant || undefined,
             today: new Date().toISOString().slice(0, 10)

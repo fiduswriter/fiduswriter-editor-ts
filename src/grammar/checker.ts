@@ -13,7 +13,13 @@
  */
 
 import {FormatCitations} from "@fiduswriter/document/citations/format"
-import {addAlert, addProgress, interpolate, noSpaceTmp} from "fwtoolkit"
+import {
+    addAlert,
+    addProgress,
+    interpolate,
+    noSpaceTmp,
+    staticUrl
+} from "fwtoolkit"
 import type {EditorState, Transaction} from "prosemirror-state"
 
 import {
@@ -113,13 +119,31 @@ export class ModGrammar {
         )
     }
 
+    /**
+     * Base URL (ending in "/") the engine fetches gzipped language packs
+     * from. Hosts install the `lingotweaker-data-<pack>` npm packages they
+     * want to support and serve the contents of their `packs/` directories
+     * under their static root; `config.grammar_check_pack_base_url`
+     * overrides that location.
+     */
+    get packBaseUrl(): string {
+        const config = this.editor.app.config as
+            | {grammar_check_pack_base_url?: unknown}
+            | undefined
+        const baseUrl = config?.grammar_check_pack_base_url
+        if (typeof baseUrl === "string" && baseUrl) {
+            return baseUrl
+        }
+        return staticUrl("lingotweaker-packs/")
+    }
+
     /** Load the engine for `language` if it is not loaded already. */
     ensureLoaded(language: string): Promise<void> {
         const languageDefinition = grammarLanguage(language)
         if (!languageDefinition) {
             return Promise.reject(new Error("unsupported language"))
         }
-        return this.client.load(languageDefinition)
+        return this.client.load(languageDefinition, this.packBaseUrl)
     }
 
     checkText(): void {

@@ -51,8 +51,8 @@ importers:
         specifier: ^3.10.1
         version: 3.10.1
       lingotweaker-wasm:
-        specifier: ^0.2.2
-        version: 0.2.2
+        specifier: ^0.2.3
+        version: 0.2.3
       mathml-to-latex:
         specifier: ^1.4.3
         version: 1.8.0
@@ -177,6 +177,24 @@ importers:
       jest:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@26.1.1)(supports-color@8.1.1)
+      lingotweaker-data-de:
+        specifier: ^0.2.2
+        version: 0.2.2
+      lingotweaker-data-en:
+        specifier: ^0.2.2
+        version: 0.2.2
+      lingotweaker-data-es:
+        specifier: ^0.2.2
+        version: 0.2.2
+      lingotweaker-data-fr:
+        specifier: ^0.2.2
+        version: 0.2.2
+      lingotweaker-data-it:
+        specifier: ^0.2.2
+        version: 0.2.2
+      lingotweaker-data-pt:
+        specifier: ^0.2.2
+        version: 0.2.2
       lint-staged:
         specifier: ^17.0.8
         version: 17.1.1
@@ -2156,12 +2174,36 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  lingotweaker-data@0.2.2:
-    resolution: {integrity: sha512-GmSzSS1jkVdGB70RMcUUy0HE5ZU7rizRpgjuOrkBDgVqeoj/3V2Ph/NSHqgdPK1AnH4LxfzoecmdVvMuNNKZMQ==}
+  lingotweaker-data-de@0.2.2:
+    resolution: {integrity: sha512-w4JyMrgwdHNWCqevFIjBtaw6ifmqCciMhSwPtoWdxOBpPvlDvGGfUtU7N35hwMR1MfwPa3EuDmTptnwCsTvpjQ==}
     engines: {node: '>= 18'}
 
-  lingotweaker-wasm@0.2.2:
-    resolution: {integrity: sha512-KTdsihPBznXXogEYyvZICavXyBbRMPNe6wCVEAOrrEWrLd6d1+iUVgW+R9SYV85z1AdDLkJntASv+OXSyLDREA==}
+  lingotweaker-data-en@0.2.2:
+    resolution: {integrity: sha512-wOOIjJXW6AxuGXhEZBXijow7Xg28fqxh0fEpr+WI8rThyKWEsO4cMpIJniT7kHu2NBSWwh/PFV48PIq7VR8ZQQ==}
+    engines: {node: '>= 18'}
+
+  lingotweaker-data-es@0.2.2:
+    resolution: {integrity: sha512-ilh4Sir15ZbMQjfnyGC4etATQEHtHrOoy3TMHbSvfeMCgiT4cQB1xvYDxRa//5Co7lTaxao2naGi3dt0eqpZNw==}
+    engines: {node: '>= 18'}
+
+  lingotweaker-data-fr@0.2.2:
+    resolution: {integrity: sha512-WINzPH77hBSEhrrQMx7ZoMDygGUsTxQtbjTs+NlHphHbgzvDMA8UVhc3vt5KpvwrNJ1tp3R7u63er5srwwD+zg==}
+    engines: {node: '>= 18'}
+
+  lingotweaker-data-it@0.2.2:
+    resolution: {integrity: sha512-hNdqgwEkLIP/BlPGaaYd4aviDMo7AkiM2VT9luTJYZJPJ+m8Vf6VxyPVQgholqzmnlDQIKF6ccPxA9rO/BK6AA==}
+    engines: {node: '>= 18'}
+
+  lingotweaker-data-pt@0.2.2:
+    resolution: {integrity: sha512-ZPZNOJL1M04WCPr1EaBqgUJ2A1pRIfqH8K7Gb0bh8NNqiELf1oP5je/jIBqOFN5zCKxX/Zt40F31R2pIHkzoVQ==}
+    engines: {node: '>= 18'}
+
+  lingotweaker-data@0.2.3:
+    resolution: {integrity: sha512-Svg0ASDXsnd7bzbgCO86ARNjo+oAp9CEdhqTUQrR2QnzW2ZYPcsSXsxj/ESfrSWIMxC7xJSarFehc39MgRRpyw==}
+    engines: {node: '>= 18'}
+
+  lingotweaker-wasm@0.2.3:
+    resolution: {integrity: sha512-J3QLqiV35mWYKtkg5ZrSmXYy8yLMRXEoIx2wHWwsZ6Y+3dqArqZFOkSJjs2BgIxUfxlR4hrnvQCBMFT/q50OwQ==}
     engines: {node: '>= 18'}
 
   lint-staged@17.1.1:
@@ -4983,11 +5025,23 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  lingotweaker-data@0.2.2: {}
+  lingotweaker-data-de@0.2.2: {}
 
-  lingotweaker-wasm@0.2.2:
+  lingotweaker-data-en@0.2.2: {}
+
+  lingotweaker-data-es@0.2.2: {}
+
+  lingotweaker-data-fr@0.2.2: {}
+
+  lingotweaker-data-it@0.2.2: {}
+
+  lingotweaker-data-pt@0.2.2: {}
+
+  lingotweaker-data@0.2.3: {}
+
+  lingotweaker-wasm@0.2.3:
     dependencies:
-      lingotweaker-data: 0.2.2
+      lingotweaker-data: 0.2.3
 
   lint-staged@17.1.1:
     dependencies:

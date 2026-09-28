@@ -105,8 +105,13 @@ npm run typecheck
   import/export helpers. It no longer depends on `@fiduswriter/common` — the
   `App`/`User` types and `FeedbackTab` have been removed or inlined.
 - Spell/grammar checking is built in (`src/grammar/`, `editor.mod.grammar`)
-  and runs the `lingotweaker-wasm` engine in a Web Worker with per-language
-  data packs fetched from the release CDN. The user preference
+  and runs the `lingotweaker-wasm` engine in a Web Worker. The worker
+  fetches the per-language data packs from the host's static tree at
+  `staticUrl("lingotweaker-packs/<pack>.pack.gz")`: hosts must install the
+  `lingotweaker-data-<pack>` npm packages for the languages they want to
+  support and serve the contents of their `packs/` directories under the
+  static root. The app config key `grammar_check_pack_base_url` (a URL
+  ending in `/`) overrides that location. The user preference
   `grammar_check_continuous` enables continuous checking.
 - The `bibliojson` dependency used indirectly via `@fiduswriter/document` and
   `@fiduswriter/bibliography-manager` was previously published as

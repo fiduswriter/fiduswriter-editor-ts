@@ -5,7 +5,7 @@
  * the LingoTweaker demo worker.
  *
  * Message protocol:
- * in:  {type: "load", lang, pack, variant?, picky?}
+ * in:  {type: "load", lang, pack, packBaseUrl, variant?, picky?}
  * in:  {type: "check", id, texts: string[]}
  * out: {type: "ready", lang}
  * out: {type: "error", message}
@@ -13,7 +13,7 @@
  */
 
 import init, {LtEngine} from "lingotweaker-wasm"
-import {fetchPack} from "lingotweaker-wasm/pack"
+import {decompressPack} from "lingotweaker-wasm/pack"
 
 import type {GrammarMatch} from "./matches.js"
 
@@ -21,6 +21,7 @@ interface LoadMessage {
     type: "load"
     lang: string
     pack: string
+    packBaseUrl: string
     variant?: string
     picky?: boolean
 }
@@ -62,21 +63,29 @@ function ensureInit(): Promise<unknown> {
     return initPromise
 }
 
-function baseLanguage(pack: string): string {
-    return pack.split("-")[0]
-}
-
-async function loadPack(pack: string): Promise<Uint8Array> {
-    try {
-        return await fetchPack(pack)
-    } catch (error) {
-        const base = baseLanguage(pack)
-        if (base === pack) {
-            throw error
-        }
-        // Fall back to the base language (e.g. "en-US" → "en").
-        return fetchPack(base)
+/**
+ * Fetch and inflate the gzipped pack for `pack` from the host's static
+ * tree. Hosts install the `lingotweaker-data-<pack>` npm packages for the
+ * languages they support and serve the contents of their `packs/`
+ * directories at `packBaseUrl` (a URL ending in "/"), so the pack for
+ * `pack` is available at `<packBaseUrl><pack>.pack.gz`.
+ */
+async function loadPack(
+    pack: string,
+    packBaseUrl: string
+): Promise<Uint8Array> {
+    const url = `${packBaseUrl}${pack}.pack.gz`
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw new Error(`cannot load ${url}: HTTP ${response.status}`)
     }
+    const bytes = new Uint8Array(await response.arrayBuffer())
+    // Some servers transparently gunzip .gz responses (Content-Encoding);
+    // only inflate when the gzip magic bytes are actually present.
+    if (bytes[0] === 0x1f && bytes[1] === 0x8b) {
+        return decompressPack(bytes)
+    }
+    return bytes
 }
 
 async function load(message: LoadMessage): Promise<void> {
@@ -84,7 +93,7 @@ async function load(message: LoadMessage): Promise<void> {
     engine = null
     textCache.clear()
     await ensureInit()
-    const packBytes = await loadPack(message.pack)
+    const packBytes = await loadPack(message.pack, message.packBaseUrl)
     if (generation !== loadGeneration) {
         return
     }

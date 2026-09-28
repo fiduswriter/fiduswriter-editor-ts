@@ -1,4 +1,4 @@
-import {describe, test, expect, jest, afterEach} from "@jest/globals"
+import {describe, test, expect, jest, afterEach, beforeAll, beforeEach} from "@jest/globals"
 
 import {GrammarClient} from "../src/grammar/client.js"
 import {
@@ -18,6 +18,9 @@ import {getText} from "../src/grammar/text.js"
 import {ModGrammar} from "../src/grammar/checker.js"
 
 const encoder = new TextEncoder()
+
+const PACK_BASE_URL = "https://static.example/lingotweaker-packs/"
+const REAL_FETCH = globalThis.fetch
 
 const matchAt = (text: string, needle: string, categoryId: string): GrammarMatch => {
     const index = text.indexOf(needle)
@@ -237,16 +240,20 @@ describe("GrammarClient", () => {
         const client = new GrammarClient(worker as never)
         expect(client.hasWorker).toBe(true)
 
-        const loadPromise = client.load({
-            code: "en-US",
-            pack: "en",
-            variant: "en-GB"
-        })
+        const loadPromise = client.load(
+            {
+                code: "en-US",
+                pack: "en",
+                variant: "en-GB"
+            },
+            PACK_BASE_URL
+        )
         await flush()
         expect(worker.messages[0]).toMatchObject({
             type: "load",
             lang: "en-US",
             pack: "en",
+            packBaseUrl: PACK_BASE_URL,
             variant: "en-GB"
         })
         worker.send({type: "ready", lang: "en-US"})
@@ -296,20 +303,52 @@ describe("GrammarClient", () => {
 
     test("falls back to a main-thread engine when no Worker exists", async () => {
         const client = new GrammarClient(null)
-        await client.load({code: "en-US", pack: "en"})
-        expect(client.loadedLanguage).toBe("en-US")
-        const results = await client.check(["teh report was very unique"])
-        expect(results[0].map(match => match.category_id).sort()).toEqual([
-            "GRAMMAR",
-            "TYPOS"
-        ])
+        let fetchedUrl = ""
+        globalThis.fetch = (async (url: unknown) => {
+            fetchedUrl = String(url)
+            return {
+                ok: true,
+                status: 200,
+                arrayBuffer: async () => new Uint8Array([1, 2, 3]).buffer
+            } as unknown as Response
+        }) as unknown as typeof fetch
+        try {
+            await client.load({code: "en-US", pack: "en"}, PACK_BASE_URL)
+            expect(fetchedUrl).toBe(`${PACK_BASE_URL}en.pack.gz`)
+            expect(client.loadedLanguage).toBe("en-US")
+            const results = await client.check(["teh report was very unique"])
+            expect(results[0].map(match => match.category_id).sort()).toEqual([
+                "GRAMMAR",
+                "TYPOS"
+            ])
+        } finally {
+            globalThis.fetch = REAL_FETCH
+        }
+        client.destroy()
+    })
+
+    test("rejects the inline load when the pack fetch fails", async () => {
+        const client = new GrammarClient(null)
+        globalThis.fetch = (async () => {
+            throw new Error("network down")
+        }) as unknown as typeof fetch
+        try {
+            await expect(
+                client.load({code: "en-US", pack: "en"}, PACK_BASE_URL)
+            ).rejects.toThrow("network down")
+        } finally {
+            globalThis.fetch = REAL_FETCH
+        }
         client.destroy()
     })
 
     test("rejects pending loads on worker errors", async () => {
         const worker = new FakeWorker()
         const client = new GrammarClient(worker as never)
-        const loadPromise = client.load({code: "en-US", pack: "en"})
+        const loadPromise = client.load(
+            {code: "en-US", pack: "en"},
+            PACK_BASE_URL
+        )
         await flush()
         worker.send({type: "error", message: "cannot load pack: HTTP 404"})
         await expect(loadPromise).rejects.toThrow("HTTP 404")
@@ -317,21 +356,232 @@ describe("GrammarClient", () => {
     })
 })
 
+describe("grammar worker", () => {
+    const flush = () => new Promise(resolve => setTimeout(resolve, 0))
+    let posted: Array<Record<string, unknown>> = []
+
+    beforeAll(async () => {
+        // The worker module expects a worker global scope at import time.
+        const scope = globalThis as unknown as {
+            self: unknown
+            postMessage(message: unknown): void
+            onmessage: ((event: {data: unknown}) => void) | null
+        }
+        scope.self = scope
+        scope.postMessage = message => {
+            posted.push(message as Record<string, unknown>)
+        }
+        await import("../src/grammar/worker.js")
+    })
+
+    afterEach(() => {
+        globalThis.fetch = REAL_FETCH
+        posted = []
+        ;(globalThis as {__lingotweakerDecompressCalls?: unknown[]})
+            .__lingotweakerDecompressCalls = []
+    })
+
+    beforeEach(() => {
+        ;(globalThis as {__lingotweakerDecompressCalls?: unknown[]})
+            .__lingotweakerDecompressCalls = []
+    })
+
+    const stubFetch = (options: {
+        ok: boolean
+        status: number
+        bytes?: ArrayLike<number>
+    }): (() => string) => {
+        let fetchedUrl = ""
+        globalThis.fetch = (async (url: unknown) => {
+            fetchedUrl = String(url)
+            const bytes = options.bytes ? Array.from(options.bytes) : []
+            return {
+                ok: options.ok,
+                status: options.status,
+                arrayBuffer: async () => new Uint8Array(bytes).buffer
+            } as unknown as Response
+        }) as unknown as typeof fetch
+        return () => fetchedUrl
+    }
+
+    const sendMessage = (data: Record<string, unknown>) => {
+        const scope = globalThis as unknown as {
+            onmessage: ((event: {data: unknown}) => void) | null
+        }
+        scope.onmessage?.({data})
+    }
+
+    const sendLoad = (overrides: Record<string, unknown> = {}) =>
+        sendMessage({
+            type: "load",
+            lang: "en-US",
+            pack: "en",
+            packBaseUrl: PACK_BASE_URL,
+            ...overrides
+        })
+
+    test("fetches the pack from <packBaseUrl><pack>.pack.gz and reports ready", async () => {
+        const fetchedUrl = stubFetch({
+            ok: true,
+            status: 200,
+            bytes: [0x1f, 0x8b, 7, 7, 7]
+        })
+        sendLoad()
+        await flush()
+        await flush()
+        expect(fetchedUrl()).toBe(`${PACK_BASE_URL}en.pack.gz`)
+        // The fetched bytes are handed to decompressPack, which gunzips
+        // them (passthrough in the mock) before the engine is constructed.
+        const decompressCalls = (
+            globalThis as {__lingotweakerDecompressCalls?: Uint8Array[]}
+        ).__lingotweakerDecompressCalls
+        expect(decompressCalls).toHaveLength(1)
+        expect(Array.from(new Uint8Array(decompressCalls![0]))).toEqual([
+            0x1f, 0x8b, 7, 7, 7
+        ])
+        expect(posted).toContainEqual({type: "ready", lang: "en-US"})
+
+        // The loaded engine answers checks.
+        sendMessage({type: "check", id: 1, texts: ["teh"]})
+        await flush()
+        expect(posted[posted.length - 1]).toMatchObject({
+            type: "result",
+            id: 1
+        })
+    })
+
+    test("accepts responses a server already gunzipped (no gzip magic bytes)", async () => {
+        const fetchedUrl = stubFetch({ok: true, status: 200, bytes: [7, 7, 7]})
+        sendLoad()
+        await flush()
+        await flush()
+        expect(fetchedUrl()).toBe(`${PACK_BASE_URL}en.pack.gz`)
+        // Servers that set Content-Encoding: gzip deliver the already
+        // inflated pack — the worker must skip gunzipping in that case.
+        const decompressCalls = (
+            globalThis as {__lingotweakerDecompressCalls?: Uint8Array[]}
+        ).__lingotweakerDecompressCalls
+        expect(decompressCalls).toHaveLength(0)
+        expect(posted).toContainEqual({type: "ready", lang: "en-US"})
+    })
+
+    test("uses the pack named by the language table for variant codes", async () => {
+        const fetchedUrl = stubFetch({ok: true, status: 200, bytes: [1]})
+        sendLoad({lang: "pt-BR", pack: "pt", variant: "pt-BR"})
+        await flush()
+        await flush()
+        expect(fetchedUrl()).toBe(`${PACK_BASE_URL}pt.pack.gz`)
+        expect(posted).toContainEqual({type: "ready", lang: "pt-BR"})
+    })
+
+    test("reports a clear load error when the pack fetch fails", async () => {
+        stubFetch({ok: false, status: 404})
+        sendLoad()
+        await flush()
+        await flush()
+        expect(posted).toHaveLength(1)
+        expect(posted[0].type).toBe("error")
+        expect(String(posted[0].message)).toContain("HTTP 404")
+        expect(String(posted[0].message)).toContain(
+            `${PACK_BASE_URL}en.pack.gz`
+        )
+    })
+})
+
 describe("supported languages", () => {
-    test("includes variants and special codes", () => {
+    test("covers the Fidus Writer document language schema", () => {
+        // Every language selectable in Fidus Writer's document schema
+        // (fiduswriter-document-ts schema/document/structure.ts) must be
+        // checkable, except the ones no language pack exists for.
+        const schemaLanguages = [
+            "af-ZA",
+            "sq-AL",
+            "ar",
+            "ast",
+            "be",
+            "br",
+            "bg",
+            "ca",
+            "ca-ES-Valencia",
+            "zh-CN",
+            "da",
+            "nl",
+            "en-AU",
+            "en-CA",
+            "en-NZ",
+            "en-ZA",
+            "en-GB",
+            "en-US",
+            "eo",
+            "fr",
+            "gl",
+            "de-DE",
+            "de-AU",
+            "de-CH",
+            "el",
+            "he",
+            "is",
+            "it",
+            "ja",
+            "km",
+            "lt",
+            "ml",
+            "nb-NO",
+            "nn-NO",
+            "fa",
+            "pl",
+            "pt-BR",
+            "pt-PT",
+            "ro",
+            "ru",
+            "tr",
+            "sr-SP-Cy",
+            "sr-SP-Lt",
+            "sk",
+            "sl",
+            "es",
+            "sv",
+            "ta",
+            "tl",
+            "uk"
+        ]
+        const noPackLanguages = ["af-ZA", "sq-AL", "bg", "he", "tr"]
+        const missing = schemaLanguages.filter(
+            code =>
+                !noPackLanguages.includes(code) && !grammarLanguage(code)
+        )
+        expect(missing).toEqual([])
+    })
+
+    test("maps schema codes, import variants and variants to packs", () => {
         expect(GRAMMAR_LANGUAGE_CODES).toContain("en-US")
         expect(GRAMMAR_LANGUAGE_CODES).toContain("en-GB")
-        expect(GRAMMAR_LANGUAGE_CODES).toContain("de-DE-x-simple-language")
-        expect(GRAMMAR_LANGUAGE_CODES).toContain("nrd")
-        expect(GRAMMAR_LANGUAGE_CODES).toContain("ja-JP")
         expect(grammarLanguage("de-AT")).toMatchObject({
             pack: "de",
             variant: "de-AT"
         })
         expect(grammarLanguage("en-US")).toMatchObject({pack: "en"})
         expect(grammarLanguage("fr")).toMatchObject({pack: "fr"})
+        expect(grammarLanguage("es")).toMatchObject({pack: "es"})
+        expect(grammarLanguage("nb-NO")).toMatchObject({pack: "no"})
+        expect(grammarLanguage("nn-NO")).toMatchObject({pack: "nn"})
+        expect(grammarLanguage("sr-SP-Cy")).toMatchObject({pack: "sr"})
+        expect(grammarLanguage("ca-ES-Valencia")).toMatchObject({pack: "ca"})
+        expect(grammarLanguage("en-AU")).toMatchObject({pack: "en"})
+        expect(grammarLanguage("de-AU")).toMatchObject({pack: "de"})
         expect(grammarLanguage("xx-YY")).toBeUndefined()
         expect(GRAMMAR_LANGUAGES.length).toBe(GRAMMAR_LANGUAGE_CODES.length)
+    })
+
+    test("excludes languages Fidus Writer does not support", () => {
+        // These packs exist upstream but no Fidus Writer document language
+        // (schema or plausible DOCX import code) maps to them.
+        expect(grammarLanguage("nrd")).toBeUndefined()
+        expect(grammarLanguage("gn-ES")).toBeUndefined()
+        expect(grammarLanguage("crh-UA")).toBeUndefined()
+        expect(grammarLanguage("de-DE-x-simple-language")).toBeUndefined()
+        expect(grammarLanguage("pt-AO")).toBeUndefined()
+        expect(grammarLanguage("pt-MZ")).toBeUndefined()
     })
 })
 
@@ -420,6 +670,38 @@ describe("ModGrammar continuous checking", () => {
         expect(grammar.runId).toBeGreaterThan(runId)
         expect(grammar.sources).toBe(false)
         expect(grammar.hasChecked).toBe(false)
+        grammar.close()
+    })
+})
+
+describe("ModGrammar pack base URL", () => {
+    test("defaults to staticUrl('lingotweaker-packs/')", () => {
+        const editor = makeFakeEditor({})
+        const grammar = new ModGrammar(editor)
+        expect(grammar.packBaseUrl).toBe("lingotweaker-packs/")
+        grammar.close()
+    })
+
+    test("grammar_check_pack_base_url in the app config overrides it", () => {
+        const editor = makeFakeEditor({})
+        editor.app.config.grammar_check_pack_base_url =
+            "https://cdn.example/packs/"
+        const grammar = new ModGrammar(editor)
+        expect(grammar.packBaseUrl).toBe("https://cdn.example/packs/")
+        grammar.close()
+    })
+
+    test("ensureLoaded threads the pack base URL to the client", async () => {
+        const editor = makeFakeEditor({})
+        const grammar = new ModGrammar(editor)
+        const load = jest
+            .spyOn(grammar.client, "load")
+            .mockReturnValue(Promise.resolve())
+        await grammar.ensureLoaded("en-US")
+        expect(load).toHaveBeenCalledWith(
+            {code: "en-US", pack: "en"},
+            "lingotweaker-packs/"
+        )
         grammar.close()
     })
 })

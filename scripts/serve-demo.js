@@ -198,6 +198,30 @@ async function buildDemo() {
     console.log("Copying locales...")
     await fs.cp(join(ROOT, "locale"), join(BUILD_DIR, "locale"), {recursive: true})
 
+    console.log("Copying spell/grammar language packs...")
+    // The editor fetches packs at staticUrl("lingotweaker-packs/<pack>.pack.gz"),
+    // which the demo's staticUrl maps under static/.
+    const packsDir = join(BUILD_DIR, "static", "lingotweaker-packs")
+    await ensureDir(packsDir)
+    const nodeModulesDir = join(ROOT, "node_modules")
+    for (const entry of await fs.readdir(nodeModulesDir)) {
+        if (!entry.startsWith("lingotweaker-data-")) {
+            continue
+        }
+        const packsSourceDir = join(nodeModulesDir, entry, "packs")
+        if (!existsSync(packsSourceDir)) {
+            continue
+        }
+        for (const packFile of await fs.readdir(packsSourceDir)) {
+            if (packFile.endsWith(".pack.gz")) {
+                await fs.copyFile(
+                    join(packsSourceDir, packFile),
+                    join(packsDir, packFile)
+                )
+            }
+        }
+    }
+
     console.log("Copying logo...")
     await fs.copyFile(join(ROOT, "logo.svg"), join(BUILD_DIR, "logo.svg"))
 }

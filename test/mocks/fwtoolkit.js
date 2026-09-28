@@ -8,6 +8,7 @@ export const SiteMenu = class {}
 export const escapeText = (s) => s
 export const shortFileTitle = (s) => s
 export const gettext = (s) => s
+export const staticUrl = (path) => path
 export const interpolate = (fmt, args) => {
     let index = 0
     return fmt.replace(/%s/g, () => {
