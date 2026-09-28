@@ -58,6 +58,8 @@ export default {
         "^@fiduswriter/bibliography-manager$": "<rootDir>/test/mocks/bibliography-manager.js",
         "^@fiduswriter/bibliography-manager/.*": "<rootDir>/test/mocks/bibliography-manager.js",
         "^@fiduswriter/image-manager$": "<rootDir>/test/mocks/image-manager.js",
-        "^@fiduswriter/image-manager/.*": "<rootDir>/test/mocks/image-manager.js"
+        "^@fiduswriter/image-manager/.*": "<rootDir>/test/mocks/image-manager.js",
+        "^lingotweaker-wasm$": "<rootDir>/test/mocks/lingotweaker-wasm.js",
+        "^lingotweaker-wasm/pack$": "<rootDir>/test/mocks/lingotweaker-wasm-pack.js"
     }
 }

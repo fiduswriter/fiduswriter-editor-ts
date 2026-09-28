@@ -46,6 +46,7 @@ import {RequestAccessDialog} from "./documents/access_rights/request_access_dial
 import {E2EESnapshotManager} from "./e2ee/snapshot-manager.js"
 import {ExportFidusFile} from "./exporter/native/file.js"
 import {ModFootnotes} from "./footnotes/index.js"
+import {ModGrammar} from "./grammar/index.js"
 import {buildEditorKeymap} from "./keymap.js"
 import {
     codeBlockMenuModel,
@@ -75,6 +76,7 @@ import {
     documentTemplatePlugin,
     figurePlugin,
     footnoteMarkersPlugin,
+    grammarCheckPlugin,
     headerbarPlugin,
     inlineMathPlugin,
     inlineReferencePlugin,
@@ -276,6 +278,7 @@ export class Editor {
             [figurePlugin, () => ({editor: this})],
             [codeBlockPlugin, () => ({editor: this})],
             [tocRenderPlugin, () => ({editor: this})],
+            [grammarCheckPlugin, () => ({editor: this})],
             [searchPlugin]
         ]
     }
@@ -1022,6 +1025,9 @@ export class Editor {
         if (this.menu.headerView) {
             ;(this.menu.headerView as any).destroy()
         }
+        if (this.mod.grammar) {
+            ;(this.mod.grammar as {close(): void}).close()
+        }
         // For E2EE documents, update the sessionStorage title cache with the
         // current ProseMirror title so the overview shows the correct title
         // immediately, even before the encrypted snapshot has been saved to the
@@ -1231,6 +1237,7 @@ export class Editor {
         new ModComments(this)
         new ModNavigator(this)
         this.mod.navigator.init()
+        new ModGrammar(this)
     }
 
     async activateFidusPlugins(): Promise<void> {

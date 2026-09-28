@@ -106,6 +106,7 @@
         "fix-utf8": "^2.0.1",
         "fwtoolkit": "^0.2.26",
         "jszip": "^3.10.1",
+        "lingotweaker-wasm": "^0.2.2",
         "mathml-to-latex": "^1.4.3",
         "mathml2omml": "^0.5.0",
         "orderedmap": "^2.1.1",

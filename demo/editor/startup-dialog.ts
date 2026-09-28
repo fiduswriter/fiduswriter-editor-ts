@@ -64,6 +64,10 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
                         <input type="checkbox" id="demo-inline-math" />
                         ${gettext("Enable inline math typing ($)")}
                     </label>
+                    <label class="checkable-label">
+                        <input type="checkbox" id="demo-grammar-check" />
+                        ${gettext("Enable continuous spell/grammar checking")}
+                    </label>
                 </div>
 
                 <div class="demo-section">
@@ -129,10 +133,14 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
         const inlineMathInput = overlay.querySelector(
             "#demo-inline-math"
         ) as HTMLInputElement
+        const grammarCheckInput = overlay.querySelector(
+            "#demo-grammar-check"
+        ) as HTMLInputElement
 
         const getPreferences = () => ({
             inline_references: inlineReferencesInput.checked,
-            inline_math: inlineMathInput.checked
+            inline_math: inlineMathInput.checked,
+            grammar_check_continuous: grammarCheckInput.checked
         })
 
         const getUserId = (): number => {

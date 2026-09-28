@@ -1196,6 +1196,51 @@ export const headerbarModel = () => ({
             keys: "Alt-t",
             content: [
                 {
+                    title: gettext("Spell/grammar checker"),
+                    type: "menu",
+                    tooltip: gettext(
+                        "Check spelling and grammar in the document text."
+                    ),
+                    order: 0,
+                    disabled: (editor: Editor) => {
+                        const grammar = editor.mod.grammar
+                        return (
+                            !grammar ||
+                            !grammar.canCheck() ||
+                            !grammar.isSupported(
+                                editor.view.state.doc.attrs.language
+                            )
+                        )
+                    },
+                    content: [
+                        {
+                            title: gettext("Check text"),
+                            type: "action",
+                            tooltip: gettext(
+                                "Check text for grammar and spelling issues."
+                            ),
+                            order: 0,
+                            action: (editor: Editor) => {
+                                editor.mod.grammar?.checkText()
+                            },
+                            disabled: (editor: Editor) => editor.app.isOffline()
+                        },
+                        {
+                            title: gettext("Remove marks"),
+                            type: "action",
+                            tooltip: gettext(
+                                "Remove lines left over in the text from language check."
+                            ),
+                            order: 1,
+                            action: (editor: Editor) => {
+                                editor.mod.grammar?.removeMarks()
+                            },
+                            disabled: (editor: Editor) =>
+                                !editor.mod.grammar?.hasChecked
+                        }
+                    ]
+                },
+                {
                     title: gettext("Word counter"),
                     type: "action",
                     tooltip: gettext("See document statistics."),

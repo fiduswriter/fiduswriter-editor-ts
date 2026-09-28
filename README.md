@@ -25,6 +25,8 @@ clipboard import/export.
 - **Citations** — Citeproc-js based citation rendering with bibliography
   generation
 - **E2EE** — End-to-end encryption with key management and passphrase support
+- **Spell/grammar checker** — Built-in client-side checking (lingotweaker-wasm)
+  with wavy-underline marks and replacement suggestions, manual or continuous
 - **Clipboard** — Paste from Word, LibreOffice, Google Docs with format
   preservation
 - **Tables, figures & equations** — Full editing support for tables, images,

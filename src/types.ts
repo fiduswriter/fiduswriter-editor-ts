@@ -299,6 +299,17 @@ export interface EditorMod {
     navigator?: {
         init(): void
     }
+    grammar?: {
+        hasChecked: boolean
+        continuous: boolean
+        canCheck(): boolean
+        isSupported(language: string): boolean
+        checkText(): void
+        removeMarks(): void
+        onDocChanged(): void
+        onLanguageChange(): void
+        close(): void
+    }
     track?: unknown
     db?: {
         bibDB: {

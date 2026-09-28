@@ -1,0 +1,202 @@
+/**
+ * Main-thread client for the spell/grammar checker engine. Runs the
+ * engine inside a Web Worker (`./worker.js` next to this module, so
+ * bundlers can rewrite the URL) and falls back to running the engine on
+ * the main thread when Workers are unavailable (tests, strict
+ * environments).
+ *
+ * Check requests carry monotonically increasing ids; results for ids
+ * older than the newest request are discarded so a late response from a
+ * superseded check can never overwrite fresher results.
+ */
+
+import type {GrammarMatch} from "./matches.js"
+import type {GrammarLanguage} from "./languages.js"
+
+interface PendingCheck {
+    resolve(matches: GrammarMatch[][]): void
+    reject(error: Error): void
+}
+
+interface WorkerMessage {
+    type: string
+    id?: number
+    lang?: string
+    results?: Array<{index: number; matches: GrammarMatch[]}>
+    message?: string
+}
+
+/**
+ * The subset of `Worker` the client relies on; tests can inject a fake.
+ */
+export interface GrammarWorkerLike {
+    postMessage(message: unknown): void
+    terminate(): void
+    onmessage: ((event: {data: unknown}) => void) | null
+}
+
+export class GrammarClient {
+    private worker: GrammarWorkerLike | null = null
+    private engine: import("lingotweaker-wasm").LtEngine | null = null
+    private nextId = 0
+    private lastCheckId = 0
+    private readonly pending = new Map<number, PendingCheck>()
+    private loadChain: Promise<void> = Promise.resolve()
+    private pendingLoad: {
+        resolve(): void
+        reject(error: Error): void
+    } | null = null
+    private destroyed = false
+
+    loadedLanguage: string | null = null
+
+    constructor(worker?: GrammarWorkerLike | null) {
+        if (worker) {
+            this.worker = worker
+        } else if (typeof Worker !== "undefined") {
+            this.worker = new Worker(
+                new URL("./worker.js", import.meta.url),
+                {type: "module"}
+            ) as GrammarWorkerLike
+        }
+        if (this.worker) {
+            this.worker.onmessage = event =>
+                this.handleMessage(event.data as WorkerMessage)
+        }
+    }
+
+    get hasWorker(): boolean {
+        return this.worker !== null
+    }
+
+    load(language: GrammarLanguage): Promise<void> {
+        this.loadChain = this.loadChain.then(() => this.loadEngine(language))
+        return this.loadChain
+    }
+
+    private loadEngine(language: GrammarLanguage): Promise<void> {
+        if (
+            this.loadedLanguage === language.code &&
+            (this.worker || this.engine)
+        ) {
+            return Promise.resolve()
+        }
+        this.loadedLanguage = null
+        if (this.worker) {
+            return new Promise<void>((resolve, reject) => {
+                this.pendingLoad = {resolve, reject}
+                this.worker!.postMessage({
+                    type: "load",
+                    lang: language.code,
+                    pack: language.pack,
+                    variant: language.variant
+                })
+            })
+        }
+        return this.loadEngineInline(language)
+    }
+
+    private async loadEngineInline(language: GrammarLanguage): Promise<void> {
+        const {default: init, LtEngine} = await import("lingotweaker-wasm")
+        const {fetchPack} = await import("lingotweaker-wasm/pack")
+        await init()
+        let packBytes
+        try {
+            packBytes = await fetchPack(language.pack)
+        } catch (error) {
+            const base = language.pack.split("-")[0]
+            if (base === language.pack) {
+                throw error
+            }
+            packBytes = await fetchPack(base)
+        }
+        const options = JSON.stringify({
+            variant: language.variant || undefined,
+            today: new Date().toISOString().slice(0, 10)
+        })
+        this.engine = new LtEngine(language.code, packBytes, options)
+        this.loadedLanguage = language.code
+    }
+
+    check(texts: string[]): Promise<GrammarMatch[][]> {
+        if (this.destroyed) {
+            return Promise.reject(new Error("client is destroyed"))
+        }
+        const id = ++this.nextId
+        this.lastCheckId = id
+        if (this.worker) {
+            return new Promise<GrammarMatch[][]>((resolve, reject) => {
+                this.pending.set(id, {resolve, reject})
+                this.worker!.postMessage({type: "check", id, texts})
+            })
+        }
+        if (this.engine) {
+            const engine = this.engine
+            const results = texts.map(text => {
+                if (!text || text.trim().length === 0) {
+                    return []
+                }
+                return JSON.parse(engine.check_matches_json(text))
+                    .matches as GrammarMatch[]
+            })
+            return Promise.resolve(results)
+        }
+        return Promise.reject(new Error("engine is not loaded"))
+    }
+
+    destroy(): void {
+        this.destroyed = true
+        this.worker?.terminate()
+        this.worker = null
+        this.engine?.free()
+        this.engine = null
+        this.pending.forEach(({reject}) =>
+            reject(new Error("client is destroyed"))
+        )
+        this.pending.clear()
+        this.pendingLoad?.reject(new Error("client is destroyed"))
+        this.pendingLoad = null
+    }
+
+    private handleMessage(message: WorkerMessage): void {
+        switch (message.type) {
+            case "ready":
+                this.loadedLanguage = message.lang ?? null
+                this.pendingLoad?.resolve()
+                this.pendingLoad = null
+                break
+            case "result": {
+                const id = message.id ?? 0
+                const pendingCheck = this.pending.get(id)
+                if (!pendingCheck) {
+                    break
+                }
+                this.pending.delete(id)
+                if (id < this.lastCheckId) {
+                    // A newer check is on the way; discard the stale result.
+                    pendingCheck.resolve([])
+                } else {
+                    pendingCheck.resolve(
+                        (message.results ?? []).map(part => part.matches)
+                    )
+                }
+                break
+            }
+            case "error": {
+                const error = new Error(
+                    message.message || "spell/grammar engine error"
+                )
+                if (this.pendingLoad) {
+                    this.pendingLoad.reject(error)
+                    this.pendingLoad = null
+                } else {
+                    this.pending.forEach(({reject}) => reject(error))
+                    this.pending.clear()
+                }
+                break
+            }
+            default:
+                break
+        }
+    }
+}

@@ -20,6 +20,7 @@ import {
     commentsPlugin,
     figurePlugin,
     getFootnoteMarkerContents,
+    grammarCheckPlugin,
     linksPlugin,
     marginboxesPlugin,
     searchPlugin,
@@ -87,7 +88,8 @@ export class ModFootnoteEditor {
             [trackPlugin, () => ({editor: this.mod.editor})],
             [marginboxesPlugin, () => ({editor: this.mod.editor})],
             [searchPlugin],
-            [figurePlugin, () => ({editor: this.mod.editor})]
+            [figurePlugin, () => ({editor: this.mod.editor})],
+            [grammarCheckPlugin, () => ({editor: this.mod.editor})]
         ]
     }
 

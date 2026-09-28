@@ -131,7 +131,8 @@ export interface StaticAppConfig {
     }>
     /**
      * Optional user preferences that control inline editing helpers.
-     * Recognized keys include `inline_references` and `inline_math`.
+     * Recognized keys include `inline_references`, `inline_math` and
+     * `grammar_check_continuous`.
      */
     userPreferences?: Record<string, boolean>
 }

@@ -28,6 +28,7 @@ Code in this repository should be limited to:
 - Track changes (`src/track/`).
 - Clipboard handling (`src/clipboard/`).
 - End-to-end encryption (`src/e2ee/`).
+- Spell/grammar checking (`src/grammar/`).
 - Editor tools (`src/tools/`).
 
 Do **not** put in this repository:
@@ -66,6 +67,7 @@ The following UI patterns are currently here but may be generic enough for
 │   ├── document_template/# Document template handling
 │   ├── e2ee/             # End-to-end encryption
 │   ├── footnotes/        # Footnote editor
+│   ├── grammar/          # Built-in spell/grammar checker
 │   ├── keymap.js         # Editor keymap
 │   ├── marginboxes/      # Margin boxes
 │   ├── menus/            # Menus and toolbar
@@ -102,6 +104,10 @@ npm run typecheck
 - This package depends on `@fiduswriter/document` for the document model and
   import/export helpers. It no longer depends on `@fiduswriter/common` — the
   `App`/`User` types and `FeedbackTab` have been removed or inlined.
+- Spell/grammar checking is built in (`src/grammar/`, `editor.mod.grammar`)
+  and runs the `lingotweaker-wasm` engine in a Web Worker with per-language
+  data packs fetched from the release CDN. The user preference
+  `grammar_check_continuous` enables continuous checking.
 - The `bibliojson` dependency used indirectly via `@fiduswriter/document` and
   `@fiduswriter/bibliography-manager` was previously published as
   `biblatex-csl-converter`. Its JSON format is referred to as the BiblioJSON
