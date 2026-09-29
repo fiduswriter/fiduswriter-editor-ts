@@ -20,6 +20,8 @@ import {ModGrammar} from "../src/grammar/checker.js"
 const encoder = new TextEncoder()
 
 const PACK_BASE_URL = "https://static.example/lingotweaker-packs/"
+const PACK_EN_URL = `${PACK_BASE_URL}en.pack.gz`
+const PACK_PT_URL = `${PACK_BASE_URL}pt.pack.gz`
 const REAL_FETCH = globalThis.fetch
 
 const matchAt = (text: string, needle: string, categoryId: string): GrammarMatch => {
@@ -246,14 +248,13 @@ describe("GrammarClient", () => {
                 pack: "en",
                 variant: "en-GB"
             },
-            PACK_BASE_URL
+            PACK_EN_URL
         )
         await flush()
         expect(worker.messages[0]).toMatchObject({
             type: "load",
             lang: "en-US",
-            pack: "en",
-            packBaseUrl: PACK_BASE_URL,
+            packUrl: PACK_EN_URL,
             variant: "en-GB"
         })
         worker.send({type: "ready", lang: "en-US"})
@@ -313,8 +314,8 @@ describe("GrammarClient", () => {
             } as unknown as Response
         }) as unknown as typeof fetch
         try {
-            await client.load({code: "en-US", pack: "en"}, PACK_BASE_URL)
-            expect(fetchedUrl).toBe(`${PACK_BASE_URL}en.pack.gz`)
+            await client.load({code: "en-US", pack: "en"}, PACK_EN_URL)
+            expect(fetchedUrl).toBe(PACK_EN_URL)
             expect(client.loadedLanguage).toBe("en-US")
             const results = await client.check(["teh report was very unique"])
             expect(results[0].map(match => match.category_id).sort()).toEqual([
@@ -334,7 +335,7 @@ describe("GrammarClient", () => {
         }) as unknown as typeof fetch
         try {
             await expect(
-                client.load({code: "en-US", pack: "en"}, PACK_BASE_URL)
+                client.load({code: "en-US", pack: "en"}, PACK_EN_URL)
             ).rejects.toThrow("network down")
         } finally {
             globalThis.fetch = REAL_FETCH
@@ -347,7 +348,7 @@ describe("GrammarClient", () => {
         const client = new GrammarClient(worker as never)
         const loadPromise = client.load(
             {code: "en-US", pack: "en"},
-            PACK_BASE_URL
+            PACK_EN_URL
         )
         await flush()
         worker.send({type: "error", message: "cannot load pack: HTTP 404"})
@@ -415,12 +416,11 @@ describe("grammar worker", () => {
         sendMessage({
             type: "load",
             lang: "en-US",
-            pack: "en",
-            packBaseUrl: PACK_BASE_URL,
+            packUrl: PACK_EN_URL,
             ...overrides
         })
 
-    test("fetches the pack from <packBaseUrl><pack>.pack.gz and reports ready", async () => {
+    test("fetches the pack from the packUrl and reports ready", async () => {
         const fetchedUrl = stubFetch({
             ok: true,
             status: 200,
@@ -429,7 +429,7 @@ describe("grammar worker", () => {
         sendLoad()
         await flush()
         await flush()
-        expect(fetchedUrl()).toBe(`${PACK_BASE_URL}en.pack.gz`)
+        expect(fetchedUrl()).toBe(PACK_EN_URL)
         // The fetched bytes are handed to decompressPack, which gunzips
         // them (passthrough in the mock) before the engine is constructed.
         const decompressCalls = (
@@ -455,7 +455,7 @@ describe("grammar worker", () => {
         sendLoad()
         await flush()
         await flush()
-        expect(fetchedUrl()).toBe(`${PACK_BASE_URL}en.pack.gz`)
+        expect(fetchedUrl()).toBe(PACK_EN_URL)
         // Servers that set Content-Encoding: gzip deliver the already
         // inflated pack — the worker must skip gunzipping in that case.
         const decompressCalls = (
@@ -465,12 +465,12 @@ describe("grammar worker", () => {
         expect(posted).toContainEqual({type: "ready", lang: "en-US"})
     })
 
-    test("uses the pack named by the language table for variant codes", async () => {
+    test("fetches the pack URL it is given for variant codes", async () => {
         const fetchedUrl = stubFetch({ok: true, status: 200, bytes: [1]})
-        sendLoad({lang: "pt-BR", pack: "pt", variant: "pt-BR"})
+        sendLoad({lang: "pt-BR", packUrl: PACK_PT_URL, variant: "pt-BR"})
         await flush()
         await flush()
-        expect(fetchedUrl()).toBe(`${PACK_BASE_URL}pt.pack.gz`)
+        expect(fetchedUrl()).toBe(PACK_PT_URL)
         expect(posted).toContainEqual({type: "ready", lang: "pt-BR"})
     })
 
@@ -482,9 +482,7 @@ describe("grammar worker", () => {
         expect(posted).toHaveLength(1)
         expect(posted[0].type).toBe("error")
         expect(String(posted[0].message)).toContain("HTTP 404")
-        expect(String(posted[0].message)).toContain(
-            `${PACK_BASE_URL}en.pack.gz`
-        )
+        expect(String(posted[0].message)).toContain(PACK_EN_URL)
     })
 })
 
@@ -674,11 +672,11 @@ describe("ModGrammar continuous checking", () => {
     })
 })
 
-describe("ModGrammar pack base URL", () => {
-    test("defaults to staticUrl('lingotweaker-packs/')", () => {
+describe("ModGrammar pack URL", () => {
+    test("defaults to staticUrl('lingotweaker-packs/<pack>.pack.gz')", () => {
         const editor = makeFakeEditor({})
         const grammar = new ModGrammar(editor)
-        expect(grammar.packBaseUrl).toBe("lingotweaker-packs/")
+        expect(grammar.packUrl("en")).toBe("lingotweaker-packs/en.pack.gz")
         grammar.close()
     })
 
@@ -687,11 +685,11 @@ describe("ModGrammar pack base URL", () => {
         editor.app.config.grammar_check_pack_base_url =
             "https://cdn.example/packs/"
         const grammar = new ModGrammar(editor)
-        expect(grammar.packBaseUrl).toBe("https://cdn.example/packs/")
+        expect(grammar.packUrl("en")).toBe("https://cdn.example/packs/en.pack.gz")
         grammar.close()
     })
 
-    test("ensureLoaded threads the pack base URL to the client", async () => {
+    test("ensureLoaded resolves the pack URL for the client", async () => {
         const editor = makeFakeEditor({})
         const grammar = new ModGrammar(editor)
         const load = jest
@@ -700,7 +698,7 @@ describe("ModGrammar pack base URL", () => {
         await grammar.ensureLoaded("en-US")
         expect(load).toHaveBeenCalledWith(
             {code: "en-US", pack: "en"},
-            "lingotweaker-packs/"
+            "lingotweaker-packs/en.pack.gz"
         )
         grammar.close()
     })

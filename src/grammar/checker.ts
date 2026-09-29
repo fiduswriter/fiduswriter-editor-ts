@@ -120,21 +120,23 @@ export class ModGrammar {
     }
 
     /**
-     * Base URL (ending in "/") the engine fetches gzipped language packs
-     * from. Hosts install the `lingotweaker-data-<pack>` npm packages they
-     * want to support and serve the contents of their `packs/` directories
-     * under their static root; `config.grammar_check_pack_base_url`
-     * overrides that location.
+     * URL of the gzipped data pack `pack`. Hosts install the
+     * `lingotweaker-data-<pack>` npm packages they want to support and
+     * serve the contents of their `packs/` directories under their static
+     * root; `config.grammar_check_pack_base_url` (a URL ending in "/")
+     * overrides that location. The full file path goes through
+     * `staticUrl` so cache-busting query strings stay at the end of the
+     * URL (e.g. `/static/lingotweaker-packs/en.pack.gz?v=1`).
      */
-    get packBaseUrl(): string {
+    packUrl(pack: string): string {
         const config = this.editor.app.config as
             | {grammar_check_pack_base_url?: unknown}
             | undefined
         const baseUrl = config?.grammar_check_pack_base_url
         if (typeof baseUrl === "string" && baseUrl) {
-            return baseUrl
+            return `${baseUrl}${pack}.pack.gz`
         }
-        return staticUrl("lingotweaker-packs/")
+        return staticUrl(`lingotweaker-packs/${pack}.pack.gz`)
     }
 
     /** Load the engine for `language` if it is not loaded already. */
@@ -143,7 +145,10 @@ export class ModGrammar {
         if (!languageDefinition) {
             return Promise.reject(new Error("unsupported language"))
         }
-        return this.client.load(languageDefinition, this.packBaseUrl)
+        return this.client.load(
+            languageDefinition,
+            this.packUrl(languageDefinition.pack)
+        )
     }
 
     checkText(): void {

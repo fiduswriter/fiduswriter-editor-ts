@@ -5,7 +5,7 @@
  * the LingoTweaker demo worker.
  *
  * Message protocol:
- * in:  {type: "load", lang, pack, packBaseUrl, variant?, picky?}
+ * in:  {type: "load", lang, packUrl, variant?, picky?}
  * in:  {type: "check", id, texts: string[]}
  * out: {type: "ready", lang}
  * out: {type: "error", message}
@@ -20,8 +20,7 @@ import type {GrammarMatch} from "./matches.js"
 interface LoadMessage {
     type: "load"
     lang: string
-    pack: string
-    packBaseUrl: string
+    packUrl: string
     variant?: string
     picky?: boolean
 }
@@ -64,20 +63,16 @@ function ensureInit(): Promise<unknown> {
 }
 
 /**
- * Fetch and inflate the gzipped pack for `pack` from the host's static
- * tree. Hosts install the `lingotweaker-data-<pack>` npm packages for the
- * languages they support and serve the contents of their `packs/`
- * directories at `packBaseUrl` (a URL ending in "/"), so the pack for
- * `pack` is available at `<packBaseUrl><pack>.pack.gz`.
+ * Fetch and inflate the gzipped pack at `packUrl`. Hosts install the
+ * `lingotweaker-data-<pack>` npm packages for the languages they support
+ * and serve the contents of their `packs/` directories; the main thread
+ * resolves the pack URL (through its `staticUrl`, which may append a
+ * cache-busting query).
  */
-async function loadPack(
-    pack: string,
-    packBaseUrl: string
-): Promise<Uint8Array> {
-    const url = `${packBaseUrl}${pack}.pack.gz`
-    const response = await fetch(url)
+async function loadPack(packUrl: string): Promise<Uint8Array> {
+    const response = await fetch(packUrl)
     if (!response.ok) {
-        throw new Error(`cannot load ${url}: HTTP ${response.status}`)
+        throw new Error(`cannot load ${packUrl}: HTTP ${response.status}`)
     }
     const bytes = new Uint8Array(await response.arrayBuffer())
     // Some servers transparently gunzip .gz responses (Content-Encoding);
@@ -93,7 +88,7 @@ async function load(message: LoadMessage): Promise<void> {
     engine = null
     textCache.clear()
     await ensureInit()
-    const packBytes = await loadPack(message.pack, message.packBaseUrl)
+    const packBytes = await loadPack(message.packUrl)
     if (generation !== loadGeneration) {
         return
     }

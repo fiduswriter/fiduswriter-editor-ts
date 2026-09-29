@@ -70,20 +70,19 @@ export class GrammarClient {
     }
 
     /**
-     * Load the engine for `language`. `packBaseUrl` is the URL (ending in
-     * "/") under which the host serves the gzipped language packs as
-     * `<packBaseUrl><pack>.pack.gz`.
+     * Load the engine for `language`. `packUrl` is the full URL of the
+     * gzipped data pack to fetch.
      */
-    load(language: GrammarLanguage, packBaseUrl: string): Promise<void> {
+    load(language: GrammarLanguage, packUrl: string): Promise<void> {
         this.loadChain = this.loadChain.then(() =>
-            this.loadEngine(language, packBaseUrl)
+            this.loadEngine(language, packUrl)
         )
         return this.loadChain
     }
 
     private loadEngine(
         language: GrammarLanguage,
-        packBaseUrl: string
+        packUrl: string
     ): Promise<void> {
         if (
             this.loadedLanguage === language.code &&
@@ -98,23 +97,21 @@ export class GrammarClient {
                 this.worker!.postMessage({
                     type: "load",
                     lang: language.code,
-                    pack: language.pack,
-                    packBaseUrl,
+                    packUrl,
                     variant: language.variant
                 })
             })
         }
-        return this.loadEngineInline(language, packBaseUrl)
+        return this.loadEngineInline(language, packUrl)
     }
 
     private async loadEngineInline(
         language: GrammarLanguage,
-        packBaseUrl: string
+        packUrl: string
     ): Promise<void> {
         const {default: init, LtEngine} = await import("lingotweaker-wasm")
         const {decompressPack} = await import("lingotweaker-wasm/pack")
         await init()
-        const packUrl = `${packBaseUrl}${language.pack}.pack.gz`
         const response = await fetch(packUrl)
         if (!response.ok) {
             throw new Error(`cannot load ${packUrl}: HTTP ${response.status}`)
