@@ -187,6 +187,14 @@ export const grammarCheckPlugin = function (options: GrammarCheckOptions) {
             }
         },
         view(_view: EditorView) {
+            // The editor starts with an empty state and the document
+            // arrives later as a brand-new state (see collab/doc.ts), so
+            // `update` below never fires for the initial document — only
+            // for later edits. The plugin view is created exactly when
+            // the document-carrying state is installed, so kick the
+            // checker here: with continuous checking on, the first check
+            // runs without any user edit.
+            options.editor.mod.grammar?.onDocChanged()
             return {
                 update: (view, prevState) => {
                     if (prevState.doc !== view.state.doc) {

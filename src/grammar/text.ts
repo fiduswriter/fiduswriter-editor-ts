@@ -41,7 +41,12 @@ export function getText({
     let text = ""
     nodes.forEach(node => {
         if (node.marks?.find(mark => mark.type.name === "deletion")) {
+            // Tracked deletion: the text is not sent to the engine, but
+            // matches spanning the gap would map onto the deleted
+            // passage in the document, so mark the boundary as
+            // untranslatable.
             posMap.push([pos, node.nodeSize])
+            badPos.push([pos, pos])
         } else if (node.type.name === "text") {
             pos += (node.text ?? "").length
             text += node.text

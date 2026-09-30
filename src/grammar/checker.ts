@@ -33,6 +33,7 @@ import {WRITE_ROLES} from "../types.js"
 import {GrammarClient} from "./client.js"
 import {grammarLanguage, GRAMMAR_LANGUAGE_CODES} from "./languages.js"
 import {
+    byteToTextRanges,
     filterBadPos,
     filterPMMatches,
     translateMatches,
@@ -373,10 +374,15 @@ export class ModGrammar {
                 }).text
                 if (source.text === updatedText) {
                     // No changes have been made while the check took place.
-                    source.matches = matches || []
+                    // The engine reports UTF-8 byte offsets; convert once
+                    // so badPos filtering and posMap translation work in
+                    // the same (UTF-16 text) unit.
+                    source.matches = byteToTextRanges(
+                        matches || [],
+                        source.text ?? ""
+                    )
                     let pmMatches: GrammarMatchPM[] = translateMatches(
                         filterBadPos(source.badPos, source.matches),
-                        source.text ?? "",
                         source.getStartPos(),
                         source.posMap
                     )

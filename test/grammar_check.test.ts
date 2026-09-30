@@ -7,6 +7,7 @@ import {
     grammarLanguage
 } from "../src/grammar/languages.js"
 import {
+    byteToTextRanges,
     filterBadPos,
     matchClass,
     plainMessage,
@@ -27,11 +28,10 @@ const REAL_FETCH = globalThis.fetch
 
 const matchAt = (text: string, needle: string, categoryId: string): GrammarMatch => {
     const index = text.indexOf(needle)
-    const start = encoder.encode(text.slice(0, index)).length
     return {
         rule_id: `${categoryId}_RULE`,
         message: `issue in ${needle}`,
-        range: {start, end: start + encoder.encode(needle).length},
+        range: {start: index, end: index + needle.length},
         suggestions: [],
         category_id: categoryId
     }
@@ -78,10 +78,10 @@ describe("match classification", () => {
 })
 
 describe("translateMatches", () => {
-    test("translates byte offsets through text and posMap", () => {
+    test("translates text offsets through the posMap", () => {
         const text = "héllo wörld"
         const match = matchAt(text, "wörld", "GRAMMAR")
-        const [translated] = translateMatches([match], text, 10, [])
+        const [translated] = translateMatches([match], 10, [])
         expect(translated.from).toBe(10 + 6)
         expect(translated.to).toBe(10 + 11)
     })
@@ -91,7 +91,7 @@ describe("translateMatches", () => {
         const match = matchAt(text, "two", "TYPOS")
         // A 5-PM-unit non-text node sits at text position 3
         const posMap: Array<[number, number]> = [[3, 5]]
-        const [translated] = translateMatches([match], text, 0, posMap)
+        const [translated] = translateMatches([match], 0, posMap)
         expect(translated.from).toBe(9)
         expect(translated.to).toBe(12)
     })
@@ -100,7 +100,7 @@ describe("translateMatches", () => {
         const text = "ab cd"
         const match = matchAt(text, "ab", "TYPOS")
         const posMap: Array<[number, number]> = [[2, 5]]
-        const [translated] = translateMatches([match], text, 0, posMap)
+        const [translated] = translateMatches([match], 0, posMap)
         expect(translated.from).toBe(0)
         // The end lands exactly on the gap; assoc -1 keeps it before the gap
         expect(translated.to).toBe(2)
@@ -116,6 +116,64 @@ describe("filterBadPos", () => {
         const kept = filterBadPos(badPos, [inside, outside])
         expect(kept).toHaveLength(1)
         expect(kept[0].rule_id).toBe(outside.rule_id)
+    })
+
+    test("drops matches inside citations with non-ASCII substituted text", () => {
+        // Regression: the engine reports UTF-8 byte offsets; they must be
+        // converted to text offsets before badPos filtering, or ranges
+        // inside substituted citation text miscompare against the
+        // (text-unit) badPos entries whenever multi-byte characters
+        // shifted the byte offsets.
+        const text = "see (Do\u00f1e, 2020) end"
+        const badPos: Array<[number, number]> = [
+            [text.indexOf("("), text.indexOf(")") + 1]
+        ]
+        const encoder = new TextEncoder()
+        const needle = "2020"
+        const byteStart = encoder.encode(
+            text.slice(0, text.indexOf(needle))
+        ).length
+        const engine = [
+            {
+                rule_id: "MORFOLOGIK",
+                message: "issue",
+                range: {
+                    start: byteStart,
+                    end: byteStart + encoder.encode(needle).length
+                },
+                suggestions: []
+            }
+        ]
+        const converted = byteToTextRanges(engine, text)
+        // The converted range is the text range of "2020" — inside the
+        // citation's badPos entry, so it must be dropped.
+        expect(converted[0].range).toEqual({
+            start: text.indexOf(needle),
+            end: text.indexOf(needle) + needle.length
+        })
+        expect(filterBadPos(badPos, converted)).toHaveLength(0)
+        // Without conversion (bytes vs text units) the range would start
+        // past its text position — the comparison must not rely on that.
+        expect(filterBadPos(badPos, engine)).toHaveLength(0)
+    })
+})
+
+describe("byteToTextRanges", () => {
+    test("converts UTF-8 byte offsets to UTF-16 text offsets", () => {
+        const text = "caf\u00e9 X"
+        // "X" is byte 6 (é = 2 bytes) but text index 5.
+        const converted = byteToTextRanges(
+            [
+                {
+                    rule_id: "R",
+                    message: "m",
+                    range: {start: 6, end: 7},
+                    suggestions: []
+                }
+            ],
+            text
+        )
+        expect(converted[0].range).toEqual({start: 5, end: 6})
     })
 })
 
@@ -177,10 +235,12 @@ describe("getText", () => {
         // The paragraph contributes leading and trailing newlines, the
         // citation is substituted, the deletion is excluded.
         expect(text).toBe("\nHello (Doe, 2020) world\n")
-        expect(badPos).toHaveLength(1)
+        // The citation range plus a zero-width entry at the deletion.
+        expect(badPos).toHaveLength(2)
         const citationStart = text.indexOf("(Doe, 2020)")
         expect(badPos[0][0]).toBe(citationStart)
         expect(badPos[0][1]).toBe(citationStart + "(Doe, 2020)".length)
+        expect(badPos[1][0]).toBe(badPos[1][1])
         // The citation node and the deleted text are position gaps
         expect(posMap.length).toBe(2)
     })
@@ -204,7 +264,6 @@ describe("getText", () => {
         expect(filterBadPos(badPos, [engineMatch])).toHaveLength(1)
         const [translated] = translateMatches(
             filterBadPos(badPos, [engineMatch]),
-            text,
             0,
             posMap
         )
@@ -212,6 +271,46 @@ describe("getText", () => {
         // node (1) + " "
         expect(translated.from).toBe(1 + "Hello ".length + 1 + 1)
         expect(translated.to).toBe(translated.from + "world".length)
+    })
+
+    test("excludes tracked deletions and marks the boundary untranslatable", () => {
+        const paragraph = blockNode("paragraph", [
+            textNode("to the "),
+            textNode("rather", [{type: {name: "deletion"}}]),
+            textNode(" dramatic")
+        ])
+        const posMap: Array<[number, number]> = [],
+            badPos: Array<[number, number]> = []
+        const {text} = getText({
+            nodes: [paragraph],
+            citationTexts: [],
+            pos: 0,
+            posMap,
+            badPos
+        })
+        // The deleted word is not sent to the engine...
+        expect(text).not.toContain("rather")
+        // ...a posMap gap accounts for its PM size...
+        const gapPos = text.indexOf(" dramatic")
+        expect(posMap).toContainEqual([gapPos, 6])
+        // ...and a zero-width badPos entry drops matches spanning the gap
+        // (e.g. the double space the extraction leaves behind).
+        expect(badPos).toContainEqual([gapPos, gapPos])
+        const spanning = {
+            rule_id: "R",
+            message: "m",
+            range: {start: gapPos - 1, end: gapPos + 1},
+            suggestions: []
+        }
+        const before = {
+            rule_id: "R",
+            message: "m",
+            range: {start: text.indexOf("to the"), end: text.indexOf("to the") + 6},
+            suggestions: []
+        }
+        const kept = filterBadPos(badPos, [spanning, before])
+        expect(kept).toHaveLength(1)
+        expect(kept[0]).toBe(before)
     })
 })
 
