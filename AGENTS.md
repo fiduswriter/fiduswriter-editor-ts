@@ -112,7 +112,28 @@ npm run typecheck
   support and serve the contents of their `packs/` directories under the
   static root. The app config key `grammar_check_pack_base_url` (a URL
   ending in `/`) overrides that location. The user preference
-  `grammar_check_continuous` enables continuous checking.
+  `grammar_check_continuous` sets the default for the per-document
+  "Continuous checking" toggle (Tools → Spell/grammar checker); when on,
+  the engine pack loads right after the document and the first check runs
+  without user intervention. Fetched packs are persisted client-side
+  (`src/grammar/pack_cache.ts`, Cache Storage — usable from the worker):
+  keyed by pack URL, with a freshness TTL taken from the response's HTTP
+  cache headers (`max-age` capped at a year, `immutable` and `no-store`
+  honored, 7-day default without headers) and a small LRU cap, so repeat
+  loads are fast even on hosts with weak cache headers while
+  versioned-URL hosts keep their normal upgrade invalidation.
+- esbuild does not bundle `new Worker(new URL("./worker.js", import.meta.url))`
+  worker spawns or `new URL('lt_wasm_bg.wasm', import.meta.url)` asset
+  references — bundlers that build on esbuild (the demo's `build-demo.js`,
+  fiduswriter-nextcloud, fiduswriter-wordpress) must emit the compiled
+  `dist/grammar/worker.js` as their own entry at the URL the client resolves
+  against its chunks and copy `lt_wasm_bg.wasm` next to those chunks
+  (rspack, used by the main app, handles both automatically). The same
+  applies to the bibliography manager's import worker. All three esbuild
+  builds end with a guard that scans the emitted chunks and fails the build
+  when a surviving `new Worker(new URL(...))` reference does not resolve to
+  an emitted file — without it the browser 404s the worker and the feature
+  hangs with no console error.
 - The `bibliojson` dependency used indirectly via `@fiduswriter/document` and
   `@fiduswriter/bibliography-manager` was previously published as
   `biblatex-csl-converter`. Its JSON format is referred to as the BiblioJSON

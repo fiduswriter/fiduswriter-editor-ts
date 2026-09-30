@@ -16,6 +16,7 @@ import init, {LtEngine} from "lingotweaker-wasm"
 import {decompressPack} from "lingotweaker-wasm/pack"
 
 import type {GrammarMatch} from "./matches.js"
+import {fetchPackCached} from "./pack_cache.js"
 
 interface LoadMessage {
     type: "load"
@@ -63,18 +64,15 @@ function ensureInit(): Promise<unknown> {
 }
 
 /**
- * Fetch and inflate the gzipped pack at `packUrl`. Hosts install the
+ * Fetch and inflate the gzipped pack at `packUrl` (served from the
+ * persistent pack cache when a fresh entry exists). Hosts install the
  * `lingotweaker-data-<pack>` npm packages for the languages they support
  * and serve the contents of their `packs/` directories; the main thread
  * resolves the pack URL (through its `staticUrl`, which may append a
  * cache-busting query).
  */
 async function loadPack(packUrl: string): Promise<Uint8Array> {
-    const response = await fetch(packUrl)
-    if (!response.ok) {
-        throw new Error(`cannot load ${packUrl}: HTTP ${response.status}`)
-    }
-    const bytes = new Uint8Array(await response.arrayBuffer())
+    const bytes = await fetchPackCached(packUrl)
     // Some servers transparently gunzip .gz responses (Content-Encoding);
     // only inflate when the gzip magic bytes are actually present.
     if (bytes[0] === 0x1f && bytes[1] === 0x8b) {

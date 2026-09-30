@@ -305,6 +305,8 @@ export interface EditorMod {
         canCheck(): boolean
         isSupported(language: string): boolean
         checkText(): void
+        startCheck(): void
+        setContinuous(on: boolean): void
         removeMarks(): void
         onDocChanged(): void
         onLanguageChange(): void

@@ -87,6 +87,18 @@ cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/css/libs/"* "$BUILD_
 mkdir -p "$BUILD_DIR/static/zip"
 cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/zip/"* "$BUILD_DIR/static/zip/"
 
+# Copy the spell/grammar checker's language packs (lingotweaker-data-* npm
+# packages). The editor fetches them at
+# staticUrl("lingotweaker-packs/<pack>.pack.gz"), which the demo maps to
+# static/lingotweaker-packs/<pack>.pack.gz (same as serve-demo.js).
+mkdir -p "$BUILD_DIR/static/lingotweaker-packs"
+for packs_dir in "$ROOT"/node_modules/lingotweaker-data-*/packs/; do
+    if [ -d "$packs_dir" ]; then
+        cp "$packs_dir"*.pack.gz "$BUILD_DIR/static/lingotweaker-packs/"
+    fi
+done
+echo "Copied $(ls "$BUILD_DIR/static/lingotweaker-packs/" | wc -l) language packs"
+
 # Copy localization catalogs used by the startup dialog and gettext fallback.
 mkdir -p "$BUILD_DIR/locale"
 cp -r "$ROOT/locale/"* "$BUILD_DIR/locale/"

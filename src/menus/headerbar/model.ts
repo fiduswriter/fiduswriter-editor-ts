@@ -1226,12 +1226,38 @@ export const headerbarModel = () => ({
                             disabled: (editor: Editor) => editor.app.isOffline()
                         },
                         {
+                            title: gettext("Continuous checking"),
+                            type: "setting",
+                            tooltip: gettext(
+                                "Check spelling and grammar automatically as you type."
+                            ),
+                            order: 1,
+                            action: (editor: Editor) => {
+                                const grammar = editor.mod.grammar
+                                if (grammar) {
+                                    grammar.setContinuous(!grammar.continuous)
+                                }
+                            },
+                            selected: (editor: Editor) =>
+                                editor.mod.grammar?.continuous === true,
+                            disabled: (editor: Editor) => {
+                                const grammar = editor.mod.grammar
+                                return (
+                                    editor.app.isOffline() ||
+                                    !grammar ||
+                                    !grammar.isSupported(
+                                        editor.view.state.doc.attrs.language
+                                    )
+                                )
+                            }
+                        },
+                        {
                             title: gettext("Remove marks"),
                             type: "action",
                             tooltip: gettext(
                                 "Remove lines left over in the text from language check."
                             ),
-                            order: 1,
+                            order: 2,
                             action: (editor: Editor) => {
                                 editor.mod.grammar?.removeMarks()
                             },

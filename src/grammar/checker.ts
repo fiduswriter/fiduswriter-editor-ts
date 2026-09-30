@@ -4,10 +4,13 @@
  *
  * - Manual checking via "Check text" in the Tools menu, with progress
  *   feedback like the old plugin.
- * - Optional continuous checking (user preference
- *   `grammar_check_continuous`): every document change schedules a
- *   debounced full-document check; decorations are cleared on change and
- *   reappear when results come back.
+ * - Continuous checking ("Continuous checking" in the Tools → Spell/grammar
+ *   checker submenu): per-document toggle, initialized from the user
+ *   preference `grammar_check_continuous` when the document is opened.
+ *   When on, the engine pack loads right away and the first check runs
+ *   without user intervention; every document change then schedules a
+ *   debounced full-document check and decorations reappear when results
+ *   come back.
  * - The engine is loaded lazily per document language and runs in a Web
  *   Worker (see `client.ts`/`worker.ts`).
  */
@@ -52,6 +55,15 @@ export class ModGrammar {
     checkTimer: ReturnType<typeof setTimeout> | null
     /** Monotonically increased per run; stale async results are discarded. */
     runId: number
+    /** Whether an engine load triggered by startCheck is in flight. */
+    engineLoading: boolean
+    /**
+     * Whether this document is continuously checked. Initialized from the
+     * user preference `grammar_check_continuous` when the document is
+     * opened; the Tools → Spell/grammar checker menu toggles it per
+     * document.
+     */
+    continuous: boolean
 
     constructor(editor: Editor) {
         editor.mod.grammar = this
@@ -62,14 +74,17 @@ export class ModGrammar {
         this.sources = false
         this.checkTimer = null
         this.runId = 0
+        this.engineLoading = false
+        this.continuous =
+            editor.app.config?.user?.preferences?.grammar_check_continuous ===
+            true
         this.injectStyles()
-    }
-
-    get continuous(): boolean {
-        return (
-            this.editor.app.config?.user?.preferences
-                ?.grammar_check_continuous === true
-        )
+        if (this.continuous) {
+            // Run as soon as possible after the document has loaded: the
+            // engine pack downloads in the background while the user
+            // starts editing, then the first check runs on its own.
+            this.startCheck()
+        }
     }
 
     wavyUnderlineStyle(color: string): string {
@@ -164,12 +179,13 @@ export class ModGrammar {
         this.removeMarks()
         this.ensureLoaded(language)
             .then(() => {
+                const runId = ++this.runId
+                this.client.nextEpoch()
                 if (!this.sources) {
                     this.sources = initSources(this.editor)
                 }
                 const sources = this.sources.slice()
                 let completed = 0
-                const runId = ++this.runId
                 const updateProgress = () => {
                     completed++
                     const percentage = Math.round(
@@ -217,10 +233,70 @@ export class ModGrammar {
             this.sources = initSources(this.editor)
         }
         const runId = ++this.runId
+        this.client.nextEpoch()
         const sources = this.sources.slice()
         return Promise.all(
             sources.map(source => this.proofread(source, runId))
         ).then(() => undefined)
+    }
+
+    /**
+     * Load the engine (if needed) and run a full check. Used when
+     * continuous checking starts — after the document has loaded, or when
+     * the user turns the per-document setting on — so no further user
+     * intervention is required. No-op while a load is already in flight
+     * or the document language is not (yet) checkable.
+     */
+    startCheck(): void {
+        if (this.engineLoading) {
+            return
+        }
+        if (!this.canCheck()) {
+            return
+        }
+        const language = this.editor.view.state.doc.attrs.language
+        if (!this.isSupported(language)) {
+            return
+        }
+        this.engineLoading = true
+        this.ensureLoaded(language)
+            .then(() => {
+                this.engineLoading = false
+                return this.runCheck(true)
+            })
+            .catch(() => {
+                this.engineLoading = false
+                addAlert(
+                    "error",
+                    gettext(
+                        "The language pack for the document language could not be loaded."
+                    )
+                )
+            })
+    }
+
+    /**
+     * Turn continuous checking on or off for this document (the Tools →
+     * Spell/grammar checker menu entry). The user preference only sets
+     * the initial value when the document is opened.
+     */
+    setContinuous(on: boolean): void {
+        if (this.continuous === on) {
+            return
+        }
+        this.continuous = on
+        if (on) {
+            this.startCheck()
+        } else {
+            if (this.checkTimer) {
+                clearTimeout(this.checkTimer)
+                this.checkTimer = null
+            }
+            // Invalidate results still in flight and clear the marks.
+            this.runId++
+            this.client.nextEpoch()
+            this.removeMarks()
+        }
     }
 
     proofread(source: GrammarSource, runId: number): Promise<void> {
@@ -281,9 +357,9 @@ export class ModGrammar {
                     return {matches: source.matches ?? []}
                 } else {
                     source.text = updatedText
-                    return this.client.check([source.text]).then(results => ({
-                        matches: results[0] ?? []
-                    }))
+                    return this.client
+                        .check([source.text], runId)
+                        .then(results => ({matches: results[0] ?? []}))
                 }
             })
             .then(({matches}) => {
@@ -378,6 +454,12 @@ export class ModGrammar {
 
     /** Called by the grammar check plugins on every document change. */
     onDocChanged(): void {
+        if (this.continuous && !this.client.loadedLanguage) {
+            // The document (and thus its language) may only have become
+            // available after this module was constructed — the editor is
+            // built before the initial document content is applied.
+            this.startCheck()
+        }
         this.scheduleCheck()
     }
 
@@ -394,6 +476,8 @@ export class ModGrammar {
         this.runId++
         this.removeMarks()
         if (this.continuous) {
+            // Load the engine for the new language, then keep checking.
+            this.startCheck()
             this.scheduleCheck()
         }
     }

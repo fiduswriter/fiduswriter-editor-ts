@@ -5,17 +5,21 @@
  * the main thread when Workers are unavailable (tests, strict
  * environments).
  *
- * Check requests carry monotonically increasing ids; results for ids
- * older than the newest request are discarded so a late response from a
- * superseded check can never overwrite fresher results.
+ * Check requests carry monotonically increasing ids and an epoch. Results
+ * for ids from an older epoch are discarded (resolved empty) so a late
+ * response from a superseded check run can never overwrite fresher
+ * results — while concurrent checks within one epoch (one per text
+ * source) all resolve normally.
  */
 
 import type {GrammarMatch} from "./matches.js"
 import type {GrammarLanguage} from "./languages.js"
+import {fetchPackCached} from "./pack_cache.js"
 
 interface PendingCheck {
     resolve(matches: GrammarMatch[][]): void
     reject(error: Error): void
+    epoch: number
 }
 
 interface WorkerMessage {
@@ -39,7 +43,7 @@ export class GrammarClient {
     private worker: GrammarWorkerLike | null = null
     private engine: import("lingotweaker-wasm").LtEngine | null = null
     private nextId = 0
-    private lastCheckId = 0
+    private epoch = 0
     private readonly pending = new Map<number, PendingCheck>()
     private loadChain: Promise<void> = Promise.resolve()
     private pendingLoad: {
@@ -112,11 +116,7 @@ export class GrammarClient {
         const {default: init, LtEngine} = await import("lingotweaker-wasm")
         const {decompressPack} = await import("lingotweaker-wasm/pack")
         await init()
-        const response = await fetch(packUrl)
-        if (!response.ok) {
-            throw new Error(`cannot load ${packUrl}: HTTP ${response.status}`)
-        }
-        const bytes = new Uint8Array(await response.arrayBuffer())
+        const bytes = await fetchPackCached(packUrl)
         // Some servers transparently gunzip .gz responses (Content-Encoding);
         // only inflate when the gzip magic bytes are actually present.
         const packBytes =
@@ -131,15 +131,22 @@ export class GrammarClient {
         this.loadedLanguage = language.code
     }
 
-    check(texts: string[]): Promise<GrammarMatch[][]> {
+    /**
+     * Start a new check epoch. Pending checks from older epochs resolve
+     * with empty results once their (late) response arrives.
+     */
+    nextEpoch(): void {
+        this.epoch++
+    }
+
+    check(texts: string[], epoch = this.epoch): Promise<GrammarMatch[][]> {
         if (this.destroyed) {
             return Promise.reject(new Error("client is destroyed"))
         }
         const id = ++this.nextId
-        this.lastCheckId = id
         if (this.worker) {
             return new Promise<GrammarMatch[][]>((resolve, reject) => {
-                this.pending.set(id, {resolve, reject})
+                this.pending.set(id, {resolve, reject, epoch})
                 this.worker!.postMessage({type: "check", id, texts})
             })
         }
@@ -185,8 +192,9 @@ export class GrammarClient {
                     break
                 }
                 this.pending.delete(id)
-                if (id < this.lastCheckId) {
-                    // A newer check is on the way; discard the stale result.
+                if (pendingCheck.epoch < this.epoch) {
+                    // A newer check run superseded this one; discard the
+                    // stale result.
                     pendingCheck.resolve([])
                 } else {
                     pendingCheck.resolve(

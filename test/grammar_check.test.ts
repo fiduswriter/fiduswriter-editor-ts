@@ -16,6 +16,7 @@ import {
 } from "../src/grammar/matches.js"
 import {getText} from "../src/grammar/text.js"
 import {ModGrammar} from "../src/grammar/checker.js"
+import {fetchPackCached} from "../src/grammar/pack_cache.js"
 
 const encoder = new TextEncoder()
 
@@ -237,7 +238,7 @@ class FakeWorker {
 describe("GrammarClient", () => {
     const flush = () => new Promise(resolve => setTimeout(resolve, 0))
 
-    test("loads and checks through a worker, discarding stale results", async () => {
+    test("loads and checks through a worker, resolving concurrent checks of one epoch", async () => {
         const worker = new FakeWorker()
         const client = new GrammarClient(worker as never)
         expect(client.hasWorker).toBe(true)
@@ -261,6 +262,8 @@ describe("GrammarClient", () => {
         await loadPromise
         expect(client.loadedLanguage).toBe("en-US")
 
+        // Concurrent checks (one per text source of a run) must ALL
+        // resolve — only results from an older epoch are discarded.
         const first = client.check(["teh first"])
         const second = client.check(["teh second"])
         const firstMessage = worker.messages.find(
@@ -268,7 +271,6 @@ describe("GrammarClient", () => {
         ) as {id: number}
         const secondMessage = worker.lastCheckMessage()
 
-        // The first check responds late, after the second was issued.
         worker.send({
             type: "result",
             id: firstMessage.id,
@@ -276,8 +278,8 @@ describe("GrammarClient", () => {
                 {index: 0, matches: [matchAt("teh first", "teh", "TYPOS")]}
             ]
         })
-        const staleResults = await first
-        expect(staleResults).toEqual([])
+        const firstResults = await first
+        expect(firstResults[0]).toHaveLength(1)
 
         worker.send({
             type: "result",
@@ -286,12 +288,39 @@ describe("GrammarClient", () => {
                 {index: 0, matches: [matchAt("teh second", "teh", "TYPOS")]}
             ]
         })
-        const freshResults = await second
-        expect(freshResults[0]).toHaveLength(1)
-        expect(freshResults[0][0].category_id).toBe("TYPOS")
+        const secondResults = await second
+        expect(secondResults[0]).toHaveLength(1)
+        expect(secondResults[0][0].category_id).toBe("TYPOS")
 
         client.destroy()
         expect(() => worker.send({type: "error", message: "late"})).not.toThrow()
+    })
+
+    test("discards results from an older epoch", async () => {
+        const worker = new FakeWorker()
+        const client = new GrammarClient(worker as never)
+        const loadPromise = client.load(
+            {code: "en-US", pack: "en", variant: "en-GB"},
+            PACK_EN_URL
+        )
+        await flush()
+        worker.send({type: "ready", lang: "en-US"})
+        await loadPromise
+
+        const stale = client.check(["teh old"])
+        const firstMessage = worker.messages.find(
+            message => message.type === "check" && message.id === 1
+        ) as {id: number}
+        // A new check run starts before the old one's result arrives.
+        client.nextEpoch()
+        worker.send({
+            type: "result",
+            id: firstMessage.id,
+            results: [{index: 0, matches: [matchAt("teh old", "teh", "TYPOS")]}]
+        })
+        await expect(stale).resolves.toEqual([])
+
+        client.destroy()
     })
 
     test("rejects checks while the engine is not loaded", () => {
@@ -620,6 +649,9 @@ describe("ModGrammar continuous checking", () => {
     })
 
     test("skips when the engine for the document language is not loaded", () => {
+        const startCheck = jest
+            .spyOn(ModGrammar.prototype, "startCheck")
+            .mockReturnValue(undefined)
         const editor = makeFakeEditor({grammar_check_continuous: true})
         const grammar = new ModGrammar(editor)
         expect(grammar.continuous).toBe(true)
@@ -628,10 +660,14 @@ describe("ModGrammar continuous checking", () => {
         expect(runCheck).not.toHaveBeenCalled()
         expect(grammar.checkTimer).toBeNull()
         grammar.close()
+        startCheck.mockRestore()
     })
 
     test("schedules a debounced check once the engine is loaded", () => {
         jest.useFakeTimers()
+        const startCheck = jest
+            .spyOn(ModGrammar.prototype, "startCheck")
+            .mockReturnValue(undefined)
         const editor = makeFakeEditor({grammar_check_continuous: true})
         const grammar = new ModGrammar(editor)
         grammar.client.loadedLanguage = "en-US"
@@ -644,9 +680,13 @@ describe("ModGrammar continuous checking", () => {
         jest.advanceTimersByTime(700)
         expect(runCheck).toHaveBeenCalledWith(true)
         grammar.close()
+        startCheck.mockRestore()
     })
 
     test("unsupported languages and read-only access gate checking", () => {
+        const startCheck = jest
+            .spyOn(ModGrammar.prototype, "startCheck")
+            .mockReturnValue(undefined)
         const editor = makeFakeEditor({grammar_check_continuous: true})
         const grammar = new ModGrammar(editor)
         expect(grammar.isSupported("en-US")).toBe(true)
@@ -655,10 +695,14 @@ describe("ModGrammar continuous checking", () => {
         editor.docInfo.access_rights = "read"
         expect(grammar.canCheck()).toBe(false)
         grammar.close()
+        startCheck.mockRestore()
     })
 
     test("onLanguageChange invalidates pending results and sources", () => {
         jest.useFakeTimers()
+        const startCheck = jest
+            .spyOn(ModGrammar.prototype, "startCheck")
+            .mockReturnValue(undefined)
         const editor = makeFakeEditor({grammar_check_continuous: true})
         const grammar = new ModGrammar(editor)
         grammar.client.loadedLanguage = "en-US"
@@ -669,6 +713,44 @@ describe("ModGrammar continuous checking", () => {
         expect(grammar.sources).toBe(false)
         expect(grammar.hasChecked).toBe(false)
         grammar.close()
+        startCheck.mockRestore()
+    })
+
+    test("startCheck runs after opening when the preference is on", () => {
+        const startCheck = jest.spyOn(ModGrammar.prototype, "startCheck")
+        const editor = makeFakeEditor({grammar_check_continuous: true})
+        new ModGrammar(editor)
+        expect(startCheck).toHaveBeenCalledTimes(1)
+        startCheck.mockRestore()
+    })
+
+    test("startCheck does not run when the preference is off", () => {
+        const startCheck = jest.spyOn(ModGrammar.prototype, "startCheck")
+        const editor = makeFakeEditor({})
+        new ModGrammar(editor)
+        expect(startCheck).not.toHaveBeenCalled()
+        expect(startCheck.mock.contexts[0]).toBeUndefined()
+        startCheck.mockRestore()
+    })
+
+    test("setContinuous turns checking on (starting a check) and off (clearing marks)", () => {
+        const startCheck = jest
+            .spyOn(ModGrammar.prototype, "startCheck")
+            .mockReturnValue(undefined)
+        const editor = makeFakeEditor({})
+        const grammar = new ModGrammar(editor)
+        expect(grammar.continuous).toBe(false)
+        grammar.setContinuous(true)
+        expect(grammar.continuous).toBe(true)
+        expect(startCheck).toHaveBeenCalledTimes(1)
+        const runId = grammar.runId
+        const removeMarks = jest.spyOn(grammar, "removeMarks")
+        grammar.setContinuous(false)
+        expect(grammar.continuous).toBe(false)
+        expect(grammar.runId).toBeGreaterThan(runId)
+        expect(removeMarks).toHaveBeenCalledTimes(1)
+        grammar.close()
+        startCheck.mockRestore()
     })
 })
 
@@ -701,5 +783,111 @@ describe("ModGrammar pack URL", () => {
             "lingotweaker-packs/en.pack.gz"
         )
         grammar.close()
+    })
+})
+
+describe("fetchPackCached", () => {
+    class FakeCache {
+        store = new Map<string, Response>()
+
+        async match(url: string): Promise<Response | undefined> {
+            const response = this.store.get(url)
+            return response ? response.clone() : undefined
+        }
+
+        async put(url: string, response: Response): Promise<void> {
+            this.store.set(url, response.clone())
+        }
+
+        async delete(key: string | {url: string}): Promise<boolean> {
+            const url = typeof key === "string" ? key : key.url
+            return this.store.delete(url)
+        }
+
+        async keys(): Promise<Array<{url: string}>> {
+            return [...this.store.keys()].map(url => ({url}) as never)
+        }
+    }
+
+    let fakeCache: FakeCache
+    let fetchCalls: Array<string>
+
+    const stubFetch = (headers: Record<string, string> = {}) => {
+        globalThis.fetch = (async (url: unknown) => {
+            const urlString = String(url)
+            fetchCalls.push(urlString)
+            return new Response(`pack:${urlString}`, {
+                status: 200,
+                headers: {"Content-Type": "application/octet-stream", ...headers}
+            })
+        }) as unknown as typeof fetch
+    }
+
+    beforeEach(() => {
+        fakeCache = new FakeCache()
+        fetchCalls = []
+        ;(globalThis as {caches?: unknown}).caches = {
+            open: async () => fakeCache
+        }
+        stubFetch()
+    })
+
+    afterEach(() => {
+        delete (globalThis as {caches?: unknown}).caches
+        globalThis.fetch = REAL_FETCH
+    })
+
+    test("serves a fresh cached entry without a second fetch", async () => {
+        const first = await fetchPackCached(PACK_EN_URL)
+        expect(new TextDecoder().decode(first)).toBe(`pack:${PACK_EN_URL}`)
+        expect(fetchCalls).toEqual([PACK_EN_URL])
+        const second = await fetchPackCached(PACK_EN_URL)
+        expect(new TextDecoder().decode(second)).toBe(`pack:${PACK_EN_URL}`)
+        expect(fetchCalls).toEqual([PACK_EN_URL])
+    })
+
+    test("refetches when the stored entry has expired", async () => {
+        stubFetch({"Cache-Control": "max-age=0"})
+        await fetchPackCached(PACK_EN_URL)
+        await fetchPackCached(PACK_EN_URL)
+        expect(fetchCalls).toEqual([PACK_EN_URL, PACK_EN_URL])
+    })
+
+    test("does not cache no-store responses", async () => {
+        stubFetch({"Cache-Control": "no-store"})
+        await fetchPackCached(PACK_EN_URL)
+        expect(fakeCache.store.size).toBe(0)
+        await fetchPackCached(PACK_EN_URL)
+        expect(fetchCalls).toEqual([PACK_EN_URL, PACK_EN_URL])
+    })
+
+    test("falls back to plain fetch when Cache Storage is unavailable", async () => {
+        delete (globalThis as {caches?: unknown}).caches
+        const bytes = await fetchPackCached(PACK_EN_URL)
+        expect(new TextDecoder().decode(bytes)).toBe(`pack:${PACK_EN_URL}`)
+        await fetchPackCached(PACK_EN_URL)
+        expect(fetchCalls).toEqual([PACK_EN_URL, PACK_EN_URL])
+    })
+
+    test("evicts the oldest entry beyond the cap", async () => {
+        const urls = Array.from(
+            {length: 11},
+            (_unused, index) => `${PACK_BASE_URL}pack${index}.pack.gz`
+        )
+        for (const url of urls) {
+            await fetchPackCached(url)
+        }
+        expect(fakeCache.store.size).toBe(10)
+        expect(fakeCache.store.has(urls[0])).toBe(false)
+        // The evicted pack is fetched again on demand.
+        await fetchPackCached(urls[0])
+        expect(fetchCalls.filter(url => url === urls[0])).toHaveLength(2)
+    })
+
+    test("throws on HTTP errors without caching anything", async () => {
+        globalThis.fetch = (async () =>
+            new Response("missing", {status: 404})) as unknown as typeof fetch
+        await expect(fetchPackCached(PACK_EN_URL)).rejects.toThrow("HTTP 404")
+        expect(fakeCache.store.size).toBe(0)
     })
 })
