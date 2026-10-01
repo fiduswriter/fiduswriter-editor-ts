@@ -24,9 +24,7 @@ test("header document title is not editable by default", async ({page}) => {
     // No contenteditable attribute — the title must be plain text.
     expect(await title.getAttribute("contenteditable")).toBeNull()
 
-    const editable = await page.evaluate(
-        () => window.demoEditor.pathEditable
-    )
+    const editable = await page.evaluate(() => window.demoEditor.pathEditable)
     expect(editable).toBe(false)
 })
 

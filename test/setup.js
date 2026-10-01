@@ -31,11 +31,15 @@ Object.defineProperty(globalThis, "navigator", {
     value: {userAgent: "node", language: "en-US", platform: "Linux"},
     configurable: true
 })
-globalThis.location = {href: "http://localhost/", protocol: "http:", hostname: "localhost"}
-globalThis.requestAnimationFrame = (cb) => setTimeout(cb, 0)
-globalThis.cancelAnimationFrame = (id) => clearTimeout(id)
-globalThis.gettext = (msgid) => msgid
-globalThis.staticUrl = (path) => path
+globalThis.location = {
+    href: "http://localhost/",
+    protocol: "http:",
+    hostname: "localhost"
+}
+globalThis.requestAnimationFrame = cb => setTimeout(cb, 0)
+globalThis.cancelAnimationFrame = id => clearTimeout(id)
+globalThis.gettext = msgid => msgid
+globalThis.staticUrl = path => path
 globalThis.interpolate = (fmt, args) => {
     let index = 0
     return fmt.replace(/%s/g, () => {
@@ -43,4 +47,3 @@ globalThis.interpolate = (fmt, args) => {
         return value !== undefined ? String(value) : ""
     })
 }
-

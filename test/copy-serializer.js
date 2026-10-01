@@ -44,7 +44,10 @@ const editor = {
                             date: "1982-03",
                             type: "techreport",
                             title: [
-                                {text: "Economic Effects of the Oil Expansion in Mexico", type: "text"}
+                                {
+                                    text: "Economic Effects of the Oil Expansion in Mexico",
+                                    type: "text"
+                                }
                             ],
                             author: [
                                 {
@@ -53,7 +56,12 @@ const editor = {
                                 }
                             ],
                             institution: [
-                                [{text: "Department of Economics, University of Gothenburg", type: "text"}]
+                                [
+                                    {
+                                        text: "Department of Economics, University of Gothenburg",
+                                        type: "text"
+                                    }
+                                ]
                             ]
                         },
                         bib_type: "report",
@@ -71,7 +79,11 @@ const doc = schema.nodeFromJSON({
     type: "doc",
     attrs: editor.view.state.doc.attrs,
     content: [
-        {type: "title", attrs: {id: "title"}, content: [{type: "text", text: "Title"}]},
+        {
+            type: "title",
+            attrs: {id: "title"},
+            content: [{type: "text", text: "Title"}]
+        },
         {
             type: "richtext_part",
             attrs: {id: "body", title: "Body"},
@@ -102,5 +114,9 @@ try {
     caughtError = error
 }
 
-assert.strictEqual(caughtError, null, `Copy serialization threw: ${caughtError}`)
+assert.strictEqual(
+    caughtError,
+    null,
+    `Copy serialization threw: ${caughtError}`
+)
 console.log("copy serialization test passed")

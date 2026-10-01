@@ -89,7 +89,9 @@
                 border-radius: 4px;
                 text-align: center;
                 cursor: pointer;
-                transition: border-color 0.2s, background 0.2s;
+                transition:
+                    border-color 0.2s,
+                    background 0.2s;
             }
             .demo-dropzone:hover,
             .demo-dropzone.dragover {
@@ -149,9 +151,7 @@
             // site root (local) or repository root (Forgejo Pages).
             const path = location.pathname
             if (path.endsWith("/editor") && !path.endsWith("/editor/")) {
-                location.replace(
-                    path + "/" + location.search + location.hash
-                )
+                location.replace(path + "/" + location.search + location.hash)
             }
         </script>
         <script type="module" src="./index.js"></script>

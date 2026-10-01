@@ -53,9 +53,9 @@ const editor = await createStaticEditor({
     locale: "en",
     username: "Demo User",
     documentData: async () => ({doc, doc_info, time: Date.now()}),
-    documentStyles: [ /* style fixtures */ ],
-    exportTemplates: [ /* export template fixtures */ ],
-    documentTemplates: { /* document template fixtures */ }
+    documentStyles: [/* style fixtures */],
+    exportTemplates: [/* export template fixtures */],
+    documentTemplates: {/* document template fixtures */}
 })
 ```
 

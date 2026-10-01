@@ -43,7 +43,8 @@ async function main(): Promise<void> {
     let docPath = ""
     let importedBibDB: Record<string, Record<string, unknown>> | undefined
     let importedImageDB: Record<string, Record<string, unknown>> | undefined
-    let importedComments: Record<string | number, Record<string, unknown>> | undefined
+    let importedComments:
+        Record<string | number, Record<string, unknown>> | undefined
 
     if (result.mode === "import") {
         const user = {

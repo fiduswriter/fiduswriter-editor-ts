@@ -53,7 +53,7 @@ async function readFidusZipTextFiles(
 export function createImportBackend(
     user: User,
     path: string,
-     
+
     _locale: string
 ): NativeImporterBackend {
     return {
@@ -129,10 +129,9 @@ export async function importFidusFile(
     locale: string
 ): Promise<ImportedDocument> {
     const textFiles = await readFidusZipTextFiles(file)
-    const bibliography = JSON.parse(textFiles["bibliography.json"] || "{}") as Record<
-        string,
-        Record<string, unknown>
-    >
+    const bibliography = JSON.parse(
+        textFiles["bibliography.json"] || "{}"
+    ) as Record<string, Record<string, unknown>>
     const images = JSON.parse(textFiles["images.json"] || "{}") as Record<
         string,
         Record<string, unknown>
@@ -153,10 +152,11 @@ export async function importFidusFile(
         docInfo: result.docInfo as Record<string, unknown>,
         bibliography,
         images: imagesWithUrls,
-        comments: (result.doc?.comments as Record<
-            string | number,
-            Record<string, unknown>
-        >) || {}
+        comments:
+            (result.doc?.comments as Record<
+                string | number,
+                Record<string, unknown>
+            >) || {}
     }
 }
 
@@ -167,17 +167,11 @@ export async function importDocxFile(
 ): Promise<{doc: Record<string, unknown>; docInfo: Record<string, unknown>}> {
     const path = file.name.replace(/\.docx$/i, "")
     const backend = createImportBackend(user, path, locale)
-    const importer = new DocxImporter(
-        file,
-        user,
-        path,
-        null,
-        {
-            getTemplate: async () => ({content: createDefaultDocument()}),
-            nativeBackend: backend,
-            e2eeOptions: null
-        }
-    )
+    const importer = new DocxImporter(file, user, path, null, {
+        getTemplate: async () => ({content: createDefaultDocument()}),
+        nativeBackend: backend,
+        e2eeOptions: null
+    })
     const result = await importer.init()
     if (!result.ok || !result.doc) {
         throw new Error(result.statusText || "Failed to import DOCX file.")
@@ -192,17 +186,11 @@ export async function importOdtFile(
 ): Promise<{doc: Record<string, unknown>; docInfo: Record<string, unknown>}> {
     const path = file.name.replace(/\.odt$/i, "")
     const backend = createImportBackend(user, path, locale)
-    const importer = new OdtImporter(
-        file,
-        user,
-        path,
-        null,
-        {
-            getTemplate: async () => ({content: createDefaultDocument()}),
-            nativeBackend: backend,
-            e2eeOptions: null
-        }
-    )
+    const importer = new OdtImporter(file, user, path, null, {
+        getTemplate: async () => ({content: createDefaultDocument()}),
+        nativeBackend: backend,
+        e2eeOptions: null
+    })
     const result = await importer.init()
     if (!result.ok || !result.doc) {
         throw new Error(result.statusText || "Failed to import ODT file.")
@@ -217,21 +205,17 @@ export async function importPandocFile(
 ): Promise<{doc: Record<string, unknown>; docInfo: Record<string, unknown>}> {
     const path = file.name.replace(/\.json$/i, "")
     const backend = createImportBackend(user, path, locale)
-    const importer = new PandocImporter(
-        file,
-        user,
-        path,
-        null,
-        {
-            getTemplate: async () => ({content: createDefaultDocument()}),
-            importBibliography: async () => ({}),
-            nativeBackend: backend,
-            e2eeOptions: null
-        }
-    )
+    const importer = new PandocImporter(file, user, path, null, {
+        getTemplate: async () => ({content: createDefaultDocument()}),
+        importBibliography: async () => ({}),
+        nativeBackend: backend,
+        e2eeOptions: null
+    })
     const result = await importer.init()
     if (!result.ok || !result.doc) {
-        throw new Error(result.statusText || "Failed to import Pandoc JSON file.")
+        throw new Error(
+            result.statusText || "Failed to import Pandoc JSON file."
+        )
     }
     return {doc: result.doc, docInfo: result.docInfo as Record<string, unknown>}
 }
@@ -263,9 +247,7 @@ export interface TemplateDefinition {
     documentStyles: Record<string, unknown>[]
 }
 
-export async function applyTemplate(
-    file: File
-): Promise<TemplateDefinition> {
+export async function applyTemplate(file: File): Promise<TemplateDefinition> {
     const zip = await JSZip.loadAsync(file)
     const textFiles: Record<string, string> = {}
     const filenames: string[] = []

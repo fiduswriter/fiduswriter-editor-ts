@@ -24,26 +24,32 @@ async function startEditor(page: Page) {
 }
 
 async function checkText(page: Page) {
-    await page.locator("#header-navigation .header-nav-item", {
-        hasText: "Tools"
-    }).click()
-    await page.locator(".fw-pulldown-item", {hasText: "Spell/grammar checker"}).click()
+    await page
+        .locator("#header-navigation .header-nav-item", {
+            hasText: "Tools"
+        })
+        .click()
+    await page
+        .locator(".fw-pulldown-item", {hasText: "Spell/grammar checker"})
+        .click()
     await page.locator(".fw-pulldown-item", {hasText: "Check text"}).click()
 }
 
 async function openIgnoredWordsDialog(page: Page) {
-    await page.locator("#header-navigation .header-nav-item", {
-        hasText: "Tools"
-    }).click()
-    await page.locator(".fw-pulldown-item", {hasText: "Spell/grammar checker"}).click()
+    await page
+        .locator("#header-navigation .header-nav-item", {
+            hasText: "Tools"
+        })
+        .click()
+    await page
+        .locator(".fw-pulldown-item", {hasText: "Spell/grammar checker"})
+        .click()
     await page.locator(".fw-pulldown-item", {hasText: "Ignored words"}).click()
     return page.locator(".fw-dialog").filter({hasText: "Ignored words"})
 }
 
 test.describe("spell-checker ignore lists", () => {
-    test("ignored word round trip through popup and dialog", async ({
-        page
-    }) => {
+    test("ignored word round trip through popup and dialog", async ({page}) => {
         await startEditor(page)
 
         // Type a word the engine reports as a misspelling.
@@ -70,9 +76,9 @@ test.describe("spell-checker ignore lists", () => {
 
         // The dialog lists the term for manual editing.
         const ignoredDialog = await openIgnoredWordsDialog(page)
-        await expect(ignoredDialog.locator("textarea.ignored-words")).toHaveValue(
-            "teh"
-        )
+        await expect(
+            ignoredDialog.locator("textarea.ignored-words")
+        ).toHaveValue("teh")
         // The demo host has no persistence callbacks.
         await expect(
             ignoredDialog.locator("p", {

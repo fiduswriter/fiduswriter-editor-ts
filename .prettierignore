@@ -1,12 +1,5 @@
-CHANGELOG.md
-README.md
-demo/
 schema.json
-test/
-jest.config.js
-scripts/
-package-lock.json
-pnpm-lock.yaml
-package.json
 .mathlive_bundle_cache.json
 static-libs/
+package-lock.json
+pnpm-lock.yaml

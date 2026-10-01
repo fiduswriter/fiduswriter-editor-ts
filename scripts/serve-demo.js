@@ -58,7 +58,9 @@ async function copyCssFiles(sourceDir, destDir) {
     await Promise.all(
         entries
             .filter(name => name.endsWith(".css"))
-            .map(name => fs.copyFile(join(sourceDir, name), join(destDir, name)))
+            .map(name =>
+                fs.copyFile(join(sourceDir, name), join(destDir, name))
+            )
     )
 }
 
@@ -88,7 +90,13 @@ async function buildDemo() {
         fwtoolkitCssDir
     )
     await fs.copyFile(
-        join(ROOT, "node_modules", "prosemirror-view", "style", "prosemirror.css"),
+        join(
+            ROOT,
+            "node_modules",
+            "prosemirror-view",
+            "style",
+            "prosemirror.css"
+        ),
         join(cssDir, "prosemirror.css")
     )
     await fs.copyFile(
@@ -97,7 +105,14 @@ async function buildDemo() {
     )
     await copyCssFiles(join(ROOT, "css"), cssDir)
     await fs.copyFile(
-        join(ROOT, "node_modules", "@fiduswriter", "bibliography-manager", "css", "bibliography.css"),
+        join(
+            ROOT,
+            "node_modules",
+            "@fiduswriter",
+            "bibliography-manager",
+            "css",
+            "bibliography.css"
+        ),
         join(cssDir, "bibliography.css")
     )
     // The image dialogs load their CSS at runtime via
@@ -132,8 +147,12 @@ async function buildDemo() {
     )
 
     console.log("Copying static assets...")
-    await fs.cp(join(ROOT, "static"), join(BUILD_DIR, "static"), {recursive: true})
-    await fs.cp(join(ROOT, "demo", "static"), join(BUILD_DIR, "static"), {recursive: true})
+    await fs.cp(join(ROOT, "static"), join(BUILD_DIR, "static"), {
+        recursive: true
+    })
+    await fs.cp(join(ROOT, "demo", "static"), join(BUILD_DIR, "static"), {
+        recursive: true
+    })
     // vivliostyle-pdf fallback fonts + WOFF2 decoder wasm (bundled in
     // @fiduswriter/document) so the direct PDF export works in the demo.
     await ensureDir(join(BUILD_DIR, "static", "fonts"))
@@ -169,11 +188,24 @@ async function buildDemo() {
     await ensureDir(faCssDir)
     await ensureDir(faFontsDir)
     await fs.copyFile(
-        join(ROOT, "node_modules", "@fortawesome", "fontawesome-free", "css", "all.css"),
+        join(
+            ROOT,
+            "node_modules",
+            "@fortawesome",
+            "fontawesome-free",
+            "css",
+            "all.css"
+        ),
         join(faCssDir, "all.css")
     )
     await fs.cp(
-        join(ROOT, "node_modules", "@fortawesome", "fontawesome-free", "webfonts"),
+        join(
+            ROOT,
+            "node_modules",
+            "@fortawesome",
+            "fontawesome-free",
+            "webfonts"
+        ),
         faFontsDir,
         {recursive: true}
     )
@@ -182,7 +214,15 @@ async function buildDemo() {
     const libsDir = join(BUILD_DIR, "css", "libs")
     await ensureDir(libsDir)
     await fs.cp(
-        join(ROOT, "node_modules", "@fiduswriter", "document", "static-libs", "css", "libs"),
+        join(
+            ROOT,
+            "node_modules",
+            "@fiduswriter",
+            "document",
+            "static-libs",
+            "css",
+            "libs"
+        ),
         libsDir,
         {recursive: true}
     )
@@ -190,13 +230,22 @@ async function buildDemo() {
     const zipDir = join(BUILD_DIR, "static", "zip")
     await ensureDir(zipDir)
     await fs.cp(
-        join(ROOT, "node_modules", "@fiduswriter", "document", "static-libs", "zip"),
+        join(
+            ROOT,
+            "node_modules",
+            "@fiduswriter",
+            "document",
+            "static-libs",
+            "zip"
+        ),
         zipDir,
         {recursive: true}
     )
 
     console.log("Copying locales...")
-    await fs.cp(join(ROOT, "locale"), join(BUILD_DIR, "locale"), {recursive: true})
+    await fs.cp(join(ROOT, "locale"), join(BUILD_DIR, "locale"), {
+        recursive: true
+    })
 
     console.log("Copying spell/grammar language packs...")
     // The editor fetches packs at staticUrl("lingotweaker-packs/<pack>.pack.gz"),

@@ -31,7 +31,9 @@ test.describe("HTML export math output", () => {
         svgMode: boolean
     ) {
         // Open the Export menu and click the HTML export action.
-        await page.click("#header-navigation .header-nav-item:has-text('Export')")
+        await page.click(
+            "#header-navigation .header-nav-item:has-text('Export')"
+        )
         await page.waitForSelector(".fw-pulldown-item")
         await page.click('.fw-pulldown-item:has-text("HTML")')
 

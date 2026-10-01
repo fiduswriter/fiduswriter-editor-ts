@@ -42,10 +42,13 @@ async function main(): Promise<void> {
         doc: {
             v: version,
             content: docContent,
-            comments: (storedPayload?.comments as Record<string, unknown>) || {},
-            bibliography: (storedPayload?.bibliography as Record<string, unknown>) ||
+            comments:
+                (storedPayload?.comments as Record<string, unknown>) || {},
+            bibliography:
+                (storedPayload?.bibliography as Record<string, unknown>) ||
                 createEmptyBibDB().db,
-            images: (storedPayload?.images as Record<string, unknown>) ||
+            images:
+                (storedPayload?.images as Record<string, unknown>) ||
                 createEmptyImageDB().db
         },
         doc_info: {

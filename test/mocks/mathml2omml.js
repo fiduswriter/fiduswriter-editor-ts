@@ -1,1 +1,3 @@
-export function mathml2omml() { return "" }
+export function mathml2omml() {
+    return ""
+}

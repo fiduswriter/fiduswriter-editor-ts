@@ -1,4 +1,12 @@
-import {describe, test, expect, jest, afterEach, beforeAll, beforeEach} from "@jest/globals"
+import {
+    describe,
+    test,
+    expect,
+    jest,
+    afterEach,
+    beforeAll,
+    beforeEach
+} from "@jest/globals"
 
 import {GrammarClient} from "../src/grammar/client.js"
 import {
@@ -31,7 +39,11 @@ const PACK_EN_URL = `${PACK_BASE_URL}en.pack.gz`
 const PACK_PT_URL = `${PACK_BASE_URL}pt.pack.gz`
 const REAL_FETCH = globalThis.fetch
 
-const matchAt = (text: string, needle: string, categoryId: string): GrammarMatch => {
+const matchAt = (
+    text: string,
+    needle: string,
+    categoryId: string
+): GrammarMatch => {
     const index = text.indexOf(needle)
     return {
         rule_id: `${categoryId}_RULE`,
@@ -103,9 +115,9 @@ describe("normalizeIgnoredList", () => {
     })
 
     test("dedupes rule ids exactly (case-sensitive)", () => {
-        expect(
-            normalizeIgnoredList(["R_1", "r_1", "R_1"], false, 500)
-        ).toEqual(["R_1", "r_1"])
+        expect(normalizeIgnoredList(["R_1", "r_1", "R_1"], false, 500)).toEqual(
+            ["R_1", "r_1"]
+        )
     })
 
     test("drops non-strings and over-length entries, caps the count", () => {
@@ -224,9 +236,9 @@ describe("match classification", () => {
     })
 
     test("plainMessage strips suggestion markup", () => {
-        expect(plainMessage("Style: <suggestion>unique</suggestion> is enough.")).toBe(
-            "Style: unique is enough."
-        )
+        expect(
+            plainMessage("Style: <suggestion>unique</suggestion> is enough.")
+        ).toBe("Style: unique is enough.")
     })
 })
 
@@ -458,7 +470,10 @@ describe("getText", () => {
         const before = {
             rule_id: "R",
             message: "m",
-            range: {start: text.indexOf("to the"), end: text.indexOf("to the") + 6},
+            range: {
+                start: text.indexOf("to the"),
+                end: text.indexOf("to the") + 6
+            },
             suggestions: []
         }
         const kept = filterBadPos(badPos, [spanning, before])
@@ -545,7 +560,9 @@ describe("GrammarClient", () => {
         expect(secondResults[0][0].category_id).toBe("TYPOS")
 
         client.destroy()
-        expect(() => worker.send({type: "error", message: "late"})).not.toThrow()
+        expect(() =>
+            worker.send({type: "error", message: "late"})
+        ).not.toThrow()
     })
 
     test("discards results from an older epoch", async () => {
@@ -659,13 +676,15 @@ describe("grammar worker", () => {
     afterEach(() => {
         globalThis.fetch = REAL_FETCH
         posted = []
-        ;(globalThis as {__lingotweakerDecompressCalls?: unknown[]})
-            .__lingotweakerDecompressCalls = []
+        ;(
+            globalThis as {__lingotweakerDecompressCalls?: unknown[]}
+        ).__lingotweakerDecompressCalls = []
     })
 
     beforeEach(() => {
-        ;(globalThis as {__lingotweakerDecompressCalls?: unknown[]})
-            .__lingotweakerDecompressCalls = []
+        ;(
+            globalThis as {__lingotweakerDecompressCalls?: unknown[]}
+        ).__lingotweakerDecompressCalls = []
     })
 
     const stubFetch = (options: {
@@ -826,8 +845,7 @@ describe("supported languages", () => {
         ]
         const noPackLanguages = ["af-ZA", "sq-AL", "bg", "he", "tr"]
         const missing = schemaLanguages.filter(
-            code =>
-                !noPackLanguages.includes(code) && !grammarLanguage(code)
+            code => !noPackLanguages.includes(code) && !grammarLanguage(code)
         )
         expect(missing).toEqual([])
     })
@@ -1111,7 +1129,9 @@ describe("ModGrammar pack URL", () => {
         editor.app.config.grammar_check_pack_base_url =
             "https://cdn.example/packs/"
         const grammar = new ModGrammar(editor)
-        expect(grammar.packUrl("en")).toBe("https://cdn.example/packs/en.pack.gz")
+        expect(grammar.packUrl("en")).toBe(
+            "https://cdn.example/packs/en.pack.gz"
+        )
         grammar.close()
     })
 
@@ -1162,7 +1182,10 @@ describe("fetchPackCached", () => {
             fetchCalls.push(urlString)
             return new Response(`pack:${urlString}`, {
                 status: 200,
-                headers: {"Content-Type": "application/octet-stream", ...headers}
+                headers: {
+                    "Content-Type": "application/octet-stream",
+                    ...headers
+                }
             })
         }) as unknown as typeof fetch
     }

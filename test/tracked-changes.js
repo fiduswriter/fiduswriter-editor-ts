@@ -18,7 +18,8 @@ const USER = {id: 1, username: "tester"}
 const DATE = 1755000000000
 
 const strongMark = docSchema.marks.strong.create()
-const para = children => docSchema.nodes.paragraph.create(null, Fragment.fromArray(children))
+const para = children =>
+    docSchema.nodes.paragraph.create(null, Fragment.fromArray(children))
 const text = (content, marks) => docSchema.text(content, marks)
 
 function makeDoc(contentText) {
@@ -50,11 +51,14 @@ function makeDoc(contentText) {
         },
         Fragment.fromArray([para([text(contentText)])])
     )
-    return docSchema.nodes.doc.create({}, Fragment.fromArray([
-        docSchema.nodes.title.create(null, text("Title")),
-        docSchema.nodes.contributors_part.create({id: "authors"}),
-        bodyPart
-    ]))
+    return docSchema.nodes.doc.create(
+        {},
+        Fragment.fromArray([
+            docSchema.nodes.title.create(null, text("Title")),
+            docSchema.nodes.contributors_part.create({id: "authors"}),
+            bodyPart
+        ])
+    )
 }
 
 function makeState(contentText) {
@@ -144,7 +148,9 @@ check("tracked insertion adds unapproved insertion marks", () => {
     const {state, pos} = makeState("Hello world")
     // Insert "X" between the two words, as typing would.
     const insertPos = pos.helloStart + 5
-    const newState = applyTracked(state, tr => tr.insertText("X", insertPos, insertPos))
+    const newState = applyTracked(state, tr =>
+        tr.insertText("X", insertPos, insertPos)
+    )
     assert.strictEqual(newState.doc.textContent.includes("HelloX world"), true)
     const inserted = getTextsIncluding(newState.doc, "X")
     assert.strictEqual(inserted.length > 0, true)
@@ -154,7 +160,11 @@ check("tracked insertion adds unapproved insertion marks", () => {
 check("tracked deletion keeps deleted text with deletion marks", () => {
     const {state, pos} = makeState("Hello world")
     const newState = applyTracked(state, tr =>
-        tr.setSelection(TextSelection.create(tr.doc, pos.worldStart, pos.worldEnd)).deleteSelection()
+        tr
+            .setSelection(
+                TextSelection.create(tr.doc, pos.worldStart, pos.worldEnd)
+            )
+            .deleteSelection()
     )
     assert.strictEqual(
         newState.doc.textContent.includes("world"),
@@ -170,7 +180,9 @@ check("tracked deletion keeps deleted text with deletion marks", () => {
 check("deleting own unapproved insertion removes it outright", () => {
     const {state, pos} = makeState("Hello world")
     const insertPos = pos.helloStart + 5
-    let newState = applyTracked(state, tr => tr.insertText("X", insertPos, insertPos))
+    let newState = applyTracked(state, tr =>
+        tr.insertText("X", insertPos, insertPos)
+    )
     // Find the inserted character and delete it again, still tracking.
     let xFrom = -1,
         xTo = -1
@@ -181,7 +193,9 @@ check("deleting own unapproved insertion removes it outright", () => {
         }
     })
     newState = applyTracked(newState, tr =>
-        tr.setSelection(TextSelection.create(tr.doc, xFrom, xTo)).deleteSelection()
+        tr
+            .setSelection(TextSelection.create(tr.doc, xFrom, xTo))
+            .deleteSelection()
     )
     assert.strictEqual(
         newState.doc.textContent.includes("X"),
@@ -192,7 +206,9 @@ check("deleting own unapproved insertion removes it outright", () => {
 
 check("adding a format creates a format_change mark", () => {
     const {state, pos} = makeState("Hello world")
-    const newState = applyTracked(state, tr => tr.addMark(pos.worldStart, pos.worldEnd, strongMark))
+    const newState = applyTracked(state, tr =>
+        tr.addMark(pos.worldStart, pos.worldEnd, strongMark)
+    )
     const word = getTextsIncluding(newState.doc, "world")[0]
     assert.strictEqual(word.marks.includes("strong"), true)
     assert.strictEqual(word.marks.includes("format_change"), true)
@@ -202,18 +218,25 @@ check("removing a format creates a format_change mark", () => {
     const doc = (() => {
         const bodyPart = docSchema.nodes.richtext_part.create(
             {title: "Body", id: "body", marks: ["strong", "em", "link"]},
-            Fragment.fromArray([para([text("Hello "), text("world", [strongMark])])])
+            Fragment.fromArray([
+                para([text("Hello "), text("world", [strongMark])])
+            ])
         )
-        return docSchema.nodes.doc.create({}, Fragment.fromArray([
-            docSchema.nodes.title.create(null, text("Title")),
-            docSchema.nodes.contributors_part.create({id: "authors"}),
-            bodyPart
-        ]))
+        return docSchema.nodes.doc.create(
+            {},
+            Fragment.fromArray([
+                docSchema.nodes.title.create(null, text("Title")),
+                docSchema.nodes.contributors_part.create({id: "authors"}),
+                bodyPart
+            ])
+        )
     })()
     const state = EditorState.create({doc})
     const {from: worldFrom, to: worldTo} = findWordRange(doc, "world")
     assert.strictEqual(worldFrom !== -1, true)
-    const newState = applyTracked(state, tr => tr.removeMark(worldFrom, worldTo, strongMark))
+    const newState = applyTracked(state, tr =>
+        tr.removeMark(worldFrom, worldTo, strongMark)
+    )
     const word = getTextsIncluding(newState.doc, "world")[0]
     assert.strictEqual(word.marks.includes("strong"), false)
     assert.strictEqual(word.marks.includes("format_change"), true)
@@ -222,16 +245,28 @@ check("removing a format creates a format_change mark", () => {
 check("acceptAll applies insertions and removes deletions", () => {
     const {state, pos} = makeState("Hello world")
     // Track-insert X and track-delete "world".
-    let newState = applyTracked(state, tr => tr.insertText("X", pos.helloStart + 5, pos.helloStart + 5))
+    let newState = applyTracked(state, tr =>
+        tr.insertText("X", pos.helloStart + 5, pos.helloStart + 5)
+    )
     const {from: delFrom, to: delTo} = findWordRange(newState.doc, "world")
     newState = applyTracked(newState, tr =>
-        tr.setSelection(TextSelection.create(tr.doc, delFrom, delTo)).deleteSelection()
+        tr
+            .setSelection(TextSelection.create(tr.doc, delFrom, delTo))
+            .deleteSelection()
     )
     const view = makeView(newState)
     acceptAll(view)
     const result = view.state.doc.textContent
-    assert.strictEqual(result.includes("HelloX"), true, "inserted text should remain")
-    assert.strictEqual(result.includes("world"), false, "deleted text should be gone")
+    assert.strictEqual(
+        result.includes("HelloX"),
+        true,
+        "inserted text should remain"
+    )
+    assert.strictEqual(
+        result.includes("world"),
+        false,
+        "deleted text should be gone"
+    )
     // Accepting an insertion approves it rather than stripping the mark.
     const acceptedInsertion = getTextsIncluding(view.state.doc, "X")[0]
     const insertionMark = acceptedInsertion?.rawMarks.find(
@@ -244,15 +279,23 @@ check("acceptAll applies insertions and removes deletions", () => {
             ["deletion", "format_change"].includes(markName)
         )
     )
-    assert.strictEqual(openTrackMarks, false, "no open track changes should remain")
+    assert.strictEqual(
+        openTrackMarks,
+        false,
+        "no open track changes should remain"
+    )
 })
 
 check("rejectAll restores the original document text", () => {
     const {state, pos} = makeState("Hello world")
-    let newState = applyTracked(state, tr => tr.insertText("X", pos.helloStart + 5, pos.helloStart + 5))
+    let newState = applyTracked(state, tr =>
+        tr.insertText("X", pos.helloStart + 5, pos.helloStart + 5)
+    )
     const {from: delFrom, to: delTo} = findWordRange(newState.doc, "world")
     newState = applyTracked(newState, tr =>
-        tr.setSelection(TextSelection.create(tr.doc, delFrom, delTo)).deleteSelection()
+        tr
+            .setSelection(TextSelection.create(tr.doc, delFrom, delTo))
+            .deleteSelection()
     )
     const view = makeView(newState)
     rejectAll(view)
@@ -275,7 +318,9 @@ check("pasted content receives insertion marks under track changes", () => {
     )
     const insertPos = pos.helloStart + 5
     const newState = applyTracked(state, tr =>
-        tr.setSelection(TextSelection.create(tr.doc, insertPos, insertPos)).replaceSelection(slice)
+        tr
+            .setSelection(TextSelection.create(tr.doc, insertPos, insertPos))
+            .replaceSelection(slice)
     )
     assert.strictEqual(newState.doc.textContent.includes("NEW"), true)
     const inserted = getTextsIncluding(newState.doc, "NEW")
@@ -301,11 +346,14 @@ function makeFigureDoc() {
             para([text("After the figure")])
         ])
     )
-    return docSchema.nodes.doc.create({}, Fragment.fromArray([
-        docSchema.nodes.title.create(null, text("Title")),
-        docSchema.nodes.contributors_part.create({id: "authors"}),
-        bodyPart
-    ]))
+    return docSchema.nodes.doc.create(
+        {},
+        Fragment.fromArray([
+            docSchema.nodes.title.create(null, text("Title")),
+            docSchema.nodes.contributors_part.create({id: "authors"}),
+            bodyPart
+        ])
+    )
 }
 
 // Selecting a figure (NodeSelection) and deleting it under track changes
@@ -344,7 +392,11 @@ check("tracked figure deletion is accepted and removes the figure", () => {
             found++
         }
     })
-    assert.strictEqual(found, 0, "figure should be gone after accepting deletion")
+    assert.strictEqual(
+        found,
+        0,
+        "figure should be gone after accepting deletion"
+    )
     assert.strictEqual(
         view.state.doc.textContent.includes("Caption"),
         false,
@@ -362,8 +414,16 @@ check("tracked figure deletion is rejected and restores the figure", () => {
     const view = makeView(state)
     reject("deletion", figPos, view)
     const figNode = view.state.doc.nodeAt(figPos)
-    assert.strictEqual(figNode?.type.name, "figure", "figure should still be present")
-    assert.strictEqual(figNode.attrs.track.length, 0, "deletion track entry should be removed")
+    assert.strictEqual(
+        figNode?.type.name,
+        "figure",
+        "figure should still be present"
+    )
+    assert.strictEqual(
+        figNode.attrs.track.length,
+        0,
+        "deletion track entry should be removed"
+    )
     assert.strictEqual(
         view.state.doc.textContent.includes("Caption"),
         true,
@@ -376,46 +436,58 @@ check("block level block_change can be accepted and rejected", () => {
         const bodyPart = docSchema.nodes.richtext_part.create(
             {title: "Body", id: "body", marks: ["strong", "em", "link"]},
             Fragment.fromArray([
-                Object.assign(
-                    para([text("Once a heading")]),
-                    {
-                        attrs: Object.assign({}, para([]).attrs, {
-                            track: [
-                                {
-                                    type: "block_change",
-                                    user: USER.id,
-                                    username: USER.username,
-                                    date: DATE / 60000,
-                                    before: {type: "heading1", attrs: {}}
-                                }
-                            ]
-                        })
-                    }
-                )
+                Object.assign(para([text("Once a heading")]), {
+                    attrs: Object.assign({}, para([]).attrs, {
+                        track: [
+                            {
+                                type: "block_change",
+                                user: USER.id,
+                                username: USER.username,
+                                date: DATE / 60000,
+                                before: {type: "heading1", attrs: {}}
+                            }
+                        ]
+                    })
+                })
             ])
         )
-        return docSchema.nodes.doc.create({}, Fragment.fromArray([
-            docSchema.nodes.title.create(null, text("Title")),
-            docSchema.nodes.contributors_part.create({id: "authors"}),
-            bodyPart
-        ]))
+        return docSchema.nodes.doc.create(
+            {},
+            Fragment.fromArray([
+                docSchema.nodes.title.create(null, text("Title")),
+                docSchema.nodes.contributors_part.create({id: "authors"}),
+                bodyPart
+            ])
+        )
     }
 
     // Reject restores the previous node type.
-    const rejectedView = makeView(EditorState.create({doc: makeDocWithBlockChange()}))
+    const rejectedView = makeView(
+        EditorState.create({doc: makeDocWithBlockChange()})
+    )
     let changedPos = -1
     rejectedView.state.doc.descendants((node, pos) => {
-        if (changedPos === -1 && node.type.name === "paragraph" && node.attrs.track.length) {
+        if (
+            changedPos === -1 &&
+            node.type.name === "paragraph" &&
+            node.attrs.track.length
+        ) {
             changedPos = pos
         }
     })
     reject("block_change", changedPos, rejectedView)
     const restored = rejectedView.state.doc.nodeAt(changedPos)
-    assert.strictEqual(restored.type.name, "heading1", "previous type should be restored")
+    assert.strictEqual(
+        restored.type.name,
+        "heading1",
+        "previous type should be restored"
+    )
     assert.strictEqual(restored.attrs.track.length, 0)
 
     // Accept keeps the current type but removes the track entry.
-    const acceptedView = makeView(EditorState.create({doc: makeDocWithBlockChange()}))
+    const acceptedView = makeView(
+        EditorState.create({doc: makeDocWithBlockChange()})
+    )
     accept("block_change", changedPos, acceptedView)
     const kept = acceptedView.state.doc.nodeAt(changedPos)
     assert.strictEqual(kept.type.name, "paragraph")

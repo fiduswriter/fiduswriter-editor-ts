@@ -23,24 +23,46 @@ function closeRange(fragment, side, from, to, depth, openEnd) {
     let node = side < 0 ? fragment.firstChild : fragment.lastChild,
         inner = node.content
     if (fragment.childCount > 1) openEnd = 0
-    if (depth < to - 1) inner = closeRange(inner, side, from, to, depth + 1, openEnd)
+    if (depth < to - 1)
+        inner = closeRange(inner, side, from, to, depth + 1, openEnd)
     if (depth >= from)
         inner =
             side < 0
-                ? node.contentMatchAt(0).fillBefore(inner, openEnd <= depth).append(inner)
-                : inner.append(node.contentMatchAt(node.childCount).fillBefore(Fragment.empty, true))
-    return fragment.replaceChild(side < 0 ? 0 : fragment.childCount - 1, node.copy(inner))
+                ? node
+                      .contentMatchAt(0)
+                      .fillBefore(inner, openEnd <= depth)
+                      .append(inner)
+                : inner.append(
+                      node
+                          .contentMatchAt(node.childCount)
+                          .fillBefore(Fragment.empty, true)
+                  )
+    return fragment.replaceChild(
+        side < 0 ? 0 : fragment.childCount - 1,
+        node.copy(inner)
+    )
 }
 
 function closeSlice(slice, openStart, openEnd) {
     if (openStart < slice.openStart)
         slice = new Slice(
-            closeRange(slice.content, -1, openStart, slice.openStart, 0, slice.openEnd),
+            closeRange(
+                slice.content,
+                -1,
+                openStart,
+                slice.openStart,
+                0,
+                slice.openEnd
+            ),
             openStart,
             slice.openEnd
         )
     if (openEnd < slice.openEnd)
-        slice = new Slice(closeRange(slice.content, 1, openEnd, slice.openEnd, 0, 0), slice.openStart, openEnd)
+        slice = new Slice(
+            closeRange(slice.content, 1, openEnd, slice.openEnd, 0, 0),
+            slice.openStart,
+            openEnd
+        )
     return slice
 }
 
@@ -66,7 +88,8 @@ function addContext(slice, context) {
 
 // --- Document mirroring the demo template ---
 const strongMark = docSchema.marks.strong.create()
-const para = children => docSchema.nodes.paragraph.create(null, Fragment.fromArray(children))
+const para = children =>
+    docSchema.nodes.paragraph.create(null, Fragment.fromArray(children))
 const text = (content, marks) => docSchema.text(content, marks)
 
 const bodyPart = docSchema.nodes.richtext_part.create(
@@ -104,19 +127,26 @@ const abstractPart = docSchema.nodes.richtext_part.create(
     {title: "Abstract", id: "abstract", marks: ["strong", "em", "link"]},
     Fragment.fromArray([para([text("Abstract ")])])
 )
-const baseDoc = docSchema.nodes.doc.create({}, Fragment.fromArray([
-    docSchema.nodes.title.create(null, text("Title")),
-    docSchema.nodes.contributors_part.create({id: "authors"}),
-    abstractPart,
-    bodyPart
-]))
+const baseDoc = docSchema.nodes.doc.create(
+    {},
+    Fragment.fromArray([
+        docSchema.nodes.title.create(null, text("Title")),
+        docSchema.nodes.contributors_part.create({id: "authors"}),
+        abstractPart,
+        bodyPart
+    ])
+)
 
 const plugin = clipboardPlugin({
     editor: {
         view: null,
         currentView: null,
         docInfo: {access_rights: "write"},
-        mod: {db: {bibDB: {findReference: () => undefined, addReference: id => id}}},
+        mod: {
+            db: {
+                bibDB: {findReference: () => undefined, addReference: id => id}
+            }
+        },
         app: {csl: {}},
         schema: docSchema
     },
@@ -154,7 +184,10 @@ function makeClipboardHTML(from, to) {
         const node = content.firstChild
         context.push(
             node.type.name,
-            JSON.stringify(node.attrs) !== JSON.stringify(node.type.defaultAttrs) ? node.attrs : null
+            JSON.stringify(node.attrs) !==
+                JSON.stringify(node.type.defaultAttrs)
+                ? node.attrs
+                : null
         )
         content = node.content
     }
@@ -174,7 +207,9 @@ function parseClipboardHTML(html, targetFrom) {
     const contextNode = dom.querySelector("[data-pm-slice]")
     const sliceData =
         contextNode &&
-        /^(\d+) (\d+)(?: -(\d+))? (.*)/.exec(contextNode.getAttribute("data-pm-slice") || "")
+        /^(\d+) (\d+)(?: -(\d+))? (.*)/.exec(
+            contextNode.getAttribute("data-pm-slice") || ""
+        )
     let workDom = dom
     if (sliceData && sliceData[3]) {
         for (let i = +sliceData[3]; i > 0; i--) {
@@ -189,7 +224,10 @@ function parseClipboardHTML(html, targetFrom) {
         context: baseDoc.resolve(targetFrom)
     })
     if (sliceData) {
-        slice = addContext(closeSlice(slice, +sliceData[1], +sliceData[2]), sliceData[4])
+        slice = addContext(
+            closeSlice(slice, +sliceData[1], +sliceData[2]),
+            sliceData[4]
+        )
     }
     return slice
 }
@@ -197,7 +235,13 @@ function parseClipboardHTML(html, targetFrom) {
 let passed = 0,
     failed = 0
 
-function scenario(label, copy, target, expectTextInDoc, expectStrongOnPastedText) {
+function scenario(
+    label,
+    copy,
+    target,
+    expectTextInDoc,
+    expectStrongOnPastedText
+) {
     console.log(`\n=== ${label} ===`)
     // Same-document copy produces the wrapped slice...
     const html = makeClipboardHTML(copy[0], copy[1])
@@ -251,12 +295,22 @@ function scenario(label, copy, target, expectTextInDoc, expectStrongOnPastedText
             // cannot look for a standalone text node.
             const endPos = tr.mapping.map(target[1], 1)
             let found = null
-            tr.doc.nodesBetween(insertPos, Math.max(endPos, insertPos + 1), node => {
-                if (found === null && node.isText && node.text?.length) {
-                    found = node.marks.some(mark => mark.type.name === "strong")
+            tr.doc.nodesBetween(
+                insertPos,
+                Math.max(endPos, insertPos + 1),
+                node => {
+                    if (found === null && node.isText && node.text?.length) {
+                        found = node.marks.some(
+                            mark => mark.type.name === "strong"
+                        )
+                    }
                 }
-            })
-            assert.strictEqual(found, expectStrongOnPastedText, "strong mark on pasted text")
+            )
+            assert.strictEqual(
+                found,
+                expectStrongOnPastedText,
+                "strong mark on pasted text"
+            )
         }
         passed++
         console.log(`  OK`)
@@ -323,8 +377,7 @@ scenario(
     assert.throws(
         () => state.tr.replaceSelection(malformed),
         error =>
-            error instanceof TypeError &&
-            error.message.includes("lastChild"),
+            error instanceof TypeError && error.message.includes("lastChild"),
         "stale open depths on flattened content are expected to crash Selection.replace"
     )
     console.log("\n=== regression guard (old buggy behavior crashes) === OK")

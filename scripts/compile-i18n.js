@@ -18,9 +18,15 @@
  * Requires: gettext-parser (npm install --save-dev gettext-parser)
  */
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs"
-import { join, dirname } from "node:path"
-import { fileURLToPath } from "node:url"
+import {
+    readFileSync,
+    writeFileSync,
+    mkdirSync,
+    readdirSync,
+    existsSync
+} from "node:fs"
+import {join, dirname} from "node:path"
+import {fileURLToPath} from "node:url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, "..")
@@ -33,7 +39,10 @@ const localeDir = join(root, "locale")
 let parsePo
 try {
     const gettextParser = await import("gettext-parser")
-    parsePo = gettextParser.po?.parse || gettextParser.default?.po?.parse || gettextParser.parse
+    parsePo =
+        gettextParser.po?.parse ||
+        gettextParser.default?.po?.parse ||
+        gettextParser.parse
 } catch {
     console.error(
         "gettext-parser not found. Install it with:\n  npm install --save-dev gettext-parser"
@@ -43,7 +52,7 @@ try {
 
 function ensureDir(dir) {
     if (!existsSync(dir)) {
-        mkdirSync(dir, { recursive: true })
+        mkdirSync(dir, {recursive: true})
     }
 }
 
@@ -52,11 +61,12 @@ function ensureDir(dir) {
 // ---------------------------------------------------------------------------
 
 const langs = process.argv.slice(2)
-const allLangs = langs.length > 0
-    ? langs
-    : readdirSync(localeDir, { withFileTypes: true })
-        .filter((e) => e.isDirectory())
-        .map((e) => e.name)
+const allLangs =
+    langs.length > 0
+        ? langs
+        : readdirSync(localeDir, {withFileTypes: true})
+              .filter(e => e.isDirectory())
+              .map(e => e.name)
 
 let total = 0
 
@@ -75,10 +85,9 @@ for (const lang of allLangs) {
 
     // Extract metadata
     const headers = parsed.headers || {}
-    catalog[""] = [
-        headers["language"] || lang,
-        headers["plural-forms"] || "",
-    ].filter(Boolean).join("; ")
+    catalog[""] = [headers["language"] || lang, headers["plural-forms"] || ""]
+        .filter(Boolean)
+        .join("; ")
 
     // Extract translations
     const translations = parsed.translations || {}

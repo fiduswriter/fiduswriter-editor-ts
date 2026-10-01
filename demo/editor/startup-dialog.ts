@@ -1,8 +1,7 @@
 import {gettext} from "fwtoolkit"
 
 export type StartupResult =
-    | {mode: "import"; file: File}
-    | {mode: "new"; templateFile?: File}
+    {mode: "import"; file: File} | {mode: "new"; templateFile?: File}
 
 export interface StartupDialogResult {
     locale: string
@@ -167,7 +166,8 @@ export function showStartupDialog(): Promise<StartupDialogResult> {
             }
         }
 
-        const getUsername = () => usernameInput.value.trim() || gettext("Demo User")
+        const getUsername = () =>
+            usernameInput.value.trim() || gettext("Demo User")
 
         const handleImportFile = (file: File) => {
             close()
