@@ -5,7 +5,9 @@ import type {EditorState} from "prosemirror-state"
 const key = new PluginKey("placeholders")
 
 export const placeholdersPlugin = (options: {editor: unknown}) => {
-    function calculatePlaceHolderDecorations(state: EditorState): DecorationSet | false {
+    function calculatePlaceHolderDecorations(
+        state: EditorState
+    ): DecorationSet | false {
         const anchor = state.selection.$anchor
         const head = state.selection.$head
         if (!anchor || !head) {
@@ -18,7 +20,10 @@ export const placeholdersPlugin = (options: {editor: unknown}) => {
         }
         const currentPart = anchorPart === headPart ? anchorPart : false
 
-        const decorations: (ReturnType<typeof Decoration.widget> | ReturnType<typeof Decoration.node>)[] = []
+        const decorations: (
+            | ReturnType<typeof Decoration.widget>
+            | ReturnType<typeof Decoration.node>
+        )[] = []
 
         state.doc.forEach((partElement, offset) => {
             if (
@@ -114,9 +119,7 @@ export const placeholdersPlugin = (options: {editor: unknown}) => {
         props: {
             decorations(state) {
                 const decorationSet = key.getState(state) as
-                    | DecorationSet
-                    | false
-                    | undefined
+                    DecorationSet | false | undefined
                 return decorationSet || null
             }
         }

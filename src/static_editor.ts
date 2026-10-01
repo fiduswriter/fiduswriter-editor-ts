@@ -64,8 +64,10 @@ class ConfirmedDocEditorPlugin {
     }
 }
 
-export interface StaticEditorConfig
-    extends Omit<StaticAppConfig, "gettext" | "csl"> {
+export interface StaticEditorConfig extends Omit<
+    StaticAppConfig,
+    "gettext" | "csl"
+> {
     /** gettext function for UI strings. When omitted, a function backed by `localeCatalog` is used. */
     gettext?: (msgid: string) => string
     /** CSL engine instance. When omitted, a default engine is created. */
@@ -188,17 +190,14 @@ function defaultStaticUrl(basePath: string): (path: string) => string {
 function ensureResetCSS(staticUrlFn: (path: string) => string): void {
     const href = staticUrlFn("css/reset.css")
     if (
-        document.querySelector(
-            `link[rel="stylesheet"][href="${href}"]`
-        ) ||
+        document.querySelector(`link[rel="stylesheet"][href="${href}"]`) ||
         // Also match host-linked copies that only differ by a cache-busting
         // query string.
-        Array.from(
-            document.querySelectorAll('link[rel="stylesheet"]')
-        ).some(link =>
-            (link.getAttribute("href") || "")
-                .split("?")[0]
-                .endsWith("css/reset.css")
+        Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(
+            link =>
+                (link.getAttribute("href") || "")
+                    .split("?")[0]
+                    .endsWith("css/reset.css")
         )
     ) {
         return
@@ -230,8 +229,7 @@ export async function createStaticEditor(
     ;(window as any).staticUrl = staticUrl
 
     const locale = config.locale || "en"
-    const catalog =
-        config.localeCatalog ?? (await loadLocaleCatalog(locale))
+    const catalog = config.localeCatalog ?? (await loadLocaleCatalog(locale))
     const localeGettext = config.gettext ?? createGettext(catalog)
 
     const basePath =
@@ -252,7 +250,9 @@ export async function createStaticEditor(
         interpolate: (fmt, args, named) => {
             if (named) {
                 return fmt.replace(/%\(([^)]+)\)s?/g, (_match, key) => {
-                    const value = (args as unknown as Record<string, unknown>)[key]
+                    const value = (args as unknown as Record<string, unknown>)[
+                        key
+                    ]
                     return value !== undefined ? String(value) : ""
                 })
             }
@@ -278,9 +278,7 @@ export async function createStaticEditor(
 
     let csl = config.csl
     if (!csl) {
-        const {createCSL} = await import(
-            "@fiduswriter/document/citeproc-plus"
-        )
+        const {createCSL} = await import("@fiduswriter/document/citeproc-plus")
         csl = await createCSL()
         // createCSL replaces getStyle/getLocale with versions that only look at
         // pre-registered styles. Restore the prototype methods so the bundled

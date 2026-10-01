@@ -190,9 +190,7 @@ function getDecos(
             markFound.attrs.diff = node.attrs.diffdata[0].type as string
             markFound.attrs.from = node.attrs.diffdata[0].from as number
             markFound.attrs.to = node.attrs.diffdata[0].to as number
-            markFound.attrs.steps = JSON.stringify(
-                node.attrs.diffdata[0].steps
-            )
+            markFound.attrs.steps = JSON.stringify(node.attrs.diffdata[0].steps)
 
             const startPos = $head.pos // position of block start.
             const dom = createDropUp(
@@ -337,8 +335,9 @@ function deletionDecorations(
         }
     })
     if (deletionClass == "offline-deleted") {
-        merge.offlineTrackedSteps =
-            merge.offlineTrackedSteps.concat(stepsTrackedByChangeset)
+        merge.offlineTrackedSteps = merge.offlineTrackedSteps.concat(
+            stepsTrackedByChangeset
+        )
     }
     return decos
 }
@@ -453,9 +452,7 @@ function createDropUp(
                     } else {
                         // remove offline deletion decoration
                         const decorationId = dropUp.dataset.decoid
-                        if (
-                            deleteContent(merge, merge.mergeView2, diffMark)
-                        ) {
+                        if (deleteContent(merge, merge.mergeView2, diffMark)) {
                             merge.mergeView2.dispatch(
                                 merge.mergeView2.state.tr.setMeta(
                                     "removeHighlight",
@@ -542,9 +539,7 @@ function createDropUp(
                     } else {
                         // remove offline deletion decoration
                         const target = event.target as HTMLElement
-                        const parentEl = target.closest(
-                            ".deletion-decoration"
-                        )
+                        const parentEl = target.closest(".deletion-decoration")
                         if (!parentEl) {
                             return
                         }
@@ -734,10 +729,7 @@ export const diffPlugin = (options: {merge: MergeEditorLike}) =>
         props: {
             handleClick: (view, _pos, event) => {
                 const $pos = view.state.doc.resolve(_pos)
-                if (
-                    $pos.parent &&
-                    $pos.parent.type.name == "figure"
-                ) {
+                if ($pos.parent && $pos.parent.type.name == "figure") {
                     // If the click is on a Fig element set up a node selection
                     // so that accept/reject options are shown properly.
                     const tr = view.state.tr
@@ -751,9 +743,7 @@ export const diffPlugin = (options: {merge: MergeEditorLike}) =>
                 const delDeco = view.dom.querySelectorAll(
                     ".offline-deleted,.online-deleted"
                 )
-                delDeco.forEach(item =>
-                    item.classList.remove("selected-dec")
-                )
+                delDeco.forEach(item => item.classList.remove("selected-dec"))
                 const delPopUp = view.dom.querySelectorAll(
                     ".deletion-decoration .drop-up-outer"
                 )
@@ -763,9 +753,10 @@ export const diffPlugin = (options: {merge: MergeEditorLike}) =>
                 const delFnToolTip = view.dom.querySelectorAll(
                     ".deleted-footnote-element"
                 )
-                delFnToolTip.forEach(tooltip =>
-                    ((tooltip.childNodes[0] as HTMLElement).style.display =
-                        "none")
+                delFnToolTip.forEach(
+                    tooltip =>
+                        ((tooltip.childNodes[0] as HTMLElement).style.display =
+                            "none")
                 )
                 options.merge.mergeView2.dispatch(
                     options.merge.mergeView2.state.tr.setMeta(
@@ -816,9 +807,8 @@ export const diffPlugin = (options: {merge: MergeEditorLike}) =>
                     }
                 }
                 if (target.matches(".deleted-footnote-element")) {
-                    ;(
-                        target.childNodes[0] as HTMLElement
-                    ).style.display = "block"
+                    ;(target.childNodes[0] as HTMLElement).style.display =
+                        "block"
                 }
                 return false
             },

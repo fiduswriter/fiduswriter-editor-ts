@@ -11,12 +11,19 @@ class ClipboardDOMSerializer {
     domSerializer: DOMSerializer
     editor: Editor
 
-    constructor(nodes: Record<string, any>, marks: Record<string, any>, editor: Editor) {
+    constructor(
+        nodes: Record<string, any>,
+        marks: Record<string, any>,
+        editor: Editor
+    ) {
         this.domSerializer = new DOMSerializer(nodes, marks)
         this.editor = editor
     }
 
-    serializeFragment(fragment: Fragment, options?: {document?: Document}): DocumentFragment {
+    serializeFragment(
+        fragment: Fragment,
+        options?: {document?: Document}
+    ): DocumentFragment {
         const domFragment = this.domSerializer.serializeFragment(
             fragment,
             options
@@ -34,7 +41,10 @@ class ClipboardDOMSerializer {
     }
 
     renderCitations(domFragment: DocumentFragment): any {
-        const settings = this.editor.view.state.doc.attrs as Record<string, any>,
+        const settings = this.editor.view.state.doc.attrs as Record<
+                string,
+                any
+            >,
             bibliographyHeader =
                 settings.bibliography_header[settings.language] ||
                 (BIBLIOGRAPHY_HEADERS as any)[settings.language]
@@ -52,9 +62,8 @@ class ClipboardDOMSerializer {
                 const bibDiv = document.createElement("div")
                 bibDiv.classList.add("fiduswriter-clipboard-bibliography")
                 bibDiv.innerHTML = fm.bibHTML
-                ;(bibDiv.firstElementChild as HTMLElement).innerHTML = gettext(
-                    "Bibliography"
-                )
+                ;(bibDiv.firstElementChild as HTMLElement).innerHTML =
+                    gettext("Bibliography")
                 domFragment.appendChild(bibDiv)
             }
             return fm
@@ -63,7 +72,10 @@ class ClipboardDOMSerializer {
         }
     }
 
-    renderFootnotes(domFragment: DocumentFragment, citationFormatter: any): void {
+    renderFootnotes(
+        domFragment: DocumentFragment,
+        citationFormatter: any
+    ): void {
         const footnoteSelector =
             citationFormatter && citationFormatter.citationType === "note"
                 ? ".footnote-marker, .citation"
@@ -91,10 +103,9 @@ class ClipboardDOMSerializer {
                 newFootnote.firstElementChild &&
                 newFootnote.firstElementChild.matches("p")
             ) {
-                ;(newFootnote.firstElementChild as HTMLElement).insertAdjacentHTML(
-                    "afterbegin",
-                    `${counter}. `
-                )
+                ;(
+                    newFootnote.firstElementChild as HTMLElement
+                ).insertAdjacentHTML("afterbegin", `${counter}. `)
             } else {
                 newFootnote.insertAdjacentHTML(
                     "afterbegin",
@@ -115,8 +126,7 @@ class ClipboardDOMSerializer {
                 "figure[data-category='figure'] figcaption span.label"
             )
             .forEach((el, index) => {
-                ;(el as HTMLElement).innerHTML +=
-                    " " + (index + 1) + ": "
+                ;(el as HTMLElement).innerHTML += " " + (index + 1) + ": "
             })
 
         domFragment
@@ -124,8 +134,7 @@ class ClipboardDOMSerializer {
                 "figure[data-category='photo'] figcaption span.label"
             )
             .forEach((el, index) => {
-                ;(el as HTMLElement).innerHTML +=
-                    " " + (index + 1) + ": "
+                ;(el as HTMLElement).innerHTML += " " + (index + 1) + ": "
             })
 
         domFragment
@@ -133,8 +142,7 @@ class ClipboardDOMSerializer {
                 "figure[data-category='table'] figcaption span.label"
             )
             .forEach((el, index) => {
-                ;(el as HTMLElement).innerHTML +=
-                    " " + (index + 1) + ": "
+                ;(el as HTMLElement).innerHTML += " " + (index + 1) + ": "
             })
     }
 
@@ -182,7 +190,9 @@ class ClipboardDOMSerializer {
     }
 }
 
-export const docClipboardSerializer = (editor: Editor): ClipboardDOMSerializer =>
+export const docClipboardSerializer = (
+    editor: Editor
+): ClipboardDOMSerializer =>
     ClipboardDOMSerializer.fromSchema(
         createDocCopySchema(editor.schema) as Schema,
         editor

@@ -50,13 +50,13 @@ export class CopyrightDialog {
 
     getCurrentValue(): void {
         this.copyright = {}
-        const holder = (
-            this.dialog as Dialog
-        ).dialogEl.querySelector(".holder") as HTMLInputElement
+        const holder = (this.dialog as Dialog).dialogEl.querySelector(
+            ".holder"
+        ) as HTMLInputElement
         this.copyright.holder = holder.value.length ? holder.value : false
-        const year = (
-            this.dialog as Dialog
-        ).dialogEl.querySelector(".year") as HTMLInputElement
+        const year = (this.dialog as Dialog).dialogEl.querySelector(
+            ".year"
+        ) as HTMLInputElement
         this.copyright.year = year.value.length
             ? Math.max(0, Math.min(Number.parseInt(year.value) || 0, 2100))
             : false
@@ -68,7 +68,9 @@ export class CopyrightDialog {
         const licenseStartDates = Array.from(
             (this.dialog as Dialog).dialogEl.querySelectorAll(".license-start")
         ).map(el => (el as HTMLInputElement).value)
-        this.copyright.licenses = (this.licensesList as InputList<License>).values
+        this.copyright.licenses = (
+            this.licensesList as InputList<License>
+        ).values
             .map((license: License, index: number) => {
                 if (!license.url.length) {
                     return false
@@ -162,7 +164,8 @@ export class CopyrightDialog {
                         label1: gettext("From list"),
                         label2: gettext("Custom"),
                         initialMode: mode,
-                        render1: () => licenseSelectTemplate({url: license.url}),
+                        render1: () =>
+                            licenseSelectTemplate({url: license.url}),
                         render2: () =>
                             licenseInputTemplate({
                                 url: license.url,
@@ -192,8 +195,7 @@ export class CopyrightDialog {
                 } else {
                     url = (
                         licenseInput.querySelector("input.license") as
-                            | HTMLInputElement
-                            | undefined
+                            HTMLInputElement | undefined
                     )?.value as string
                     title = (
                         licenseInput.querySelector(
@@ -201,11 +203,10 @@ export class CopyrightDialog {
                         ) as HTMLInputElement
                     ).value
                 }
-                const startValue =
-                    (el.closest("tr")?.querySelector(".license-start") as
-                        | HTMLInputElement
-                        | undefined
-                    )?.value
+                const startValue = (
+                    el.closest("tr")?.querySelector(".license-start") as
+                        HTMLInputElement | undefined
+                )?.value
                 const start: string | false = startValue || false
                 return {url, title, start}
             }

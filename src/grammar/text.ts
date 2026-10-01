@@ -129,25 +129,21 @@ export function initSources(editor: Editor): GrammarSource[] {
                     return []
                 }
                 let fnCount = 0
-                editor.view.state.doc
-                    .child(index)
-                    .descendants(node => {
-                        if (node.type.name === "footnote") {
-                            fnCount++
-                        }
-                    })
+                editor.view.state.doc.child(index).descendants(node => {
+                    if (node.type.name === "footnote") {
+                        fnCount++
+                    }
+                })
                 if (!fnCount) {
                     return []
                 }
                 let fnFromIndex = 0
                 for (let i = 0; i < index; i++) {
-                    editor.view.state.doc
-                        .child(i)
-                        .descendants(node => {
-                            if (node.type.name === "footnote") {
-                                fnFromIndex++
-                            }
-                        })
+                    editor.view.state.doc.child(i).descendants(node => {
+                        if (node.type.name === "footnote") {
+                            fnFromIndex++
+                        }
+                    })
                 }
                 return editor.mod.footnotes!.fnEditor.view.state.doc.content.content.slice(
                     fnFromIndex,
@@ -157,13 +153,11 @@ export function initSources(editor: Editor): GrammarSource[] {
             getStartPos: () => {
                 let fnFromIndex = 0
                 for (let i = 0; i < index; i++) {
-                    editor.view.state.doc
-                        .child(i)
-                        .descendants(node => {
-                            if (node.type.name === "footnote") {
-                                fnFromIndex++
-                            }
-                        })
+                    editor.view.state.doc.child(i).descendants(node => {
+                        if (node.type.name === "footnote") {
+                            fnFromIndex++
+                        }
+                    })
                 }
                 let pos = 0
                 for (let i = 0; i < fnFromIndex; i++) {

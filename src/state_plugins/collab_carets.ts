@@ -33,7 +33,11 @@ export const updateCollaboratorSelection = (
 ): Transaction => {
     const pluginState = key.getState(state) as CollabCaretsState | undefined
     if (!pluginState) {
-        return state.tr.setMeta(key, {decos: DecorationSet.empty, caretPositions: [], caretUpdate: false})
+        return state.tr.setMeta(key, {
+            decos: DecorationSet.empty,
+            caretPositions: [],
+            caretUpdate: false
+        })
     }
     let {decos, caretPositions} = pluginState
 
@@ -144,9 +148,14 @@ export const collabCaretsPlugin = (_options: {editor: unknown}) =>
                     // of previous values
                     return meta
                 }
-                const pluginState = key.getState(oldState) as CollabCaretsState | undefined
+                const pluginState = key.getState(oldState) as
+                    CollabCaretsState | undefined
                 if (!pluginState) {
-                    return {decos: DecorationSet.empty, caretPositions: [], caretUpdate: false}
+                    return {
+                        decos: DecorationSet.empty,
+                        caretPositions: [],
+                        caretUpdate: false
+                    }
                 }
                 let {decos, caretPositions} = pluginState,
                     caretUpdate: false | {anchor: number; head: number} = false

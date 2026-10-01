@@ -177,7 +177,9 @@ export const pdfExportDialogTemplate = (): string => `
     <p>
         <label><input type="checkbox" class="pdf-crop-marks" aria-describedby="pdf-crop-marks-help"> ${gettext("Crop marks")}</label>
         ${infoTooltip(
-            gettext("Small lines at the corners of the page that show printers where to cut the paper."),
+            gettext(
+                "Small lines at the corners of the page that show printers where to cut the paper."
+            ),
             "pdf-crop-marks-help"
         )}<br>
         <label><input type="checkbox" class="pdf-trim-box" aria-describedby="pdf-trim-box-help"> ${gettext("Trim box")}</label>
@@ -187,22 +189,30 @@ export const pdfExportDialogTemplate = (): string => `
         )}<br>
         <label><input type="checkbox" class="pdf-bleed-box" aria-describedby="pdf-bleed-box-help"> ${gettext("Bleed box")}</label>
         ${infoTooltip(
-            gettext("Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."),
+            gettext(
+                "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+            ),
             "pdf-bleed-box-help"
         )}<br>
         <label>${gettext("Bleed")}: <input type="number" class="pdf-bleed-mm fw-inline" value="3" min="0" step="0.5" aria-describedby="pdf-bleed-mm-help"> ${gettext("mm")}</label>
         ${infoTooltip(
-            gettext("How far, in millimeters, images and colors extend beyond the edge of the page."),
+            gettext(
+                "How far, in millimeters, images and colors extend beyond the edge of the page."
+            ),
             "pdf-bleed-mm-help"
         )}<br>
         <label><input type="checkbox" class="pdf-link-borders" aria-describedby="pdf-link-borders-help"> ${gettext("Show link annotation borders")}</label>
         ${infoTooltip(
-            gettext("Draws a visible border around hyperlinks in the PDF so they are easier to find."),
+            gettext(
+                "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+            ),
             "pdf-link-borders-help"
         )}<br>
         <label><input type="checkbox" class="pdf-rasterize-svgs" aria-describedby="pdf-rasterize-svgs-help"> ${gettext("Rasterize SVG images")}</label>
         ${infoTooltip(
-            gettext("Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."),
+            gettext(
+                "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+            ),
             "pdf-rasterize-svgs-help"
         )}
     </p>
@@ -243,10 +253,12 @@ export const getExportTrackChangesValue = (
     name: string
 ): string => {
     return (
-        dialogEl.querySelector(
-            `input[name="${name}"]:checked`
-        ) as HTMLInputElement | null
-    )?.value || "resolve"
+        (
+            dialogEl.querySelector(
+                `input[name="${name}"]:checked`
+            ) as HTMLInputElement | null
+        )?.value || "resolve"
+    )
 }
 
 export const htmlExportDialogTemplate = (): string => `
@@ -451,7 +463,9 @@ export const figureImageTemplate = ({imageDB}: {imageDB: ImageDB}): string =>
                 </tr>
             </thead>
             <tbody class="fw-data-table-body fw-small">
-                ${Object.values(imageDB).map(image => figureImageItemTemplate(image)).join("")}
+                ${Object.values(imageDB)
+                    .map(image => figureImageItemTemplate(image))
+                    .join("")}
             </tbody>
         </table>
         <div class="dialogSubmit">
@@ -469,7 +483,11 @@ export const figureImageTemplate = ({imageDB}: {imageDB: ImageDB}): string =>
     </div>`
 
 /** A template to configure the display of a figure in the editor. */
-export const configureFigureTemplate = ({language}: {language: string}): string =>
+export const configureFigureTemplate = ({
+    language
+}: {
+    language: string
+}): string =>
     `<div class="fw-media-uploader">
             <input type="hidden" id="figure-category">
             <div class="figure-preview">

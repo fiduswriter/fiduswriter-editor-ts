@@ -52,8 +52,7 @@ export class FigureDialog {
 
     constructor(editor: Editor) {
         this.editor = editor
-        this.imageDB = this.editor.mod.db!
-            .imageDB as unknown as EditorImageDB
+        this.imageDB = this.editor.mod.db!.imageDB as unknown as EditorImageDB
         this.userImageDB = this.editor.app.imageDB as unknown as EditorImageDB
     }
 
@@ -98,9 +97,11 @@ export class FigureDialog {
             MathfieldElement.locale = "int"
             MathfieldElement.plonkSound = null
             MathfieldElement.keypressSound = null
-            this.mathField = new (MathfieldElement as unknown as new (
-                options: Record<string, unknown>
-            ) => MathfieldElementInstance)({
+            this.mathField = new (
+                MathfieldElement as unknown as new (
+                    options: Record<string, unknown>
+                ) => MathfieldElementInstance
+            )({
                 mathVirtualKeyboardPolicy: "manual"
             })
             this.mathField.value = this.equation
@@ -113,9 +114,7 @@ export class FigureDialog {
                 this.hidePlaceHolder()
             )
             this.mathField.addEventListener("input", () => {
-                this.equation = this.mathField
-                    ? this.mathField.getValue()
-                    : ""
+                this.equation = this.mathField ? this.mathField.getValue() : ""
                 this.showHideNonMathElements()
             })
             this.mathField.select()
@@ -163,39 +162,32 @@ export class FigureDialog {
             this.imgId,
             this.editor as any
         )
-        imageSelection
-            .init()
-            .then((result) => {
-                const {
-                    id,
-                    db
-                } = result as {
-                    id: number | false
-                    db: "document" | "user"
-                }
-                if (id) {
-                    this.imgId = id
-                    this.imgDb = db
-                    // We take a copy of the object in case of the image coming from the user db in order
-                    // not to overwrite the copyright info from the user's image db.
-                    this.copyright =
-                        db === "document"
-                            ? (this.imageDB.db[String(id)].copyright as
-                                  | Record<string, JSONValue>
-                                  | undefined) || false
-                            : JSON.parse(
-                                  JSON.stringify(
-                                      this.userImageDB.db[String(id)]
-                                          .copyright
-                                  )
+        imageSelection.init().then(result => {
+            const {id, db} = result as {
+                id: number | false
+                db: "document" | "user"
+            }
+            if (id) {
+                this.imgId = id
+                this.imgDb = db
+                // We take a copy of the object in case of the image coming from the user db in order
+                // not to overwrite the copyright info from the user's image db.
+                this.copyright =
+                    db === "document"
+                        ? (this.imageDB.db[String(id)].copyright as
+                              Record<string, JSONValue> | undefined) || false
+                        : JSON.parse(
+                              JSON.stringify(
+                                  this.userImageDB.db[String(id)].copyright
                               )
-                    this.layoutImagePreview()
-                } else {
-                    this.imgId = false
-                    this.imgDb = false
-                    this.layoutMathEditor()
-                }
-            })
+                          )
+                this.layoutImagePreview()
+            } else {
+                this.imgId = false
+                this.imgDb = false
+                this.layoutMathEditor()
+            }
+        })
     }
 
     async layoutImagePreview(): Promise<void> {
@@ -229,16 +221,16 @@ export class FigureDialog {
             }
 
             const dialogEl = (this.dialog as Dialog).dialogEl
-            dialogEl.querySelector(
-                ".inner-figure-preview"
-            )!.innerHTML = `<img src="${imgSrc}" style="max-width: 400px;max-height:220px">
+            dialogEl.querySelector(".inner-figure-preview")!.innerHTML =
+                `<img src="${imgSrc}" style="max-width: 400px;max-height:220px">
                 <span class="dot-menu-icon"><i class="fa-solid fa-ellipsis-v"></i></span>`
 
             dialogEl
                 .querySelector(".dot-menu-icon")!
                 .addEventListener("click", event => {
                     const contentMenu = new ContentMenu({
-                        menu: this.editor.menu.imageMenuModel as ContentMenuInit,
+                        menu: this.editor.menu
+                            .imageMenuModel as ContentMenuInit,
                         page: this,
                         menuPos: {
                             X: (event as MouseEvent).pageX,
@@ -282,10 +274,7 @@ export class FigureDialog {
                         key
                     )
                     const encryptedCopyright =
-                        await E2EEEncryptor.encryptObject(
-                            this.copyright,
-                            key
-                        )
+                        await E2EEEncryptor.encryptObject(this.copyright, key)
                     const newId = await this.imageDB.saveImage({
                         image: encryptedFile,
                         title: userImage.title,
@@ -340,10 +329,8 @@ export class FigureDialog {
         if (
             node &&
             this.insideFigure &&
-            this.equation ===
-                (currentEquationNode?.attrs.equation || "") &&
-            this.imgId ===
-                (currentImageNode?.attrs.image || false) &&
+            this.equation === (currentEquationNode?.attrs.equation || "") &&
+            this.imgId === (currentImageNode?.attrs.image || false) &&
             this.imgDb === "document" &&
             this.caption === node.attrs.caption &&
             this.category === node.attrs.category &&
@@ -374,7 +361,9 @@ export class FigureDialog {
             node?.content?.content.find(
                 (node: Node) => node.type.name === "figure_caption"
             ) ||
-            this.editor.currentView.state.schema.nodes["figure_caption"].create()
+            this.editor.currentView.state.schema.nodes[
+                "figure_caption"
+            ].create()
         if (this.category === "table") {
             content.unshift(captionNode)
         } else {
@@ -442,7 +431,8 @@ export class FigureDialog {
             this.submitMessage = gettext("Update")
             this.equation =
                 node.content.content.find(
-                    (childNode: Node) => childNode.type.name === "figure_equation"
+                    (childNode: Node) =>
+                        childNode.type.name === "figure_equation"
                 )?.attrs.equation || ""
             this.imgId =
                 node.content.content.find(
@@ -567,9 +557,9 @@ export class FigureDialog {
         )
 
         if (this.imgId && this.imageDB.db[String(this.imgId)]) {
-            this.copyright = (this.imageDB.db[String(this.imgId)].copyright as
-                | Record<string, JSONValue>
-                | undefined) || false
+            this.copyright =
+                (this.imageDB.db[String(this.imgId)].copyright as
+                    Record<string, JSONValue> | undefined) || false
             this.layoutImagePreview()
         } else {
             this.layoutMathEditor()

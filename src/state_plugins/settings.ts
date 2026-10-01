@@ -72,7 +72,9 @@ export const settingsPlugin = (options: SettingsOptions) => {
                         break
                     case "citationstyle":
                         if (newValue.length) {
-                            ;(options.editor.mod.citations as any).resetCitations()
+                            ;(
+                                options.editor.mod.citations as any
+                            ).resetCitations()
                         } else {
                             settingsValid = false
                         }
@@ -91,8 +93,7 @@ export const settingsPlugin = (options: SettingsOptions) => {
                                                 lang[2] as "ltr" | "rtl")
                                     )
                                 options.editor.docInfo.dir = lang[2] as
-                                    | "ltr"
-                                    | "rtl"
+                                    "ltr" | "rtl"
                                 updateLanguageCSS(newValue)
                             }
                         } else {
@@ -113,8 +114,7 @@ export const settingsPlugin = (options: SettingsOptions) => {
                 (doc_style: {slug: string}) => doc_style.slug === docStyleId
             ) ||
             ((options.editor.mod.documentTemplate as any).documentStyles.length
-                ? (options.editor.mod.documentTemplate as any)
-                    .documentStyles[0]
+                ? (options.editor.mod.documentTemplate as any).documentStyles[0]
                 : {contents: "", documentstylefile_set: []})
 
         let docStyleCSS: string = docStyle.contents
@@ -219,7 +219,9 @@ export const settingsPlugin = (options: SettingsOptions) => {
             return tr
         },
         view(view) {
-            if (!updateSettings(view.state.doc.attrs as Record<string, any>, {})) {
+            if (
+                !updateSettings(view.state.doc.attrs as Record<string, any>, {})
+            ) {
                 setTimeout(() => {
                     const tr = view.state.tr
                     const fixedSettings = fixSettings(
@@ -250,8 +252,7 @@ export const settingsPlugin = (options: SettingsOptions) => {
                     // save status ("Saved", …), which must survive unrelated
                     // transactions such as remote merges or saves confirming
                     // local steps.
-                    const title =
-                        view.state.doc.firstChild?.textContent || ""
+                    const title = view.state.doc.firstChild?.textContent || ""
                     const prevTitle =
                         prevState.doc.firstChild?.textContent || ""
                     if (title !== prevTitle) {

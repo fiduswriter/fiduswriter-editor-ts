@@ -28,7 +28,8 @@ export const citationRenderPlugin = (options: CitationRenderOptions) =>
                     // of previous values
                     return meta as CitationRenderState
                 }
-                const oldPluginState = key.getState(oldState) as CitationRenderState | undefined
+                const oldPluginState = key.getState(oldState) as
+                    CitationRenderState | undefined
                 if (!oldPluginState) {
                     return {action: false}
                 }
@@ -77,11 +78,15 @@ export const citationRenderPlugin = (options: CitationRenderOptions) =>
                 return {action}
             }
         },
-        view(_view: EditorView): {update: (view: EditorView, prevState: EditorState) => void; destroy: () => void} {
+        view(_view: EditorView): {
+            update: (view: EditorView, prevState: EditorState) => void
+            destroy: () => void
+        } {
             options.editor.mod.citations.resetCitations()
             return {
                 update: (view: EditorView, _prevState: EditorState) => {
-                    const stateAction = key.getState(view.state) as CitationRenderState | undefined
+                    const stateAction = key.getState(view.state) as
+                        CitationRenderState | undefined
                     const action = stateAction?.action
                     if (action === "reset") {
                         options.editor.mod.citations.resetCitations()

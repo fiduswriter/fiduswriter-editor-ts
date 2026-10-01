@@ -102,8 +102,8 @@ export class LinkDialog {
     // To check whether links, cross references or both can be added in current position.
     checkAllowedContent(): AllowedContent {
         if (this.editor.currentView === this.editor.view) {
-            const settings = this.editor.view.state.selection.$anchor.node(1)
-                .attrs
+            const settings =
+                this.editor.view.state.selection.$anchor.node(1).attrs
             return {
                 link: settings.marks.includes("link"),
                 cross_reference: settings.elements.includes("cross_reference")
@@ -119,7 +119,10 @@ export class LinkDialog {
     }
 
     // Find the start and end of the link currently selected.
-    extendSelectionToMark(pos: number, mark: ProseMirrorNode["marks"][0]): void {
+    extendSelectionToMark(
+        pos: number,
+        mark: ProseMirrorNode["marks"][0]
+    ): void {
         const view = this.editor.currentView,
             state = view.state,
             $pos = state.doc.resolve(pos)
@@ -161,7 +164,9 @@ export class LinkDialog {
             text: this.submitButtonText,
             classes: "fw-dark",
             click: () => {
-                const linkTypeEl = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                const linkTypeEl = (
+                        this.dialog as InstanceType<typeof Dialog>
+                    ).dialogEl.querySelector(
                         "input[name=link-type]:checked"
                     ) as HTMLInputElement | null,
                     linkType = linkTypeEl ? linkTypeEl.value : "external"
@@ -173,7 +178,9 @@ export class LinkDialog {
                 switch (linkType) {
                     case "internal": {
                         target = (
-                            (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                            (
+                                this.dialog as InstanceType<typeof Dialog>
+                            ).dialogEl.querySelector(
                                 "select.internal-link-selector"
                             ) as HTMLSelectElement
                         ).value
@@ -190,9 +197,11 @@ export class LinkDialog {
                         break
                     }
                     case "external": {
-                        const linkEl =
-                            (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector("input.link") as
-                                HTMLInputElement
+                        const linkEl = (
+                            this.dialog as InstanceType<typeof Dialog>
+                        ).dialogEl.querySelector(
+                            "input.link"
+                        ) as HTMLInputElement
                         if (
                             !/^\s*$/.test(linkEl.value) &&
                             linkEl.value !== this.defaultLink
@@ -200,7 +209,9 @@ export class LinkDialog {
                             href = linkEl.value
                         }
                         title = (
-                            (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                            (
+                                this.dialog as InstanceType<typeof Dialog>
+                            ).dialogEl.querySelector(
                                 "input.link-title"
                             ) as HTMLInputElement
                         ).value
@@ -217,7 +228,9 @@ export class LinkDialog {
                     }
                     case "cross_reference": {
                         target = (
-                            (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                            (
+                                this.dialog as InstanceType<typeof Dialog>
+                            ).dialogEl.querySelector(
                                 "select.cross-reference-selector"
                             ) as HTMLSelectElement
                         ).value
@@ -236,7 +249,7 @@ export class LinkDialog {
                         target = false
                         change = false
                 }
-                (this.dialog as InstanceType<typeof Dialog>).close()
+                ;(this.dialog as InstanceType<typeof Dialog>).close()
 
                 if (!change) {
                     // The link input is empty or hasn't been changed from the default value.
@@ -310,31 +323,43 @@ export class LinkDialog {
         this.dialog.open()
 
         if (this.internalTargets.length) {
-            const externalEls = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
-                    "input.link, input.link-title"
-                ),
-                internalEls = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
-                    "select.internal-link-selector"
-                ),
-                crossReferenceEls = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
-                    "select.cross-reference-selector"
-                ),
-                externalSwitchers = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
+            const externalEls = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelectorAll("input.link, input.link-title"),
+                internalEls = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelectorAll("select.internal-link-selector"),
+                crossReferenceEls = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelectorAll("select.cross-reference-selector"),
+                externalSwitchers = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelectorAll(
                     "input.link, input.link-title, label.link-external-label, input.link-external-check"
                 ),
-                internalSwitchers = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
+                internalSwitchers = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelectorAll(
                     "select.internal-link-selector, label.link-internal-label, input.link-internal-check"
                 ),
-                crossReferenceSwitchers = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
+                crossReferenceSwitchers = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelectorAll(
                     "select.cross-reference-selector, label.cross-reference-label, input.cross-reference-check"
                 ),
-                radioInternal = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                radioInternal = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelector(
                     "input.link-internal-check"
                 ) as HTMLInputElement,
-                radioExternal = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                radioExternal = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelector(
                     "input.link-external-check"
                 ) as HTMLInputElement,
-                radioCrossReference = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                radioCrossReference = (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelector(
                     "input.cross-reference-check"
                 ) as HTMLInputElement
 

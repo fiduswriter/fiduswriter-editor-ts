@@ -141,7 +141,9 @@ export class Merge {
 
             // Before starting the merge process update the fn editor to be in sync
             // with main editor
-            ;(this.mod.editor.mod.footnotes as any).fnEditor.renderAllFootnotes()
+            ;(
+                this.mod.editor.mod.footnotes as any
+            ).fnEditor.renderAllFootnotes()
 
             // Load all the newly added comments from online users.
             ;((this.mod.editor.mod.comments as any).store as any).loadComments(
@@ -230,7 +232,9 @@ export class Merge {
             )
             if (mapped && !rebasedTr.maybeStep(mapped).failed) {
                 maps.appendMap(mapped.getMap())
-                ;(maps as unknown as {setMirror(a: number, b: number): void}).setMirror(
+                ;(
+                    maps as unknown as {setMirror(a: number, b: number): void}
+                ).setMirror(
                     unconfirmedTr.steps.length - index - 1,
                     unconfirmedTr.steps.length +
                         lostTr.steps.length +
@@ -268,7 +272,15 @@ export class Merge {
         let usedImages: (number | string)[] = []
         const usedBibs: (number | string)[] = []
         const footnoteFind = (
-            node: {name?: string; attrs?: {references?: {id: string | number}[]; image?: number | string; footnote?: any[]}; content?: any[]},
+            node: {
+                name?: string
+                attrs?: {
+                    references?: {id: string | number}[]
+                    image?: number | string
+                    footnote?: any[]
+                }
+                content?: any[]
+            },
             usedImages: (number | string)[],
             usedBibs: (number | string)[]
         ) => {
@@ -286,17 +298,12 @@ export class Merge {
         }
         rebasedTr.doc.descendants(node => {
             if (node.type.name === "citation") {
-                node.attrs.references.forEach(
-                    (ref: {id: string | number}) => {
-                        usedBibs.push(Number.parseInt(String(ref.id)))
-                    }
-                )
+                node.attrs.references.forEach((ref: {id: string | number}) => {
+                    usedBibs.push(Number.parseInt(String(ref.id)))
+                })
             } else if (node.type.name === "image" && node.attrs.image) {
                 usedImages.push(node.attrs.image)
-            } else if (
-                node.type.name === "footnote" &&
-                node.attrs.footnote
-            ) {
+            } else if (node.type.name === "footnote" && node.attrs.footnote) {
                 node.attrs.footnote.forEach((subNode: unknown) =>
                     footnoteFind(subNode as any, usedImages, usedBibs)
                 )
@@ -305,10 +312,7 @@ export class Merge {
         const oldBibDB = this.mod.editor.mod.db!.bibDB.db
         this.mod.editor.mod.db!.bibDB.setDB(data.doc.bibliography)
         usedBibs.forEach(id => {
-            if (
-                !this.mod.editor.mod.db!.bibDB.db[id] &&
-                oldBibDB[id]
-            ) {
+            if (!this.mod.editor.mod.db!.bibDB.db[id] && oldBibDB[id]) {
                 ;(this.mod.editor.mod.db!.bibDB as any).updateReference(
                     id,
                     oldBibDB[id]
@@ -321,10 +325,7 @@ export class Merge {
         const uniqueImages = new Set(usedImages)
         usedImages = Array.from(uniqueImages)
         usedImages.forEach(id => {
-            if (
-                !this.mod.editor.mod.db!.imageDB.db[id] &&
-                oldImageDB[id]
-            ) {
+            if (!this.mod.editor.mod.db!.imageDB.db[id] && oldImageDB[id]) {
                 // If the image was uploaded by the offline user we know that he may not have deleted it so we can resend it normally
                 if (
                     Object.keys(this.mod.editor.app.imageDB.db).includes(

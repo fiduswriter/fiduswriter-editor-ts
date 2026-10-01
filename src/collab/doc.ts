@@ -369,9 +369,8 @@ export class ModCollabDoc {
                         }
                     } else if (result?.action === "recover") {
                         // Recovery flow
-                        const {recoverWithKeyDialog} = await import(
-                            "fwtoolkit/e2ee/passphrase-dialog"
-                        )
+                        const {recoverWithKeyDialog} =
+                            await import("fwtoolkit/e2ee/passphrase-dialog")
                         const recoverResult = await new Promise<{
                             recoveryKey: string
                             newPassphrase: string
@@ -385,9 +384,8 @@ export class ModCollabDoc {
                                         recoverResult.recoveryKey,
                                         recoverResult.newPassphrase
                                     )) as {newRecoveryKey: string}
-                                const {showRecoveryKeyDialog} = await import(
-                                    "fwtoolkit/e2ee/passphrase-dialog"
-                                )
+                                const {showRecoveryKeyDialog} =
+                                    await import("fwtoolkit/e2ee/passphrase-dialog")
                                 await new Promise<void>(resolve => {
                                     showRecoveryKeyDialog(
                                         newRecoveryKey,
@@ -694,21 +692,18 @@ export class ModCollabDoc {
         }
 
         // Store the E2EE state on the editor
-        const e2ee = this.mod.editor.e2ee = {
+        const e2ee = (this.mod.editor.e2ee = {
             encrypted: true,
             encryptionSalt: salt,
             encryptionIterations: iterations || 600000,
             key: key,
             snapshotManager: this.mod.editor.e2ee?.snapshotManager || undefined
-        }
+        })
         // Initialize snapshot manager now that we have the key
         if (!e2ee.snapshotManager) {
-            const {E2EESnapshotManager} = await import(
-                "../e2ee/snapshot-manager.js"
-            )
-            e2ee.snapshotManager = new E2EESnapshotManager(
-                this.mod.editor
-            )
+            const {E2EESnapshotManager} =
+                await import("../e2ee/snapshot-manager.js")
+            e2ee.snapshotManager = new E2EESnapshotManager(this.mod.editor)
         }
         ;(e2ee.snapshotManager as any).setKey(key)
 
@@ -772,7 +767,10 @@ export class ModCollabDoc {
             bibliography: decryptedBibliography,
             images: decryptedImages
         }
-        this._loadUnencryptedDocument(decryptedDoc as IncomingDoc, isInitialLoad)
+        this._loadUnencryptedDocument(
+            decryptedDoc as IncomingDoc,
+            isInitialLoad
+        )
 
         // Cache the decrypted title in sessionStorage so the document overview
         // can display the real title without prompting for the password again.
@@ -825,7 +823,9 @@ export class ModCollabDoc {
     _loadUnencryptedDocument(doc: IncomingDoc, isInitialLoad: boolean): void {
         // Remember location hash to scroll there subsequently.
         const [locationHash, _queryString] = window.location.hash.split("?")
-        this.mod.editor.mod.db!.bibDB.setDB(doc.bibliography as unknown as BibDB)
+        this.mod.editor.mod.db!.bibDB.setDB(
+            doc.bibliography as unknown as BibDB
+        )
         this.mod.editor.mod.db!.imageDB.setDB(doc.images as unknown as ImageDB)
         const stateDoc = this.mod.editor.schema.nodeFromJSON(
             doc.content as Record<string, unknown>
@@ -867,9 +867,7 @@ export class ModCollabDoc {
         // runs before loadDocument(), so the header still shows "Untitled"
         // from the empty initial document.
         if (this.mod.editor.menu.headerView) {
-            ;(
-                this.mod.editor.menu.headerView as {update: () => void}
-            ).update()
+            ;(this.mod.editor.menu.headerView as {update: () => void}).update()
         }
         if (isInitialLoad) {
             this.initialDocLoaded = true
@@ -939,7 +937,9 @@ export class ModCollabDoc {
     setDocSettings(): void {
         // Set part specific settings
         ;(this.mod.editor.mod.documentTemplate as any).addDocPartSettings()
-        ;(this.mod.editor.mod.documentTemplate as any).addCitationStylesMenuEntries()
+        ;(
+            this.mod.editor.mod.documentTemplate as any
+        ).addCitationStylesMenuEntries()
     }
 
     sendToCollaborators(): void {
@@ -972,8 +972,7 @@ export class ModCollabDoc {
                 return false
             } else if (
                 sendableSteps(this.mod.editor.view.state) ||
-                (this.mod.editor.mod.comments as any).store
-                    .unsentEvents()
+                (this.mod.editor.mod.comments as any).store.unsentEvents()
                     .length ||
                 (this.mod.editor.mod.db!.bibDB as any).unsentEvents().length ||
                 (this.mod.editor.mod.db!.imageDB as any).unsentEvents().length
@@ -984,8 +983,9 @@ export class ModCollabDoc {
                         (this.mod.editor.mod.footnotes as any).fnEditor.view
                             .state
                     ),
-                    commentUpdates = (this.mod.editor.mod.comments as any).store
-                        .unsentEvents(),
+                    commentUpdates = (
+                        this.mod.editor.mod.comments as any
+                    ).store.unsentEvents(),
                     bibliographyUpdates = (
                         this.mod.editor.mod.db!.bibDB as any
                     ).unsentEvents(),
@@ -1140,7 +1140,8 @@ export class ModCollabDoc {
 
         if (
             !sendableSteps(this.mod.editor.view.state) &&
-            !(this.mod.editor.mod.comments as any).store.unsentEvents().length &&
+            !(this.mod.editor.mod.comments as any).store.unsentEvents()
+                .length &&
             !(this.mod.editor.mod.db!.bibDB as any).unsentEvents().length &&
             !(this.mod.editor.mod.db!.imageDB as any).unsentEvents().length
         ) {
@@ -1157,12 +1158,15 @@ export class ModCollabDoc {
             fnStepsToSend = sendableSteps(
                 (this.mod.editor.mod.footnotes as any).fnEditor.view.state
             ),
-            commentUpdates = (this.mod.editor.mod.comments as any).store
-                .unsentEvents(),
-            bibliographyUpdates = (this.mod.editor.mod.db!.bibDB as any)
-                .unsentEvents(),
-            imageUpdates = (this.mod.editor.mod.db!.imageDB as any)
-                .unsentEvents()
+            commentUpdates = (
+                this.mod.editor.mod.comments as any
+            ).store.unsentEvents(),
+            bibliographyUpdates = (
+                this.mod.editor.mod.db!.bibDB as any
+            ).unsentEvents(),
+            imageUpdates = (
+                this.mod.editor.mod.db!.imageDB as any
+            ).unsentEvents()
 
         if (
             !stepsToSend &&
@@ -1202,9 +1206,7 @@ export class ModCollabDoc {
             ;(this.mod.editor.docInfo.confirmedDoc as Node).firstChild?.forEach(
                 child => {
                     if (
-                        !child.marks.find(
-                            mark => mark.type.name === "deletion"
-                        )
+                        !child.marks.find(mark => mark.type.name === "deletion")
                     ) {
                         oldTitle += child.textContent
                     }
@@ -1369,15 +1371,15 @@ export class ModCollabDoc {
         this.mod.editor.docInfo.version!++
         if (data["bu"]) {
             // bibliography updates
-            (this.mod.editor.mod.db!.bibDB as any).receive(data["bu"])
+            ;(this.mod.editor.mod.db!.bibDB as any).receive(data["bu"])
         }
         if (data["iu"]) {
             // images updates
-            (this.mod.editor.mod.db!.imageDB as any).receive(data["iu"])
+            ;(this.mod.editor.mod.db!.imageDB as any).receive(data["iu"])
         }
         if (data["cu"]) {
             // comment updates
-            (this.mod.editor.mod.comments as any).store.receive(data["cu"])
+            ;(this.mod.editor.mod.comments as any).store.receive(data["cu"])
         }
         if (data["ds"]) {
             // document steps
@@ -1392,7 +1394,9 @@ export class ModCollabDoc {
         }
         if (data["footnoterender"]) {
             // re-render footnotes properly
-            ;(this.mod.editor.mod.footnotes as any).fnEditor.renderAllFootnotes()
+            ;(
+                this.mod.editor.mod.footnotes as any
+            ).fnEditor.renderAllFootnotes()
         }
 
         if (serverFix) {
@@ -1421,10 +1425,7 @@ export class ModCollabDoc {
      * @param serverFix - Whether this is a server-generated fix
      * @private
      */
-    async _receiveE2EEDiff(
-        data: DiffData,
-        serverFix = false
-    ): Promise<void> {
+    async _receiveE2EEDiff(data: DiffData, serverFix = false): Promise<void> {
         try {
             const key = this.mod.editor.e2ee!.key as CryptoKey
             const decryptedPayload = await E2EEEncryptor.decryptObject(
@@ -1472,7 +1473,9 @@ export class ModCollabDoc {
 
         const sentSteps = unconfirmedDiffs["ds"] // document steps
         if (sentSteps) {
-            const ourIds = sentSteps.map((_step: any) => this.mod.editor.client_id)
+            const ourIds = sentSteps.map(
+                (_step: any) => this.mod.editor.client_id
+            )
             const tr = receiveTransaction(
                 this.mod.editor.view.state,
                 sentSteps,

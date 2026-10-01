@@ -54,13 +54,17 @@ export const commentSchema = new Schema({
     marks: {}
 })
 
-export const serializeCommentNode = (pmNode: Node): {html: string; text: string} => {
+export const serializeCommentNode = (
+    pmNode: Node
+): {html: string; text: string} => {
     const serializer = DOMSerializer.fromSchema(commentSchema),
         dom = serializer.serializeNode(pmNode) as HTMLElement
     return {html: dom.innerHTML, text: dom.innerText}
 }
 
-export const serializeComment = (content: unknown): {html: string; text: string} => {
+export const serializeComment = (
+    content: unknown
+): {html: string; text: string} => {
     const pmNode = commentSchema.nodeFromJSON({type: "doc", content})
     return serializeCommentNode(pmNode)
 }

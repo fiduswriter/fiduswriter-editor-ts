@@ -115,10 +115,7 @@ export class CommentEditor {
                 },
                 onKeyDown: ({event}: {event: KeyboardEvent}) => {
                     if (event.key === "ArrowDown") {
-                        if (
-                            this.userTaggerList.length >
-                            this.selectedTag + 1
-                        ) {
+                        if (this.userTaggerList.length > this.selectedTag + 1) {
                             this.selectedTag += 1
                             this.showUserTagger()
                         }
@@ -315,8 +312,7 @@ export class CommentEditor {
             .concat(owner)
             .filter(
                 user =>
-                    user.name.includes(search) ||
-                    user.username.includes(search)
+                    user.name.includes(search) || user.username.includes(search)
             )
     }
 

@@ -5,11 +5,7 @@ import type {EditorView} from "prosemirror-view"
 import {deactivateAllSelectedChanges} from "../state_plugins/track/index.js"
 import {deleteNode} from "./delete.js"
 
-export const reject = (
-    type: string,
-    pos: number,
-    view: EditorView
-): void => {
+export const reject = (type: string, pos: number, view: EditorView): void => {
     const tr = view.state.tr.setMeta("track", true),
         map = new Mapping()
     let reachedEnd = false,
@@ -60,9 +56,9 @@ export const reject = (
                 deleteNode(tr, node, nodePos, map, false)
             } else if (type === "deletion") {
                 if (node.attrs.track) {
-                    const track = (node.attrs.track as Array<{type: string}>).filter(
-                        track => track.type !== "deletion"
-                    )
+                    const track = (
+                        node.attrs.track as Array<{type: string}>
+                    ).filter(track => track.type !== "deletion")
                     tr.setNodeMarkup(
                         map.map(nodePos),
                         null,
@@ -94,7 +90,9 @@ export const reject = (
                     )
                 )
                 ;(trackMark.attrs.after as string[]).forEach(newMark => {
-                    const mark = node.marks.find(mark => mark.type.name === newMark)
+                    const mark = node.marks.find(
+                        mark => mark.type.name === newMark
+                    )
                     if (mark) {
                         tr.step(
                             new RemoveMarkStep(
@@ -113,13 +111,20 @@ export const reject = (
                     )
                 )
             } else if (type === "block_change") {
-                const blockChangeTrack = (node.attrs.track as Array<{
-                        type: string
-                        before: {type: string; attrs: Record<string, unknown>}
-                    }> | undefined)?.find(track => track.type === "block_change"),
-                    track = (node.attrs.track as Array<{type: string}> | undefined)?.filter(
-                        track => track !== blockChangeTrack
-                    )
+                const blockChangeTrack = (
+                        node.attrs.track as
+                            | Array<{
+                                  type: string
+                                  before: {
+                                      type: string
+                                      attrs: Record<string, unknown>
+                                  }
+                              }>
+                            | undefined
+                    )?.find(track => track.type === "block_change"),
+                    track = (
+                        node.attrs.track as Array<{type: string}> | undefined
+                    )?.filter(track => track !== blockChangeTrack)
                 if (!blockChangeTrack) {
                     return true
                 }

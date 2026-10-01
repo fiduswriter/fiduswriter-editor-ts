@@ -1,9 +1,4 @@
-import {
-    Dialog,
-    addAlert,
-    addProgress,
-    shortFileTitle
-} from "fwtoolkit"
+import {Dialog, addAlert, addProgress, shortFileTitle} from "fwtoolkit"
 import type {BibDB, ExportDoc, ImageDB} from "@fiduswriter/document"
 import {CopyrightDialog} from "../../copyright_dialog/index.js"
 import {DocumentAccessRightsDialog} from "../../documents/access_rights/index.js"
@@ -240,10 +235,14 @@ export const headerbarModel = () => ({
                         shareDialog.init()
                     },
                     available: (editor: Editor) => {
-                        if (editor.app.settings.SHOW_FILE_MENU_ITEMS === false) {
+                        if (
+                            editor.app.settings.SHOW_FILE_MENU_ITEMS === false
+                        ) {
                             return false
                         }
-                        if (editor.app.settings.EDITOR_SAVE_MODE === "external") {
+                        if (
+                            editor.app.settings.EDITOR_SAVE_MODE === "external"
+                        ) {
                             return false
                         }
                         if (!editor.user.is_authenticated) {
@@ -407,28 +406,28 @@ export const headerbarModel = () => ({
                     order: 5,
                     keys: "Ctrl-p",
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/print/index"
-                        ).then(({PrintExporter}) => {
-                            const db = getDB(editor)
-                            const doc = getExportDoc(editor, {
-                                changes: "acceptAllNoInsertions"
-                            })
-                            const exporter = new PrintExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.app.csl,
-                                editor.docInfo.updated as Date as Date,
-                                getDocumentTemplate(editor).documentStyles,
-                                exportProgress(doc),
-                                {
-                                    printEngine:
-                                        editor.app.settings.PRINT_ENGINE
-                                }
-                            )
-                            exporter.init()
-                        })
+                        import("@fiduswriter/document/exporter/print/index").then(
+                            ({PrintExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new PrintExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date as Date,
+                                    getDocumentTemplate(editor).documentStyles,
+                                    exportProgress(doc),
+                                    {
+                                        printEngine:
+                                            editor.app.settings.PRINT_ENGINE
+                                    }
+                                )
+                                exporter.init()
+                            }
+                        )
                     }
                 },
                 {
@@ -523,9 +522,8 @@ export const headerbarModel = () => ({
                                                 currentSaltBytes,
                                                 e2ee.encryptionIterations as number
                                             )
-                                        const {E2EEEncryptor} = await import(
-                                            "fwtoolkit/e2ee/encryptor"
-                                        )
+                                        const {E2EEEncryptor} =
+                                            await import("fwtoolkit/e2ee/encryptor")
                                         const testValue = "test"
                                         const encryptedTest =
                                             await E2EEEncryptor.encrypt(
@@ -553,8 +551,7 @@ export const headerbarModel = () => ({
                                         )
 
                                     // Re-encrypt the document with the new key
-                                    await e2ee.snapshotManager!
-                                        .reEncryptWithNewKey(
+                                    await e2ee.snapshotManager!.reEncryptWithNewKey(
                                         newKey,
                                         newSaltBase64,
                                         newIterations
@@ -641,41 +638,44 @@ export const headerbarModel = () => ({
                     tooltip: gettext("Export the document to an HTML file."),
                     order: 0,
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/html/index"
-                        ).then(async ({HTMLExporter}) => {
-                            const db = getDB(editor)
-                            const dialog = new HtmlExportDialog()
-                            const options = await dialog.init()
-                            if (!options) {
-                                return
+                        import("@fiduswriter/document/exporter/html/index").then(
+                            async ({HTMLExporter}) => {
+                                const db = getDB(editor)
+                                const dialog = new HtmlExportDialog()
+                                const options = await dialog.init()
+                                if (!options) {
+                                    return
+                                }
+                                const doc = getExportDoc(
+                                    editor,
+                                    options.resolveTrackChanges
+                                        ? {changes: "acceptAllNoInsertions"}
+                                        : undefined
+                                )
+                                const converterOptions: Record<
+                                    string,
+                                    unknown
+                                > = {}
+                                if (options.svgMath) {
+                                    converterOptions.mathOutput = "svg"
+                                }
+                                if (!options.resolveTrackChanges) {
+                                    // Keep the marks and render them in the output.
+                                    converterOptions.trackChanges = true
+                                }
+                                const exporter = new HTMLExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date,
+                                    getDocumentTemplate(editor).documentStyles,
+                                    converterOptions
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
                             }
-                            const doc = getExportDoc(
-                                editor,
-                                options.resolveTrackChanges
-                                    ? {changes: "acceptAllNoInsertions"}
-                                    : undefined
-                            )
-                            const converterOptions: Record<string, unknown> = {}
-                            if (options.svgMath) {
-                                converterOptions.mathOutput = "svg"
-                            }
-                            if (!options.resolveTrackChanges) {
-                                // Keep the marks and render them in the output.
-                                converterOptions.trackChanges = true
-                            }
-                            const exporter = new HTMLExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.app.csl,
-                                editor.docInfo.updated as Date,
-                                getDocumentTemplate(editor).documentStyles,
-                                converterOptions
-                            )
-                            exporter.progressCallback = exportProgress(doc)
-                            exporter.init()
-                        })
+                        )
                     }
                 },
                 {
@@ -686,71 +686,72 @@ export const headerbarModel = () => ({
                     ),
                     order: 1,
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/pdf/index"
-                        ).then(async ({PdfExporter}) => {
-                            const db = getDB(editor)
-                            const dialog = new PdfExportDialog()
-                            const options = await dialog.init()
-                            if (!options) {
-                                return
-                            }
-                            const doc = getExportDoc(
-                                editor,
-                                options.resolveTrackChanges
-                                    ? {changes: "acceptAllNoInsertions"}
-                                    : undefined
-                            )
-                            let fidusFile: Uint8Array | undefined
-                            if (options.embedFidusFile) {
-                                // The ExportFidusFile constructor runs init()
-                                // itself and returns the resulting Promise,
-                                // so `new ExportFidusFile(...)` is awaited
-                                // directly to obtain the .fidus Blob.
-                                const blob = (await new ExportFidusFile(
-                                    editor.app,
+                        import("@fiduswriter/document/exporter/pdf/index").then(
+                            async ({PdfExporter}) => {
+                                const db = getDB(editor)
+                                const dialog = new PdfExportDialog()
+                                const options = await dialog.init()
+                                if (!options) {
+                                    return
+                                }
+                                const doc = getExportDoc(
+                                    editor,
+                                    options.resolveTrackChanges
+                                        ? {changes: "acceptAllNoInsertions"}
+                                        : undefined
+                                )
+                                let fidusFile: Uint8Array | undefined
+                                if (options.embedFidusFile) {
+                                    // The ExportFidusFile constructor runs init()
+                                    // itself and returns the resulting Promise,
+                                    // so `new ExportFidusFile(...)` is awaited
+                                    // directly to obtain the .fidus Blob.
+                                    const blob = (await new ExportFidusFile(
+                                        editor.app,
+                                        doc,
+                                        db.bibDB,
+                                        db.imageDB,
+                                        true,
+                                        editor.docInfo.token,
+                                        false
+                                    )) as unknown as Blob
+                                    fidusFile = new Uint8Array(
+                                        await blob.arrayBuffer()
+                                    )
+                                }
+                                const pdfExporter = new PdfExporter(
                                     doc,
                                     db.bibDB,
                                     db.imageDB,
-                                    true,
-                                    editor.docInfo.token,
-                                    false
-                                )) as unknown as Blob
-                                fidusFile = new Uint8Array(
-                                    await blob.arrayBuffer()
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date,
+                                    getDocumentTemplate(editor).documentStyles,
+                                    exportProgress(doc),
+                                    {
+                                        version: editor.app.settings.VERSION as
+                                            string | undefined,
+                                        userName:
+                                            editor.user?.name ||
+                                            editor.user?.username ||
+                                            undefined,
+                                        fidusFile,
+                                        pdfA: options.pdfA,
+                                        pdfUa: options.pdfUa,
+                                        embedSourceHtml:
+                                            options.embedSourceHtml ||
+                                            undefined,
+                                        figurePageFloats:
+                                            options.figurePageFloats,
+                                        tablePageFloats:
+                                            options.tablePageFloats,
+                                        printOptions: options.printOptions,
+                                        printEngine:
+                                            editor.app.settings.PRINT_ENGINE
+                                    }
                                 )
+                                pdfExporter.init()
                             }
-                            const pdfExporter = new PdfExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.app.csl,
-                                editor.docInfo.updated as Date,
-                                getDocumentTemplate(editor).documentStyles,
-                                exportProgress(doc),
-                                {
-                                    version: editor.app.settings
-                                        .VERSION as string | undefined,
-                                    userName:
-                                        editor.user?.name ||
-                                        editor.user?.username ||
-                                        undefined,
-                                    fidusFile,
-                                    pdfA: options.pdfA,
-                                    pdfUa: options.pdfUa,
-                                    embedSourceHtml:
-                                        options.embedSourceHtml ||
-                                        undefined,
-                                    figurePageFloats:
-                                        options.figurePageFloats,
-                                    tablePageFloats: options.tablePageFloats,
-                                    printOptions: options.printOptions,
-                                    printEngine:
-                                        editor.app.settings.PRINT_ENGINE
-                                }
-                            )
-                            pdfExporter.init()
-                        })
+                        )
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -762,41 +763,44 @@ export const headerbarModel = () => ({
                     ),
                     order: 1,
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/epub/index"
-                        ).then(async ({EpubExporter}) => {
-                            const db = getDB(editor)
-                            const dialog = new EpubExportDialog()
-                            const options = await dialog.init()
-                            if (!options) {
-                                return
+                        import("@fiduswriter/document/exporter/epub/index").then(
+                            async ({EpubExporter}) => {
+                                const db = getDB(editor)
+                                const dialog = new EpubExportDialog()
+                                const options = await dialog.init()
+                                if (!options) {
+                                    return
+                                }
+                                const doc = getExportDoc(
+                                    editor,
+                                    options.resolveTrackChanges
+                                        ? {changes: "acceptAllNoInsertions"}
+                                        : undefined
+                                )
+                                const converterOptions: Record<
+                                    string,
+                                    unknown
+                                > = {}
+                                if (options.svgMath) {
+                                    converterOptions.mathOutput = "svg"
+                                }
+                                if (!options.resolveTrackChanges) {
+                                    // Keep the marks and render them in the output.
+                                    converterOptions.trackChanges = true
+                                }
+                                const exporter = new EpubExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date,
+                                    getDocumentTemplate(editor).documentStyles,
+                                    converterOptions
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
                             }
-                            const doc = getExportDoc(
-                                editor,
-                                options.resolveTrackChanges
-                                    ? {changes: "acceptAllNoInsertions"}
-                                    : undefined
-                            )
-                            const converterOptions: Record<string, unknown> = {}
-                            if (options.svgMath) {
-                                converterOptions.mathOutput = "svg"
-                            }
-                            if (!options.resolveTrackChanges) {
-                                // Keep the marks and render them in the output.
-                                converterOptions.trackChanges = true
-                            }
-                            const exporter = new EpubExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.app.csl,
-                                editor.docInfo.updated as Date,
-                                getDocumentTemplate(editor).documentStyles,
-                                converterOptions
-                            )
-                            exporter.progressCallback = exportProgress(doc)
-                            exporter.init()
-                        })
+                        )
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -806,22 +810,22 @@ export const headerbarModel = () => ({
                     tooltip: gettext("Export the document to an LaTeX file."),
                     order: 2,
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/latex/index"
-                        ).then(({LatexExporter}) => {
-                            const db = getDB(editor)
-                            const doc = getExportDoc(editor, {
-                                changes: "acceptAllNoInsertions"
-                            })
-                            const exporter = new LatexExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.docInfo.updated as Date
-                            )
-                            exporter.progressCallback = exportProgress(doc)
-                            exporter.init()
-                        })
+                        import("@fiduswriter/document/exporter/latex/index").then(
+                            ({LatexExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new LatexExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.docInfo.updated as Date
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
+                            }
+                        )
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -833,24 +837,24 @@ export const headerbarModel = () => ({
                     ),
                     order: 2,
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/jats/index"
-                        ).then(({JATSExporter}) => {
-                            const db = getDB(editor)
-                            const doc = getExportDoc(editor, {
-                                changes: "acceptAllNoInsertions"
-                            })
-                            const exporter = new JATSExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.app.csl,
-                                editor.docInfo.updated as Date,
-                                "article"
-                            )
-                            exporter.progressCallback = exportProgress(doc)
-                            exporter.init()
-                        })
+                        import("@fiduswriter/document/exporter/jats/index").then(
+                            ({JATSExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new JATSExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date,
+                                    "article"
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
+                            }
+                        )
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -862,24 +866,24 @@ export const headerbarModel = () => ({
                     ),
                     order: 2,
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/jats/index"
-                        ).then(({JATSExporter}) => {
-                            const db = getDB(editor)
-                            const doc = getExportDoc(editor, {
-                                changes: "acceptAllNoInsertions"
-                            })
-                            const exporter = new JATSExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.app.csl,
-                                editor.docInfo.updated as Date,
-                                "book-part-wrapper"
-                            )
-                            exporter.progressCallback = exportProgress(doc)
-                            exporter.init()
-                        })
+                        import("@fiduswriter/document/exporter/jats/index").then(
+                            ({JATSExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new JATSExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date,
+                                    "book-part-wrapper"
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
+                            }
+                        )
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -891,23 +895,23 @@ export const headerbarModel = () => ({
                     ),
                     order: 3,
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/pandoc/index"
-                        ).then(({PandocExporter}) => {
-                            const db = getDB(editor)
-                            const doc = getExportDoc(editor, {
-                                changes: "acceptAllNoInsertions"
-                            })
-                            const exporter = new PandocExporter(
-                                doc,
-                                db.bibDB,
-                                db.imageDB,
-                                editor.app.csl,
-                                editor.docInfo.updated as Date
-                            )
-                            exporter.progressCallback = exportProgress(doc)
-                            exporter.init()
-                        })
+                        import("@fiduswriter/document/exporter/pandoc/index").then(
+                            ({PandocExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new PandocExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
+                            }
+                        )
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -1184,7 +1188,8 @@ export const headerbarModel = () => ({
                             editor.currentView.focus()
                         })
                     },
-                    disabled: (editor: Editor) => editor.docInfo.access_rights !== "write"
+                    disabled: (editor: Editor) =>
+                        editor.docInfo.access_rights !== "write"
                 }
             ]
         },
@@ -1322,7 +1327,8 @@ export const headerbarModel = () => ({
             tooltip: gettext("Tracking changes to the document"),
             order: 4,
             keys: "Alt-c",
-            disabled: (editor: Editor) => editor.docInfo.access_rights !== "write",
+            disabled: (editor: Editor) =>
+                editor.docInfo.access_rights !== "write",
             content: [
                 {
                     title: gettext("Record"),

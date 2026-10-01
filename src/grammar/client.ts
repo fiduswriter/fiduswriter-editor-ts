@@ -58,10 +58,9 @@ export class GrammarClient {
         if (worker) {
             this.worker = worker
         } else if (typeof Worker !== "undefined") {
-            this.worker = new Worker(
-                new URL("./worker.js", import.meta.url),
-                {type: "module"}
-            ) as GrammarWorkerLike
+            this.worker = new Worker(new URL("./worker.js", import.meta.url), {
+                type: "module"
+            }) as GrammarWorkerLike
         }
         if (this.worker) {
             this.worker.onmessage = event =>

@@ -194,9 +194,7 @@ export const linksPlugin = (options: {editor: Editor}): Plugin => {
         const appConfig = editor.app as {
             config?: {user?: {preferences?: {inline_references?: boolean}}}
         }
-        if (
-            appConfig.config?.user?.preferences?.inline_references === true
-        ) {
+        if (appConfig.config?.user?.preferences?.inline_references === true) {
             return undefined
         }
         return state.selection instanceof NodeSelection
@@ -212,9 +210,7 @@ export const linksPlugin = (options: {editor: Editor}): Plugin => {
         const appConfig = editor.app as {
             config?: {user?: {preferences?: {inline_references?: boolean}}}
         }
-        if (
-            appConfig.config?.user?.preferences?.inline_references === true
-        ) {
+        if (appConfig.config?.user?.preferences?.inline_references === true) {
             return undefined
         }
         return state.selection instanceof NodeSelection
@@ -307,7 +303,10 @@ export const linksPlugin = (options: {editor: Editor}): Plugin => {
             requiredPx = 10
 
         if (linkMark) {
-            linkType = (linkMark.attrs.href as string)[0] === "#" ? "internal" : "external"
+            linkType =
+                (linkMark.attrs.href as string)[0] === "#"
+                    ? "internal"
+                    : "external"
             linkHref =
                 linkType === "internal"
                     ? window.location.href.split("#")[0] + linkMark.attrs.href
@@ -448,10 +447,7 @@ ${
         // Rebuild the actions array so handleKeyDown always has the current
         // set of handlers in the same order the <li> items appear in the DOM.
         currentDropUpActions = []
-        const setupAction = (
-            selector: string,
-            action: () => void
-        ): void => {
+        const setupAction = (selector: string, action: () => void): void => {
             const el = dropUp.querySelector(selector)
             if (!el) {
                 return
@@ -588,7 +584,9 @@ ${
                             stepWithRange.to,
                             node => {
                                 if (
-                                    (node.type as NodeTypeWithGroups).groups.includes("heading") ||
+                                    (
+                                        node.type as NodeTypeWithGroups
+                                    ).groups.includes("heading") ||
                                     node.type.name === "figure"
                                 ) {
                                     foundIdElement = true
@@ -607,7 +605,9 @@ ${
                         state.doc.nodesBetween(range[0], range[1], node => {
                             if (
                                 !foundIdElement &&
-                                ((node.type as NodeTypeWithGroups).groups.includes("heading") ||
+                                ((
+                                    node.type as NodeTypeWithGroups
+                                ).groups.includes("heading") ||
                                     [
                                         "figure",
                                         "table",
@@ -667,16 +667,18 @@ ${
             })
             // ID should not be found in the other pm either. So we look through
             // those as well.
-            let otherState: EditorState,
-                language: string
+            let otherState: EditorState, language: string
             if (oldState.schema === options.editor.view.state.schema) {
-                otherState = (options.editor.mod.footnotes as {
-                    fnEditor: {view: EditorView}
-                }).fnEditor.view.state
+                otherState = (
+                    options.editor.mod.footnotes as {
+                        fnEditor: {view: EditorView}
+                    }
+                ).fnEditor.view.state
                 language = newState.doc.attrs.language as string
             } else {
                 otherState = options.editor.view.state
-                language = options.editor.view.state.doc.attrs.language as string
+                language = options.editor.view.state.doc.attrs
+                    .language as string
             }
 
             const internalTargets = getInternalTargets(
@@ -707,7 +709,9 @@ ${
 
             otherState.doc.descendants(node => {
                 if (
-                    (node.type as NodeTypeWithGroups).groups.includes("heading") ||
+                    (node.type as NodeTypeWithGroups).groups.includes(
+                        "heading"
+                    ) ||
                     ["figure", "table", "bullet_list", "ordered_list"].includes(
                         node.type.name
                     )
@@ -720,16 +724,21 @@ ${
 
             newState.doc.descendants((node, pos) => {
                 if (
-                    (node.type as NodeTypeWithGroups).groups.includes("heading") ||
+                    (node.type as NodeTypeWithGroups).groups.includes(
+                        "heading"
+                    ) ||
                     ["figure", "table", "bullet_list", "ordered_list"].includes(
                         node.type.name
                     )
                 ) {
-                    if (ids.includes(node.attrs.id as string) || !node.attrs.id) {
+                    if (
+                        ids.includes(node.attrs.id as string) ||
+                        !node.attrs.id
+                    ) {
                         // Add node if the id is false (default) or it is present twice
-                        const randomIdGenerator = (node.type as NodeTypeWithGroups).groups.includes(
-                            "heading"
-                        )
+                        const randomIdGenerator = (
+                            node.type as NodeTypeWithGroups
+                        ).groups.includes("heading")
                             ? randomHeadingId
                             : node.type.name === "figure"
                               ? randomFigureId
@@ -775,13 +784,13 @@ ${
                         (mark.attrs.href as string)[0] === "#" &&
                         !internalTargets.find(
                             it =>
-                                it.id === (mark.attrs.href as string).slice(1) &&
+                                it.id ===
+                                    (mark.attrs.href as string).slice(1) &&
                                 it.text === node.attrs.title
                         )
                     ) {
                         const iTarget = internalTargets.find(
-                            it =>
-                                it.id === (mark.attrs.href as string).slice(1)
+                            it => it.id === (mark.attrs.href as string).slice(1)
                         )
                         const attrs = Object.assign({}, mark.attrs, {
                             title: iTarget ? iTarget.text : null
@@ -816,8 +825,7 @@ ${
             },
             handleKeyDown(view: EditorView, event: KeyboardEvent) {
                 const pluginState = key.getState(view.state) as
-                    | LinksPluginState
-                    | undefined
+                    LinksPluginState | undefined
                 if (!pluginState) {
                     return false
                 }
@@ -876,7 +884,8 @@ ${
                 return false
             },
             decorations(state: EditorState) {
-                const pluginState = key.getState(state) as LinksPluginState | undefined
+                const pluginState = key.getState(state) as
+                    LinksPluginState | undefined
                 if (!pluginState) {
                     return DecorationSet.empty
                 }

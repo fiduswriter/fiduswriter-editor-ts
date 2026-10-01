@@ -17,16 +17,22 @@ export function acceptAllNoInsertions(doc: Node): Node {
         map = new Mapping()
     doc.descendants((node: Node, pos: number) => {
         const deletionTrack = node.attrs.track
-                ? (node.attrs.track as TrackAttr[]).find(track => track.type === "deletion")
+                ? (node.attrs.track as TrackAttr[]).find(
+                      track => track.type === "deletion"
+                  )
                 : node.marks.find(mark => mark.type.name === "deletion"),
             insertionTrack = node.attrs.track
-                ? (node.attrs.track as TrackAttr[]).find(track => track.type === "insertion")
+                ? (node.attrs.track as TrackAttr[]).find(
+                      track => track.type === "insertion"
+                  )
                 : node.marks.find(mark => mark.type.name === "insertion"),
             formatChangeMark = node.marks.find(
                 mark => mark.type.name === "format_change"
             ),
             blockChangeTrack = node.attrs.track
-                ? (node.attrs.track as TrackAttr[]).find(track => track.name === "block_change")
+                ? (node.attrs.track as TrackAttr[]).find(
+                      track => track.name === "block_change"
+                  )
                 : false
 
         if (node.type.name === "footnote" && node.attrs.footnote) {

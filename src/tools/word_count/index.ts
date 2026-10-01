@@ -32,7 +32,15 @@ export class WordCountDialog {
                 this.editor.view.state.doc
             ),
             footnoteContent = getNonDeletedTextContent(
-                (this.editor.mod.footnotes as {fnEditor: {view: {state: {doc: import("prosemirror-model").Node}}}}).fnEditor.view.state.doc
+                (
+                    this.editor.mod.footnotes as {
+                        fnEditor: {
+                            view: {
+                                state: {doc: import("prosemirror-model").Node}
+                            }
+                        }
+                    }
+                ).fnEditor.view.state.doc
             ),
             bibliographyContent =
                 document.querySelector(".doc-bibliography")?.textContent || ""

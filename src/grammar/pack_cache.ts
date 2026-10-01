@@ -52,9 +52,7 @@ export async function fetchPackCached(packUrl: string): Promise<Uint8Array> {
             const cache = await caches.open(CACHE_NAME)
             const cached = await cache.match(packUrl)
             if (cached) {
-                const expires = Number(
-                    cached.headers.get(EXPIRES_HEADER) || 0
-                )
+                const expires = Number(cached.headers.get(EXPIRES_HEADER) || 0)
                 if (expires > Date.now()) {
                     return new Uint8Array(await cached.arrayBuffer())
                 }

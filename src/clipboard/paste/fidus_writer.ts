@@ -21,7 +21,9 @@ export class FidusWriterPasteHandler extends GeneralPasteHandler {
                     string,
                     Record<string, unknown>
                 >,
-                references = JSON.parse(node.dataset.references || "[]") as Array<{
+                references = JSON.parse(
+                    node.dataset.references || "[]"
+                ) as Array<{
                     id: number | string
                 }>,
                 bibDB = (this.editor as Editor).mod.db?.bibDB as

@@ -1,4 +1,4 @@
-import { defineConfig } from "@playwright/test"
+import {defineConfig} from "@playwright/test"
 
 // The demo server (scripts/serve-demo.js) serves on $PORT (default 8080,
 // like Forgejo Pages). Override PORT to run the tests beside other
@@ -26,7 +26,7 @@ export default defineConfig({
     projects: [
         {
             name: "chromium",
-            use: { browserName: "chromium" }
+            use: {browserName: "chromium"}
         }
     ]
 })

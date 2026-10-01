@@ -1,7 +1,11 @@
 import {Slice, type Node} from "prosemirror-model"
 import {liftListItem} from "prosemirror-schema-list"
 import {EditorState, Selection, TextSelection} from "prosemirror-state"
-import {ReplaceAroundStep, ReplaceStep, replaceStep} from "prosemirror-transform"
+import {
+    ReplaceAroundStep,
+    ReplaceStep,
+    replaceStep
+} from "prosemirror-transform"
 
 export const deleteNode = (
     tr: import("prosemirror-transform").Transform,
@@ -36,9 +40,9 @@ export const deleteNode = (
             if (allowMerge) {
                 delStep = replaceStep(tr.doc, start, end)
             } else {
-                const track = (node.attrs.track as Array<{type: string}>).filter(
-                    track => track.type !== trackType
-                )
+                const track = (
+                    node.attrs.track as Array<{type: string}>
+                ).filter(track => track.type !== trackType)
                 tr.setNodeMarkup(
                     newNodePos,
                     null,
@@ -67,7 +71,8 @@ export const deleteNode = (
     } else if (node.type === tr.doc.type.schema.nodes["list_item"]) {
         const state = EditorState.create({
             doc: tr.doc,
-            selection: Selection.findFrom(tr.doc.resolve(newNodePos), 1) || undefined
+            selection:
+                Selection.findFrom(tr.doc.resolve(newNodePos), 1) || undefined
         })
         liftListItem(node.type)(state, newTr => {
             newTr.steps.forEach(step => {

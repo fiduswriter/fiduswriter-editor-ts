@@ -94,7 +94,11 @@ import {
     toolbarPlugin,
     trackPlugin
 } from "./state_plugins/index.js"
-import {ModTrack, acceptAllNoInsertions, amendTransaction} from "./track/index.js"
+import {
+    ModTrack,
+    acceptAllNoInsertions,
+    amendTransaction
+} from "./track/index.js"
 import type {EditorApp, EditorUser} from "./types.js"
 
 // UUID v4 pattern for share tokens
@@ -139,7 +143,9 @@ export class Editor {
         ws: WebSocket
         init(): void
         close(): void
-        send(data: string | (() => Record<string, unknown> | false | undefined)): void
+        send(
+            data: string | (() => Record<string, unknown> | false | undefined)
+        ): void
     }
     dom!: HTMLElement
     mount?: HTMLElement
@@ -147,7 +153,11 @@ export class Editor {
     noCollabSave?: NoCollabSave
 
     constructor(
-        {app, user, mount}: {
+        {
+            app,
+            user,
+            mount
+        }: {
             app: EditorApp
             user: EditorUser
             mount?: HTMLElement
@@ -352,18 +362,18 @@ export class Editor {
                 this.app.apiConnectors.document
                     .validateShareToken(this.docInfo.token as string)
                     .then(({json, status}: {json: any; status: number}) => {
-                    if (status === 200 && json.document_id) {
-                        this.docInfo.id = json.document_id
-                        this.docInfo.access_rights = json.rights
-                        this.docInfo.wsBase = json.ws_base
-                        return Promise.resolve()
-                    } else {
-                        // Token is invalid or expired
-                        return Promise.reject(
-                            new Error("Invalid or expired share link")
-                        )
-                    }
-                })
+                        if (status === 200 && json.document_id) {
+                            this.docInfo.id = json.document_id
+                            this.docInfo.access_rights = json.rights
+                            this.docInfo.wsBase = json.ws_base
+                            return Promise.resolve()
+                        } else {
+                            // Token is invalid or expired
+                            return Promise.reject(
+                                new Error("Invalid or expired share link")
+                            )
+                        }
+                    })
             )
         }
         return Promise.all(initPromises)
@@ -448,7 +458,10 @@ export class Editor {
                             return Promise.reject(false)
                         } else {
                             deactivateWait()
-                            console.error("Editor initialization failed:", error)
+                            console.error(
+                                "Editor initialization failed:",
+                                error
+                            )
                         }
                         return Promise.reject(error)
                     })
@@ -476,8 +489,10 @@ export class Editor {
                     this.ws = new WebSocketConnector({
                         base: (wsResult.json as any).ws_base,
                         path: wsPath,
-                        appLoaded: () => Boolean(this.view.state.plugins.length),
-                        anythingToSend: () => Boolean(sendableSteps(this.view.state)),
+                        appLoaded: () =>
+                            Boolean(this.view.state.plugins.length),
+                        anythingToSend: () =>
+                            Boolean(sendableSteps(this.view.state)),
                         initialMessage: () => {
                             const message: Record<string, unknown> = {
                                 type: "subscribe",
@@ -567,7 +582,9 @@ export class Editor {
                                                     data.e2ee_iterations,
                                                 key: null,
                                                 snapshotManager:
-                                                    new E2EESnapshotManager(this)
+                                                    new E2EESnapshotManager(
+                                                        this
+                                                    )
                                             }
                                         } else {
                                             this.e2ee.encrypted = true
@@ -592,10 +609,10 @@ export class Editor {
                                             v: this.docInfo.version as number
                                         })
                                         .then(({json}) => {
-                                        this.mod.collab.doc.receiveDocument(
-                                            json
-                                        )
-                                    })
+                                            this.mod.collab.doc.receiveDocument(
+                                                json
+                                            )
+                                        })
                                     break
                                 case "confirm_version":
                                     this.mod.collab.doc.cancelCurrentlyCheckingVersion()
@@ -784,7 +801,8 @@ export class Editor {
                     }) as any
                 }
                 this.mod.documentTemplate.setStyles(stylesResult.json)
-                const docIsE2EE = (docResult.json as any).doc_info?.e2ee === true
+                const docIsE2EE =
+                    (docResult.json as any).doc_info?.e2ee === true
                 this.mod.collab.doc.receiveDocument(docResult.json)
                 // For E2EE documents, delay the WebSocket connection until
                 // after the password dialog and decryption are complete (see
@@ -802,8 +820,7 @@ export class Editor {
                         this.noCollabSave = new NoCollabSave(
                             this,
                             this.app.settings.SAVE_POLLING as
-                                | Partial<PollingOptions>
-                                | undefined
+                                Partial<PollingOptions> | undefined
                         )
                     }
                     this.noCollabSave.start()
@@ -867,7 +884,10 @@ export class Editor {
      * @private
      */
     async _createE2EEDocument(): Promise<void> {
-        let password: string, key: CryptoKey, saltBase64: string, iterations: number
+        let password: string,
+            key: CryptoKey,
+            saltBase64: string,
+            iterations: number
 
         // Check if the user has a personal passphrase set up
         const hasPassphraseKeys = await PassphraseManager.hasEncryptionKeys()
@@ -893,9 +913,8 @@ export class Editor {
                     }
                 } else if (result.action === "recover") {
                     // Recovery flow
-                    const {recoverWithKeyDialog} = await import(
-                        "fwtoolkit/e2ee/passphrase-dialog"
-                    )
+                    const {recoverWithKeyDialog} =
+                        await import("fwtoolkit/e2ee/passphrase-dialog")
                     const recoverResult = await new Promise(resolve => {
                         recoverWithKeyDialog(resolve)
                     })
@@ -906,9 +925,8 @@ export class Editor {
                                     (recoverResult as any).recoveryKey,
                                     (recoverResult as any).newPassphrase
                                 )) as {newRecoveryKey: string}
-                            const {showRecoveryKeyDialog} = await import(
-                                "fwtoolkit/e2ee/passphrase-dialog"
-                            )
+                            const {showRecoveryKeyDialog} =
+                                await import("fwtoolkit/e2ee/passphrase-dialog")
                             await new Promise(resolve => {
                                 showRecoveryKeyDialog(
                                     newRecoveryKey,
@@ -918,7 +936,8 @@ export class Editor {
                         } catch (e) {
                             addAlert(
                                 "error",
-                                gettext("Recovery failed: ") + (e as Error).message
+                                gettext("Recovery failed: ") +
+                                    (e as Error).message
                             )
                         }
                     }
@@ -952,19 +971,21 @@ export class Editor {
         )
 
         // Create the document on the server with E2EE parameters
-        const {json, status} = await this.app.apiConnectors.document.createDocument({
-            template_id: this.docInfo.templateId,
-            path: this.docInfo.path,
-            e2ee: true,
-            e2ee_salt: saltBase64,
-            e2ee_iterations: iterations
-        })
+        const {json, status} =
+            await this.app.apiConnectors.document.createDocument({
+                template_id: this.docInfo.templateId,
+                path: this.docInfo.path,
+                e2ee: true,
+                e2ee_salt: saltBase64,
+                e2ee_iterations: iterations
+            })
 
         const createData = json as {id: number; error?: string}
         if (status === 403) {
             addAlert(
                 "error",
-                createData.error || gettext("E2EE is not enabled on this server.")
+                createData.error ||
+                    gettext("E2EE is not enabled on this server.")
             )
             window.location.href = "/"
             return
@@ -1045,10 +1066,7 @@ export class Editor {
                         title += child.textContent
                     }
                 })
-                sessionStorage.setItem(
-                    `e2ee_title_${this.docInfo.id}`,
-                    title
-                )
+                sessionStorage.setItem(`e2ee_title_${this.docInfo.id}`, title)
             }
         }
         if (this.noCollabSave) {
@@ -1261,8 +1279,7 @@ export class Editor {
                                 this
                             )
                             return (
-                                this.plugins![name].init() ||
-                                Promise.resolve()
+                                this.plugins![name].init() || Promise.resolve()
                             )
                         }
                         return Promise.resolve()
@@ -1340,8 +1357,7 @@ export class Editor {
                         node.type.name === "figure") &&
                     node.attrs.id === id
                 ) {
-                    foundPos =
-                        node.type.name === "figure" ? pos : pos + 1
+                    foundPos = node.type.name === "figure" ? pos : pos + 1
                     view = fnView
                 } else {
                     const anchorMark = node.marks.find(

@@ -38,8 +38,8 @@ export const accessRightsPlugin = (options: {editor: Editor}) =>
                         step =>
                             ((step as unknown as {jsonID: string}).jsonID ===
                                 "addMark" ||
-                                (step as unknown as {jsonID: string})
-                                    .jsonID === "removeMark") &&
+                                (step as unknown as {jsonID: string}).jsonID ===
+                                    "removeMark") &&
                             (step as any).mark.type.name === "comment"
                     )
                 ) {

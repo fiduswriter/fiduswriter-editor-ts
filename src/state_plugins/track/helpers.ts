@@ -96,9 +96,7 @@ export function setSelectedChanges(
     return tr.setMeta(key, {decos}).setMeta("track", true)
 }
 
-export function deactivateAllSelectedChanges(
-    tr: Transaction
-): Transaction {
+export function deactivateAllSelectedChanges(tr: Transaction): Transaction {
     const pluginState = {
         decos: DecorationSet.empty
     }

@@ -18,7 +18,10 @@ import {
     nameToText
 } from "@fiduswriter/bibliography-manager/tools"
 
-import {configureCitationTemplate, selectedCitationTemplate} from "./templates.js"
+import {
+    configureCitationTemplate,
+    selectedCitationTemplate
+} from "./templates.js"
 
 ensureCSS(staticUrl("css/fwtoolkit/checkable_list.css"))
 
@@ -50,8 +53,9 @@ export class CitationDialog {
         this.editor = editor
         this.initialReferences = []
         this.initialFormat = "autocite"
-        this.node = (this.editor.currentView.state.selection as NodeSelection)
-            .node
+        this.node = (
+            this.editor.currentView.state.selection as NodeSelection
+        ).node
         this.dialog = false
         this.buttons = []
         this.submitButtonText = gettext("Insert")
@@ -125,7 +129,8 @@ export class CitationDialog {
         // Add plugins. Prefer plugins injected by the host app; fall back to
         // the default plugin list bundled with the editor package.
         const pluginList =
-            (this.editor.citationDialogPlugins as any[]) || defaultCitationPlugins
+            (this.editor.citationDialogPlugins as any[]) ||
+            defaultCitationPlugins
         this.plugins = {}
 
         return Promise.all(
@@ -141,8 +146,12 @@ export class CitationDialog {
                             ] = new pluginExport(this)
                             return (
                                 (
-                                    this.plugins as Record<string, CitationPlugin>
-                                )[pluginExport.name].init!() || Promise.resolve()
+                                    this.plugins as Record<
+                                        string,
+                                        CitationPlugin
+                                    >
+                                )[pluginExport.name].init!() ||
+                                Promise.resolve()
                             )
                         }
                         return Promise.resolve()
@@ -213,16 +222,18 @@ export class CitationDialog {
     }
 
     registerNewSource(): void {
-        import("@fiduswriter/bibliography-manager/form").then(({BibEntryForm}) => {
-            const form = new BibEntryForm((this.editor.mod.db as any).bibDB)
-            form.init().then(idTranslations => {
-                if (!idTranslations) {
-                    return
-                }
-                const ids = idTranslations.map(idTrans => idTrans[1])
-                this.addToCitableItems(ids)
-            })
-        })
+        import("@fiduswriter/bibliography-manager/form").then(
+            ({BibEntryForm}) => {
+                const form = new BibEntryForm((this.editor.mod.db as any).bibDB)
+                form.init().then(idTranslations => {
+                    if (!idTranslations) {
+                        return
+                    }
+                    const ids = idTranslations.map(idTrans => idTrans[1])
+                    this.addToCitableItems(ids)
+                })
+            }
+        )
     }
 
     bibDBToBibEntry(
@@ -312,9 +323,9 @@ export class CitationDialog {
     }
 
     initTable(): void {
-        const host = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
-            "#my-sources"
-        ) as HTMLElement | null
+        const host = (
+            this.dialog as InstanceType<typeof Dialog>
+        ).dialogEl.querySelector("#my-sources") as HTMLElement | null
         if (!host) {
             return
         }
@@ -327,22 +338,22 @@ export class CitationDialog {
                 {
                     select: 0,
                     hidden: true,
-                    type: "string",
+                    type: "string"
                 },
                 {
                     select: 1,
-                    name: gettext("Title"),
+                    name: gettext("Title")
                 },
                 {
                     select: 2,
                     name: gettext("Author"),
-                    type: "string",
+                    type: "string"
                 },
                 {
                     select: 3,
                     name: gettext("Year"),
-                    type: "string",
-                },
+                    type: "string"
+                }
             ],
             data: this.createAllTableRows(),
             idColumn: 0,
@@ -357,9 +368,12 @@ export class CitationDialog {
         this.selectionTable.init()
         this.table = this.selectionTable.table
 
-        this.table.on("datatable.sort", (column: number, dir: "asc" | "desc") => {
-            this.lastSort = {column, dir}
-        })
+        this.table.on(
+            "datatable.sort",
+            (column: number, dir: "asc" | "desc") => {
+                this.lastSort = {column, dir}
+            }
+        )
         this.table.columns.sort(0, "asc")
     }
 
@@ -388,9 +402,9 @@ export class CitationDialog {
                             index ? Number.parseInt(val) : val
                         ) as [string, number]
                     if (
-                        (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
-                            `#selected-source-${db}-${id}`
-                        )
+                        (
+                            this.dialog as InstanceType<typeof Dialog>
+                        ).dialogEl.querySelector(`#selected-source-${db}-${id}`)
                     ) {
                         return
                     }
@@ -413,7 +427,9 @@ export class CitationDialog {
                 let documentEl
                 switch (true) {
                     case findTarget(event, ".selected-source .delete", el):
-                        documentEl = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                        documentEl = (
+                            this.dialog as InstanceType<typeof Dialog>
+                        ).dialogEl.querySelector(
                             `#selected-source-${(el.target as HTMLElement).dataset.db}-${(el.target as HTMLElement).dataset.id}`
                         )
                         if (documentEl) {
@@ -421,13 +437,12 @@ export class CitationDialog {
                         }
                         break
                     case findTarget(event, ".selected-source .order-up", el):
-                        documentEl = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                        documentEl = (
+                            this.dialog as InstanceType<typeof Dialog>
+                        ).dialogEl.querySelector(
                             `#selected-source-${(el.target as HTMLElement).dataset.db}-${(el.target as HTMLElement).dataset.id}`
                         )
-                        if (
-                            documentEl &&
-                            documentEl.previousElementSibling
-                        ) {
+                        if (documentEl && documentEl.previousElementSibling) {
                             documentEl.parentElement?.insertBefore(
                                 documentEl,
                                 documentEl.previousElementSibling
@@ -435,7 +450,9 @@ export class CitationDialog {
                         }
                         break
                     case findTarget(event, ".selected-source .order-down", el):
-                        documentEl = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector(
+                        documentEl = (
+                            this.dialog as InstanceType<typeof Dialog>
+                        ).dialogEl.querySelector(
                             `#selected-source-${(el.target as HTMLElement).dataset.db}-${(el.target as HTMLElement).dataset.id}`
                         )
                         if (documentEl && documentEl.nextElementSibling) {
@@ -457,12 +474,16 @@ export class CitationDialog {
 
     dialogSubmit(): boolean {
         const citeItems = Array.from(
-                (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
+                (
+                    this.dialog as InstanceType<typeof Dialog>
+                ).dialogEl.querySelectorAll(
                     "#selected-cite-source-table .fw-cite-parts-table"
                 )
             ),
             references = citeItems.map(bibRef => {
-                const deleteButton = bibRef.querySelector(".delete") as HTMLElement
+                const deleteButton = bibRef.querySelector(
+                    ".delete"
+                ) as HTMLElement
                 const db = deleteButton.dataset.db as string
                 let id = Number.parseInt(deleteButton.dataset.id as string)
                 if (db === "user") {

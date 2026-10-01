@@ -252,10 +252,7 @@ export class NoCollabSave {
             this._pollingState(),
             this._pollingOptions
         )
-        if (
-            this._timeout !== null &&
-            this._nextTickTime - Date.now() > delay
-        ) {
+        if (this._timeout !== null && this._nextTickTime - Date.now() > delay) {
             this._scheduleNext(delay)
         }
     }
@@ -380,7 +377,7 @@ export class NoCollabSave {
         }
         return Boolean(
             this._savedBaseDoc &&
-                !this.editor.view.state.doc.eq(this._savedBaseDoc)
+            !this.editor.view.state.doc.eq(this._savedBaseDoc)
         )
     }
 
@@ -420,10 +417,11 @@ export class NoCollabSave {
             this.editor.e2ee.encrypted &&
             this.editor.e2ee.snapshotManager
         ) {
-            const snapshot =
-                await (this.editor.e2ee.snapshotManager as {
+            const snapshot = await (
+                this.editor.e2ee.snapshotManager as {
                     getEncryptedSnapshot: () => Promise<Record<string, unknown>>
-                }).getEncryptedSnapshot()
+                }
+            ).getEncryptedSnapshot()
             if (snapshot) {
                 payload = {
                     id: this.editor.docInfo.id,
@@ -545,9 +543,7 @@ export class NoCollabSave {
             if (
                 !documentApi.getDocumentVersion &&
                 this.editor.schema
-                    .nodeFromJSON(
-                        (json as ServerDocData).doc?.content || {}
-                    )
+                    .nodeFromJSON((json as ServerDocData).doc?.content || {})
                     .eq(this.editor.view.state.doc)
             ) {
                 // Without a version probe, only merge when the document
@@ -647,8 +643,7 @@ export class NoCollabSave {
     _mergeServerData(data: ServerDocData, serverDoc?: Node): void {
         const schema = this.editor.schema
         const currentDoc = this.editor.view.state.doc
-        const server =
-            serverDoc || schema.nodeFromJSON(data.doc?.content || {})
+        const server = serverDoc || schema.nodeFromJSON(data.doc?.content || {})
         const baseDoc = this._savedBaseDoc || currentDoc
         const {steps, clientIds} = getRemoteSteps(
             schema,
@@ -672,9 +667,7 @@ export class NoCollabSave {
             // keep them queued, so they are still saved/persisted afterwards.
             const bibEvents = db.bibDB.unsentEvents()
             const bibUnsent = db.bibDB.unsent.slice()
-            db.bibDB.setDB(
-                (data.doc?.bibliography as never) ?? ({} as never)
-            )
+            db.bibDB.setDB((data.doc?.bibliography as never) ?? ({} as never))
             db.bibDB.receive(bibEvents)
             db.bibDB.unsent = bibUnsent
 

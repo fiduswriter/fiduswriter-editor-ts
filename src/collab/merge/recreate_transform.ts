@@ -12,9 +12,10 @@ function getReplaceStep(fromDoc: Node, toDoc: Node): ReplaceStep | false {
     if (start === null) {
         return false
     }
-    let {a: endA, b: endB} = toDoc.content.findDiffEnd(
-        fromDoc.content
-    ) as {a: number; b: number}
+    let {a: endA, b: endB} = toDoc.content.findDiffEnd(fromDoc.content) as {
+        a: number
+        b: number
+    }
     const overlap = start - Math.min(endA, endB)
     if (overlap > 0) {
         if (
@@ -243,9 +244,7 @@ class RecreateTransform {
         const op1Doc = this.schema.nodeFromJSON(afterOP1JSON),
             op2Doc = this.schema.nodeFromJSON(afterOP2JSON)
 
-        let offset = op1Doc.content.findDiffStart(
-            op2Doc.content
-        ) as number
+        let offset = op1Doc.content.findDiffStart(op2Doc.content) as number
         const marks = op1Doc.resolve(offset + 1).marks()
 
         pathParts.shift()

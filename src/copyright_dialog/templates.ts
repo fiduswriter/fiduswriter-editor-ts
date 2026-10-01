@@ -47,27 +47,39 @@ const copyrightRow = (
         fieldClass
     }).html()
 
-export const copyrightTemplate = ({holder, year, freeToRead}: CopyrightParams) =>
+export const copyrightTemplate = ({
+    holder,
+    year,
+    freeToRead
+}: CopyrightParams) =>
     `<table class="fw-dialog-table">
         <tbody>
             ${copyrightRow(
                 gettext("Copyright holder"),
-                gettext("If the work is not in the public domain, specify who the copyright holder is."),
+                gettext(
+                    "If the work is not in the public domain, specify who the copyright holder is."
+                ),
                 `<input type="text" class="holder" value="${holder ? escapeText(holder) : ""}">`
             )}
             ${copyrightRow(
                 gettext("Copyright year"),
-                gettext("If the work is not in the public domain, specify the year of the copyright."),
+                gettext(
+                    "If the work is not in the public domain, specify the year of the copyright."
+                ),
                 `<input type="number" class="year" min=0 max=2100 value="${year ? year : ""}">`
             )}
             ${copyrightRow(
                 gettext("Available to read for free?"),
-                gettext("Specify whether the work can be accessed without paying a fee."),
+                gettext(
+                    "Specify whether the work can be accessed without paying a fee."
+                ),
                 `<input type="checkbox" class="free-to-read"${freeToRead ? " checked" : ""}>`
             )}
             ${copyrightRow(
                 gettext("License(s)"),
-                gettext('List any licenses the work is available under. If the license only applies from a given date, please specify the date in the ISO8601 format (such as "2012-10-15").'),
+                gettext(
+                    'List any licenses the work is available under. If the license only applies from a given date, please specify the date in the ISO8601 format (such as "2012-10-15").'
+                ),
                 `<div class="copyright-licenses-list"></div>`,
                 "licenses"
             )}

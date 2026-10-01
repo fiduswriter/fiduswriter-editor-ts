@@ -102,7 +102,10 @@ async function maybeDecryptImage(
         binary += String.fromCharCode.apply(null, Array.from(chunk))
     }
     const base64 = btoa(binary)
-    const decrypted = await E2EEEncryptor.decryptBufferToBase64(base64, sourceKey)
+    const decrypted = await E2EEEncryptor.decryptBufferToBase64(
+        base64,
+        sourceKey
+    )
     const mime = imageEntry.original_file_type || "image/png"
     const byteCharacters = atob(decrypted)
     const byteNumbers = new Array<number>(byteCharacters.length)
@@ -127,10 +130,14 @@ function createNativeImporterBackend(
                 document_styles: template.documentStyles,
                 import_id: importId
                     ? importId
-                    : (template.content.attrs as Record<string, unknown> | undefined)
-                          ?.import_id,
-                template_title: (template.content.attrs as Record<string, unknown> | undefined)
-                    ?.template,
+                    : (
+                          template.content.attrs as
+                              Record<string, unknown> | undefined
+                      )?.import_id,
+                template_title: (
+                    template.content.attrs as
+                        Record<string, unknown> | undefined
+                )?.template,
                 path
             }
             if (e2ee?.enabled) {
@@ -233,9 +240,11 @@ function createNativeImporterBackend(
                 })
         },
         encryptImage: (file, key) => E2EEEncryptor.encryptImage(file, key),
-        encryptObject: (obj, key) => E2EEEncryptor.encryptObject(obj as object, key),
+        encryptObject: (obj, key) =>
+            E2EEEncryptor.encryptObject(obj as object, key),
         encrypt: (text, key) => E2EEEncryptor.encrypt(text, key),
-        storeKeyInSession: (docId, key) => E2EEKeyManager.storeKeyInSession(docId, key)
+        storeKeyInSession: (docId, key) =>
+            E2EEKeyManager.storeKeyInSession(docId, key)
     }
 }
 
@@ -249,7 +258,10 @@ export class SaveCopy extends GenericSaveCopy {
         e2eeOptions: E2EEOptions | null = null,
         documentImportApi?: EditorDocumentImportApi
     ) {
-        const title = shortFileTitle(doc.title as string, (doc.path as string) || "")
+        const title = shortFileTitle(
+            doc.title as string,
+            (doc.path as string) || ""
+        )
         const task = addProgress(
             "info",
             `${title}: ${gettext("Creating copy...")}`,

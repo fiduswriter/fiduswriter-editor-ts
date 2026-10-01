@@ -79,7 +79,11 @@ export class DocumentTemplateExporter {
             }> = []
             ;(data.export_templates || []).forEach(
                 (template: {
-                    fields: {template_file: string; file_type: string; title: string}
+                    fields: {
+                        template_file: string
+                        file_type: string
+                        title: string
+                    }
                 }) => {
                     const filename = `exporttemplates/${template.fields.template_file.split("/").slice(-1)[0]}`
                     this.httpFiles.push({
@@ -118,14 +122,16 @@ export class DocumentTemplateExporter {
                         title: docStyle.fields.title,
                         files: [] as string[]
                     }
-                    docStyle.fields.documentstylefile_set.forEach(docstyleFile => {
-                        const filename = `documentstyles/${docstyleFile[1]}`
-                        this.httpFiles.push({
-                            filename,
-                            url: docstyleFile[0]
-                        })
-                        style.files.push(filename)
-                    })
+                    docStyle.fields.documentstylefile_set.forEach(
+                        docstyleFile => {
+                            const filename = `documentstyles/${docstyleFile[1]}`
+                            this.httpFiles.push({
+                                filename,
+                                url: docstyleFile[0]
+                            })
+                            style.files.push(filename)
+                        }
+                    )
                     documentStyles.push(style)
                 }
             )

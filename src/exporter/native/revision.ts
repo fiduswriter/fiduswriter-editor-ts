@@ -1,4 +1,9 @@
-import type {BibDB, ExportDoc, ImageDB, UploadRevision} from "@fiduswriter/document"
+import type {
+    BibDB,
+    ExportDoc,
+    ImageDB,
+    UploadRevision
+} from "@fiduswriter/document"
 import {SaveRevision as GenericSaveRevision} from "@fiduswriter/document/exporter/native"
 import {createSlug} from "@fiduswriter/document/exporter/tools/file"
 import {addAlert, addProgress, gettext, shortFileTitle} from "fwtoolkit"
@@ -19,8 +24,10 @@ export class SaveRevision extends GenericSaveRevision {
             `${title}: ${gettext("Saving revision...")}`,
             {autoClose: 6000}
         )
-        const progressCallback = (message: string, percentage?: number | null) =>
-            task.update(percentage ?? null, message)
+        const progressCallback = (
+            message: string,
+            percentage?: number | null
+        ) => task.update(percentage ?? null, message)
 
         const onError = (error: unknown) => {
             task.close()
@@ -37,7 +44,10 @@ export class SaveRevision extends GenericSaveRevision {
             }
         }
 
-        const getTemplateFiles = (docId: number | string, token: string | boolean) => {
+        const getTemplateFiles = (
+            docId: number | string,
+            token: string | boolean
+        ) => {
             const templateExporter = new DocumentTemplateExporter(
                 docId,
                 app.apiConnectors.document.getTemplateForDoc,
@@ -61,7 +71,10 @@ export class SaveRevision extends GenericSaveRevision {
                         file: {
                             file: blob,
                             filename: `${createSlug(
-                                shortFileTitle(doc.title as string, doc.path as string)
+                                shortFileTitle(
+                                    doc.title as string,
+                                    doc.path as string
+                                )
                             )}.fidus`
                         }
                     }

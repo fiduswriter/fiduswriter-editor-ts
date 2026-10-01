@@ -75,17 +75,9 @@ export const buildEditorKeymap = (schema: Schema) => {
                 view
             ),
         "Mod-z": (state: EditorState, dispatch, view?: EditorView) =>
-            undo(
-                state,
-                tr => dispatch!(addInputType(tr, "historyUndo")),
-                view
-            ),
+            undo(state, tr => dispatch!(addInputType(tr, "historyUndo")), view),
         "Shift-Mod-z": (state: EditorState, dispatch, view?: EditorView) =>
-            redo(
-                state,
-                tr => dispatch!(addInputType(tr, "historyRedo")),
-                view
-            ),
+            redo(state, tr => dispatch!(addInputType(tr, "historyRedo")), view),
         "Shift-Ctrl-0": setBlockType(schema.nodes.paragraph),
         "Shift-Ctrl-\\": setBlockType(schema.nodes.code_block),
         "Ctrl-<": liftListItem(schema.nodes.list_item),
@@ -111,12 +103,11 @@ export const buildEditorKeymap = (schema: Schema) => {
         })
     }
     if (!mac) {
-        editorKeymap["Mod-y"] = (state: EditorState, dispatch, view?: EditorView) =>
-            redo(
-                state,
-                tr => dispatch!(addInputType(tr, "historyRedo")),
-                view
-            )
+        editorKeymap["Mod-y"] = (
+            state: EditorState,
+            dispatch,
+            view?: EditorView
+        ) => redo(state, tr => dispatch!(addInputType(tr, "historyRedo")), view)
     }
     return editorKeymap
 }

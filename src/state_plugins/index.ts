@@ -1,7 +1,12 @@
 export {accessRightsPlugin} from "./access_rights.js"
 export {citationRenderPlugin} from "./citation_render.js"
 export {clipboardPlugin} from "./clipboard.js"
-export {collabCaretsPlugin, getSelectionUpdate, removeCollaboratorSelection, updateCollaboratorSelection} from "./collab_carets.js"
+export {
+    collabCaretsPlugin,
+    getSelectionUpdate,
+    removeCollaboratorSelection,
+    updateCollaboratorSelection
+} from "./collab_carets.js"
 export {
     addCommentDuringCreationDecoration,
     getCommentDuringCreationDecoration,
@@ -10,10 +15,22 @@ export {
 export {commentsPlugin} from "./comments.js"
 export {contributorInputPlugin} from "./contributor_input/index.js"
 export {codeBlockPlugin} from "./code_block.js"
-export {documentTemplatePlugin, getProtectedRanges} from "./document_template.js"
+export {
+    documentTemplatePlugin,
+    getProtectedRanges
+} from "./document_template.js"
 export {figurePlugin} from "./figure.js"
-export {footnoteMarkersPlugin, getFootnoteMarkerContents, getFootnoteMarkers, updateFootnoteMarker} from "./footnote_markers.js"
-export {grammarCheckPlugin, removeDecorationsBetween, setDecorations} from "./grammar_check.js"
+export {
+    footnoteMarkersPlugin,
+    getFootnoteMarkerContents,
+    getFootnoteMarkers,
+    updateFootnoteMarker
+} from "./footnote_markers.js"
+export {
+    grammarCheckPlugin,
+    removeDecorationsBetween,
+    setDecorations
+} from "./grammar_check.js"
 export type {GrammarCheckState} from "./grammar_check.js"
 export {headerbarPlugin} from "./headerbar.js"
 export {inlineMathPlugin} from "./inline_math.js"

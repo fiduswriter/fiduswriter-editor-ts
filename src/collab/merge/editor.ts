@@ -390,7 +390,9 @@ export class MergeEditor {
             if (change.inserted.length > 0) {
                 let stepsInvolved: number[] = []
                 change.inserted.forEach((insertion: {data: {step: number}}) =>
-                    stepsInvolved.push(Number.parseInt(String(insertion.data.step)))
+                    stepsInvolved.push(
+                        Number.parseInt(String(insertion.data.step))
+                    )
                 )
                 const stepsSet = new Set(stepsInvolved)
                 stepsInvolved = Array.from(stepsSet)
@@ -509,7 +511,10 @@ export class MergeEditor {
                     })
                     insertionMarksTr.addMark(from, to, insertionMark)
                     stepsTrackedByChangeset.push(index)
-                } else if (stepOne.slice && stepOne.slice.content[0].type === "figure") {
+                } else if (
+                    stepOne.slice &&
+                    stepOne.slice.content[0].type === "figure"
+                ) {
                     if (stepOne.from == stepOne.to) {
                         this.markBlockDiffs(
                             insertionMarksTr,
@@ -654,8 +659,12 @@ export class MergeEditor {
                                 this.mergeView2.state,
                                 this.editor.user,
                                 !this.mergeView2.state.doc.attrs.tracked &&
-                                    !["write-tracked", "review-tracked"].includes(
-                                        this.editor.docInfo.access_rights as string
+                                    ![
+                                        "write-tracked",
+                                        "review-tracked"
+                                    ].includes(
+                                        this.editor.docInfo
+                                            .access_rights as string
                                     ),
                                 Date.now() - this.editor.clientTimeAdjustment
                             )
@@ -708,7 +717,9 @@ export class MergeEditor {
         const settings = view.state.doc.attrs,
             bibliographyHeader =
                 settings.bibliography_header[settings.language] ||
-                (BIBLIOGRAPHY_HEADERS as Record<string, string>)[settings.language]
+                (BIBLIOGRAPHY_HEADERS as Record<string, string>)[
+                    settings.language
+                ]
         const citRenderer = new RenderCitations(
             document.getElementById(elementId)!,
             settings.citationstyle,
@@ -974,17 +985,12 @@ export class MergeEditor {
         // Looking at rebased doc so that it contains the merged document !!!
         offlineDoc.descendants((node: Node) => {
             if (node.type.name === "citation") {
-                node.attrs.references.forEach(
-                    (ref: {id: string | number}) => {
-                        usedBibs.push(Number.parseInt(String(ref.id)))
-                    }
-                )
+                node.attrs.references.forEach((ref: {id: string | number}) => {
+                    usedBibs.push(Number.parseInt(String(ref.id)))
+                })
             } else if (node.type.name === "image" && node.attrs.image) {
                 usedImages.push(node.attrs.image)
-            } else if (
-                node.type.name === "footnote" &&
-                node.attrs.footnote
-            ) {
+            } else if (node.type.name === "footnote" && node.attrs.footnote) {
                 node.attrs.footnote.forEach((subNode: unknown) =>
                     footnoteFind(subNode as any, usedImages, usedBibs)
                 )

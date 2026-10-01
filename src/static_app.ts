@@ -243,8 +243,7 @@ export async function createStaticApp(
             height,
             added: existing?.added || Date.now(),
             cats: (data.cats as number[]) || existing?.cats || [],
-            copyright:
-                (data.copyright as Image["copyright"]) ||
+            copyright: (data.copyright as Image["copyright"]) ||
                 existing?.copyright || {freeToRead: true, licenses: []}
         }
         sessionImages[id] = image
@@ -252,7 +251,8 @@ export async function createStaticApp(
     }
 
     const defaultGetTemplateForDoc = async () => {
-        const docContent = config.getDocContent?.() as Record<string, unknown> | undefined
+        const docContent = config.getDocContent?.() as
+            Record<string, unknown> | undefined
         const template = docContent
             ? extractTemplate(docContent as unknown as any)
             : null

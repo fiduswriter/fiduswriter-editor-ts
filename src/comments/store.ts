@@ -63,8 +63,7 @@ export class ModCommentStore {
         // Set a timeout so that the update can be combines with other updates
         // if they happen more or less simultaneously.
         window.setTimeout(
-            () =>
-                (this.mod.editor.mod as any).collab.doc.sendToCollaborators(),
+            () => (this.mod.editor.mod as any).collab.doc.sendToCollaborators(),
             100
         )
     }
@@ -201,19 +200,28 @@ export class ModCommentStore {
         // add to inline nodes
         tr.addMark(from, to, mark)
         // add to leaf nodes
-        tr.doc.nodesBetween(from, to, (node: ProseMirrorNode, pos: number, parent: ProseMirrorNode | null) => {
-            if (!node.isLeaf) {
-                return
+        tr.doc.nodesBetween(
+            from,
+            to,
+            (
+                node: ProseMirrorNode,
+                pos: number,
+                parent: ProseMirrorNode | null
+            ) => {
+                if (!node.isLeaf) {
+                    return
+                }
+                const marks = node.marks
+                if (
+                    !mark.isInSet(marks) &&
+                    parent &&
+                    parent.type.allowsMarkType(mark.type)
+                ) {
+                    const newMarks = mark.addToSet(marks)
+                    tr.setNodeMarkup(pos, null, node.attrs, newMarks)
+                }
             }
-            const marks = node.marks
-            if (
-                !mark.isInSet(marks) &&
-                parent && parent.type.allowsMarkType(mark.type)
-            ) {
-                const newMarks = mark.addToSet(marks)
-                tr.setNodeMarkup(pos, null, node.attrs, newMarks)
-            }
-        })
+        )
         if (!tr.steps.length) {
             return
         }
@@ -252,7 +260,8 @@ export class ModCommentStore {
         if (
             commentData.user !== undefined &&
             !(this.mod.editor.mod as any).collab.pastParticipants.find(
-                (participant: {id: number}) => participant.id === commentData.user
+                (participant: {id: number}) =>
+                    participant.id === commentData.user
             )
         ) {
             ;(this.mod.editor.mod as any).collab.pastParticipants.push({
@@ -366,11 +375,7 @@ export class ModCommentStore {
         }
     }
 
-    addLocalAnswer(
-        id: number | string,
-        answer: any,
-        local?: boolean
-    ): void {
+    addLocalAnswer(id: number | string, answer: any, local?: boolean): void {
         if (this.comments[id]) {
             if (!this.comments[id].answers) {
                 this.comments[id].answers = []

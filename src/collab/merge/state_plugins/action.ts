@@ -81,7 +81,11 @@ export const acceptChanges = (
         }
         if (mappedStep && !insertionTr.maybeStep(mappedStep).failed) {
             mergedDocMap.appendMap(mappedStep.getMap())
-            ;(rebasedMapping as unknown as {setMirror: (a: number, b: number) => void}).setMirror(
+            ;(
+                rebasedMapping as unknown as {
+                    setMirror: (a: number, b: number) => void
+                }
+            ).setMirror(
                 tr.steps.length - stepIndex - 1,
                 tr.steps.length + mergedDocMap.maps.length - 1
             )
@@ -201,7 +205,11 @@ export const handleMarks = (
         )
     )
     marksToBeAdded.forEach(addMark =>
-        newTr.addMark(mark.attrs.from as number, mark.attrs.to as number, addMark)
+        newTr.addMark(
+            mark.attrs.from as number,
+            mark.attrs.to as number,
+            addMark
+        )
     )
     newTr.setMeta("notrack", true)
     newTr.setMeta("mapAppended", true)

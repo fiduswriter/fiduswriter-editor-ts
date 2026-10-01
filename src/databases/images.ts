@@ -212,7 +212,10 @@ export class ModImageDB {
                             node.type.name === "figure" &&
                             node.attrs.image == id
                         ) {
-                            const attrs = Object.assign({}, node.attrs) as Record<string, any>
+                            const attrs = Object.assign(
+                                {},
+                                node.attrs
+                            ) as Record<string, any>
                             attrs["image"] = false
                             const nodeType =
                                 this.mod.editor.currentView.state.schema.nodes[
@@ -254,7 +257,9 @@ export class ModImageDB {
                     .then(response => response.blob())
                     .then(blob => {
                         const filename = imageUrl.split("/").pop() || "image"
-                        const file = new File([blob], filename, {type: blob.type})
+                        const file = new File([blob], filename, {
+                            type: blob.type
+                        })
                         const x = {
                             image: file,
                             title: title,
@@ -281,8 +286,8 @@ export class ModImageDB {
                                             ) as Record<string, any>
                                             attrs["image"] = newId
                                             const nodeType =
-                                                this.mod.editor.currentView.state
-                                                    .schema.nodes["image"]
+                                                this.mod.editor.currentView
+                                                    .state.schema.nodes["image"]
                                             const transaction =
                                                 this.mod.editor.view.state.tr.setNodeMarkup(
                                                     pos,

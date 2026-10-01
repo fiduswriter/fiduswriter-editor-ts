@@ -95,7 +95,8 @@ export const grammarCheckPlugin = function (options: GrammarCheckOptions) {
                 if (
                     oldState.doc.attrs?.language &&
                     oldState.doc.attrs?.language !== state.doc.attrs?.language
-                ) {                    // Language has changed, remove all decorations in both
+                ) {
+                    // Language has changed, remove all decorations in both
                     // the main and the footnote editor.
                     options.editor.mod.grammar?.onLanguageChange()
                     return {
@@ -171,11 +172,7 @@ export const grammarCheckPlugin = function (options: GrammarCheckOptions) {
                         return false
                     }
                     const transaction = view.state.tr.setSelection(
-                        TextSelection.create(
-                            view.state.doc,
-                            deco.from,
-                            deco.to
-                        )
+                        TextSelection.create(view.state.doc, deco.from, deco.to)
                     )
                     view.dispatch(transaction)
 

@@ -59,7 +59,7 @@ export class ModCollab {
                 // party. This is a good time to clean up the databases, removing
                 // unused images and bibliography items.
                 if (this.editor.mod.db) {
-                    (
+                    ;(
                         this.editor.mod.db as unknown as {clean: () => void}
                     ).clean()
                 }
@@ -107,7 +107,9 @@ export class ModCollab {
                 .headerView
         ) {
             ;(
-                this.editor.menu as unknown as {headerView: {update: () => void}}
+                this.editor.menu as unknown as {
+                    headerView: {update: () => void}
+                }
             ).headerView.update()
         }
         this.chat.showChat(participantArray)

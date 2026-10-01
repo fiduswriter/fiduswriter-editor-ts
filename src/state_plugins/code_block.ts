@@ -22,7 +22,12 @@ class CodeBlockView implements NodeView {
     contentDOM: HTMLElement
     menuButton: HTMLButtonElement
 
-    constructor(node: Node, view: EditorView, getPos: () => number, options: CodeBlockOptions) {
+    constructor(
+        node: Node,
+        view: EditorView,
+        getPos: () => number,
+        options: CodeBlockOptions
+    ) {
         this.node = node
         this.view = view
         this.getPos = getPos
@@ -37,7 +42,9 @@ class CodeBlockView implements NodeView {
 
         // Use DOMSerializer to create the content
         this.serializer = DOMSerializer.fromSchema(node.type.schema)
-        const preElement = this.serializer.serializeNode(this.node) as HTMLElement
+        const preElement = this.serializer.serializeNode(
+            this.node
+        ) as HTMLElement
         preElement.classList.forEach((className: string) =>
             this.dom.classList.add(className)
         )
@@ -140,8 +147,14 @@ class CodeBlockView implements NodeView {
                     width: 280,
                     page: this.options.editor,
                     menuPos: {
-                        X: Number.parseInt(mouseEvent.pageX as unknown as string) + 20,
-                        Y: Number.parseInt(mouseEvent.pageY as unknown as string) - 100
+                        X:
+                            Number.parseInt(
+                                mouseEvent.pageX as unknown as string
+                            ) + 20,
+                        Y:
+                            Number.parseInt(
+                                mouseEvent.pageY as unknown as string
+                            ) - 100
                     },
                     onClose: () => {
                         this.view.focus()

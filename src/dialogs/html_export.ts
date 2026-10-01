@@ -1,5 +1,8 @@
 import {Dialog} from "fwtoolkit"
-import {getExportTrackChangesValue, htmlExportDialogTemplate} from "./templates.js"
+import {
+    getExportTrackChangesValue,
+    htmlExportDialogTemplate
+} from "./templates.js"
 
 export interface HtmlExportDialogResult {
     /** Render `equation`/`figure_equation` nodes as SVG images (MathJax)
@@ -37,7 +40,10 @@ export class HtmlExportDialog {
                                 "html-track-changes"
                             ) !== "include"
                         ;(this.dialog as Dialog).close()
-                        return resolve({svgMath: !!svgMath, resolveTrackChanges})
+                        return resolve({
+                            svgMath: !!svgMath,
+                            resolveTrackChanges
+                        })
                     }
                 })
 

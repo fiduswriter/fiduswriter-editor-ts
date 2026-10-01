@@ -1,5 +1,9 @@
 import {escapeText} from "fwtoolkit"
-import {dateToYear, litToText, nameToText} from "@fiduswriter/bibliography-manager/tools"
+import {
+    dateToYear,
+    litToText,
+    nameToText
+} from "@fiduswriter/bibliography-manager/tools"
 import type {EditorState} from "prosemirror-state"
 
 import {getInternalTargets} from "../links.js"
@@ -204,9 +208,7 @@ export function buildCrossRefList(editor: Editor): CrossRefTarget[] {
     const mainState = editor.view.state as EditorState
     const language = mainState.doc.attrs.language as string
     const targets = getInternalTargets(mainState, language, "main")
-    if (
-        (editor.mod as any).footnotes?.fnEditor?.view?.state
-    ) {
+    if ((editor.mod as any).footnotes?.fnEditor?.view?.state) {
         targets.push(
             ...getInternalTargets(
                 (editor.mod as any).footnotes.fnEditor.view.state,

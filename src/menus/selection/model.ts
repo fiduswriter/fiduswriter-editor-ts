@@ -126,7 +126,8 @@ export const selectionMenuModel = (): {content: MenuItem[]} => ({
                     editor.currentView.state.selection.from,
                     editor.currentView.state.selection.to
                 ),
-            disabled: (editor: Editor) => editor.docInfo.access_rights !== "write",
+            disabled: (editor: Editor) =>
+                editor.docInfo.access_rights !== "write",
             hidden: (editor: Editor) =>
                 editor.currentView.state.selection.$anchor.depth < 1 ||
                 !tracksInSelection(editor.currentView),
@@ -142,7 +143,8 @@ export const selectionMenuModel = (): {content: MenuItem[]} => ({
                     editor.currentView.state.selection.from,
                     editor.currentView.state.selection.to
                 ),
-            disabled: (editor: Editor) => editor.docInfo.access_rights !== "write",
+            disabled: (editor: Editor) =>
+                editor.docInfo.access_rights !== "write",
             hidden: (editor: Editor) =>
                 editor.currentView.state.selection.$anchor.depth < 1 ||
                 !tracksInSelection(editor.currentView),

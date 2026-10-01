@@ -146,9 +146,15 @@ export class HeaderbarView {
             this.saveFileName()
         }
         this.editor.dom.removeEventListener("click", this.listeners.onclick!)
-        this.editor.dom.removeEventListener("keydown", this.listeners.onKeydown!)
+        this.editor.dom.removeEventListener(
+            "keydown",
+            this.listeners.onKeydown!
+        )
         this.editor.dom.removeEventListener("keyup", this.listeners.onKeyup!)
-        this.editor.dom.removeEventListener("focusout", this.listeners.onFocusout!)
+        this.editor.dom.removeEventListener(
+            "focusout",
+            this.listeners.onFocusout!
+        )
     }
 
     onclick(event: MouseEvent): void {
@@ -418,7 +424,11 @@ export class HeaderbarView {
                 return
             }
         }
-        this.checkKeys(event, this.editor.menu.headerbarModel as HeaderbarModel, name)
+        this.checkKeys(
+            event,
+            this.editor.menu.headerbarModel as HeaderbarModel,
+            name
+        )
     }
 
     onKeyup(event: KeyboardEvent): void {
@@ -480,8 +490,9 @@ export class HeaderbarView {
                         this.parentChain[this.parentChain.length - 1]
                     )
                 } else {
-                    const currentMenuIndex =
-                        model.content.findIndex(menu => menu.open)
+                    const currentMenuIndex = model.content.findIndex(
+                        menu => menu.open
+                    )
                     const newMenuIndex = currentMenuIndex
                         ? currentMenuIndex - 1
                         : model.content.length - 1
@@ -502,8 +513,9 @@ export class HeaderbarView {
                         this.parentChain[this.parentChain.length - 1]
                     )
                 } else {
-                    const currentMenuIndex =
-                        model.content.findIndex(menu => menu.open)
+                    const currentMenuIndex = model.content.findIndex(
+                        menu => menu.open
+                    )
                     const newMenuIndex =
                         currentMenuIndex === model.content.length - 1
                             ? 0
@@ -537,7 +549,9 @@ export class HeaderbarView {
             // We are offline. Just reset.
             return this.update()
         }
-        const docTitleEl = this.editor.dom.querySelector("h1#document-title") as HTMLElement | null
+        const docTitleEl = this.editor.dom.querySelector(
+            "h1#document-title"
+        ) as HTMLElement | null
         if (!docTitleEl) {
             return
         }
@@ -624,7 +638,8 @@ export class HeaderbarView {
             // header is closed
             return "<div></div>"
         }
-        const editorOnlyMode = this.editor.app.settings.EDITOR_ONLY_MODE === true
+        const editorOnlyMode =
+            this.editor.app.settings.EDITOR_ONLY_MODE === true
         let closeTop = ""
         if (!editorOnlyMode) {
             let exitUrl: string
@@ -665,9 +680,16 @@ export class HeaderbarView {
     }
 
     getParticipantListHTML(): string {
-        const participants = (this.editor.mod.collab as {
-            participants: {id: number; username?: string; name?: string; avatar?: string}[]
-        }).participants
+        const participants = (
+            this.editor.mod.collab as {
+                participants: {
+                    id: number
+                    username?: string
+                    name?: string
+                    avatar?: string
+                }[]
+            }
+        ).participants
         if (participants.length > 1) {
             return `
                 <div id="connected-collaborators">
@@ -746,9 +768,7 @@ export class HeaderbarView {
         menuItem: HeaderbarActionItem | HeaderbarSettingItem
     ): string {
         return `<span class="fw-pulldown-item${
-            menuItem.selected?.(this.editor)
-                ? " fw-selected"
-                : ""
+            menuItem.selected?.(this.editor) ? " fw-selected" : ""
         }${menuItem.disabled?.(this.editor) ? " fw-disabled" : ""}${
             menuItem === this.cursorMenuItem ? " fw-cursor" : ""
         }"
@@ -763,9 +783,7 @@ export class HeaderbarView {
 
     getMenuMenuItemHTML(menuItem: HeaderbarMenuItem): string {
         return `<span class="fw-pulldown-item${
-            menuItem.selected?.(this.editor)
-                ? " fw-selected"
-                : ""
+            menuItem.selected?.(this.editor) ? " fw-selected" : ""
         }${menuItem.disabled?.(this.editor) ? " fw-disabled" : ""}${
             menuItem === this.cursorMenuItem ? " fw-cursor" : ""
         }" ${menuItem.tooltip ? `title="${menuItem.tooltip}" aria-label="${menuItem.tooltip}"` : ""}>

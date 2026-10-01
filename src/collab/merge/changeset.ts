@@ -20,7 +20,10 @@ export class changeSet {
         return tr.docs.length > index ? tr.docs[index] : tr.doc
     }
 
-    findConflicts(tr1: Transaction, tr2: Transaction): Array<[number, string, number, string]> {
+    findConflicts(
+        tr1: Transaction,
+        tr2: Transaction
+    ): Array<[number, string, number, string]> {
         const conflicts: Array<[number, string, number, string]> = []
         const changes1 = this.findContentChanges(tr1)
         const changes2 = this.findContentChanges(tr2)
@@ -64,12 +67,14 @@ export class changeSet {
     } {
         const doc = this.trDoc(tr)
         let changes = ChangeSet.create(doc)
-        tr.steps.forEach((_step: import("prosemirror-transform").Step, index: number) => {
-            const stepDoc = this.trDoc(tr, index + 1)
-            changes = changes.addSteps(stepDoc, [tr.mapping.maps[index]], {
-                step: index
-            })
-        })
+        tr.steps.forEach(
+            (_step: import("prosemirror-transform").Step, index: number) => {
+                const stepDoc = this.trDoc(tr, index + 1)
+                changes = changes.addSteps(stepDoc, [tr.mapping.maps[index]], {
+                    step: index
+                })
+            }
+        )
         const invertedMapping = new Mapping()
         invertedMapping.appendMappingInverted(tr.mapping)
 
@@ -105,12 +110,14 @@ export class changeSet {
         const tr = this.tr
         const doc = this.trDoc(tr)
         let changes = ChangeSet.create(doc)
-        tr.steps.forEach((_step: import("prosemirror-transform").Step, index: number) => {
-            const stepDoc = this.trDoc(tr, index + 1)
-            changes = changes.addSteps(stepDoc, [tr.mapping.maps[index]], {
-                step: index
-            })
-        })
+        tr.steps.forEach(
+            (_step: import("prosemirror-transform").Step, index: number) => {
+                const stepDoc = this.trDoc(tr, index + 1)
+                changes = changes.addSteps(stepDoc, [tr.mapping.maps[index]], {
+                    step: index
+                })
+            }
+        )
         return changes
     }
 }

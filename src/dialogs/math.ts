@@ -57,7 +57,9 @@ export class MathDialog {
                             if (this.equationSelected) {
                                 view.dispatch(state.tr.deleteSelection())
                             }
-                            ;(this.dialog as InstanceType<typeof Dialog>).close()
+                            ;(
+                                this.dialog as InstanceType<typeof Dialog>
+                            ).close()
                             return
                         } else if (
                             new RegExp(
@@ -69,7 +71,9 @@ export class MathDialog {
                             view.dispatch(
                                 state.tr.insertText(sup(this.equation.slice(1)))
                             )
-                            ;(this.dialog as InstanceType<typeof Dialog>).close()
+                            ;(
+                                this.dialog as InstanceType<typeof Dialog>
+                            ).close()
                             return
                         } else if (
                             new RegExp(
@@ -81,14 +85,18 @@ export class MathDialog {
                             view.dispatch(
                                 state.tr.insertText(sub(this.equation.slice(1)))
                             )
-                            ;(this.dialog as InstanceType<typeof Dialog>).close()
+                            ;(
+                                this.dialog as InstanceType<typeof Dialog>
+                            ).close()
                             return
                         } else if (
                             this.equationSelected &&
                             this.equation === this.node?.attrs.equation
                         ) {
                             // Equation selected, but has not changed from last time.
-                            ;(this.dialog as InstanceType<typeof Dialog>).close()
+                            ;(
+                                this.dialog as InstanceType<typeof Dialog>
+                            ).close()
                             return
                         }
                         const nodeType = state.schema.nodes["equation"]
@@ -125,7 +133,7 @@ export class MathDialog {
 
         import("@fiduswriter/document/mathlive").then(MathLive => {
             interface MathfieldElementClass {
-                strings: Record<string, Record<string, string>>,
+                strings: Record<string, Record<string, string>>
                 locale: string
                 plonkSound: null
                 keypressSound: null
@@ -154,9 +162,11 @@ export class MathDialog {
             MathfieldElement.locale = "int"
             MathfieldElement.plonkSound = null
             MathfieldElement.keypressSound = null
-            this.mathField = new (MathfieldElement as unknown as new (
-                options: Record<string, unknown>
-            ) => {getValue: () => string})({
+            this.mathField = new (
+                MathfieldElement as unknown as new (
+                    options: Record<string, unknown>
+                ) => {getValue: () => string}
+            )({
                 mathVirtualKeyboardPolicy: "auto"
             })
             ;(this.mathField as {value: string}).value = this.equation

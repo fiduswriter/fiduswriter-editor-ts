@@ -34,9 +34,7 @@ export class AddContactDialog {
                         ).value
                         document
                             .querySelectorAll("#add-new-contact .fw-warning")
-                            .forEach(el =>
-                                el.parentElement?.removeChild(el)
-                            )
+                            .forEach(el => el.parentElement?.removeChild(el))
                         const userStrings = userString.split(/[\s,;]+/)
                         let chain: Promise<unknown[]> = Promise.resolve([])
 

@@ -43,9 +43,11 @@ export const createDiffSchema = (docSchema: Schema): Schema => {
                                 " " +
                                 (node.attrs.diffdata[0] as {type: string}).type
                         } else {
-                            dom[1]["class"] = (node.attrs.diffdata[0] as {
-                                type: string
-                            }).type
+                            dom[1]["class"] = (
+                                node.attrs.diffdata[0] as {
+                                    type: string
+                                }
+                            ).type
                         }
                         dom = [
                             dom[0],
@@ -65,9 +67,7 @@ export const createDiffSchema = (docSchema: Schema): Schema => {
                 parseDOM: nodeSpec.parseDOM?.map(tag => ({
                     tag: tag.tag,
                     getAttrs: (dom: HTMLElement) => {
-                        const attrs = tag.getAttrs
-                            ? tag.getAttrs(dom)
-                            : {}
+                        const attrs = tag.getAttrs ? tag.getAttrs(dom) : {}
                         return Object.assign(
                             {
                                 diffdata: parseDiff(dom.dataset.diffdata)

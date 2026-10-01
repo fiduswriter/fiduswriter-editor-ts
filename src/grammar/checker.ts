@@ -179,8 +179,7 @@ export class ModGrammar {
      */
     packUrl(pack: string): string {
         const config = this.editor.app.config as
-            | {grammar_check_pack_base_url?: unknown}
-            | undefined
+            {grammar_check_pack_base_url?: unknown} | undefined
         const baseUrl = config?.grammar_check_pack_base_url
         if (typeof baseUrl === "string" && baseUrl) {
             return `${baseUrl}${pack}.pack.gz`
@@ -227,10 +226,10 @@ export class ModGrammar {
                     )
                     task.update(
                         percentage,
-                        interpolate(
-                            gettext("Checked %s of %s sections..."),
-                            [completed, sources.length]
-                        )
+                        interpolate(gettext("Checked %s of %s sections..."), [
+                            completed,
+                            sources.length
+                        ])
                     )
                 }
                 return Promise.all(
@@ -519,10 +518,7 @@ export class ModGrammar {
             return
         }
         save(entries).catch(() => {
-            addAlert(
-                "error",
-                gettext("The ignore lists could not be saved.")
-            )
+            addAlert("error", gettext("The ignore lists could not be saved."))
         })
     }
 

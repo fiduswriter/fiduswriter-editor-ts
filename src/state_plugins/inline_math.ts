@@ -129,8 +129,7 @@ function createInlineMathWidget(
     input.addEventListener("keydown", event => {
         event.stopPropagation()
         const currentState = pluginKey.getState(view.state) as
-            | InlineEditorState
-            | undefined
+            InlineEditorState | undefined
         if (!currentState?.active) {
             return
         }
@@ -212,8 +211,7 @@ function createInlineMathWidget(
         // (e.g. scrollbar) does not accidentally commit.
         setTimeout(() => {
             const currentState = pluginKey.getState(view.state) as
-                | InlineEditorState
-                | undefined
+                InlineEditorState | undefined
             if (currentState?.active && currentState.widgetId === myWidgetId) {
                 view.dispatch(
                     view.state.tr.setMeta(pluginKey, {action: "commit"})
@@ -296,10 +294,7 @@ function dropupPlugin(options: {editor: Editor}): Plugin {
             </div>`
 
         currentDropUpActions = []
-        const setupAction = (
-            selector: string,
-            action: () => void
-        ): void => {
+        const setupAction = (selector: string, action: () => void): void => {
             const el = dropUp.querySelector(selector)
             if (!el) {
                 return
@@ -400,8 +395,7 @@ function dropupPlugin(options: {editor: Editor}): Plugin {
         props: {
             handleKeyDown(view: EditorView, event: KeyboardEvent) {
                 const pluginState = key.getState(view.state) as
-                    | DropupState
-                    | undefined
+                    DropupState | undefined
                 if (!pluginState?.equationNode) {
                     return false
                 }
@@ -448,8 +442,7 @@ function dropupPlugin(options: {editor: Editor}): Plugin {
             },
             decorations(state: EditorState) {
                 const pluginState = key.getState(state) as
-                    | DropupState
-                    | undefined
+                    DropupState | undefined
                 return pluginState?.decos || DecorationSet.empty
             }
         }
@@ -491,8 +484,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                         mathNodePos: (meta.mathNodePos as number) || 0,
                         widgetId: Math.random().toString(36).slice(2),
                         cursorAtStart: meta.cursorAtStart as
-                            | boolean
-                            | undefined,
+                            boolean | undefined,
                         decos: DecorationSet.empty
                     }
                 } else if (meta?.action === "deactivate") {
@@ -549,8 +541,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
 
         appendTransaction: (trs, oldState, newState) => {
             const oldPluginState = key.getState(oldState) as
-                | InlineEditorState
-                | undefined
+                InlineEditorState | undefined
             const meta = trs.find(tr => tr.getMeta(key))?.getMeta(key)
 
             /* Transactions appended here are applied by ProseMirror directly
@@ -710,10 +701,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                     )
                     return tracked(tr)
                 } else {
-                    const tr = newState.tr.insertText(
-                        "$",
-                        oldPluginState.from
-                    )
+                    const tr = newState.tr.insertText("$", oldPluginState.from)
                     tr.setSelection(
                         TextSelection.create(tr.doc, oldPluginState.from)
                     )
@@ -809,8 +797,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
         props: {
             decorations(state: EditorState) {
                 const pluginState = key.getState(state) as
-                    | InlineEditorState
-                    | undefined
+                    InlineEditorState | undefined
                 return pluginState?.decos || DecorationSet.empty
             },
 
@@ -862,8 +849,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
                     }
 
                     const pluginState = key.getState(view.state) as
-                        | InlineEditorState
-                        | undefined
+                        InlineEditorState | undefined
                     if (pluginState?.active) {
                         // Commit the current widget before opening a new one.
                         const commitTr = view.state.tr.setMeta(key, {
@@ -898,8 +884,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
 
                 click(view: EditorView, event: MouseEvent) {
                     const pluginState = key.getState(view.state) as
-                        | InlineEditorState
-                        | undefined
+                        InlineEditorState | undefined
                     if (pluginState?.active) {
                         const target = event.target as HTMLElement | null
                         if (target?.closest(".inline-math-widget")) {
@@ -919,8 +904,7 @@ function inlineEditorPlugin(options: {editor: Editor}): Plugin {
 
             handleKeyDown(view: EditorView, event: KeyboardEvent) {
                 const pluginState = key.getState(view.state) as
-                    | InlineEditorState
-                    | undefined
+                    InlineEditorState | undefined
                 if (!pluginState?.active) {
                     /* ── "$" keypress → activate inline editor ── */
                     if (event.key === "$") {

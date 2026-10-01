@@ -18,38 +18,40 @@ export class TemplateExportDialog {
         this.dialog = false
     }
 
-    init(fileType: "docx" | "odt"): Promise<TemplateExportDialogResult | false> {
+    init(
+        fileType: "docx" | "odt"
+    ): Promise<TemplateExportDialogResult | false> {
         const title =
             fileType === "docx"
                 ? gettext("DOCX export options")
                 : gettext("ODT export options")
         const buttons: Array<Record<string, unknown>> = []
-        const dialogDonePromise = new Promise<TemplateExportDialogResult | false>(
-            resolve => {
-                buttons.push({
-                    text: gettext("Export"),
-                    classes: "fw-dark",
-                    click: () => {
-                        const dialogEl = (this.dialog as Dialog).dialogEl
-                        const resolveTrackChanges =
-                            getExportTrackChangesValue(
-                                dialogEl,
-                                "template-track-changes"
-                            ) !== "include"
-                        ;(this.dialog as Dialog).close()
-                        return resolve({resolveTrackChanges})
-                    }
-                })
+        const dialogDonePromise = new Promise<
+            TemplateExportDialogResult | false
+        >(resolve => {
+            buttons.push({
+                text: gettext("Export"),
+                classes: "fw-dark",
+                click: () => {
+                    const dialogEl = (this.dialog as Dialog).dialogEl
+                    const resolveTrackChanges =
+                        getExportTrackChangesValue(
+                            dialogEl,
+                            "template-track-changes"
+                        ) !== "include"
+                    ;(this.dialog as Dialog).close()
+                    return resolve({resolveTrackChanges})
+                }
+            })
 
-                buttons.push({
-                    type: "cancel" as const,
-                    click: () => {
-                        ;(this.dialog as Dialog).close()
-                        resolve(false)
-                    }
-                })
-            }
-        )
+            buttons.push({
+                type: "cancel" as const,
+                click: () => {
+                    ;(this.dialog as Dialog).close()
+                    resolve(false)
+                }
+            })
+        })
 
         this.dialog = new Dialog({
             title,

@@ -88,7 +88,9 @@ export const rejectAll = (
                     tr.step(
                         new RemoveMarkStep(
                             map.map(Math.max(pos, from)),
-                            map.map(Math.min(pos + node.nodeSize, to as number)),
+                            map.map(
+                                Math.min(pos + node.nodeSize, to as number)
+                            ),
                             mark
                         )
                     )

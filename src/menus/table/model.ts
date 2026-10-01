@@ -88,7 +88,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -114,7 +114,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -140,7 +140,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -166,7 +166,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -196,7 +196,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -222,7 +222,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -258,10 +258,9 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     selection.jsonID !== "cell" ||
-                    selection.$headCell.pos ===
-                        selection.$anchorCell.pos ||
+                    selection.$headCell.pos === selection.$anchorCell.pos ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -296,13 +295,11 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     selection.jsonID !== "cell" ||
-                    selection.$headCell.pos !==
-                        selection.$anchorCell.pos ||
+                    selection.$headCell.pos !== selection.$anchorCell.pos ||
                     (selection.$anchorCell.nodeAfter.attrs.rowspan === 1 &&
-                        selection.$anchorCell.nodeAfter.attrs.colspan ===
-                            1) ||
+                        selection.$anchorCell.nodeAfter.attrs.colspan === 1) ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -333,7 +330,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -362,7 +359,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -391,7 +388,7 @@ export const tableMenuModel = () => ({
                 if (
                     !table ||
                     (["write-tracked", "review-tracked"].includes(
-                        (editor.docInfo.access_rights as string)
+                        editor.docInfo.access_rights as string
                     ) &&
                         !tableAddedByUser(table, editor.user.id))
                 ) {
@@ -429,7 +426,8 @@ export const tableMenuModel = () => ({
                     editor.currentView.dispatch
                 )
             },
-            disabled: (editor: Editor) => tableAddedFromTemplate(editor.currentView.state)
+            disabled: (editor: Editor) =>
+                tableAddedFromTemplate(editor.currentView.state)
         }
     ]
 })

@@ -10,7 +10,8 @@ interface CachedSchema {
     cached: {bibDB: BibDB}
 }
 
-const asCached = (schema: Schema): CachedSchema => schema as unknown as CachedSchema
+const asCached = (schema: Schema): CachedSchema =>
+    schema as unknown as CachedSchema
 
 const copyCitation = Object.assign({}, citation)
 

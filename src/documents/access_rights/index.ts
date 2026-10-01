@@ -168,8 +168,7 @@ export class AccessRightsTab {
         this.documentIds = documentIds
         this.contacts = contacts
         this.newContactCall = newContactCall
-        this.singleDocumentId =
-            documentIds.length === 1 ? documentIds[0] : null
+        this.singleDocumentId = documentIds.length === 1 ? documentIds[0] : null
         this.e2ee = e2ee
         this.documentPassword = documentPassword
         this.onShareSuccess = onShareSuccess
@@ -230,11 +229,7 @@ export class AccessRightsTab {
 
         this.dialogTabs = new DialogTabs(tabs, {
             onShow: index => {
-                if (
-                    this.isOwner &&
-                    index === 1 &&
-                    this.singleDocumentId
-                ) {
+                if (this.isOwner && index === 1 && this.singleDocumentId) {
                     this.loadShareTokens()
                 }
             }
@@ -270,8 +265,9 @@ export class AccessRightsTab {
                             const colRow = collaboratorEl as HTMLElement
                             if (colRow.dataset.rights === "delete") {
                                 colRow.dataset.rights = "read"
-                                const accessRightIcon =
-                                    colRow.querySelector(".fw-icon-access-right")
+                                const accessRightIcon = colRow.querySelector(
+                                    ".fw-icon-access-right"
+                                )
                                 accessRightIcon?.classList.remove(
                                     "icon-access-delete"
                                 )
@@ -284,7 +280,9 @@ export class AccessRightsTab {
                                 contact =>
                                     contact.type === htmlEl.dataset.type &&
                                     contact.id ===
-                                        Number.parseInt(htmlEl.dataset.id || "0")
+                                        Number.parseInt(
+                                            htmlEl.dataset.id || "0"
+                                        )
                             )
                             if (!collaborator) {
                                 console.warn(
@@ -400,7 +398,10 @@ export class AccessRightsTab {
                     )
                     const contentMenu = new ContentMenu({
                         menu: menu as ContentMenuInit,
-                        menuPos: {X: (event as MouseEvent).pageX, Y: (event as MouseEvent).pageY},
+                        menuPos: {
+                            X: (event as MouseEvent).pageX,
+                            Y: (event as MouseEvent).pageY
+                        },
                         width: 200
                     })
                     contentMenu.open()
@@ -513,9 +514,7 @@ export class AccessRightsTab {
             if (item.type === "header") {
                 const nextItems = content.slice(index + 1)
                 const nextAction = nextItems.find(i => i.type === "action")
-                const nextHeader = nextItems.findIndex(
-                    i => i.type === "header"
-                )
+                const nextHeader = nextItems.findIndex(i => i.type === "header")
                 if (!nextAction) {
                     return false
                 }
@@ -651,7 +650,9 @@ export class AccessRightsTab {
                         this.container?.querySelector("#share-token-list")
                     if (!listEl?.querySelector(".share-token-row")) {
                         if (listEl) {
-                            listEl.innerHTML = shareTokenListTemplate({tokens: []})
+                            listEl.innerHTML = shareTokenListTemplate({
+                                tokens: []
+                            })
                         }
                     }
                     addAlert("success", gettext("Share link revoked."))
@@ -771,7 +772,9 @@ export class DocumentAccessRightsDialog {
                                         })
                                     )
                                 this.tab.container
-                                    ?.querySelector("#share-contact table tbody")
+                                    ?.querySelector(
+                                        "#share-contact table tbody"
+                                    )
                                     ?.insertAdjacentHTML(
                                         "beforeend",
                                         collaboratorsTemplate({
@@ -787,7 +790,9 @@ export class DocumentAccessRightsDialog {
                                 this.newContactCall(contactData)
                             } else {
                                 this.tab.container
-                                    ?.querySelector("#share-contact table tbody")
+                                    ?.querySelector(
+                                        "#share-contact table tbody"
+                                    )
                                     ?.insertAdjacentHTML(
                                         "beforeend",
                                         collaboratorsTemplate({

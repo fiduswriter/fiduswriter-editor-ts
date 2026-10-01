@@ -18,7 +18,10 @@ export class TableDialog {
         this.insertTableDialog()
     }
 
-    markInsertTable(cell: HTMLTableCellElement, className: string): {
+    markInsertTable(
+        cell: HTMLTableCellElement,
+        className: string
+    ): {
         colCount: number
         rowCount: number
     } {
@@ -38,9 +41,9 @@ export class TableDialog {
             rowCount += 1
         }
         // add hover class.
-        const rows = (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelectorAll(
-            "tr"
-        )
+        const rows = (
+            this.dialog as InstanceType<typeof Dialog>
+        ).dialogEl.querySelectorAll("tr")
         for (let i = 0; i < rowCount; i++) {
             const cols = rows[i].querySelectorAll("td")
             for (let j = 0; j < colCount; j++) {
@@ -181,9 +184,7 @@ export class TableConfigurationDialog {
     }
 
     submitForm(): void {
-        const {table, tablePos} = this.findTable(
-            this.editor.currentView.state
-        )
+        const {table, tablePos} = this.findTable(this.editor.currentView.state)
         if (!table) {
             return
         }
@@ -256,7 +257,9 @@ export class TableConfigurationDialog {
         }
 
         dropdownSelect(
-            this.dialog.dialogEl.querySelector(".table-width") as HTMLSelectElement,
+            this.dialog.dialogEl.querySelector(
+                ".table-width"
+            ) as HTMLSelectElement,
             {
                 onChange: (newValue: string | false) => {
                     if (newValue !== false) {
@@ -276,7 +279,9 @@ export class TableConfigurationDialog {
         )
 
         dropdownSelect(
-            this.dialog.dialogEl.querySelector(".table-layout") as HTMLSelectElement,
+            this.dialog.dialogEl.querySelector(
+                ".table-layout"
+            ) as HTMLSelectElement,
             {
                 onChange: (newValue: string | false) => {
                     if (newValue !== false) {
@@ -289,7 +294,9 @@ export class TableConfigurationDialog {
         )
 
         dropdownSelect(
-            this.dialog.dialogEl.querySelector(".table-category") as HTMLSelectElement,
+            this.dialog.dialogEl.querySelector(
+                ".table-category"
+            ) as HTMLSelectElement,
             {
                 onChange: (newValue: string | false) => {
                     if (newValue !== false) {
@@ -302,7 +309,9 @@ export class TableConfigurationDialog {
         )
 
         dropdownSelect(
-            this.dialog.dialogEl.querySelector(".table-caption") as HTMLSelectElement,
+            this.dialog.dialogEl.querySelector(
+                ".table-caption"
+            ) as HTMLSelectElement,
             {
                 onChange: (newValue: string | false) => {
                     if (newValue !== false) {

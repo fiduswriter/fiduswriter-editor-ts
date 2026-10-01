@@ -223,9 +223,7 @@ export const footnoteMarkersPlugin = (options: {editor: Editor}) =>
                         } else {
                             newFootnotes.forEach((footnote, index) => {
                                 const fnContent = (
-                                    state.doc.nodeAt(
-                                        footnote.from
-                                    ) as Node
+                                    state.doc.nodeAt(footnote.from) as Node
                                 ).attrs.footnote
                                 options.editor.mod.footnotes!.fnEditor.renderFootnote(
                                     fnContent,

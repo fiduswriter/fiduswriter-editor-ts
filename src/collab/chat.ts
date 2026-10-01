@@ -184,9 +184,7 @@ export class ModCollabChat {
                 chatContainer.style.maxHeight = `${window.innerHeight - 200}px`
             }
 
-            const resizeButton = document.querySelector(
-                "#chat .resize-button"
-            )
+            const resizeButton = document.querySelector("#chat .resize-button")
             if (!resizeButton) {
                 return
             }
@@ -195,9 +193,7 @@ export class ModCollabChat {
                 if (!chatEl) {
                     return
                 }
-                if (
-                    resizeButton.classList.contains("fa-angle-double-down")
-                ) {
+                if (resizeButton.classList.contains("fa-angle-double-down")) {
                     resizeButton.classList.remove("fa-angle-double-down")
                     resizeButton.classList.add("fa-angle-double-up")
                     chatEl.style.top = `${chatEl.getBoundingClientRect().top}px` // Set current height to get the animation working.

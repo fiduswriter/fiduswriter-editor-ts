@@ -29,7 +29,9 @@ function tocHTML(tocItems: TocItem[], title: string) {
     return `<h1 class="toc">${escapeText(title)}</h1>
     ${tocItems
         .map(item => {
-            const level = (item.type as unknown as {name: string}).name.substr(-1)
+            const level = (item.type as unknown as {name: string}).name.substr(
+                -1
+            )
             return `<h${level}><a href="#${item.id}">${escapeText(item.textContent)}</a></h${level}>`
         })
         .join("")}`
@@ -126,8 +128,11 @@ export const tocRenderPlugin = (_options: {editor: unknown}) =>
         },
         props: {
             nodeViews: {
-                toc: (node: Node, view: EditorView, getPos: () => number | undefined) =>
-                    new ToCView(node, view, getPos as () => number)
+                toc: (
+                    node: Node,
+                    view: EditorView,
+                    getPos: () => number | undefined
+                ) => new ToCView(node, view, getPos as () => number)
             }
         }
     })

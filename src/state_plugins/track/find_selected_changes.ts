@@ -116,7 +116,11 @@ export function findSelectedChanges(state: EditorState): SelectedChanges {
     if (formatChangeMark && formatChangePos !== false) {
         selectedChanges.formatChange = formatChangeSize
             ? {from: formatChangePos, to: formatChangePos + formatChangeSize}
-            : getFromToMark(state.doc, formatChangePos, formatChangeMark as Mark)
+            : getFromToMark(
+                  state.doc,
+                  formatChangePos,
+                  formatChangeMark as Mark
+              )
     }
     return selectedChanges
 }

@@ -78,7 +78,10 @@ export class SelectionMenuView {
 
     bindEvents(): void {
         this.listeners.onclick = event => this.onclick(event)
-        this.editor.dom.addEventListener("click", this.listeners.onclick as EventListener)
+        this.editor.dom.addEventListener(
+            "click",
+            this.listeners.onclick as EventListener
+        )
     }
 
     destroy(): void {
@@ -110,7 +113,8 @@ export class SelectionMenuView {
                 menuNumber++
                 seekItem = seekItem.previousElementSibling as HTMLElement
             }
-            const menuItem = this.getMenu().selectionMenuModel.content[menuNumber]
+            const menuItem =
+                this.getMenu().selectionMenuModel.content[menuNumber]
             // execute an associated action.
             if (menuItem.action) {
                 event.preventDefault()
@@ -151,10 +155,15 @@ export class SelectionMenuView {
 
     getSelectionMenuHTML(): string {
         if (
-            READ_ONLY_ROLES.includes(this.editor.docInfo.access_rights as string) ||
+            READ_ONLY_ROLES.includes(
+                this.editor.docInfo.access_rights as string
+            ) ||
             this.editorView.state.selection.empty ||
-            (this.editor.mod.comments as {store: {commentDuringCreation?: boolean}}).store
-                .commentDuringCreation ||
+            (
+                this.editor.mod.comments as {
+                    store: {commentDuringCreation?: boolean}
+                }
+            ).store.commentDuringCreation ||
             (
                 this.editor.mod.comments as {
                     interactions: {isCurrentlyEditing: () => boolean}
@@ -172,8 +181,8 @@ export class SelectionMenuView {
                 ).top - selectionMenuTop
         return `<div style="margin-top: ${offset}px;">
             <div class="editor-selection-menu">
-                ${this.getMenu().selectionMenuModel.content
-                    .map(
+                ${this.getMenu()
+                    .selectionMenuModel.content.map(
                         (menuItem, index) =>
                             `<div class="ui-buttonset${(menuItem.hidden && menuItem.hidden(this.editor)) || (menuItem.disabled && menuItem.disabled(this.editor)) ? " fw-disabled" : ""}">
                         ${this.getSelectionMenuItemHTML(menuItem, index)}

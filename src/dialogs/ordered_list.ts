@@ -90,7 +90,10 @@ export class OrderedListStartDialog {
         const listStartInput = document.querySelector("input.list-start")
         if (listStartInput) {
             listStartInput.addEventListener("change", _event => {
-                this.order = Number.parseInt((listStartInput as HTMLInputElement).value) || 1
+                this.order =
+                    Number.parseInt(
+                        (listStartInput as HTMLInputElement).value
+                    ) || 1
             })
         }
     }

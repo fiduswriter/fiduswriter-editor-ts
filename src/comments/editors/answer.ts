@@ -55,7 +55,21 @@ export class CommentAnswerEditor extends CommentEditor {
         if (!text) {
             return
         }
-        const interactions = (this.mod as {interactions?: {submitAnswerUpdate?: (commentId: string, answerId: string, text: unknown[]) => void; createNewAnswer?: (commentId: string, text: unknown[]) => void}}).interactions
+        const interactions = (
+            this.mod as {
+                interactions?: {
+                    submitAnswerUpdate?: (
+                        commentId: string,
+                        answerId: string,
+                        text: unknown[]
+                    ) => void
+                    createNewAnswer?: (
+                        commentId: string,
+                        text: unknown[]
+                    ) => void
+                }
+            }
+        ).interactions
         if ((this.options as CommentAnswerOptions).answerId) {
             interactions?.submitAnswerUpdate?.(
                 this.id,

@@ -126,7 +126,9 @@ export class ModCitations {
             const settings = this.editor.view.state.doc.attrs,
                 bibliographyHeader =
                     settings.bibliography_header[settings.language as string] ||
-                    BIBLIOGRAPHY_HEADERS[settings.language as keyof typeof BIBLIOGRAPHY_HEADERS]
+                    BIBLIOGRAPHY_HEADERS[
+                        settings.language as keyof typeof BIBLIOGRAPHY_HEADERS
+                    ]
             this.citRenderer = new RenderCitations(
                 document.getElementById("paper-editable") as HTMLElement,
                 settings.citationstyle,
@@ -167,9 +169,9 @@ export class ModCitations {
                 const citationText = referencesData
                     .map((ref: {id?: number; locator?: string}) => {
                         const entryId = ref.id
-                        const item = ((this.editor.mod.db as any).bibDB.db as any)[
-                            entryId as number
-                        ]
+                        const item = (
+                            (this.editor.mod.db as any).bibDB.db as any
+                        )[entryId as number]
 
                         if (!item) {
                             return `[${entryId || "?"}]`
@@ -209,7 +211,9 @@ export class ModCitations {
                 const settings = this.editor.view.state.doc.attrs
                 const bibliographyHeader =
                     settings.bibliography_header[settings.language as string] ||
-                    BIBLIOGRAPHY_HEADERS[settings.language as keyof typeof BIBLIOGRAPHY_HEADERS]
+                    BIBLIOGRAPHY_HEADERS[
+                        settings.language as keyof typeof BIBLIOGRAPHY_HEADERS
+                    ]
 
                 let bibHTML = `<h1 class="doc-bibliography-header">${bibliographyHeader}</h1><div class="csl-bib-body">`
 
@@ -243,20 +247,27 @@ export class ModCitations {
 
                         const authors = item.fields.author?.length
                             ? item.fields.author
-                                  .map((author: Record<string, unknown>) =>
-                                      authorName(author) || "Unknown"
+                                  .map(
+                                      (author: Record<string, unknown>) =>
+                                          authorName(author) || "Unknown"
                                   )
                                   .join(", ")
                             : "Unknown Author"
 
                         const itemYear = itemDateYear(item)
                         const year = itemYear ? `(${itemYear})` : "(n.d.)"
-                        const title = item.fields.title
-                            ?.map((part: {text?: string}) => part.text || "")
-                            .join("") || "Untitled"
-                        const publisher = item.fields.publisher
-                            ?.map((part: {text?: string}) => part.text || "")
-                            .join("") || ""
+                        const title =
+                            item.fields.title
+                                ?.map(
+                                    (part: {text?: string}) => part.text || ""
+                                )
+                                .join("") || "Untitled"
+                        const publisher =
+                            item.fields.publisher
+                                ?.map(
+                                    (part: {text?: string}) => part.text || ""
+                                )
+                                .join("") || ""
                         const itemType = item.bib_type || "misc"
 
                         bibHTML += `<div class="csl-entry" data-reference="${id}">${authors} ${year}. <i>${title}</i>. ${publisher}. [${itemType}]</div>`
@@ -307,7 +318,9 @@ export class ModCitations {
                         (el as HTMLElement).dataset.reference) as string
                 )
                 this.checkTrackingDialog()
-                    .then(() => import("@fiduswriter/bibliography-manager/form"))
+                    .then(
+                        () => import("@fiduswriter/bibliography-manager/form")
+                    )
                     .then(({BibEntryForm}) => {
                         const form = new BibEntryForm(
                             (this.editor.mod.db as any).bibDB,
@@ -460,28 +473,26 @@ export class ModCitations {
                 citationFootnoteCounter = 1,
                 footnoteCounter = 1
 
-            this.editor.view.state.doc.descendants(
-                (node: ProseMirrorNode) => {
-                    if (
-                        node.isInline &&
-                        (node.type.name === "footnote" ||
-                            node.type.name === "citation")
-                    ) {
-                        if (node.type.name === "footnote") {
-                            outputCSS += `#footnote-box-container .footnote-container:nth-of-type(${editorFootnoteCounter}) > *:first-child::before {
+            this.editor.view.state.doc.descendants((node: ProseMirrorNode) => {
+                if (
+                    node.isInline &&
+                    (node.type.name === "footnote" ||
+                        node.type.name === "citation")
+                ) {
+                    if (node.type.name === "footnote") {
+                        outputCSS += `#footnote-box-container .footnote-container:nth-of-type(${editorFootnoteCounter}) > *:first-child::before {
                              content: "${footnoteCounter} ";
                          }\n`
-                            editorFootnoteCounter++
-                        } else {
-                            outputCSS += `.footnote-citation:nth-of-type(${citationFootnoteCounter})::before {
+                        editorFootnoteCounter++
+                    } else {
+                        outputCSS += `.footnote-citation:nth-of-type(${citationFootnoteCounter})::before {
                              content: "${footnoteCounter} ";
                          }\n`
-                            citationFootnoteCounter++
-                        }
-                        footnoteCounter++
+                        citationFootnoteCounter++
                     }
+                    footnoteCounter++
                 }
-            )
+            })
         }
 
         if (this.fnOverrideElement!.innerHTML !== outputCSS) {

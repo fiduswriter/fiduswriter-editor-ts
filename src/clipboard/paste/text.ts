@@ -19,7 +19,8 @@ export class TextPaste {
     init(): void {
         import("@fiduswriter/bibliography-manager/import").then(
             ({BibliographyImporter}) => {
-                const bibDB = this.editor.mod.db?.bibDB as unknown as BibDBCollection
+                const bibDB = this.editor.mod.db
+                    ?.bibDB as unknown as BibDBCollection
                 const importer = new BibliographyImporter(
                     this.text,
                     bibDB,

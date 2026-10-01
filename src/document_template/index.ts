@@ -103,7 +103,8 @@ export class ModDocumentTemplate {
             type: "menu",
             tooltip: gettext("Choose which optional sections to enable."),
             order: 0,
-            disabled: (editor: Editor) => editor.docInfo.access_rights !== "write",
+            disabled: (editor: Editor) =>
+                editor.docInfo.access_rights !== "write",
             content: hideableDocParts.map(docPart => ({
                 title: docPart.title,
                 type: "setting",
@@ -147,7 +148,9 @@ export class ModDocumentTemplate {
             (menu: any) => menu.id === "file"
         )
         // Cancel if run already
-        if (fileMenu.content.find((menuItem: any) => menuItem.id === "copy_as")) {
+        if (
+            fileMenu.content.find((menuItem: any) => menuItem.id === "copy_as")
+        ) {
             return
         }
         fileMenu.content.push({
@@ -187,7 +190,8 @@ export class ModDocumentTemplate {
                         ${gettext("Select document template for copy.")}
                         </p>
                         <select class="fw-button fw-large fw-light">${Object.entries(
-                            (editor.mod as any).documentTemplate.documentTemplates
+                            (editor.mod as any).documentTemplate
+                                .documentTemplates
                         )
                             .map(
                                 ([importId, dt]) =>
@@ -251,40 +255,44 @@ export class ModDocumentTemplate {
                                             targetE2EE: false
                                         })
                                     } else {
-                                        enterPasswordDialog(async (password: string) => {
-                                            try {
-                                                const key =
-                                                    await E2EEKeyManager.deriveKey(
-                                                        password,
-                                                        new Uint8Array(
-                                                            atob(
-                                                                (editor.docInfo as any)
-                                                                    .e2ee_salt
-                                                            )
-                                                                .split("")
-                                                                .map(c =>
-                                                                    c.charCodeAt(
-                                                                        0
-                                                                    )
+                                        enterPasswordDialog(
+                                            async (password: string) => {
+                                                try {
+                                                    const key =
+                                                        await E2EEKeyManager.deriveKey(
+                                                            password,
+                                                            new Uint8Array(
+                                                                atob(
+                                                                    (
+                                                                        editor.docInfo as any
+                                                                    ).e2ee_salt
                                                                 )
-                                                        ),
-                                                        (editor.docInfo as any)
-                                                            .e2ee_iterations ||
-                                                            600000
+                                                                    .split("")
+                                                                    .map(c =>
+                                                                        c.charCodeAt(
+                                                                            0
+                                                                        )
+                                                                    )
+                                                            ),
+                                                            (
+                                                                editor.docInfo as any
+                                                            ).e2ee_iterations ||
+                                                                600000
+                                                        )
+                                                    doCopy({
+                                                        sourceKey: key,
+                                                        targetE2EE: false
+                                                    })
+                                                } catch (_err) {
+                                                    addAlert(
+                                                        "error",
+                                                        gettext(
+                                                            "Incorrect password."
+                                                        )
                                                     )
-                                                doCopy({
-                                                    sourceKey: key,
-                                                    targetE2EE: false
-                                                })
-                                            } catch (_err) {
-                                                addAlert(
-                                                    "error",
-                                                    gettext(
-                                                        "Incorrect password."
-                                                    )
-                                                )
+                                                }
                                             }
-                                        })
+                                        )
                                     }
                                 } else if (!isE2EE && targetE2EE) {
                                     // Encrypting: need new password
@@ -296,49 +304,57 @@ export class ModDocumentTemplate {
                                     })
                                 } else if (isE2EE && targetE2EE) {
                                     // E2EE -> E2EE: need source key, then new password
-                                    const handlePasswords = (sourceKey: any) => {
-                                        createPasswordDialog((password: string) => {
-                                            doCopy({
-                                                sourceKey: sourceKey,
-                                                targetE2EE: true,
-                                                targetPassword: password
-                                            })
-                                        })
+                                    const handlePasswords = (
+                                        sourceKey: any
+                                    ) => {
+                                        createPasswordDialog(
+                                            (password: string) => {
+                                                doCopy({
+                                                    sourceKey: sourceKey,
+                                                    targetE2EE: true,
+                                                    targetPassword: password
+                                                })
+                                            }
+                                        )
                                     }
                                     if (editor.e2ee && editor.e2ee.key) {
                                         handlePasswords(editor.e2ee.key)
                                     } else {
-                                        enterPasswordDialog(async (password: string) => {
-                                            try {
-                                                const key =
-                                                    await E2EEKeyManager.deriveKey(
-                                                        password,
-                                                        new Uint8Array(
-                                                            atob(
-                                                                (editor.docInfo as any)
-                                                                    .e2ee_salt
-                                                            )
-                                                                .split("")
-                                                                .map(c =>
-                                                                    c.charCodeAt(
-                                                                        0
-                                                                    )
+                                        enterPasswordDialog(
+                                            async (password: string) => {
+                                                try {
+                                                    const key =
+                                                        await E2EEKeyManager.deriveKey(
+                                                            password,
+                                                            new Uint8Array(
+                                                                atob(
+                                                                    (
+                                                                        editor.docInfo as any
+                                                                    ).e2ee_salt
                                                                 )
-                                                        ),
-                                                        (editor.docInfo as any)
-                                                            .e2ee_iterations ||
-                                                            600000
+                                                                    .split("")
+                                                                    .map(c =>
+                                                                        c.charCodeAt(
+                                                                            0
+                                                                        )
+                                                                    )
+                                                            ),
+                                                            (
+                                                                editor.docInfo as any
+                                                            ).e2ee_iterations ||
+                                                                600000
+                                                        )
+                                                    handlePasswords(key)
+                                                } catch (_err) {
+                                                    addAlert(
+                                                        "error",
+                                                        gettext(
+                                                            "Incorrect password."
+                                                        )
                                                     )
-                                                handlePasswords(key)
-                                            } catch (_err) {
-                                                addAlert(
-                                                    "error",
-                                                    gettext(
-                                                        "Incorrect password."
-                                                    )
-                                                )
+                                                }
                                             }
-                                        })
+                                        )
                                     }
                                 } else {
                                     // Plain -> plain
@@ -388,41 +404,41 @@ export class ModDocumentTemplate {
                         "Export the document to a DOCX file with the given template."
                     ),
                     action: (editor: Editor) => {
-                        import(
-                            "@fiduswriter/document/exporter/docx/index"
-                        ).then(async ({DOCXExporter}: any) => {
-                            const dialog = new TemplateExportDialog()
-                            const options = await dialog.init("docx")
-                            if (!options) {
-                                return
+                        import("@fiduswriter/document/exporter/docx/index").then(
+                            async ({DOCXExporter}: any) => {
+                                const dialog = new TemplateExportDialog()
+                                const options = await dialog.init("docx")
+                                if (!options) {
+                                    return
+                                }
+                                const doc = editor.getDoc({
+                                    changes: options.resolveTrackChanges
+                                        ? "acceptAllNoInsertions"
+                                        : undefined
+                                }) as any
+                                const title = shortFileTitle(
+                                    doc.title,
+                                    doc.path || ""
+                                )
+                                const task = addProgress(
+                                    "info",
+                                    `${title}: ${gettext("Exporting DOCX...")}`,
+                                    {autoClose: 6000}
+                                )
+                                const exporter = new DOCXExporter(
+                                    doc,
+                                    template.template_file,
+                                    (editor.mod.db as any).bibDB,
+                                    (editor.mod.db as any).imageDB,
+                                    editor.app.csl
+                                )
+                                exporter.progressCallback = (
+                                    message: string,
+                                    percentage: number
+                                ) => task.update(percentage, message)
+                                exporter.init()
                             }
-                            const doc = editor.getDoc({
-                                changes: options.resolveTrackChanges
-                                    ? "acceptAllNoInsertions"
-                                    : undefined
-                            }) as any
-                            const title = shortFileTitle(
-                                doc.title,
-                                doc.path || ""
-                            )
-                            const task = addProgress(
-                                "info",
-                                `${title}: ${gettext("Exporting DOCX...")}`,
-                                {autoClose: 6000}
-                            )
-                            const exporter = new DOCXExporter(
-                                doc,
-                                template.template_file,
-                                (editor.mod.db as any).bibDB,
-                                (editor.mod.db as any).imageDB,
-                                editor.app.csl
-                            )
-                            exporter.progressCallback = (
-                                message: string,
-                                percentage: number
-                            ) => task.update(percentage, message)
-                            exporter.init()
-                        })
+                        )
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 }
@@ -544,11 +560,14 @@ export class ModDocumentTemplate {
             citationStyleMenu.content =
                 this.editor.view.state.doc.attrs.citationstyles.map(
                     (citationstyle: string) => ({
-                        title: this.citationStyles[citationstyle] ||
+                        title:
+                            this.citationStyles[citationstyle] ||
                             this.citationStyleFallbackTitle(citationstyle),
                         type: "setting",
                         action: (editor: Editor) => {
-                            const actualStyle = this.citationStyles[citationstyle]
+                            const actualStyle = this.citationStyles[
+                                citationstyle
+                            ]
                                 ? citationstyle
                                 : this.citationStyleFallbackId(citationstyle)
                             editor.view.dispatch(
@@ -561,10 +580,16 @@ export class ModDocumentTemplate {
                             )
                         },
                         selected: (editor: Editor) => {
-                            const current = editor.view.state.doc.attrs.citationstyle
-                            return current === citationstyle ||
+                            const current =
+                                editor.view.state.doc.attrs.citationstyle
+                            return (
+                                current === citationstyle ||
                                 (!this.citationStyles[citationstyle] &&
-                                    current === this.citationStyleFallbackId(citationstyle))
+                                    current ===
+                                        this.citationStyleFallbackId(
+                                            citationstyle
+                                        ))
+                            )
                         }
                     })
                 )

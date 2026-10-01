@@ -48,7 +48,8 @@ export const tagInputPlugin = (options: {editor: Editor}) =>
                 }
 
                 // Find all tags_part nodes in the document
-                const tagsPartPositions: Array<{start: number; end: number}> = []
+                const tagsPartPositions: Array<{start: number; end: number}> =
+                    []
                 state.doc.descendants((node, pos) => {
                     if (node.type.name === "tags_part") {
                         tagsPartPositions.push({
@@ -77,135 +78,136 @@ export const tagInputPlugin = (options: {editor: Editor}) =>
             nodeViews: {},
             handleDOMEvents: {
                 mousedown(view, event) {
-                // Mark that this selection change came from a mouse click
-                // Set the closure variable to indicate a mouse click is happening
-                mouseClickActive = true
+                    // Mark that this selection change came from a mouse click
+                    // Set the closure variable to indicate a mouse click is happening
+                    mouseClickActive = true
 
-                // Clear any existing timer
-                if (mouseClickTimer) {
-                    clearTimeout(mouseClickTimer)
-                }
+                    // Clear any existing timer
+                    if (mouseClickTimer) {
+                        clearTimeout(mouseClickTimer)
+                    }
 
-                // Reset after a delay to allow all related transactions to process
-                // Including blur handlers and any delayed events
-                mouseClickTimer = setTimeout(() => {
-                    mouseClickActive = false
-                    mouseClickTimer = null
-                }, 100)
+                    // Reset after a delay to allow all related transactions to process
+                    // Including blur handlers and any delayed events
+                    mouseClickTimer = setTimeout(() => {
+                        mouseClickActive = false
+                        mouseClickTimer = null
+                    }, 100)
 
-                // Check if we're clicking outside a focused tag input
-                const activeElement = document.activeElement
-                // Check if active element is inside a tag-input container
-                const tagInputContainer =
-                    activeElement?.closest(".tag-input")
-                const target = event.target as HTMLElement
-                const clickedInsideTagInput = target.closest(".tag-input")
-                // Check if clicking on a tag within the tags_part (but not the tag input)
-                const clickedOnTag =
-                    target.closest(".tag") ||
-                    target.closest(".doc-tags_part")
+                    // Check if we're clicking outside a focused tag input
+                    const activeElement = document.activeElement
+                    // Check if active element is inside a tag-input container
+                    const tagInputContainer =
+                        activeElement?.closest(".tag-input")
+                    const target = event.target as HTMLElement
+                    const clickedInsideTagInput = target.closest(".tag-input")
+                    // Check if clicking on a tag within the tags_part (but not the tag input)
+                    const clickedOnTag =
+                        target.closest(".tag") ||
+                        target.closest(".doc-tags_part")
 
-                // If a tag input has focus and we're clicking outside it (including on existing tags), submit and blur it
-                if (
-                    tagInputContainer &&
-                    (!clickedInsideTagInput || clickedOnTag)
-                ) {
-                    // Get the stored references from WeakMap
-                    const refs = tagInputReferences.get(
-                        tagInputContainer as HTMLElement
-                    )
-                    if (refs) {
-                        const {tagInputView, mainView, getPos} = refs
+                    // If a tag input has focus and we're clicking outside it (including on existing tags), submit and blur it
+                    if (
+                        tagInputContainer &&
+                        (!clickedInsideTagInput || clickedOnTag)
+                    ) {
+                        // Get the stored references from WeakMap
+                        const refs = tagInputReferences.get(
+                            tagInputContainer as HTMLElement
+                        )
+                        if (refs) {
+                            const {tagInputView, mainView, getPos} = refs
 
-                        // Submit the tag immediately with the valid position
-                        submitTag(tagInputView, mainView, getPos)
+                            // Submit the tag immediately with the valid position
+                            submitTag(tagInputView, mainView, getPos)
 
-                        // If we clicked outside the tags_part entirely, set selection to clicked position
-                        // If we clicked on a tag, let the normal click handling select it
-                        if (!clickedOnTag) {
-                            // Now set the selection based on where the user clicked
-                            // We need to do this synchronously before appendTransaction runs
-                            const clickPos = view.posAtCoords({
-                                left: event.clientX,
-                                top: event.clientY
-                            })
-                            if (clickPos) {
-                                const tr = view.state.tr.setSelection(
-                                    TextSelection.create(
-                                        view.state.doc,
-                                        clickPos.pos
-                                    )
-                                )
-                                view.dispatch(tr)
-                                view.focus()
-                            }
-                        } else {
-                            // Blur the tag input first, then focus the main view
-
-                            // Set flag to prevent tag input from being refocused
-                            tagInputJustBlurred = true
-
-                            // Blur the tag input
-                            tagInputView.dom.blur()
-
-                            // Find the position of the clicked tag and select it
-                            const clickPos = view.posAtCoords({
-                                left: event.clientX,
-                                top: event.clientY
-                            })
-                            if (clickPos) {
-                                // Try to create a NodeSelection on the tag
-                                try {
-                                    const node = view.state.doc.nodeAt(
-                                        clickPos.pos
-                                    )
-                                    if (node && node.type.name === "tag") {
-                                        const tr = view.state.tr.setSelection(
-                                            NodeSelection.create(
-                                                view.state.doc,
-                                                clickPos.pos
-                                            )
+                            // If we clicked outside the tags_part entirely, set selection to clicked position
+                            // If we clicked on a tag, let the normal click handling select it
+                            if (!clickedOnTag) {
+                                // Now set the selection based on where the user clicked
+                                // We need to do this synchronously before appendTransaction runs
+                                const clickPos = view.posAtCoords({
+                                    left: event.clientX,
+                                    top: event.clientY
+                                })
+                                if (clickPos) {
+                                    const tr = view.state.tr.setSelection(
+                                        TextSelection.create(
+                                            view.state.doc,
+                                            clickPos.pos
                                         )
-                                        view.dispatch(tr)
-                                    } else {
-                                        // If not directly on a tag, try the position before
-                                        const nodeBefore =
-                                            view.state.doc.nodeAt(
-                                                clickPos.pos - 1
-                                            )
-                                        if (
-                                            nodeBefore &&
-                                            nodeBefore.type.name === "tag"
-                                        ) {
+                                    )
+                                    view.dispatch(tr)
+                                    view.focus()
+                                }
+                            } else {
+                                // Blur the tag input first, then focus the main view
+
+                                // Set flag to prevent tag input from being refocused
+                                tagInputJustBlurred = true
+
+                                // Blur the tag input
+                                tagInputView.dom.blur()
+
+                                // Find the position of the clicked tag and select it
+                                const clickPos = view.posAtCoords({
+                                    left: event.clientX,
+                                    top: event.clientY
+                                })
+                                if (clickPos) {
+                                    // Try to create a NodeSelection on the tag
+                                    try {
+                                        const node = view.state.doc.nodeAt(
+                                            clickPos.pos
+                                        )
+                                        if (node && node.type.name === "tag") {
                                             const tr =
                                                 view.state.tr.setSelection(
                                                     NodeSelection.create(
                                                         view.state.doc,
-                                                        clickPos.pos - 1
+                                                        clickPos.pos
                                                     )
                                                 )
                                             view.dispatch(tr)
+                                        } else {
+                                            // If not directly on a tag, try the position before
+                                            const nodeBefore =
+                                                view.state.doc.nodeAt(
+                                                    clickPos.pos - 1
+                                                )
+                                            if (
+                                                nodeBefore &&
+                                                nodeBefore.type.name === "tag"
+                                            ) {
+                                                const tr =
+                                                    view.state.tr.setSelection(
+                                                        NodeSelection.create(
+                                                            view.state.doc,
+                                                            clickPos.pos - 1
+                                                        )
+                                                    )
+                                                view.dispatch(tr)
+                                            }
                                         }
+                                    } catch {
+                                        // Silently ignore selection errors
                                     }
-                                } catch {
-                                    // Silently ignore selection errors
                                 }
+
+                                view.focus()
+
+                                // Reset the flag after a short delay
+                                setTimeout(() => {
+                                    tagInputJustBlurred = false
+                                }, 150)
                             }
-
-                            view.focus()
-
-                            // Reset the flag after a short delay
-                            setTimeout(() => {
-                                tagInputJustBlurred = false
-                            }, 150)
                         }
                     }
-                }
 
-                return false
+                    return false
+                }
             }
-        }
-    },
+        },
         appendTransaction: (trs, oldState, newState) => {
             // If selection is not collapsed or not changed, don't do anything
             if (

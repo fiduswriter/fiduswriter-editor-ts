@@ -38,21 +38,30 @@ export class ModTrack {
                     let seekItem = el.target?.closest(".margin-box")
                     while (seekItem?.previousElementSibling) {
                         boxNumber += 1
-                        seekItem = seekItem.previousElementSibling as HTMLElement
+                        seekItem =
+                            seekItem.previousElementSibling as HTMLElement
                     }
                     const box = (
-                        this.editor.mod.marginboxes as {marginBoxes: MarginBox[]}
+                        this.editor.mod.marginboxes as {
+                            marginBoxes: MarginBox[]
+                        }
                     ).marginBoxes[boxNumber]
                     accept(
                         (el.target as HTMLElement).dataset.type as string,
                         box.pos,
                         box.view === "main"
                             ? this.editor.view
-                            : (this.editor.mod.footnotes as {fnEditor: {view: EditorView}}).fnEditor.view
+                            : (
+                                  this.editor.mod.footnotes as {
+                                      fnEditor: {view: EditorView}
+                                  }
+                              ).fnEditor.view
                     )
                     // Activate the next margin box with the same number
                     const newBox = (
-                        this.editor.mod.marginboxes as {marginBoxes: MarginBox[]}
+                        this.editor.mod.marginboxes as {
+                            marginBoxes: MarginBox[]
+                        }
                     ).marginBoxes[boxNumber]
                     if (newBox) {
                         ;(this.editor.mod.track as ModTrack).activateTrack(
@@ -68,21 +77,30 @@ export class ModTrack {
                     let seekItem = el.target?.closest(".margin-box")
                     while (seekItem?.previousElementSibling) {
                         boxNumber += 1
-                        seekItem = seekItem.previousElementSibling as HTMLElement
+                        seekItem =
+                            seekItem.previousElementSibling as HTMLElement
                     }
                     const box = (
-                        this.editor.mod.marginboxes as {marginBoxes: MarginBox[]}
+                        this.editor.mod.marginboxes as {
+                            marginBoxes: MarginBox[]
+                        }
                     ).marginBoxes[boxNumber]
                     reject(
                         (el.target as HTMLElement).dataset.type as string,
                         box.pos,
                         box.view === "main"
                             ? this.editor.view
-                            : (this.editor.mod.footnotes as {fnEditor: {view: EditorView}}).fnEditor.view
+                            : (
+                                  this.editor.mod.footnotes as {
+                                      fnEditor: {view: EditorView}
+                                  }
+                              ).fnEditor.view
                     )
                     // Activate the next margin box with the same number
                     const newBox = (
-                        this.editor.mod.marginboxes as {marginBoxes: MarginBox[]}
+                        this.editor.mod.marginboxes as {
+                            marginBoxes: MarginBox[]
+                        }
                     ).marginBoxes[boxNumber]
                     if (newBox) {
                         ;(this.editor.mod.track as ModTrack).activateTrack(
@@ -108,10 +126,12 @@ export class ModTrack {
         const view =
             viewName === "main"
                 ? this.editor.view
-                : (this.editor.mod.footnotes as {fnEditor: {view: EditorView}}).fnEditor.view
+                : (this.editor.mod.footnotes as {fnEditor: {view: EditorView}})
+                      .fnEditor.view
         const otherView =
             viewName === "main"
-                ? (this.editor.mod.footnotes as {fnEditor: {view: EditorView}}).fnEditor.view
+                ? (this.editor.mod.footnotes as {fnEditor: {view: EditorView}})
+                      .fnEditor.view
                 : this.editor.view
         // remove all selected changes in other view
         otherView.dispatch(deactivateAllSelectedChanges(otherView.state.tr))
@@ -124,12 +144,18 @@ export class ModTrack {
     }
 
     rejectAll(): void {
-        rejectAll((this.editor.mod.footnotes as {fnEditor: {view: EditorView}}).fnEditor.view)
+        rejectAll(
+            (this.editor.mod.footnotes as {fnEditor: {view: EditorView}})
+                .fnEditor.view
+        )
         rejectAll(this.editor.view)
     }
 
     acceptAll(): void {
-        acceptAll((this.editor.mod.footnotes as {fnEditor: {view: EditorView}}).fnEditor.view)
+        acceptAll(
+            (this.editor.mod.footnotes as {fnEditor: {view: EditorView}})
+                .fnEditor.view
+        )
         acceptAll(this.editor.view)
     }
 }

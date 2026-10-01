@@ -72,10 +72,8 @@ export function filterBadPos(
         match =>
             !badPos.find(
                 bad =>
-                    (match.range.start < bad[0] &&
-                        match.range.end > bad[0]) ||
-                    (match.range.start < bad[1] &&
-                        match.range.end > bad[1]) ||
+                    (match.range.start < bad[0] && match.range.end > bad[0]) ||
+                    (match.range.start < bad[1] && match.range.end > bad[1]) ||
                     (match.range.start >= bad[0] && match.range.end <= bad[1])
             )
     )
@@ -253,9 +251,10 @@ export function normalizeIgnoredList(
  * `grammar_check_ignored_words`/`grammar_check_ignored_rules`; invalid
  * shapes yield empty lists.
  */
-export function readIgnored(
-    preferences?: Record<string, unknown>
-): {words: string[]; rules: string[]} {
+export function readIgnored(preferences?: Record<string, unknown>): {
+    words: string[]
+    rules: string[]
+} {
     const prefs = preferences ?? {}
     return {
         words: normalizeIgnoredList(

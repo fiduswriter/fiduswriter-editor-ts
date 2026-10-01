@@ -7,7 +7,10 @@ import type {Node, ResolvedPos} from "prosemirror-model"
 import type {EditorState, Transaction} from "prosemirror-state"
 import type {EditorView} from "prosemirror-view"
 
-import {docClipboardSerializer, fnClipboardSerializer} from "../clipboard/copy/index.js"
+import {
+    docClipboardSerializer,
+    fnClipboardSerializer
+} from "../clipboard/copy/index.js"
 import {HTMLPaste, TextPaste} from "../clipboard/paste/index.js"
 import type {Editor} from "../types.js"
 
@@ -195,7 +198,10 @@ const filterFragment = (
     return Fragment.from(nodes)
 }
 
-export const clipboardPlugin = (options: {editor: Editor; viewType: string}) => {
+export const clipboardPlugin = (options: {
+    editor: Editor
+    viewType: string
+}) => {
     let shiftPressed = false
     return new Plugin({
         key,
@@ -323,12 +329,11 @@ export const clipboardPlugin = (options: {editor: Editor; viewType: string}) => 
                 ph.init()
                 return fixedText // We need to analyze it asynchronously, so we always need to turn this into an empty string for now.
             },
-            clipboardSerializer:
-                (
-                    options.viewType === "main"
-                        ? docClipboardSerializer(options.editor)
-                        : fnClipboardSerializer(options.editor)
-                ) as unknown as import("prosemirror-model").DOMSerializer,
+            clipboardSerializer: (options.viewType === "main"
+                ? docClipboardSerializer(options.editor)
+                : fnClipboardSerializer(
+                      options.editor
+                  )) as unknown as import("prosemirror-model").DOMSerializer,
             transformPasted: (slice, view, plain) => {
                 // Only filter if not plain text paste
                 if (plain) {
@@ -375,7 +380,11 @@ export const clipboardPlugin = (options: {editor: Editor; viewType: string}) => 
                     filteredContent,
                     Math.min(
                         slice.openStart,
-                        openChainDepth(filteredContent, slice.openStart, "start")
+                        openChainDepth(
+                            filteredContent,
+                            slice.openStart,
+                            "start"
+                        )
                     ),
                     Math.min(
                         slice.openEnd,

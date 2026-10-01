@@ -89,7 +89,8 @@ export const contributorInputPlugin = (
                     const oldDropUpDeco = decos.find(
                         undefined,
                         undefined,
-                        spec => (spec as {id?: string}).id === "contributorDropUp"
+                        spec =>
+                            (spec as {id?: string}).id === "contributorDropUp"
                     )
                     if (oldDropUpDeco && oldDropUpDeco.length) {
                         decos = decos.remove(oldDropUpDeco)
@@ -98,7 +99,8 @@ export const contributorInputPlugin = (
                     if (
                         state.selection instanceof NodeSelection &&
                         state.selection.node.type.name === "contributor" &&
-                        state.selection.$anchor.node(1).attrs.locking !== "fixed"
+                        state.selection.$anchor.node(1).attrs.locking !==
+                            "fixed"
                     ) {
                         const dropUpDeco = Decoration.widget(
                             state.selection.from,
@@ -152,8 +154,10 @@ export const contributorInputPlugin = (
 
                                         // Arrow-Right and Arrow-Left should always pass through for contributor navigation
                                         if (
-                                            (event as KeyboardEvent).key === "ArrowRight" ||
-                                            (event as KeyboardEvent).key === "ArrowLeft"
+                                            (event as KeyboardEvent).key ===
+                                                "ArrowRight" ||
+                                            (event as KeyboardEvent).key ===
+                                                "ArrowLeft"
                                         ) {
                                             return false
                                         }
@@ -162,7 +166,9 @@ export const contributorInputPlugin = (
                                         // 1. The event target is within the drop-up, or
                                         // 2. The drop-up has focus
                                         if (
-                                            keysHandled.includes((event as KeyboardEvent).key) &&
+                                            keysHandled.includes(
+                                                (event as KeyboardEvent).key
+                                            ) &&
                                             (isTargetInDropUp || dropUpHasFocus)
                                         ) {
                                             return true
@@ -187,7 +193,8 @@ export const contributorInputPlugin = (
         props: {
             nodeViews: {},
             decorations(state: EditorState) {
-                const pluginState = key.getState(state) as ContributorInputState | undefined
+                const pluginState = key.getState(state) as
+                    ContributorInputState | undefined
                 if (!pluginState) {
                     return DecorationSet.empty
                 }
@@ -287,7 +294,9 @@ export const contributorInputPlugin = (
                             return
                         }
 
-                        return newState.tr.setSelection(newSelection as Selection)
+                        return newState.tr.setSelection(
+                            newSelection as Selection
+                        )
                     }
                 }
 

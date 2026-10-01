@@ -77,7 +77,8 @@ export const addCommentDuringCreationDecoration = (
     if (!tr.selection.from || tr.selection.from === tr.selection.to) {
         return false
     }
-    const pluginState = key.getState(state) as {decos: DecorationSet} | undefined
+    const pluginState = key.getState(state) as
+        {decos: DecorationSet} | undefined
     if (!pluginState) {
         return false
     }
@@ -111,7 +112,8 @@ export const removeCommentDuringCreationDecoration = (
     state: EditorState,
     tr: Transaction
 ): Transaction | false => {
-    const pluginState = key.getState(state) as {decos: DecorationSet} | undefined
+    const pluginState = key.getState(state) as
+        {decos: DecorationSet} | undefined
     if (!pluginState) {
         return false
     }
@@ -134,7 +136,8 @@ export const removeCommentDuringCreationDecoration = (
 export const getCommentDuringCreationDecoration = (
     state: EditorState
 ): Decoration | false => {
-    const pluginState = key.getState(state) as {decos: DecorationSet} | undefined
+    const pluginState = key.getState(state) as
+        {decos: DecorationSet} | undefined
     if (!pluginState) {
         return false
     }
@@ -169,7 +172,8 @@ export const commentsPlugin = (options: CommentPluginOptions) =>
                     // of previous values
                     return meta
                 }
-                const oldPluginState = key.getState(oldState) as {decos: DecorationSet} | undefined
+                const oldPluginState = key.getState(oldState) as
+                    {decos: DecorationSet} | undefined
                 if (!oldPluginState) {
                     return {decos: DecorationSet.empty}
                 }
@@ -178,9 +182,9 @@ export const commentsPlugin = (options: CommentPluginOptions) =>
                 decos = decos.map(tr.mapping, tr.doc, {
                     onRemove: _decoSpec => {
                         // comment text has been deleted, cancel comment creation.
-                        ;(options.editor.mod.comments as any).interactions.deleteComment(
-                            -1
-                        )
+                        ;(
+                            options.editor.mod.comments as any
+                        ).interactions.deleteComment(-1)
                     }
                 })
 
@@ -298,7 +302,8 @@ export const commentsPlugin = (options: CommentPluginOptions) =>
         },
         props: {
             decorations(state: EditorState) {
-                const pluginState = this.getState(state) as {decos: DecorationSet} | undefined
+                const pluginState = this.getState(state) as
+                    {decos: DecorationSet} | undefined
                 if (!pluginState) {
                     return DecorationSet.empty
                 }

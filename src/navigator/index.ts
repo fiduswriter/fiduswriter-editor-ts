@@ -28,7 +28,9 @@ export class ModNavigator {
         this.editor = editor
         this.navigatorEl = document.querySelector("#navigator")
         this.listeners = {}
-        this.navigatorFilters = (editor.menu as any).navigatorFilterModel.content
+        this.navigatorFilters = (
+            editor.menu as any
+        ).navigatorFilterModel.content
         this.defaultFilters = ["heading1", "heading2", "heading3"]
 
         this.lastSelectedTarget = null
@@ -169,10 +171,9 @@ export class ModNavigator {
                     if (activeHeading) {
                         ;(activeHeading as HTMLElement).focus()
                     } else {
-                        const firstFocusable =
-                            this.navigatorEl?.querySelector(
-                                "#navigator-list [href]"
-                            )
+                        const firstFocusable = this.navigatorEl?.querySelector(
+                            "#navigator-list [href]"
+                        )
                         if (firstFocusable) {
                             ;(firstFocusable as HTMLElement).focus()
                         }
@@ -369,7 +370,9 @@ export class ModNavigator {
             const target =
                 this.lastSelectedTarget == "title"
                     ? this.editor.dom.querySelector(`div.doc-title`)
-                    : this.editor.dom.querySelector(`#${this.lastSelectedTarget}`)
+                    : this.editor.dom.querySelector(
+                          `#${this.lastSelectedTarget}`
+                      )
             if (target) {
                 // Set selection at end of target.
                 const range = document.createRange()

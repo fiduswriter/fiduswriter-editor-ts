@@ -7,10 +7,7 @@ export class GoogleDocsPasteHandler extends GeneralPasteHandler {
         node = super.convertNode(node)
         // Replace  nodes with other nodes to not change the number of child nodes
         // <b style="font-weight:normal;">...</b> => <span>...</span>
-        if (
-            node.tagName === "B" &&
-            node.style.fontWeight === "normal"
-        ) {
+        if (node.tagName === "B" && node.style.fontWeight === "normal") {
             node = this.neutralizeInlineNode(node)
         }
         return node

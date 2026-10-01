@@ -25,10 +25,12 @@ export function trackPlugin(options: {editor: Editor}) {
                     options.editor.user.name || ""
                 state.doc.descendants((node: Node) => {
                     if (node.attrs.track) {
-                        ;(node.attrs.track as Array<{
-                            user: number
-                            username: string
-                        }>).forEach(track => {
+                        ;(
+                            node.attrs.track as Array<{
+                                user: number
+                                username: string
+                            }>
+                        ).forEach(track => {
                             if (!users[track.user] && track.user !== 0) {
                                 users[track.user] = track.username
                             }
@@ -62,7 +64,10 @@ export function trackPlugin(options: {editor: Editor}) {
                         if (
                             !(
                                 options.editor.mod.collab as {
-                                    pastParticipants: {id: number; name: string}[]
+                                    pastParticipants: {
+                                        id: number
+                                        name: string
+                                    }[]
                                 }
                             ).pastParticipants.find(
                                 participant => participant.id === userId
@@ -70,7 +75,10 @@ export function trackPlugin(options: {editor: Editor}) {
                         ) {
                             ;(
                                 options.editor.mod.collab as {
-                                    pastParticipants: {id: number; name: string}[]
+                                    pastParticipants: {
+                                        id: number
+                                        name: string
+                                    }[]
                                 }
                             ).pastParticipants.push({
                                 id: userId,
@@ -92,7 +100,8 @@ export function trackPlugin(options: {editor: Editor}) {
                     return meta
                 }
 
-                const oldPluginState = key.getState(oldState) as {decos: DecorationSet} | undefined
+                const oldPluginState = key.getState(oldState) as
+                    {decos: DecorationSet} | undefined
                 if (!oldPluginState) {
                     return {decos: DecorationSet.empty}
                 }
@@ -151,7 +160,8 @@ export function trackPlugin(options: {editor: Editor}) {
         },
         props: {
             decorations(state) {
-                const pluginState = this.getState(state) as {decos: DecorationSet} | undefined
+                const pluginState = this.getState(state) as
+                    {decos: DecorationSet} | undefined
                 if (!pluginState) {
                     return DecorationSet.empty
                 }
@@ -161,7 +171,9 @@ export function trackPlugin(options: {editor: Editor}) {
                 focus: (_view, _event) => {
                     ;(
                         options.editor.mod.comments as {
-                            interactions: {deactivateSelectedChanges: () => void}
+                            interactions: {
+                                deactivateSelectedChanges: () => void
+                            }
                         }
                     ).interactions.deactivateSelectedChanges()
                 }

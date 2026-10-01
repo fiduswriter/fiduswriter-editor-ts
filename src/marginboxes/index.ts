@@ -174,9 +174,7 @@ export class ModMarginboxes {
             document.getElementById("new-global-comment")
         if (
             newGlobalCommentButton &&
-            READ_ONLY_ROLES.includes(
-                this.editor.docInfo.access_rights || ""
-            )
+            READ_ONLY_ROLES.includes(this.editor.docInfo.access_rights || "")
         ) {
             newGlobalCommentButton.classList.add("fw-hide")
         }
@@ -316,9 +314,8 @@ export class ModMarginboxes {
                     break
                 case !!showMoreButton: {
                     const button = showMoreButton as Element
-                    const marginBox = button.closest(
-                        ".margin-box.comment"
-                    ) as HTMLElement | null | undefined
+                    const marginBox = button.closest(".margin-box.comment") as
+                        HTMLElement | null | undefined
                     if (marginBox?.classList.contains("inactive")) {
                         const commentId = marginBox.dataset.id
                         if (commentId) {
@@ -704,8 +701,7 @@ export class ModMarginboxes {
                         marginBoxPlacements: MarginBoxPlacement[] = Array.from(
                             marginBoxesDOM
                         ).map((mboxDOM, index) => {
-                            const mboxDOMRect =
-                                mboxDOM.getBoundingClientRect()
+                            const mboxDOMRect = mboxDOM.getBoundingClientRect()
                             return {
                                 height: mboxDOMRect.height,
                                 refPos:
@@ -752,7 +748,8 @@ export class ModMarginboxes {
                             currentPos + 2,
                             mboxPlacement.refPos
                         )
-                        currentPos = (mboxPlacement.pos as number) + mboxPlacement.height
+                        currentPos =
+                            (mboxPlacement.pos as number) + mboxPlacement.height
                         activeIndex++
                     }
 
@@ -764,11 +761,11 @@ export class ModMarginboxes {
                     // — full-page frame, CMS admin embeds, header open or
                     // closed.
                     const initialOffset = this.marginBoxesContainer
-                        ? this.marginBoxesContainer.getBoundingClientRect().top -
-                          bodyTop
+                        ? this.marginBoxesContainer.getBoundingClientRect()
+                              .top - bodyTop
                         : this.editor.dom.classList.contains("header-closed")
-                            ? 72 + 90
-                            : 225 + 90
+                          ? 72 + 90
+                          : 225 + 90
                     const $head = this.editor.view.state.selection.$head
                     const selectionInTitle =
                         $head.depth > 0 &&
@@ -783,12 +780,11 @@ export class ModMarginboxes {
                             if (mboxPlacement.height === 0) {
                                 return ""
                             }
-                            const pos = (mboxPlacement.pos as number) - initialOffset
+                            const pos =
+                                (mboxPlacement.pos as number) - initialOffset
                             let css = ""
                             if (pos !== totalOffset) {
-                                let topMargin = Math.trunc(
-                                    pos - totalOffset
-                                )
+                                let topMargin = Math.trunc(pos - totalOffset)
                                 if (selectionInTitle) {
                                     topMargin = Math.max(topMargin, 0)
                                 }
@@ -801,8 +797,11 @@ export class ModMarginboxes {
                         .join("")
                     if (firstActiveIndex > -1) {
                         const topMenuHeight =
-                            (this.editor.dom.querySelector("header") as HTMLElement | null)
-                                ?.offsetHeight || 0
+                            (
+                                this.editor.dom.querySelector(
+                                    "header"
+                                ) as HTMLElement | null
+                            )?.offsetHeight || 0
                         const refDistanceFromTop = this.editor.view.coordsAtPos(
                             referrers[firstActiveIndex]
                         ).top
@@ -877,7 +876,8 @@ export class ModMarginboxes {
             const helpBox = {
                 type: "help",
                 data: {
-                    active: selectionLike.$anchor.node(1) === node ? true : false,
+                    active:
+                        selectionLike.$anchor.node(1) === node ? true : false,
                     help: node.attrs.help
                 }
             }
@@ -911,7 +911,9 @@ export class ModMarginboxes {
                     type: "warning",
                     data: {
                         active: linkMark.isInSet(selectionLike.$anchor.marks()),
-                        warning: gettext("An internal link has lost its target.")
+                        warning: gettext(
+                            "An internal link has lost its target."
+                        )
                     }
                 }
                 marginBoxes.push(warningBox as MarginBox)
@@ -976,33 +978,48 @@ export class ModMarginboxes {
                                       track.type
                                   ) ||
                                       (track.type === "format_change" &&
-                                          (track.data.before as string[]).length ===
-                                              (lastTrack.data.before as string[])
-                                                  .length &&
-                                          (track.data.after as string[]).length ===
+                                          (track.data.before as string[])
+                                              .length ===
+                                              (
+                                                  lastTrack.data
+                                                      .before as string[]
+                                              ).length &&
+                                          (track.data.after as string[])
+                                              .length ===
                                               (lastTrack.data.after as string[])
                                                   .length &&
                                           (track.data.before as string[]).every(
                                               markName =>
-                                                  (lastTrack.data.before as string[]).includes(
-                                                      markName
-                                                  )
+                                                  (
+                                                      lastTrack.data
+                                                          .before as string[]
+                                                  ).includes(markName)
                                           ) &&
                                           (track.data.after as string[]).every(
                                               markName =>
-                                                  (lastTrack.data.after as string[]).includes(
-                                                      markName
-                                                  )
+                                                  (
+                                                      lastTrack.data
+                                                          .after as string[]
+                                                  ).includes(markName)
                                           )) ||
                                       (track.type === "block_change" &&
-                                          (track.data.before as {type: string}).type ===
-                                              (lastTrack.data.before as {type: string})
-                                                  .type &&
-                                          (track.data.before as {attrs?: {level?: number}})
-                                              .attrs?.level ===
-                                              (lastTrack.data.before as {
+                                          (track.data.before as {type: string})
+                                              .type ===
+                                              (
+                                                  lastTrack.data.before as {
+                                                      type: string
+                                                  }
+                                              ).type &&
+                                          (
+                                              track.data.before as {
                                                   attrs?: {level?: number}
-                                              }).attrs?.level))
+                                              }
+                                          ).attrs?.level ===
+                                              (
+                                                  lastTrack.data.before as {
+                                                      attrs?: {level?: number}
+                                                  }
+                                              ).attrs?.level))
                           )
                   )
                 : nodeTracks
@@ -1014,9 +1031,12 @@ export class ModMarginboxes {
                         pos,
                         view,
                         active:
-                            selectedChanges[track.type as keyof SelectedChanges] &&
-                            selectedChanges[track.type as keyof SelectedChanges]!
-                                .from === pos
+                            selectedChanges[
+                                track.type as keyof SelectedChanges
+                            ] &&
+                            selectedChanges[
+                                track.type as keyof SelectedChanges
+                            ]!.from === pos
                     },
                     track
                 ) as MarginBox
@@ -1095,9 +1115,10 @@ export class ModMarginboxes {
     ) {
         const btnTop = showMarginboxOptionsBtn.getBoundingClientRect().top,
             scrollTopOffset = window.pageYOffset,
-            mBoxRight = showMarginboxOptionsBtn
-                .closest(".comment-answer-container")
-                ?.getBoundingClientRect().right || 0
+            mBoxRight =
+                showMarginboxOptionsBtn
+                    .closest(".comment-answer-container")
+                    ?.getBoundingClientRect().right || 0
 
         marginBoxDialog.style.top = `${btnTop + scrollTopOffset + 30}px`
         marginBoxDialog.style.left = `${mBoxRight - marginBoxDialog.getBoundingClientRect().width - 10}px`

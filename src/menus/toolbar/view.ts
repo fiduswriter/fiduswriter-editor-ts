@@ -75,7 +75,9 @@ export class ToolbarView {
         this.listeners = {}
 
         if (editorView === this.options.editor.view) {
-            this.removeUnavailable(this.options.editor.menu.toolbarModel as ToolbarModel)
+            this.removeUnavailable(
+                this.options.editor.menu.toolbarModel as ToolbarModel
+            )
         }
 
         this.bindEvents()
@@ -97,7 +99,10 @@ export class ToolbarView {
         this.listeners.onclick = event => this.onclick(event)
         this.editor.dom.addEventListener("click", this.listeners.onclick)
         this.listeners.onmousedown = event => this.onmousedown(event)
-        this.editor.dom.addEventListener("mousedown", this.listeners.onmousedown)
+        this.editor.dom.addEventListener(
+            "mousedown",
+            this.listeners.onmousedown
+        )
     }
 
     destroy(): void {
@@ -132,8 +137,10 @@ export class ToolbarView {
      * in a narrower host container (CMS admin pages, split views).
      */
     availableEditorWidth(): number {
-        return (this.editor.dom?.clientWidth || window.innerWidth) -
+        return (
+            (this.editor.dom?.clientWidth || window.innerWidth) -
             this.sideMargins
+        )
     }
 
     onclick(event: MouseEvent): void {
@@ -157,7 +164,8 @@ export class ToolbarView {
                 seekItem = seekItem.previousElementSibling
             }
             seekItem =
-                seekItem?.parentElement?.parentElement?.parentElement?.parentElement ?? null
+                seekItem?.parentElement?.parentElement?.parentElement
+                    ?.parentElement ?? null
             while (seekItem?.previousElementSibling) {
                 menuNumber++
                 seekItem = seekItem.previousElementSibling
@@ -202,7 +210,8 @@ export class ToolbarView {
                 seekItem = seekItem.previousElementSibling
             }
             seekItem =
-                seekItem?.parentElement?.parentElement?.parentElement?.parentElement ?? null
+                seekItem?.parentElement?.parentElement?.parentElement
+                    ?.parentElement ?? null
             let menuNumber = 0
             while (seekItem?.previousElementSibling) {
                 menuNumber++
@@ -220,10 +229,7 @@ export class ToolbarView {
             if (focus !== false) {
                 this.editor.currentView.focus()
             }
-        } else if (
-            this.openedMenu !== false ||
-            toolbarModel.openMore
-        ) {
+        } else if (this.openedMenu !== false || toolbarModel.openMore) {
             if (this.openedMenu !== false) {
                 const openedItem = toolbarModel.content[this.openedMenu]
                 if (openedItem?.type === "menu") {
@@ -363,8 +369,9 @@ export class ToolbarView {
     getMoreButtonListHTML(menuIndexToDrop: number): string {
         const toolbarModel = this.editor.menu.toolbarModel as ToolbarModel
         if (toolbarModel.openMore) {
-            const remainingItems =
-                toolbarModel.content.slice(menuIndexToDrop) as ToolbarMenuOption[]
+            const remainingItems = toolbarModel.content.slice(
+                menuIndexToDrop
+            ) as ToolbarMenuOption[]
             return `
                 <div class="fw-pulldown fw-left" style="display: block;">
                     <ul>${remainingItems.map(menuOption => this.getDropdownOptionHTML(menuOption)).join("")}</ul>

@@ -82,7 +82,9 @@ export class E2EESnapshotManager {
         const content = ((this.editor.view as any).docView as any).node.toJSON()
         const comments = (this.editor.docInfo as any).comments || {}
         const bibliography = (this.editor.docInfo as any).bibliography || {}
-        const {title} = this.editor.getDoc() as {title: string} as {title: string}
+        const {title} = this.editor.getDoc() as {title: string} as {
+            title: string
+        }
 
         const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
 
@@ -207,7 +209,9 @@ export class E2EESnapshotManager {
             // is prompted for the new password on next access.
             const {E2EEKeyManager} = await import("fwtoolkit/e2ee/key-manager")
             E2EEKeyManager.clearKeyFromSession(this.editor.docInfo.id as number)
-            E2EEKeyManager.clearPasswordFromSession(this.editor.docInfo.id as number)
+            E2EEKeyManager.clearPasswordFromSession(
+                this.editor.docInfo.id as number
+            )
             // Notify the user that the password has changed.
             const {showSystemMessage} = await import("fwtoolkit")
             showSystemMessage(

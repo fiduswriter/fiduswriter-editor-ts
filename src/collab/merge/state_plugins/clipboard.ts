@@ -36,7 +36,9 @@ export const clipboardPlugin = (options: {editor: Editor}) => {
                 view.dispatch(tr)
                 return true
             },
-            clipboardSerializer: docClipboardSerializer(options.editor) as unknown as DOMSerializer
+            clipboardSerializer: docClipboardSerializer(
+                options.editor
+            ) as unknown as DOMSerializer
         }
     })
 }

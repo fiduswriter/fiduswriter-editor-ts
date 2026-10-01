@@ -120,7 +120,9 @@ export class ModFootnoteLayout {
                                 citationFootnotes.length > citationFootnoteIndex
                             ) {
                                 const footnoteBox =
-                                        citationFootnotes[citationFootnoteIndex],
+                                        citationFootnotes[
+                                            citationFootnoteIndex
+                                        ],
                                     selector =
                                         ".footnote-citation:nth-of-type(" +
                                         (citationFootnoteIndex + 1) +
@@ -130,9 +132,7 @@ export class ModFootnoteLayout {
                                     footnoteBoxHeight =
                                         footnoteBoxCoords.height,
                                     referrerTop =
-                                        this.editor.view.coordsAtPos(
-                                            pos
-                                        ).top
+                                        this.editor.view.coordsAtPos(pos).top
                                 citationFootnoteIndex++
                                 if (!referrerTop) {
                                     // footnote is not shown. Also hide the footnote from the editor.

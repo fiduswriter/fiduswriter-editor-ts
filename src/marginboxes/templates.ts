@@ -47,9 +47,7 @@ export interface TrackData {
     user: number
     username: string
     date: number
-    before?:
-        | string[]
-        | {type: string; attrs?: {order?: number; level?: number}}
+    before?: string[] | {type: string; attrs?: {order?: number; level?: number}}
     after?: string[]
 }
 
@@ -95,10 +93,7 @@ export interface WarningMarginBox {
 }
 
 export type MarginBox =
-    | CommentMarginBox
-    | TrackMarginBox
-    | HelpMarginBox
-    | WarningMarginBox
+    CommentMarginBox | TrackMarginBox | HelpMarginBox | WarningMarginBox
 
 interface MarginBoxOptionComment {
     answer?: boolean
@@ -166,8 +161,7 @@ const answerCommentTemplate = ({
         <div class="comment-collapsible-buttons">
                 ${
                     !isGlobal &&
-                    serialized.text.length >
-                        COMMENT_SHOW_MORE_THRESHOLD
+                    serialized.text.length > COMMENT_SHOW_MORE_THRESHOLD
                         ? `<a type="button" class="comment-expand-compress show-more-less">${gettext("show more")}</a>`
                         : ""
                 }
@@ -216,8 +210,7 @@ const singleCommentTemplate = ({
                 ${
                     !editComment &&
                     !comment.isGlobal &&
-                    serialized.text.length >
-                        COMMENT_SHOW_MORE_THRESHOLD
+                    serialized.text.length > COMMENT_SHOW_MORE_THRESHOLD
                         ? `<a type="button" class="comment-expand-compress show-more-less">${gettext("show more")}</a>`
                         : ""
                 }

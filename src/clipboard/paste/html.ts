@@ -38,7 +38,11 @@ export class HTMLPaste {
         this.view = view
         this.htmlDoc = undefined
         this.handler = GeneralPasteHandler
-        this.handlerInstance = new GeneralPasteHandler(editor, document.createElement("html"), pmType)
+        this.handlerInstance = new GeneralPasteHandler(
+            editor,
+            document.createElement("html"),
+            pmType
+        )
         this.outHTML = ""
     }
 
@@ -72,7 +76,9 @@ export class HTMLPaste {
         }
         // For LibreOffice
         const head = this.htmlDoc.getElementsByTagName("head")[0]
-        const generatorMetaTag = head.querySelector("meta[name=generator]") as HTMLMetaElement | null
+        const generatorMetaTag = head.querySelector(
+            "meta[name=generator]"
+        ) as HTMLMetaElement | null
         // For Google Docs
         const body = this.htmlDoc.getElementsByTagName("body")[0]
         const firstB = body.querySelector("b") as HTMLElement | null

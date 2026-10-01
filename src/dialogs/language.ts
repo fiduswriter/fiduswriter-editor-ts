@@ -22,7 +22,9 @@ export class LanguageDialog {
             classes: "fw-dark",
             click: () => {
                 const language =
-                    (this.dialog as InstanceType<typeof Dialog>).dialogEl.querySelector("select")?.value || this.language
+                    (
+                        this.dialog as InstanceType<typeof Dialog>
+                    ).dialogEl.querySelector("select")?.value || this.language
                 ;(this.dialog as InstanceType<typeof Dialog>).close()
 
                 if (language === this.language) {

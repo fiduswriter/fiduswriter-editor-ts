@@ -68,8 +68,12 @@ class OrderedListView implements NodeView {
                 width: 280,
                 page: this.options.editor,
                 menuPos: {
-                    X: Number.parseInt(mouseEvent.pageX as unknown as string) + 20,
-                    Y: Number.parseInt(mouseEvent.pageY as unknown as string) - 100
+                    X:
+                        Number.parseInt(mouseEvent.pageX as unknown as string) +
+                        20,
+                    Y:
+                        Number.parseInt(mouseEvent.pageY as unknown as string) -
+                        100
                 },
                 onClose: () => {
                     this.view.focus()

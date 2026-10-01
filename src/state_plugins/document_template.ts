@@ -46,9 +46,10 @@ export function getProtectedRanges(state: EditorState): ProtectedRange[] {
         .protectedRanges
 }
 
-export function getAllowedElementsAndMarks(
-    state: EditorState
-): {elements: string[] | false; marks: string[] | false} {
+export function getAllowedElementsAndMarks(state: EditorState): {
+    elements: string[] | false
+    marks: string[] | false
+} {
     // Get the allowed elements and marks at the current selection position
     const {$anchor} = state.selection
     const docPart = $anchor.node(1) // Get the part node (richtext_part, heading_part, etc.)
@@ -173,13 +174,12 @@ export const documentTemplatePlugin = (
                         view: EditorView,
                         getPos: () => number | undefined
                     ) => new PartView(node, view, getPos)
-                    ;((this as any).spec.props as any).nodeViews[
-                        "table_part"
-                    ] = (
-                        node: ProseMirrorNode,
-                        view: EditorView,
-                        getPos: () => number | undefined
-                    ) => new PartView(node, view, getPos)
+                    ;((this as any).spec.props as any).nodeViews["table_part"] =
+                        (
+                            node: ProseMirrorNode,
+                            view: EditorView,
+                            getPos: () => number | undefined
+                        ) => new PartView(node, view, getPos)
                     // Tags and Contributors have node views defined in tag_input and contributor_input.
                     // TOCs have node views defined in toc_render.
                 }
@@ -207,9 +207,7 @@ export const documentTemplatePlugin = (
                             node.attrs.initial
                         )
                         let protectionSize = initialFragment.size
-                        if (
-                            initialFragment.lastChild?.isTextblock
-                        ) {
+                        if (initialFragment.lastChild?.isTextblock) {
                             protectionSize -= 1 // We allow writing at the end of the last text block.
                             if (initialFragment.lastChild?.nodeSize === 2) {
                                 // The last text block is empty, so we remove all protection from it, even node type
@@ -291,9 +289,7 @@ export const documentTemplatePlugin = (
                         }))
                     }
                     const stepData = step as any
-                    if (
-                        ["removeMark", "addMark"].includes(stepData.jsonID)
-                    ) {
+                    if (["removeMark", "addMark"].includes(stepData.jsonID)) {
                         changingRanges.push({
                             start: stepData.from,
                             end: stepData.to

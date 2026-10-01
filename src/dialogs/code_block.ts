@@ -33,10 +33,7 @@ export class CodeBlockDialog {
 
     findCodeBlock(state: EditorState): Node | false {
         const selection = state.selection as any
-        if (
-            selection.node &&
-            selection.node.type.name === "code_block"
-        ) {
+        if (selection.node && selection.node.type.name === "code_block") {
             return selection.node
         }
         const $head = state.selection.$head
@@ -63,9 +60,7 @@ export class CodeBlockDialog {
                 : this.category
                   ? randomCodeBlockId()
                   : "",
-            track: this.insideCodeBlock
-                ? (this.node as Node).attrs.track
-                : []
+            track: this.insideCodeBlock ? (this.node as Node).attrs.track : []
         }
 
         let tr: Transaction
@@ -119,8 +114,9 @@ export class CodeBlockDialog {
     }
 
     getAvailableLanguages(): string[] {
-        return (this.editor.view.state.doc.attrs.code_languages as string[]) ||
-            []
+        return (
+            (this.editor.view.state.doc.attrs.code_languages as string[]) || []
+        )
     }
 
     init(): boolean | void {

@@ -49,9 +49,7 @@ declare module "prosemirror-suggestions" {
         debug?: boolean
     }
 
-    export function suggestionsPlugin(
-        options: SuggestionsPluginOptions
-    ): Plugin
+    export function suggestionsPlugin(options: SuggestionsPluginOptions): Plugin
 }
 
 declare module "fix-utf8" {
@@ -72,7 +70,10 @@ declare module "downloadjs" {
 }
 
 declare module "diff" {
-    export function diffChars(oldStr: string, newStr: string): Array<{
+    export function diffChars(
+        oldStr: string,
+        newStr: string
+    ): Array<{
         value: string
         added?: boolean
         removed?: boolean

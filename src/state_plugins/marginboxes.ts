@@ -10,7 +10,11 @@ export const marginboxesPlugin = (options: {editor: Editor}) =>
         view(_editorState) {
             return {
                 update: (view: EditorView, _prevState) => {
-                    ;(options.editor.mod.marginboxes as {view(v: EditorView): void}).view(view)
+                    ;(
+                        options.editor.mod.marginboxes as {
+                            view(v: EditorView): void
+                        }
+                    ).view(view)
                 }
             }
         }

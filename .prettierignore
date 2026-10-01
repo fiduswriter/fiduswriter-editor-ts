@@ -2,7 +2,6 @@ CHANGELOG.md
 README.md
 demo/
 schema.json
-src/
 test/
 jest.config.js
 scripts/

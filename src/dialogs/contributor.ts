@@ -38,40 +38,44 @@ export class ContributorDialog {
                 const dialogEl = (this.dialog as InstanceType<typeof Dialog>)
                     .dialogEl
                 // Get form values
-                let firstname: string | false = (
-                        dialogEl.querySelector("input[name=firstname]") as
-                            | HTMLInputElement
-                            | null
-                    )?.value || false,
-                    lastname: string | false = (
-                        dialogEl.querySelector("input[name=lastname]") as
-                            | HTMLInputElement
-                            | null
-                    )?.value || false,
-                    email: string | false = (
-                        dialogEl.querySelector("input[name=email]") as
-                            | HTMLInputElement
-                            | null
-                    )?.value || false,
-                    institution: string | false = (
-                        dialogEl.querySelector("input[name=institution]") as
-                            | HTMLInputElement
-                            | null
-                    )?.value || false,
+                let firstname: string | false =
+                        (
+                            dialogEl.querySelector(
+                                "input[name=firstname]"
+                            ) as HTMLInputElement | null
+                        )?.value || false,
+                    lastname: string | false =
+                        (
+                            dialogEl.querySelector(
+                                "input[name=lastname]"
+                            ) as HTMLInputElement | null
+                        )?.value || false,
+                    email: string | false =
+                        (
+                            dialogEl.querySelector(
+                                "input[name=email]"
+                            ) as HTMLInputElement | null
+                        )?.value || false,
+                    institution: string | false =
+                        (
+                            dialogEl.querySelector(
+                                "input[name=institution]"
+                            ) as HTMLInputElement | null
+                        )?.value || false,
                     id_type: string | false = false,
                     id_value: string | false = false
 
                 firstname = firstname && firstname.length ? firstname : false
                 lastname = lastname && lastname.length ? lastname : false
-                institution = institution && institution.length ? institution : false
+                institution =
+                    institution && institution.length ? institution : false
                 email = email && email.length ? email : false
 
                 // Get ID type/value if fields are shown
                 if (this.idTypes && this.idTypes.length > 0) {
-                    const idTypeEl = dialogEl.querySelector("[name=id_type]") as
-                        | HTMLInputElement
-                        | HTMLSelectElement
-                        | null
+                    const idTypeEl = dialogEl.querySelector(
+                        "[name=id_type]"
+                    ) as HTMLInputElement | HTMLSelectElement | null
                     if (idTypeEl && idTypeEl.value) {
                         id_type = idTypeEl.value
                         const idValueInput = dialogEl.querySelector(
@@ -83,9 +87,17 @@ export class ContributorDialog {
                             const selectedType = this.idTypes.find(
                                 t => t === id_type
                             )
-                            if (selectedType && (selectedType as unknown as {regex?: string}).regex) {
+                            if (
+                                selectedType &&
+                                (selectedType as unknown as {regex?: string})
+                                    .regex
+                            ) {
                                 const regex = new RegExp(
-                                    (selectedType as unknown as {regex?: string}).regex as string
+                                    (
+                                        selectedType as unknown as {
+                                            regex?: string
+                                        }
+                                    ).regex as string
                                 )
                                 if (!regex.test(id_value)) {
                                     addAlert(
@@ -141,8 +153,7 @@ export class ContributorDialog {
                     )
                 } else {
                     // Adding: find the insertion point based on current document state
-                    let posFrom: number | undefined,
-                        posTo: number | undefined
+                    let posFrom: number | undefined, posTo: number | undefined
                     view.state.doc.descendants((node, pos) => {
                         // Find the contributors_part node to determine insertion position
                         if (node.attrs.id === this.node.attrs.id) {

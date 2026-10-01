@@ -1,5 +1,10 @@
 import type {Node} from "prosemirror-model"
-import {Plugin, PluginKey, type EditorState, type Transaction} from "prosemirror-state"
+import {
+    Plugin,
+    PluginKey,
+    type EditorState,
+    type Transaction
+} from "prosemirror-state"
 import {Decoration, DecorationSet} from "prosemirror-view"
 import type {EditorView} from "prosemirror-view"
 
@@ -31,10 +36,7 @@ function findMatches(doc: Node, term: string): Match[] {
         ) {
             return
         }
-        if (
-            stringObj &&
-            (parent !== stringObj.parent || !node.isText)
-        ) {
+        if (stringObj && (parent !== stringObj.parent || !node.isText)) {
             matches = matches.concat(findTerm(term, stringObj))
             stringObj = false
         }
@@ -154,11 +156,7 @@ export const selectNextSearchMatch = (state: EditorState): Transaction => {
     } else {
         selected = 0
     }
-    const decos = matchesToDecos(
-        state.doc,
-        pluginState.matches,
-        selected
-    )
+    const decos = matchesToDecos(state.doc, pluginState.matches, selected)
     return state.tr.setMeta(key, {
         term: pluginState.term,
         decos,
@@ -185,11 +183,7 @@ export const selectPreviousSearchMatch = (state: EditorState): Transaction => {
     } else {
         selected = pluginState.matches.length - 1
     }
-    const decos = matchesToDecos(
-        state.doc,
-        pluginState.matches,
-        selected
-    )
+    const decos = matchesToDecos(state.doc, pluginState.matches, selected)
     return state.tr.setMeta(key, {
         term: pluginState.term,
         decos,

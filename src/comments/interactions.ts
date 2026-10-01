@@ -156,7 +156,7 @@ export class ModCommentInteractions {
                 this.mod,
                 id as string,
                 answerEditorDOM as HTMLElement,
-                 text,
+                text,
                 {answerId: answerId ? String(answerId) : undefined}
             )
         }
@@ -364,11 +364,7 @@ export class ModCommentInteractions {
         this.mod.store.updateComment({id, resolved: false})
     }
 
-    assignComment(
-        id: string | number,
-        user: number,
-        username: string
-    ): void {
+    assignComment(id: string | number, user: number, username: string): void {
         this.notifyAssignedUser(user, id)
         this.mod.store.updateComment({
             id,

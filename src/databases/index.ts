@@ -60,9 +60,8 @@ export class ModDB {
             usedBibs: (number | string)[] = []
         this.editor.view.state.doc.descendants((node: Node) => {
             if (node.type.name === "citation") {
-                node.attrs.references.forEach(
-                    (ref: {id: number | string}) =>
-                        usedBibs.push(Number.parseInt(String(ref.id)))
+                node.attrs.references.forEach((ref: {id: number | string}) =>
+                    usedBibs.push(Number.parseInt(String(ref.id)))
                 )
             } else if (node.type.name === "image" && node.attrs.image) {
                 usedImages.push(node.attrs.image)
@@ -75,9 +74,8 @@ export class ModDB {
             }
         ).fnEditor.view.state.doc.descendants((node: Node) => {
             if (node.type.name === "citation") {
-                node.attrs.references.forEach(
-                    (ref: {id: number | string}) =>
-                        usedBibs.push(Number.parseInt(String(ref.id)))
+                node.attrs.references.forEach((ref: {id: number | string}) =>
+                    usedBibs.push(Number.parseInt(String(ref.id)))
                 )
             } else if (node.type.name === "image" && node.attrs.image) {
                 usedImages.push(node.attrs.image)

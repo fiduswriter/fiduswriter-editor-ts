@@ -89,9 +89,7 @@ export function computeNextDelayMs(
     } else if (!state.visible) {
         // Hidden tabs pause periodic checks; one safety probe remains in
         // case the browser never delivers `visibilitychange`.
-        delay = state.dirty
-            ? opts.hiddenDirtyDelayMs
-            : opts.hiddenSafetyDelayMs
+        delay = state.dirty ? opts.hiddenDirtyDelayMs : opts.hiddenSafetyDelayMs
     } else if (state.dirty) {
         delay =
             state.msSinceLastEdit <= opts.activeEditWindowMs
@@ -102,10 +100,7 @@ export function computeNextDelayMs(
     } else if (!state.focused) {
         // Visible but blurred: start slow and ramp to the cap.
         const streak = Math.min(state.noChangeStreak, 8)
-        delay = Math.min(
-            opts.blurredCapMs,
-            opts.blurredDelayMs * 2 ** streak
-        )
+        delay = Math.min(opts.blurredCapMs, opts.blurredDelayMs * 2 ** streak)
     } else {
         // Visible and focused idle: use the configured ramp.
         delay =

@@ -1,5 +1,10 @@
 import {Node, Slice} from "prosemirror-model"
-import {EditorState, Selection, TextSelection, Transaction} from "prosemirror-state"
+import {
+    EditorState,
+    Selection,
+    TextSelection,
+    Transaction
+} from "prosemirror-state"
 import {CellSelection} from "prosemirror-tables"
 import {
     AddMarkStep,
@@ -138,10 +143,11 @@ function markDeletion(
             ) &&
             !["bullet_list", "ordered_list"].includes(node.type.name)
         ) {
-            const insertionTrack = (node.attrs.track as Track[] | undefined)?.find(
+            const insertionTrack = (
+                node.attrs.track as Track[] | undefined
+            )?.find(
                 trackAttr =>
-                    trackAttr.type === "insertion" &&
-                    trackAttr.user === user.id
+                    trackAttr.type === "insertion" && trackAttr.user === user.id
             )
             if (insertionTrack) {
                 let removeStep: ReplaceStep | undefined
@@ -280,7 +286,9 @@ export function amendTransaction(
                 metadata => ["inputType", "uiEvent", "paste"].includes(metadata)
             )) ||
         // don't replace history TRs
-        ["historyUndo", "historyRedo"].includes(tr.getMeta("inputType") as string)
+        ["historyUndo", "historyRedo"].includes(
+            tr.getMeta("inputType") as string
+        )
     ) {
         // None of the transactions change the doc, or all are remote, come from footnotes,
         // are footnote creations, history or fixing IDs. Give up.
@@ -365,7 +373,10 @@ export function trackedTransaction(
                     map.appendMap(condensedStep.getMap(), mirrorIndex)
                     if (!newTr.selection.eq(trTemp.selection)) {
                         newTr.setSelection(
-                            Selection.fromJSON(newTr.doc, trTemp.selection.toJSON())
+                            Selection.fromJSON(
+                                newTr.doc,
+                                trTemp.selection.toJSON()
+                            )
                         )
                     }
                 }
@@ -481,11 +492,13 @@ export function trackedTransaction(
                     let after: string[], before: string[]
                     if (formatChangeMark) {
                         if (
-                            (formatChangeMark.attrs.before as string[]).includes(
-                                step.mark.type.name
-                            )
+                            (
+                                formatChangeMark.attrs.before as string[]
+                            ).includes(step.mark.type.name)
                         ) {
-                            before = (formatChangeMark.attrs.before as string[]).filter(
+                            before = (
+                                formatChangeMark.attrs.before as string[]
+                            ).filter(
                                 markName => markName !== step.mark.type.name
                             )
                             after = formatChangeMark.attrs.after as string[]
@@ -552,7 +565,9 @@ export function trackedTransaction(
                                 step.mark.type.name
                             )
                         ) {
-                            after = (formatChangeMark.attrs.after as string[]).filter(
+                            after = (
+                                formatChangeMark.attrs.after as string[]
+                            ).filter(
                                 markName => markName !== step.mark.type.name
                             )
                             before = formatChangeMark.attrs.before as string[]

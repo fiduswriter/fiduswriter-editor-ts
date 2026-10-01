@@ -45,8 +45,12 @@ export class SearchReplaceDialog {
         this.matches = {matches: [], selected: false}
         this.fnMatches = {matches: [], selected: false}
         this.canWrite =
-            READ_ONLY_ROLES.includes(this.editor.docInfo.access_rights as string) ||
-            COMMENT_ONLY_ROLES.includes(this.editor.docInfo.access_rights as string)
+            READ_ONLY_ROLES.includes(
+                this.editor.docInfo.access_rights as string
+            ) ||
+            COMMENT_ONLY_ROLES.includes(
+                this.editor.docInfo.access_rights as string
+            )
                 ? false
                 : true
     }
@@ -71,7 +75,9 @@ export class SearchReplaceDialog {
                             this.editor.view.dispatch(
                                 deselectSearchMatch(this.editor.view.state)
                             )
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(
                                 selectPreviousSearchMatch(
                                     (this.editor.mod as any).footnotes.fnEditor
                                         .view.state
@@ -83,14 +89,18 @@ export class SearchReplaceDialog {
                             this.fnMatches.selected > 0 ||
                             !this.matches.matches.length
                         ) {
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(
                                 selectPreviousSearchMatch(
                                     (this.editor.mod as any).footnotes.fnEditor
                                         .view.state
                                 )
                             )
                         } else {
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(
                                 deselectSearchMatch(
                                     (this.editor.mod as any).footnotes.fnEditor
                                         .view.state
@@ -122,7 +132,9 @@ export class SearchReplaceDialog {
                             this.editor.view.dispatch(
                                 deselectSearchMatch(this.editor.view.state)
                             )
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(
                                 selectNextSearchMatch(
                                     (this.editor.mod as any).footnotes.fnEditor
                                         .view.state
@@ -135,14 +147,18 @@ export class SearchReplaceDialog {
                                 this.fnMatches.matches.length - 1 ||
                             !this.matches.matches.length
                         ) {
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(
                                 selectNextSearchMatch(
                                     (this.editor.mod as any).footnotes.fnEditor
                                         .view.state
                                 )
                             )
                         } else {
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(
                                 deselectSearchMatch(
                                     (this.editor.mod as any).footnotes.fnEditor
                                         .view.state
@@ -186,18 +202,22 @@ export class SearchReplaceDialog {
                                 this.fnMatches.matches[this.fnMatches.selected]
                             const originalDoc = (this.editor.mod as any)
                                 .footnotes.fnEditor.view.state.doc
-                            const tr = (this.editor.mod as any).footnotes.fnEditor.view.state.tr.insertText(
+                            const tr = (
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.state.tr.insertText(
                                 this.replaceInput.value,
                                 match.from,
                                 match.to
                             )
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
-                                tr
-                            )
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(tr)
                             // In case there was a match within protected range , the change
                             // would be rejected. Show alert when replace is successfull.
                             if (
-                                !(this.editor.mod as any).footnotes.fnEditor.view.state.doc.eq(
+                                !(
+                                    this.editor.mod as any
+                                ).footnotes.fnEditor.view.state.doc.eq(
                                     originalDoc
                                 )
                             ) {
@@ -216,9 +236,10 @@ export class SearchReplaceDialog {
                         if (this.matches.matches.length) {
                             const tr = this.editor.view.state.tr
                             const originalDoc = this.editor.view.state.doc
-                            const protectedRanges: Array<{from: number; to: number}> = getProtectedRanges(
-                                this.editor.view.state
-                            )
+                            const protectedRanges: Array<{
+                                from: number
+                                to: number
+                            }> = getProtectedRanges(this.editor.view.state)
                             const matches = this.matches.matches.slice()
                             while (matches.length) {
                                 const match = matches.pop() // We take them backward so that there is no need for mapping steps
@@ -268,13 +289,15 @@ export class SearchReplaceDialog {
                                     )
                                 }
                             }
-                            ;(this.editor.mod as any).footnotes.fnEditor.view.dispatch(
-                                tr
-                            )
+                            ;(
+                                this.editor.mod as any
+                            ).footnotes.fnEditor.view.dispatch(tr)
                             // In case there was a match within protected range , the change
                             // would be rejected. Show alert when replace is successfull.
                             if (
-                                !(this.editor.mod as any).footnotes.fnEditor.view.state.doc.eq(
+                                !(
+                                    this.editor.mod as any
+                                ).footnotes.fnEditor.view.state.doc.eq(
                                     originalDoc
                                 )
                             ) {
@@ -321,9 +344,11 @@ export class SearchReplaceDialog {
         this.resultCountEl = this.dialog.dialogEl.querySelector(
             ".search-result-count"
         ) as HTMLElement
-        ;(this.dialog.dialogEl.querySelector("input[type=text]") as
-            | HTMLInputElement
-            | null)?.focus()
+        ;(
+            this.dialog.dialogEl.querySelector(
+                "input[type=text]"
+            ) as HTMLInputElement | null
+        )?.focus()
 
         this.bind()
     }
@@ -356,7 +381,8 @@ export class SearchReplaceDialog {
         if (!this.dialog) {
             return
         }
-        const protectedRanges: Array<{from: number; to: number}> = getProtectedRanges(this.editor.view.state)
+        const protectedRanges: Array<{from: number; to: number}> =
+            getProtectedRanges(this.editor.view.state)
         const matches = this.matches.matches.slice()
         let matchWithinPR = false
         while (matches.length && !matchWithinPR) {

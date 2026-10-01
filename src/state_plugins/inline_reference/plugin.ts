@@ -52,11 +52,15 @@ interface InlineReferenceState {
     decos: DecorationSet
 }
 
-export const getInlineReferenceState = (state: EditorState) => key.getState(state)
+export const getInlineReferenceState = (state: EditorState) =>
+    key.getState(state)
 
 export const setInlineReferenceState = (
     tr: {
-        setMeta: (key: PluginKey, state: Partial<InlineReferenceState>) => unknown
+        setMeta: (
+            key: PluginKey,
+            state: Partial<InlineReferenceState>
+        ) => unknown
     },
     state: Partial<InlineReferenceState>
 ) => tr.setMeta(key, state)
@@ -294,8 +298,7 @@ function createInlineReferenceWidget(
 
     function renderDropUp(): void {
         const currentState = pluginKey.getState(view.state) as
-            | InlineReferenceState
-            | undefined
+            InlineReferenceState | undefined
         if (!currentState?.active) {
             return
         }
@@ -391,7 +394,9 @@ function createInlineReferenceWidget(
         const text = input.textContent || ""
         if (!text) {
             // Everything including `@` was deleted — remove the node.
-            view.dispatch(view.state.tr.setMeta(pluginKey, {action: "cancelDelete"}))
+            view.dispatch(
+                view.state.tr.setMeta(pluginKey, {action: "cancelDelete"})
+            )
             view.focus()
             return
         }
@@ -417,8 +422,7 @@ function createInlineReferenceWidget(
     input.addEventListener("keydown", event => {
         event.stopPropagation()
         const currentState = pluginKey.getState(view.state) as
-            | InlineReferenceState
-            | undefined
+            InlineReferenceState | undefined
         if (!currentState?.active) {
             return
         }
@@ -451,8 +455,7 @@ function createInlineReferenceWidget(
                 event.preventDefault()
                 {
                     const state = pluginKey.getState(view.state) as
-                        | InlineReferenceState
-                        | undefined
+                        InlineReferenceState | undefined
                     if (!state?.listActive) {
                         view.dispatch(
                             view.state.tr.setMeta(pluginKey, {
@@ -477,8 +480,7 @@ function createInlineReferenceWidget(
                 event.preventDefault()
                 {
                     const state = pluginKey.getState(view.state) as
-                        | InlineReferenceState
-                        | undefined
+                        InlineReferenceState | undefined
                     if (state?.listActive && state.selectedIndex > 0) {
                         view.dispatch(
                             view.state.tr.setMeta(pluginKey, {
@@ -503,8 +505,7 @@ function createInlineReferenceWidget(
                 event.preventDefault()
                 {
                     const state = pluginKey.getState(view.state) as
-                        | InlineReferenceState
-                        | undefined
+                        InlineReferenceState | undefined
                     const rawText = input.textContent || ""
                     const citDisabledEnter = elementDisabled(editor, "citation")
                     const xrefDisabledEnter = elementDisabled(
@@ -594,7 +595,9 @@ function createInlineReferenceWidget(
                 break
             case "Escape":
                 event.preventDefault()
-                view.dispatch(view.state.tr.setMeta(pluginKey, {action: "cancel"}))
+                view.dispatch(
+                    view.state.tr.setMeta(pluginKey, {action: "cancel"})
+                )
                 view.focus()
                 break
             case "Home":
@@ -610,7 +613,9 @@ function createInlineReferenceWidget(
                 if ((input.textContent || "").length <= 1) {
                     event.preventDefault()
                     view.dispatch(
-                        view.state.tr.setMeta(pluginKey, {action: "cancelDelete"})
+                        view.state.tr.setMeta(pluginKey, {
+                            action: "cancelDelete"
+                        })
                     )
                     view.focus()
                 }
@@ -620,14 +625,18 @@ function createInlineReferenceWidget(
                 if ((input.textContent || "").length <= 1) {
                     event.preventDefault()
                     view.dispatch(
-                        view.state.tr.setMeta(pluginKey, {action: "cancelDelete"})
+                        view.state.tr.setMeta(pluginKey, {
+                            action: "cancelDelete"
+                        })
                     )
                     view.focus()
                 }
                 break
             case "Tab":
                 event.preventDefault()
-                view.dispatch(view.state.tr.setMeta(pluginKey, {action: "commit"}))
+                view.dispatch(
+                    view.state.tr.setMeta(pluginKey, {action: "commit"})
+                )
                 break
             default:
                 break
@@ -642,10 +651,11 @@ function createInlineReferenceWidget(
         const myWidgetId = pluginState.widgetId
         setTimeout(() => {
             const currentState = pluginKey.getState(view.state) as
-                | InlineReferenceState
-                | undefined
+                InlineReferenceState | undefined
             if (currentState?.active && currentState.widgetId === myWidgetId) {
-                view.dispatch(view.state.tr.setMeta(pluginKey, {action: "commit"}))
+                view.dispatch(
+                    view.state.tr.setMeta(pluginKey, {action: "commit"})
+                )
             }
         }, 1)
     })
@@ -731,12 +741,12 @@ export const inlineReferencePlugin = (options: {editor: Editor}): Plugin => {
                         selectedIndex: -1,
                         listActive: false,
                         isEdit: (meta.isEdit as boolean) || false,
-                        referenceNodePos: (meta.referenceNodePos as number) || 0,
+                        referenceNodePos:
+                            (meta.referenceNodePos as number) || 0,
                         bibList: (meta.bibList as BibliographyEntry[]) || [],
                         widgetId: Math.random().toString(36).slice(2),
                         cursorAtStart: meta.cursorAtStart as
-                            | boolean
-                            | undefined,
+                            boolean | undefined,
                         decos: DecorationSet.empty
                     }
                 } else if (meta?.action === "deactivate") {
@@ -808,8 +818,7 @@ export const inlineReferencePlugin = (options: {editor: Editor}): Plugin => {
         },
         appendTransaction: (trs, oldState, newState) => {
             const oldPluginState = key.getState(oldState) as
-                | InlineReferenceState
-                | undefined
+                InlineReferenceState | undefined
             const meta = trs.find(tr => tr.getMeta(key))?.getMeta(key)
 
             if (
@@ -1231,8 +1240,7 @@ export const inlineReferencePlugin = (options: {editor: Editor}): Plugin => {
         props: {
             decorations(state: EditorState) {
                 const pluginState = key.getState(state) as
-                    | InlineReferenceState
-                    | undefined
+                    InlineReferenceState | undefined
                 return pluginState?.decos || DecorationSet.empty
             },
             handleClickOn(
@@ -1309,8 +1317,7 @@ export const inlineReferencePlugin = (options: {editor: Editor}): Plugin => {
                         return false
                     }
                     const pluginState = key.getState(view.state) as
-                        | InlineReferenceState
-                        | undefined
+                        InlineReferenceState | undefined
                     if (pluginState?.active) {
                         // Commit current widget first
                         const commitTr = view.state.tr.setMeta(key, {
@@ -1358,8 +1365,7 @@ export const inlineReferencePlugin = (options: {editor: Editor}): Plugin => {
                     // Fallback click handler for touch devices and cases where
                     // mousedown/handleClickOn did not fire.
                     const pluginState = key.getState(view.state) as
-                        | InlineReferenceState
-                        | undefined
+                        InlineReferenceState | undefined
                     if (pluginState?.active) {
                         const target = event.target as HTMLElement | null
                         const closest = target?.closest(
@@ -1415,8 +1421,7 @@ export const inlineReferencePlugin = (options: {editor: Editor}): Plugin => {
             },
             handleKeyDown(view: EditorView, event: KeyboardEvent) {
                 const pluginState = key.getState(view.state) as
-                    | InlineReferenceState
-                    | undefined
+                    InlineReferenceState | undefined
                 if (!pluginState?.active) {
                     if (event.key === "@") {
                         const $pos = view.state.selection.$head

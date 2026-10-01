@@ -21,9 +21,7 @@ export const figureMenuModel = () => ({
                 return false
             },
             disabled: (editor: Editor) =>
-                !(
-                    selectedNode(editor)?.type.name === "figure"
-                ) ||
+                !(selectedNode(editor)?.type.name === "figure") ||
                 selectedNode(editor)?.attrs.track?.find(
                     (track: {type: string}) => track.type === "deletion"
                 )
@@ -40,9 +38,7 @@ export const figureMenuModel = () => ({
                 editor.currentView.dispatch(tr)
             },
             disabled: (editor: Editor) =>
-                !(
-                    selectedNode(editor)?.type.name === "figure"
-                ) ||
+                !(selectedNode(editor)?.type.name === "figure") ||
                 selectedNode(editor)?.attrs.track?.find(
                     (track: {type: string}) => track.type === "deletion"
                 )

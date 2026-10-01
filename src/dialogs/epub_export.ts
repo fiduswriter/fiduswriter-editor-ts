@@ -1,5 +1,8 @@
 import {Dialog} from "fwtoolkit"
-import {epubExportDialogTemplate, getExportTrackChangesValue} from "./templates.js"
+import {
+    epubExportDialogTemplate,
+    getExportTrackChangesValue
+} from "./templates.js"
 
 export interface EpubExportDialogResult {
     /** Render `equation`/`figure_equation` nodes as SVG images (MathJax)
@@ -37,7 +40,10 @@ export class EpubExportDialog {
                                 "epub-track-changes"
                             ) !== "include"
                         ;(this.dialog as Dialog).close()
-                        return resolve({svgMath: !!svgMath, resolveTrackChanges})
+                        return resolve({
+                            svgMath: !!svgMath,
+                            resolveTrackChanges
+                        })
                     }
                 })
 

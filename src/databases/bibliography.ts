@@ -90,7 +90,10 @@ export class ModBibliographyDB {
     }
 
     addReference(reference: any, id: number): number {
-        while (!id || (this.db && (this.db as Record<string, any>)[String(id)])) {
+        while (
+            !id ||
+            (this.db && (this.db as Record<string, any>)[String(id)])
+        ) {
             id = randomID()
         }
         this.updateReference(id, reference)
@@ -113,7 +116,9 @@ export class ModBibliographyDB {
             id = id[0]
         }
         const preExisting =
-            this.db && (this.db as Record<string, any>)[String(id)] ? true : false
+            this.db && (this.db as Record<string, any>)[String(id)]
+                ? true
+                : false
         ;(this.db as Record<string, any>)[String(id)] = reference
         if (preExisting) {
             this.mod.editor.mod.citations.resetCitations()

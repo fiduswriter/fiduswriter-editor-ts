@@ -48,7 +48,8 @@ class TableView implements NodeView {
         dom.dataset.width = node.attrs.width as string
         dom.dataset.aligned = node.attrs.aligned as string
         dom.dataset.layout = node.attrs.layout as string
-        ;(dom as unknown as {class: string}).class = `table-${node.attrs.width} table-${node.attrs.aligned} table-${node.attrs.layout}`
+        ;(dom as unknown as {class: string}).class =
+            `table-${node.attrs.width} table-${node.attrs.aligned} table-${node.attrs.layout}`
         dom.dataset.category = node.attrs.category as string
         if (!node.attrs.caption) {
             dom.dataset.captionHidden = "true"
@@ -76,12 +77,17 @@ class TableView implements NodeView {
                 this.view.dispatch(tr)
             }
             const contentMenu = new ContentMenu({
-                menu: this.options.editor.menu.tableMenuModel as ContentMenuInit,
+                menu: this.options.editor.menu
+                    .tableMenuModel as ContentMenuInit,
                 width: 280,
                 page: this.options.editor,
                 menuPos: {
-                    X: Number.parseInt(mouseEvent.pageX as unknown as string) + 20,
-                    Y: Number.parseInt(mouseEvent.pageY as unknown as string) - 100
+                    X:
+                        Number.parseInt(mouseEvent.pageX as unknown as string) +
+                        20,
+                    Y:
+                        Number.parseInt(mouseEvent.pageY as unknown as string) -
+                        100
                 },
                 onClose: () => {
                     this.view.focus()
@@ -119,7 +125,9 @@ class TableCaptionView implements NodeView {
 }
 
 const isSelectedTableClicked = (state: EditorState, pos: number) => {
-    const pathArr = (state.selection.$head as unknown as {path: (Node | number)[]}).path
+    const pathArr = (
+        state.selection.$head as unknown as {path: (Node | number)[]}
+    ).path
     for (let i = 0; i < pathArr.length; i++) {
         const item = pathArr[i]
         if (

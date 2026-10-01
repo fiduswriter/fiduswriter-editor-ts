@@ -26,9 +26,14 @@ export class ExportFidusFile extends GenericExportFidusFile {
             `${title}: ${gettext("Exporting Fidus file...")}`,
             {autoClose: 6000}
         )
-        const progressCallback = (message: string, percentage?: number | null) =>
-            task.update(percentage ?? null, message)
-        const getTemplateFiles = (docId: number | string, token: string | boolean) => {
+        const progressCallback = (
+            message: string,
+            percentage?: number | null
+        ) => task.update(percentage ?? null, message)
+        const getTemplateFiles = (
+            docId: number | string,
+            token: string | boolean
+        ) => {
             const templateExporter = new DocumentTemplateExporter(
                 docId,
                 app.apiConnectors.document.getTemplateForDoc,

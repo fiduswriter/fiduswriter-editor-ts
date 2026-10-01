@@ -179,7 +179,9 @@ export const readOnlyFnEditor = (footnoteElement: HTMLElement): HTMLElement => {
         content: [
             {
                 type: "footnotecontainer",
-                content: htmlToFnNode(footnoteElement.dataset.footnote as string)
+                content: htmlToFnNode(
+                    footnoteElement.dataset.footnote as string
+                )
             }
         ]
     })

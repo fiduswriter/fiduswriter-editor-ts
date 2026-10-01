@@ -6,11 +6,7 @@ import {deactivateAllSelectedChanges} from "../state_plugins/track/index.js"
 
 import {deleteNode} from "./delete.js"
 
-export const accept = (
-    type: string,
-    pos: number,
-    view: EditorView
-): void => {
+export const accept = (type: string, pos: number, view: EditorView): void => {
     const tr = view.state.tr.setMeta("track", true),
         map = new Mapping()
     let reachedEnd = false
@@ -42,9 +38,9 @@ export const accept = (
             } else if (
                 trackMark &&
                 !trackMark.isInSet(node.marks) &&
-                !(
-                    node.attrs.track as Array<{type: string}> | undefined
-                )?.some(track => track.type === type)
+                !(node.attrs.track as Array<{type: string}> | undefined)?.some(
+                    track => track.type === type
+                )
             ) {
                 reachedEnd = true
                 return false
@@ -61,10 +57,13 @@ export const accept = (
                     deleteNode(tr, node, nodePos, map, true)
                 } else if (type === "insertion") {
                     if (node.attrs.track) {
-                        const track = (node.attrs.track as Array<{type: string}>).filter(
-                            track => track.type !== "insertion"
-                        )
-                        if ((node.attrs.track as Array<{type: string}>).length === track.length) {
+                        const track = (
+                            node.attrs.track as Array<{type: string}>
+                        ).filter(track => track.type !== "insertion")
+                        if (
+                            (node.attrs.track as Array<{type: string}>)
+                                .length === track.length
+                        ) {
                             return true
                         }
                         tr.setNodeMarkup(
@@ -114,9 +113,9 @@ export const accept = (
                         )
                     )
                 } else if (type === "block_change") {
-                    const track = (node.attrs.track as Array<{type: string}>).filter(
-                        track => track.type !== "block_change"
-                    )
+                    const track = (
+                        node.attrs.track as Array<{type: string}>
+                    ).filter(track => track.type !== "block_change")
                     tr.setNodeMarkup(
                         map.map(nodePos),
                         null,

@@ -23,7 +23,15 @@ import type {
 import type {ImageApi, ImagePicker} from "@fiduswriter/image-manager"
 import type {PollingOptions} from "./no_collab_save/scheduling.js"
 
-export type {BibDB, BibDBEntries, BibDBEntry, CommentData, CSL, ImageDB, ImageDBEntries}
+export type {
+    BibDB,
+    BibDBEntries,
+    BibDBEntry,
+    CommentData,
+    CSL,
+    ImageDB,
+    ImageDBEntries
+}
 
 /** Image database interface used by the editor (document and user DBs). */
 export interface EditorImageDB extends ImageDB {
@@ -41,15 +49,19 @@ export interface EditorDocumentApi {
     createDocument(
         data: Record<string, unknown>
     ): Promise<{json: unknown; status: number}>
-    getWebSocketBase(
-        data: {id: number; token?: string}
-    ): Promise<{json: unknown; status: number}>
-    getDocumentStyles(
-        data: {id: number; token?: string}
-    ): Promise<{json: unknown; status: number}>
-    getDocumentData(
-        data: {id: number | string; token?: string; v?: number}
-    ): Promise<{json: unknown; status: number}>
+    getWebSocketBase(data: {
+        id: number
+        token?: string
+    }): Promise<{json: unknown; status: number}>
+    getDocumentStyles(data: {
+        id: number
+        token?: string
+    }): Promise<{json: unknown; status: number}>
+    getDocumentData(data: {
+        id: number | string
+        token?: string
+        v?: number
+    }): Promise<{json: unknown; status: number}>
     /**
      * Optional cheap version probe used by the direct-save mode to detect
      * changes by other users without downloading the whole document. Hosts
@@ -57,28 +69,30 @@ export interface EditorDocumentApi {
      * this; when it is missing or does not return a numeric version, the
      * editor falls back to fetching the full document.
      */
-    getDocumentVersion?(
-        data: {id: number | string; token?: string}
-    ): Promise<{json: unknown; status: number}>
+    getDocumentVersion?(data: {
+        id: number | string
+        token?: string
+    }): Promise<{json: unknown; status: number}>
     saveDocument(
         data: Record<string, unknown>,
         options?: {keepalive?: boolean}
     ): Promise<{json: unknown; status: number}>
     commentNotify(data: Record<string, unknown>): Promise<unknown>
-    requestAccess(
-        data: {document_id: number; rights: string}
+    requestAccess(data: {
+        document_id: number
+        rights: string
+    }): Promise<{json: unknown; status: number}>
+    validateShareToken(token: string): Promise<{json: unknown; status: number}>
+    listShareTokens(
+        document_id: number
     ): Promise<{json: unknown; status: number}>
-    validateShareToken(
-        token: string
-    ): Promise<{json: unknown; status: number}>
-    listShareTokens(document_id: number): Promise<{json: unknown; status: number}>
     createShareToken(
         data: Record<string, unknown>
     ): Promise<{json: unknown; status: number}>
     revokeShareToken(token_id: number): Promise<{json: unknown; status: number}>
-    getAccessRights(
-        data: {document_ids: number[]}
-    ): Promise<{json: unknown; status: number}>
+    getAccessRights(data: {
+        document_ids: number[]
+    }): Promise<{json: unknown; status: number}>
     saveAccessRights(data: {
         document_ids: number[]
         access_rights: unknown[]
@@ -156,7 +170,9 @@ export interface EditorApp {
         SAVE_POLLING?: Partial<PollingOptions>
         [key: string]: unknown
     }
-    menuPlugins?: Array<[string, Record<string, {new (...args: unknown[]): {init(): void}}>]>
+    menuPlugins?: Array<
+        [string, Record<string, {new (...args: unknown[]): {init(): void}}>]
+    >
     name: string
     isOffline(): boolean
     csl: CSL
@@ -222,7 +238,12 @@ export interface DocInfo {
         name?: string
         type?: string
         avatar?: string
-        contacts: Array<{id: number | string; type: string; name: string; avatar?: string}>
+        contacts: Array<{
+            id: number | string
+            type: string
+            name: string
+            avatar?: string
+        }>
     }
     is_owner: boolean
     confirmedDoc: Node | false
@@ -251,7 +272,12 @@ export interface EditorMod {
             awaitingDiffResponse: boolean
             footnoteRender: boolean
         }
-        participants: Array<{id: number; name?: string; session_id?: string; sessionIds?: string[]}>
+        participants: Array<{
+            id: number
+            name?: string
+            session_id?: string
+            sessionIds?: string[]
+        }>
         pastParticipants: Array<{id: number; name?: string}>
         updateParticipantList(participants: unknown[]): void
         colors: {
@@ -272,7 +298,11 @@ export interface EditorMod {
         fnEditor: {
             view: EditorView
             renderAllFootnotes(): void
-            renderFootnote(content: unknown, index: number, tr: Transaction): void
+            renderFootnote(
+                content: unknown,
+                index: number,
+                tr: Transaction
+            ): void
             removeFootnote(index: number, tr: Transaction): void
             applyDiffs(diffs: unknown[], cid: unknown): void
             schema: {cached: Record<string, unknown>}
@@ -417,10 +447,7 @@ export interface EditorOptions {
 /** Editor plugin tuple used to build the ProseMirror state. */
 export type EditorPluginTuple =
     | [Plugin | ((...args: unknown[]) => Plugin)]
-    | [
-          Plugin | ((...args: unknown[]) => Plugin),
-          () => Record<string, unknown>
-      ]
+    | [Plugin | ((...args: unknown[]) => Plugin), () => Record<string, unknown>]
 
 /** Main Editor instance shape used by modules, state plugins and menus. */
 export interface Editor {
@@ -458,12 +485,17 @@ export interface Editor {
         ws?: WebSocket
         init(): void
         close(): void
-        send(data: string | (() => Record<string, unknown> | false | undefined)): void
+        send(
+            data: string | (() => Record<string, unknown> | false | undefined)
+        ): void
     }
 
     init(): Promise<void>
     startWebSocket(): void
-    getDoc(options?: {use_current_view?: boolean; changes?: string}): Record<string, unknown>
+    getDoc(options?: {
+        use_current_view?: boolean
+        changes?: string
+    }): Record<string, unknown>
     close(): void
     scrollPosIntoView(pos: number, view: EditorView): void
     scrollBibliographyIntoView(_target?: string): void

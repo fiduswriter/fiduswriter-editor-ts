@@ -62,7 +62,9 @@ export const acceptAll = (
                 mark => mark.type.name === "insertion" && !mark.attrs.approved
             )
         ) {
-            const mark = node.marks.find(mark => mark.type.name === "insertion"),
+            const mark = node.marks.find(
+                    mark => mark.type.name === "insertion"
+                ),
                 attrs = Object.assign({}, mark?.attrs, {approved: true})
             tr.step(
                 new AddMarkStep(
@@ -90,9 +92,9 @@ export const acceptAll = (
                 node.attrs.track as Array<{type: string}>
             ).find(track => track.type === "block_change")
             if (blockChangeTrack) {
-                const track = (node.attrs.track as Array<{type: string}>).filter(
-                    track => track !== blockChangeTrack
-                )
+                const track = (
+                    node.attrs.track as Array<{type: string}>
+                ).filter(track => track !== blockChangeTrack)
                 tr.setNodeMarkup(
                     map.map(pos),
                     null,

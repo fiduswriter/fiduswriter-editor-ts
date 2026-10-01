@@ -15,7 +15,9 @@ export class LibreOfficeWriterPasteHandler extends GeneralPasteHandler {
             const href = node.getAttribute("href") || ""
             const fnSelector =
                 href.length > 3 ? href.substring(0, href.length - 3) : href
-            const footnote = this.dom.querySelector(fnSelector) as HTMLElement | null
+            const footnote = this.dom.querySelector(
+                fnSelector
+            ) as HTMLElement | null
             if (footnote) {
                 const footnoteCounter =
                     footnote.querySelector("a.sdfootnotesym")

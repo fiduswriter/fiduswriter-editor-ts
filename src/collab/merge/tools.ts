@@ -154,7 +154,10 @@ export const updateMarkData = (
                     String(node.attrs.image)
                 )
             ) {
-                const attrs = Object.assign({}, node.attrs) as Record<string, any>
+                const attrs = Object.assign({}, node.attrs) as Record<
+                    string,
+                    any
+                >
                 attrs["image"] = imageDataModified[String(node.attrs.image)]
                 const nodeType = tr.doc.type.schema.nodes["image"]
                 newTr.setNodeMarkup(pos, nodeType, attrs)

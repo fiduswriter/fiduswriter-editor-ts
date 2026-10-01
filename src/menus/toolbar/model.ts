@@ -62,10 +62,15 @@ function currentSelection(editor: Editor): Selection & SelectionExtras {
 }
 
 // from https://github.com/ProseMirror/prosemirror-tables/blob/master/src/util.js
-const findTable = (state: {selection: {$head: {depth: number; node(d: number): Node}}}) => {
+const findTable = (state: {
+    selection: {$head: {depth: number; node(d: number): Node}}
+}) => {
     const $head = state.selection.$head
     for (let d = $head.depth; d > 0; d--) {
-        if (($head.node(d).type.spec as {tableRole?: string}).tableRole == "table") {
+        if (
+            ($head.node(d).type.spec as {tableRole?: string}).tableRole ==
+            "table"
+        ) {
             return $head.node(d)
         }
     }
@@ -76,26 +81,29 @@ function elementAvailable(editor: Editor, elementName: string): boolean {
     let elementInDocParts = false
     editor.view.state.doc.forEach(docPart => {
         if (
-            (docPart.attrs.elements as string[] | undefined)?.includes(elementName)
+            (docPart.attrs.elements as string[] | undefined)?.includes(
+                elementName
+            )
         ) {
             elementInDocParts = true
         }
     })
     const partElements =
         editor.view.state.selection.$anchor.node(1)?.attrs.elements ||
-        (editor.view.state.selection.$anchor.node(1)?.type.spec.attrs
-            ?.elements as {default?: string[]})?.default
+        (
+            editor.view.state.selection.$anchor.node(1)?.type.spec.attrs
+                ?.elements as {default?: string[]}
+        )?.default
     return (
         partElements?.includes(elementName) ||
-        (editor.view.state.doc.attrs.footnote_elements as string[]).includes(elementName) ||
+        (editor.view.state.doc.attrs.footnote_elements as string[]).includes(
+            elementName
+        ) ||
         elementInDocParts
     )
 }
 
-export function elementDisabled(
-    editor: Editor,
-    elementName: string
-): boolean {
+export function elementDisabled(editor: Editor, elementName: string): boolean {
     if (editor.currentView === editor.view) {
         // main editor
         const anchorDocPart =
@@ -103,7 +111,8 @@ export function elementDisabled(
             headDocPart = editor.currentView.state.selection.$head.node(1)
         const partElements =
             anchorDocPart?.attrs.elements ||
-            (anchorDocPart?.type.spec.attrs?.elements as {default?: string[]})?.default
+            (anchorDocPart?.type.spec.attrs?.elements as {default?: string[]})
+                ?.default
 
         return (
             !anchorDocPart ||
@@ -120,7 +129,9 @@ export function elementDisabled(
         return (
             !anchorFootnote ||
             headFootnote !== anchorFootnote ||
-            !(editor.view.state.doc.attrs.footnote_elements as string[]).includes(elementName)
+            !(
+                editor.view.state.doc.attrs.footnote_elements as string[]
+            ).includes(elementName)
         )
     }
 }
@@ -133,8 +144,9 @@ function markAvailable(editor: Editor, markName: string): boolean {
         }
     })
     return (
-        (editor.view.state.doc.attrs.footnote_marks as string[]).includes(markName) ||
-        markInDocParts
+        (editor.view.state.doc.attrs.footnote_marks as string[]).includes(
+            markName
+        ) || markInDocParts
     )
 }
 
@@ -148,7 +160,9 @@ function markDisabled(editor: Editor, markName: string): boolean {
         return (
             !anchorDocPart ||
             headDocPart !== anchorDocPart ||
-            !(anchorDocPart.attrs.marks as string[] | undefined)?.includes(markName) ||
+            !(anchorDocPart.attrs.marks as string[] | undefined)?.includes(
+                markName
+            ) ||
             checkProtectedInSelection(editor.view.state)
         )
     } else {
@@ -160,7 +174,9 @@ function markDisabled(editor: Editor, markName: string): boolean {
         return (
             !anchorFootnote ||
             headFootnote !== anchorFootnote ||
-            !(editor.view.state.doc.attrs.footnote_marks as string[]).includes(markName)
+            !(editor.view.state.doc.attrs.footnote_marks as string[]).includes(
+                markName
+            )
         )
     }
 }
@@ -179,8 +195,9 @@ export const toolbarModel = () => ({
                 }
             },
             action: (editor: Editor) => {
-                ;(editor.menu.headerbarModel as HeaderbarModelLike).open =
-                    !(editor.menu.headerbarModel as HeaderbarModelLike).open
+                ;(editor.menu.headerbarModel as HeaderbarModelLike).open = !(
+                    editor.menu.headerbarModel as HeaderbarModelLike
+                ).open
                 if (editor.menu.headerView) {
                     ;(editor.menu.headerView as HeaderbarViewLike).update()
                 }
@@ -244,17 +261,21 @@ export const toolbarModel = () => ({
                 const selection = currentSelection(editor)
                 if (
                     editor.currentView.state.selection.$anchor.node(1) &&
-                    !editor.view.state.selection.$anchor.node(1).attrs.elements &&
-                    !(editor.view.state.schema.nodes.richtext_part as
-                        | {spec: {attrs: Record<string, {default?: unknown}>}}
-                        | undefined)?.spec?.attrs?.elements?.default
+                    !editor.view.state.selection.$anchor.node(1).attrs
+                        .elements &&
+                    !(
+                        editor.view.state.schema.nodes.richtext_part as
+                            | {
+                                  spec: {
+                                      attrs: Record<string, {default?: unknown}>
+                                  }
+                              }
+                            | undefined
+                    )?.spec?.attrs?.elements?.default
                 ) {
                     return ""
                 }
-                if (
-                    selection.jsonID === "node" &&
-                    selection.node?.isBlock
-                ) {
+                if (selection.jsonID === "node" && selection.node?.isBlock) {
                     const selectedNode = selection.node
                     return BLOCK_LABELS[selectedNode.type.name]
                         ? BLOCK_LABELS[selectedNode.type.name]
@@ -298,14 +319,26 @@ export const toolbarModel = () => ({
                 }
             },
             disabled: (editor: Editor) =>
-                READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                READ_ONLY_ROLES.includes(
+                    editor.docInfo.access_rights as string
+                ) ||
+                COMMENT_ONLY_ROLES.includes(
+                    editor.docInfo.access_rights as string
+                ) ||
                 !editor.currentView.state.selection.$anchor.node(1) ||
-                !(editor.currentView.state.selection.$anchor.node(1).attrs
-                    .elements ||
-                  (editor.currentView.state.schema.nodes.richtext_part as
-                      | {spec: {attrs: Record<string, {default?: unknown}>}}
-                      | undefined)?.spec?.attrs?.elements?.default) ||
+                !(
+                    editor.currentView.state.selection.$anchor.node(1).attrs
+                        .elements ||
+                    (
+                        editor.currentView.state.schema.nodes.richtext_part as
+                            | {
+                                  spec: {
+                                      attrs: Record<string, {default?: unknown}>
+                                  }
+                              }
+                            | undefined
+                    )?.spec?.attrs?.elements?.default
+                ) ||
                 (currentSelection(editor).jsonID === "node" &&
                     currentSelection(editor).node?.isBlock &&
                     !currentSelection(editor).node?.isTextblock) ||
@@ -320,8 +353,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "paragraph"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "paragraph"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "paragraph"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "paragraph"),
                     order: 0
                 },
                 {
@@ -333,8 +368,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "heading1"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "heading1"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "heading1"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "heading1"),
                     order: 1
                 },
                 {
@@ -346,8 +383,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "heading2"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "heading2"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "heading2"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "heading2"),
                     order: 2
                 },
                 {
@@ -359,8 +398,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "heading3"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "heading3"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "heading3"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "heading3"),
                     order: 3
                 },
                 {
@@ -372,8 +413,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "heading4"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "heading4"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "heading4"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "heading4"),
                     order: 4
                 },
                 {
@@ -385,8 +428,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "heading5"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "heading5"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "heading5"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "heading5"),
                     order: 5
                 },
                 {
@@ -398,8 +443,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "heading6"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "heading6"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "heading6"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "heading6"),
                     order: 6
                 },
                 {
@@ -411,8 +458,10 @@ export const toolbarModel = () => ({
                             view.dispatch
                         )
                     },
-                    available: (editor: Editor) => elementAvailable(editor, "code_block"),
-                    disabled: (editor: Editor) => elementDisabled(editor, "code_block"),
+                    available: (editor: Editor) =>
+                        elementAvailable(editor, "code_block"),
+                    disabled: (editor: Editor) =>
+                        elementDisabled(editor, "code_block"),
                     order: 7
                 }
             ],
@@ -432,8 +481,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => markAvailable(editor, "strong"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     currentSelection(editor).jsonID === "gapcursor" ||
                     markDisabled(editor, "strong")
                 ) {
@@ -444,7 +497,9 @@ export const toolbarModel = () => ({
             selected: (editor: Editor) => {
                 const storedMarks = editor.currentView.state.storedMarks
                 if (
-                    storedMarks?.some((mark: Mark) => mark.type.name === "strong") ||
+                    storedMarks?.some(
+                        (mark: Mark) => mark.type.name === "strong"
+                    ) ||
                     editor.currentView.state.selection.$head
                         .marks()
                         .some((mark: Mark) => mark.type.name === "strong")
@@ -469,14 +524,20 @@ export const toolbarModel = () => ({
             },
             available: (editor: Editor) => markAvailable(editor, "em"),
             disabled: (editor: Editor) =>
-                READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                READ_ONLY_ROLES.includes(
+                    editor.docInfo.access_rights as string
+                ) ||
+                COMMENT_ONLY_ROLES.includes(
+                    editor.docInfo.access_rights as string
+                ) ||
                 currentSelection(editor).jsonID === "gapcursor" ||
                 markDisabled(editor, "em"),
             selected: (editor: Editor) => {
                 const storedMarks = editor.currentView.state.storedMarks
                 if (
-                    storedMarks?.some((mark: Mark) => mark.type.name === "em") ||
+                    storedMarks?.some(
+                        (mark: Mark) => mark.type.name === "em"
+                    ) ||
                     editor.currentView.state.selection.$head
                         .marks()
                         .some((mark: Mark) => mark.type.name === "em")
@@ -502,8 +563,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => markAvailable(editor, "underline"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     currentSelection(editor).jsonID === "gapcursor" ||
                     markDisabled(editor, "underline")
                 ) {
@@ -514,7 +579,9 @@ export const toolbarModel = () => ({
             selected: (editor: Editor) => {
                 const storedMarks = editor.currentView.state.storedMarks
                 if (
-                    storedMarks?.some((mark: Mark) => mark.type.name === "underline") ||
+                    storedMarks?.some(
+                        (mark: Mark) => mark.type.name === "underline"
+                    ) ||
                     editor.currentView.state.selection.$head
                         .marks()
                         .some((mark: Mark) => mark.type.name === "underline")
@@ -540,8 +607,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => markAvailable(editor, "sup"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     currentSelection(editor).jsonID === "gapcursor" ||
                     markDisabled(editor, "sup")
                 ) {
@@ -552,7 +623,9 @@ export const toolbarModel = () => ({
             selected: (editor: Editor) => {
                 const storedMarks = editor.currentView.state.storedMarks
                 if (
-                    storedMarks?.some((mark: Mark) => mark.type.name === "sup") ||
+                    storedMarks?.some(
+                        (mark: Mark) => mark.type.name === "sup"
+                    ) ||
                     editor.currentView.state.selection.$head
                         .marks()
                         .some((mark: Mark) => mark.type.name === "sup")
@@ -578,8 +651,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => markAvailable(editor, "sub"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     currentSelection(editor).jsonID === "gapcursor" ||
                     markDisabled(editor, "sub")
                 ) {
@@ -590,7 +667,9 @@ export const toolbarModel = () => ({
             selected: (editor: Editor) => {
                 const storedMarks = editor.currentView.state.storedMarks
                 if (
-                    storedMarks?.some((mark: Mark) => mark.type.name === "sub") ||
+                    storedMarks?.some(
+                        (mark: Mark) => mark.type.name === "sub"
+                    ) ||
                     editor.currentView.state.selection.$head
                         .marks()
                         .some((mark: Mark) => mark.type.name === "sub")
@@ -616,8 +695,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => markAvailable(editor, "code"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     currentSelection(editor).jsonID === "gapcursor" ||
                     markDisabled(editor, "code")
                 ) {
@@ -628,7 +711,9 @@ export const toolbarModel = () => ({
             selected: (editor: Editor) => {
                 const storedMarks = editor.currentView.state.storedMarks
                 if (
-                    storedMarks?.some((mark: Mark) => mark.type.name === "code") ||
+                    storedMarks?.some(
+                        (mark: Mark) => mark.type.name === "code"
+                    ) ||
                     editor.currentView.state.selection.$head
                         .marks()
                         .some((mark: Mark) => mark.type.name === "code")
@@ -652,11 +737,16 @@ export const toolbarModel = () => ({
                     editor.currentView.dispatch(tr)
                 )
             },
-            available: (editor: Editor) => elementAvailable(editor, "ordered_list"),
+            available: (editor: Editor) =>
+                elementAvailable(editor, "ordered_list"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "ordered_list")
                 ) {
                     return true
@@ -693,11 +783,16 @@ export const toolbarModel = () => ({
                     editor.currentView.dispatch(tr)
                 )
             },
-            available: (editor: Editor) => elementAvailable(editor, "bullet_list"),
+            available: (editor: Editor) =>
+                elementAvailable(editor, "bullet_list"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "bullet_list")
                 ) {
                     return true
@@ -727,17 +822,23 @@ export const toolbarModel = () => ({
             title: gettext("Blockquote"),
             icon: "quote-right",
             action: (editor: Editor) => {
-                const node = editor.currentView.state.schema.nodes["blockquote"]!
+                const node =
+                    editor.currentView.state.schema.nodes["blockquote"]!
                 const command = wrapIn(node)
                 command(editor.currentView.state, tr =>
                     editor.currentView.dispatch(tr)
                 )
             },
-            available: (editor: Editor) => elementAvailable(editor, "blockquote"),
+            available: (editor: Editor) =>
+                elementAvailable(editor, "blockquote"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "blockquote")
                 ) {
                     return true
@@ -774,8 +875,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => markAvailable(editor, "link"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     (markDisabled(editor, "link") &&
                         elementDisabled(editor, "cross_reference"))
                 ) {
@@ -805,8 +910,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => elementAvailable(editor, "footnote"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     editor.view !== editor.currentView || // we don't allow footnotes in footnotes
                     elementDisabled(editor, "footnote")
                 ) {
@@ -841,15 +950,18 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => elementAvailable(editor, "citation"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "citation") ||
                     !["text", "node"].includes(
                         currentSelection(editor).jsonID
                     ) ||
                     (currentSelection(editor).jsonID === "node" &&
-                        currentSelection(editor).node?.type.name !==
-                            "citation")
+                        currentSelection(editor).node?.type.name !== "citation")
                 ) {
                     return true
                 }
@@ -870,11 +982,16 @@ export const toolbarModel = () => ({
                     )
                 )
             },
-            available: (editor: Editor) => elementAvailable(editor, "horizontal_rule"),
+            available: (editor: Editor) =>
+                elementAvailable(editor, "horizontal_rule"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "horizontal_rule")
                 ) {
                     return true
@@ -894,15 +1011,18 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => elementAvailable(editor, "equation"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "equation") ||
                     !["text", "node"].includes(
                         currentSelection(editor).jsonID
                     ) ||
                     (currentSelection(editor).jsonID === "node" &&
-                        currentSelection(editor).node?.type.name !==
-                            "equation")
+                        currentSelection(editor).node?.type.name !== "equation")
                 ) {
                     return true
                 }
@@ -922,8 +1042,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => elementAvailable(editor, "figure"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "figure")
                 ) {
                     return true
@@ -945,8 +1069,12 @@ export const toolbarModel = () => ({
             available: (editor: Editor) => elementAvailable(editor, "table"),
             disabled: (editor: Editor) => {
                 if (
-                    READ_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
-                    COMMENT_ONLY_ROLES.includes(editor.docInfo.access_rights as string) ||
+                    READ_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
+                    COMMENT_ONLY_ROLES.includes(
+                        editor.docInfo.access_rights as string
+                    ) ||
                     elementDisabled(editor, "table") ||
                     findTable(editor.currentView.state)
                 ) {
@@ -966,7 +1094,8 @@ export const toolbarModel = () => ({
                         tr.setMeta("inputType", "historyUndo")
                     )
                 ),
-            disabled: (editor: Editor) => undoDepth(editor.currentView.state) === 0,
+            disabled: (editor: Editor) =>
+                undoDepth(editor.currentView.state) === 0,
             order: 16
         },
         {
@@ -979,7 +1108,8 @@ export const toolbarModel = () => ({
                         tr.setMeta("inputType", "historyRedo")
                     )
                 ),
-            disabled: (editor: Editor) => redoDepth(editor.currentView.state) === 0,
+            disabled: (editor: Editor) =>
+                redoDepth(editor.currentView.state) === 0,
             order: 17
         }
     ]

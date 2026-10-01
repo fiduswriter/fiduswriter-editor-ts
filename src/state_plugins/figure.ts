@@ -30,7 +30,9 @@ class FigureView implements NodeView {
         this.dom = document.createElement("div")
         this.dom.classList.add("figure")
         this.serializer = DOMSerializer.fromSchema(node.type.schema)
-        const contentDOM = this.serializer.serializeNode(this.node) as HTMLElement
+        const contentDOM = this.serializer.serializeNode(
+            this.node
+        ) as HTMLElement
         contentDOM.classList.forEach((className: string) =>
             this.dom.classList.add(className)
         )
@@ -56,12 +58,19 @@ class FigureView implements NodeView {
                 tr.setSelection(new NodeSelection($pos))
                 this.view.dispatch(tr)
                 const contentMenu = new ContentMenu({
-                    menu: this.options.editor.menu.figureMenuModel as ContentMenuInit,
+                    menu: this.options.editor.menu
+                        .figureMenuModel as ContentMenuInit,
                     width: 280,
                     page: this.options.editor,
                     menuPos: {
-                        X: Number.parseInt(mouseEvent.pageX as unknown as string) + 20,
-                        Y: Number.parseInt(mouseEvent.pageY as unknown as string) - 100
+                        X:
+                            Number.parseInt(
+                                mouseEvent.pageX as unknown as string
+                            ) + 20,
+                        Y:
+                            Number.parseInt(
+                                mouseEvent.pageY as unknown as string
+                            ) - 100
                     },
                     onClose: () => {
                         this.view.focus()

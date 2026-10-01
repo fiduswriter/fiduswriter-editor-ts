@@ -54,7 +54,9 @@ export class PdfExportDialog {
                         )?.value
                         const checked = (selector: string): boolean =>
                             (
-                                dialogEl.querySelector(selector) as HTMLInputElement
+                                dialogEl.querySelector(
+                                    selector
+                                ) as HTMLInputElement
                             ).checked
                         const result: PdfExportDialogResult = {
                             resolveTrackChanges:
@@ -79,9 +81,8 @@ export class PdfExportDialog {
                                             ) as HTMLInputElement
                                         ).value
                                     ) || 0,
-                                linkAnnotationBorders: checked(
-                                    ".pdf-link-borders"
-                                ),
+                                linkAnnotationBorders:
+                                    checked(".pdf-link-borders"),
                                 rasterizeSvgs: checked(".pdf-rasterize-svgs")
                             }
                         }
