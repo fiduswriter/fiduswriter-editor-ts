@@ -9,14 +9,19 @@ import {
 import {
     byteToTextRanges,
     filterBadPos,
+    filterIgnored,
+    isMisspelling,
     matchClass,
+    normalizeIgnoredList,
     plainMessage,
+    readIgnored,
     translateMatches,
     utf16Index,
     type GrammarMatch
 } from "../src/grammar/matches.js"
 import {getText} from "../src/grammar/text.js"
 import {ModGrammar} from "../src/grammar/checker.js"
+import {dialogTemplate} from "../src/grammar/templates.js"
 import {fetchPackCached} from "../src/grammar/pack_cache.js"
 
 const encoder = new TextEncoder()
@@ -53,6 +58,154 @@ describe("utf16Index", () => {
         // 😀 takes four UTF-8 bytes and two UTF-16 code units
         expect(utf16Index(bytes, 5)).toBe(3)
         expect(utf16Index(bytes, bytes.length)).toBe(4)
+    })
+})
+
+describe("isMisspelling helper", () => {
+    const match = (overrides: Partial<GrammarMatch>): GrammarMatch => ({
+        rule_id: "R",
+        message: "m",
+        range: {start: 0, end: 1},
+        suggestions: [],
+        ...overrides
+    })
+
+    test("classifies misspelling issue types like the extension", () => {
+        expect(isMisspelling(match({issue_type: "misspelling"}))).toBe(true)
+        expect(isMisspelling(match({issue_type: "UnknownWord"}))).toBe(true)
+        expect(isMisspelling(match({issue_type: "misspelling_case"}))).toBe(
+            true
+        )
+    })
+
+    test("does not classify grammar and style issue types", () => {
+        expect(isMisspelling(match({issue_type: "grammar"}))).toBe(false)
+        expect(isMisspelling(match({issue_type: "typographical"}))).toBe(false)
+        expect(isMisspelling(match({issue_type: "style"}))).toBe(false)
+    })
+
+    test("falls back to the TYPOS category without an issue type", () => {
+        expect(isMisspelling(match({category_id: "TYPOS"}))).toBe(true)
+        expect(isMisspelling(match({category_id: "GRAMMAR"}))).toBe(false)
+        expect(isMisspelling(match({}))).toBe(false)
+    })
+})
+
+describe("normalizeIgnoredList", () => {
+    test("trims, drops empties and dedupes case-insensitively", () => {
+        expect(
+            normalizeIgnoredList(
+                [" teh ", "", "TEH", "van der Berg"],
+                true,
+                5000
+            )
+        ).toEqual(["teh", "van der Berg"])
+    })
+
+    test("dedupes rule ids exactly (case-sensitive)", () => {
+        expect(
+            normalizeIgnoredList(["R_1", "r_1", "R_1"], false, 500)
+        ).toEqual(["R_1", "r_1"])
+    })
+
+    test("drops non-strings and over-length entries, caps the count", () => {
+        expect(
+            normalizeIgnoredList([42, "x".repeat(201), "ok"], true, 5000)
+        ).toEqual(["ok"])
+        expect(normalizeIgnoredList(["a", "b", "c"], true, 2)).toEqual([
+            "a",
+            "b"
+        ])
+    })
+
+    test("non-array input yields an empty list", () => {
+        expect(normalizeIgnoredList("teh", true, 5000)).toEqual([])
+        expect(normalizeIgnoredList(undefined, true, 5000)).toEqual([])
+    })
+})
+
+describe("readIgnored", () => {
+    test("reads both lists from the preferences", () => {
+        expect(
+            readIgnored({
+                grammar_check_ignored_words: ["teh"],
+                grammar_check_ignored_rules: ["R_1"]
+            })
+        ).toEqual({words: ["teh"], rules: ["R_1"]})
+    })
+
+    test("invalid shapes yield empty lists", () => {
+        expect(readIgnored({grammar_check_ignored_words: "teh"})).toEqual({
+            words: [],
+            rules: []
+        })
+        expect(readIgnored()).toEqual({words: [], rules: []})
+    })
+})
+
+describe("filterIgnored", () => {
+    const text = "teh very unique"
+    const typo = matchAt(text, "teh", "TYPOS")
+    const grammar = matchAt(text, "very unique", "GRAMMAR")
+
+    test("suppresses misspelling matches covering an ignored term exactly", () => {
+        // Terms in the lookup set are lowercased by ModGrammar; the
+        // surface is lowercased at compare time.
+        expect(
+            filterIgnored([typo, grammar], text, new Set(["teh"]), new Set())
+        ).toEqual([grammar])
+    })
+
+    test("does not suppress by substring", () => {
+        const text = "tehs"
+        const match = matchAt(text, "tehs", "TYPOS")
+        expect(
+            filterIgnored([match], text, new Set(["teh"]), new Set())
+        ).toEqual([match])
+    })
+
+    test("terms never suppress non-misspelling matches", () => {
+        expect(
+            filterIgnored([grammar], text, new Set(["very unique"]), new Set())
+        ).toEqual([grammar])
+    })
+
+    test("rules suppress matches of any kind", () => {
+        expect(
+            filterIgnored(
+                [typo, grammar],
+                text,
+                new Set(),
+                new Set(["GRAMMAR_RULE"])
+            )
+        ).toEqual([typo])
+    })
+
+    test("empty sets are a no-op", () => {
+        expect(
+            filterIgnored([typo, grammar], text, new Set(), new Set())
+        ).toEqual([typo, grammar])
+    })
+})
+
+describe("grammar dialog template", () => {
+    const args = {
+        message: "Possible spelling mistake.",
+        suggestions: [{value: "the"}]
+    }
+
+    test("misspellings get the add-to-ignored-words button, not ignore-rule", () => {
+        const html = dialogTemplate({...args, word: "teh", misspelling: true})
+        expect(html).toContain('Add "teh" to ignored words')
+        expect(html).toContain("add-ignored fw-button")
+        expect(html).not.toContain("add-ignored-rule")
+    })
+
+    test("other matches get the ignore-rule button, not add-to-ignored-words", () => {
+        const html = dialogTemplate({...args, word: "", misspelling: false})
+        expect(html).toContain("Ignore rule")
+        expect(html).toContain("add-ignored-rule fw-button")
+        expect(html).not.toContain("add-ignored fw-button")
     })
 })
 
@@ -711,7 +864,7 @@ describe("supported languages", () => {
     })
 })
 
-const makeFakeEditor = (preferences: Record<string, boolean>) => {
+const makeFakeEditor = (preferences: Record<string, unknown>) => {
     const doc = {
         attrs: {language: "en-US"},
         forEach: () => {},
@@ -850,6 +1003,98 @@ describe("ModGrammar continuous checking", () => {
         expect(removeMarks).toHaveBeenCalledTimes(1)
         grammar.close()
         startCheck.mockRestore()
+    })
+})
+
+describe("ModGrammar ignore lists", () => {
+    const makeCheckedGrammar = (
+        editor: ReturnType<typeof makeFakeEditor>,
+        app?: Record<string, unknown>
+    ) => {
+        if (app) {
+            Object.assign(editor.app as object, app)
+        }
+        const grammar = new ModGrammar(editor)
+        const runCheck = jest
+            .spyOn(grammar, "runCheck")
+            .mockReturnValue(Promise.resolve())
+        const removeMarks = jest
+            .spyOn(grammar, "removeMarks")
+            .mockImplementation(() => {})
+        grammar.client.loadedLanguage = "en-US"
+        grammar.hasChecked = true
+        return {grammar, runCheck, removeMarks}
+    }
+
+    test("reads both lists from the preferences", () => {
+        const editor = makeFakeEditor({
+            grammar_check_ignored_words: ["teh", "TEH"],
+            grammar_check_ignored_rules: ["R_1"]
+        })
+        const grammar = new ModGrammar(editor)
+        expect(grammar.getIgnoredWords()).toEqual(["teh"])
+        expect(grammar.getIgnoredRules()).toEqual(["R_1"])
+        grammar.close()
+    })
+
+    test("addIgnoredWord normalizes, persists and refreshes the marks", () => {
+        const saveWords = jest.fn(() => Promise.resolve())
+        const editor = makeFakeEditor({})
+        const {grammar, runCheck, removeMarks} = makeCheckedGrammar(editor, {
+            saveIgnoredWords: saveWords
+        })
+        grammar.addIgnoredWord(" teh ")
+        expect(grammar.getIgnoredWords()).toEqual(["teh"])
+        expect(saveWords).toHaveBeenCalledWith(["teh"])
+        expect(removeMarks).toHaveBeenCalledTimes(1)
+        expect(runCheck).toHaveBeenCalledWith(true)
+        grammar.close()
+    })
+
+    test("addIgnoredRule normalizes, persists and refreshes the marks", () => {
+        const saveRules = jest.fn(() => Promise.resolve())
+        const editor = makeFakeEditor({})
+        const {grammar, runCheck} = makeCheckedGrammar(editor, {
+            saveIgnoredRules: saveRules
+        })
+        grammar.addIgnoredRule(" R_1 ")
+        expect(grammar.getIgnoredRules()).toEqual(["R_1"])
+        expect(saveRules).toHaveBeenCalledWith(["R_1"])
+        expect(runCheck).toHaveBeenCalledWith(true)
+        grammar.close()
+    })
+
+    test("unchanged lists are not re-saved or re-checked", () => {
+        const saveWords = jest.fn(() => Promise.resolve())
+        const editor = makeFakeEditor({})
+        const {grammar, runCheck} = makeCheckedGrammar(editor, {
+            saveIgnoredWords: saveWords
+        })
+        grammar.setIgnoredWords([])
+        expect(saveWords).not.toHaveBeenCalled()
+        expect(runCheck).not.toHaveBeenCalled()
+        grammar.close()
+    })
+
+    test("no refresh before anything was checked", () => {
+        const editor = makeFakeEditor({})
+        const grammar = new ModGrammar(editor)
+        const runCheck = jest.spyOn(grammar, "runCheck")
+        grammar.addIgnoredWord("teh")
+        expect(runCheck).not.toHaveBeenCalled()
+        grammar.close()
+        runCheck.mockRestore()
+    })
+
+    test("a failing save keeps the local list for the session", async () => {
+        const editor = makeFakeEditor({})
+        const {grammar} = makeCheckedGrammar(editor, {
+            saveIgnoredWords: () => Promise.reject(new Error("offline"))
+        })
+        grammar.addIgnoredWord("teh")
+        await new Promise(resolve => setTimeout(resolve, 0))
+        expect(grammar.getIgnoredWords()).toEqual(["teh"])
+        grammar.close()
     })
 })
 

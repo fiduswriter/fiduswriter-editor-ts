@@ -143,10 +143,11 @@ export interface StaticEditorConfig
     mount?: HTMLElement | string
     /**
      * Optional user preferences that control inline editing helpers.
-     * Recognized keys include `inline_references`, `inline_math` and
-     * `grammar_check_continuous`.
+     * Recognized keys include `inline_references`, `inline_math`,
+     * `grammar_check_continuous`, `grammar_check_ignored_words` and
+     * `grammar_check_ignored_rules` (the latter two string arrays).
      */
-    userPreferences?: Record<string, boolean>
+    userPreferences?: Record<string, unknown>
 }
 
 async function loadLocaleCatalog(

@@ -45,8 +45,10 @@ export const GRAMMAR_LANGUAGES: GrammarLanguage[] = [
     {code: "it", pack: "it"},
     {code: "lt-LT", pack: "lt"},
     {code: "lt", pack: "lt"},
-    {code: "nl-NL", pack: "nl"},
-    {code: "nl", pack: "nl"},
+    // Dutch uses the lighter `nl-light` pack (same coverage of the
+    // document-schema languages at roughly half the download).
+    {code: "nl-NL", pack: "nl-light"},
+    {code: "nl", pack: "nl-light"},
     {code: "no", pack: "no"},
     {code: "nb-NO", pack: "no"},
     {code: "nn", pack: "nn"},

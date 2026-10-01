@@ -156,3 +156,117 @@ export function filterPMMatches(
             match.to - match.from
     )
 }
+
+/** Limits for the per-user ignore lists (see ModGrammar). */
+export const IGNORED_WORDS_MAX_ENTRIES = 5000
+export const IGNORED_RULES_MAX_ENTRIES = 500
+export const IGNORED_MAX_ENTRY_LENGTH = 200
+
+/**
+ * Misspelling-kind match, using the same classification as the
+ * LingoTweaker extension (issueKind in its src/common/match.js): the
+ * engine's issue_type contains "misspell" or is "unknownword". Matches
+ * without an issue_type fall back to the TYPOS category (the spelling
+ * decoration class). Drives both the ignored-words filter and the popup's
+ * mutually exclusive actions.
+ */
+export function isMisspelling(match: GrammarMatch): boolean {
+    const issueType = (match.issue_type ?? "").toLowerCase()
+    if (issueType.length) {
+        return issueType.includes("misspell") || issueType === "unknownword"
+    }
+    return match.category_id === "TYPOS"
+}
+
+/**
+ * Remove matches the user has ignored: misspelling-kind matches whose
+ * exact covered text is an ignored term, and matches of ignored rules
+ * (any kind). Match ranges must be UTF-16 text offsets (see
+ * `byteToTextRanges`); terms are compared lowercased.
+ */
+export function filterIgnored(
+    matches: GrammarMatch[],
+    text: string,
+    ignoredTerms: Set<string>,
+    ignoredRules: Set<string>
+): GrammarMatch[] {
+    if (!ignoredTerms.size && !ignoredRules.size) {
+        return matches
+    }
+    return matches.filter(match => {
+        if (ignoredRules.has(match.rule_id)) {
+            return false
+        }
+        if (
+            ignoredTerms.size &&
+            isMisspelling(match) &&
+            ignoredTerms.has(
+                text.slice(match.range.start, match.range.end).toLowerCase()
+            )
+        ) {
+            return false
+        }
+        return true
+    })
+}
+
+/**
+ * Normalize untrusted ignore-list entries: trim, drop empties and
+ * over-length entries, dedupe (case-insensitively for word terms, exactly
+ * for rule ids) and cap the count. Must stay in sync with the backend
+ * validation of `grammar_check_ignored_words`/`_rules`.
+ */
+export function normalizeIgnoredList(
+    entries: unknown,
+    caseInsensitiveDedupe: boolean,
+    maxEntries: number
+): string[] {
+    if (!Array.isArray(entries)) {
+        return []
+    }
+    const normalized: string[] = []
+    const seen = new Set<string>()
+    entries.forEach(entry => {
+        if (
+            typeof entry !== "string" ||
+            !entry.trim().length ||
+            entry.trim().length > IGNORED_MAX_ENTRY_LENGTH
+        ) {
+            return
+        }
+        const trimmed = entry.trim()
+        if (normalized.length >= maxEntries) {
+            return
+        }
+        const key = caseInsensitiveDedupe ? trimmed.toLowerCase() : trimmed
+        if (seen.has(key)) {
+            return
+        }
+        seen.add(key)
+        normalized.push(trimmed)
+    })
+    return normalized
+}
+
+/**
+ * Read both ignore lists from the user preferences
+ * `grammar_check_ignored_words`/`grammar_check_ignored_rules`; invalid
+ * shapes yield empty lists.
+ */
+export function readIgnored(
+    preferences?: Record<string, unknown>
+): {words: string[]; rules: string[]} {
+    const prefs = preferences ?? {}
+    return {
+        words: normalizeIgnoredList(
+            prefs.grammar_check_ignored_words,
+            true,
+            IGNORED_WORDS_MAX_ENTRIES
+        ),
+        rules: normalizeIgnoredList(
+            prefs.grammar_check_ignored_rules,
+            false,
+            IGNORED_RULES_MAX_ENTRIES
+        )
+    }
+}

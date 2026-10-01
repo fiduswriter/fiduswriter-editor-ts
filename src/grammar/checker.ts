@@ -11,6 +11,13 @@
  *   without user intervention; every document change then schedules a
  *   debounced full-document check and decorations reappear when results
  *   come back.
+ * - Personal ignore lists ("Add to ignored words"/"Ignore rule" on an
+ *   underline, edited via "Ignored words" in the same submenu): per-user
+ *   lists shared across all languages, initialized from the preferences
+ *   `grammar_check_ignored_words`/`_rules` and persisted through the
+ *   host's `saveIgnoredWords`/`saveIgnoredRules` when available. They are
+ *   applied as client-side filtering of the engine results (the wasm
+ *   engine has no wordlist API); see matches.ts.
  * - The engine is loaded lazily per document language and runs in a Web
  *   Worker (see `client.ts`/`worker.ts`).
  */
@@ -35,7 +42,12 @@ import {grammarLanguage, GRAMMAR_LANGUAGE_CODES} from "./languages.js"
 import {
     byteToTextRanges,
     filterBadPos,
+    filterIgnored,
     filterPMMatches,
+    IGNORED_RULES_MAX_ENTRIES,
+    IGNORED_WORDS_MAX_ENTRIES,
+    normalizeIgnoredList,
+    readIgnored,
     translateMatches,
     type GrammarMatch,
     type GrammarMatchPM
@@ -46,6 +58,9 @@ import type {Editor} from "../types.js"
 const CHECK_DEBOUNCE_MS = 700
 
 let stylesInjected = false
+
+const sameList = (a: string[], b: string[]): boolean =>
+    a.length === b.length && a.every((entry, index) => entry === b[index])
 
 export class ModGrammar {
     editor: Editor
@@ -65,6 +80,17 @@ export class ModGrammar {
      * document.
      */
     continuous: boolean
+    /**
+     * The user's ignored words (misspelling-kind matches covering exactly
+     * such a term are not reported) and ignored rules (matches of these
+     * rule ids are not reported). Per user, shared across all languages;
+     * changed via the popup or the "Ignored words" dialog.
+     */
+    ignoredWords: string[]
+    ignoredRules: string[]
+    /** Lookup sets for filterIgnored (terms lowercased, rules exact). */
+    ignoredWordsSet: Set<string>
+    ignoredRulesSet: Set<string>
 
     constructor(editor: Editor) {
         editor.mod.grammar = this
@@ -79,6 +105,13 @@ export class ModGrammar {
         this.continuous =
             editor.app.config?.user?.preferences?.grammar_check_continuous ===
             true
+        const ignored = readIgnored(editor.app.config?.user?.preferences)
+        this.ignoredWords = ignored.words
+        this.ignoredRules = ignored.rules
+        this.ignoredWordsSet = new Set(
+            ignored.words.map(word => word.toLowerCase())
+        )
+        this.ignoredRulesSet = new Set(ignored.rules)
         this.injectStyles()
         if (this.continuous) {
             // Run as soon as possible after the document has loaded: the
@@ -382,7 +415,12 @@ export class ModGrammar {
                         source.text ?? ""
                     )
                     let pmMatches: GrammarMatchPM[] = translateMatches(
-                        filterBadPos(source.badPos, source.matches),
+                        filterIgnored(
+                            filterBadPos(source.badPos, source.matches),
+                            source.text ?? "",
+                            this.ignoredWordsSet,
+                            this.ignoredRulesSet
+                        ),
                         source.getStartPos(),
                         source.posMap
                     )
@@ -409,6 +447,105 @@ export class ModGrammar {
             view.dispatch(tr)
         }
         this.hasChecked = true
+    }
+
+    /** Add the covered text of a misspelling match to the ignored words. */
+    addIgnoredWord(term: string): void {
+        this.setIgnoredWords(this.ignoredWords.concat([term]))
+    }
+
+    /** Do not report matches of `ruleId` from now on. */
+    addIgnoredRule(ruleId: string): void {
+        this.setIgnoredRules(this.ignoredRules.concat([ruleId]))
+    }
+
+    getIgnoredWords(): string[] {
+        return this.ignoredWords.slice()
+    }
+
+    getIgnoredRules(): string[] {
+        return this.ignoredRules.slice()
+    }
+
+    /**
+     * Replace the ignored-words list (popup "add word" action and the
+     * "Ignored words" dialog). Persists through the host's
+     * `saveIgnoredWords` when available, then refreshes the marks.
+     */
+    setIgnoredWords(words: string[]): void {
+        const normalized = normalizeIgnoredList(
+            words,
+            true,
+            IGNORED_WORDS_MAX_ENTRIES
+        )
+        if (sameList(normalized, this.ignoredWords)) {
+            return
+        }
+        this.ignoredWords = normalized
+        this.ignoredWordsSet = new Set(
+            normalized.map(word => word.toLowerCase())
+        )
+        this.saveIgnored("saveIgnoredWords", normalized)
+        this.refreshMarksAfterIgnoreChange()
+    }
+
+    /** Replace the ignored-rules list (popup "Ignore rule" and dialog). */
+    setIgnoredRules(rules: string[]): void {
+        const normalized = normalizeIgnoredList(
+            rules,
+            false,
+            IGNORED_RULES_MAX_ENTRIES
+        )
+        if (sameList(normalized, this.ignoredRules)) {
+            return
+        }
+        this.ignoredRules = normalized
+        this.ignoredRulesSet = new Set(normalized)
+        this.saveIgnored("saveIgnoredRules", normalized)
+        this.refreshMarksAfterIgnoreChange()
+    }
+
+    /**
+     * Persist an ignore list through the matching optional host callback.
+     * Failures are non-fatal: the local list stays in effect for this
+     * session and the user is informed.
+     */
+    private saveIgnored(
+        method: "saveIgnoredWords" | "saveIgnoredRules",
+        entries: string[]
+    ): void {
+        const save = this.editor.app[method]
+        if (!save) {
+            return
+        }
+        save(entries).catch(() => {
+            addAlert(
+                "error",
+                gettext("The ignore lists could not be saved.")
+            )
+        })
+    }
+
+    /**
+     * Re-check after an ignore list change so the decorations match the
+     * new lists (adding entries removes underlines, removing them
+     * restores marks). The worker's per-text cache makes this cheap for
+     * unchanged sections; positions are rebuilt so decorations land
+     * correctly even after edits.
+     */
+    private refreshMarksAfterIgnoreChange(): void {
+        if (!this.continuous && !this.hasChecked) {
+            return
+        }
+        const language = this.editor.view.state.doc.attrs.language
+        if (
+            !this.isSupported(language) ||
+            this.client.loadedLanguage !== language
+        ) {
+            return
+        }
+        this.removeMarks()
+        this.runCheck(true).catch(error => console.error(error))
     }
 
     removeMarks(): void {

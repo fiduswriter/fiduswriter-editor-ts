@@ -83,6 +83,7 @@ async function loadPack(packUrl: string): Promise<Uint8Array> {
 
 async function load(message: LoadMessage): Promise<void> {
     const generation = ++loadGeneration
+    engine?.free()
     engine = null
     textCache.clear()
     await ensureInit()
@@ -96,10 +97,13 @@ async function load(message: LoadMessage): Promise<void> {
         today: new Date().toISOString().slice(0, 10),
         picky: message.picky === true
     })
-    engine = new LtEngine(message.lang, packBytes, options)
+    const newEngine = new LtEngine(message.lang, packBytes, options)
     if (generation !== loadGeneration) {
+        // A newer load superseded this one; drop the stale engine.
+        newEngine.free()
         return
     }
+    engine = newEngine
     post({type: "ready", lang: message.lang})
 }
 

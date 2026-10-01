@@ -127,6 +127,7 @@ export class GrammarClient {
             variant: language.variant || undefined,
             today: new Date().toISOString().slice(0, 10)
         })
+        this.engine?.free()
         this.engine = new LtEngine(language.code, packBytes, options)
         this.loadedLanguage = language.code
     }

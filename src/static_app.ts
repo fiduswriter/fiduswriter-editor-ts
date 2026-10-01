@@ -131,10 +131,19 @@ export interface StaticAppConfig {
     }>
     /**
      * Optional user preferences that control inline editing helpers.
-     * Recognized keys include `inline_references`, `inline_math` and
-     * `grammar_check_continuous`.
+     * Recognized keys include `inline_references`, `inline_math`,
+     * `grammar_check_continuous`, `grammar_check_ignored_words` and
+     * `grammar_check_ignored_rules` (the latter two string arrays).
      */
-    userPreferences?: Record<string, boolean>
+    userPreferences?: Record<string, unknown>
+    /**
+     * Optional callbacks for persisting the per-user spell-checker
+     * ignore lists when the user adds an ignored word/rule or edits the
+     * lists in the "Ignored words" dialog. Without them the lists are
+     * session-only.
+     */
+    onSaveIgnoredWords?: (words: string[]) => Promise<void>
+    onSaveIgnoredRules?: (rules: string[]) => Promise<void>
 }
 
 interface StoredImage {
@@ -427,7 +436,9 @@ export async function createStaticApp(
             image: {...imageApi, ...overrides.image},
             bibliography: overrides.bibliography ?? bibliographyApi,
             contacts: overrides.contacts ?? contactsApi
-        }
+        },
+        saveIgnoredWords: config.onSaveIgnoredWords,
+        saveIgnoredRules: config.onSaveIgnoredRules
     } as unknown as EditorApp
 
     const bibDB = new BibliographyDB(app as any)

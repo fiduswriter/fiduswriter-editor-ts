@@ -20,6 +20,7 @@ import {
 import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {PassphraseManager} from "fwtoolkit/e2ee/passphrase-manager"
 import {changePasswordDialog} from "fwtoolkit/e2ee/password-dialog"
+import {DialogIgnoredWords} from "../../grammar/ignored_words_dialog.js"
 import {
     KeyBindingsDialog,
     SearchReplaceDialog,
@@ -1252,12 +1253,25 @@ export const headerbarModel = () => ({
                             }
                         },
                         {
+                            title: gettext("Ignored words"),
+                            type: "action",
+                            tooltip: gettext(
+                                "Edit the words and rules the spell checker accepts."
+                            ),
+                            order: 2,
+                            action: (editor: Editor) => {
+                                const dialog = new DialogIgnoredWords(editor)
+                                dialog.init()
+                            },
+                            disabled: (editor: Editor) => !editor.mod.grammar
+                        },
+                        {
                             title: gettext("Remove marks"),
                             type: "action",
                             tooltip: gettext(
                                 "Remove lines left over in the text from language check."
                             ),
-                            order: 2,
+                            order: 3,
                             action: (editor: Editor) => {
                                 editor.mod.grammar?.removeMarks()
                             },

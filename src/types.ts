@@ -164,7 +164,12 @@ export interface EditorApp {
     imageDB: EditorImageDB
     config?: {
         user?: {
-            preferences?: Record<string, boolean>
+            /**
+             * User preferences as delivered by the host, e.g.
+             * `grammar_check_continuous` (boolean) or
+             * `grammar_check_ignored_words`/`_rules` (string arrays).
+             */
+            preferences?: Record<string, unknown>
         }
     }
     apiConnectors: {
@@ -173,6 +178,13 @@ export interface EditorApp {
         image: ImageApi
         contacts: EditorContactsApi
     }
+    /**
+     * Persist the per-user spell-checker ignore lists (see ModGrammar).
+     * Provided by hosts with a logged-in user (Fidus Writer server,
+     * WordPress, Nextcloud); without them the lists are session-only.
+     */
+    saveIgnoredWords?: (words: string[]) => Promise<void>
+    saveIgnoredRules?: (rules: string[]) => Promise<void>
 }
 
 /** Document access role constants. */
@@ -311,6 +323,12 @@ export interface EditorMod {
         onDocChanged(): void
         onLanguageChange(): void
         close(): void
+        addIgnoredWord(term: string): void
+        addIgnoredRule(ruleId: string): void
+        setIgnoredWords(words: string[]): void
+        setIgnoredRules(rules: string[]): void
+        getIgnoredWords(): string[]
+        getIgnoredRules(): string[]
     }
     track?: unknown
     db?: {
