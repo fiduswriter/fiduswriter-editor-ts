@@ -4,10 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 msgid "(Author, 1998)"
 msgstr "(Yazar, 1998)"
 
@@ -71,31 +70,11 @@ msgstr "Değişikliği kabul et"
 msgid "Accept Change"
 msgstr "Değişikliği Kabul Et"
 
-msgid ""
-"Accepting or rejecting a change in the merge editor in the middle or the "
-"offline editor on the right causes a change in the merge editor. You can "
-"accept a change by directly clicking on the highlighted text. A dropdown "
-"menu will appear and you can then either accept or reject the change. When "
-"you click on the highlighted text, it also highlights the changes that will "
-"get accepted. %(mergeImage)s As shown in the above image one can click on a "
-"highlighted change, and click on accept change. On accepting a change it "
-"will be reflected in the merged document editor in the middle. Rejecting a "
-"change works in the same way except on reject a change the highlight of the "
-"change will be lost, with it the ability to accept, reject or copy a change."
+msgid "Accepting or rejecting a change in the merge editor in the middle or the offline editor on the right causes a change in the merge editor. You can accept a change by directly clicking on the highlighted text. A dropdown menu will appear and you can then either accept or reject the change. When you click on the highlighted text, it also highlights the changes that will get accepted. %(mergeImage)s As shown in the above image one can click on a highlighted change, and click on accept change. On accepting a change it will be reflected in the merged document editor in the middle. Rejecting a change works in the same way except on reject a change the highlight of the change will be lost, with it the ability to accept, reject or copy a change."
+msgstr "Ortadaki birleştirme düzenleyicisinde veya sağdaki çevrimdışı düzenleyicide yapılan bir değişikliğin kabul edilmesi veya reddedilmesi, birleştirme düzenleyicisinde bir değişikliğe neden olur. Vurgulanan metne doğrudan tıklayarak bir değişikliği kabul edebilirsiniz. Bir açılır menü görünecektir ve ardından değişikliği kabul edebilir veya reddedebilirsiniz. Vurgulanan metne tıkladığınızda, kabul edilecek değişiklikler de vurgulanır. %(mergeImage)s Yukarıdaki resimde gösterildiği gibi, vurgulanan bir değişikliğe tıklanabilir ve değişikliği kabul et seçeneğine tıklanabilir. Bir değişiklik kabul edildiğinde ortadaki birleştirilmiş belge düzenleyicide yansıtılacaktır. Bir değişikliği reddetmek aynı şekilde çalışır; ancak bir değişikliği reddetmek, değişikliğin kabul edilmesi, reddedilmesi veya kopyalanması yeteneğiyle birlikte değişikliğin öne çıkan özelliğinin kaybolmasına neden olur."
+
+msgid "Access level"
 msgstr ""
-"Ortadaki birleştirme düzenleyicisinde veya sağdaki çevrimdışı düzenleyicide "
-"yapılan bir değişikliğin kabul edilmesi veya reddedilmesi, birleştirme "
-"düzenleyicisinde bir değişikliğe neden olur. Vurgulanan metne doğrudan "
-"tıklayarak bir değişikliği kabul edebilirsiniz. Bir açılır menü görünecektir"
-" ve ardından değişikliği kabul edebilir veya reddedebilirsiniz. Vurgulanan "
-"metne tıkladığınızda, kabul edilecek değişiklikler de vurgulanır. "
-"%(mergeImage)s Yukarıdaki resimde gösterildiği gibi, vurgulanan bir "
-"değişikliğe tıklanabilir ve değişikliği kabul et seçeneğine tıklanabilir. "
-"Bir değişiklik kabul edildiğinde ortadaki birleştirilmiş belge düzenleyicide"
-" yansıtılacaktır. Bir değişikliği reddetmek aynı şekilde çalışır; ancak bir "
-"değişikliği reddetmek, değişikliğin kabul edilmesi, reddedilmesi veya "
-"kopyalanması yeteneğiyle birlikte değişikliğin öne çıkan özelliğinin "
-"kaybolmasına neden olur."
 
 msgid "Access rights could not be saved"
 msgstr "Erişim hakları kaydedilemedi"
@@ -157,14 +136,8 @@ msgstr "Hizalama"
 msgid "Am I the only one seeing this dialog?"
 msgstr "Bu diyaloğu gören tek kişi ben miyim?"
 
-msgid ""
-"An error occurred during the merge process, so we cannot save your work to "
-"the server any longer, and it is downloaded to your computer instead. Please"
-" consider importing it into a new document."
-msgstr ""
-"Birleştirme işlemi sırasında bir hata oluştu, bu nedenle çalışmanızı artık "
-"sunucuya kaydedemiyoruz ve onun yerine bilgisayarınıza indiriliyor. Lütfen "
-"bunu yeni bir belgeye aktarmayı düşünün."
+msgid "An error occurred during the merge process, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "Birleştirme işlemi sırasında bir hata oluştu, bu nedenle çalışmanızı artık sunucuya kaydedemiyoruz ve onun yerine bilgisayarınıza indiriliyor. Lütfen bunu yeni bir belgeye aktarmayı düşünün."
 
 msgid "An internal link has lost its target."
 msgstr "Dahili bir bağlantı hedefini kaybetti."
@@ -184,6 +157,15 @@ msgstr "Herhangi"
 msgid "Any/None"
 msgstr "Herhangi biri/Hiçbiri"
 
+msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Archiving and accessibility"
+msgstr ""
+
 msgid "Assign comment to"
 msgstr "Yorumu şuna ata:"
 
@@ -198,6 +180,9 @@ msgstr "Atandı"
 
 msgid "Assignee"
 msgstr "Vekil"
+
+msgid "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+msgstr ""
 
 msgid "Author"
 msgstr "Yazar"
@@ -222,6 +207,12 @@ msgstr "Kaynakça"
 
 msgid "BITS"
 msgstr "BİTLER"
+
+msgid "Bleed"
+msgstr ""
+
+msgid "Bleed box"
+msgstr ""
 
 msgid "Block change"
 msgstr "Blok değişikliği"
@@ -283,21 +274,35 @@ msgstr "%(level)s başlığına değiştirildi"
 msgid "Changed into paragraph"
 msgstr "Paragrafa dönüştürüldü"
 
+msgid "Changes apply to this session only."
+msgstr ""
+
 msgid "Changes to citation sources are not being tracked!"
 msgstr "Alıntı kaynaklarındaki değişiklikler takip edilmiyor!"
 
-msgid ""
-"Changes you made to the document since going offline will be lost, if you "
-"choose to close/refresh the tab or close the browser."
-msgstr ""
-"Sekmeyi kapatmayı/yenilemeyi veya tarayıcıyı kapatmayı seçerseniz, "
-"çevrimdışı olduğunuzdan beri belgede yaptığınız değişiklikler kaybolacaktır."
+msgid "Changes you made to the document since going offline will be lost, if you choose to close/refresh the tab or close the browser."
+msgstr "Sekmeyi kapatmayı/yenilemeyi veya tarayıcıyı kapatmayı seçerseniz, çevrimdışı olduğunuzdan beri belgede yaptığınız değişiklikler kaybolacaktır."
 
 msgid "Characters with blanks"
 msgstr "Boşluklu karakterler"
 
 msgid "Characters without blanks"
 msgstr "Boşluksuz karakterler"
+
+msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar in the document text."
+msgstr ""
+
+msgid "Check text"
+msgstr ""
+
+msgid "Check text for grammar and spelling issues."
+msgstr ""
+
+msgid "Checked %s of %s sections..."
+msgstr ""
 
 msgid "Chinese (Simplified)"
 msgstr "Çince (Basitleştirilmiş)"
@@ -392,6 +397,12 @@ msgstr "Tabloyu yapılandırın."
 msgid "Contacts"
 msgstr "Kişiler"
 
+msgid "Continuous checking"
+msgstr ""
+
+msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgstr ""
+
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -470,8 +481,14 @@ msgstr "Yeni paylaşım bağlantısı oluştur"
 msgid "Create share link"
 msgstr "Paylaşım bağlantısı oluştur"
 
+msgid "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+msgstr ""
+
 msgid "Creating copy..."
 msgstr "Kopya oluşturuluyor..."
+
+msgid "Crop marks"
+msgstr ""
 
 msgid "Cross reference"
 msgstr "Çapraz referans"
@@ -548,12 +565,11 @@ msgstr "Devre dışı bırakmak"
 msgid "Disconnected. Attempting to reconnect..."
 msgstr "Bağlantı kesildi. Yeniden bağlanmaya çalışılıyor..."
 
-msgid ""
-"Do not worry, we can handle such a situation as we will simply show you "
-"another merge dialog."
+msgid "Do not report this rule again, in any document."
 msgstr ""
-"Endişelenmeyin, size başka bir birleştirme iletişim kutusu göstereceğimizden"
-" böyle bir durumun üstesinden gelebiliriz."
+
+msgid "Do not worry, we can handle such a situation as we will simply show you another merge dialog."
+msgstr "Endişelenmeyin, size başka bir birleştirme iletişim kutusu göstereceğimizden böyle bir durumun üstesinden gelebiliriz."
 
 msgid "Document"
 msgstr "Belge"
@@ -561,17 +577,11 @@ msgstr "Belge"
 msgid "Document comment"
 msgstr "Belge yorumu"
 
-msgid ""
-"Document encryption key rotated. Other passphrase users will receive the new"
-" key automatically."
-msgstr ""
-"Belge şifreleme anahtarı döndürüldü. Diğer parola kullanıcıları yeni "
-"anahtarı otomatik olarak alacaktır."
+msgid "Document encryption key rotated. Other passphrase users will receive the new key automatically."
+msgstr "Belge şifreleme anahtarı döndürüldü. Diğer parola kullanıcıları yeni anahtarı otomatik olarak alacaktır."
 
 msgid "Document has been modified by another user. Please reload the page."
-msgstr ""
-"Doküman başka bir kullanıcı tarafından değiştirildi. Lütfen sayfayı yeniden "
-"yükleyin."
+msgstr "Doküman başka bir kullanıcı tarafından değiştirildi. Lütfen sayfayı yeniden yükleyin."
 
 msgid "Document headings"
 msgstr "Belge başlıkları"
@@ -588,15 +598,14 @@ msgstr "Belge Gezgini"
 msgid "Document password"
 msgstr "Belge şifresi"
 
-msgid ""
-"Document password changed. Remember to share the new password with your "
-"collaborators."
-msgstr ""
-"Belge şifresi değiştirildi. Yeni şifreyi ortak çalıştığınız kişilerle "
-"paylaşmayı unutmayın."
+msgid "Document password changed. Remember to share the new password with your collaborators."
+msgstr "Belge şifresi değiştirildi. Yeni şifreyi ortak çalıştığınız kişilerle paylaşmayı unutmayın."
 
 msgid "Document Style"
 msgstr "Belge Stili"
+
+msgid "DOCX export options"
+msgstr ""
 
 msgid "Does the order in which I work on merging the changes matter?"
 msgstr "Değişiklikleri birleştirmeye çalıştığım sıra önemli mi?"
@@ -606,6 +615,9 @@ msgstr "İndir"
 
 msgid "Download Document"
 msgstr "Belgeyi İndir"
+
+msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+msgstr ""
 
 msgid "Dutch"
 msgstr "Flemenkçe"
@@ -631,16 +643,23 @@ msgstr "Denklemi düzenle"
 msgid "Edit link"
 msgstr "Bağlantıyı düzenle"
 
-msgid "Either print or create a PDF using your browser print dialog."
+msgid "Edit the words and rules the spell checker accepts."
 msgstr ""
-"Tarayıcınızın yazdırma iletişim kutusunu kullanarak yazdırın veya PDF "
-"oluşturun."
 
 msgid "Email"
 msgstr "E-posta"
 
 msgid "Email is in incorrect format!"
 msgstr "E-posta yanlış formatta!"
+
+msgid "Embed a Fidus Writer file of this document in the PDF"
+msgstr ""
+
+msgid "Embed the source HTML in the PDF"
+msgstr ""
+
+msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+msgstr ""
 
 msgid "Emphasis"
 msgstr "Vurgu"
@@ -669,6 +688,9 @@ msgstr "Bağlantıya eklemek için belge şifresini girin"
 msgid "Epub"
 msgstr "Epub"
 
+msgid "EPUB export options"
+msgstr ""
+
 msgid "Equation"
 msgstr "Denklem"
 
@@ -687,8 +709,10 @@ msgstr "Belge içeriğini dışa aktarma"
 msgid "Export the document as a FIDUS file including its template."
 msgstr "Belgeyi şablonuyla birlikte bir FIDUS dosyası olarak dışa aktarın."
 
-msgid ""
-"Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgid "Export the document directly to a PDF file."
+msgstr ""
+
+msgid "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
 msgstr "Belgeyi Kitap Değişim Etiket Seti BITS Sürüm 2.1 dosyasına aktarın."
 
 msgid "Export the document to a DOCX file with the given template."
@@ -697,12 +721,8 @@ msgstr "Belgeyi verilen şablonla bir DOCX dosyasına aktarın."
 msgid "Export the document to a FIDUS file without its template."
 msgstr "Belgeyi şablonu olmadan bir FIDUS dosyasına aktarın."
 
-msgid ""
-"Export the document to a Journal Archiving and Interchange Tag Library NISO "
-"JATS Version 1.2 file."
-msgstr ""
-"Belgeyi Journal Archiving and Interchange Tag Library NISO JATS Sürüm 1.2 "
-"dosyasına aktarın."
+msgid "Export the document to a Journal Archiving and Interchange Tag Library NISO JATS Version 1.2 file."
+msgstr "Belgeyi Journal Archiving and Interchange Tag Library NISO JATS Sürüm 1.2 dosyasına aktarın."
 
 msgid "Export the document to a Pandoc JSON file."
 msgstr "Belgeyi bir Pandoc JSON dosyasına aktarın."
@@ -736,6 +756,9 @@ msgstr "Harici"
 
 msgid "Figure"
 msgstr "Figür"
+
+msgid "Figures and tables"
+msgstr ""
 
 msgid "File"
 msgstr "Dosya"
@@ -812,8 +835,14 @@ msgstr "Yatay çizgi"
 msgid "How do I accept or reject a particular change?"
 msgstr "Belirli bir değişikliği nasıl kabul ederim veya reddederim?"
 
+msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
+msgstr ""
+
 msgid "HTML"
 msgstr "HTML"
+
+msgid "HTML export options"
+msgstr ""
 
 msgid "I cannot accept a particular change. What do I do?"
 msgstr "Belirli bir değişikliği kabul edemem. Ben ne yaparım?"
@@ -824,38 +853,35 @@ msgstr "Kimlik Değeri"
 msgid "ID Value format is incorrect for "
 msgstr "Kimlik Değeri biçimi yanlış "
 
-msgid ""
-"If the work is not in the public domain, specify the year of the copyright."
+msgid "If the work is not in the public domain, specify the year of the copyright."
 msgstr "Eser kamu malı değilse, telif hakkının yılını belirtin."
 
-msgid ""
-"If the work is not in the public domain, specify who the copyright holder "
-"is."
-msgstr ""
-"Çalışma kamu malı değilse telif hakkı sahibinin kim olduğunu belirtin."
+msgid "If the work is not in the public domain, specify who the copyright holder is."
+msgstr "Çalışma kamu malı değilse telif hakkı sahibinin kim olduğunu belirtin."
 
-msgid ""
-"If you cannot automatically accept a change into the merge editor, do not "
-"worry. You can choose to copy the change either by clicking on the copy "
-"button or manually copy the change and then paste it in the merge editor in "
-"the middle. It is as simple as that!"
-msgstr ""
-"Birleştirme düzenleyicisinde yapılan bir değişikliği otomatik olarak kabul "
-"edemiyorsanız endişelenmeyin. Kopyala düğmesine tıklayarak değişikliği "
-"kopyalamayı veya değişikliği manuel olarak kopyalayıp ortadaki birleştirme "
-"düzenleyicisine yapıştırmayı seçebilirsiniz. Bu kadar basit!"
+msgid "If you cannot automatically accept a change into the merge editor, do not worry. You can choose to copy the change either by clicking on the copy button or manually copy the change and then paste it in the merge editor in the middle. It is as simple as that!"
+msgstr "Birleştirme düzenleyicisinde yapılan bir değişikliği otomatik olarak kabul edemiyorsanız endişelenmeyin. Kopyala düğmesine tıklayarak değişikliği kopyalamayı veya değişikliği manuel olarak kopyalayıp ortadaki birleştirme düzenleyicisine yapıştırmayı seçebilirsiniz. Bu kadar basit!"
 
-msgid ""
-"If you enter the password above, it will be embedded in the link (after #). "
-"Anyone with the link can open the document. Only share such links through "
-"secure channels."
+msgid "If you enter the password above, it will be embedded in the link (after #). Anyone with the link can open the document. Only share such links through secure channels."
+msgstr "Şifreyi yukarıya girerseniz, bağlantıya eklenecektir (# işaretinden sonra). Bağlantıya sahip olan herkes belgeyi açabilir. Bu tür bağlantıları yalnızca güvenli kanallar aracılığıyla paylaşın."
+
+msgid "Ignore rule"
 msgstr ""
-"Şifreyi yukarıya girerseniz, bağlantıya eklenecektir (# işaretinden sonra). "
-"Bağlantıya sahip olan herkes belgeyi açabilir. Bu tür bağlantıları yalnızca "
-"güvenli kanallar aracılığıyla paylaşın."
+
+msgid "Ignored rules"
+msgstr ""
+
+msgid "Ignored words"
+msgstr ""
 
 msgid "Image"
 msgstr "Resim"
+
+msgid "Include tracked changes in the export"
+msgstr ""
+
+msgid "Include tracked changes in the PDF"
+msgstr ""
 
 msgid "Incorrect passphrase."
 msgstr "Yanlış parola."
@@ -939,9 +965,7 @@ msgid "Invite you sent"
 msgstr "Gönderdiğiniz davet"
 
 msgid "It is always better to try to accept the changes in a linear fashion."
-msgstr ""
-"Değişiklikleri doğrusal bir şekilde kabul etmeye çalışmak her zaman daha "
-"iyidir."
+msgstr "Değişiklikleri doğrusal bir şekilde kabul etmeye çalışmak her zaman daha iyidir."
 
 msgid "Italian"
 msgstr "İtalyan"
@@ -954,6 +978,9 @@ msgstr "Japonca"
 
 msgid "JATS"
 msgstr "JATS"
+
+msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
 
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
@@ -1015,6 +1042,12 @@ msgstr "Şu şekilde listelendi:"
 msgid "Loading…"
 msgstr "Yükleniyor…"
 
+msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+msgstr ""
+
+msgid "Marks the final size of the page after it has been cut."
+msgstr ""
+
 msgid "Math"
 msgstr "Matematik"
 
@@ -1048,8 +1081,17 @@ msgstr "Birleştirilmiş paragraf"
 msgid "Merging Offline Document"
 msgstr "Çevrimdışı Belgeyi Birleştirme"
 
+msgid "mm"
+msgstr ""
+
 msgid "More"
 msgstr "Daha"
+
+msgid "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
+
+msgid "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
 
 msgid "My collaborators"
 msgstr "işbirlikçilerim"
@@ -1108,12 +1150,8 @@ msgstr "Hiçbiri"
 msgid "Normal Text"
 msgstr "Normal Metin"
 
-msgid ""
-"Not all changes have been resolved. Please make sure to review all the "
-"changes to before proceeding."
-msgstr ""
-"Tüm değişiklikler çözülmedi. Devam etmeden önce lütfen tüm değişiklikleri "
-"gözden geçirdiğinizden emin olun."
+msgid "Not all changes have been resolved. Please make sure to review all the changes to before proceeding."
+msgstr "Tüm değişiklikler çözülmedi. Devam etmeden önce lütfen tüm değişiklikleri gözden geçirdiğinizden emin olun."
 
 msgid "Not tracked"
 msgstr "Takip edilmedi"
@@ -1130,32 +1168,23 @@ msgstr "Numaralı liste"
 msgid "Numeric"
 msgstr "Sayısal"
 
+msgid "ODT export options"
+msgstr ""
+
 msgid "Offline Document"
 msgstr "Çevrimdışı Belge"
 
 msgid "OK"
 msgstr "TAMAM"
 
-msgid ""
-"One of the image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"Kopyaladığınız görsellerden biri sunucuda bulunamadı. Lütfen tekrar "
-"yüklemeyi deneyin."
+msgid "One of the image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "Kopyaladığınız görsellerden biri sunucuda bulunamadı. Lütfen tekrar yüklemeyi deneyin."
 
-msgid ""
-"One of the Image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"Kopyaladığınız Resim(ler)den biri sunucuda bulunamadı. Lütfen tekrar "
-"yüklemeyi deneyin."
+msgid "One of the Image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "Kopyaladığınız Resim(ler)den biri sunucuda bulunamadı. Lütfen tekrar yüklemeyi deneyin."
 
-msgid ""
-"One or more of the image(s) you copied could not be found on the server. "
-"Consider re-uploading them once the document is merged."
-msgstr ""
-"Kopyaladığınız görsellerden bir veya daha fazlası sunucuda bulunamadı. Belge"
-" birleştirildikten sonra bunları yeniden yüklemeyi düşünün."
+msgid "One or more of the image(s) you copied could not be found on the server. Consider re-uploading them once the document is merged."
+msgstr "Kopyaladığınız görsellerden bir veya daha fazlası sunucuda bulunamadı. Belge birleştirildikten sonra bunları yeniden yüklemeyi düşünün."
 
 msgid "Online Document"
 msgstr "Çevrimiçi Belge"
@@ -1202,8 +1231,26 @@ msgstr "İçerik algılamayla yapıştırma"
 msgid "Paste without content detection"
 msgstr "İçerik algılamadan yapıştır"
 
+msgid "PDF"
+msgstr ""
+
+msgid "PDF export options"
+msgstr ""
+
+msgid "PDF/A-4 (archival)"
+msgstr ""
+
+msgid "PDF/UA (accessible, tagged)"
+msgstr ""
+
 msgid "People"
 msgstr "İnsanlar"
+
+msgid "Place figures as page floats"
+msgstr ""
+
+msgid "Place tables as page floats"
+msgstr ""
 
 msgid "Please select at least one citation source!"
 msgstr "Lütfen en az bir alıntı kaynağı seçin!"
@@ -1220,18 +1267,29 @@ msgstr "Öncesi"
 msgid "Print"
 msgstr "Yazdır"
 
+msgid "Print production"
+msgstr ""
+
+msgid "Print the document using your browser print dialog."
+msgstr ""
+
+msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Proceed to Login page"
 msgstr "Giriş sayfasına ilerleyin"
 
 msgid "Proceed to Merge"
 msgstr "Birleştirmeye Devam Et"
 
+msgid "Rasterize SVG images"
+msgstr ""
+
 msgid "Read"
 msgstr "Okumak"
 
 msgid "Read document but not see comments and chats of others"
-msgstr ""
-"Belgeyi okuyun ancak başkalarının yorumlarını ve sohbetlerini görmeyin"
+msgstr "Belgeyi okuyun ancak başkalarının yorumlarını ve sohbetlerini görmeyin"
 
 msgid "Read without comments"
 msgstr "Yorum yapmadan okuyun"
@@ -1296,8 +1354,14 @@ msgstr "Denklemi kaldır"
 msgid "Remove image"
 msgstr "Resmi kaldır"
 
+msgid "Remove lines left over in the text from language check."
+msgstr ""
+
 msgid "Remove link"
 msgstr "Bağlantıyı kaldır"
+
+msgid "Remove marks"
+msgstr ""
 
 msgid "Remove the code block."
 msgstr "Kod bloğunu kaldırın."
@@ -1314,6 +1378,9 @@ msgstr "Kaldırıldı"
 msgid "Removed code block"
 msgstr "Kod bloğu kaldırıldı"
 
+msgid "Render formulas as SVG images instead of MathML"
+msgstr ""
+
 msgid "Replace"
 msgstr "Değiştir"
 
@@ -1326,6 +1393,9 @@ msgstr "Şununla değiştir:"
 msgid "replies"
 msgstr "cevaplar"
 
+msgid "Request"
+msgstr ""
+
 msgid "Request Access"
 msgstr "Erişim Talebi"
 
@@ -1337,6 +1407,9 @@ msgstr "Çöz"
 
 msgid "Resolve comment"
 msgstr "Yorumu çözümle"
+
+msgid "Resolve tracked changes (accept all)"
+msgstr ""
 
 msgid "Resolved comments"
 msgstr "Çözümlenen yorumlar"
@@ -1403,6 +1476,9 @@ msgstr "Aramak..."
 
 msgid "See document statistics."
 msgstr "Belge istatistiklerine bakın."
+
+msgid "Select a higher access level to request from the document owner."
+msgstr ""
 
 msgid "Select document editing tool."
 msgstr "Belge düzenleme aracını seçin."
@@ -1476,6 +1552,9 @@ msgstr "Klavye kısayollarını göster"
 msgid "show less"
 msgstr "daha az göster"
 
+msgid "Show link annotation borders"
+msgstr ""
+
 msgid "show more"
 msgstr "daha fazlasını göster"
 
@@ -1500,6 +1579,9 @@ msgstr "Kaydolun veya giriş yapın"
 msgid "Slim FIDUS"
 msgstr "İnce FIDUS"
 
+msgid "Small lines at the corners of the page that show printers where to cut the paper."
+msgstr ""
+
 msgid "Spanish"
 msgstr "İspanyol"
 
@@ -1511,6 +1593,15 @@ msgstr "Bu listenin saymaya başlayacağı sayıyı belirtin"
 
 msgid "Specify whether the work can be accessed without paying a fee."
 msgstr "Esere ücret ödemeden erişilip erişilemeyeceğini belirtin."
+
+msgid "Spell/grammar check finished."
+msgstr ""
+
+msgid "Spell/grammar check initialized."
+msgstr ""
+
+msgid "Spell/grammar checker"
+msgstr ""
 
 msgid "Split cell"
 msgstr "Hücreyi böl"
@@ -1539,11 +1630,17 @@ msgstr "Abonelik"
 msgid "Superscript"
 msgstr "Üst simge"
 
+msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr ""
+
 msgid "Symbols and Roman Letters"
 msgstr "Semboller ve Roma Harfleri"
 
 msgid "Table"
 msgstr "Masa"
+
+msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
+msgstr ""
 
 msgid "Text before"
 msgstr "Önce metin"
@@ -1554,80 +1651,47 @@ msgstr "Metin Dili"
 msgid "Text replaced successfully"
 msgstr "Metin başarıyla değiştirildi"
 
-msgid ""
-"The change could not be applied automatically. Please consider using the "
-"copy option to copy the changes."
-msgstr ""
-"Değişiklik otomatik olarak uygulanamadı. Lütfen değişiklikleri kopyalamak "
-"için kopyala seçeneğini kullanmayı düşünün."
+msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
+msgstr "Değişiklik otomatik olarak uygulanamadı. Lütfen değişiklikleri kopyalamak için kopyala seçeneğini kullanmayı düşünün."
 
 msgid "The current password is incorrect."
 msgstr "Mevcut şifre yanlış."
 
-msgid ""
-"The document password was changed by another user. You will need to enter "
-"the new password to continue editing."
+msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
-"Belge parolası başka bir kullanıcı tarafından değiştirildi. Düzenlemeye "
-"devam etmek için yeni şifreyi girmeniz gerekecektir."
 
-msgid ""
-"The document was modified substantially by other users while you were "
-"offline. We have merged your changes in as tracked changes. You should "
-"verify that your edits still make sense."
-msgstr ""
-"Belge siz çevrimdışıyken diğer kullanıcılar tarafından önemli ölçüde "
-"değiştirildi. Değişikliklerinizi izlenen değişiklikler olarak birleştirdik. "
-"Düzenlemelerinizin hâlâ anlamlı olduğunu doğrulamanız gerekir."
+msgid "The document password was changed by another user. You will need to enter the new password to continue editing."
+msgstr "Belge parolası başka bir kullanıcı tarafından değiştirildi. Düzenlemeye devam etmek için yeni şifreyi girmeniz gerekecektir."
 
-msgid ""
-"The editors in the middle and on the right will show content that is "
-"highlighted in green. They also contain text that is highlighted in red. The"
-" text marked in green corresponds to the text that was edited (added) by you"
-" or other users. The text marked in red corresponds to text that was deleted"
-" by either you or other users. The insertions and deletions made by other "
-"users will be marked in the merge editor. The insertions and deletions made "
-"by you will be marked in the offline editor on the right."
+msgid "The document was modified substantially by other users while you were offline. We have merged your changes in as tracked changes. You should verify that your edits still make sense."
+msgstr "Belge siz çevrimdışıyken diğer kullanıcılar tarafından önemli ölçüde değiştirildi. Değişikliklerinizi izlenen değişiklikler olarak birleştirdik. Düzenlemelerinizin hâlâ anlamlı olduğunu doğrulamanız gerekir."
+
+msgid "The editors in the middle and on the right will show content that is highlighted in green. They also contain text that is highlighted in red. The text marked in green corresponds to the text that was edited (added) by you or other users. The text marked in red corresponds to text that was deleted by either you or other users. The insertions and deletions made by other users will be marked in the merge editor. The insertions and deletions made by you will be marked in the offline editor on the right."
+msgstr "Ortadaki ve sağdaki editörler yeşil renkle vurgulanan içeriği gösterecektir. Ayrıca kırmızıyla vurgulanan metinleri de içerirler. Yeşil renkle işaretlenen metin, sizin veya diğer kullanıcıların düzenlediği (eklediği) metne karşılık gelir. Kırmızıyla işaretlenmiş metin, sizin veya diğer kullanıcıların sildiği metne karşılık gelir. Diğer kullanıcılar tarafından yapılan ekleme ve silme işlemleri birleştirme düzenleyicisinde işaretlenecektir. Yaptığınız ekleme ve silme işlemleri sağdaki çevrimdışı düzenleyicide işaretlenecektir."
+
+msgid "The file is locked by another session. Changes cannot be saved until the lock is released."
 msgstr ""
-"Ortadaki ve sağdaki editörler yeşil renkle vurgulanan içeriği gösterecektir."
-" Ayrıca kırmızıyla vurgulanan metinleri de içerirler. Yeşil renkle "
-"işaretlenen metin, sizin veya diğer kullanıcıların düzenlediği (eklediği) "
-"metne karşılık gelir. Kırmızıyla işaretlenmiş metin, sizin veya diğer "
-"kullanıcıların sildiği metne karşılık gelir. Diğer kullanıcılar tarafından "
-"yapılan ekleme ve silme işlemleri birleştirme düzenleyicisinde "
-"işaretlenecektir. Yaptığınız ekleme ve silme işlemleri sağdaki çevrimdışı "
-"düzenleyicide işaretlenecektir."
 
 msgid "The format used by the USA and some other American countries."
 msgstr "ABD ve diğer bazı Amerika ülkeleri tarafından kullanılan format."
 
-msgid ""
-"The recovery key you entered is incorrect, or the recovery process failed. "
-"Please try again."
+msgid "The ignore lists could not be saved."
 msgstr ""
-"Girdiğiniz kurtarma anahtarı hatalı veya kurtarma işlemi başarısız oldu. "
-"Lütfen tekrar deneyin."
 
-msgid ""
-"This document is end-to-end encrypted. Collaborators without a personal "
-"passphrase will need the document password shared with them through a secure"
-" channel outside of Fidus Writer. Do not send the password through the "
-"document chat."
+msgid "The language pack for the document language could not be loaded."
 msgstr ""
-"Bu belge uçtan uca şifrelenmiştir. Kişisel parolası olmayan ortak "
-"çalışanların, Fidus Writer dışındaki güvenli bir kanal aracılığıyla "
-"kendileriyle paylaşılan belge parolasına ihtiyacı olacaktır. Şifreyi belge "
-"sohbeti aracılığıyla göndermeyin."
+
+msgid "The recovery key you entered is incorrect, or the recovery process failed. Please try again."
+msgstr "Girdiğiniz kurtarma anahtarı hatalı veya kurtarma işlemi başarısız oldu. Lütfen tekrar deneyin."
+
+msgid "This document is end-to-end encrypted. Collaborators without a personal passphrase will need the document password shared with them through a secure channel outside of Fidus Writer. Do not send the password through the document chat."
+msgstr "Bu belge uçtan uca şifrelenmiştir. Kişisel parolası olmayan ortak çalışanların, Fidus Writer dışındaki güvenli bir kanal aracılığıyla kendileriyle paylaşılan belge parolasına ihtiyacı olacaktır. Şifreyi belge sohbeti aracılığıyla göndermeyin."
 
 msgid "This person is already in your contacts!"
 msgstr "Bu kişi zaten kişileriniz arasında!"
 
-msgid ""
-"This share link has expired or is invalid. Please ask the document owner for"
-" a new link."
-msgstr ""
-"Bu paylaşım bağlantısının süresi dolmuş veya geçersiz. Lütfen belge "
-"sahibinden yeni bir bağlantı isteyin."
+msgid "This share link has expired or is invalid. Please ask the document owner for a new link."
+msgstr "Bu paylaşım bağlantısının süresi dolmuş veya geçersiz. Lütfen belge sahibinden yeni bir bağlantı isteyin."
 
 msgid "Title"
 msgstr "Başlık"
@@ -1665,11 +1729,17 @@ msgstr "Aletler"
 msgid "Track changes"
 msgstr "Değişiklikleri izle"
 
+msgid "Tracked changes"
+msgstr ""
+
 msgid "Tracking"
 msgstr "Takip"
 
 msgid "Tracking changes to the document"
 msgstr "Belgedeki değişiklikleri izleme"
+
+msgid "Trim box"
+msgstr ""
 
 msgid "Type formula"
 msgstr "Formül yazın"
@@ -1707,12 +1777,8 @@ msgstr "ABD Mektubu"
 msgid "User"
 msgstr "Kullanıcı"
 
-msgid ""
-"Warning! Not all your changes have been saved! You could suffer data loss. "
-"Attempting to reconnect..."
-msgstr ""
-"Uyarı! Değişikliklerinizin tümü kaydedilmedi! Veri kaybı yaşayabilirsiniz. "
-"Yeniden bağlanmaya çalışılıyor..."
+msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
+msgstr "Uyarı! Değişikliklerinizin tümü kaydedilmedi! Veri kaybı yaşayabilirsiniz. Yeniden bağlanmaya çalışılıyor..."
 
 msgid "Warnings"
 msgstr "Uyarılar"
@@ -1726,18 +1792,11 @@ msgstr "Editörlerdeki yeşil ve kırmızı vurgular nelerdir?"
 msgid "What do I do after completing the merge?"
 msgstr "Birleştirme tamamlandıktan sonra ne yapmalıyım?"
 
-msgid ""
-"What happens if I try to complete merge without resolving all the changes?"
-msgstr ""
-"Tüm değişiklikleri çözmeden birleştirme işlemini tamamlamaya çalışırsam ne "
-"olur?"
+msgid "What happens if I try to complete merge without resolving all the changes?"
+msgstr "Tüm değişiklikleri çözmeden birleştirme işlemini tamamlamaya çalışırsam ne olur?"
 
-msgid ""
-"What if my collaborators continue working on the document while I am "
-"merging?"
-msgstr ""
-"Ben birleştirirken ortak çalışanlarım belge üzerinde çalışmaya devam ederse "
-"ne olur?"
+msgid "What if my collaborators continue working on the document while I am merging?"
+msgstr "Ben birleştirirken ortak çalışanlarım belge üzerinde çalışmaya devam ederse ne olur?"
 
 msgid "Why am I seeing this merge dialog?"
 msgstr "Bu birleştirme iletişim kutusunu neden görüyorum?"
@@ -1753,6 +1812,9 @@ msgstr "Kelime sayacı"
 
 msgid "Words"
 msgstr "Kelimeler"
+
+msgid "Words and word combinations that the spell checker should accept as correct. One word or phrase per line."
+msgstr ""
 
 msgid "Wrap selection in bullet list"
 msgstr "Seçimi madde işareti listesine kaydır"
@@ -1773,104 +1835,53 @@ msgid "Write with changes tracked"
 msgstr "Takip edilen değişikliklerle yaz"
 
 msgid "Write with tracked changes, but not see comments and chats of others"
-msgstr ""
-"İzlenen değişikliklerle yazın ancak başkalarının yorumlarını ve sohbetlerini"
-" görmeyin"
+msgstr "İzlenen değişikliklerle yazın ancak başkalarının yorumlarını ve sohbetlerini görmeyin"
 
 msgid "Year"
 msgstr "Yıl"
 
-msgid ""
-"Yes, you are the only one who can see this dialog. Therefore it would be "
-"great if you could ask your collaborators to stop editing the document, so "
-"that once you are finished with the merge, it will not lead to more "
-"conflicts."
+msgid "Yes, you are the only one who can see this dialog. Therefore it would be great if you could ask your collaborators to stop editing the document, so that once you are finished with the merge, it will not lead to more conflicts."
+msgstr "Evet, bu diyaloğu görebilen tek kişi sizsiniz. Bu nedenle, ortak çalışanlarınızdan belgeyi düzenlemeyi bırakmalarını istemeniz harika olurdu, böylece birleştirme işlemi bittiğinde daha fazla çakışmaya yol açmayacak."
+
+msgid "You already have the highest possible access level."
 msgstr ""
-"Evet, bu diyaloğu görebilen tek kişi sizsiniz. Bu nedenle, ortak "
-"çalışanlarınızdan belgeyi düzenlemeyi bırakmalarını istemeniz harika olurdu,"
-" böylece birleştirme işlemi bittiğinde daha fazla çakışmaya yol açmayacak."
 
 msgid "You are currently offline. Please try again when you are back online."
-msgstr ""
-"Şu anda çevrimdışısınız. Lütfen tekrar çevrimiçi olduğunuzda tekrar deneyin."
+msgstr "Şu anda çevrimdışısınız. Lütfen tekrar çevrimiçi olduğunuzda tekrar deneyin."
 
-msgid ""
-"You are seeing this merge dialog because you were offline for a long time, "
-"and the changes you made to the document while you were offline conflicted "
-"with the changes made by other users. So it was not possible to merge your "
-"edits in automatically."
-msgstr ""
-"Uzun süredir çevrimdışı olduğunuz ve çevrimdışıyken belgede yaptığınız "
-"değişiklikler diğer kullanıcılar tarafından yapılan değişikliklerle "
-"çakıştığı için bu birleştirme iletişim kutusunu görüyorsunuz. Bu nedenle "
-"düzenlemelerinizi otomatik olarak birleştirmek mümkün olmadı."
+msgid "You are seeing this merge dialog because you were offline for a long time, and the changes you made to the document while you were offline conflicted with the changes made by other users. So it was not possible to merge your edits in automatically."
+msgstr "Uzun süredir çevrimdışı olduğunuz ve çevrimdışıyken belgede yaptığınız değişiklikler diğer kullanıcılar tarafından yapılan değişikliklerle çakıştığı için bu birleştirme iletişim kutusunu görüyorsunuz. Bu nedenle düzenlemelerinizi otomatik olarak birleştirmek mümkün olmadı."
 
-msgid ""
-"You can edit the content only in the merge editor in the middle. You cannot "
-"edit content in the other two editors."
-msgstr ""
-"İçeriği yalnızca ortadaki birleştirme düzenleyicisinde düzenleyebilirsiniz. "
-"Diğer iki düzenleyicideki içeriği düzenleyemezsiniz."
+msgid "You can edit the content only in the merge editor in the middle. You cannot edit content in the other two editors."
+msgstr "İçeriği yalnızca ortadaki birleştirme düzenleyicisinde düzenleyebilirsiniz. Diğer iki düzenleyicideki içeriği düzenleyemezsiniz."
 
 msgid "You cannot add yourself to your contacts!"
 msgstr "Kendinizi kişilerinize ekleyemezsiniz!"
 
-msgid ""
-"You will receive a warning when you try to complete a merge without "
-"accepting or rejecting all of the changes. You can still proceed to merge "
-"the document. If you do that, all the insertions and deletions in the merge "
-"editor in the middle will be accepted automatically, and all the insertions "
-"and deletions in the offline editor on the right will be ignored."
+msgid "You do not have access to this document. Select the access level you would like to request from the document owner."
 msgstr ""
-"Değişikliklerin tümünü kabul etmeden veya reddetmeden birleştirme işlemini "
-"tamamlamaya çalıştığınızda bir uyarı alırsınız. Belgeyi birleştirmeye devam "
-"edebilirsiniz. Bunu yaparsanız, ortadaki birleştirme düzenleyicisindeki tüm "
-"ekleme ve silme işlemleri otomatik olarak kabul edilecek ve sağdaki "
-"çevrimdışı düzenleyicideki tüm ekleme ve silme işlemleri göz ardı "
-"edilecektir."
+
+msgid "You will receive a warning when you try to complete a merge without accepting or rejecting all of the changes. You can still proceed to merge the document. If you do that, all the insertions and deletions in the merge editor in the middle will be accepted automatically, and all the insertions and deletions in the offline editor on the right will be ignored."
+msgstr ""
 
 msgid "Your access request has been sent to the document owner."
 msgstr "Erişim talebiniz doküman sahibine gönderildi."
 
-msgid ""
-"Your Access rights have been modified. You now have %(accessRight)s access "
-"to this document."
-msgstr ""
-"Erişim haklarınız değiştirildi. Artık bu belgeye %(accessRight)s erişiminiz "
-"var."
+msgid "Your Access rights have been modified. You now have %(accessRight)s access to this document."
+msgstr "Erişim haklarınız değiştirildi. Artık bu belgeye %(accessRight)s erişiminiz var."
 
-msgid ""
-"Your access rights were modified while you were offline, so we cannot save "
-"your work to the server any longer, and it is downloaded to your computer "
-"instead. Please consider importing it into a new document."
-msgstr ""
-"Erişim haklarınız siz çevrimdışıyken değiştirildi, dolayısıyla çalışmanızı "
-"artık sunucuya kaydedemiyoruz ve onun yerine bilgisayarınıza indiriliyor. "
-"Lütfen bunu yeni bir belgeye aktarmayı düşünün."
+msgid "Your access rights were modified while you were offline, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "Erişim haklarınız siz çevrimdışıyken değiştirildi, dolayısıyla çalışmanızı artık sunucuya kaydedemiyoruz ve onun yerine bilgisayarınıza indiriliyor. Lütfen bunu yeni bir belgeye aktarmayı düşünün."
 
 msgid "Your document was out of sync and has been reset."
 msgstr "Dokümanınız senkronize değildi ve sıfırlandı."
 
-msgid ""
-"Your personal passphrase will still unlock this document. A new random "
-"password is generated automatically. Other passphrase users will receive it "
-"automatically; non-passphrase collaborators need it shared with them "
-"manually."
-msgstr ""
-"Kişisel parolanız yine de bu belgenin kilidini açacaktır. Otomatik olarak "
-"yeni bir rastgele şifre oluşturulur. Diğer parola kullanıcıları parolayı "
-"otomatik olarak alacaktır; parola kullanmayan ortak çalışanların bu "
-"parolanın kendileriyle manuel olarak paylaşılmasına ihtiyacı vardır."
+msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
+msgstr "Kişisel parolanız yine de bu belgenin kilidini açacaktır. Otomatik olarak yeni bir rastgele şifre oluşturulur. Diğer parola kullanıcıları parolayı otomatik olarak alacaktır; parola kullanmayan ortak çalışanların bu parolanın kendileriyle manuel olarak paylaşılmasına ihtiyacı vardır."
 
-msgid ""
-"Your session expired while you were offline, so we cannot save your work to "
-"the server any longer, but you can download it to your computer instead. "
-"Please consider importing it as a new document after logging in."
-msgstr ""
-"Oturumunuzun süresi siz çevrimdışıyken sona erdi, bu nedenle çalışmanızı "
-"artık sunucuya kaydedemeyiz ancak bunun yerine bilgisayarınıza "
-"indirebilirsiniz. Lütfen giriş yaptıktan sonra yeni bir belge olarak içe "
-"aktarmayı düşünün."
+msgid "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in."
+msgstr "Oturumunuzun süresi siz çevrimdışıyken sona erdi, bu nedenle çalışmanızı artık sunucuya kaydedemeyiz ancak bunun yerine bilgisayarınıza indirebilirsiniz. Lütfen giriş yaptıktan sonra yeni bir belge olarak içe aktarmayı düşünün."
 
 msgid "YYYY-MM-DD or empty"
 msgstr "YYYY-AA-GG veya boş"
+

@@ -4,10 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 msgid "(Author, 1998)"
 msgstr "(Autor, 1998)"
 
@@ -71,29 +70,11 @@ msgstr "Aceptar el cambio"
 msgid "Accept Change"
 msgstr "Aceptar el cambio"
 
-msgid ""
-"Accepting or rejecting a change in the merge editor in the middle or the "
-"offline editor on the right causes a change in the merge editor. You can "
-"accept a change by directly clicking on the highlighted text. A dropdown "
-"menu will appear and you can then either accept or reject the change. When "
-"you click on the highlighted text, it also highlights the changes that will "
-"get accepted. %(mergeImage)s As shown in the above image one can click on a "
-"highlighted change, and click on accept change. On accepting a change it "
-"will be reflected in the merged document editor in the middle. Rejecting a "
-"change works in the same way except on reject a change the highlight of the "
-"change will be lost, with it the ability to accept, reject or copy a change."
+msgid "Accepting or rejecting a change in the merge editor in the middle or the offline editor on the right causes a change in the merge editor. You can accept a change by directly clicking on the highlighted text. A dropdown menu will appear and you can then either accept or reject the change. When you click on the highlighted text, it also highlights the changes that will get accepted. %(mergeImage)s As shown in the above image one can click on a highlighted change, and click on accept change. On accepting a change it will be reflected in the merged document editor in the middle. Rejecting a change works in the same way except on reject a change the highlight of the change will be lost, with it the ability to accept, reject or copy a change."
+msgstr "Aceptar o rechazar un cambio en el editor de fusión en el medio o el editor sin conexión a la derecha provoca un cambio en el editor de fusión. Puede aceptar un cambio haciendo clic directamente en el texto resaltado. Aparecerá un menú desplegable y podrá aceptar o rechazar el cambio. Cuando hace clic en el texto resaltado, también resalta los cambios que se aceptarán. %(mergeImage)s Como se muestra en la imagen de arriba, uno puede hacer clic en un cambio resaltado y hacer clic en aceptar cambio. Al aceptar un cambio, se reflejará en el editor de documentos fusionados en el medio. Rechazar un cambio funciona de la misma manera, excepto que al rechazar un cambio, el resaltado del cambio se perderá, con ello la capacidad de aceptar, rechazar o copiar un cambio."
+
+msgid "Access level"
 msgstr ""
-"Aceptar o rechazar un cambio en el editor de fusión en el medio o el editor "
-"sin conexión a la derecha provoca un cambio en el editor de fusión. Puede "
-"aceptar un cambio haciendo clic directamente en el texto resaltado. "
-"Aparecerá un menú desplegable y podrá aceptar o rechazar el cambio. Cuando "
-"hace clic en el texto resaltado, también resalta los cambios que se "
-"aceptarán. %(mergeImage)s Como se muestra en la imagen de arriba, uno puede "
-"hacer clic en un cambio resaltado y hacer clic en aceptar cambio. Al aceptar"
-" un cambio, se reflejará en el editor de documentos fusionados en el medio. "
-"Rechazar un cambio funciona de la misma manera, excepto que al rechazar un "
-"cambio, el resaltado del cambio se perderá, con ello la capacidad de "
-"aceptar, rechazar o copiar un cambio."
 
 msgid "Access rights could not be saved"
 msgstr "Los derechos de acceso no se pudieron guardar"
@@ -155,14 +136,8 @@ msgstr "Alineación"
 msgid "Am I the only one seeing this dialog?"
 msgstr "¿Soy el único que ve este diálogo?"
 
-msgid ""
-"An error occurred during the merge process, so we cannot save your work to "
-"the server any longer, and it is downloaded to your computer instead. Please"
-" consider importing it into a new document."
-msgstr ""
-"Se produjo un error durante el proceso de fusión, por lo que ya no podemos "
-"guardar su trabajo en el servidor. E su lugar,, el trabajo se descargará en "
-"su computadora. Considere importarlo a un nuevo documento."
+msgid "An error occurred during the merge process, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "Se produjo un error durante el proceso de fusión, por lo que ya no podemos guardar su trabajo en el servidor. E su lugar,, el trabajo se descargará en su computadora. Considere importarlo a un nuevo documento."
 
 msgid "An internal link has lost its target."
 msgstr "Un enlace interno ha perdido su destino."
@@ -182,6 +157,15 @@ msgstr "Cualquiera"
 msgid "Any/None"
 msgstr "Cualquiera/Nadie"
 
+msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Archiving and accessibility"
+msgstr ""
+
 msgid "Assign comment to"
 msgstr "Asignar comentario a"
 
@@ -196,6 +180,9 @@ msgstr "Asignado a"
 
 msgid "Assignee"
 msgstr "Asignado a"
+
+msgid "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+msgstr ""
 
 msgid "Author"
 msgstr "Autor"
@@ -220,6 +207,12 @@ msgstr "Bibliografía"
 
 msgid "BITS"
 msgstr "BITS"
+
+msgid "Bleed"
+msgstr ""
+
+msgid "Bleed box"
+msgstr ""
 
 msgid "Block change"
 msgstr "Cambio de bloque"
@@ -281,21 +274,35 @@ msgstr "Cambiado al encabezado %(level)s"
 msgid "Changed into paragraph"
 msgstr "Cambiado a párrafo"
 
+msgid "Changes apply to this session only."
+msgstr ""
+
 msgid "Changes to citation sources are not being tracked!"
 msgstr "¡Cambios en las fuentes de citas no se rastrean!"
 
-msgid ""
-"Changes you made to the document since going offline will be lost, if you "
-"choose to close/refresh the tab or close the browser."
-msgstr ""
-"Los cambios que realizó en el documento desde que se desconectó se perderán "
-"si elige cerrar/actualizar la pestaña o cerrar el navegador."
+msgid "Changes you made to the document since going offline will be lost, if you choose to close/refresh the tab or close the browser."
+msgstr "Los cambios que realizó en el documento desde que se desconectó se perderán si elige cerrar/actualizar la pestaña o cerrar el navegador."
 
 msgid "Characters with blanks"
 msgstr "Caracteres con espacios"
 
 msgid "Characters without blanks"
 msgstr "Caracteres sin espacios"
+
+msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar in the document text."
+msgstr ""
+
+msgid "Check text"
+msgstr ""
+
+msgid "Check text for grammar and spelling issues."
+msgstr ""
+
+msgid "Checked %s of %s sections..."
+msgstr ""
 
 msgid "Chinese (Simplified)"
 msgstr "Chino (simplificado)"
@@ -337,8 +344,7 @@ msgid "Close document"
 msgstr "Cerrar documento"
 
 msgid "Close the document and return to the document overview menu."
-msgstr ""
-"Cierre el documento y regrese al menú de descripción general del documento."
+msgstr "Cierre el documento y regrese al menú de descripción general del documento."
 
 msgid "Code"
 msgstr "Código"
@@ -390,6 +396,12 @@ msgstr "Configure la tabla."
 
 msgid "Contacts"
 msgstr "Contactos"
+
+msgid "Continuous checking"
+msgstr ""
+
+msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgstr ""
 
 msgid "Copy"
 msgstr "Copiar"
@@ -469,8 +481,14 @@ msgstr "Crear nuevo enlace para compartir"
 msgid "Create share link"
 msgstr "Crear enlace para compartir"
 
+msgid "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+msgstr ""
+
 msgid "Creating copy..."
 msgstr "Creando copia..."
+
+msgid "Crop marks"
+msgstr ""
 
 msgid "Cross reference"
 msgstr "Referencia cruzada"
@@ -547,12 +565,11 @@ msgstr "Inhabilitar"
 msgid "Disconnected. Attempting to reconnect..."
 msgstr "Desconectado. Intentando reconectar..."
 
-msgid ""
-"Do not worry, we can handle such a situation as we will simply show you "
-"another merge dialog."
+msgid "Do not report this rule again, in any document."
 msgstr ""
-"No se preocupe, podemos manejar tal situación ya que simplemente le "
-"mostraremos otra ventana de diálogo de fusión."
+
+msgid "Do not worry, we can handle such a situation as we will simply show you another merge dialog."
+msgstr "No se preocupe, podemos manejar tal situación ya que simplemente le mostraremos otra ventana de diálogo de fusión."
 
 msgid "Document"
 msgstr "Documento"
@@ -560,24 +577,17 @@ msgstr "Documento"
 msgid "Document comment"
 msgstr "Comentario del documento"
 
-msgid ""
-"Document encryption key rotated. Other passphrase users will receive the new"
-" key automatically."
-msgstr ""
-"Clave de cifrado de documentos rotada. Otros usuarios de contraseña "
-"recibirán la nueva clave automáticamente."
+msgid "Document encryption key rotated. Other passphrase users will receive the new key automatically."
+msgstr "Clave de cifrado de documentos rotada. Otros usuarios de contraseña recibirán la nueva clave automáticamente."
 
 msgid "Document has been modified by another user. Please reload the page."
-msgstr ""
-"El documento ha sido modificado por otro usuario. Por favor recarga la "
-"página."
+msgstr "El documento ha sido modificado por otro usuario. Por favor recarga la página."
 
 msgid "Document headings"
 msgstr "Encabezados de documentos"
 
 msgid "Document key is not available. Please reload the document."
-msgstr ""
-"La clave del documento no está disponible. Por favor recarga el documento."
+msgstr "La clave del documento no está disponible. Por favor recarga el documento."
 
 msgid "Document Navigator"
 msgstr "Navegador de documentos"
@@ -588,15 +598,14 @@ msgstr "Navegador de documentos"
 msgid "Document password"
 msgstr "Contraseña del documento"
 
-msgid ""
-"Document password changed. Remember to share the new password with your "
-"collaborators."
-msgstr ""
-"Se cambió la contraseña del documento. Recuerda compartir la nueva "
-"contraseña con tus colaboradores."
+msgid "Document password changed. Remember to share the new password with your collaborators."
+msgstr "Se cambió la contraseña del documento. Recuerda compartir la nueva contraseña con tus colaboradores."
 
 msgid "Document Style"
 msgstr "Estilo del Documento"
+
+msgid "DOCX export options"
+msgstr ""
 
 msgid "Does the order in which I work on merging the changes matter?"
 msgstr "¿Es importante el orden en el que trabajo cuando fusiono los cambios?"
@@ -606,6 +615,9 @@ msgstr "Descargar"
 
 msgid "Download Document"
 msgstr "Descargar documento"
+
+msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+msgstr ""
 
 msgid "Dutch"
 msgstr "Holandés"
@@ -631,15 +643,23 @@ msgstr "Editar ecuación"
 msgid "Edit link"
 msgstr "Editar enlace"
 
-msgid "Either print or create a PDF using your browser print dialog."
+msgid "Edit the words and rules the spell checker accepts."
 msgstr ""
-"Imprima o cree un PDF utilizando el diálogo de impresión de su navegador."
 
 msgid "Email"
 msgstr "Correo electrónico"
 
 msgid "Email is in incorrect format!"
 msgstr "¡El correo electrónico está en formato incorrecto!"
+
+msgid "Embed a Fidus Writer file of this document in the PDF"
+msgstr ""
+
+msgid "Embed the source HTML in the PDF"
+msgstr ""
+
+msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+msgstr ""
 
 msgid "Emphasis"
 msgstr "Cursiva"
@@ -668,6 +688,9 @@ msgstr "Introduce la contraseña del documento para incluirlo en el enlace"
 msgid "Epub"
 msgstr "Epub"
 
+msgid "EPUB export options"
+msgstr ""
+
 msgid "Equation"
 msgstr "Ecuación"
 
@@ -686,11 +709,11 @@ msgstr "Exportar el contenido del documento"
 msgid "Export the document as a FIDUS file including its template."
 msgstr "Exporte el documento como un archivo FIDUS, incluida su plantilla."
 
-msgid ""
-"Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgid "Export the document directly to a PDF file."
 msgstr ""
-"Exporte el documento a un archivo BITS (Book Interchange Tag Set Version "
-"2.1)."
+
+msgid "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgstr "Exporte el documento a un archivo BITS (Book Interchange Tag Set Version 2.1)."
 
 msgid "Export the document to a DOCX file with the given template."
 msgstr "Exportar el documento a un archivo DOCX con la plantilla dada."
@@ -698,12 +721,8 @@ msgstr "Exportar el documento a un archivo DOCX con la plantilla dada."
 msgid "Export the document to a FIDUS file without its template."
 msgstr "Exporte el documento a un archivo FIDUS sin su plantilla."
 
-msgid ""
-"Export the document to a Journal Archiving and Interchange Tag Library NISO "
-"JATS Version 1.2 file."
-msgstr ""
-"Exporte el documento a un Journal Archiving y NISO JATS Versión 1.2 de la "
-"Biblioteca de Etiquetas de Intercambio y Archivado de Diario."
+msgid "Export the document to a Journal Archiving and Interchange Tag Library NISO JATS Version 1.2 file."
+msgstr "Exporte el documento a un Journal Archiving y NISO JATS Versión 1.2 de la Biblioteca de Etiquetas de Intercambio y Archivado de Diario."
 
 msgid "Export the document to a Pandoc JSON file."
 msgstr "Exportar el documento a un archivo Pandoc JSON."
@@ -737,6 +756,9 @@ msgstr "Externo"
 
 msgid "Figure"
 msgstr "Figura"
+
+msgid "Figures and tables"
+msgstr ""
 
 msgid "File"
 msgstr "Archivo"
@@ -813,8 +835,14 @@ msgstr "Linea horizontal"
 msgid "How do I accept or reject a particular change?"
 msgstr "¿Cómo acepto o rechazo un cambio en particular?"
 
+msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
+msgstr ""
+
 msgid "HTML"
 msgstr "HTML"
+
+msgid "HTML export options"
+msgstr ""
 
 msgid "I cannot accept a particular change. What do I do?"
 msgstr "No puedo aceptar un cambio en particular. ¿Qué debo hacer?"
@@ -825,40 +853,35 @@ msgstr "Valor de identificación"
 msgid "ID Value format is incorrect for "
 msgstr "El formato del valor de ID es incorrecto para "
 
-msgid ""
-"If the work is not in the public domain, specify the year of the copyright."
-msgstr ""
-"Si el trabajo no es de dominio público, especifique el año del copyright."
+msgid "If the work is not in the public domain, specify the year of the copyright."
+msgstr "Si el trabajo no es de dominio público, especifique el año del copyright."
 
-msgid ""
-"If the work is not in the public domain, specify who the copyright holder "
-"is."
-msgstr ""
-"Si el trabajo no es de dominio público, especifique quién es el titular del "
-"copyright."
+msgid "If the work is not in the public domain, specify who the copyright holder is."
+msgstr "Si el trabajo no es de dominio público, especifique quién es el titular del copyright."
 
-msgid ""
-"If you cannot automatically accept a change into the merge editor, do not "
-"worry. You can choose to copy the change either by clicking on the copy "
-"button or manually copy the change and then paste it in the merge editor in "
-"the middle. It is as simple as that!"
-msgstr ""
-"Si no puedes aceptar automáticamente un cambio en el editor de fusión, no se"
-" preocupe. Puede copiar el cambio haciendo clic en el botón de copiar. "
-"También puede copiar manualmente el cambio y luego pegarlo en el editor de "
-"fusión que se encuentra en el medio."
+msgid "If you cannot automatically accept a change into the merge editor, do not worry. You can choose to copy the change either by clicking on the copy button or manually copy the change and then paste it in the merge editor in the middle. It is as simple as that!"
+msgstr "Si no puedes aceptar automáticamente un cambio en el editor de fusión, no se preocupe. Puede copiar el cambio haciendo clic en el botón de copiar. También puede copiar manualmente el cambio y luego pegarlo en el editor de fusión que se encuentra en el medio."
 
-msgid ""
-"If you enter the password above, it will be embedded in the link (after #). "
-"Anyone with the link can open the document. Only share such links through "
-"secure channels."
+msgid "If you enter the password above, it will be embedded in the link (after #). Anyone with the link can open the document. Only share such links through secure channels."
+msgstr "Si ingresa la contraseña anterior, se incluirá en el enlace (después de #). Cualquiera que tenga el enlace puede abrir el documento. Comparta dichos enlaces únicamente a través de canales seguros."
+
+msgid "Ignore rule"
 msgstr ""
-"Si ingresa la contraseña anterior, se incluirá en el enlace (después de #). "
-"Cualquiera que tenga el enlace puede abrir el documento. Comparta dichos "
-"enlaces únicamente a través de canales seguros."
+
+msgid "Ignored rules"
+msgstr ""
+
+msgid "Ignored words"
+msgstr ""
 
 msgid "Image"
 msgstr "Imagen"
+
+msgid "Include tracked changes in the export"
+msgstr ""
+
+msgid "Include tracked changes in the PDF"
+msgstr ""
 
 msgid "Incorrect passphrase."
 msgstr "Frase de contraseña incorrecta."
@@ -956,6 +979,9 @@ msgstr "Japonés"
 msgid "JATS"
 msgstr "JATS"
 
+msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Keyboard shortcuts"
 msgstr "Atajos de teclado"
 
@@ -1016,6 +1042,12 @@ msgstr "Catalogado como"
 msgid "Loading…"
 msgstr "Cargando…"
 
+msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+msgstr ""
+
+msgid "Marks the final size of the page after it has been cut."
+msgstr ""
+
 msgid "Math"
 msgstr "Matemáticas"
 
@@ -1049,8 +1081,17 @@ msgstr "Párrafo fusionado"
 msgid "Merging Offline Document"
 msgstr "Fusionar documento sin conexión"
 
+msgid "mm"
+msgstr ""
+
 msgid "More"
 msgstr "Más"
+
+msgid "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
+
+msgid "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
 
 msgid "My collaborators"
 msgstr "Mis colaboradores"
@@ -1109,12 +1150,8 @@ msgstr "Ningún"
 msgid "Normal Text"
 msgstr "Texto normal"
 
-msgid ""
-"Not all changes have been resolved. Please make sure to review all the "
-"changes to before proceeding."
-msgstr ""
-"No se han resuelto todos los cambios. Asegúrese de revisar todos los cambios"
-" antes de continuar."
+msgid "Not all changes have been resolved. Please make sure to review all the changes to before proceeding."
+msgstr "No se han resuelto todos los cambios. Asegúrese de revisar todos los cambios antes de continuar."
 
 msgid "Not tracked"
 msgstr "Cambios no rastreados"
@@ -1131,32 +1168,23 @@ msgstr "Lista numerada"
 msgid "Numeric"
 msgstr "Numérico"
 
+msgid "ODT export options"
+msgstr ""
+
 msgid "Offline Document"
 msgstr "Documento sin conexión"
 
 msgid "OK"
 msgstr "OK"
 
-msgid ""
-"One of the image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"Una de las imágenes que copió no se pudo encontrar en el servidor. Intente "
-"cargarlo nuevamente."
+msgid "One of the image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "Una de las imágenes que copió no se pudo encontrar en el servidor. Intente cargarlo nuevamente."
 
-msgid ""
-"One of the Image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"Una de las imágenes que copió no se pudo encontrar en el servidor. Intente "
-"cargarlo nuevamente."
+msgid "One of the Image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "Una de las imágenes que copió no se pudo encontrar en el servidor. Intente cargarlo nuevamente."
 
-msgid ""
-"One or more of the image(s) you copied could not be found on the server. "
-"Consider re-uploading them once the document is merged."
-msgstr ""
-"Una o más imágenes que copió no se pudieron encontrar en el servidor. "
-"Considere volver a cargarlos una vez que se haya fusionado el documento."
+msgid "One or more of the image(s) you copied could not be found on the server. Consider re-uploading them once the document is merged."
+msgstr "Una o más imágenes que copió no se pudieron encontrar en el servidor. Considere volver a cargarlos una vez que se haya fusionado el documento."
 
 msgid "Online Document"
 msgstr "Documento online"
@@ -1203,8 +1231,26 @@ msgstr "Pegar con detección de contenido"
 msgid "Paste without content detection"
 msgstr "Pegar sin detección de contenido"
 
+msgid "PDF"
+msgstr ""
+
+msgid "PDF export options"
+msgstr ""
+
+msgid "PDF/A-4 (archival)"
+msgstr ""
+
+msgid "PDF/UA (accessible, tagged)"
+msgstr ""
+
 msgid "People"
 msgstr "Gente"
+
+msgid "Place figures as page floats"
+msgstr ""
+
+msgid "Place tables as page floats"
+msgstr ""
 
 msgid "Please select at least one citation source!"
 msgstr "¡Por favor, selecciona al menos una fuente de cita!"
@@ -1221,18 +1267,29 @@ msgstr "Anterior"
 msgid "Print"
 msgstr "Imprimir"
 
+msgid "Print production"
+msgstr ""
+
+msgid "Print the document using your browser print dialog."
+msgstr ""
+
+msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Proceed to Login page"
 msgstr "Vaya a la página de inicio de sesión"
 
 msgid "Proceed to Merge"
 msgstr "Proceder a fusionar"
 
+msgid "Rasterize SVG images"
+msgstr ""
+
 msgid "Read"
 msgstr "Leer"
 
 msgid "Read document but not see comments and chats of others"
-msgstr ""
-"Leer el documento pero no mostrar comentarios ni chats de otros usuarios"
+msgstr "Leer el documento pero no mostrar comentarios ni chats de otros usuarios"
 
 msgid "Read without comments"
 msgstr "Leer sin comentarios"
@@ -1297,8 +1354,14 @@ msgstr "Eliminar ecuación"
 msgid "Remove image"
 msgstr "Eliminar la imagen"
 
+msgid "Remove lines left over in the text from language check."
+msgstr ""
+
 msgid "Remove link"
 msgstr "Elimina enlace"
+
+msgid "Remove marks"
+msgstr "Quitar marcas"
 
 msgid "Remove the code block."
 msgstr "Retire el bloque de código."
@@ -1315,6 +1378,9 @@ msgstr "Eliminar"
 msgid "Removed code block"
 msgstr "Se eliminó el código bloque"
 
+msgid "Render formulas as SVG images instead of MathML"
+msgstr ""
+
 msgid "Replace"
 msgstr "Reemplazar"
 
@@ -1327,6 +1393,9 @@ msgstr "Reemplazar con"
 msgid "replies"
 msgstr "respuestas"
 
+msgid "Request"
+msgstr ""
+
 msgid "Request Access"
 msgstr "Solicitar acceso"
 
@@ -1338,6 +1407,9 @@ msgstr "Resolver"
 
 msgid "Resolve comment"
 msgstr "Resolver comentario"
+
+msgid "Resolve tracked changes (accept all)"
+msgstr ""
 
 msgid "Resolved comments"
 msgstr "Comentarios resueltos"
@@ -1404,6 +1476,9 @@ msgstr "Buscar..."
 
 msgid "See document statistics."
 msgstr "Ver estadísticas del documento."
+
+msgid "Select a higher access level to request from the document owner."
+msgstr ""
 
 msgid "Select document editing tool."
 msgstr "Seleccione la herramienta de edición de documentos."
@@ -1477,6 +1552,9 @@ msgstr "Mostrar atajos del teclado"
 msgid "show less"
 msgstr "muestra menos"
 
+msgid "Show link annotation borders"
+msgstr ""
+
 msgid "show more"
 msgstr "muestra más"
 
@@ -1501,6 +1579,9 @@ msgstr "Regístrate o inicia sesión"
 msgid "Slim FIDUS"
 msgstr "Slim FIDUS"
 
+msgid "Small lines at the corners of the page that show printers where to cut the paper."
+msgstr ""
+
 msgid "Spanish"
 msgstr "Español"
 
@@ -1508,11 +1589,19 @@ msgid "Specify copyright information"
 msgstr "Especificar información de copyright"
 
 msgid "Specify the number from which this list is to start counting"
-msgstr ""
-"Especifique el número a partir del cual esta lista debe comenzar a contar."
+msgstr "Especifique el número a partir del cual esta lista debe comenzar a contar."
 
 msgid "Specify whether the work can be accessed without paying a fee."
 msgstr "Especifique si se puede acceder al trabajo sin pagar una tarifa."
+
+msgid "Spell/grammar check finished."
+msgstr ""
+
+msgid "Spell/grammar check initialized."
+msgstr ""
+
+msgid "Spell/grammar checker"
+msgstr ""
 
 msgid "Split cell"
 msgstr "Celda dividida"
@@ -1541,11 +1630,17 @@ msgstr "Subíndice"
 msgid "Superscript"
 msgstr "Sobrescrito"
 
+msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr ""
+
 msgid "Symbols and Roman Letters"
 msgstr "Símbolos y letras romanas"
 
 msgid "Table"
 msgstr "Tabla"
+
+msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
+msgstr ""
 
 msgid "Text before"
 msgstr "Texto antes"
@@ -1556,79 +1651,47 @@ msgstr "Idioma del texto"
 msgid "Text replaced successfully"
 msgstr "Texto reemplazado correctamente"
 
-msgid ""
-"The change could not be applied automatically. Please consider using the "
-"copy option to copy the changes."
-msgstr ""
-"El cambio no se pudo aplicar automáticamente. Considere usar la opción de "
-"copia para copiar los cambios."
+msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
+msgstr "El cambio no se pudo aplicar automáticamente. Considere usar la opción de copia para copiar los cambios."
 
 msgid "The current password is incorrect."
 msgstr "La contraseña actual es incorrecta."
 
-msgid ""
-"The document password was changed by another user. You will need to enter "
-"the new password to continue editing."
+msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
-"La contraseña del documento fue cambiada por otro usuario. Deberá ingresar "
-"la nueva contraseña para continuar editando."
 
-msgid ""
-"The document was modified substantially by other users while you were "
-"offline. We have merged your changes in as tracked changes. You should "
-"verify that your edits still make sense."
-msgstr ""
-"El documento fue modificado sustancialmente por otros usuarios mientras "
-"estabas desconectado. Hemos fusionado tus cambios como cambios rastreados. "
-"Debes verificar que tus ediciones sigan teniendo sentido."
+msgid "The document password was changed by another user. You will need to enter the new password to continue editing."
+msgstr "La contraseña del documento fue cambiada por otro usuario. Deberá ingresar la nueva contraseña para continuar editando."
 
-msgid ""
-"The editors in the middle and on the right will show content that is "
-"highlighted in green. They also contain text that is highlighted in red. The"
-" text marked in green corresponds to the text that was edited (added) by you"
-" or other users. The text marked in red corresponds to text that was deleted"
-" by either you or other users. The insertions and deletions made by other "
-"users will be marked in the merge editor. The insertions and deletions made "
-"by you will be marked in the offline editor on the right."
+msgid "The document was modified substantially by other users while you were offline. We have merged your changes in as tracked changes. You should verify that your edits still make sense."
+msgstr "El documento fue modificado sustancialmente por otros usuarios mientras estabas desconectado. Hemos fusionado tus cambios como cambios rastreados. Debes verificar que tus ediciones sigan teniendo sentido."
+
+msgid "The editors in the middle and on the right will show content that is highlighted in green. They also contain text that is highlighted in red. The text marked in green corresponds to the text that was edited (added) by you or other users. The text marked in red corresponds to text that was deleted by either you or other users. The insertions and deletions made by other users will be marked in the merge editor. The insertions and deletions made by you will be marked in the offline editor on the right."
+msgstr "Los editores del medio y de la derecha mostrarán contenido resaltado en verde. También contienen textos resaltados en rojo. El texto marcado en verde corresponde al texto que usted u otros usuarios editaron (agregaron). El texto marcado en rojo corresponde al texto que usted u otros usuarios borraron. Las inserciones y eliminaciones realizadas por otros usuarios se marcarán en el editor de fusión. Las inserciones y eliminaciones realizadas por usted se marcarán en el editor fuera de línea ubicado a la derecha."
+
+msgid "The file is locked by another session. Changes cannot be saved until the lock is released."
 msgstr ""
-"Los editores del medio y de la derecha mostrarán contenido resaltado en "
-"verde. También contienen textos resaltados en rojo. El texto marcado en "
-"verde corresponde al texto que usted u otros usuarios editaron (agregaron). "
-"El texto marcado en rojo corresponde al texto que usted u otros usuarios "
-"borraron. Las inserciones y eliminaciones realizadas por otros usuarios se "
-"marcarán en el editor de fusión. Las inserciones y eliminaciones realizadas "
-"por usted se marcarán en el editor fuera de línea ubicado a la derecha."
 
 msgid "The format used by the USA and some other American countries."
 msgstr "Formato utilizado por los EEUU y algunos países de América."
 
-msgid ""
-"The recovery key you entered is incorrect, or the recovery process failed. "
-"Please try again."
+msgid "The ignore lists could not be saved."
 msgstr ""
-"La clave de recuperación que ingresó es incorrecta o el proceso de "
-"recuperación falló. Por favor inténtalo de nuevo."
 
-msgid ""
-"This document is end-to-end encrypted. Collaborators without a personal "
-"passphrase will need the document password shared with them through a secure"
-" channel outside of Fidus Writer. Do not send the password through the "
-"document chat."
+msgid "The language pack for the document language could not be loaded."
 msgstr ""
-"Este documento está cifrado de extremo a extremo. Los colaboradores sin una "
-"frase de contraseña personal necesitarán compartir la contraseña del "
-"documento con ellos a través de un canal seguro fuera de Fidus Writer. No "
-"envíe la contraseña a través del chat de documentos."
+
+msgid "The recovery key you entered is incorrect, or the recovery process failed. Please try again."
+msgstr "La clave de recuperación que ingresó es incorrecta o el proceso de recuperación falló. Por favor inténtalo de nuevo."
+
+msgid "This document is end-to-end encrypted. Collaborators without a personal passphrase will need the document password shared with them through a secure channel outside of Fidus Writer. Do not send the password through the document chat."
+msgstr "Este documento está cifrado de extremo a extremo. Los colaboradores sin una frase de contraseña personal necesitarán compartir la contraseña del documento con ellos a través de un canal seguro fuera de Fidus Writer. No envíe la contraseña a través del chat de documentos."
 
 msgid "This person is already in your contacts!"
 msgstr "¡Esta persona ya está entre tus contactos!"
 
-msgid ""
-"This share link has expired or is invalid. Please ask the document owner for"
-" a new link."
-msgstr ""
-"Este enlace para compartir ha caducado o no es válido. Solicite al "
-"propietario del documento un nuevo enlace."
+msgid "This share link has expired or is invalid. Please ask the document owner for a new link."
+msgstr "Este enlace para compartir ha caducado o no es válido. Solicite al propietario del documento un nuevo enlace."
 
 msgid "Title"
 msgstr "Título"
@@ -1649,12 +1712,10 @@ msgid "Toggle header row"
 msgstr "Alternar fila de encabezado"
 
 msgid "Toggle header-status of currently selected cells"
-msgstr ""
-"Alternar el estado del encabezado de las celdas seleccionadas actualmente"
+msgstr "Alternar el estado del encabezado de las celdas seleccionadas actualmente"
 
 msgid "Toggle header-status of currently selected column"
-msgstr ""
-"Alternar el estado del encabezado de la columna seleccionada actualmente"
+msgstr "Alternar el estado del encabezado de la columna seleccionada actualmente"
 
 msgid "Toggle header-status of currently selected row"
 msgstr "Alternar el estado del encabezado de la fila seleccionada actualmente"
@@ -1668,11 +1729,17 @@ msgstr "Herramientas"
 msgid "Track changes"
 msgstr "Rastreo de cambios"
 
+msgid "Tracked changes"
+msgstr ""
+
 msgid "Tracking"
 msgstr "Seguimiento"
 
 msgid "Tracking changes to the document"
 msgstr "Seguimiento de cambios en el documento."
+
+msgid "Trim box"
+msgstr ""
 
 msgid "Type formula"
 msgstr "fórmula"
@@ -1710,12 +1777,8 @@ msgstr "US Letter"
 msgid "User"
 msgstr "Usuario"
 
-msgid ""
-"Warning! Not all your changes have been saved! You could suffer data loss. "
-"Attempting to reconnect..."
-msgstr ""
-"¡Advertencia! ¡No se han guardado todos sus cambios! Podría sufrir pérdida "
-"de datos. Intentando reconectar..."
+msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
+msgstr "¡Advertencia! ¡No se han guardado todos sus cambios! Podría sufrir pérdida de datos. Intentando reconectar..."
 
 msgid "Warnings"
 msgstr "Advertencias"
@@ -1729,17 +1792,11 @@ msgstr "¿Qué significan los colores verde y rojo en los editores?"
 msgid "What do I do after completing the merge?"
 msgstr "¿Qué hago después de completar la fusión?"
 
-msgid ""
-"What happens if I try to complete merge without resolving all the changes?"
-msgstr ""
-"¿Qué sucede si intento completar la fusión sin resolver todos los cambios?"
+msgid "What happens if I try to complete merge without resolving all the changes?"
+msgstr "¿Qué sucede si intento completar la fusión sin resolver todos los cambios?"
 
-msgid ""
-"What if my collaborators continue working on the document while I am "
-"merging?"
-msgstr ""
-"¿Qué pasa si mis colaboradores continúan trabajando en el documento mientras"
-" yo lo estoy fusionando?"
+msgid "What if my collaborators continue working on the document while I am merging?"
+msgstr "¿Qué pasa si mis colaboradores continúan trabajando en el documento mientras yo lo estoy fusionando?"
 
 msgid "Why am I seeing this merge dialog?"
 msgstr "¿Por qué veo este cuadro de diálogo de fusíón?"
@@ -1755,6 +1812,9 @@ msgstr "Contador de palabras"
 
 msgid "Words"
 msgstr "Palabras"
+
+msgid "Words and word combinations that the spell checker should accept as correct. One word or phrase per line."
+msgstr ""
 
 msgid "Wrap selection in bullet list"
 msgstr "Mover lo seleccionado a lista de viñetas"
@@ -1775,106 +1835,53 @@ msgid "Write with changes tracked"
 msgstr "Escribir con cambios rastreados"
 
 msgid "Write with tracked changes, but not see comments and chats of others"
-msgstr ""
-"Escribir con cambios rastreados, pero no ver comentarios ni chats de otras "
-"personas."
+msgstr "Escribir con cambios rastreados, pero no ver comentarios ni chats de otras personas."
 
 msgid "Year"
 msgstr "Año"
 
-msgid ""
-"Yes, you are the only one who can see this dialog. Therefore it would be "
-"great if you could ask your collaborators to stop editing the document, so "
-"that once you are finished with the merge, it will not lead to more "
-"conflicts."
+msgid "Yes, you are the only one who can see this dialog. Therefore it would be great if you could ask your collaborators to stop editing the document, so that once you are finished with the merge, it will not lead to more conflicts."
+msgstr "Sí, eres el único que puede ver este diálogo. Por lo tanto, sería estupendo si pudiera pedir a sus colaboradores que dejen de editar el documento para que una vez que haya terminado con la fusión, no se produzcan más conflictos."
+
+msgid "You already have the highest possible access level."
 msgstr ""
-"Sí, eres el único que puede ver este diálogo. Por lo tanto, sería estupendo "
-"si pudiera pedir a sus colaboradores que dejen de editar el documento para "
-"que una vez que haya terminado con la fusión, no se produzcan más "
-"conflictos."
 
 msgid "You are currently offline. Please try again when you are back online."
-msgstr ""
-"Actualmente estás desconectado. Vuelva a intentarlo cuando vuelva a estar en"
-" línea."
+msgstr "Actualmente estás desconectado. Vuelva a intentarlo cuando vuelva a estar en línea."
 
-msgid ""
-"You are seeing this merge dialog because you were offline for a long time, "
-"and the changes you made to the document while you were offline conflicted "
-"with the changes made by other users. So it was not possible to merge your "
-"edits in automatically."
-msgstr ""
-"Está viendo este diálogo de fusión porque estuvo fuera de línea durante "
-"mucho tiempo y los cambios que hizo en el documento entraron en conflicto "
-"con los cambios realizados por otros usuarios. Por esta razón no fue posible"
-" fusionar sus ediciones de forma automática."
+msgid "You are seeing this merge dialog because you were offline for a long time, and the changes you made to the document while you were offline conflicted with the changes made by other users. So it was not possible to merge your edits in automatically."
+msgstr "Está viendo este diálogo de fusión porque estuvo fuera de línea durante mucho tiempo y los cambios que hizo en el documento entraron en conflicto con los cambios realizados por otros usuarios. Por esta razón no fue posible fusionar sus ediciones de forma automática."
 
-msgid ""
-"You can edit the content only in the merge editor in the middle. You cannot "
-"edit content in the other two editors."
-msgstr ""
-"Puede editar el contenido solo en el editor de fusión ubicado en el medio. "
-"No puede editar contenido en los otros dos editores."
+msgid "You can edit the content only in the merge editor in the middle. You cannot edit content in the other two editors."
+msgstr "Puede editar el contenido solo en el editor de fusión ubicado en el medio. No puede editar contenido en los otros dos editores."
 
 msgid "You cannot add yourself to your contacts!"
 msgstr "¡No puedes añadirte a tu lista de contactos!"
 
-msgid ""
-"You will receive a warning when you try to complete a merge without "
-"accepting or rejecting all of the changes. You can still proceed to merge "
-"the document. If you do that, all the insertions and deletions in the merge "
-"editor in the middle will be accepted automatically, and all the insertions "
-"and deletions in the offline editor on the right will be ignored."
+msgid "You do not have access to this document. Select the access level you would like to request from the document owner."
 msgstr ""
-"Recibirá una advertencia cuando intente completar una combinación sin "
-"aceptar o rechazar todos los cambios. Aún puedes proceder a fusionar el "
-"documento. Si hace eso, todas las inserciones y eliminaciones en el editor "
-"de combinación en el medio se aceptarán automáticamente y todas las "
-"inserciones y eliminaciones en el editor sin conexión a la derecha se "
-"ignorarán."
+
+msgid "You will receive a warning when you try to complete a merge without accepting or rejecting all of the changes. You can still proceed to merge the document. If you do that, all the insertions and deletions in the merge editor in the middle will be accepted automatically, and all the insertions and deletions in the offline editor on the right will be ignored."
+msgstr ""
 
 msgid "Your access request has been sent to the document owner."
 msgstr "Su solicitud de acceso ha sido enviada al propietario del documento."
 
-msgid ""
-"Your Access rights have been modified. You now have %(accessRight)s access "
-"to this document."
-msgstr ""
-"Se han modificado sus derechos de acceso. Ahora tiene el siguiente nivel de "
-"acceso a este documento: %(accessRight)s."
+msgid "Your Access rights have been modified. You now have %(accessRight)s access to this document."
+msgstr "Se han modificado sus derechos de acceso. Ahora tiene el siguiente nivel de acceso a este documento: %(accessRight)s."
 
-msgid ""
-"Your access rights were modified while you were offline, so we cannot save "
-"your work to the server any longer, and it is downloaded to your computer "
-"instead. Please consider importing it into a new document."
-msgstr ""
-"Sus derechos de acceso se modificaron mientras estaba desconectado por lo "
-"que ya no podemos guardar su trabajo en el servidor. En su lugar, se "
-"descargará en su computadora. Considere importarlo a un nuevo documento."
+msgid "Your access rights were modified while you were offline, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "Sus derechos de acceso se modificaron mientras estaba desconectado por lo que ya no podemos guardar su trabajo en el servidor. En su lugar, se descargará en su computadora. Considere importarlo a un nuevo documento."
 
 msgid "Your document was out of sync and has been reset."
 msgstr "Tu documento no estaba sincronizado y se ha reiniciado."
 
-msgid ""
-"Your personal passphrase will still unlock this document. A new random "
-"password is generated automatically. Other passphrase users will receive it "
-"automatically; non-passphrase collaborators need it shared with them "
-"manually."
-msgstr ""
-"Su contraseña personal aún desbloqueará este documento. Se genera "
-"automáticamente una nueva contraseña aleatoria. Otros usuarios de contraseña"
-" la recibirán automáticamente; los colaboradores sin contraseña necesitan "
-"compartirla con ellos manualmente."
+msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
+msgstr "Su contraseña personal aún desbloqueará este documento. Se genera automáticamente una nueva contraseña aleatoria. Otros usuarios de contraseña la recibirán automáticamente; los colaboradores sin contraseña necesitan compartirla con ellos manualmente."
 
-msgid ""
-"Your session expired while you were offline, so we cannot save your work to "
-"the server any longer, but you can download it to your computer instead. "
-"Please consider importing it as a new document after logging in."
-msgstr ""
-"Tu sesión expiró mientras estabas desconectado, por lo que ya no podemos "
-"guardar tu trabajo en el servidor, pero puedes descargarlo a tu ordenador. "
-"Considera importarlo como un nuevo documento después de iniciar una nueva "
-"sesión."
+msgid "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in."
+msgstr "Tu sesión expiró mientras estabas desconectado, por lo que ya no podemos guardar tu trabajo en el servidor, pero puedes descargarlo a tu ordenador. Considera importarlo como un nuevo documento después de iniciar una nueva sesión."
 
 msgid "YYYY-MM-DD or empty"
 msgstr "AAAA-MM-DD o vacío"
+

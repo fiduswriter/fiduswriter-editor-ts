@@ -4,10 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Language: bg\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 msgid "(Author, 1998)"
 msgstr "(Автор, 1998)"
 
@@ -71,30 +70,11 @@ msgstr "Приемете промяната"
 msgid "Accept Change"
 msgstr "Приемете промяната"
 
-msgid ""
-"Accepting or rejecting a change in the merge editor in the middle or the "
-"offline editor on the right causes a change in the merge editor. You can "
-"accept a change by directly clicking on the highlighted text. A dropdown "
-"menu will appear and you can then either accept or reject the change. When "
-"you click on the highlighted text, it also highlights the changes that will "
-"get accepted. %(mergeImage)s As shown in the above image one can click on a "
-"highlighted change, and click on accept change. On accepting a change it "
-"will be reflected in the merged document editor in the middle. Rejecting a "
-"change works in the same way except on reject a change the highlight of the "
-"change will be lost, with it the ability to accept, reject or copy a change."
+msgid "Accepting or rejecting a change in the merge editor in the middle or the offline editor on the right causes a change in the merge editor. You can accept a change by directly clicking on the highlighted text. A dropdown menu will appear and you can then either accept or reject the change. When you click on the highlighted text, it also highlights the changes that will get accepted. %(mergeImage)s As shown in the above image one can click on a highlighted change, and click on accept change. On accepting a change it will be reflected in the merged document editor in the middle. Rejecting a change works in the same way except on reject a change the highlight of the change will be lost, with it the ability to accept, reject or copy a change."
+msgstr "Приемането или отхвърлянето на промяна в редактора за сливане в средата или офлайн редактора вдясно води до промяна в редактора за сливане. Можете да приемете промяна, като щракнете директно върху маркирания текст. Ще се появи падащо меню и след това можете да приемете или отхвърлите промяната. Когато щракнете върху маркирания текст, той също така подчертава промените, които ще бъдат приети. %(mergeImage)s Както е показано на изображението по-горе, можете да щракнете върху маркирана промяна и да щракнете върху приемане на промяната. При приемането на промяна тя ще бъде отразена в редактора на обединени документи в средата. Отхвърлянето на промяна работи по същия начин, освен че при отхвърляне на промяна акцентът на промяната ще бъде загубен, заедно с възможността за приемане, отхвърляне или копиране на промяна."
+
+msgid "Access level"
 msgstr ""
-"Приемането или отхвърлянето на промяна в редактора за сливане в средата или "
-"офлайн редактора вдясно води до промяна в редактора за сливане. Можете да "
-"приемете промяна, като щракнете директно върху маркирания текст. Ще се появи"
-" падащо меню и след това можете да приемете или отхвърлите промяната. Когато"
-" щракнете върху маркирания текст, той също така подчертава промените, които "
-"ще бъдат приети. %(mergeImage)s Както е показано на изображението по-горе, "
-"можете да щракнете върху маркирана промяна и да щракнете върху приемане на "
-"промяната. При приемането на промяна тя ще бъде отразена в редактора на "
-"обединени документи в средата. Отхвърлянето на промяна работи по същия "
-"начин, освен че при отхвърляне на промяна акцентът на промяната ще бъде "
-"загубен, заедно с възможността за приемане, отхвърляне или копиране на "
-"промяна."
 
 msgid "Access rights could not be saved"
 msgstr "Правата за достъп не можаха да бъдат запазени"
@@ -156,14 +136,8 @@ msgstr "Подравняване"
 msgid "Am I the only one seeing this dialog?"
 msgstr "Само аз ли виждам този диалог?"
 
-msgid ""
-"An error occurred during the merge process, so we cannot save your work to "
-"the server any longer, and it is downloaded to your computer instead. Please"
-" consider importing it into a new document."
-msgstr ""
-"По време на процеса на обединяване възникна грешка, така че не можем повече "
-"да запазваме работата ви на сървъра и вместо това тя се изтегля на вашия "
-"компютър. Моля, помислете за импортирането му в нов документ."
+msgid "An error occurred during the merge process, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "По време на процеса на обединяване възникна грешка, така че не можем повече да запазваме работата ви на сървъра и вместо това тя се изтегля на вашия компютър. Моля, помислете за импортирането му в нов документ."
 
 msgid "An internal link has lost its target."
 msgstr "Вътрешната връзка е загубила целта си."
@@ -183,6 +157,15 @@ msgstr "който и да е"
 msgid "Any/None"
 msgstr "Всяко / Няма"
 
+msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Archiving and accessibility"
+msgstr ""
+
 msgid "Assign comment to"
 msgstr "Присвояване на коментар към"
 
@@ -197,6 +180,9 @@ msgstr "Възлага се на"
 
 msgid "Assignee"
 msgstr "правоприемник"
+
+msgid "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+msgstr ""
 
 msgid "Author"
 msgstr "Автор"
@@ -221,6 +207,12 @@ msgstr "Библиография"
 
 msgid "BITS"
 msgstr "БИТОВЕ"
+
+msgid "Bleed"
+msgstr ""
+
+msgid "Bleed box"
+msgstr ""
 
 msgid "Block change"
 msgstr "Блокова промяна"
@@ -282,22 +274,35 @@ msgstr "Променено в заглавие %(level)s"
 msgid "Changed into paragraph"
 msgstr "Променен в параграф"
 
+msgid "Changes apply to this session only."
+msgstr ""
+
 msgid "Changes to citation sources are not being tracked!"
 msgstr "Промените в източниците на цитиране не се проследяват!"
 
-msgid ""
-"Changes you made to the document since going offline will be lost, if you "
-"choose to close/refresh the tab or close the browser."
-msgstr ""
-"Промените, които сте направили в документа, след като сте офлайн, ще бъдат "
-"загубени, ако решите да затворите / опресните раздела или да затворите "
-"браузъра."
+msgid "Changes you made to the document since going offline will be lost, if you choose to close/refresh the tab or close the browser."
+msgstr "Промените, които сте направили в документа, след като сте офлайн, ще бъдат загубени, ако решите да затворите / опресните раздела или да затворите браузъра."
 
 msgid "Characters with blanks"
 msgstr "Знаци (с интервали)"
 
 msgid "Characters without blanks"
 msgstr "Знаци (без интервали)"
+
+msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar in the document text."
+msgstr ""
+
+msgid "Check text"
+msgstr ""
+
+msgid "Check text for grammar and spelling issues."
+msgstr ""
+
+msgid "Checked %s of %s sections..."
+msgstr ""
 
 msgid "Chinese (Simplified)"
 msgstr "Опростен китайски)"
@@ -392,6 +397,12 @@ msgstr "Конфигурирайте таблицата."
 msgid "Contacts"
 msgstr "Контакти"
 
+msgid "Continuous checking"
+msgstr ""
+
+msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgstr ""
+
 msgid "Copy"
 msgstr "копие"
 
@@ -470,8 +481,14 @@ msgstr "Създайте нова връзка за споделяне"
 msgid "Create share link"
 msgstr "Създайте връзка за споделяне"
 
+msgid "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+msgstr ""
+
 msgid "Creating copy..."
 msgstr "Създава се копие..."
+
+msgid "Crop marks"
+msgstr ""
 
 msgid "Cross reference"
 msgstr "Препратка"
@@ -548,12 +565,11 @@ msgstr "Деактивирайте"
 msgid "Disconnected. Attempting to reconnect..."
 msgstr "Връзката е прекъсната. Опит за повторно свързване ..."
 
-msgid ""
-"Do not worry, we can handle such a situation as we will simply show you "
-"another merge dialog."
+msgid "Do not report this rule again, in any document."
 msgstr ""
-"Не се притеснявайте, ние можем да се справим с такава ситуация, тъй като "
-"просто ще ви покажем друг диалогов прозорец за сливане."
+
+msgid "Do not worry, we can handle such a situation as we will simply show you another merge dialog."
+msgstr "Не се притеснявайте, ние можем да се справим с такава ситуация, тъй като просто ще ви покажем друг диалогов прозорец за сливане."
 
 msgid "Document"
 msgstr "Документ"
@@ -561,16 +577,11 @@ msgstr "Документ"
 msgid "Document comment"
 msgstr "Коментар на документа"
 
-msgid ""
-"Document encryption key rotated. Other passphrase users will receive the new"
-" key automatically."
-msgstr ""
-"Ключът за шифроване на документа е завъртян. Други потребители на парола ще "
-"получат новия ключ автоматично."
+msgid "Document encryption key rotated. Other passphrase users will receive the new key automatically."
+msgstr "Ключът за шифроване на документа е завъртян. Други потребители на парола ще получат новия ключ автоматично."
 
 msgid "Document has been modified by another user. Please reload the page."
-msgstr ""
-"Документът е променен от друг потребител. Моля, презаредете страницата."
+msgstr "Документът е променен от друг потребител. Моля, презаредете страницата."
 
 msgid "Document headings"
 msgstr "Заглавия на документа"
@@ -587,25 +598,26 @@ msgstr "Навигатор на документи"
 msgid "Document password"
 msgstr "Парола за документ"
 
-msgid ""
-"Document password changed. Remember to share the new password with your "
-"collaborators."
-msgstr ""
-"Паролата на документа е променена. Не забравяйте да споделите новата парола "
-"с вашите сътрудници."
+msgid "Document password changed. Remember to share the new password with your collaborators."
+msgstr "Паролата на документа е променена. Не забравяйте да споделите новата парола с вашите сътрудници."
 
 msgid "Document Style"
 msgstr "Стил на Документа"
 
-msgid "Does the order in which I work on merging the changes matter?"
+msgid "DOCX export options"
 msgstr ""
-"Има ли значение редът, в който работя върху обединяването на промените?"
+
+msgid "Does the order in which I work on merging the changes matter?"
+msgstr "Има ли значение редът, в който работя върху обединяването на промените?"
 
 msgid "Download"
 msgstr "Изтегли"
 
 msgid "Download Document"
 msgstr "Изтегляне на документ"
+
+msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+msgstr ""
 
 msgid "Dutch"
 msgstr "холандски"
@@ -631,16 +643,23 @@ msgstr "Редактиране на уравнението"
 msgid "Edit link"
 msgstr "Редактиране на връзка"
 
-msgid "Either print or create a PDF using your browser print dialog."
+msgid "Edit the words and rules the spell checker accepts."
 msgstr ""
-"Или отпечатайте, или създайте PDF, използвайки диалоговия прозорец за печат "
-"на браузъра."
 
 msgid "Email"
 msgstr "Имейл"
 
 msgid "Email is in incorrect format!"
 msgstr "Имейлът е в неправилен формат!"
+
+msgid "Embed a Fidus Writer file of this document in the PDF"
+msgstr ""
+
+msgid "Embed the source HTML in the PDF"
+msgstr ""
+
+msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+msgstr ""
 
 msgid "Emphasis"
 msgstr "ударение"
@@ -669,6 +688,9 @@ msgstr "Въведете паролата на документа, за да я 
 msgid "Epub"
 msgstr "Epub"
 
+msgid "EPUB export options"
+msgstr ""
+
 msgid "Equation"
 msgstr "Уравнение"
 
@@ -687,11 +709,11 @@ msgstr "Експортирай съдаржанието на документа"
 msgid "Export the document as a FIDUS file including its template."
 msgstr "Експортирайте документа като файл FIDUS, включително неговия шаблон."
 
-msgid ""
-"Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgid "Export the document directly to a PDF file."
 msgstr ""
-"Експортирайте документа в библиотека с етикети за архивиране и обмен на "
-"журнали Book Interchange Tag Set BITS версия 2.1."
+
+msgid "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgstr "Експортирайте документа в библиотека с етикети за архивиране и обмен на журнали Book Interchange Tag Set BITS версия 2.1."
 
 msgid "Export the document to a DOCX file with the given template."
 msgstr "Експортирайте документа в DOCX файл с дадения шаблон."
@@ -699,12 +721,8 @@ msgstr "Експортирайте документа в DOCX файл с дад
 msgid "Export the document to a FIDUS file without its template."
 msgstr "Експортирайте документа във файл FIDUS без неговия шаблон."
 
-msgid ""
-"Export the document to a Journal Archiving and Interchange Tag Library NISO "
-"JATS Version 1.2 file."
-msgstr ""
-"Експортирайте документа в библиотека с етикети за архивиране и обмен на "
-"журнали NISO JATS версия 1.2."
+msgid "Export the document to a Journal Archiving and Interchange Tag Library NISO JATS Version 1.2 file."
+msgstr "Експортирайте документа в библиотека с етикети за архивиране и обмен на журнали NISO JATS версия 1.2."
 
 msgid "Export the document to a Pandoc JSON file."
 msgstr "Експортирайте документа в Pandoc JSON файл."
@@ -738,6 +756,9 @@ msgstr "Външен"
 
 msgid "Figure"
 msgstr "Фигура"
+
+msgid "Figures and tables"
+msgstr ""
 
 msgid "File"
 msgstr "Файл"
@@ -814,8 +835,14 @@ msgstr "Хоризонтална линия"
 msgid "How do I accept or reject a particular change?"
 msgstr "Как да приема или отхвърля определена промяна?"
 
+msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
+msgstr ""
+
 msgid "HTML"
 msgstr "HTML"
+
+msgid "HTML export options"
+msgstr ""
 
 msgid "I cannot accept a particular change. What do I do?"
 msgstr "Не мога да приема конкретна промяна. Какво да правя?"
@@ -826,41 +853,35 @@ msgstr "ID стойност"
 msgid "ID Value format is incorrect for "
 msgstr "Форматът на стойността на ID е неправилен за "
 
-msgid ""
-"If the work is not in the public domain, specify the year of the copyright."
-msgstr ""
-"Ако произведението не е публично достояние, посочете годината на авторските "
-"права."
+msgid "If the work is not in the public domain, specify the year of the copyright."
+msgstr "Ако произведението не е публично достояние, посочете годината на авторските права."
 
-msgid ""
-"If the work is not in the public domain, specify who the copyright holder "
-"is."
-msgstr ""
-"Ако произведението не е публично достояние, посочете кой е носителят на "
-"авторските права."
+msgid "If the work is not in the public domain, specify who the copyright holder is."
+msgstr "Ако произведението не е публично достояние, посочете кой е носителят на авторските права."
 
-msgid ""
-"If you cannot automatically accept a change into the merge editor, do not "
-"worry. You can choose to copy the change either by clicking on the copy "
-"button or manually copy the change and then paste it in the merge editor in "
-"the middle. It is as simple as that!"
-msgstr ""
-"Ако не можете автоматично да приемете промяна в редактора за обединяване, не"
-" се притеснявайте. Можете да изберете да копирате промяната или като "
-"кликнете върху бутона за копиране, или ръчно да копирате промяната и след "
-"това да я поставите в редактора за обединяване в средата. Толкова е просто!"
+msgid "If you cannot automatically accept a change into the merge editor, do not worry. You can choose to copy the change either by clicking on the copy button or manually copy the change and then paste it in the merge editor in the middle. It is as simple as that!"
+msgstr "Ако не можете автоматично да приемете промяна в редактора за обединяване, не се притеснявайте. Можете да изберете да копирате промяната или като кликнете върху бутона за копиране, или ръчно да копирате промяната и след това да я поставите в редактора за обединяване в средата. Толкова е просто!"
 
-msgid ""
-"If you enter the password above, it will be embedded in the link (after #). "
-"Anyone with the link can open the document. Only share such links through "
-"secure channels."
+msgid "If you enter the password above, it will be embedded in the link (after #). Anyone with the link can open the document. Only share such links through secure channels."
+msgstr "Ако въведете паролата по-горе, тя ще бъде вградена във връзката (след #). Всеки с връзката може да отвори документа. Споделяйте такива връзки само през защитени канали."
+
+msgid "Ignore rule"
 msgstr ""
-"Ако въведете паролата по-горе, тя ще бъде вградена във връзката (след #). "
-"Всеки с връзката може да отвори документа. Споделяйте такива връзки само "
-"през защитени канали."
+
+msgid "Ignored rules"
+msgstr ""
+
+msgid "Ignored words"
+msgstr ""
 
 msgid "Image"
 msgstr "Изображение"
+
+msgid "Include tracked changes in the export"
+msgstr ""
+
+msgid "Include tracked changes in the PDF"
+msgstr ""
 
 msgid "Incorrect passphrase."
 msgstr "Неправилна парола."
@@ -944,8 +965,7 @@ msgid "Invite you sent"
 msgstr "Покана, която сте изпратили"
 
 msgid "It is always better to try to accept the changes in a linear fashion."
-msgstr ""
-"Винаги е по-добре да се опитате да приемете промените по линеен начин."
+msgstr "Винаги е по-добре да се опитате да приемете промените по линеен начин."
 
 msgid "Italian"
 msgstr "Италиански"
@@ -958,6 +978,9 @@ msgstr "японски"
 
 msgid "JATS"
 msgstr "JATS"
+
+msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
 
 msgid "Keyboard shortcuts"
 msgstr "Комбинация от клавиши"
@@ -1019,6 +1042,12 @@ msgstr "Изброени като"
 msgid "Loading…"
 msgstr "Зарежда се..."
 
+msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+msgstr ""
+
+msgid "Marks the final size of the page after it has been cut."
+msgstr ""
+
 msgid "Math"
 msgstr "Math"
 
@@ -1052,8 +1081,17 @@ msgstr "Обединен параграф"
 msgid "Merging Offline Document"
 msgstr "Обединяване на офлайн документ"
 
+msgid "mm"
+msgstr ""
+
 msgid "More"
 msgstr "| Повече ▼"
+
+msgid "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
+
+msgid "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
 
 msgid "My collaborators"
 msgstr "Моите приноси"
@@ -1112,12 +1150,8 @@ msgstr "Нито един"
 msgid "Normal Text"
 msgstr "Нормален текст"
 
-msgid ""
-"Not all changes have been resolved. Please make sure to review all the "
-"changes to before proceeding."
-msgstr ""
-"Не всички промени са разрешени. Моля, не забравяйте да прегледате всички "
-"промени в, преди да продължите."
+msgid "Not all changes have been resolved. Please make sure to review all the changes to before proceeding."
+msgstr "Не всички промени са разрешени. Моля, не забравяйте да прегледате всички промени в, преди да продължите."
 
 msgid "Not tracked"
 msgstr "Не е проследен"
@@ -1134,33 +1168,23 @@ msgstr "Номериран списък"
 msgid "Numeric"
 msgstr "Цифрова"
 
+msgid "ODT export options"
+msgstr ""
+
 msgid "Offline Document"
 msgstr "Офлайн документ"
 
 msgid "OK"
 msgstr "ОК"
 
-msgid ""
-"One of the image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"Едно от копираните изображения не може да бъде намерено на сървъра. Моля, "
-"опитайте да го качите отново."
+msgid "One of the image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "Едно от копираните изображения не може да бъде намерено на сървъра. Моля, опитайте да го качите отново."
 
-msgid ""
-"One of the Image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"Едно от копираните изображения не може да бъде намерено на сървъра. Моля, "
-"опитайте да го качите отново."
+msgid "One of the Image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "Едно от копираните изображения не може да бъде намерено на сървъра. Моля, опитайте да го качите отново."
 
-msgid ""
-"One or more of the image(s) you copied could not be found on the server. "
-"Consider re-uploading them once the document is merged."
-msgstr ""
-"Едно или повече от копираните изображения, които сте копирали, не могат да "
-"бъдат намерени на сървъра. Помислете за повторното им качване, след като "
-"документът бъде обединен."
+msgid "One or more of the image(s) you copied could not be found on the server. Consider re-uploading them once the document is merged."
+msgstr "Едно или повече от копираните изображения, които сте копирали, не могат да бъдат намерени на сървъра. Помислете за повторното им качване, след като документът бъде обединен."
 
 msgid "Online Document"
 msgstr "Онлайн документ"
@@ -1207,8 +1231,26 @@ msgstr "Поставяне с откриване на съдържание"
 msgid "Paste without content detection"
 msgstr "Поставяне без откриване на съдържание"
 
+msgid "PDF"
+msgstr ""
+
+msgid "PDF export options"
+msgstr ""
+
+msgid "PDF/A-4 (archival)"
+msgstr ""
+
+msgid "PDF/UA (accessible, tagged)"
+msgstr ""
+
 msgid "People"
 msgstr "хора"
+
+msgid "Place figures as page floats"
+msgstr ""
+
+msgid "Place tables as page floats"
+msgstr ""
 
 msgid "Please select at least one citation source!"
 msgstr "Моля изберете поне един източник на цитати!"
@@ -1225,11 +1267,23 @@ msgstr "предишен"
 msgid "Print"
 msgstr "печат"
 
+msgid "Print production"
+msgstr ""
+
+msgid "Print the document using your browser print dialog."
+msgstr ""
+
+msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Proceed to Login page"
 msgstr "Преминете към страницата за вход"
 
 msgid "Proceed to Merge"
 msgstr "Продължете към обединяване"
+
+msgid "Rasterize SVG images"
+msgstr ""
 
 msgid "Read"
 msgstr "Прочети"
@@ -1300,8 +1354,14 @@ msgstr "Премахване на уравнението"
 msgid "Remove image"
 msgstr "Премахване на изображението"
 
+msgid "Remove lines left over in the text from language check."
+msgstr ""
+
 msgid "Remove link"
 msgstr "Премахване на връзката"
+
+msgid "Remove marks"
+msgstr "Премахване на белези"
 
 msgid "Remove the code block."
 msgstr "Премахнете кодовия блок."
@@ -1318,6 +1378,9 @@ msgstr "Премахнато"
 msgid "Removed code block"
 msgstr "Премахнат код код"
 
+msgid "Render formulas as SVG images instead of MathML"
+msgstr ""
+
 msgid "Replace"
 msgstr "Заменете"
 
@@ -1330,6 +1393,9 @@ msgstr "Замени с"
 msgid "replies"
 msgstr "отговаря"
 
+msgid "Request"
+msgstr ""
+
 msgid "Request Access"
 msgstr "Поискайте достъп"
 
@@ -1341,6 +1407,9 @@ msgstr "Разрешаване"
 
 msgid "Resolve comment"
 msgstr "Решете коментар"
+
+msgid "Resolve tracked changes (accept all)"
+msgstr ""
 
 msgid "Resolved comments"
 msgstr "Решени коментари"
@@ -1407,6 +1476,9 @@ msgstr "Търсене..."
 
 msgid "See document statistics."
 msgstr "Вижте статистиката на документите."
+
+msgid "Select a higher access level to request from the document owner."
+msgstr ""
 
 msgid "Select document editing tool."
 msgstr "Изберете инструмент за редактиране на документи."
@@ -1480,6 +1552,9 @@ msgstr "Показване на клавишни комбинации"
 msgid "show less"
 msgstr "покажете по-малко"
 
+msgid "Show link annotation borders"
+msgstr ""
+
 msgid "show more"
 msgstr "Покажи повече"
 
@@ -1504,6 +1579,9 @@ msgstr "Регистрирайте се или влезте"
 msgid "Slim FIDUS"
 msgstr "Тънък FIDUS"
 
+msgid "Small lines at the corners of the page that show printers where to cut the paper."
+msgstr ""
+
 msgid "Spanish"
 msgstr "Испански"
 
@@ -1515,6 +1593,15 @@ msgstr "Посочете номера, от който трябва да зап�
 
 msgid "Specify whether the work can be accessed without paying a fee."
 msgstr "Посочете дали работата може да бъде достъпна без заплащане на такса."
+
+msgid "Spell/grammar check finished."
+msgstr ""
+
+msgid "Spell/grammar check initialized."
+msgstr ""
+
+msgid "Spell/grammar checker"
+msgstr ""
 
 msgid "Split cell"
 msgstr "Раздели клетка"
@@ -1543,11 +1630,17 @@ msgstr "Долен индекс"
 msgid "Superscript"
 msgstr "Горен индекс"
 
+msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr ""
+
 msgid "Symbols and Roman Letters"
 msgstr "Символи и римски букви"
 
 msgid "Table"
 msgstr "Таблица"
+
+msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
+msgstr ""
 
 msgid "Text before"
 msgstr "Текст преди"
@@ -1558,79 +1651,47 @@ msgstr "Език на текста"
 msgid "Text replaced successfully"
 msgstr "Текстът е заменен успешно"
 
-msgid ""
-"The change could not be applied automatically. Please consider using the "
-"copy option to copy the changes."
-msgstr ""
-"Промяната не може да се приложи автоматично. Моля, помислете за използването"
-" на опцията за копиране, за да копирате промените."
+msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
+msgstr "Промяната не може да се приложи автоматично. Моля, помислете за използването на опцията за копиране, за да копирате промените."
 
 msgid "The current password is incorrect."
 msgstr "Текущата парола е неправилна."
 
-msgid ""
-"The document password was changed by another user. You will need to enter "
-"the new password to continue editing."
+msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
-"Паролата на документа е променена от друг потребител. Ще трябва да въведете "
-"новата парола, за да продължите да редактирате."
 
-msgid ""
-"The document was modified substantially by other users while you were "
-"offline. We have merged your changes in as tracked changes. You should "
-"verify that your edits still make sense."
-msgstr ""
-"Документът бе променен съществено от други потребители, докато сте офлайн. "
-"Смесихме промените ви като проследени промени. Трябва да проверите дали "
-"редакциите ви все още имат смисъл."
+msgid "The document password was changed by another user. You will need to enter the new password to continue editing."
+msgstr "Паролата на документа е променена от друг потребител. Ще трябва да въведете новата парола, за да продължите да редактирате."
 
-msgid ""
-"The editors in the middle and on the right will show content that is "
-"highlighted in green. They also contain text that is highlighted in red. The"
-" text marked in green corresponds to the text that was edited (added) by you"
-" or other users. The text marked in red corresponds to text that was deleted"
-" by either you or other users. The insertions and deletions made by other "
-"users will be marked in the merge editor. The insertions and deletions made "
-"by you will be marked in the offline editor on the right."
+msgid "The document was modified substantially by other users while you were offline. We have merged your changes in as tracked changes. You should verify that your edits still make sense."
+msgstr "Документът бе променен съществено от други потребители, докато сте офлайн. Смесихме промените ви като проследени промени. Трябва да проверите дали редакциите ви все още имат смисъл."
+
+msgid "The editors in the middle and on the right will show content that is highlighted in green. They also contain text that is highlighted in red. The text marked in green corresponds to the text that was edited (added) by you or other users. The text marked in red corresponds to text that was deleted by either you or other users. The insertions and deletions made by other users will be marked in the merge editor. The insertions and deletions made by you will be marked in the offline editor on the right."
+msgstr "Редакторите в средата и вдясно ще показват съдържание, което е маркирано в зелено. Те също така съдържат текст, който е маркиран в червено. Текстът, маркиран в зелено, съответства на текста, който е редактиран (добавен) от вас или други потребители. Текстът, маркиран в червено, съответства на текст, който е бил изтрит от вас или от други потребители. Вмъкванията и изтриванията, направени от други потребители, ще бъдат маркирани в редактора за обединяване. Вмъкванията и изтриванията, направени от вас, ще бъдат маркирани в офлайн редактора вдясно."
+
+msgid "The file is locked by another session. Changes cannot be saved until the lock is released."
 msgstr ""
-"Редакторите в средата и вдясно ще показват съдържание, което е маркирано в "
-"зелено. Те също така съдържат текст, който е маркиран в червено. Текстът, "
-"маркиран в зелено, съответства на текста, който е редактиран (добавен) от "
-"вас или други потребители. Текстът, маркиран в червено, съответства на "
-"текст, който е бил изтрит от вас или от други потребители. Вмъкванията и "
-"изтриванията, направени от други потребители, ще бъдат маркирани в редактора"
-" за обединяване. Вмъкванията и изтриванията, направени от вас, ще бъдат "
-"маркирани в офлайн редактора вдясно."
 
 msgid "The format used by the USA and some other American countries."
 msgstr "Форматът използван в USA и някои американски страни."
 
-msgid ""
-"The recovery key you entered is incorrect, or the recovery process failed. "
-"Please try again."
+msgid "The ignore lists could not be saved."
 msgstr ""
-"Въведеният от вас ключ за възстановяване е неправилен или процесът на "
-"възстановяване е неуспешен. Моля, опитайте отново."
 
-msgid ""
-"This document is end-to-end encrypted. Collaborators without a personal "
-"passphrase will need the document password shared with them through a secure"
-" channel outside of Fidus Writer. Do not send the password through the "
-"document chat."
+msgid "The language pack for the document language could not be loaded."
 msgstr ""
-"Този документ е криптиран от край до край. Сътрудниците без лична парола ще "
-"се нуждаят от паролата на документа, споделена с тях чрез защитен канал "
-"извън Fidus Writer. Не изпращайте паролата през чата за документи."
+
+msgid "The recovery key you entered is incorrect, or the recovery process failed. Please try again."
+msgstr "Въведеният от вас ключ за възстановяване е неправилен или процесът на възстановяване е неуспешен. Моля, опитайте отново."
+
+msgid "This document is end-to-end encrypted. Collaborators without a personal passphrase will need the document password shared with them through a secure channel outside of Fidus Writer. Do not send the password through the document chat."
+msgstr "Този документ е криптиран от край до край. Сътрудниците без лична парола ще се нуждаят от паролата на документа, споделена с тях чрез защитен канал извън Fidus Writer. Не изпращайте паролата през чата за документи."
 
 msgid "This person is already in your contacts!"
 msgstr "Този човек вече е във вашите контакти!"
 
-msgid ""
-"This share link has expired or is invalid. Please ask the document owner for"
-" a new link."
-msgstr ""
-"Тази връзка за споделяне е изтекла или е невалидна. Моля, помолете "
-"собственика на документа за нова връзка."
+msgid "This share link has expired or is invalid. Please ask the document owner for a new link."
+msgstr "Тази връзка за споделяне е изтекла или е невалидна. Моля, помолете собственика на документа за нова връзка."
 
 msgid "Title"
 msgstr "Заглавие"
@@ -1668,11 +1729,17 @@ msgstr "Инструменти"
 msgid "Track changes"
 msgstr "Проследяване на промените"
 
+msgid "Tracked changes"
+msgstr ""
+
 msgid "Tracking"
 msgstr "Проследяване"
 
 msgid "Tracking changes to the document"
 msgstr "Проследяване на промените в документа"
+
+msgid "Trim box"
+msgstr ""
 
 msgid "Type formula"
 msgstr "Тип формула"
@@ -1710,12 +1777,8 @@ msgstr "US Letter"
 msgid "User"
 msgstr "Потребител"
 
-msgid ""
-"Warning! Not all your changes have been saved! You could suffer data loss. "
-"Attempting to reconnect..."
-msgstr ""
-"Внимание! Не всички ваши промени са запазени! Може да претърпите загуба на "
-"данни. Опит за повторно свързване ..."
+msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
+msgstr "Внимание! Не всички ваши промени са запазени! Може да претърпите загуба на данни. Опит за повторно свързване ..."
 
 msgid "Warnings"
 msgstr "Предупреждения"
@@ -1729,18 +1792,11 @@ msgstr "Кои са зелените и червените акценти в р�
 msgid "What do I do after completing the merge?"
 msgstr "Какво да правя след завършване на сливането?"
 
-msgid ""
-"What happens if I try to complete merge without resolving all the changes?"
-msgstr ""
-"Какво се случва, ако се опитам да завърша обединяването, без да разреша "
-"всички промени?"
+msgid "What happens if I try to complete merge without resolving all the changes?"
+msgstr "Какво се случва, ако се опитам да завърша обединяването, без да разреша всички промени?"
 
-msgid ""
-"What if my collaborators continue working on the document while I am "
-"merging?"
-msgstr ""
-"Ами ако моите сътрудници продължат да работят по документа, докато се "
-"обединявам?"
+msgid "What if my collaborators continue working on the document while I am merging?"
+msgstr "Ами ако моите сътрудници продължат да работят по документа, докато се обединявам?"
 
 msgid "Why am I seeing this merge dialog?"
 msgstr "Защо виждам този диалогов прозорец за сливане?"
@@ -1756,6 +1812,9 @@ msgstr "Брой Думи"
 
 msgid "Words"
 msgstr "Думи"
+
+msgid "Words and word combinations that the spell checker should accept as correct. One word or phrase per line."
+msgstr ""
 
 msgid "Wrap selection in bullet list"
 msgstr "Опаковайте селекцията в списък с маркери"
@@ -1776,102 +1835,53 @@ msgid "Write with changes tracked"
 msgstr "Пишете с проследени промени"
 
 msgid "Write with tracked changes, but not see comments and chats of others"
-msgstr ""
-"Пишете с проследени промени, но не виждайте коментари и чатове на други"
+msgstr "Пишете с проследени промени, но не виждайте коментари и чатове на други"
 
 msgid "Year"
 msgstr "година"
 
-msgid ""
-"Yes, you are the only one who can see this dialog. Therefore it would be "
-"great if you could ask your collaborators to stop editing the document, so "
-"that once you are finished with the merge, it will not lead to more "
-"conflicts."
+msgid "Yes, you are the only one who can see this dialog. Therefore it would be great if you could ask your collaborators to stop editing the document, so that once you are finished with the merge, it will not lead to more conflicts."
+msgstr "Да, вие сте единственият, който може да види този диалогов прозорец. Следователно би било чудесно, ако можете да помолите сътрудниците си да спрат редактирането на документа, така че след като приключите със сливането, това няма да доведе до повече конфликти."
+
+msgid "You already have the highest possible access level."
 msgstr ""
-"Да, вие сте единственият, който може да види този диалогов прозорец. "
-"Следователно би било чудесно, ако можете да помолите сътрудниците си да "
-"спрат редактирането на документа, така че след като приключите със "
-"сливането, това няма да доведе до повече конфликти."
 
 msgid "You are currently offline. Please try again when you are back online."
-msgstr ""
-"В момента сте офлайн. Моля, опитайте отново, когато се върнете онлайн."
+msgstr "В момента сте офлайн. Моля, опитайте отново, когато се върнете онлайн."
 
-msgid ""
-"You are seeing this merge dialog because you were offline for a long time, "
-"and the changes you made to the document while you were offline conflicted "
-"with the changes made by other users. So it was not possible to merge your "
-"edits in automatically."
-msgstr ""
-"Виждате този диалогов прозорец за обединяване, защото дълго време сте били "
-"офлайн и промените, които сте направили в документа, докато сте били офлайн,"
-" са в конфликт с промените, направени от други потребители. Така че не беше "
-"възможно да обедините редакциите си автоматично."
+msgid "You are seeing this merge dialog because you were offline for a long time, and the changes you made to the document while you were offline conflicted with the changes made by other users. So it was not possible to merge your edits in automatically."
+msgstr "Виждате този диалогов прозорец за обединяване, защото дълго време сте били офлайн и промените, които сте направили в документа, докато сте били офлайн, са в конфликт с промените, направени от други потребители. Така че не беше възможно да обедините редакциите си автоматично."
 
-msgid ""
-"You can edit the content only in the merge editor in the middle. You cannot "
-"edit content in the other two editors."
-msgstr ""
-"Можете да редактирате съдържанието само в редактора за обединяване в "
-"средата. Не можете да редактирате съдържание в другите два редактора."
+msgid "You can edit the content only in the merge editor in the middle. You cannot edit content in the other two editors."
+msgstr "Можете да редактирате съдържанието само в редактора за обединяване в средата. Не можете да редактирате съдържание в другите два редактора."
 
 msgid "You cannot add yourself to your contacts!"
 msgstr "Не можете да добавите себе си към вашите контакти!"
 
-msgid ""
-"You will receive a warning when you try to complete a merge without "
-"accepting or rejecting all of the changes. You can still proceed to merge "
-"the document. If you do that, all the insertions and deletions in the merge "
-"editor in the middle will be accepted automatically, and all the insertions "
-"and deletions in the offline editor on the right will be ignored."
+msgid "You do not have access to this document. Select the access level you would like to request from the document owner."
 msgstr ""
-"Ще получите предупреждение, когато се опитате да завършите сливане, без да "
-"приемете или отхвърлите всички промени. Все още можете да продължите към "
-"обединяването на документа. Ако направите това, всички вмъквания и "
-"изтривания в редактора за сливане в средата ще бъдат приети автоматично и "
-"всички вмъквания и изтривания в офлайн редактора вдясно ще бъдат игнорирани."
+
+msgid "You will receive a warning when you try to complete a merge without accepting or rejecting all of the changes. You can still proceed to merge the document. If you do that, all the insertions and deletions in the merge editor in the middle will be accepted automatically, and all the insertions and deletions in the offline editor on the right will be ignored."
+msgstr ""
 
 msgid "Your access request has been sent to the document owner."
 msgstr "Вашата заявка за достъп е изпратена до собственика на документа."
 
-msgid ""
-"Your Access rights have been modified. You now have %(accessRight)s access "
-"to this document."
-msgstr ""
-"Вашите права за достъп са променени. Вече имате %(accessRight)s достъп до "
-"този документ."
+msgid "Your Access rights have been modified. You now have %(accessRight)s access to this document."
+msgstr "Вашите права за достъп са променени. Вече имате %(accessRight)s достъп до този документ."
 
-msgid ""
-"Your access rights were modified while you were offline, so we cannot save "
-"your work to the server any longer, and it is downloaded to your computer "
-"instead. Please consider importing it into a new document."
-msgstr ""
-"Правата ви за достъп бяха променени, докато бяхте офлайн, така че не можем "
-"повече да запазваме работата ви на сървъра и вместо това тя се изтегля на "
-"вашия компютър. Моля, помислете за импортирането му в нов документ."
+msgid "Your access rights were modified while you were offline, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "Правата ви за достъп бяха променени, докато бяхте офлайн, така че не можем повече да запазваме работата ви на сървъра и вместо това тя се изтегля на вашия компютър. Моля, помислете за импортирането му в нов документ."
 
 msgid "Your document was out of sync and has been reset."
 msgstr "Документът ви не е синхронизиран и е нулиран."
 
-msgid ""
-"Your personal passphrase will still unlock this document. A new random "
-"password is generated automatically. Other passphrase users will receive it "
-"automatically; non-passphrase collaborators need it shared with them "
-"manually."
-msgstr ""
-"Вашата лична парола пак ще отключи този документ. Автоматично се генерира "
-"нова произволна парола. Други потребители на парола ще я получат "
-"автоматично; сътрудниците без парола трябва да го споделят с тях ръчно."
+msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
+msgstr "Вашата лична парола пак ще отключи този документ. Автоматично се генерира нова произволна парола. Други потребители на парола ще я получат автоматично; сътрудниците без парола трябва да го споделят с тях ръчно."
 
-msgid ""
-"Your session expired while you were offline, so we cannot save your work to "
-"the server any longer, but you can download it to your computer instead. "
-"Please consider importing it as a new document after logging in."
-msgstr ""
-"Вашата сесия е изтекла, докато сте били офлайн, така че вече не можем да "
-"запазим работата ви на сървъра, но вместо това можете да я изтеглите на "
-"вашия компютър. Моля, обмислете импортирането му като нов документ, след "
-"като влезете."
+msgid "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in."
+msgstr "Вашата сесия е изтекла, докато сте били офлайн, така че вече не можем да запазим работата ви на сървъра, но вместо това можете да я изтеглите на вашия компютър. Моля, обмислете импортирането му като нов документ, след като влезете."
 
 msgid "YYYY-MM-DD or empty"
 msgstr "ГГГГ-ММ-ДД или празно"
+

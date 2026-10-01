@@ -4,10 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Language: ar\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 msgid "(Author, 1998)"
 msgstr "(المؤلف، 1998)"
 
@@ -71,27 +70,11 @@ msgstr "قبول التغيير"
 msgid "Accept Change"
 msgstr "قبول التغيير"
 
-msgid ""
-"Accepting or rejecting a change in the merge editor in the middle or the "
-"offline editor on the right causes a change in the merge editor. You can "
-"accept a change by directly clicking on the highlighted text. A dropdown "
-"menu will appear and you can then either accept or reject the change. When "
-"you click on the highlighted text, it also highlights the changes that will "
-"get accepted. %(mergeImage)s As shown in the above image one can click on a "
-"highlighted change, and click on accept change. On accepting a change it "
-"will be reflected in the merged document editor in the middle. Rejecting a "
-"change works in the same way except on reject a change the highlight of the "
-"change will be lost, with it the ability to accept, reject or copy a change."
+msgid "Accepting or rejecting a change in the merge editor in the middle or the offline editor on the right causes a change in the merge editor. You can accept a change by directly clicking on the highlighted text. A dropdown menu will appear and you can then either accept or reject the change. When you click on the highlighted text, it also highlights the changes that will get accepted. %(mergeImage)s As shown in the above image one can click on a highlighted change, and click on accept change. On accepting a change it will be reflected in the merged document editor in the middle. Rejecting a change works in the same way except on reject a change the highlight of the change will be lost, with it the ability to accept, reject or copy a change."
+msgstr "يؤدي قبول أو رفض التغيير في محرر الدمج الموجود في المنتصف أو المحرر غير المتصل الموجود على اليمين إلى حدوث تغيير في محرر الدمج. يمكنك قبول التغيير من خلال النقر مباشرة على النص المميز. ستظهر قائمة منسدلة ويمكنك بعد ذلك قبول التغيير أو رفضه. عند النقر على النص المميز، فإنه يسلط الضوء أيضًا على التغييرات التي سيتم قبولها. %(mergeImage)s كما هو موضح في الصورة أعلاه، يمكن النقر على التغيير المميز، ثم النقر على قبول التغيير. عند قبول التغيير، سينعكس ذلك في محرر المستندات المدمج في المنتصف. يعمل رفض التغيير بنفس الطريقة باستثناء عند رفض التغيير، سيتم فقدان أبرز التغيير، مع القدرة على قبول التغيير أو رفضه أو نسخه."
+
+msgid "Access level"
 msgstr ""
-"يؤدي قبول أو رفض التغيير في محرر الدمج الموجود في المنتصف أو المحرر غير "
-"المتصل الموجود على اليمين إلى حدوث تغيير في محرر الدمج. يمكنك قبول التغيير "
-"من خلال النقر مباشرة على النص المميز. ستظهر قائمة منسدلة ويمكنك بعد ذلك قبول"
-" التغيير أو رفضه. عند النقر على النص المميز، فإنه يسلط الضوء أيضًا على "
-"التغييرات التي سيتم قبولها. %(mergeImage)s كما هو موضح في الصورة أعلاه، يمكن"
-" النقر على التغيير المميز، ثم النقر على قبول التغيير. عند قبول التغيير، "
-"سينعكس ذلك في محرر المستندات المدمج في المنتصف. يعمل رفض التغيير بنفس "
-"الطريقة باستثناء عند رفض التغيير، سيتم فقدان أبرز التغيير، مع القدرة على "
-"قبول التغيير أو رفضه أو نسخه."
 
 msgid "Access rights could not be saved"
 msgstr "لا يمكن حفظ حقوق الوصول"
@@ -153,14 +136,8 @@ msgstr "تنسيق"
 msgid "Am I the only one seeing this dialog?"
 msgstr "هل أنا الوحيد الذي يرى هذا الحوار؟"
 
-msgid ""
-"An error occurred during the merge process, so we cannot save your work to "
-"the server any longer, and it is downloaded to your computer instead. Please"
-" consider importing it into a new document."
-msgstr ""
-"حدث خطأ أثناء عملية الدمج، لذلك لا يمكننا حفظ عملك على الخادم بعد الآن، ويتم"
-" تنزيله على جهاز الكمبيوتر الخاص بك بدلاً من ذلك. يرجى النظر في استيراده إلى"
-" مستند جديد."
+msgid "An error occurred during the merge process, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "حدث خطأ أثناء عملية الدمج، لذلك لا يمكننا حفظ عملك على الخادم بعد الآن، ويتم تنزيله على جهاز الكمبيوتر الخاص بك بدلاً من ذلك. يرجى النظر في استيراده إلى مستند جديد."
 
 msgid "An internal link has lost its target."
 msgstr "لقد فقد الرابط الداخلي هدفه."
@@ -180,6 +157,15 @@ msgstr "أي"
 msgid "Any/None"
 msgstr "أي/لا شيء"
 
+msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Archiving and accessibility"
+msgstr ""
+
 msgid "Assign comment to"
 msgstr "تعيين تعليق ل"
 
@@ -194,6 +180,9 @@ msgstr "المخصصة ل"
 
 msgid "Assignee"
 msgstr "المكلف"
+
+msgid "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+msgstr ""
 
 msgid "Author"
 msgstr "مؤلف"
@@ -218,6 +207,12 @@ msgstr "فهرس"
 
 msgid "BITS"
 msgstr "أجزاء"
+
+msgid "Bleed"
+msgstr ""
+
+msgid "Bleed box"
+msgstr ""
 
 msgid "Block change"
 msgstr "منع التغيير"
@@ -279,21 +274,35 @@ msgstr "تم التغيير إلى العنوان %(level)s"
 msgid "Changed into paragraph"
 msgstr "تم التغيير إلى الفقرة"
 
+msgid "Changes apply to this session only."
+msgstr ""
+
 msgid "Changes to citation sources are not being tracked!"
 msgstr "لا يتم تتبع التغييرات في مصادر الاقتباس!"
 
-msgid ""
-"Changes you made to the document since going offline will be lost, if you "
-"choose to close/refresh the tab or close the browser."
-msgstr ""
-"سيتم فقدان التغييرات التي أجريتها على المستند منذ عدم الاتصال بالإنترنت، إذا"
-" اخترت إغلاق/تحديث علامة التبويب أو إغلاق المتصفح."
+msgid "Changes you made to the document since going offline will be lost, if you choose to close/refresh the tab or close the browser."
+msgstr "سيتم فقدان التغييرات التي أجريتها على المستند منذ عدم الاتصال بالإنترنت، إذا اخترت إغلاق/تحديث علامة التبويب أو إغلاق المتصفح."
 
 msgid "Characters with blanks"
 msgstr "الشخصيات مع الفراغات"
 
 msgid "Characters without blanks"
 msgstr "أحرف بدون فراغات"
+
+msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar in the document text."
+msgstr ""
+
+msgid "Check text"
+msgstr ""
+
+msgid "Check text for grammar and spelling issues."
+msgstr ""
+
+msgid "Checked %s of %s sections..."
+msgstr ""
 
 msgid "Chinese (Simplified)"
 msgstr "الصينية (المبسطة)"
@@ -388,6 +397,12 @@ msgstr "تكوين الجدول."
 msgid "Contacts"
 msgstr "اتصالات"
 
+msgid "Continuous checking"
+msgstr ""
+
+msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgstr ""
+
 msgid "Copy"
 msgstr "نسخ"
 
@@ -466,8 +481,14 @@ msgstr "إنشاء رابط مشاركة جديد"
 msgid "Create share link"
 msgstr "إنشاء رابط المشاركة"
 
+msgid "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+msgstr ""
+
 msgid "Creating copy..."
 msgstr "جارٍ إنشاء نسخة..."
+
+msgid "Crop marks"
+msgstr ""
 
 msgid "Cross reference"
 msgstr "إشارة مرجعية"
@@ -544,12 +565,11 @@ msgstr "إبطال"
 msgid "Disconnected. Attempting to reconnect..."
 msgstr "غير متصل. جارٍ محاولة إعادة الاتصال..."
 
-msgid ""
-"Do not worry, we can handle such a situation as we will simply show you "
-"another merge dialog."
+msgid "Do not report this rule again, in any document."
 msgstr ""
-"لا تقلق، يمكننا التعامل مع مثل هذا الموقف حيث سنعرض لك ببساطة مربع حوار دمج "
-"آخر."
+
+msgid "Do not worry, we can handle such a situation as we will simply show you another merge dialog."
+msgstr "لا تقلق، يمكننا التعامل مع مثل هذا الموقف حيث سنعرض لك ببساطة مربع حوار دمج آخر."
 
 msgid "Document"
 msgstr "وثيقة"
@@ -557,12 +577,8 @@ msgstr "وثيقة"
 msgid "Document comment"
 msgstr "تعليق الوثيقة"
 
-msgid ""
-"Document encryption key rotated. Other passphrase users will receive the new"
-" key automatically."
-msgstr ""
-"تم تدوير مفتاح تشفير المستند. وسيتلقى مستخدمو عبارة المرور الآخرون المفتاح "
-"الجديد تلقائيًا."
+msgid "Document encryption key rotated. Other passphrase users will receive the new key automatically."
+msgstr "تم تدوير مفتاح تشفير المستند. وسيتلقى مستخدمو عبارة المرور الآخرون المفتاح الجديد تلقائيًا."
 
 msgid "Document has been modified by another user. Please reload the page."
 msgstr "تم تعديل الوثيقة من قبل مستخدم آخر. يرجى إعادة تحميل الصفحة."
@@ -582,15 +598,14 @@ msgstr "متصفح الوثيقة"
 msgid "Document password"
 msgstr "كلمة مرور الوثيقة"
 
-msgid ""
-"Document password changed. Remember to share the new password with your "
-"collaborators."
-msgstr ""
-"تم تغيير كلمة مرور المستند. تذكر مشاركة كلمة المرور الجديدة مع المتعاونين "
-"معك."
+msgid "Document password changed. Remember to share the new password with your collaborators."
+msgstr "تم تغيير كلمة مرور المستند. تذكر مشاركة كلمة المرور الجديدة مع المتعاونين معك."
 
 msgid "Document Style"
 msgstr "نمط الوثيقة"
+
+msgid "DOCX export options"
+msgstr ""
 
 msgid "Does the order in which I work on merging the changes matter?"
 msgstr "هل الترتيب الذي أعمل به على دمج التغييرات مهم؟"
@@ -600,6 +615,9 @@ msgstr "تحميل"
 
 msgid "Download Document"
 msgstr "تنزيل الوثيقة"
+
+msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+msgstr ""
 
 msgid "Dutch"
 msgstr "هولندي"
@@ -625,14 +643,23 @@ msgstr "تحرير المعادلة"
 msgid "Edit link"
 msgstr "تعديل الرابط"
 
-msgid "Either print or create a PDF using your browser print dialog."
-msgstr "قم إما بطباعة أو إنشاء ملف PDF باستخدام مربع حوار الطباعة في المتصفح."
+msgid "Edit the words and rules the spell checker accepts."
+msgstr ""
 
 msgid "Email"
 msgstr "بريد إلكتروني"
 
 msgid "Email is in incorrect format!"
 msgstr "البريد الإلكتروني بتنسيق غير صحيح!"
+
+msgid "Embed a Fidus Writer file of this document in the PDF"
+msgstr ""
+
+msgid "Embed the source HTML in the PDF"
+msgstr ""
+
+msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+msgstr ""
 
 msgid "Emphasis"
 msgstr "توكيد"
@@ -661,6 +688,9 @@ msgstr "أدخل كلمة مرور المستند لإدراجها في الرا
 msgid "Epub"
 msgstr "النشر الإلكتروني"
 
+msgid "EPUB export options"
+msgstr ""
+
 msgid "Equation"
 msgstr "معادلة"
 
@@ -679,8 +709,10 @@ msgstr "تصدير محتويات الوثيقة"
 msgid "Export the document as a FIDUS file including its template."
 msgstr "قم بتصدير المستند كملف FIDUS بما في ذلك القالب الخاص به."
 
-msgid ""
-"Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgid "Export the document directly to a PDF file."
+msgstr ""
+
+msgid "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
 msgstr "قم بتصدير المستند إلى ملف Book Interchange Tag Set BITS الإصدار 2.1."
 
 msgid "Export the document to a DOCX file with the given template."
@@ -689,12 +721,8 @@ msgstr "قم بتصدير المستند إلى ملف DOCX باستخدام ا�
 msgid "Export the document to a FIDUS file without its template."
 msgstr "قم بتصدير المستند إلى ملف FIDUS بدون القالب الخاص به."
 
-msgid ""
-"Export the document to a Journal Archiving and Interchange Tag Library NISO "
-"JATS Version 1.2 file."
-msgstr ""
-"قم بتصدير المستند إلى ملف أرشفة دفتر اليومية ومكتبة علامات التبادل NISO JATS"
-" الإصدار 1.2."
+msgid "Export the document to a Journal Archiving and Interchange Tag Library NISO JATS Version 1.2 file."
+msgstr "قم بتصدير المستند إلى ملف أرشفة دفتر اليومية ومكتبة علامات التبادل NISO JATS الإصدار 1.2."
 
 msgid "Export the document to a Pandoc JSON file."
 msgstr "قم بتصدير المستند إلى ملف Pandoc JSON."
@@ -728,6 +756,9 @@ msgstr "خارجي"
 
 msgid "Figure"
 msgstr "شكل"
+
+msgid "Figures and tables"
+msgstr ""
 
 msgid "File"
 msgstr "ملف"
@@ -804,8 +835,14 @@ msgstr "خط أفقي"
 msgid "How do I accept or reject a particular change?"
 msgstr "كيف يمكنني قبول أو رفض تغيير معين؟"
 
+msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
+msgstr ""
+
 msgid "HTML"
 msgstr "HTML"
+
+msgid "HTML export options"
+msgstr ""
 
 msgid "I cannot accept a particular change. What do I do?"
 msgstr "لا أستطيع قبول تغيير معين. ماذا أفعل؟"
@@ -816,36 +853,35 @@ msgstr "قيمة المعرف"
 msgid "ID Value format is incorrect for "
 msgstr "تنسيق قيمة المعرف غير صحيح لـ "
 
-msgid ""
-"If the work is not in the public domain, specify the year of the copyright."
+msgid "If the work is not in the public domain, specify the year of the copyright."
 msgstr "إذا لم يكن العمل ضمن الملكية العامة، فحدد سنة حقوق الطبع والنشر."
 
-msgid ""
-"If the work is not in the public domain, specify who the copyright holder "
-"is."
+msgid "If the work is not in the public domain, specify who the copyright holder is."
 msgstr "إذا لم يكن العمل ضمن الملكية العامة، فحدد صاحب حقوق الطبع والنشر."
 
-msgid ""
-"If you cannot automatically accept a change into the merge editor, do not "
-"worry. You can choose to copy the change either by clicking on the copy "
-"button or manually copy the change and then paste it in the merge editor in "
-"the middle. It is as simple as that!"
-msgstr ""
-"إذا لم تتمكن من قبول التغيير في محرر الدمج تلقائيًا، فلا تقلق. يمكنك اختيار "
-"نسخ التغيير إما عن طريق النقر على زر النسخ أو نسخ التغيير يدويًا ثم لصقه في "
-"محرر الدمج في المنتصف. الأمر بهذه البساطة!"
+msgid "If you cannot automatically accept a change into the merge editor, do not worry. You can choose to copy the change either by clicking on the copy button or manually copy the change and then paste it in the merge editor in the middle. It is as simple as that!"
+msgstr "إذا لم تتمكن من قبول التغيير في محرر الدمج تلقائيًا، فلا تقلق. يمكنك اختيار نسخ التغيير إما عن طريق النقر على زر النسخ أو نسخ التغيير يدويًا ثم لصقه في محرر الدمج في المنتصف. الأمر بهذه البساطة!"
 
-msgid ""
-"If you enter the password above, it will be embedded in the link (after #). "
-"Anyone with the link can open the document. Only share such links through "
-"secure channels."
+msgid "If you enter the password above, it will be embedded in the link (after #). Anyone with the link can open the document. Only share such links through secure channels."
+msgstr "إذا قمت بإدخال كلمة المرور أعلاه، فسيتم تضمينها في الرابط (بعد #). يمكن لأي شخص لديه الرابط فتح المستند. لا تشارك هذه الروابط إلا من خلال القنوات الآمنة."
+
+msgid "Ignore rule"
 msgstr ""
-"إذا قمت بإدخال كلمة المرور أعلاه، فسيتم تضمينها في الرابط (بعد #). يمكن لأي "
-"شخص لديه الرابط فتح المستند. لا تشارك هذه الروابط إلا من خلال القنوات "
-"الآمنة."
+
+msgid "Ignored rules"
+msgstr ""
+
+msgid "Ignored words"
+msgstr ""
 
 msgid "Image"
 msgstr "صورة"
+
+msgid "Include tracked changes in the export"
+msgstr ""
+
+msgid "Include tracked changes in the PDF"
+msgstr ""
 
 msgid "Incorrect passphrase."
 msgstr "عبارة مرور غير صحيحة."
@@ -943,6 +979,9 @@ msgstr "اليابانية"
 msgid "JATS"
 msgstr "جاتس"
 
+msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Keyboard shortcuts"
 msgstr "اختصارات لوحة المفاتيح"
 
@@ -1003,6 +1042,12 @@ msgstr "مدرج باسم"
 msgid "Loading…"
 msgstr "تحميل…"
 
+msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+msgstr ""
+
+msgid "Marks the final size of the page after it has been cut."
+msgstr ""
+
 msgid "Math"
 msgstr "الرياضيات"
 
@@ -1036,8 +1081,17 @@ msgstr "فقرة مدمجة"
 msgid "Merging Offline Document"
 msgstr "دمج مستند غير متصل"
 
+msgid "mm"
+msgstr ""
+
 msgid "More"
 msgstr "أكثر"
+
+msgid "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
+
+msgid "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
 
 msgid "My collaborators"
 msgstr "المتعاونون معي"
@@ -1096,11 +1150,8 @@ msgstr "لا أحد"
 msgid "Normal Text"
 msgstr "نص عادي"
 
-msgid ""
-"Not all changes have been resolved. Please make sure to review all the "
-"changes to before proceeding."
-msgstr ""
-"لم يتم حل كافة التغييرات. يرجى التأكد من مراجعة جميع التغييرات قبل المتابعة."
+msgid "Not all changes have been resolved. Please make sure to review all the changes to before proceeding."
+msgstr "لم يتم حل كافة التغييرات. يرجى التأكد من مراجعة جميع التغييرات قبل المتابعة."
 
 msgid "Not tracked"
 msgstr "لم يتم تعقبها"
@@ -1117,32 +1168,23 @@ msgstr "قائمة مرقمة"
 msgid "Numeric"
 msgstr "رقمي"
 
+msgid "ODT export options"
+msgstr ""
+
 msgid "Offline Document"
 msgstr "مستند غير متصل"
 
 msgid "OK"
 msgstr "موافق"
 
-msgid ""
-"One of the image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"تعذر العثور على إحدى الصور (الصور) التي نسختها على الخادم. يرجى محاولة "
-"تحميله مرة أخرى."
+msgid "One of the image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "تعذر العثور على إحدى الصور (الصور) التي نسختها على الخادم. يرجى محاولة تحميله مرة أخرى."
 
-msgid ""
-"One of the Image(s) you copied could not be found on the server. Please try "
-"uploading it again."
-msgstr ""
-"تعذر العثور على إحدى الصور (الصور) التي نسختها على الخادم. يرجى محاولة "
-"تحميله مرة أخرى."
+msgid "One of the Image(s) you copied could not be found on the server. Please try uploading it again."
+msgstr "تعذر العثور على إحدى الصور (الصور) التي نسختها على الخادم. يرجى محاولة تحميله مرة أخرى."
 
-msgid ""
-"One or more of the image(s) you copied could not be found on the server. "
-"Consider re-uploading them once the document is merged."
-msgstr ""
-"تعذر العثور على صورة أو أكثر من الصور التي نسختها على الخادم. فكر في إعادة "
-"تحميلها بمجرد دمج المستند."
+msgid "One or more of the image(s) you copied could not be found on the server. Consider re-uploading them once the document is merged."
+msgstr "تعذر العثور على صورة أو أكثر من الصور التي نسختها على الخادم. فكر في إعادة تحميلها بمجرد دمج المستند."
 
 msgid "Online Document"
 msgstr "وثيقة على الانترنت"
@@ -1189,8 +1231,26 @@ msgstr "لصق مع الكشف عن المحتوى"
 msgid "Paste without content detection"
 msgstr "لصق دون الكشف عن المحتوى"
 
+msgid "PDF"
+msgstr ""
+
+msgid "PDF export options"
+msgstr ""
+
+msgid "PDF/A-4 (archival)"
+msgstr ""
+
+msgid "PDF/UA (accessible, tagged)"
+msgstr ""
+
 msgid "People"
 msgstr "الناس"
+
+msgid "Place figures as page floats"
+msgstr ""
+
+msgid "Place tables as page floats"
+msgstr ""
 
 msgid "Please select at least one citation source!"
 msgstr "الرجاء تحديد مصدر اقتباس واحد على الأقل!"
@@ -1207,11 +1267,23 @@ msgstr "سابق"
 msgid "Print"
 msgstr "طباعة"
 
+msgid "Print production"
+msgstr ""
+
+msgid "Print the document using your browser print dialog."
+msgstr ""
+
+msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Proceed to Login page"
 msgstr "انتقل إلى صفحة تسجيل الدخول"
 
 msgid "Proceed to Merge"
 msgstr "انتقل إلى الدمج"
+
+msgid "Rasterize SVG images"
+msgstr ""
 
 msgid "Read"
 msgstr "يقرأ"
@@ -1282,8 +1354,14 @@ msgstr "إزالة المعادلة"
 msgid "Remove image"
 msgstr "إزالة الصورة"
 
+msgid "Remove lines left over in the text from language check."
+msgstr ""
+
 msgid "Remove link"
 msgstr "إزالة الرابط"
+
+msgid "Remove marks"
+msgstr ""
 
 msgid "Remove the code block."
 msgstr "قم بإزالة كتلة التعليمات البرمجية."
@@ -1300,6 +1378,9 @@ msgstr "تمت الإزالة"
 msgid "Removed code block"
 msgstr "تمت إزالة كتلة التعليمات البرمجية"
 
+msgid "Render formulas as SVG images instead of MathML"
+msgstr ""
+
 msgid "Replace"
 msgstr "استبدال"
 
@@ -1312,6 +1393,9 @@ msgstr "استبدل ب"
 msgid "replies"
 msgstr "الردود"
 
+msgid "Request"
+msgstr ""
+
 msgid "Request Access"
 msgstr "طلب الوصول"
 
@@ -1323,6 +1407,9 @@ msgstr "حل"
 
 msgid "Resolve comment"
 msgstr "حل التعليق"
+
+msgid "Resolve tracked changes (accept all)"
+msgstr ""
 
 msgid "Resolved comments"
 msgstr "التعليقات التي تم حلها"
@@ -1389,6 +1476,9 @@ msgstr "يبحث..."
 
 msgid "See document statistics."
 msgstr "انظر إحصائيات الوثيقة."
+
+msgid "Select a higher access level to request from the document owner."
+msgstr ""
 
 msgid "Select document editing tool."
 msgstr "حدد أداة تحرير المستندات."
@@ -1462,6 +1552,9 @@ msgstr "إظهار اختصارات لوحة المفاتيح"
 msgid "show less"
 msgstr "تظهر أقل"
 
+msgid "Show link annotation borders"
+msgstr ""
+
 msgid "show more"
 msgstr "أظهر المزيد"
 
@@ -1486,6 +1579,9 @@ msgstr "قم بالتسجيل أو تسجيل الدخول"
 msgid "Slim FIDUS"
 msgstr "سليم فيدوس"
 
+msgid "Small lines at the corners of the page that show printers where to cut the paper."
+msgstr ""
+
 msgid "Spanish"
 msgstr "الأسبانية"
 
@@ -1497,6 +1593,15 @@ msgstr "حدد الرقم الذي ستبدأ منه هذه القائمة في 
 
 msgid "Specify whether the work can be accessed without paying a fee."
 msgstr "حدد ما إذا كان يمكن الوصول إلى العمل دون دفع رسوم."
+
+msgid "Spell/grammar check finished."
+msgstr ""
+
+msgid "Spell/grammar check initialized."
+msgstr ""
+
+msgid "Spell/grammar checker"
+msgstr ""
 
 msgid "Split cell"
 msgstr "انقسام الخلية"
@@ -1525,11 +1630,17 @@ msgstr "منخفض"
 msgid "Superscript"
 msgstr "مرتفع"
 
+msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr ""
+
 msgid "Symbols and Roman Letters"
 msgstr "الرموز والحروف الرومانية"
 
 msgid "Table"
 msgstr "طاولة"
+
+msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
+msgstr ""
 
 msgid "Text before"
 msgstr "النص من قبل"
@@ -1540,80 +1651,47 @@ msgstr "لغة النص"
 msgid "Text replaced successfully"
 msgstr "تم استبدال النص بنجاح"
 
-msgid ""
-"The change could not be applied automatically. Please consider using the "
-"copy option to copy the changes."
-msgstr ""
-"لا يمكن تطبيق التغيير تلقائيًا. يرجى النظر في استخدام خيار النسخ لنسخ "
-"التغييرات."
+msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
+msgstr "لا يمكن تطبيق التغيير تلقائيًا. يرجى النظر في استخدام خيار النسخ لنسخ التغييرات."
 
 msgid "The current password is incorrect."
 msgstr "كلمة المرور الحالية غير صحيحة."
 
-msgid ""
-"The document password was changed by another user. You will need to enter "
-"the new password to continue editing."
+msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
-"تم تغيير كلمة مرور المستند بواسطة مستخدم آخر. سوف تحتاج إلى إدخال كلمة "
-"المرور الجديدة لمواصلة التحرير."
 
-msgid ""
-"The document was modified substantially by other users while you were "
-"offline. We have merged your changes in as tracked changes. You should "
-"verify that your edits still make sense."
-msgstr ""
-"تم تعديل المستند بشكل كبير بواسطة مستخدمين آخرين أثناء عدم اتصالك بالإنترنت."
-" لقد قمنا بدمج تغييراتك كتغييرات متعقبة. يجب عليك التحقق من أن تعديلاتك لا "
-"تزال منطقية."
+msgid "The document password was changed by another user. You will need to enter the new password to continue editing."
+msgstr "تم تغيير كلمة مرور المستند بواسطة مستخدم آخر. سوف تحتاج إلى إدخال كلمة المرور الجديدة لمواصلة التحرير."
 
-msgid ""
-"The editors in the middle and on the right will show content that is "
-"highlighted in green. They also contain text that is highlighted in red. The"
-" text marked in green corresponds to the text that was edited (added) by you"
-" or other users. The text marked in red corresponds to text that was deleted"
-" by either you or other users. The insertions and deletions made by other "
-"users will be marked in the merge editor. The insertions and deletions made "
-"by you will be marked in the offline editor on the right."
+msgid "The document was modified substantially by other users while you were offline. We have merged your changes in as tracked changes. You should verify that your edits still make sense."
+msgstr "تم تعديل المستند بشكل كبير بواسطة مستخدمين آخرين أثناء عدم اتصالك بالإنترنت. لقد قمنا بدمج تغييراتك كتغييرات متعقبة. يجب عليك التحقق من أن تعديلاتك لا تزال منطقية."
+
+msgid "The editors in the middle and on the right will show content that is highlighted in green. They also contain text that is highlighted in red. The text marked in green corresponds to the text that was edited (added) by you or other users. The text marked in red corresponds to text that was deleted by either you or other users. The insertions and deletions made by other users will be marked in the merge editor. The insertions and deletions made by you will be marked in the offline editor on the right."
+msgstr "سيعرض المحررون الموجودون في المنتصف وعلى اليمين المحتوى المميز باللون الأخضر. كما تحتوي أيضًا على نص تم تمييزه باللون الأحمر. يتوافق النص المميز باللون الأخضر مع النص الذي تم تحريره (إضافته) بواسطتك أو بواسطة مستخدمين آخرين. يتوافق النص المميز باللون الأحمر مع النص الذي تم حذفه بواسطتك أو بواسطة مستخدمين آخرين. سيتم وضع علامة على عمليات الإدراج والحذف التي أجراها مستخدمون آخرون في محرر الدمج. سيتم وضع علامة على عمليات الإدراج والحذف التي أجريتها في المحرر غير المتصل على اليمين."
+
+msgid "The file is locked by another session. Changes cannot be saved until the lock is released."
 msgstr ""
-"سيعرض المحررون الموجودون في المنتصف وعلى اليمين المحتوى المميز باللون "
-"الأخضر. كما تحتوي أيضًا على نص تم تمييزه باللون الأحمر. يتوافق النص المميز "
-"باللون الأخضر مع النص الذي تم تحريره (إضافته) بواسطتك أو بواسطة مستخدمين "
-"آخرين. يتوافق النص المميز باللون الأحمر مع النص الذي تم حذفه بواسطتك أو "
-"بواسطة مستخدمين آخرين. سيتم وضع علامة على عمليات الإدراج والحذف التي أجراها "
-"مستخدمون آخرون في محرر الدمج. سيتم وضع علامة على عمليات الإدراج والحذف التي "
-"أجريتها في المحرر غير المتصل على اليمين."
 
 msgid "The format used by the USA and some other American countries."
-msgstr ""
-"التنسيق المستخدم من قبل الولايات المتحدة الأمريكية وبعض الدول الأمريكية "
-"الأخرى."
+msgstr "التنسيق المستخدم من قبل الولايات المتحدة الأمريكية وبعض الدول الأمريكية الأخرى."
 
-msgid ""
-"The recovery key you entered is incorrect, or the recovery process failed. "
-"Please try again."
+msgid "The ignore lists could not be saved."
 msgstr ""
-"مفتاح الاسترداد الذي أدخلته غير صحيح، أو فشلت عملية الاسترداد. يرجى المحاولة"
-" مرة أخرى."
 
-msgid ""
-"This document is end-to-end encrypted. Collaborators without a personal "
-"passphrase will need the document password shared with them through a secure"
-" channel outside of Fidus Writer. Do not send the password through the "
-"document chat."
+msgid "The language pack for the document language could not be loaded."
 msgstr ""
-"هذه الوثيقة مشفرة من طرف إلى طرف. سيحتاج المتعاونون الذين ليس لديهم عبارة "
-"مرور شخصية إلى كلمة مرور المستند التي تمت مشاركتها معهم من خلال قناة آمنة "
-"خارج Fidus Writer. لا ترسل كلمة المرور من خلال الدردشة المستندية."
+
+msgid "The recovery key you entered is incorrect, or the recovery process failed. Please try again."
+msgstr "مفتاح الاسترداد الذي أدخلته غير صحيح، أو فشلت عملية الاسترداد. يرجى المحاولة مرة أخرى."
+
+msgid "This document is end-to-end encrypted. Collaborators without a personal passphrase will need the document password shared with them through a secure channel outside of Fidus Writer. Do not send the password through the document chat."
+msgstr "هذه الوثيقة مشفرة من طرف إلى طرف. سيحتاج المتعاونون الذين ليس لديهم عبارة مرور شخصية إلى كلمة مرور المستند التي تمت مشاركتها معهم من خلال قناة آمنة خارج Fidus Writer. لا ترسل كلمة المرور من خلال الدردشة المستندية."
 
 msgid "This person is already in your contacts!"
 msgstr "هذا الشخص موجود بالفعل في جهات الاتصال الخاصة بك!"
 
-msgid ""
-"This share link has expired or is invalid. Please ask the document owner for"
-" a new link."
-msgstr ""
-"انتهت صلاحية رابط المشاركة هذا أو أنه غير صالح. الرجاء مطالبة مالك المستند "
-"برابط جديد."
+msgid "This share link has expired or is invalid. Please ask the document owner for a new link."
+msgstr "انتهت صلاحية رابط المشاركة هذا أو أنه غير صالح. الرجاء مطالبة مالك المستند برابط جديد."
 
 msgid "Title"
 msgstr "عنوان"
@@ -1651,11 +1729,17 @@ msgstr "أدوات"
 msgid "Track changes"
 msgstr "تتبع التغييرات"
 
+msgid "Tracked changes"
+msgstr ""
+
 msgid "Tracking"
 msgstr "تتبع"
 
 msgid "Tracking changes to the document"
 msgstr "تتبع التغييرات في المستند"
+
+msgid "Trim box"
+msgstr ""
 
 msgid "Type formula"
 msgstr "اكتب الصيغة"
@@ -1693,12 +1777,8 @@ msgstr "رسالة أمريكية"
 msgid "User"
 msgstr "مستخدم"
 
-msgid ""
-"Warning! Not all your changes have been saved! You could suffer data loss. "
-"Attempting to reconnect..."
-msgstr ""
-"تحذير! لم يتم حفظ جميع تغييراتك! قد تعاني من فقدان البيانات. جارٍ محاولة "
-"إعادة الاتصال..."
+msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
+msgstr "تحذير! لم يتم حفظ جميع تغييراتك! قد تعاني من فقدان البيانات. جارٍ محاولة إعادة الاتصال..."
 
 msgid "Warnings"
 msgstr "تحذيرات"
@@ -1712,13 +1792,10 @@ msgstr "ما هي النقاط البارزة باللونين الأخضر وا
 msgid "What do I do after completing the merge?"
 msgstr "ماذا أفعل بعد الانتهاء من الدمج؟"
 
-msgid ""
-"What happens if I try to complete merge without resolving all the changes?"
+msgid "What happens if I try to complete merge without resolving all the changes?"
 msgstr "ماذا يحدث إذا حاولت إكمال الدمج دون حل جميع التغييرات؟"
 
-msgid ""
-"What if my collaborators continue working on the document while I am "
-"merging?"
+msgid "What if my collaborators continue working on the document while I am merging?"
 msgstr "ماذا لو واصل المتعاونون معي العمل على المستند أثناء قيامي بالدمج؟"
 
 msgid "Why am I seeing this merge dialog?"
@@ -1735,6 +1812,9 @@ msgstr "عداد الكلمات"
 
 msgid "Words"
 msgstr "كلمات"
+
+msgid "Words and word combinations that the spell checker should accept as correct. One word or phrase per line."
+msgstr ""
 
 msgid "Wrap selection in bullet list"
 msgstr "التفاف التحديد في القائمة النقطية"
@@ -1755,100 +1835,53 @@ msgid "Write with changes tracked"
 msgstr "الكتابة مع التغييرات المتعقبة"
 
 msgid "Write with tracked changes, but not see comments and chats of others"
-msgstr ""
-"يمكنك الكتابة باستخدام التغييرات المتعقبة، ولكن دون رؤية تعليقات ودردشات "
-"الآخرين"
+msgstr "يمكنك الكتابة باستخدام التغييرات المتعقبة، ولكن دون رؤية تعليقات ودردشات الآخرين"
 
 msgid "Year"
 msgstr "سنة"
 
-msgid ""
-"Yes, you are the only one who can see this dialog. Therefore it would be "
-"great if you could ask your collaborators to stop editing the document, so "
-"that once you are finished with the merge, it will not lead to more "
-"conflicts."
+msgid "Yes, you are the only one who can see this dialog. Therefore it would be great if you could ask your collaborators to stop editing the document, so that once you are finished with the merge, it will not lead to more conflicts."
+msgstr "نعم، أنت الوحيد الذي يمكنه رؤية مربع الحوار هذا. ولذلك سيكون من الرائع أن تطلب من المتعاونين لديك التوقف عن تحرير المستند، بحيث لا يؤدي ذلك إلى المزيد من التعارضات بمجرد الانتهاء من عملية الدمج."
+
+msgid "You already have the highest possible access level."
 msgstr ""
-"نعم، أنت الوحيد الذي يمكنه رؤية مربع الحوار هذا. ولذلك سيكون من الرائع أن "
-"تطلب من المتعاونين لديك التوقف عن تحرير المستند، بحيث لا يؤدي ذلك إلى المزيد"
-" من التعارضات بمجرد الانتهاء من عملية الدمج."
 
 msgid "You are currently offline. Please try again when you are back online."
-msgstr ""
-"أنت غير متصل حاليا. يرجى المحاولة مرة أخرى عندما تعود متصلاً بالإنترنت."
+msgstr "أنت غير متصل حاليا. يرجى المحاولة مرة أخرى عندما تعود متصلاً بالإنترنت."
 
-msgid ""
-"You are seeing this merge dialog because you were offline for a long time, "
-"and the changes you made to the document while you were offline conflicted "
-"with the changes made by other users. So it was not possible to merge your "
-"edits in automatically."
-msgstr ""
-"يظهر لك مربع حوار الدمج هذا لأنك كنت غير متصل بالإنترنت لفترة طويلة، وتتعارض"
-" التغييرات التي أجريتها على المستند أثناء عدم اتصالك بالإنترنت مع التغييرات "
-"التي أجراها المستخدمون الآخرون. لذلك لم يكن من الممكن دمج تعديلاتك تلقائيًا."
+msgid "You are seeing this merge dialog because you were offline for a long time, and the changes you made to the document while you were offline conflicted with the changes made by other users. So it was not possible to merge your edits in automatically."
+msgstr "يظهر لك مربع حوار الدمج هذا لأنك كنت غير متصل بالإنترنت لفترة طويلة، وتتعارض التغييرات التي أجريتها على المستند أثناء عدم اتصالك بالإنترنت مع التغييرات التي أجراها المستخدمون الآخرون. لذلك لم يكن من الممكن دمج تعديلاتك تلقائيًا."
 
-msgid ""
-"You can edit the content only in the merge editor in the middle. You cannot "
-"edit content in the other two editors."
-msgstr ""
-"يمكنك تحرير المحتوى فقط في محرر الدمج الموجود في المنتصف. لا يمكنك تحرير "
-"المحتوى في المحررين الآخرين."
+msgid "You can edit the content only in the merge editor in the middle. You cannot edit content in the other two editors."
+msgstr "يمكنك تحرير المحتوى فقط في محرر الدمج الموجود في المنتصف. لا يمكنك تحرير المحتوى في المحررين الآخرين."
 
 msgid "You cannot add yourself to your contacts!"
 msgstr "لا يمكنك إضافة نفسك إلى جهات الاتصال الخاصة بك!"
 
-msgid ""
-"You will receive a warning when you try to complete a merge without "
-"accepting or rejecting all of the changes. You can still proceed to merge "
-"the document. If you do that, all the insertions and deletions in the merge "
-"editor in the middle will be accepted automatically, and all the insertions "
-"and deletions in the offline editor on the right will be ignored."
+msgid "You do not have access to this document. Select the access level you would like to request from the document owner."
 msgstr ""
-"ستتلقى تحذيرًا عندما تحاول إكمال عملية الدمج دون قبول كافة التغييرات أو "
-"رفضها. لا يزال بإمكانك المتابعة لدمج المستند. إذا قمت بذلك، فسيتم قبول جميع "
-"عمليات الإدراج والحذف في محرر الدمج الموجود في المنتصف تلقائيًا، وسيتم تجاهل"
-" جميع عمليات الإدراج والحذف في المحرر غير المتصل الموجود على اليمين."
+
+msgid "You will receive a warning when you try to complete a merge without accepting or rejecting all of the changes. You can still proceed to merge the document. If you do that, all the insertions and deletions in the merge editor in the middle will be accepted automatically, and all the insertions and deletions in the offline editor on the right will be ignored."
+msgstr ""
 
 msgid "Your access request has been sent to the document owner."
 msgstr "تم إرسال طلب الوصول الخاص بك إلى مالك المستند."
 
-msgid ""
-"Your Access rights have been modified. You now have %(accessRight)s access "
-"to this document."
-msgstr ""
-"تم تعديل حقوق الوصول الخاصة بك. لديك الآن حق الوصول %(accessRight)s إلى هذا "
-"المستند."
+msgid "Your Access rights have been modified. You now have %(accessRight)s access to this document."
+msgstr "تم تعديل حقوق الوصول الخاصة بك. لديك الآن حق الوصول %(accessRight)s إلى هذا المستند."
 
-msgid ""
-"Your access rights were modified while you were offline, so we cannot save "
-"your work to the server any longer, and it is downloaded to your computer "
-"instead. Please consider importing it into a new document."
-msgstr ""
-"تم تعديل حقوق الوصول الخاصة بك عندما كنت غير متصل بالإنترنت، لذلك لا يمكننا "
-"حفظ عملك على الخادم بعد الآن، ويتم تنزيله على جهاز الكمبيوتر الخاص بك بدلاً "
-"من ذلك. يرجى النظر في استيراده إلى مستند جديد."
+msgid "Your access rights were modified while you were offline, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "تم تعديل حقوق الوصول الخاصة بك عندما كنت غير متصل بالإنترنت، لذلك لا يمكننا حفظ عملك على الخادم بعد الآن، ويتم تنزيله على جهاز الكمبيوتر الخاص بك بدلاً من ذلك. يرجى النظر في استيراده إلى مستند جديد."
 
 msgid "Your document was out of sync and has been reset."
 msgstr "كان مستندك غير متزامن وتمت إعادة تعيينه."
 
-msgid ""
-"Your personal passphrase will still unlock this document. A new random "
-"password is generated automatically. Other passphrase users will receive it "
-"automatically; non-passphrase collaborators need it shared with them "
-"manually."
-msgstr ""
-"ستظل عبارة المرور الشخصية الخاصة بك تفتح قفل هذا المستند. يتم إنشاء كلمة "
-"مرور عشوائية جديدة تلقائيًا. سوف يستلمها المستخدمون الآخرون لعبارة المرور "
-"تلقائيًا؛ يحتاج المتعاونون الذين لا يستخدمون عبارة المرور إلى مشاركتها معهم "
-"يدويًا."
+msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
+msgstr "ستظل عبارة المرور الشخصية الخاصة بك تفتح قفل هذا المستند. يتم إنشاء كلمة مرور عشوائية جديدة تلقائيًا. سوف يستلمها المستخدمون الآخرون لعبارة المرور تلقائيًا؛ يحتاج المتعاونون الذين لا يستخدمون عبارة المرور إلى مشاركتها معهم يدويًا."
 
-msgid ""
-"Your session expired while you were offline, so we cannot save your work to "
-"the server any longer, but you can download it to your computer instead. "
-"Please consider importing it as a new document after logging in."
-msgstr ""
-"انتهت جلسة العمل الخاصة بك عندما كنت غير متصل بالإنترنت، لذلك لا يمكننا حفظ "
-"عملك على الخادم بعد الآن، ولكن يمكنك تنزيله على جهاز الكمبيوتر الخاص بك "
-"بدلاً من ذلك. يرجى النظر في استيراده كمستند جديد بعد تسجيل الدخول."
+msgid "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in."
+msgstr "انتهت جلسة العمل الخاصة بك عندما كنت غير متصل بالإنترنت، لذلك لا يمكننا حفظ عملك على الخادم بعد الآن، ولكن يمكنك تنزيله على جهاز الكمبيوتر الخاص بك بدلاً من ذلك. يرجى النظر في استيراده كمستند جديد بعد تسجيل الدخول."
 
 msgid "YYYY-MM-DD or empty"
 msgstr "YYYY-MM-DD أو فارغ"
+

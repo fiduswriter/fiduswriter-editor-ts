@@ -4,10 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 msgid "(Author, 1998)"
 msgstr "(著者、1998)"
 
@@ -71,24 +70,11 @@ msgstr "変更を受け入れる"
 msgid "Accept Change"
 msgstr "変更を受け入れる"
 
-msgid ""
-"Accepting or rejecting a change in the merge editor in the middle or the "
-"offline editor on the right causes a change in the merge editor. You can "
-"accept a change by directly clicking on the highlighted text. A dropdown "
-"menu will appear and you can then either accept or reject the change. When "
-"you click on the highlighted text, it also highlights the changes that will "
-"get accepted. %(mergeImage)s As shown in the above image one can click on a "
-"highlighted change, and click on accept change. On accepting a change it "
-"will be reflected in the merged document editor in the middle. Rejecting a "
-"change works in the same way except on reject a change the highlight of the "
-"change will be lost, with it the ability to accept, reject or copy a change."
+msgid "Accepting or rejecting a change in the merge editor in the middle or the offline editor on the right causes a change in the merge editor. You can accept a change by directly clicking on the highlighted text. A dropdown menu will appear and you can then either accept or reject the change. When you click on the highlighted text, it also highlights the changes that will get accepted. %(mergeImage)s As shown in the above image one can click on a highlighted change, and click on accept change. On accepting a change it will be reflected in the merged document editor in the middle. Rejecting a change works in the same way except on reject a change the highlight of the change will be lost, with it the ability to accept, reject or copy a change."
+msgstr "中央のマージ エディターまたは右側のオフライン エディターで変更を承認または拒否すると、マージ エディターが変更されます。強調表示されたテキストを直接クリックすると、変更を受け入れることができます。ドロップダウン メニューが表示され、変更を受け入れるか拒否するかを選択できます。強調表示されたテキストをクリックすると、受け入れられる変更も強調表示されます。 %(mergeImage)s 上の画像に示すように、強調表示された変更をクリックし、[変更の受け入れ] をクリックします。変更を受け入れると、中央にある結合されたドキュメント エディターに変更が反映されます。変更の拒否も同様に機能しますが、変更を拒否すると変更のハイライトが失われ、変更を承認、拒否、またはコピーする機能が失われます。"
+
+msgid "Access level"
 msgstr ""
-"中央のマージ エディターまたは右側のオフライン エディターで変更を承認または拒否すると、マージ "
-"エディターが変更されます。強調表示されたテキストを直接クリックすると、変更を受け入れることができます。ドロップダウン "
-"メニューが表示され、変更を受け入れるか拒否するかを選択できます。強調表示されたテキストをクリックすると、受け入れられる変更も強調表示されます。 "
-"%(mergeImage)s 上の画像に示すように、強調表示された変更をクリックし、[変更の受け入れ] "
-"をクリックします。変更を受け入れると、中央にある結合されたドキュメント "
-"エディターに変更が反映されます。変更の拒否も同様に機能しますが、変更を拒否すると変更のハイライトが失われ、変更を承認、拒否、またはコピーする機能が失われます。"
 
 msgid "Access rights could not be saved"
 msgstr "アクセス権を保存できませんでした"
@@ -150,13 +136,8 @@ msgstr "位置合わせ"
 msgid "Am I the only one seeing this dialog?"
 msgstr "このダイアログが表示されているのは私だけでしょうか?"
 
-msgid ""
-"An error occurred during the merge process, so we cannot save your work to "
-"the server any longer, and it is downloaded to your computer instead. Please"
-" consider importing it into a new document."
-msgstr ""
-"マージ "
-"プロセス中にエラーが発生したため、作業内容をサーバーに保存できなくなり、代わりに作業内容がコンピュータにダウンロードされます。新しいドキュメントにインポートすることを検討してください。"
+msgid "An error occurred during the merge process, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "マージ プロセス中にエラーが発生したため、作業内容をサーバーに保存できなくなり、代わりに作業内容がコンピュータにダウンロードされます。新しいドキュメントにインポートすることを検討してください。"
 
 msgid "An internal link has lost its target."
 msgstr "内部リンクがターゲットを失いました。"
@@ -176,6 +157,15 @@ msgstr "どれでも"
 msgid "Any/None"
 msgstr "任意/なし"
 
+msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Archiving and accessibility"
+msgstr ""
+
 msgid "Assign comment to"
 msgstr "コメントを割り当てる"
 
@@ -190,6 +180,9 @@ msgstr "担当者"
 
 msgid "Assignee"
 msgstr "譲受人"
+
+msgid "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+msgstr ""
 
 msgid "Author"
 msgstr "著者"
@@ -214,6 +207,12 @@ msgstr "参考文献"
 
 msgid "BITS"
 msgstr "ビット"
+
+msgid "Bleed"
+msgstr ""
+
+msgid "Bleed box"
+msgstr ""
 
 msgid "Block change"
 msgstr "ブロックチェンジ"
@@ -275,12 +274,13 @@ msgstr "見出し %(level)s に変更されました"
 msgid "Changed into paragraph"
 msgstr "段落に変更されました"
 
+msgid "Changes apply to this session only."
+msgstr ""
+
 msgid "Changes to citation sources are not being tracked!"
 msgstr "引用元への変更は追跡されません。"
 
-msgid ""
-"Changes you made to the document since going offline will be lost, if you "
-"choose to close/refresh the tab or close the browser."
+msgid "Changes you made to the document since going offline will be lost, if you choose to close/refresh the tab or close the browser."
 msgstr "タブを閉じたり更新したり、ブラウザを閉じたりすると、オフラインになってからドキュメントに加えた変更は失われます。"
 
 msgid "Characters with blanks"
@@ -288,6 +288,21 @@ msgstr "空白を含む文字"
 
 msgid "Characters without blanks"
 msgstr "空白のない文字"
+
+msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar in the document text."
+msgstr ""
+
+msgid "Check text"
+msgstr ""
+
+msgid "Check text for grammar and spelling issues."
+msgstr ""
+
+msgid "Checked %s of %s sections..."
+msgstr ""
 
 msgid "Chinese (Simplified)"
 msgstr "中国語（簡体字）"
@@ -382,6 +397,12 @@ msgstr "テーブルを設定します。"
 msgid "Contacts"
 msgstr "連絡先"
 
+msgid "Continuous checking"
+msgstr ""
+
+msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgstr ""
+
 msgid "Copy"
 msgstr "コピー"
 
@@ -460,8 +481,14 @@ msgstr "新しい共有リンクを作成"
 msgid "Create share link"
 msgstr "共有リンクを作成"
 
+msgid "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+msgstr ""
+
 msgid "Creating copy..."
 msgstr "コピーを作成中..."
+
+msgid "Crop marks"
+msgstr ""
 
 msgid "Cross reference"
 msgstr "相互参照"
@@ -538,9 +565,10 @@ msgstr "無効"
 msgid "Disconnected. Attempting to reconnect..."
 msgstr "切断されました。再接続しようとしています..."
 
-msgid ""
-"Do not worry, we can handle such a situation as we will simply show you "
-"another merge dialog."
+msgid "Do not report this rule again, in any document."
+msgstr ""
+
+msgid "Do not worry, we can handle such a situation as we will simply show you another merge dialog."
 msgstr "心配しないでください。そのような状況には別のマージ ダイアログが表示されるだけなので対処できます。"
 
 msgid "Document"
@@ -549,9 +577,7 @@ msgstr "書類"
 msgid "Document comment"
 msgstr "文書コメント"
 
-msgid ""
-"Document encryption key rotated. Other passphrase users will receive the new"
-" key automatically."
+msgid "Document encryption key rotated. Other passphrase users will receive the new key automatically."
 msgstr "ドキュメント暗号化キーがローテーションされました。他のパスフレーズ ユーザーは新しいキーを自動的に受け取ります。"
 
 msgid "Document has been modified by another user. Please reload the page."
@@ -572,13 +598,14 @@ msgstr "ドキュメントナビゲーター"
 msgid "Document password"
 msgstr "文書パスワード"
 
-msgid ""
-"Document password changed. Remember to share the new password with your "
-"collaborators."
+msgid "Document password changed. Remember to share the new password with your collaborators."
 msgstr "文書のパスワードが変更されました。忘れずに新しいパスワードを共同作業者と共有してください。"
 
 msgid "Document Style"
 msgstr "ドキュメントスタイル"
+
+msgid "DOCX export options"
+msgstr ""
 
 msgid "Does the order in which I work on merging the changes matter?"
 msgstr "変更のマージ作業の順序は重要ですか?"
@@ -588,6 +615,9 @@ msgstr "ダウンロード"
 
 msgid "Download Document"
 msgstr "ドキュメントをダウンロード"
+
+msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+msgstr ""
 
 msgid "Dutch"
 msgstr "オランダ語"
@@ -613,14 +643,23 @@ msgstr "方程式を編集"
 msgid "Edit link"
 msgstr "リンクを編集"
 
-msgid "Either print or create a PDF using your browser print dialog."
-msgstr "印刷するか、ブラウザの印刷ダイアログを使用して PDF を作成します。"
+msgid "Edit the words and rules the spell checker accepts."
+msgstr ""
 
 msgid "Email"
 msgstr "電子メール"
 
 msgid "Email is in incorrect format!"
 msgstr "メールの形式が正しくありません。"
+
+msgid "Embed a Fidus Writer file of this document in the PDF"
+msgstr ""
+
+msgid "Embed the source HTML in the PDF"
+msgstr ""
+
+msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+msgstr ""
 
 msgid "Emphasis"
 msgstr "強調"
@@ -649,6 +688,9 @@ msgstr "ドキュメントのパスワードを入力してリンクに含めま
 msgid "Epub"
 msgstr "Epub"
 
+msgid "EPUB export options"
+msgstr ""
+
 msgid "Equation"
 msgstr "方程式"
 
@@ -667,8 +709,10 @@ msgstr "ドキュメントコンテンツのエクスポート"
 msgid "Export the document as a FIDUS file including its template."
 msgstr "ドキュメントをテンプレートを含む FIDUS ファイルとしてエクスポートします。"
 
-msgid ""
-"Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgid "Export the document directly to a PDF file."
+msgstr ""
+
+msgid "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
 msgstr "ドキュメントを Book Interchange Tag Set BITS バージョン 2.1 ファイルにエクスポートします。"
 
 msgid "Export the document to a DOCX file with the given template."
@@ -677,12 +721,8 @@ msgstr "指定されたテンプレートを使用してドキュメントを DO
 msgid "Export the document to a FIDUS file without its template."
 msgstr "テンプレートを使用せずにドキュメントを FIDUS ファイルにエクスポートします。"
 
-msgid ""
-"Export the document to a Journal Archiving and Interchange Tag Library NISO "
-"JATS Version 1.2 file."
-msgstr ""
-"文書を Journal Archiving and Interchange Tag Library NISO JATS バージョン 1.2 "
-"ファイルにエクスポートします。"
+msgid "Export the document to a Journal Archiving and Interchange Tag Library NISO JATS Version 1.2 file."
+msgstr "文書を Journal Archiving and Interchange Tag Library NISO JATS バージョン 1.2 ファイルにエクスポートします。"
 
 msgid "Export the document to a Pandoc JSON file."
 msgstr "ドキュメントを Pandoc JSON ファイルにエクスポートします。"
@@ -716,6 +756,9 @@ msgstr "外部の"
 
 msgid "Figure"
 msgstr "形"
+
+msgid "Figures and tables"
+msgstr ""
 
 msgid "File"
 msgstr "ファイル"
@@ -792,8 +835,14 @@ msgstr "水平線"
 msgid "How do I accept or reject a particular change?"
 msgstr "特定の変更を承認または拒否するにはどうすればよいですか?"
 
+msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
+msgstr ""
+
 msgid "HTML"
 msgstr "HTML"
+
+msgid "HTML export options"
+msgstr ""
 
 msgid "I cannot accept a particular change. What do I do?"
 msgstr "特定の変更を受け入れることはできません。どうすればよいですか？"
@@ -804,33 +853,35 @@ msgstr "ID値"
 msgid "ID Value format is incorrect for "
 msgstr "ID 値の形式が正しくありません "
 
-msgid ""
-"If the work is not in the public domain, specify the year of the copyright."
+msgid "If the work is not in the public domain, specify the year of the copyright."
 msgstr "作品がパブリックドメインにない場合は、著作権の年を指定してください。"
 
-msgid ""
-"If the work is not in the public domain, specify who the copyright holder "
-"is."
+msgid "If the work is not in the public domain, specify who the copyright holder is."
 msgstr "作品がパブリックドメインではない場合は、著作権所有者を明記してください。"
 
-msgid ""
-"If you cannot automatically accept a change into the merge editor, do not "
-"worry. You can choose to copy the change either by clicking on the copy "
-"button or manually copy the change and then paste it in the merge editor in "
-"the middle. It is as simple as that!"
-msgstr ""
-"マージ エディターへの変更を自動的に受け入れることができない場合でも、心配する必要はありません。コピー "
-"ボタンをクリックして変更をコピーするか、変更を手動でコピーして中央のマージ エディターに貼り付けるかを選択できます。それはとても簡単です!"
+msgid "If you cannot automatically accept a change into the merge editor, do not worry. You can choose to copy the change either by clicking on the copy button or manually copy the change and then paste it in the merge editor in the middle. It is as simple as that!"
+msgstr "マージ エディターへの変更を自動的に受け入れることができない場合でも、心配する必要はありません。コピー ボタンをクリックして変更をコピーするか、変更を手動でコピーして中央のマージ エディターに貼り付けるかを選択できます。それはとても簡単です!"
 
-msgid ""
-"If you enter the password above, it will be embedded in the link (after #). "
-"Anyone with the link can open the document. Only share such links through "
-"secure channels."
+msgid "If you enter the password above, it will be embedded in the link (after #). Anyone with the link can open the document. Only share such links through secure channels."
+msgstr "上記のパスワードを入力すると、リンク(#以降)にパスワードが埋め込まれます。リンクを知っている人は誰でもドキュメントを開くことができます。このようなリンクは安全なチャネルを通じてのみ共有してください。"
+
+msgid "Ignore rule"
 msgstr ""
-"上記のパスワードを入力すると、リンク(#以降)にパスワードが埋め込まれます。リンクを知っている人は誰でもドキュメントを開くことができます。このようなリンクは安全なチャネルを通じてのみ共有してください。"
+
+msgid "Ignored rules"
+msgstr ""
+
+msgid "Ignored words"
+msgstr ""
 
 msgid "Image"
 msgstr "画像"
+
+msgid "Include tracked changes in the export"
+msgstr ""
+
+msgid "Include tracked changes in the PDF"
+msgstr ""
 
 msgid "Incorrect passphrase."
 msgstr "パスフレーズが正しくありません。"
@@ -928,6 +979,9 @@ msgstr "日本語"
 msgid "JATS"
 msgstr "ジャッツ"
 
+msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Keyboard shortcuts"
 msgstr "キーボードショートカット"
 
@@ -988,6 +1042,12 @@ msgstr "としてリストされています"
 msgid "Loading…"
 msgstr "読み込み中…"
 
+msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+msgstr ""
+
+msgid "Marks the final size of the page after it has been cut."
+msgstr ""
+
 msgid "Math"
 msgstr "数学"
 
@@ -1021,8 +1081,17 @@ msgstr "結合された段落"
 msgid "Merging Offline Document"
 msgstr "オフラインドキュメントの結合"
 
+msgid "mm"
+msgstr ""
+
 msgid "More"
 msgstr "もっと"
+
+msgid "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
+
+msgid "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
 
 msgid "My collaborators"
 msgstr "私の共同編集者"
@@ -1081,9 +1150,7 @@ msgstr "なし"
 msgid "Normal Text"
 msgstr "通常のテキスト"
 
-msgid ""
-"Not all changes have been resolved. Please make sure to review all the "
-"changes to before proceeding."
+msgid "Not all changes have been resolved. Please make sure to review all the changes to before proceeding."
 msgstr "すべての変更が解決されたわけではありません。続行する前に、すべての変更を必ず確認してください。"
 
 msgid "Not tracked"
@@ -1101,25 +1168,22 @@ msgstr "番号付きリスト"
 msgid "Numeric"
 msgstr "数値"
 
+msgid "ODT export options"
+msgstr ""
+
 msgid "Offline Document"
 msgstr "オフラインドキュメント"
 
 msgid "OK"
 msgstr "OK"
 
-msgid ""
-"One of the image(s) you copied could not be found on the server. Please try "
-"uploading it again."
+msgid "One of the image(s) you copied could not be found on the server. Please try uploading it again."
 msgstr "コピーした画像の 1 つがサーバー上で見つかりませんでした。もう一度アップロードしてみてください。"
 
-msgid ""
-"One of the Image(s) you copied could not be found on the server. Please try "
-"uploading it again."
+msgid "One of the Image(s) you copied could not be found on the server. Please try uploading it again."
 msgstr "コピーした画像の 1 つがサーバー上で見つかりませんでした。もう一度アップロードしてみてください。"
 
-msgid ""
-"One or more of the image(s) you copied could not be found on the server. "
-"Consider re-uploading them once the document is merged."
+msgid "One or more of the image(s) you copied could not be found on the server. Consider re-uploading them once the document is merged."
 msgstr "コピーした 1 つ以上のイメージがサーバー上で見つかりませんでした。ドキュメントが結合されたら、再アップロードすることを検討してください。"
 
 msgid "Online Document"
@@ -1167,8 +1231,26 @@ msgstr "コンテンツ検出を使用して貼り付け"
 msgid "Paste without content detection"
 msgstr "コンテンツ検出なしで貼り付け"
 
+msgid "PDF"
+msgstr ""
+
+msgid "PDF export options"
+msgstr ""
+
+msgid "PDF/A-4 (archival)"
+msgstr ""
+
+msgid "PDF/UA (accessible, tagged)"
+msgstr ""
+
 msgid "People"
 msgstr "人々"
+
+msgid "Place figures as page floats"
+msgstr ""
+
+msgid "Place tables as page floats"
+msgstr ""
 
 msgid "Please select at least one citation source!"
 msgstr "少なくとも 1 つの引用元を選択してください。"
@@ -1185,11 +1267,23 @@ msgstr "前の"
 msgid "Print"
 msgstr "印刷"
 
+msgid "Print production"
+msgstr ""
+
+msgid "Print the document using your browser print dialog."
+msgstr ""
+
+msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Proceed to Login page"
 msgstr "ログインページに進む"
 
 msgid "Proceed to Merge"
 msgstr "結合に進む"
+
+msgid "Rasterize SVG images"
+msgstr ""
 
 msgid "Read"
 msgstr "閲覧"
@@ -1260,8 +1354,14 @@ msgstr "方程式を削除"
 msgid "Remove image"
 msgstr "画像を削除"
 
+msgid "Remove lines left over in the text from language check."
+msgstr ""
+
 msgid "Remove link"
 msgstr "リンクを削除"
+
+msgid "Remove marks"
+msgstr ""
 
 msgid "Remove the code block."
 msgstr "コードブロックを削除します。"
@@ -1278,6 +1378,9 @@ msgstr "削除されました"
 msgid "Removed code block"
 msgstr "削除されたコードブロック"
 
+msgid "Render formulas as SVG images instead of MathML"
+msgstr ""
+
 msgid "Replace"
 msgstr "置換"
 
@@ -1290,6 +1393,9 @@ msgstr "と置き換えます"
 msgid "replies"
 msgstr "返信"
 
+msgid "Request"
+msgstr ""
+
 msgid "Request Access"
 msgstr "アクセスのリクエスト"
 
@@ -1301,6 +1407,9 @@ msgstr "解決"
 
 msgid "Resolve comment"
 msgstr "コメントを解決"
+
+msgid "Resolve tracked changes (accept all)"
+msgstr ""
 
 msgid "Resolved comments"
 msgstr "解決されたコメント"
@@ -1367,6 +1476,9 @@ msgstr "検索..."
 
 msgid "See document statistics."
 msgstr "ドキュメント統計を参照してください。"
+
+msgid "Select a higher access level to request from the document owner."
+msgstr ""
 
 msgid "Select document editing tool."
 msgstr "ドキュメント編集ツールを選択します。"
@@ -1440,6 +1552,9 @@ msgstr "キーボード ショートカットを表示"
 msgid "show less"
 msgstr "あまり見せない"
 
+msgid "Show link annotation borders"
+msgstr ""
+
 msgid "show more"
 msgstr "もっと見る"
 
@@ -1464,6 +1579,9 @@ msgstr "サインアップまたはログイン"
 msgid "Slim FIDUS"
 msgstr "スリム FIDUS"
 
+msgid "Small lines at the corners of the page that show printers where to cut the paper."
+msgstr ""
+
 msgid "Spanish"
 msgstr "スペイン語"
 
@@ -1475,6 +1593,15 @@ msgstr "このリストのカウントを開始する番号を指定します"
 
 msgid "Specify whether the work can be accessed without paying a fee."
 msgstr "料金を支払わずに作品にアクセスできるかどうかを指定します。"
+
+msgid "Spell/grammar check finished."
+msgstr ""
+
+msgid "Spell/grammar check initialized."
+msgstr ""
+
+msgid "Spell/grammar checker"
+msgstr ""
 
 msgid "Split cell"
 msgstr "分割セル"
@@ -1503,11 +1630,17 @@ msgstr "下付き文字"
 msgid "Superscript"
 msgstr "上付き文字"
 
+msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr ""
+
 msgid "Symbols and Roman Letters"
 msgstr "記号とローマ字"
 
 msgid "Table"
 msgstr "テーブル"
+
+msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
+msgstr ""
 
 msgid "Text before"
 msgstr "前のテキスト"
@@ -1518,63 +1651,46 @@ msgstr "テキスト言語"
 msgid "Text replaced successfully"
 msgstr "テキストは正常に置き換えられました"
 
-msgid ""
-"The change could not be applied automatically. Please consider using the "
-"copy option to copy the changes."
+msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "変更を自動的に適用できませんでした。変更をコピーするには、コピー オプションの使用を検討してください。"
 
 msgid "The current password is incorrect."
 msgstr "現在のパスワードが間違っています。"
 
-msgid ""
-"The document password was changed by another user. You will need to enter "
-"the new password to continue editing."
+msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
+msgstr ""
+
+msgid "The document password was changed by another user. You will need to enter the new password to continue editing."
 msgstr "ドキュメントのパスワードが別のユーザーによって変更されました。編集を続けるには、新しいパスワードを入力する必要があります。"
 
-msgid ""
-"The document was modified substantially by other users while you were "
-"offline. We have merged your changes in as tracked changes. You should "
-"verify that your edits still make sense."
-msgstr ""
-"オフライン中に他のユーザーによってドキュメントが大幅に変更されました。変更を追跡変更としてマージしました。編集内容が依然として意味をなしていることを確認する必要があります。"
+msgid "The document was modified substantially by other users while you were offline. We have merged your changes in as tracked changes. You should verify that your edits still make sense."
+msgstr "オフライン中に他のユーザーによってドキュメントが大幅に変更されました。変更を追跡変更としてマージしました。編集内容が依然として意味をなしていることを確認する必要があります。"
 
-msgid ""
-"The editors in the middle and on the right will show content that is "
-"highlighted in green. They also contain text that is highlighted in red. The"
-" text marked in green corresponds to the text that was edited (added) by you"
-" or other users. The text marked in red corresponds to text that was deleted"
-" by either you or other users. The insertions and deletions made by other "
-"users will be marked in the merge editor. The insertions and deletions made "
-"by you will be marked in the offline editor on the right."
+msgid "The editors in the middle and on the right will show content that is highlighted in green. They also contain text that is highlighted in red. The text marked in green corresponds to the text that was edited (added) by you or other users. The text marked in red corresponds to text that was deleted by either you or other users. The insertions and deletions made by other users will be marked in the merge editor. The insertions and deletions made by you will be marked in the offline editor on the right."
+msgstr "中央と右側のエディタには、緑色で強調表示されたコンテンツが表示されます。赤で強調表示されたテキストも含まれています。緑色でマークされたテキストは、あなたまたは他のユーザーによって編集 (追加) されたテキストに対応します。赤でマークされたテキストは、あなたまたは他のユーザーによって削除されたテキストに対応します。他のユーザーが行った挿入と削除は、マージ エディターでマークされます。ユーザーが行った挿入と削除は、右側のオフライン エディターでマークされます。"
+
+msgid "The file is locked by another session. Changes cannot be saved until the lock is released."
 msgstr ""
-"中央と右側のエディタには、緑色で強調表示されたコンテンツが表示されます。赤で強調表示されたテキストも含まれています。緑色でマークされたテキストは、あなたまたは他のユーザーによって編集"
-" (追加) "
-"されたテキストに対応します。赤でマークされたテキストは、あなたまたは他のユーザーによって削除されたテキストに対応します。他のユーザーが行った挿入と削除は、マージ"
-" エディターでマークされます。ユーザーが行った挿入と削除は、右側のオフライン エディターでマークされます。"
 
 msgid "The format used by the USA and some other American countries."
 msgstr "米国およびその他の米国諸国で使用される形式。"
 
-msgid ""
-"The recovery key you entered is incorrect, or the recovery process failed. "
-"Please try again."
+msgid "The ignore lists could not be saved."
+msgstr ""
+
+msgid "The language pack for the document language could not be loaded."
+msgstr ""
+
+msgid "The recovery key you entered is incorrect, or the recovery process failed. Please try again."
 msgstr "入力した回復キーが間違っているか、回復プロセスが失敗しました。もう一度試してください。"
 
-msgid ""
-"This document is end-to-end encrypted. Collaborators without a personal "
-"passphrase will need the document password shared with them through a secure"
-" channel outside of Fidus Writer. Do not send the password through the "
-"document chat."
-msgstr ""
-"この文書はエンドツーエンドで暗号化されています。個人のパスフレーズを持たない共同作業者は、Fidus Writer "
-"の外部の安全なチャネルを通じて共有されるドキュメントのパスワードが必要になります。ドキュメントチャットを通じてパスワードを送信しないでください。"
+msgid "This document is end-to-end encrypted. Collaborators without a personal passphrase will need the document password shared with them through a secure channel outside of Fidus Writer. Do not send the password through the document chat."
+msgstr "この文書はエンドツーエンドで暗号化されています。個人のパスフレーズを持たない共同作業者は、Fidus Writer の外部の安全なチャネルを通じて共有されるドキュメントのパスワードが必要になります。ドキュメントチャットを通じてパスワードを送信しないでください。"
 
 msgid "This person is already in your contacts!"
 msgstr "この人はすでにあなたの連絡先に登録されています。"
 
-msgid ""
-"This share link has expired or is invalid. Please ask the document owner for"
-" a new link."
+msgid "This share link has expired or is invalid. Please ask the document owner for a new link."
 msgstr "この共有リンクは期限切れか無効です。ドキュメントの所有者に新しいリンクを依頼してください。"
 
 msgid "Title"
@@ -1613,11 +1729,17 @@ msgstr "ツール"
 msgid "Track changes"
 msgstr "変更を追跡"
 
+msgid "Tracked changes"
+msgstr ""
+
 msgid "Tracking"
 msgstr "トラッキング"
 
 msgid "Tracking changes to the document"
 msgstr "ドキュメントへの変更の追跡"
+
+msgid "Trim box"
+msgstr ""
 
 msgid "Type formula"
 msgstr "タイプ式"
@@ -1655,9 +1777,7 @@ msgstr "米国の手紙"
 msgid "User"
 msgstr "ユーザー"
 
-msgid ""
-"Warning! Not all your changes have been saved! You could suffer data loss. "
-"Attempting to reconnect..."
+msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "警告！すべての変更が保存されていません。データ損失が発生する可能性があります。再接続しようとしています..."
 
 msgid "Warnings"
@@ -1672,13 +1792,10 @@ msgstr "エディターの緑と赤のハイライトは何ですか?"
 msgid "What do I do after completing the merge?"
 msgstr "マージが完了した後はどうすればよいですか?"
 
-msgid ""
-"What happens if I try to complete merge without resolving all the changes?"
+msgid "What happens if I try to complete merge without resolving all the changes?"
 msgstr "すべての変更を解決せずにマージを完了しようとするとどうなりますか?"
 
-msgid ""
-"What if my collaborators continue working on the document while I am "
-"merging?"
+msgid "What if my collaborators continue working on the document while I am merging?"
 msgstr "私の結合中に共同作業者がドキュメントの作業を続けた場合はどうなりますか?"
 
 msgid "Why am I seeing this merge dialog?"
@@ -1695,6 +1812,9 @@ msgstr "ワードカウンター"
 
 msgid "Words"
 msgstr "言葉"
+
+msgid "Words and word combinations that the spell checker should accept as correct. One word or phrase per line."
+msgstr ""
 
 msgid "Wrap selection in bullet list"
 msgstr "選択範囲を箇条書きリストで折り返す"
@@ -1720,76 +1840,48 @@ msgstr "変更を追跡して編集できますが、他者のコメントやチ
 msgid "Year"
 msgstr "年"
 
-msgid ""
-"Yes, you are the only one who can see this dialog. Therefore it would be "
-"great if you could ask your collaborators to stop editing the document, so "
-"that once you are finished with the merge, it will not lead to more "
-"conflicts."
+msgid "Yes, you are the only one who can see this dialog. Therefore it would be great if you could ask your collaborators to stop editing the document, so that once you are finished with the merge, it will not lead to more conflicts."
+msgstr "はい、このダイアログを表示できるのはあなただけです。したがって、結合が完了したらさらに競合が発生しないように、共同作業者にドキュメントの編集を中止するように依頼できれば幸いです。"
+
+msgid "You already have the highest possible access level."
 msgstr ""
-"はい、このダイアログを表示できるのはあなただけです。したがって、結合が完了したらさらに競合が発生しないように、共同作業者にドキュメントの編集を中止するように依頼できれば幸いです。"
 
 msgid "You are currently offline. Please try again when you are back online."
 msgstr "現在オフラインです。オンラインに戻ったら、もう一度お試しください。"
 
-msgid ""
-"You are seeing this merge dialog because you were offline for a long time, "
-"and the changes you made to the document while you were offline conflicted "
-"with the changes made by other users. So it was not possible to merge your "
-"edits in automatically."
-msgstr ""
-"この差し込みダイアログが表示されるのは、長期間オフラインであり、オフライン中にドキュメントに加えた変更が他のユーザーによって加えられた変更と競合したためです。そのため、編集内容を自動的にマージすることはできませんでした。"
+msgid "You are seeing this merge dialog because you were offline for a long time, and the changes you made to the document while you were offline conflicted with the changes made by other users. So it was not possible to merge your edits in automatically."
+msgstr "この差し込みダイアログが表示されるのは、長期間オフラインであり、オフライン中にドキュメントに加えた変更が他のユーザーによって加えられた変更と競合したためです。そのため、編集内容を自動的にマージすることはできませんでした。"
 
-msgid ""
-"You can edit the content only in the merge editor in the middle. You cannot "
-"edit content in the other two editors."
+msgid "You can edit the content only in the merge editor in the middle. You cannot edit content in the other two editors."
 msgstr "コンテンツは中央のマージエディターでのみ編集できます。他の 2 つのエディタではコンテンツを編集できません。"
 
 msgid "You cannot add yourself to your contacts!"
 msgstr "自分を連絡先に追加することはできません。"
 
-msgid ""
-"You will receive a warning when you try to complete a merge without "
-"accepting or rejecting all of the changes. You can still proceed to merge "
-"the document. If you do that, all the insertions and deletions in the merge "
-"editor in the middle will be accepted automatically, and all the insertions "
-"and deletions in the offline editor on the right will be ignored."
+msgid "You do not have access to this document. Select the access level you would like to request from the document owner."
 msgstr ""
-"すべての変更を承認または拒否せずにマージを完了しようとすると、警告が表示されます。引き続きドキュメントの結合を続行できます。これを行うと、中央のマージ "
-"エディターでのすべての挿入と削除は自動的に受け入れられ、右側のオフライン エディターでのすべての挿入と削除は無視されます。"
+
+msgid "You will receive a warning when you try to complete a merge without accepting or rejecting all of the changes. You can still proceed to merge the document. If you do that, all the insertions and deletions in the merge editor in the middle will be accepted automatically, and all the insertions and deletions in the offline editor on the right will be ignored."
+msgstr ""
 
 msgid "Your access request has been sent to the document owner."
 msgstr "アクセス要求はドキュメントの所有者に送信されました。"
 
-msgid ""
-"Your Access rights have been modified. You now have %(accessRight)s access "
-"to this document."
+msgid "Your Access rights have been modified. You now have %(accessRight)s access to this document."
 msgstr "アクセス権が変更されました。このドキュメントへの %(accessRight)s アクセス権が与えられました。"
 
-msgid ""
-"Your access rights were modified while you were offline, so we cannot save "
-"your work to the server any longer, and it is downloaded to your computer "
-"instead. Please consider importing it into a new document."
-msgstr ""
-"オフライン中にアクセス権が変更されたため、作業内容をサーバーに保存できなくなり、代わりにコンピュータにダウンロードされます。新しいドキュメントにインポートすることを検討してください。"
+msgid "Your access rights were modified while you were offline, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
+msgstr "オフライン中にアクセス権が変更されたため、作業内容をサーバーに保存できなくなり、代わりにコンピュータにダウンロードされます。新しいドキュメントにインポートすることを検討してください。"
 
 msgid "Your document was out of sync and has been reset."
 msgstr "ドキュメントは同期されていないため、リセットされました。"
 
-msgid ""
-"Your personal passphrase will still unlock this document. A new random "
-"password is generated automatically. Other passphrase users will receive it "
-"automatically; non-passphrase collaborators need it shared with them "
-"manually."
-msgstr ""
-"個人のパスフレーズでもこのドキュメントのロックを解除できます。新しいランダムなパスワードが自動的に生成されます。他のパスフレーズ "
-"ユーザーは自動的にそれを受け取ります。パスフレーズを持たない共同作業者は、手動で共有する必要があります。"
+msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
+msgstr "個人のパスフレーズでもこのドキュメントのロックを解除できます。新しいランダムなパスワードが自動的に生成されます。他のパスフレーズ ユーザーは自動的にそれを受け取ります。パスフレーズを持たない共同作業者は、手動で共有する必要があります。"
 
-msgid ""
-"Your session expired while you were offline, so we cannot save your work to "
-"the server any longer, but you can download it to your computer instead. "
-"Please consider importing it as a new document after logging in."
-msgstr ""
-"オフライン中にセッションの有効期限が切れたため、作業内容をサーバーに保存できなくなりましたが、代わりにコンピュータにダウンロードすることができます。ログイン後、新規ドキュメントとしてインポートすることを検討してください。"
+msgid "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in."
+msgstr "オフライン中にセッションの有効期限が切れたため、作業内容をサーバーに保存できなくなりましたが、代わりにコンピュータにダウンロードすることができます。ログイン後、新規ドキュメントとしてインポートすることを検討してください。"
 
 msgid "YYYY-MM-DD or empty"
 msgstr "YYYY-MM-DD または空"
+

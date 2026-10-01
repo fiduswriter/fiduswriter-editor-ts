@@ -4,10 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Language: zh_Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_Hans\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 msgid "(Author, 1998)"
 msgstr "（作者，1998）"
 
@@ -71,21 +70,11 @@ msgstr "接受变更"
 msgid "Accept Change"
 msgstr "接受变更"
 
-msgid ""
-"Accepting or rejecting a change in the merge editor in the middle or the "
-"offline editor on the right causes a change in the merge editor. You can "
-"accept a change by directly clicking on the highlighted text. A dropdown "
-"menu will appear and you can then either accept or reject the change. When "
-"you click on the highlighted text, it also highlights the changes that will "
-"get accepted. %(mergeImage)s As shown in the above image one can click on a "
-"highlighted change, and click on accept change. On accepting a change it "
-"will be reflected in the merged document editor in the middle. Rejecting a "
-"change works in the same way except on reject a change the highlight of the "
-"change will be lost, with it the ability to accept, reject or copy a change."
+msgid "Accepting or rejecting a change in the merge editor in the middle or the offline editor on the right causes a change in the merge editor. You can accept a change by directly clicking on the highlighted text. A dropdown menu will appear and you can then either accept or reject the change. When you click on the highlighted text, it also highlights the changes that will get accepted. %(mergeImage)s As shown in the above image one can click on a highlighted change, and click on accept change. On accepting a change it will be reflected in the merged document editor in the middle. Rejecting a change works in the same way except on reject a change the highlight of the change will be lost, with it the ability to accept, reject or copy a change."
+msgstr "接受或拒绝中间的合并编辑器或右侧的离线编辑器中的更改会导致合并编辑器中的更改。您可以通过直接单击突出显示的文本来接受更改。将出现一个下拉菜单，然后您可以接受或拒绝更改。当您单击突出显示的文本时，它还会突出显示将接受的更改。 %(mergeImage)s 如上图所示，可以单击突出显示的更改，然后单击接受更改。接受更改后，它将反映在中间的合并文档编辑器中。拒绝更改的工作方式相同，除了拒绝更改时，更改的突出显示将丢失，从而无法接受、拒绝或复制更改。"
+
+msgid "Access level"
 msgstr ""
-"接受或拒绝中间的合并编辑器或右侧的离线编辑器中的更改会导致合并编辑器中的更改。您可以通过直接单击突出显示的文本来接受更改。将出现一个下拉菜单，然后您可以接受或拒绝更改。当您单击突出显示的文本时，它还会突出显示将接受的更改。"
-" %(mergeImage)s "
-"如上图所示，可以单击突出显示的更改，然后单击接受更改。接受更改后，它将反映在中间的合并文档编辑器中。拒绝更改的工作方式相同，除了拒绝更改时，更改的突出显示将丢失，从而无法接受、拒绝或复制更改。"
 
 msgid "Access rights could not be saved"
 msgstr "无法保存访问权限"
@@ -147,10 +136,7 @@ msgstr "结盟"
 msgid "Am I the only one seeing this dialog?"
 msgstr "我是唯一看到此对话框的人吗？"
 
-msgid ""
-"An error occurred during the merge process, so we cannot save your work to "
-"the server any longer, and it is downloaded to your computer instead. Please"
-" consider importing it into a new document."
+msgid "An error occurred during the merge process, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
 msgstr "合并过程中发生错误，因此我们无法再将您的工作保存到服务器，而是将其下载到您的计算机上。请考虑将其导入到新文档中。"
 
 msgid "An internal link has lost its target."
@@ -171,6 +157,15 @@ msgstr "任何"
 msgid "Any/None"
 msgstr "任何/无"
 
+msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
+msgstr ""
+
+msgid "Archiving and accessibility"
+msgstr ""
+
 msgid "Assign comment to"
 msgstr "将评论分配给"
 
@@ -185,6 +180,9 @@ msgstr "分配给"
 
 msgid "Assignee"
 msgstr "受让人"
+
+msgid "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+msgstr ""
 
 msgid "Author"
 msgstr "作者"
@@ -209,6 +207,12 @@ msgstr "参考书目"
 
 msgid "BITS"
 msgstr "BITS"
+
+msgid "Bleed"
+msgstr ""
+
+msgid "Bleed box"
+msgstr ""
 
 msgid "Block change"
 msgstr "区块变更"
@@ -270,12 +274,13 @@ msgstr "更改为标题 %(level)s"
 msgid "Changed into paragraph"
 msgstr "改为段落"
 
+msgid "Changes apply to this session only."
+msgstr ""
+
 msgid "Changes to citation sources are not being tracked!"
 msgstr "不会跟踪引用来源的更改！"
 
-msgid ""
-"Changes you made to the document since going offline will be lost, if you "
-"choose to close/refresh the tab or close the browser."
+msgid "Changes you made to the document since going offline will be lost, if you choose to close/refresh the tab or close the browser."
 msgstr "如果您选择关闭/刷新选项卡或关闭浏览器，则脱机后对文档所做的更改将会丢失。"
 
 msgid "Characters with blanks"
@@ -283,6 +288,21 @@ msgstr "带空格的字符"
 
 msgid "Characters without blanks"
 msgstr "不带空格的字符"
+
+msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar in the document text."
+msgstr ""
+
+msgid "Check text"
+msgstr ""
+
+msgid "Check text for grammar and spelling issues."
+msgstr ""
+
+msgid "Checked %s of %s sections..."
+msgstr ""
 
 msgid "Chinese (Simplified)"
 msgstr "中文（简体）"
@@ -377,6 +397,12 @@ msgstr "配置表。"
 msgid "Contacts"
 msgstr "联系人"
 
+msgid "Continuous checking"
+msgstr ""
+
+msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgstr ""
+
 msgid "Copy"
 msgstr "复制"
 
@@ -455,8 +481,14 @@ msgstr "创建新的分享链接"
 msgid "Create share link"
 msgstr "创建分享链接"
 
+msgid "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+msgstr ""
+
 msgid "Creating copy..."
 msgstr "正在创建副本..."
+
+msgid "Crop marks"
+msgstr ""
 
 msgid "Cross reference"
 msgstr "交叉参考"
@@ -533,9 +565,10 @@ msgstr "禁用"
 msgid "Disconnected. Attempting to reconnect..."
 msgstr "已断开连接。正在尝试重新连接..."
 
-msgid ""
-"Do not worry, we can handle such a situation as we will simply show you "
-"another merge dialog."
+msgid "Do not report this rule again, in any document."
+msgstr ""
+
+msgid "Do not worry, we can handle such a situation as we will simply show you another merge dialog."
 msgstr "别担心，我们可以处理这种情况，因为我们只会向您显示另一个合并对话框。"
 
 msgid "Document"
@@ -544,9 +577,7 @@ msgstr "文档"
 msgid "Document comment"
 msgstr "文档评论"
 
-msgid ""
-"Document encryption key rotated. Other passphrase users will receive the new"
-" key automatically."
+msgid "Document encryption key rotated. Other passphrase users will receive the new key automatically."
 msgstr "文档加密密钥已轮换。其他密码短语用户将自动收到新密钥。"
 
 msgid "Document has been modified by another user. Please reload the page."
@@ -567,13 +598,14 @@ msgstr "文档导航器"
 msgid "Document password"
 msgstr "文档密码"
 
-msgid ""
-"Document password changed. Remember to share the new password with your "
-"collaborators."
+msgid "Document password changed. Remember to share the new password with your collaborators."
 msgstr "文档密码已更改。请记住与您的协作者分享新密码。"
 
 msgid "Document Style"
 msgstr "文档样式"
+
+msgid "DOCX export options"
+msgstr ""
 
 msgid "Does the order in which I work on merging the changes matter?"
 msgstr "我合并更改的顺序重要吗？"
@@ -583,6 +615,9 @@ msgstr "下载"
 
 msgid "Download Document"
 msgstr "下载文件"
+
+msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
+msgstr ""
 
 msgid "Dutch"
 msgstr "荷兰语"
@@ -608,14 +643,23 @@ msgstr "编辑方程"
 msgid "Edit link"
 msgstr "编辑链接"
 
-msgid "Either print or create a PDF using your browser print dialog."
-msgstr "使用浏览器打印对话框打印或创建 PDF。"
+msgid "Edit the words and rules the spell checker accepts."
+msgstr ""
 
 msgid "Email"
 msgstr "电子邮件"
 
 msgid "Email is in incorrect format!"
 msgstr "电子邮件格式不正确！"
+
+msgid "Embed a Fidus Writer file of this document in the PDF"
+msgstr ""
+
+msgid "Embed the source HTML in the PDF"
+msgstr ""
+
+msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
+msgstr ""
 
 msgid "Emphasis"
 msgstr "强调"
@@ -644,6 +688,9 @@ msgstr "输入文档密码以将其包含在链接中"
 msgid "Epub"
 msgstr "电子书"
 
+msgid "EPUB export options"
+msgstr ""
+
 msgid "Equation"
 msgstr "方程"
 
@@ -662,8 +709,10 @@ msgstr "导出文档内容"
 msgid "Export the document as a FIDUS file including its template."
 msgstr "将文档导出为 FIDUS 文件（包括其模板）。"
 
-msgid ""
-"Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgid "Export the document directly to a PDF file."
+msgstr ""
+
+msgid "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
 msgstr "将文档导出到图书交换标签集 BITS 版本 2.1 文件。"
 
 msgid "Export the document to a DOCX file with the given template."
@@ -672,9 +721,7 @@ msgstr "使用给定模板将文档导出为 DOCX 文件。"
 msgid "Export the document to a FIDUS file without its template."
 msgstr "将文档导出到不带模板的 FIDUS 文件。"
 
-msgid ""
-"Export the document to a Journal Archiving and Interchange Tag Library NISO "
-"JATS Version 1.2 file."
+msgid "Export the document to a Journal Archiving and Interchange Tag Library NISO JATS Version 1.2 file."
 msgstr "将文档导出到期刊存档和交换标签库 NISO JATS 版本 1.2 文件。"
 
 msgid "Export the document to a Pandoc JSON file."
@@ -709,6 +756,9 @@ msgstr "外部的"
 
 msgid "Figure"
 msgstr "图"
+
+msgid "Figures and tables"
+msgstr ""
 
 msgid "File"
 msgstr "文件"
@@ -785,8 +835,14 @@ msgstr "水平线"
 msgid "How do I accept or reject a particular change?"
 msgstr "我如何接受或拒绝特定更改？"
 
+msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
+msgstr ""
+
 msgid "HTML"
 msgstr "超文本标记语言"
+
+msgid "HTML export options"
+msgstr ""
 
 msgid "I cannot accept a particular change. What do I do?"
 msgstr "我无法接受特定的改变。我该怎么办？"
@@ -797,31 +853,35 @@ msgstr "ID值"
 msgid "ID Value format is incorrect for "
 msgstr "ID 值格式不正确 "
 
-msgid ""
-"If the work is not in the public domain, specify the year of the copyright."
+msgid "If the work is not in the public domain, specify the year of the copyright."
 msgstr "如果该作品不属于公共领域，请注明版权年份。"
 
-msgid ""
-"If the work is not in the public domain, specify who the copyright holder "
-"is."
+msgid "If the work is not in the public domain, specify who the copyright holder is."
 msgstr "如果该作品不属于公共领域，请注明版权所有者是谁。"
 
-msgid ""
-"If you cannot automatically accept a change into the merge editor, do not "
-"worry. You can choose to copy the change either by clicking on the copy "
-"button or manually copy the change and then paste it in the merge editor in "
-"the middle. It is as simple as that!"
-msgstr ""
-"如果您无法自动接受合并编辑器中的更改，请不要担心。您可以选择通过单击复制按钮来复制更改，也可以手动复制更改，然后将其粘贴到中间的合并编辑器中。就是这么简单！"
+msgid "If you cannot automatically accept a change into the merge editor, do not worry. You can choose to copy the change either by clicking on the copy button or manually copy the change and then paste it in the merge editor in the middle. It is as simple as that!"
+msgstr "如果您无法自动接受合并编辑器中的更改，请不要担心。您可以选择通过单击复制按钮来复制更改，也可以手动复制更改，然后将其粘贴到中间的合并编辑器中。就是这么简单！"
 
-msgid ""
-"If you enter the password above, it will be embedded in the link (after #). "
-"Anyone with the link can open the document. Only share such links through "
-"secure channels."
+msgid "If you enter the password above, it will be embedded in the link (after #). Anyone with the link can open the document. Only share such links through secure channels."
 msgstr "如果您输入上面的密码，它将嵌入到链接中（# 之后）。知道链接的任何人都可以打开该文档。仅通过安全渠道共享此类链接。"
+
+msgid "Ignore rule"
+msgstr ""
+
+msgid "Ignored rules"
+msgstr ""
+
+msgid "Ignored words"
+msgstr ""
 
 msgid "Image"
 msgstr "图像"
+
+msgid "Include tracked changes in the export"
+msgstr ""
+
+msgid "Include tracked changes in the PDF"
+msgstr ""
 
 msgid "Incorrect passphrase."
 msgstr "密码不正确。"
@@ -919,6 +979,9 @@ msgstr "日本人"
 msgid "JATS"
 msgstr "JATS"
 
+msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Keyboard shortcuts"
 msgstr "键盘快捷键"
 
@@ -979,6 +1042,12 @@ msgstr "列为"
 msgid "Loading…"
 msgstr "加载中…"
 
+msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
+msgstr ""
+
+msgid "Marks the final size of the page after it has been cut."
+msgstr ""
+
 msgid "Math"
 msgstr "数学"
 
@@ -1012,8 +1081,17 @@ msgstr "合并段落"
 msgid "Merging Offline Document"
 msgstr "合并离线文档"
 
+msgid "mm"
+msgstr ""
+
 msgid "More"
 msgstr "更多的"
+
+msgid "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
+
+msgid "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
+msgstr ""
 
 msgid "My collaborators"
 msgstr "我的合作者"
@@ -1072,9 +1150,7 @@ msgstr "没有任何"
 msgid "Normal Text"
 msgstr "普通文本"
 
-msgid ""
-"Not all changes have been resolved. Please make sure to review all the "
-"changes to before proceeding."
+msgid "Not all changes have been resolved. Please make sure to review all the changes to before proceeding."
 msgstr "并非所有更改都已解决。请确保在继续之前查看所有更改。"
 
 msgid "Not tracked"
@@ -1092,25 +1168,22 @@ msgstr "编号列表"
 msgid "Numeric"
 msgstr "数字"
 
+msgid "ODT export options"
+msgstr ""
+
 msgid "Offline Document"
 msgstr "离线文档"
 
 msgid "OK"
 msgstr "确定"
 
-msgid ""
-"One of the image(s) you copied could not be found on the server. Please try "
-"uploading it again."
+msgid "One of the image(s) you copied could not be found on the server. Please try uploading it again."
 msgstr "在服务器上找不到您复制的图像之一。请尝试重新上传。"
 
-msgid ""
-"One of the Image(s) you copied could not be found on the server. Please try "
-"uploading it again."
+msgid "One of the Image(s) you copied could not be found on the server. Please try uploading it again."
 msgstr "在服务器上找不到您复制的图像之一。请尝试重新上传。"
 
-msgid ""
-"One or more of the image(s) you copied could not be found on the server. "
-"Consider re-uploading them once the document is merged."
+msgid "One or more of the image(s) you copied could not be found on the server. Consider re-uploading them once the document is merged."
 msgstr "在服务器上找不到您复制的一张或多张图像。合并文档后考虑重新上传它们。"
 
 msgid "Online Document"
@@ -1158,8 +1231,26 @@ msgstr "带内容检测的粘贴"
 msgid "Paste without content detection"
 msgstr "粘贴时不检测内容"
 
+msgid "PDF"
+msgstr ""
+
+msgid "PDF export options"
+msgstr ""
+
+msgid "PDF/A-4 (archival)"
+msgstr ""
+
+msgid "PDF/UA (accessible, tagged)"
+msgstr ""
+
 msgid "People"
 msgstr "人们"
+
+msgid "Place figures as page floats"
+msgstr ""
+
+msgid "Place tables as page floats"
+msgstr ""
 
 msgid "Please select at least one citation source!"
 msgstr "请至少选择一个引用来源！"
@@ -1176,11 +1267,23 @@ msgstr "以前的"
 msgid "Print"
 msgstr "打印"
 
+msgid "Print production"
+msgstr ""
+
+msgid "Print the document using your browser print dialog."
+msgstr ""
+
+msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
+msgstr ""
+
 msgid "Proceed to Login page"
 msgstr "进入登录页面"
 
 msgid "Proceed to Merge"
 msgstr "继续合并"
+
+msgid "Rasterize SVG images"
+msgstr ""
 
 msgid "Read"
 msgstr "读"
@@ -1251,8 +1354,14 @@ msgstr "删除方程"
 msgid "Remove image"
 msgstr "删除图像"
 
+msgid "Remove lines left over in the text from language check."
+msgstr ""
+
 msgid "Remove link"
 msgstr "删除链接"
+
+msgid "Remove marks"
+msgstr ""
 
 msgid "Remove the code block."
 msgstr "删除代码块。"
@@ -1269,6 +1378,9 @@ msgstr "已删除"
 msgid "Removed code block"
 msgstr "删除了代码块"
 
+msgid "Render formulas as SVG images instead of MathML"
+msgstr ""
+
 msgid "Replace"
 msgstr "代替"
 
@@ -1281,6 +1393,9 @@ msgstr "替换为"
 msgid "replies"
 msgstr "回复"
 
+msgid "Request"
+msgstr ""
+
 msgid "Request Access"
 msgstr "请求访问权限"
 
@@ -1292,6 +1407,9 @@ msgstr "解决"
 
 msgid "Resolve comment"
 msgstr "解决评论"
+
+msgid "Resolve tracked changes (accept all)"
+msgstr ""
 
 msgid "Resolved comments"
 msgstr "已解决的评论"
@@ -1358,6 +1476,9 @@ msgstr "搜索..."
 
 msgid "See document statistics."
 msgstr "参见文档统计。"
+
+msgid "Select a higher access level to request from the document owner."
+msgstr ""
 
 msgid "Select document editing tool."
 msgstr "选择文档编辑工具。"
@@ -1431,6 +1552,9 @@ msgstr "显示键盘快捷键"
 msgid "show less"
 msgstr "显示较少"
 
+msgid "Show link annotation borders"
+msgstr ""
+
 msgid "show more"
 msgstr "显示更多"
 
@@ -1455,6 +1579,9 @@ msgstr "注册或登录"
 msgid "Slim FIDUS"
 msgstr "苗条FIDUS"
 
+msgid "Small lines at the corners of the page that show printers where to cut the paper."
+msgstr ""
+
 msgid "Spanish"
 msgstr "西班牙语"
 
@@ -1466,6 +1593,15 @@ msgstr "指定此列表从哪个数字开始计数"
 
 msgid "Specify whether the work can be accessed without paying a fee."
 msgstr "指定是否可以在不付费的情况下访问该作品。"
+
+msgid "Spell/grammar check finished."
+msgstr ""
+
+msgid "Spell/grammar check initialized."
+msgstr ""
+
+msgid "Spell/grammar checker"
+msgstr ""
 
 msgid "Split cell"
 msgstr "分裂细胞"
@@ -1494,11 +1630,17 @@ msgstr "下标"
 msgid "Superscript"
 msgstr "上标"
 
+msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgstr ""
+
 msgid "Symbols and Roman Letters"
 msgstr "符号和罗马字母"
 
 msgid "Table"
 msgstr "表格"
+
+msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
+msgstr ""
 
 msgid "Text before"
 msgstr "之前的文字"
@@ -1509,58 +1651,46 @@ msgstr "文本语言"
 msgid "Text replaced successfully"
 msgstr "文字替换成功"
 
-msgid ""
-"The change could not be applied automatically. Please consider using the "
-"copy option to copy the changes."
+msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "无法自动应用更改。请考虑使用复制选项来复制更改。"
 
 msgid "The current password is incorrect."
 msgstr "当前密码不正确。"
 
-msgid ""
-"The document password was changed by another user. You will need to enter "
-"the new password to continue editing."
+msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
+msgstr ""
+
+msgid "The document password was changed by another user. You will need to enter the new password to continue editing."
 msgstr "文档密码已被其他用户更改。您需要输入新密码才能继续编辑。"
 
-msgid ""
-"The document was modified substantially by other users while you were "
-"offline. We have merged your changes in as tracked changes. You should "
-"verify that your edits still make sense."
+msgid "The document was modified substantially by other users while you were offline. We have merged your changes in as tracked changes. You should verify that your edits still make sense."
 msgstr "当您离线时，其他用户对该文档进行了大幅修改。我们已将您的更改合并为跟踪更改。您应该验证您的编辑仍然有意义。"
 
-msgid ""
-"The editors in the middle and on the right will show content that is "
-"highlighted in green. They also contain text that is highlighted in red. The"
-" text marked in green corresponds to the text that was edited (added) by you"
-" or other users. The text marked in red corresponds to text that was deleted"
-" by either you or other users. The insertions and deletions made by other "
-"users will be marked in the merge editor. The insertions and deletions made "
-"by you will be marked in the offline editor on the right."
+msgid "The editors in the middle and on the right will show content that is highlighted in green. They also contain text that is highlighted in red. The text marked in green corresponds to the text that was edited (added) by you or other users. The text marked in red corresponds to text that was deleted by either you or other users. The insertions and deletions made by other users will be marked in the merge editor. The insertions and deletions made by you will be marked in the offline editor on the right."
+msgstr "中间和右侧的编辑器将显示以绿色突出显示的内容。它们还包含以红色突出显示的文本。标记为绿色的文本对应于您或其他用户编辑（添加）的文本。以红色标记的文本对应于您或其他用户删除的文本。其他用户所做的插入和删除将在合并编辑器中标记。您所做的插入和删除将会在右侧的离线编辑器中标记出来。"
+
+msgid "The file is locked by another session. Changes cannot be saved until the lock is released."
 msgstr ""
-"中间和右侧的编辑器将显示以绿色突出显示的内容。它们还包含以红色突出显示的文本。标记为绿色的文本对应于您或其他用户编辑（添加）的文本。以红色标记的文本对应于您或其他用户删除的文本。其他用户所做的插入和删除将在合并编辑器中标记。您所做的插入和删除将会在右侧的离线编辑器中标记出来。"
 
 msgid "The format used by the USA and some other American countries."
 msgstr "美国和其他一些美洲国家使用的格式。"
 
-msgid ""
-"The recovery key you entered is incorrect, or the recovery process failed. "
-"Please try again."
+msgid "The ignore lists could not be saved."
+msgstr ""
+
+msgid "The language pack for the document language could not be loaded."
+msgstr ""
+
+msgid "The recovery key you entered is incorrect, or the recovery process failed. Please try again."
 msgstr "您输入的恢复密钥不正确，或者恢复过程失败。请再试一次。"
 
-msgid ""
-"This document is end-to-end encrypted. Collaborators without a personal "
-"passphrase will need the document password shared with them through a secure"
-" channel outside of Fidus Writer. Do not send the password through the "
-"document chat."
-msgstr ""
-"该文档是端到端加密的。没有个人密码的协作者将需要通过 Fidus Writer 外部的安全通道与他们共享文档密码。不要通过文档聊天发送密码。"
+msgid "This document is end-to-end encrypted. Collaborators without a personal passphrase will need the document password shared with them through a secure channel outside of Fidus Writer. Do not send the password through the document chat."
+msgstr "该文档是端到端加密的。没有个人密码的协作者将需要通过 Fidus Writer 外部的安全通道与他们共享文档密码。不要通过文档聊天发送密码。"
 
 msgid "This person is already in your contacts!"
 msgstr "此人已在您的联系人中！"
 
-msgid ""
-"This share link has expired or is invalid. Please ask the document owner for"
-" a new link."
+msgid "This share link has expired or is invalid. Please ask the document owner for a new link."
 msgstr "此分享链接已过期或无效。请向文档所有者询问新链接。"
 
 msgid "Title"
@@ -1599,11 +1729,17 @@ msgstr "工具"
 msgid "Track changes"
 msgstr "追踪变更"
 
+msgid "Tracked changes"
+msgstr ""
+
 msgid "Tracking"
 msgstr "追踪"
 
 msgid "Tracking changes to the document"
 msgstr "跟踪文档的更改"
+
+msgid "Trim box"
+msgstr ""
 
 msgid "Type formula"
 msgstr "类型公式"
@@ -1641,9 +1777,7 @@ msgstr "美国信"
 msgid "User"
 msgstr "用户"
 
-msgid ""
-"Warning! Not all your changes have been saved! You could suffer data loss. "
-"Attempting to reconnect..."
+msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "警告！并非所有更改都已保存！您可能会丢失数据。正在尝试重新连接..."
 
 msgid "Warnings"
@@ -1658,13 +1792,10 @@ msgstr "编辑器中的绿色和红色突出显示是什么？"
 msgid "What do I do after completing the merge?"
 msgstr "完成合并后我该怎么办？"
 
-msgid ""
-"What happens if I try to complete merge without resolving all the changes?"
+msgid "What happens if I try to complete merge without resolving all the changes?"
 msgstr "如果我尝试完成合并而不解决所有更改，会发生什么情况？"
 
-msgid ""
-"What if my collaborators continue working on the document while I am "
-"merging?"
+msgid "What if my collaborators continue working on the document while I am merging?"
 msgstr "如果我合并时我的协作者继续处理文档怎么办？"
 
 msgid "Why am I seeing this merge dialog?"
@@ -1681,6 +1812,9 @@ msgstr "字数计数器"
 
 msgid "Words"
 msgstr "字"
+
+msgid "Words and word combinations that the spell checker should accept as correct. One word or phrase per line."
+msgstr ""
 
 msgid "Wrap selection in bullet list"
 msgstr "在项目符号列表中换行选择"
@@ -1706,70 +1840,48 @@ msgstr "编写跟踪更改，但看不到其他人的评论和聊天"
 msgid "Year"
 msgstr "年"
 
-msgid ""
-"Yes, you are the only one who can see this dialog. Therefore it would be "
-"great if you could ask your collaborators to stop editing the document, so "
-"that once you are finished with the merge, it will not lead to more "
-"conflicts."
+msgid "Yes, you are the only one who can see this dialog. Therefore it would be great if you could ask your collaborators to stop editing the document, so that once you are finished with the merge, it will not lead to more conflicts."
 msgstr "是的，您是唯一可以看到此对话框的人。因此，如果您能要求您的协作者停止编辑文档，那就太好了，这样一旦您完成合并，就不会导致更多冲突。"
+
+msgid "You already have the highest possible access level."
+msgstr ""
 
 msgid "You are currently offline. Please try again when you are back online."
 msgstr "您目前处于离线状态。请当您重新上线后重试。"
 
-msgid ""
-"You are seeing this merge dialog because you were offline for a long time, "
-"and the changes you made to the document while you were offline conflicted "
-"with the changes made by other users. So it was not possible to merge your "
-"edits in automatically."
+msgid "You are seeing this merge dialog because you were offline for a long time, and the changes you made to the document while you were offline conflicted with the changes made by other users. So it was not possible to merge your edits in automatically."
 msgstr "您看到此合并对话框是因为您长时间离线，并且您在离线状态下对文档所做的更改与其他用户所做的更改发生冲突。因此无法自动合并您的编辑。"
 
-msgid ""
-"You can edit the content only in the merge editor in the middle. You cannot "
-"edit content in the other two editors."
+msgid "You can edit the content only in the merge editor in the middle. You cannot edit content in the other two editors."
 msgstr "您只能在中间的合并编辑器中编辑内容。您无法在其他两个编辑器中编辑内容。"
 
 msgid "You cannot add yourself to your contacts!"
 msgstr "您无法将自己添加到联系人中！"
 
-msgid ""
-"You will receive a warning when you try to complete a merge without "
-"accepting or rejecting all of the changes. You can still proceed to merge "
-"the document. If you do that, all the insertions and deletions in the merge "
-"editor in the middle will be accepted automatically, and all the insertions "
-"and deletions in the offline editor on the right will be ignored."
+msgid "You do not have access to this document. Select the access level you would like to request from the document owner."
 msgstr ""
-"当您尝试在不接受或拒绝所有更改的情况下完成合并时，您将收到警告。您仍然可以继续合并文档。如果这样做，中间的合并编辑器中的所有插入和删除将被自动接受，而右侧的离线编辑器中的所有插入和删除将被忽略。"
+
+msgid "You will receive a warning when you try to complete a merge without accepting or rejecting all of the changes. You can still proceed to merge the document. If you do that, all the insertions and deletions in the merge editor in the middle will be accepted automatically, and all the insertions and deletions in the offline editor on the right will be ignored."
+msgstr ""
 
 msgid "Your access request has been sent to the document owner."
 msgstr "您的访问请求已发送给文档所有者。"
 
-msgid ""
-"Your Access rights have been modified. You now have %(accessRight)s access "
-"to this document."
+msgid "Your Access rights have been modified. You now have %(accessRight)s access to this document."
 msgstr "您的访问权限已被修改。您现在拥有 %(accessRight)s 对此文档的访问权限。"
 
-msgid ""
-"Your access rights were modified while you were offline, so we cannot save "
-"your work to the server any longer, and it is downloaded to your computer "
-"instead. Please consider importing it into a new document."
+msgid "Your access rights were modified while you were offline, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
 msgstr "您的访问权限在您离线时被修改，因此我们无法再将您的工作保存到服务器，而是将其下载到您的计算机。请考虑将其导入到新文档中。"
 
 msgid "Your document was out of sync and has been reset."
 msgstr "您的文档不同步并已重置。"
 
-msgid ""
-"Your personal passphrase will still unlock this document. A new random "
-"password is generated automatically. Other passphrase users will receive it "
-"automatically; non-passphrase collaborators need it shared with them "
-"manually."
+msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "您的个人密码仍将解锁此文档。自动生成新的随机密码。其他密码用户将自动收到；非密码短语协作者需要手动与他们共享。"
 
-msgid ""
-"Your session expired while you were offline, so we cannot save your work to "
-"the server any longer, but you can download it to your computer instead. "
-"Please consider importing it as a new document after logging in."
-msgstr ""
-"当您处于离线状态时，您的会话已过期，因此我们无法再将您的工作保存到服务器，但您可以将其下载到您的计算机上。请考虑在登录后将其作为新文档导入。"
+msgid "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in."
+msgstr "当您处于离线状态时，您的会话已过期，因此我们无法再将您的工作保存到服务器，但您可以将其下载到您的计算机上。请考虑在登录后将其作为新文档导入。"
 
 msgid "YYYY-MM-DD or empty"
 msgstr "YYYY-MM-DD 或空"
+
