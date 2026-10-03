@@ -1,0 +1,25 @@
+.fw-file-selector {
+    line-height: 1.2em;
+    padding: 10px 10px 10px 20px;
+}
+
+.fw-file-selector p.fw-file {
+    text-indent: -10px;
+}
+
+.fw-file-selector .fa-plus-square,
+.fw-file-selector .fa-minus-square {
+    margin-left: -16px;
+}
+
+.fw-file-selector .fa-plus-square,
+.fw-file-selector .fa-minus-square,
+.fw-file-selector .fw-file-name,
+.fw-file-selector .fw-folder-name {
+    cursor: pointer;
+}
+
+.fw-file-selector .fw-file-name.fw-selected,
+.fw-file-selector .fw-folder-name.fw-selected {
+    text-decoration: underline;
+}
