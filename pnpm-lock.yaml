@@ -2304,6 +2304,7 @@ packages:
 
   paged-with-floats@0.11.1:
     resolution: {integrity: sha512-VqlEMdzBc6/twdyFx5RojmxPsS8p4rk2Srjc9A+ak6U/QI+MohQLL1653iYq6VjbXw3e0cEZxAdXIjPWZljRqg==}
+    deprecated: paged-with-floats has been renamed to paginate-for-print. Use paginate-for-print (v1.0.0 or later) instead.
 
   pages-to-pdf@0.3.10:
     resolution: {integrity: sha512-k/WF0d7AyOWHM5v8V6qWEjYmWdZbe9sL6TYoWoGlTz7wVEje6nMaGV1qKzu2+wTYfjNugTtIdCyXAnF/nt85Vw==}

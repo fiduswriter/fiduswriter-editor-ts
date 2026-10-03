@@ -111,10 +111,10 @@ export interface StaticAppConfig {
     fileMenuItems?: boolean
     /**
      * The pagination engine used by the print and PDF exporters
-     * ("paged-with-floats" or "vivliostyle-pdf"). The host must also
+     * ("paginate-for-print" or "vivliostyle-pdf"). The host must also
      * register the engine (see
      * `@fiduswriter/document/exporter/print/engines/`). Defaults to
-     * "paged-with-floats".
+     * "paginate-for-print".
      */
     printEngine?: string
     /**
