@@ -1,3 +1,4 @@
+minimumReleaseAge: 0
 allowBuilds:
     "@parcel/watcher": true
     "@swc/core": true
@@ -6,20 +7,6 @@ allowBuilds:
     es5-ext: true
     esbuild: true
     unrs-resolver: true
-minimumReleaseAgeExclude:
-    - "@fiduswriter/bibliography-manager@0.1.34"
-    - "@fiduswriter/document@0.3.17"
-    - paged-with-floats@0.11.0
-    - pages-to-pdf@0.3.10
-    - lingotweaker-data@0.2.1 || 0.2.2 || 0.2.3
-    - lingotweaker-wasm@0.2.1 || 0.2.2 || 0.2.3
-    - lingotweaker-data-de@0.2.2
-    - lingotweaker-data-en@0.2.2
-    - lingotweaker-data-es@0.2.2
-    - lingotweaker-data-fr@0.2.2
-    - lingotweaker-data-it@0.2.2
-    - lingotweaker-data-pt@0.2.2
-    - "paged-with-floats@0.11.1"
 overrides:
     test-exclude: ^8.0.0
     "@xmldom/xmldom": 0.9.12
