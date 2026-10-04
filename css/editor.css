@@ -107,6 +107,27 @@ body.fw-editor {
     border-bottom: 1px solid var(--cs-5-border);
 }
 
+/* A host-supplied logo, rendered before the document title. The editor has no
+   branding of its own, so a standalone host supplies one. Absolutely positioned
+   because #document-top is a block whose other children (the nav and the
+   participant list) must keep their own layout.
+
+   The offsets mirror the fox-face background on the title below, so the two do
+   not collide: 42px in the roomy layout, 14px in the compact one. */
+#document-logo {
+    position: absolute;
+    left: 42px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+#document-top {
+    position: relative;
+}
+
 #document-top > h1 {
     font-size: 22px;
     color: var(--cs-5-text);
@@ -1157,6 +1178,12 @@ html[hc="a5"] #toolbar {
         background-position: 14px 0;
     }
 
+    #document-logo {
+        left: 14px;
+        width: 26px;
+        height: 26px;
+    }
+
     #header-navigation {
         margin-left: 52px;
     }
@@ -1193,6 +1220,10 @@ html[hc="a5"] #toolbar {
     #document-top > h1 {
         background: initial;
         padding-left: 8px;
+    }
+
+    #document-logo {
+        display: none;
     }
 
     #header-navigation {

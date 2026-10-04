@@ -118,6 +118,19 @@ rebuilding cannot accumulate duplicates. Give entries ids.
 The view renders `content` in array order, so genuinely new entries are
 prepended. `order` is not consulted for ordering.
 
+## Host-supplied branding
+
+The editor carries no branding: the Django backend renders its logo in the page
+chrome around the editor, and a standalone or embedded host supplies its own.
+`StaticAppConfig.logoUrl` puts an `<img id="document-logo">` at the head of
+`#document-top`, before the document title, and nothing is rendered when it is
+unset.
+
+`#document-top > h1` also draws a small fox face as a CSS background
+(`static/img/fidus_face.avif`), but a container query drops it below 1023px of
+editor width. `#document-logo` mirrors those offsets — 42px roomy, 14px compact,
+hidden narrow — so the two never overlap.
+
 ## Notes
 
 - This package depends on `@fiduswriter/document` for the document model and

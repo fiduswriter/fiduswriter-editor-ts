@@ -124,6 +124,16 @@ export interface StaticAppConfig {
      */
     extraFileMenuItems?: HostFileMenuItem[]
     /**
+     * URL of a logo to show at the head of the editor's header, before the
+     * document title.
+     *
+     * The editor has no branding of its own — the Django backend puts its logo
+     * in the page chrome around the editor — so a standalone or embedded host
+     * supplies one. Omitted or empty means no logo element is rendered, rather
+     * than an empty one.
+     */
+    logoUrl?: string
+    /**
      * The pagination engine used by the print and PDF exporters
      * ("paginate-for-print" or "vivliostyle-pdf"). The host must also
      * register the engine (see
@@ -438,6 +448,7 @@ export async function createStaticApp(
             SHOW_FILE_MENU_ITEMS: config.fileMenuItems ?? true,
             // Read by the Editor constructor and spliced into the File menu.
             EXTRA_FILE_MENU_ITEMS: config.extraFileMenuItems ?? [],
+            LOGO_URL: config.logoUrl ?? "",
             PRINT_ENGINE: config.printEngine
         },
         csl: config.csl,
