@@ -1422,6 +1422,10 @@ export type {
     EditorContactsApi,
     HostFileMenuItem
 } from "./types.js"
+// Exported so a host can surface the ignored-words dialog from its own UI.
+// The editor reaches it through the Settings menu; a host with its own menu
+// entry (the desktop application's Preferences dialog) needs the same dialog.
+export {DialogIgnoredWords} from "./grammar/ignored_words_dialog.js"
 export {createStaticEditor} from "./static_editor.js"
 export type {StaticEditorConfig} from "./static_editor.js"
 export {createStaticApp} from "./static_app.js"
