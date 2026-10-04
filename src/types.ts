@@ -136,6 +136,47 @@ export interface EditorDocumentImportApi {
     ): Promise<{json: unknown; status: number}>
 }
 
+/**
+ * An extra entry a host adds to the editor's **File** menu.
+ *
+ * Hosts without a Fidus Writer backend have document-level actions that the
+ * editor cannot know about — Open, Save as, New — because in a standalone or
+ * embedded editor the document lifecycle belongs to the host. Rather than have
+ * the host bolt a separate toolbar onto the page, it can pass these and they
+ * appear inside the editor's own File menu, above the built-in entries.
+ *
+ * Deliberately mirrors the editor's internal headerbar action-item shape, so
+ * there is one menu implementation and one look.
+ */
+export interface HostFileMenuItem {
+    /**
+     * Stable identifier. Optional, but supplying one lets a host replace its own
+     * entry on a re-render instead of appending a duplicate.
+     */
+    id?: string
+    /** Label. May be a function, e.g. to append the document title. */
+    title: string | ((editor: Editor) => string)
+    /** Tooltip text. */
+    tooltip?: string | ((editor: Editor) => string)
+    /**
+     * Invoked when the entry is chosen. Receives the editor, so a host can reach
+     * `editor.docInfo`, the export dialogs, and so on.
+     */
+    action: (editor: Editor) => void
+    /** Hidden when this returns false. Defaults to always shown. */
+    available?: (editor: Editor) => boolean
+    /** Shown greyed out and unselectable when this returns true. */
+    disabled?: (editor: Editor) => boolean
+    /** A Font Awesome class name. */
+    icon?: string
+    /**
+     * Sort weight within the File menu. The editor renders entries in array
+     * order, so this is only consulted when a host mixes its own entries with
+     * its own; it does not reorder the editor's built-in items.
+     */
+    order?: number
+}
+
 /** Minimal app interface — only the fields the Editor actually uses. */
 export interface EditorApp {
     routes: Record<string, {app: string; [key: string]: unknown}>
@@ -148,6 +189,12 @@ export interface EditorApp {
          * Create copy. Defaults to showing them.
          */
         SHOW_FILE_MENU_ITEMS?: boolean
+        /**
+         * Host-provided entries for the File menu, populated from
+         * {@link StaticAppConfig.extraFileMenuItems}. Set by the host plumbing;
+         * hosts should configure it rather than assign it.
+         */
+        EXTRA_FILE_MENU_ITEMS?: HostFileMenuItem[]
         /**
          * The pagination engine used by the print and PDF exporters
          * ("paginate-for-print" or "vivliostyle-pdf"). Hosts that select

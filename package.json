@@ -83,7 +83,7 @@
         "lint:fix": "eslint src --fix",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js && node test/no-collab-save-merge.js && node test/no-collab-save-scheduling.js && node test/copy-serializer.js && node test/comment-store.js && node test/import-comments.js && node test/contributor-dialog.js && node test/paste-slice.js && node test/tracked-changes.js",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js && node test/no-collab-save-merge.js && node test/no-collab-save-scheduling.js && node test/copy-serializer.js && node test/comment-store.js && node test/import-comments.js && node test/contributor-dialog.js && node test/paste-slice.js && node test/tracked-changes.js && node test/host-file-menu-items.js",
         "test:e2e": "playwright test",
         "test:e2e:install": "playwright install chromium",
         "deploy-pages": "./scripts/deploy-pages.sh",
@@ -92,7 +92,7 @@
         "testserver": "node scripts/serve-demo.js"
     },
     "dependencies": {
-        "@fiduswriter/bibliography-manager": "^0.1.34",
+        "@fiduswriter/bibliography-manager": "^0.1.35",
         "@fiduswriter/document": "^0.3.19",
         "@fiduswriter/image-manager": "^0.1.28",
         "@fortawesome/fontawesome-free": "^7.2.0",

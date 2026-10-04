@@ -99,6 +99,25 @@ npm run typecheck
 - Statically served pages and browser demos that use `createStaticEditor` or
   `createStaticApp` without a backend server.
 
+## Host-provided File-menu entries
+
+`StaticAppConfig.extraFileMenuItems` lets a host add entries to the editor's
+**File** menu, above the built-in ones. A host without a Fidus Writer backend
+owns the document lifecycle — which file is open, where it is saved, what "New"
+means — so the editor cannot supply Open, Save as or New itself. Supplying them
+this way keeps one menu and one look, instead of the host bolting a separate
+toolbar onto the page.
+
+The shape is `HostFileMenuItem` (`src/types.ts`); the splicing is
+`addHostFileMenuItems` in `src/menus/headerbar/host_items.ts`, applied by the
+`Editor` constructor the same way `document_template` adds its own "Create copy
+as ..." entry. Entries are matched by `id`: an entry whose id matches an existing
+one replaces it **in place**, so overriding cannot reorder the menu and
+rebuilding cannot accumulate duplicates. Give entries ids.
+
+The view renders `content` in array order, so genuinely new entries are
+prepended. `order` is not consulted for ordering.
+
 ## Notes
 
 - This package depends on `@fiduswriter/document` for the document model and

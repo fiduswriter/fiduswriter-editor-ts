@@ -49,6 +49,7 @@ import {ModFootnotes} from "./footnotes/index.js"
 import {ModGrammar} from "./grammar/index.js"
 import {buildEditorKeymap} from "./keymap.js"
 import {
+    addHostFileMenuItems,
     codeBlockMenuModel,
     figureMenuModel,
     figureWidthMenuModel,
@@ -243,6 +244,14 @@ export class Editor {
             figureWidthMenuModel: figureWidthMenuModel(),
             codeBlockMenuModel: codeBlockMenuModel()
         }
+
+        // Host-provided File-menu entries (Open, Save as, New, ...). Applied
+        // after construction, like `document_template` does for its own entry.
+        addHostFileMenuItems(
+            this.menu.headerbarModel,
+            (app.settings as {EXTRA_FILE_MENU_ITEMS?: unknown})
+                .EXTRA_FILE_MENU_ITEMS as never
+        )
         this.client_id = Math.floor(Math.random() * 0xffffffff)
         this.clientTimeAdjustment = 0
 
@@ -1410,7 +1419,8 @@ export class Editor {
 export type {
     EditorDocumentApi,
     EditorDocumentImportApi,
-    EditorContactsApi
+    EditorContactsApi,
+    HostFileMenuItem
 } from "./types.js"
 export {createStaticEditor} from "./static_editor.js"
 export type {StaticEditorConfig} from "./static_editor.js"

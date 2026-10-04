@@ -1,4 +1,4 @@
-import type {CSL, EditorImageDB} from "./types.js"
+import type {CSL, EditorImageDB, HostFileMenuItem} from "./types.js"
 import {BibliographyDB} from "@fiduswriter/bibliography-manager/database"
 import type {BibliographyApi} from "@fiduswriter/bibliography-manager"
 import {ImageDB} from "@fiduswriter/image-manager/database"
@@ -109,6 +109,20 @@ export interface StaticAppConfig {
      * `false` to match the behavior of a normal external-mode editor.
      */
     fileMenuItems?: boolean
+    /**
+     * Extra entries for the editor's **File** menu, rendered above the built-in
+     * ones.
+     *
+     * A standalone or embedded host owns the document lifecycle, so the editor
+     * cannot know what Open, Save as or New mean for it. Supplying them here
+     * puts them in the editor's own menu instead of requiring a separate
+     * toolbar: the desktop application uses this for New…, Open… and Save as…,
+     * and an embedded host can do the same.
+     *
+     * An entry whose `id` matches an existing one replaces it, so rebuilding the
+     * menu does not accumulate duplicates.
+     */
+    extraFileMenuItems?: HostFileMenuItem[]
     /**
      * The pagination engine used by the print and PDF exporters
      * ("paginate-for-print" or "vivliostyle-pdf"). The host must also
@@ -422,6 +436,8 @@ export async function createStaticApp(
             // editor) hide the file-menu items that need one: Share, Save
             // revision, Create copy.
             SHOW_FILE_MENU_ITEMS: config.fileMenuItems ?? true,
+            // Read by the Editor constructor and spliced into the File menu.
+            EXTRA_FILE_MENU_ITEMS: config.extraFileMenuItems ?? [],
             PRINT_ENGINE: config.printEngine
         },
         csl: config.csl,

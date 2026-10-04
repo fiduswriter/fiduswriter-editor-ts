@@ -1,4 +1,8 @@
-export {HeaderbarView, headerbarModel} from "./headerbar/index.js"
+export {
+    HeaderbarView,
+    addHostFileMenuItems,
+    headerbarModel
+} from "./headerbar/index.js"
 export {ToolbarView, toolbarModel} from "./toolbar/index.js"
 export {SelectionMenuView, selectionMenuModel} from "./selection/index.js"
 export {tableMenuModel} from "./table/index.js"

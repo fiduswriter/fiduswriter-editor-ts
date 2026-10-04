@@ -13,8 +13,8 @@ importers:
   .:
     dependencies:
       '@fiduswriter/bibliography-manager':
-        specifier: ^0.1.34
-        version: 0.1.34(@pdfme/pdf-lib@6.2.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
+        specifier: ^0.1.35
+        version: 0.1.35(@pdfme/pdf-lib@6.2.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
       '@fiduswriter/document':
         specifier: ^0.3.19
         version: 0.3.19(@pdfme/pdf-lib@6.2.2)
@@ -604,11 +604,8 @@ packages:
     resolution: {integrity: sha512-IkO+/KEUvwbVpiURZg+P7zF74z5Jxe0UgJxVni+RtoHQ6IZieXaO02kmadomap/q+l6bc/jdPGGqTjhuZnuz1Q==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@fiduswriter/bibliography-manager@0.1.34':
-    resolution: {integrity: sha512-QnAjaerr00r9So6oCamyTFt5UIoIeAYF09IE1Z4PH827WgvQGIjYuyWg/xsQxPEiAm7mHr3n5HLTe8SsFuwaCQ==}
-
-  '@fiduswriter/document@0.3.17':
-    resolution: {integrity: sha512-gq5nWX8ofe0Nh/MgEjEiYHLZFN2sNSx+Sc32S5y2x6wJVOo5ERGxzWYxR5gy37wMWiQ/dAB+gVuq+jwEdGgYGw==}
+  '@fiduswriter/bibliography-manager@0.1.35':
+    resolution: {integrity: sha512-r6e8UZO37DcCKGApbrJz+qWvMdiQC+qo747SmY7bIOpQDqCEWZ+WIC9FGEv4BnsyTRyBI6SZAxIs6zvHI6gIHw==}
 
   '@fiduswriter/document@0.3.19':
     resolution: {integrity: sha512-Yte18A8Yr4NmVJC6XzAwZ/IookgEw0ZLXCP5ubkUMlSml67ek1+d73upIniZLGCd4PtQn1d95Vhg/lGrbCPXlA==}
@@ -2305,13 +2302,6 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
-  paged-with-floats@0.11.1:
-    resolution: {integrity: sha512-VqlEMdzBc6/twdyFx5RojmxPsS8p4rk2Srjc9A+ak6U/QI+MohQLL1653iYq6VjbXw3e0cEZxAdXIjPWZljRqg==}
-    deprecated: paged-with-floats has been renamed to paginate-for-print. Use paginate-for-print (v1.0.0 or later) instead.
-
-  pages-to-pdf@0.3.10:
-    resolution: {integrity: sha512-k/WF0d7AyOWHM5v8V6qWEjYmWdZbe9sL6TYoWoGlTz7wVEje6nMaGV1qKzu2+wTYfjNugTtIdCyXAnF/nt85Vw==}
-
   pages-to-pdf@0.4.1:
     resolution: {integrity: sha512-Y91uRab9lJNzw9M89QPzX6pd/ITG9MGSMx7RCA9cY7l3SM3oh5Tj9i8XTrIBxUyffiHFWVcsz+W6MotuwMwqBA==}
 
@@ -3117,9 +3107,9 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fiduswriter/bibliography-manager@0.1.34(@pdfme/pdf-lib@6.2.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)':
+  '@fiduswriter/bibliography-manager@0.1.35(@pdfme/pdf-lib@6.2.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)':
     dependencies:
-      '@fiduswriter/document': 0.3.17(@pdfme/pdf-lib@6.2.2)
+      '@fiduswriter/document': 0.3.19(@pdfme/pdf-lib@6.2.2)
       bibliojson: 4.1.0
       fix-utf8: 2.0.1
       fwtoolkit: 0.2.26(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
@@ -3133,40 +3123,6 @@ snapshots:
       - prosemirror-keymap
       - prosemirror-state
       - prosemirror-view
-
-  '@fiduswriter/document@0.3.17(@pdfme/pdf-lib@6.2.2)':
-    dependencies:
-      '@mathjax/mathjax-newcm-font': 4.1.3
-      '@mathjax/src': 4.1.3
-      '@prettier/plugin-xml': 3.4.2(prettier@3.9.9)
-      bibliojson: 4.1.0
-      citeproc-plus: 2.0.4
-      downloadjs: 1.4.7
-      fast-deep-equal: 3.1.3
-      fast-xml-parser: 5.11.2
-      fwtoolkit: 0.2.26(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
-      jszip: 3.10.2
-      mathlive: 0.110.0
-      mathml-to-latex: 1.8.0
-      mathml2omml: 0.5.0
-      orderedmap: 2.1.1
-      paged-with-floats: 0.11.1(@pdfme/pdf-lib@6.2.2)
-      pages-to-pdf: 0.3.10
-      prettier: 3.9.9
-      prosemirror-commands: 1.7.2
-      prosemirror-gapcursor: 1.4.1
-      prosemirror-history: 1.5.1
-      prosemirror-keymap: 1.2.3
-      prosemirror-model: 1.25.12
-      prosemirror-schema-basic: 1.2.5
-      prosemirror-schema-list: 1.5.1
-      prosemirror-state: 1.4.4
-      prosemirror-tables: 1.8.5
-      prosemirror-transform: 1.12.2
-      prosemirror-view: 1.42.6
-      w3c-keyname: 2.2.8
-    transitivePeerDependencies:
-      - '@pdfme/pdf-lib'
 
   '@fiduswriter/document@0.3.19(@pdfme/pdf-lib@6.2.2)':
     dependencies:
@@ -5070,29 +5026,6 @@ snapshots:
   p-try@2.2.0: {}
 
   package-json-from-dist@1.0.1: {}
-
-  paged-with-floats@0.11.1(@pdfme/pdf-lib@6.2.2):
-    dependencies:
-      '@babel/runtime': 7.29.7
-      '@chenglou/pretext': 0.0.8
-      clear-cut: 2.0.2
-      css-tree: 1.1.3
-      event-emitter: 0.3.5
-      fontkit: 2.0.4
-      pages-to-pdf: 0.3.10
-      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.2)
-    optionalDependencies:
-      fonteditor-core: 2.6.3
-    transitivePeerDependencies:
-      - '@pdfme/pdf-lib'
-
-  pages-to-pdf@0.3.10:
-    dependencies:
-      '@mathjax/src': 4.1.3
-      '@pdfme/pdf-lib': 6.2.2
-      fonteditor-core: 2.6.3
-      fontkit: 2.0.4
-      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.2)
 
   pages-to-pdf@0.4.1:
     dependencies:
