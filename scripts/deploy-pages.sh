@@ -74,6 +74,25 @@ cp "$ROOT/node_modules/@fiduswriter/document/static-libs/fonts/"*.ttf \
 cp "$ROOT/node_modules/@fiduswriter/document/static-libs/woff2/woff2.wasm" \
     "$BUILD_DIR/static/woff2/"
 
+# Copy the pagination polyfill the print and PDF exporters load into their
+# hidden iframe via staticUrl("paged/paged.polyfill.js") — the demo's
+# staticUrl maps that to static/paged/. Without it pagination never starts and
+# both Print and PDF export fail.
+#
+# Copy the directory wholesale so a rename of the file inside it keeps working.
+# Note that upstream paginate-for-print renamed its own dist file
+# (1.1.0 paged.polyfill.js -> 1.1.1 paginate.polyfill.js), but
+# @fiduswriter/document still vendors it under static-libs/paged/ and still
+# requests that path, so the directory name here must stay "paged".
+mkdir -p "$BUILD_DIR/static/paged"
+cp -r "$ROOT/node_modules/@fiduswriter/document/static-libs/paged/." \
+    "$BUILD_DIR/static/paged/"
+if [ ! -f "$BUILD_DIR/static/paged/paged.polyfill.js" ]; then
+    echo "ERROR: static/paged/paged.polyfill.js missing after copy —" \
+        "print and PDF export would 404." >&2
+    exit 1
+fi
+
 # Copy Font Awesome CSS and webfonts used by fwtoolkit and the editor.
 mkdir -p "$BUILD_DIR/css/fontawesome/css"
 mkdir -p "$BUILD_DIR/css/fontawesome/webfonts"

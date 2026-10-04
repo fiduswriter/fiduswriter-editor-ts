@@ -163,6 +163,9 @@ msgstr ""
 msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
 msgstr ""
 
+msgid "Applies to newly opened documents."
+msgstr ""
+
 msgid "Archiving and accessibility"
 msgstr ""
 
@@ -289,7 +292,13 @@ msgstr "Znaki ze spacjami"
 msgid "Characters without blanks"
 msgstr "Znaki bez spacji"
 
+msgid "Check as you type. Turning this off leaves checking available on demand, and uses less memory."
+msgstr ""
+
 msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar continuously"
 msgstr ""
 
 msgid "Check spelling and grammar in the document text."
@@ -337,6 +346,12 @@ msgstr "Styl cytatów"
 msgid "Cite"
 msgstr "Cytować"
 
+msgid "Click a citation to edit it in place, rather than opening a dropup."
+msgstr ""
+
+msgid "Click inline math to edit it directly, rather than opening a dropup."
+msgstr ""
+
 msgid "Close"
 msgstr "Zamknij"
 
@@ -345,6 +360,9 @@ msgstr "Zamknij dokument"
 
 msgid "Close the document and return to the document overview menu."
 msgstr "Zamknij dokument i wróć do menu przeglądu dokumentu."
+
+msgid "Close this document."
+msgstr ""
 
 msgid "Code"
 msgstr "Kod"
@@ -465,6 +483,9 @@ msgstr "Utwórz"
 
 msgid "Create a copy of the document."
 msgstr "Utwórz kopię dokumentu."
+
+msgid "Create a new, empty document."
+msgstr ""
 
 msgid "Create copy"
 msgstr "Utwórz kopię"
@@ -640,10 +661,19 @@ msgstr "Edytuj odsyłacz"
 msgid "Edit equation"
 msgstr "Edytuj równanie"
 
+msgid "Edit inline math in place"
+msgstr ""
+
 msgid "Edit link"
 msgstr "Edytuj link"
 
+msgid "Edit references inline"
+msgstr ""
+
 msgid "Edit the words and rules the spell checker accepts."
+msgstr ""
+
+msgid "Editing"
 msgstr ""
 
 msgid "Email"
@@ -753,6 +783,9 @@ msgstr "Eksportowanie..."
 
 msgid "External"
 msgstr "Zewnętrzny"
+
+msgid "Fidus Writer"
+msgstr "Pisarz Fidus"
 
 msgid "Figure"
 msgstr "Ilustracja"
@@ -874,6 +907,9 @@ msgstr ""
 msgid "Ignored words"
 msgstr ""
 
+msgid "Ignored words and rules…"
+msgstr ""
+
 msgid "Image"
 msgstr "Obraz"
 
@@ -945,6 +981,12 @@ msgstr "Instytucja"
 
 msgid "Instructions"
 msgstr "Instrukcje"
+
+msgid "Interface language"
+msgstr ""
+
+msgid "Interface language and spell-checking preferences."
+msgstr ""
 
 msgid "Internal"
 msgstr "Wewnętrzny"
@@ -1120,6 +1162,9 @@ msgstr "Nowy element listy"
 msgid "New paragraph"
 msgstr "Nowy akapit"
 
+msgid "New…"
+msgstr ""
+
 msgid "Next"
 msgstr "Następny"
 
@@ -1192,6 +1237,12 @@ msgstr "Dokument internetowy"
 msgid "Only major comments"
 msgstr "Tylko główne komentarze"
 
+msgid "Open a document, template or bibliography."
+msgstr ""
+
+msgid "Open…"
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "Otwórz/zamknij menu nagłówka"
 
@@ -1260,6 +1311,12 @@ msgstr "Polski"
 
 msgid "Portuguese (Brazil)"
 msgstr "portugalski (Brazylia)"
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Preferences…"
+msgstr ""
 
 msgid "Previous"
 msgstr "Poprzedni"
@@ -1644,6 +1701,9 @@ msgstr ""
 
 msgid "Text before"
 msgstr "Tekst wcześniej"
+
+msgid "Text checking"
+msgstr ""
 
 msgid "Text Language"
 msgstr "Język tekstu"

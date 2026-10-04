@@ -163,6 +163,9 @@ msgstr ""
 msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
 msgstr ""
 
+msgid "Applies to newly opened documents."
+msgstr ""
+
 msgid "Archiving and accessibility"
 msgstr ""
 
@@ -289,7 +292,13 @@ msgstr "الشخصيات مع الفراغات"
 msgid "Characters without blanks"
 msgstr "أحرف بدون فراغات"
 
+msgid "Check as you type. Turning this off leaves checking available on demand, and uses less memory."
+msgstr ""
+
 msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar continuously"
 msgstr ""
 
 msgid "Check spelling and grammar in the document text."
@@ -337,6 +346,12 @@ msgstr "نمط الاقتباس"
 msgid "Cite"
 msgstr "استشهد"
 
+msgid "Click a citation to edit it in place, rather than opening a dropup."
+msgstr ""
+
+msgid "Click inline math to edit it directly, rather than opening a dropup."
+msgstr ""
+
 msgid "Close"
 msgstr "إغلاق"
 
@@ -345,6 +360,9 @@ msgstr "إغلاق المستند"
 
 msgid "Close the document and return to the document overview menu."
 msgstr "أغلق المستند وارجع إلى قائمة النظرة العامة على المستند."
+
+msgid "Close this document."
+msgstr ""
 
 msgid "Code"
 msgstr "شفرة"
@@ -465,6 +483,9 @@ msgstr "إنشاء"
 
 msgid "Create a copy of the document."
 msgstr "قم بإنشاء نسخة من المستند."
+
+msgid "Create a new, empty document."
+msgstr ""
 
 msgid "Create copy"
 msgstr "إنشاء نسخة"
@@ -640,10 +661,19 @@ msgstr "تحرير الإسناد الترافقي"
 msgid "Edit equation"
 msgstr "تحرير المعادلة"
 
+msgid "Edit inline math in place"
+msgstr ""
+
 msgid "Edit link"
 msgstr "تعديل الرابط"
 
+msgid "Edit references inline"
+msgstr ""
+
 msgid "Edit the words and rules the spell checker accepts."
+msgstr ""
+
+msgid "Editing"
 msgstr ""
 
 msgid "Email"
@@ -753,6 +783,9 @@ msgstr "جارٍ التصدير..."
 
 msgid "External"
 msgstr "خارجي"
+
+msgid "Fidus Writer"
+msgstr "كاتب فيدوس"
 
 msgid "Figure"
 msgstr "شكل"
@@ -874,6 +907,9 @@ msgstr ""
 msgid "Ignored words"
 msgstr ""
 
+msgid "Ignored words and rules…"
+msgstr ""
+
 msgid "Image"
 msgstr "صورة"
 
@@ -945,6 +981,12 @@ msgstr "مؤسسة"
 
 msgid "Instructions"
 msgstr "تعليمات"
+
+msgid "Interface language"
+msgstr ""
+
+msgid "Interface language and spell-checking preferences."
+msgstr ""
 
 msgid "Internal"
 msgstr "داخلي"
@@ -1120,6 +1162,9 @@ msgstr "عنصر قائمة جديد"
 msgid "New paragraph"
 msgstr "فقرة جديدة"
 
+msgid "New…"
+msgstr ""
+
 msgid "Next"
 msgstr "التالي"
 
@@ -1192,6 +1237,12 @@ msgstr "وثيقة على الانترنت"
 msgid "Only major comments"
 msgstr "التعليقات الرئيسية فقط"
 
+msgid "Open a document, template or bibliography."
+msgstr ""
+
+msgid "Open…"
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "فتح/إغلاق القائمة الرئيسية"
 
@@ -1260,6 +1311,12 @@ msgstr "بولندي"
 
 msgid "Portuguese (Brazil)"
 msgstr "البرتغالية (البرازيل)"
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Preferences…"
+msgstr ""
 
 msgid "Previous"
 msgstr "سابق"
@@ -1644,6 +1701,9 @@ msgstr ""
 
 msgid "Text before"
 msgstr "النص من قبل"
+
+msgid "Text checking"
+msgstr ""
 
 msgid "Text Language"
 msgstr "لغة النص"

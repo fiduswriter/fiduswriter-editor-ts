@@ -163,6 +163,9 @@ msgstr "Applies all tracked changes so the exported file shows the document as i
 msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
 msgstr "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
 
+msgid "Applies to newly opened documents."
+msgstr ""
+
 msgid "Archiving and accessibility"
 msgstr ""
 
@@ -289,7 +292,13 @@ msgstr "Characters with blanks"
 msgid "Characters without blanks"
 msgstr "Characters without blanks"
 
+msgid "Check as you type. Turning this off leaves checking available on demand, and uses less memory."
+msgstr ""
+
 msgid "Check spelling and grammar automatically as you type."
+msgstr ""
+
+msgid "Check spelling and grammar continuously"
 msgstr ""
 
 msgid "Check spelling and grammar in the document text."
@@ -337,6 +346,12 @@ msgstr "Citation Style"
 msgid "Cite"
 msgstr "Cite"
 
+msgid "Click a citation to edit it in place, rather than opening a dropup."
+msgstr ""
+
+msgid "Click inline math to edit it directly, rather than opening a dropup."
+msgstr ""
+
 msgid "Close"
 msgstr "Close"
 
@@ -345,6 +360,9 @@ msgstr "Close document"
 
 msgid "Close the document and return to the document overview menu."
 msgstr "Close the document and return to the document overview menu."
+
+msgid "Close this document."
+msgstr ""
 
 msgid "Code"
 msgstr "Code"
@@ -465,6 +483,9 @@ msgstr "Create"
 
 msgid "Create a copy of the document."
 msgstr "Create a copy of the document."
+
+msgid "Create a new, empty document."
+msgstr ""
 
 msgid "Create copy"
 msgstr "Create copy"
@@ -640,10 +661,19 @@ msgstr "Edit cross reference"
 msgid "Edit equation"
 msgstr "Edit equation"
 
+msgid "Edit inline math in place"
+msgstr ""
+
 msgid "Edit link"
 msgstr "Edit link"
 
+msgid "Edit references inline"
+msgstr ""
+
 msgid "Edit the words and rules the spell checker accepts."
+msgstr ""
+
+msgid "Editing"
 msgstr ""
 
 msgid "Email"
@@ -753,6 +783,9 @@ msgstr "Exporting..."
 
 msgid "External"
 msgstr "External"
+
+msgid "Fidus Writer"
+msgstr "Fidus Writer"
 
 msgid "Figure"
 msgstr "Figure"
@@ -874,6 +907,9 @@ msgstr ""
 msgid "Ignored words"
 msgstr ""
 
+msgid "Ignored words and rules…"
+msgstr ""
+
 msgid "Image"
 msgstr "Image"
 
@@ -945,6 +981,12 @@ msgstr "Institution"
 
 msgid "Instructions"
 msgstr "Instructions"
+
+msgid "Interface language"
+msgstr ""
+
+msgid "Interface language and spell-checking preferences."
+msgstr ""
 
 msgid "Internal"
 msgstr "Internal"
@@ -1120,6 +1162,9 @@ msgstr "New list item"
 msgid "New paragraph"
 msgstr "New paragraph"
 
+msgid "New…"
+msgstr ""
+
 msgid "Next"
 msgstr "Next"
 
@@ -1192,6 +1237,12 @@ msgstr "Online Document"
 msgid "Only major comments"
 msgstr "Only major comments"
 
+msgid "Open a document, template or bibliography."
+msgstr ""
+
+msgid "Open…"
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "Open/close header menu"
 
@@ -1260,6 +1311,12 @@ msgstr "Polish"
 
 msgid "Portuguese (Brazil)"
 msgstr "Portuguese (Brazil)"
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Preferences…"
+msgstr ""
 
 msgid "Previous"
 msgstr "Previous"
@@ -1644,6 +1701,9 @@ msgstr ""
 
 msgid "Text before"
 msgstr "Text before"
+
+msgid "Text checking"
+msgstr ""
 
 msgid "Text Language"
 msgstr "Text Language"

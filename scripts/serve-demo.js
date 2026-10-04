@@ -182,6 +182,38 @@ async function buildDemo() {
         {recursive: true}
     )
 
+    // The pagination polyfill the print and PDF exporters load into their
+    // hidden iframe via staticUrl("paged/paged.polyfill.js"), which the demo's
+    // staticUrl maps to static/paged/. Without it pagination never starts and
+    // both Print and PDF export fail.
+    //
+    // Copy the directory wholesale so a rename of the file inside it keeps
+    // working. Upstream paginate-for-print renamed its own dist file (1.1.0
+    // paged.polyfill.js -> 1.1.1 paginate.polyfill.js), but
+    // @fiduswriter/document still vendors it under static-libs/paged/ and
+    // still requests that path, so the directory name here stays "paged".
+    const pagedDir = join(BUILD_DIR, "static", "paged")
+    await ensureDir(pagedDir)
+    await fs.cp(
+        join(
+            ROOT,
+            "node_modules",
+            "@fiduswriter",
+            "document",
+            "static-libs",
+            "paged"
+        ),
+        pagedDir,
+        {recursive: true}
+    )
+    const polyfill = join(pagedDir, "paged.polyfill.js")
+    if (!existsSync(polyfill)) {
+        throw new Error(
+            `${polyfill} missing after copy — print and PDF export would 404.`
+        )
+    }
+    console.log("Copied pagination polyfill ->", polyfill)
+
     console.log("Copying Font Awesome...")
     const faCssDir = join(BUILD_DIR, "css", "fontawesome", "css")
     const faFontsDir = join(BUILD_DIR, "css", "fontawesome", "webfonts")
