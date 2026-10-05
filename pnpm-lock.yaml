@@ -14,10 +14,10 @@ importers:
     dependencies:
       '@fiduswriter/bibliography-manager':
         specifier: ^0.1.35
-        version: 0.1.35(@pdfme/pdf-lib@6.2.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
+        version: 0.1.35(@pdfme/pdf-lib@6.2.3)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
       '@fiduswriter/document':
-        specifier: ^0.3.20
-        version: 0.3.20(@pdfme/pdf-lib@6.2.2)
+        specifier: ^0.3.22
+        version: 0.3.22(@pdfme/pdf-lib@6.2.3)
       '@fiduswriter/image-manager':
         specifier: ^0.1.28
         version: 0.1.28(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
@@ -55,8 +55,8 @@ importers:
         specifier: ^3.10.2
         version: 3.10.2
       lingotweaker-wasm:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       mathml-to-latex:
         specifier: ^1.8.0
         version: 1.8.0
@@ -179,23 +179,23 @@ importers:
         specifier: ^30.5.2
         version: 30.5.2(@types/node@26.6.4)(supports-color@8.1.1)
       lingotweaker-data-de:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       lingotweaker-data-en:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       lingotweaker-data-es:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       lingotweaker-data-fr:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       lingotweaker-data-it:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       lingotweaker-data-pt:
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       lint-staged:
         specifier: ^17.6.0
         version: 17.6.0
@@ -607,8 +607,8 @@ packages:
   '@fiduswriter/bibliography-manager@0.1.35':
     resolution: {integrity: sha512-r6e8UZO37DcCKGApbrJz+qWvMdiQC+qo747SmY7bIOpQDqCEWZ+WIC9FGEv4BnsyTRyBI6SZAxIs6zvHI6gIHw==}
 
-  '@fiduswriter/document@0.3.20':
-    resolution: {integrity: sha512-EihK8tTel+n6UjxBt/L/QX/3tSO0z4sqy5fp1MOqMleaxxO/3U0W8Gx5WHyptTIGlLeuTWFTg4/GEcohu//flQ==}
+  '@fiduswriter/document@0.3.22':
+    resolution: {integrity: sha512-rUokW9eg95rZDvqVyF6l+hbCjsIy9wQ+lWRiOstNJFIIOkqIb+c+jaQfjuqs0KchA3WQ1duO3gU8MXaLE7468A==}
 
   '@fiduswriter/image-manager@0.1.28':
     resolution: {integrity: sha512-8zJfLs2iUmwEoFfCYTrLbe0/PC63Q2pWi51stfrGrJ7b8ftBmc4+0M0FFVbnbGMOGbBlKjyh4XGZbXxO+vp+JQ==}
@@ -768,8 +768,8 @@ packages:
   '@mathjax/src@4.1.3':
     resolution: {integrity: sha512-rIrWquuBSoJuoMBdC/1qD+AUHTorlccPicoVy6P2xbUgnuDBpCcpbHtOAsB8L3hdCHtNBg92lF8e3Fz+pkcQbw==}
 
-  '@napi-rs/wasm-runtime@1.2.4':
-    resolution: {integrity: sha512-AJxoUD2/15ESHbvpcyjU274nsAPLuOtPHCk0vKJM5pj//Fg/B1FXNWjPnXTT9PymCYYiHo4zPj0ZomXBKhoy7g==}
+  '@napi-rs/wasm-runtime@1.2.5':
+    resolution: {integrity: sha512-HshSvXzmBxNzqejd3k/KemgQ3hdREUYFRRrgxOZ+gPljDIsO2SDZrVZMd4Z/HsxudQbE62OVyVFE8z9BCurfjA==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=23.5.0}
     peerDependencies:
       '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.4
@@ -866,8 +866,8 @@ packages:
   '@pdf-lib/upng@1.0.1':
     resolution: {integrity: sha512-dQK2FUMQtowVP00mtIksrlZhdFXQZPC+taih1q4CvPZ5vqdxR/LKBaFg0oAfzd1GlHZXXSPdQfzQnt+ViGvEIQ==}
 
-  '@pdfme/pdf-lib@6.2.2':
-    resolution: {integrity: sha512-ixgQqaqpVKJ/syDcBrqh62Xydm8Pb0ct2MM73XGM3R1ydCepIpcCoKzxGaAxXBXi2n9IeeGXVZJibDM3qyperQ==}
+  '@pdfme/pdf-lib@6.2.3':
+    resolution: {integrity: sha512-/DE4bfFnAHHkgqfWBHvBA/V0gdK4CoX7377wcrukfr/XSpgNRtsT+8aUjj3XeZvULFjsJETCd8w1AOx2IPpENw==}
 
   '@pkgr/core@0.3.6':
     resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
@@ -1500,8 +1500,8 @@ packages:
     resolution: {integrity: sha512-unCNTpVyuZoWc0CT3Rk88HWpuL0h02TKJxfCr1oPopbmoumSJURuoY+4Xa6hL2wOuWVfMKolJnttTOXn52ccgQ==}
     hasBin: true
 
-  cjs-module-lexer@2.2.1:
-    resolution: {integrity: sha512-Ca8swihM+/4yKecYHY52kgJd300hi2lADU/a1RxNTRe+RJ9jvqQlESpbz9DnG9mowez8qwXHB8qYdIUw9e+F5Q==}
+  cjs-module-lexer@2.3.0:
+    resolution: {integrity: sha512-lmNyBzi6iYiqyrExTctfmjd8tInx+dHu9PBomTfH5RXS53c27JMFJgzNv5TyAnm3PgGf+MLy0+Ws41/HlVxdKQ==}
 
   clear-cut@2.0.2:
     resolution: {integrity: sha512-WVgn/gSejQ+0aoR8ucbKIdo6icduPZW6AbWwyUmAUgxy63rUYjwa5rj/HeoNPhf0/XPrl82X8bO/hwBkSmsFtg==}
@@ -2144,36 +2144,36 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  lingotweaker-data-de@0.2.4:
-    resolution: {integrity: sha512-SzD5lwTXsOmPwnIQ43iBlWeafE9gHTon+KFdc+f/0+GYa9p7oEGXg5Vtqsvg0VjMRSbU71Soo+X/Aaxfn+VzBw==}
+  lingotweaker-data-de@0.2.6:
+    resolution: {integrity: sha512-filH6nC52dgEEb15pK/GrK9NPglFLvaVpdjtkHnSGcrYgOlLPx1HjNVIaeMDVqIGkBAwtWyS5tD1aUdifZ8iJg==}
     engines: {node: '>= 18'}
 
-  lingotweaker-data-en@0.2.4:
-    resolution: {integrity: sha512-wxzuNYmS+HKjQvLyUdmqUZO7+iK0Hg8aJq7n0CPw4EPVx+fM2rKBsWIgHwsptX/Qe38XwC4pOJN8IxUMx3JpEw==}
+  lingotweaker-data-en@0.2.6:
+    resolution: {integrity: sha512-RIN8KyWDD9cChqzy1ToAAw/VAD8LiHEukAPs5k946lsR+KmS85DZ+nXAtN0e95JZaBsl1qR26zumHEXAynoR0Q==}
     engines: {node: '>= 18'}
 
-  lingotweaker-data-es@0.2.4:
-    resolution: {integrity: sha512-9dxTaQ7qcgFRXHlTaRQ0q3iq7QGsRbwQBfEBgY+HRGj2h0sFx0TYSlxPZnTRzZx2cxUc0ZiXEsBY+KZYXu3eow==}
+  lingotweaker-data-es@0.2.6:
+    resolution: {integrity: sha512-JWKZaAYJcDhjr2ElnijsNFUZqH8pBEWGaFcBvDv9nyWa6tsjqZv3MAY5GoV5VPtRVt43oIN9VZEH/bx/8wgbeA==}
     engines: {node: '>= 18'}
 
-  lingotweaker-data-fr@0.2.4:
-    resolution: {integrity: sha512-iA98XddJjAWd+uauZZmCMES9/EPh5uHDyogkCFiUF5J77WkLJW24zDrTo7n/lmWXOPpxln1hy9g/xgzJxkyuDA==}
+  lingotweaker-data-fr@0.2.6:
+    resolution: {integrity: sha512-Ly5k6MaQClBtD78uL4v79Tk1WjqzN1b2QWkXxq7uqhqZZZAh0ZaRnwcBEA0q1Nobq886knqDI7p1gtNjSEUqSw==}
     engines: {node: '>= 18'}
 
-  lingotweaker-data-it@0.2.4:
-    resolution: {integrity: sha512-IdajIjMhACIjdYUCQjWF6kDXSL9UnNlFY2f4LnI+dz1QwWwBRGfgtoFQaXDMq7u/Ug45yprqN8oqc5inqkTEgQ==}
+  lingotweaker-data-it@0.2.6:
+    resolution: {integrity: sha512-ceyp0GWOXsrTh0Ux05QNuLLZTOfkZYR/nUCX85U8JKE2xp4/jjgCRkw3ukTzWIZ0hwEM2W9VfVlGvIP6+WN9lw==}
     engines: {node: '>= 18'}
 
-  lingotweaker-data-pt@0.2.4:
-    resolution: {integrity: sha512-K5Y8FoSOljZougzk7lc32HFWKSalJLAexWbPgA4u3ka2qqS2cZwJlM860EKLFMvu/osWsmYt4WZOcfJ9bmiq9g==}
+  lingotweaker-data-pt@0.2.6:
+    resolution: {integrity: sha512-2oXqKghjmQAgKZhVmy7a75WRha/VVNrvl38dSmPUg/gxKv6VkLgRFR11y60F0ob8Fs6Xk/jEAE6hv55PGfeZbA==}
     engines: {node: '>= 18'}
 
-  lingotweaker-data@0.2.4:
-    resolution: {integrity: sha512-Gq9zhvgkuMxpWbF2VhAbpCMb8EPk5DugsRDwCvI2/x1DWOFp/OxY3DB34ehl6LEI9m8sF37NY0moKMmQHgKZGg==}
+  lingotweaker-data@0.2.6:
+    resolution: {integrity: sha512-T0L7gjcvOL+bibW/Sm0grgMVCfFg6X7nHODn4iug8HfGbcOqoFF2AmuQ+sDz6ylm+EyXLzEys8zE4h+0B/5GGw==}
     engines: {node: '>= 18'}
 
-  lingotweaker-wasm@0.2.4:
-    resolution: {integrity: sha512-APUsKzQsz/t4EvAoc7SoLTFGl9ggtuujB/HQmE/wNUMBp9T3pFOC01h4QYH+XMZYHWWqdY2nXmK1Blad8StHOg==}
+  lingotweaker-wasm@0.2.6:
+    resolution: {integrity: sha512-YZTxkZb1wv2dounZWQ27BKjrbYEBRgN3KprB9mQUwcBP4HOdnA7K5L82DtzgcImoW96KpFHlcnS3ftnNlqm5Ww==}
     engines: {node: '>= 18'}
 
   lint-staged@17.6.0:
@@ -2305,8 +2305,8 @@ packages:
   pages-to-pdf@0.4.1:
     resolution: {integrity: sha512-Y91uRab9lJNzw9M89QPzX6pd/ITG9MGSMx7RCA9cY7l3SM3oh5Tj9i8XTrIBxUyffiHFWVcsz+W6MotuwMwqBA==}
 
-  paginate-for-print@1.1.1:
-    resolution: {integrity: sha512-iqf/fgTj/cpUGKKLW3StiFqQjd2f2CHWNq9iqDxYTRTOWmjiHdPqZWLo9/b8jCtFsrKZchUEo6V61Luj0hodEg==}
+  paginate-for-print@1.1.2:
+    resolution: {integrity: sha512-8lgEyfIsuaN7E3aFBjbQIp0LxHoG/MNvDSZZIvausrMwFXEUvOYRTJUf5wKn/RREHrLnnw5SxjMK0Tm2NiVOYA==}
 
   pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
@@ -3107,9 +3107,9 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fiduswriter/bibliography-manager@0.1.35(@pdfme/pdf-lib@6.2.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)':
+  '@fiduswriter/bibliography-manager@0.1.35(@pdfme/pdf-lib@6.2.3)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)':
     dependencies:
-      '@fiduswriter/document': 0.3.20(@pdfme/pdf-lib@6.2.2)
+      '@fiduswriter/document': 0.3.22(@pdfme/pdf-lib@6.2.3)
       bibliojson: 4.1.0
       fix-utf8: 2.0.1
       fwtoolkit: 0.2.26(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
@@ -3124,7 +3124,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@0.3.20(@pdfme/pdf-lib@6.2.2)':
+  '@fiduswriter/document@0.3.22(@pdfme/pdf-lib@6.2.3)':
     dependencies:
       '@mathjax/mathjax-newcm-font': 4.1.3
       '@mathjax/src': 4.1.3
@@ -3141,7 +3141,7 @@ snapshots:
       mathml2omml: 0.5.0
       orderedmap: 2.1.1
       pages-to-pdf: 0.4.1
-      paginate-for-print: 1.1.1(@pdfme/pdf-lib@6.2.2)
+      paginate-for-print: 1.1.2(@pdfme/pdf-lib@6.2.3)
       prettier: 3.9.9
       prosemirror-commands: 1.7.2
       prosemirror-gapcursor: 1.4.1
@@ -3424,7 +3424,7 @@ snapshots:
       mj-context-menu: 1.0.0
       speech-rule-engine: 5.0.0-rc.4
 
-  '@napi-rs/wasm-runtime@1.2.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
+  '@napi-rs/wasm-runtime@1.2.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
@@ -3497,7 +3497,7 @@ snapshots:
     dependencies:
       pako: 1.0.11
 
-  '@pdfme/pdf-lib@6.2.2':
+  '@pdfme/pdf-lib@6.2.3':
     dependencies:
       '@pdf-lib/standard-fonts': 1.0.0
       '@pdf-lib/upng': 1.0.1
@@ -3878,7 +3878,7 @@ snapshots:
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
-      '@napi-rs/wasm-runtime': 1.2.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
+      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
     optional: true
 
   '@unrs/resolver-binding-win32-arm64-msvc@1.12.2':
@@ -4053,7 +4053,7 @@ snapshots:
 
   citeproc-ts@0.2.3: {}
 
-  cjs-module-lexer@2.2.1: {}
+  cjs-module-lexer@2.3.0: {}
 
   clear-cut@2.0.2: {}
 
@@ -4760,7 +4760,7 @@ snapshots:
       '@jest/types': 30.5.1
       '@types/node': 26.6.4
       chalk: 4.1.2
-      cjs-module-lexer: 2.2.1
+      cjs-module-lexer: 2.3.0
       collect-v8-coverage: 1.0.3
       es-module-lexer: 2.3.2
       glob: 13.0.6
@@ -4896,23 +4896,23 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  lingotweaker-data-de@0.2.4: {}
+  lingotweaker-data-de@0.2.6: {}
 
-  lingotweaker-data-en@0.2.4: {}
+  lingotweaker-data-en@0.2.6: {}
 
-  lingotweaker-data-es@0.2.4: {}
+  lingotweaker-data-es@0.2.6: {}
 
-  lingotweaker-data-fr@0.2.4: {}
+  lingotweaker-data-fr@0.2.6: {}
 
-  lingotweaker-data-it@0.2.4: {}
+  lingotweaker-data-it@0.2.6: {}
 
-  lingotweaker-data-pt@0.2.4: {}
+  lingotweaker-data-pt@0.2.6: {}
 
-  lingotweaker-data@0.2.4: {}
+  lingotweaker-data@0.2.6: {}
 
-  lingotweaker-wasm@0.2.4:
+  lingotweaker-wasm@0.2.6:
     dependencies:
-      lingotweaker-data: 0.2.4
+      lingotweaker-data: 0.2.6
 
   lint-staged@17.6.0:
     dependencies:
@@ -5030,12 +5030,12 @@ snapshots:
   pages-to-pdf@0.4.1:
     dependencies:
       '@mathjax/src': 4.1.3
-      '@pdfme/pdf-lib': 6.2.2
+      '@pdfme/pdf-lib': 6.2.3
       fonteditor-core: 2.6.3
       fontkit: 2.0.4
-      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.2)
+      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.3)
 
-  paginate-for-print@1.1.1(@pdfme/pdf-lib@6.2.2):
+  paginate-for-print@1.1.2(@pdfme/pdf-lib@6.2.3):
     dependencies:
       '@babel/runtime': 7.29.7
       '@chenglou/pretext': 0.0.8
@@ -5044,7 +5044,7 @@ snapshots:
       event-emitter: 0.3.5
       fontkit: 2.0.4
       pages-to-pdf: 0.4.1
-      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.2)
+      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.3)
     optionalDependencies:
       fonteditor-core: 2.6.3
     transitivePeerDependencies:
@@ -5342,10 +5342,10 @@ snapshots:
 
   svg-for-pdfkit@0.2.1: {}
 
-  svg4pdf-lib@0.1.2(@pdfme/pdf-lib@6.2.2):
+  svg4pdf-lib@0.1.2(@pdfme/pdf-lib@6.2.3):
     dependencies:
       '@pdf-lib/upng': 1.0.1
-      '@pdfme/pdf-lib': 6.2.2
+      '@pdfme/pdf-lib': 6.2.3
       svg-for-pdfkit: 0.2.1
 
   synckit@0.11.13:
