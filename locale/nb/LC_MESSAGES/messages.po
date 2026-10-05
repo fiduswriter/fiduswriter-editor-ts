@@ -163,9 +163,6 @@ msgstr ""
 msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
 msgstr ""
 
-msgid "Applies to newly opened documents."
-msgstr ""
-
 msgid "Archiving and accessibility"
 msgstr ""
 
@@ -292,13 +289,7 @@ msgstr "Karakterer med blanke"
 msgid "Characters without blanks"
 msgstr "Karakterer uten mellomrom"
 
-msgid "Check as you type. Turning this off leaves checking available on demand, and uses less memory."
-msgstr ""
-
 msgid "Check spelling and grammar automatically as you type."
-msgstr ""
-
-msgid "Check spelling and grammar continuously"
 msgstr ""
 
 msgid "Check spelling and grammar in the document text."
@@ -346,12 +337,6 @@ msgstr "Sitasjonsstil"
 msgid "Cite"
 msgstr "Sitere"
 
-msgid "Click a citation to edit it in place, rather than opening a dropup."
-msgstr ""
-
-msgid "Click inline math to edit it directly, rather than opening a dropup."
-msgstr ""
-
 msgid "Close"
 msgstr "Lukk"
 
@@ -360,9 +345,6 @@ msgstr "Lukk dokumentet"
 
 msgid "Close the document and return to the document overview menu."
 msgstr "Lukk dokumentet og gå tilbake til dokumentoversiktsmenyen."
-
-msgid "Close this document."
-msgstr ""
 
 msgid "Code"
 msgstr "Kode"
@@ -483,9 +465,6 @@ msgstr "Opprett"
 
 msgid "Create a copy of the document."
 msgstr "Lag en kopi av dokumentet."
-
-msgid "Create a new, empty document."
-msgstr ""
 
 msgid "Create copy"
 msgstr "Lag kopi"
@@ -661,19 +640,10 @@ msgstr "Rediger kryssreferanse"
 msgid "Edit equation"
 msgstr "Rediger ligningen"
 
-msgid "Edit inline math in place"
-msgstr ""
-
 msgid "Edit link"
 msgstr "Rediger link"
 
-msgid "Edit references inline"
-msgstr ""
-
 msgid "Edit the words and rules the spell checker accepts."
-msgstr ""
-
-msgid "Editing"
 msgstr ""
 
 msgid "Email"
@@ -783,9 +753,6 @@ msgstr "Eksporterer..."
 
 msgid "External"
 msgstr "Utvendig"
-
-msgid "Fidus Writer"
-msgstr "Fidus forfatter"
 
 msgid "Figure"
 msgstr "Figur"
@@ -907,9 +874,6 @@ msgstr ""
 msgid "Ignored words"
 msgstr ""
 
-msgid "Ignored words and rules…"
-msgstr ""
-
 msgid "Image"
 msgstr "Bilde"
 
@@ -981,12 +945,6 @@ msgstr "Institusjon"
 
 msgid "Instructions"
 msgstr "Instruksjoner"
-
-msgid "Interface language"
-msgstr ""
-
-msgid "Interface language and spell-checking preferences."
-msgstr ""
 
 msgid "Internal"
 msgstr "Innvendig"
@@ -1162,9 +1120,6 @@ msgstr "Nytt listeelement"
 msgid "New paragraph"
 msgstr "Ny paragraf"
 
-msgid "New…"
-msgstr ""
-
 msgid "Next"
 msgstr "Neste"
 
@@ -1237,12 +1192,6 @@ msgstr "Online dokument"
 msgid "Only major comments"
 msgstr "Bare store kommentarer"
 
-msgid "Open a document, template or bibliography."
-msgstr ""
-
-msgid "Open…"
-msgstr ""
-
 msgid "Open/close header menu"
 msgstr "Åpne/lukk overskriftsmenyen"
 
@@ -1311,12 +1260,6 @@ msgstr "Pusse"
 
 msgid "Portuguese (Brazil)"
 msgstr "Portugisisk (Brasil)"
-
-msgid "Preferences"
-msgstr ""
-
-msgid "Preferences…"
-msgstr ""
 
 msgid "Previous"
 msgstr "Tidligere"
@@ -1701,9 +1644,6 @@ msgstr ""
 
 msgid "Text before"
 msgstr "Tekst før"
-
-msgid "Text checking"
-msgstr ""
 
 msgid "Text Language"
 msgstr "Tekstspråk"

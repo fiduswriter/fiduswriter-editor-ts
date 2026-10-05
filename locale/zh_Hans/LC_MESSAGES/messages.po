@@ -163,9 +163,6 @@ msgstr ""
 msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
 msgstr ""
 
-msgid "Applies to newly opened documents."
-msgstr ""
-
 msgid "Archiving and accessibility"
 msgstr ""
 
@@ -292,13 +289,7 @@ msgstr "带空格的字符"
 msgid "Characters without blanks"
 msgstr "不带空格的字符"
 
-msgid "Check as you type. Turning this off leaves checking available on demand, and uses less memory."
-msgstr ""
-
 msgid "Check spelling and grammar automatically as you type."
-msgstr ""
-
-msgid "Check spelling and grammar continuously"
 msgstr ""
 
 msgid "Check spelling and grammar in the document text."
@@ -346,12 +337,6 @@ msgstr "引文风格"
 msgid "Cite"
 msgstr "引用"
 
-msgid "Click a citation to edit it in place, rather than opening a dropup."
-msgstr ""
-
-msgid "Click inline math to edit it directly, rather than opening a dropup."
-msgstr ""
-
 msgid "Close"
 msgstr "关闭"
 
@@ -360,9 +345,6 @@ msgstr "关闭文档"
 
 msgid "Close the document and return to the document overview menu."
 msgstr "关闭文档并返回到文档概述菜单。"
-
-msgid "Close this document."
-msgstr ""
 
 msgid "Code"
 msgstr "代码"
@@ -483,9 +465,6 @@ msgstr "新建"
 
 msgid "Create a copy of the document."
 msgstr "创建文档的副本。"
-
-msgid "Create a new, empty document."
-msgstr ""
 
 msgid "Create copy"
 msgstr "创建副本"
@@ -661,19 +640,10 @@ msgstr "编辑交叉引用"
 msgid "Edit equation"
 msgstr "编辑方程"
 
-msgid "Edit inline math in place"
-msgstr ""
-
 msgid "Edit link"
 msgstr "编辑链接"
 
-msgid "Edit references inline"
-msgstr ""
-
 msgid "Edit the words and rules the spell checker accepts."
-msgstr ""
-
-msgid "Editing"
 msgstr ""
 
 msgid "Email"
@@ -783,9 +753,6 @@ msgstr "出口..."
 
 msgid "External"
 msgstr "外部的"
-
-msgid "Fidus Writer"
-msgstr "菲杜斯作家"
 
 msgid "Figure"
 msgstr "图"
@@ -907,9 +874,6 @@ msgstr ""
 msgid "Ignored words"
 msgstr ""
 
-msgid "Ignored words and rules…"
-msgstr ""
-
 msgid "Image"
 msgstr "图像"
 
@@ -981,12 +945,6 @@ msgstr "机构"
 
 msgid "Instructions"
 msgstr "指示"
-
-msgid "Interface language"
-msgstr ""
-
-msgid "Interface language and spell-checking preferences."
-msgstr ""
 
 msgid "Internal"
 msgstr "内部的"
@@ -1162,9 +1120,6 @@ msgstr "新列表项"
 msgid "New paragraph"
 msgstr "新段落"
 
-msgid "New…"
-msgstr ""
-
 msgid "Next"
 msgstr "下一个"
 
@@ -1237,12 +1192,6 @@ msgstr "在线文档"
 msgid "Only major comments"
 msgstr "仅主要评论"
 
-msgid "Open a document, template or bibliography."
-msgstr ""
-
-msgid "Open…"
-msgstr ""
-
 msgid "Open/close header menu"
 msgstr "打开/关闭标题菜单"
 
@@ -1311,12 +1260,6 @@ msgstr "抛光"
 
 msgid "Portuguese (Brazil)"
 msgstr "葡萄牙语（巴西）"
-
-msgid "Preferences"
-msgstr ""
-
-msgid "Preferences…"
-msgstr ""
 
 msgid "Previous"
 msgstr "以前的"
@@ -1701,9 +1644,6 @@ msgstr ""
 
 msgid "Text before"
 msgstr "之前的文字"
-
-msgid "Text checking"
-msgstr ""
 
 msgid "Text Language"
 msgstr "文本语言"

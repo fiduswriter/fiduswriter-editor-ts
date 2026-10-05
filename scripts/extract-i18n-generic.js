@@ -61,20 +61,6 @@ function scanDir(dir) {
 
 console.log("Scanning src/ for gettext() calls...")
 scanDir(join(root, "src"))
-
-// Additional source roots, e.g. a host application's sources. This is how the
-// desktop app contributes msgids: they belong in the same catalogue set, and a
-// published catalogue cannot be extended at runtime.
-const extraRoots = process.argv.slice(3)
-for (const extra of extraRoots) {
-    const dir = extra.startsWith("/") ? extra : join(root, extra)
-    if (!existsSync(dir)) {
-        console.error(`Skipping missing source root: ${dir}`)
-        continue
-    }
-    console.log(`Also scanning ${dir} ...`)
-    scanDir(dir)
-}
 console.log(`Found ${msgids.size} unique msgids.\n`)
 
 if (msgids.size === 0) {
