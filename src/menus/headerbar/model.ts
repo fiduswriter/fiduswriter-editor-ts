@@ -971,6 +971,33 @@ export const headerbarModel = () => ({
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
                 {
+                    title: gettext("Typst"),
+                    type: "action",
+                    tooltip: gettext(
+                        "Export the document to a Typst file with a bibliography file."
+                    ),
+                    order: 6,
+                    action: (editor: Editor) => {
+                        import("@fiduswriter/document/exporter/typst/index").then(
+                            ({TypstExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new TypstExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.docInfo.updated as Date
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
+                            }
+                        )
+                    },
+                    disabled: (editor: Editor) => editor.app.isOffline()
+                },
+                {
                     title: gettext("Slim FIDUS"),
                     type: "action",
                     tooltip: gettext(

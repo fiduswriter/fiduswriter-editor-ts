@@ -16,8 +16,8 @@ importers:
         specifier: ^0.1.35
         version: 0.1.35(@pdfme/pdf-lib@6.2.3)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
       '@fiduswriter/document':
-        specifier: ^0.3.24
-        version: 0.3.24(@pdfme/pdf-lib@6.2.3)
+        specifier: ^0.3.30
+        version: 0.3.30(@pdfme/pdf-lib@6.2.3)
       '@fiduswriter/image-manager':
         specifier: ^0.1.28
         version: 0.1.28(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
@@ -607,8 +607,8 @@ packages:
   '@fiduswriter/bibliography-manager@0.1.35':
     resolution: {integrity: sha512-r6e8UZO37DcCKGApbrJz+qWvMdiQC+qo747SmY7bIOpQDqCEWZ+WIC9FGEv4BnsyTRyBI6SZAxIs6zvHI6gIHw==}
 
-  '@fiduswriter/document@0.3.24':
-    resolution: {integrity: sha512-hIGYRTew6Ul6bI/GjDc5cwKoUuikN3LKVSbtO1dghBbDXaQnJNiFIMyGBQQCH63ooZY7vOJ9VEi/5ULoXiwv5w==}
+  '@fiduswriter/document@0.3.30':
+    resolution: {integrity: sha512-3dG7iJjfQQwAkz6gksMgtPvw/01Rxd9R+3l8oYkKGNgTIqKs9j3Ar6TroSe1ikXFoopSuAo8+xM6y6otmM1FUg==}
 
   '@fiduswriter/image-manager@0.1.28':
     resolution: {integrity: sha512-8zJfLs2iUmwEoFfCYTrLbe0/PC63Q2pWi51stfrGrJ7b8ftBmc4+0M0FFVbnbGMOGbBlKjyh4XGZbXxO+vp+JQ==}
@@ -3146,7 +3146,7 @@ snapshots:
 
   '@fiduswriter/bibliography-manager@0.1.35(@pdfme/pdf-lib@6.2.3)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)':
     dependencies:
-      '@fiduswriter/document': 0.3.24(@pdfme/pdf-lib@6.2.3)
+      '@fiduswriter/document': 0.3.30(@pdfme/pdf-lib@6.2.3)
       bibliojson: 4.1.0
       fix-utf8: 2.0.1
       fwtoolkit: 0.2.26(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
@@ -3161,7 +3161,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@0.3.24(@pdfme/pdf-lib@6.2.3)':
+  '@fiduswriter/document@0.3.30(@pdfme/pdf-lib@6.2.3)':
     dependencies:
       '@mathjax/mathjax-newcm-font': 4.1.3
       '@mathjax/src': 4.1.3
