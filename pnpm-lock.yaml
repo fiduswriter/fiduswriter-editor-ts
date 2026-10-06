@@ -16,8 +16,8 @@ importers:
         specifier: ^0.1.35
         version: 0.1.35(@pdfme/pdf-lib@6.2.3)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
       '@fiduswriter/document':
-        specifier: ^0.3.22
-        version: 0.3.22(@pdfme/pdf-lib@6.2.3)
+        specifier: ^0.3.24
+        version: 0.3.24(@pdfme/pdf-lib@6.2.3)
       '@fiduswriter/image-manager':
         specifier: ^0.1.28
         version: 0.1.28(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
@@ -607,8 +607,8 @@ packages:
   '@fiduswriter/bibliography-manager@0.1.35':
     resolution: {integrity: sha512-r6e8UZO37DcCKGApbrJz+qWvMdiQC+qo747SmY7bIOpQDqCEWZ+WIC9FGEv4BnsyTRyBI6SZAxIs6zvHI6gIHw==}
 
-  '@fiduswriter/document@0.3.22':
-    resolution: {integrity: sha512-rUokW9eg95rZDvqVyF6l+hbCjsIy9wQ+lWRiOstNJFIIOkqIb+c+jaQfjuqs0KchA3WQ1duO3gU8MXaLE7468A==}
+  '@fiduswriter/document@0.3.24':
+    resolution: {integrity: sha512-hIGYRTew6Ul6bI/GjDc5cwKoUuikN3LKVSbtO1dghBbDXaQnJNiFIMyGBQQCH63ooZY7vOJ9VEi/5ULoXiwv5w==}
 
   '@fiduswriter/image-manager@0.1.28':
     resolution: {integrity: sha512-8zJfLs2iUmwEoFfCYTrLbe0/PC63Q2pWi51stfrGrJ7b8ftBmc4+0M0FFVbnbGMOGbBlKjyh4XGZbXxO+vp+JQ==}
@@ -1441,6 +1441,9 @@ packages:
     resolution: {integrity: sha512-3nED0ENvAP4yroghehwK6AmlOaTTn7EvIPSpFee5Lrfkmge/ZDP891yJGZpSIqAzp8G0o5ccgHcgHZjEzHYxUA==}
     engines: {node: '>=22'}
 
+  boolbase@1.0.0:
+    resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+
   brace-expansion@5.0.12:
     resolution: {integrity: sha512-YovQ3rzhaLMIrDjNDMkNS01tea93qhEhG5xy8f6+R0l+dw3Ki+5sCoIoI942iuLZTHWogWktgwVDhU09iNEimQ==}
     engines: {node: 20 || >=22}
@@ -1575,9 +1578,16 @@ packages:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
+  css-select@5.2.2:
+    resolution: {integrity: sha512-TizTzUddG/xYLA3NXodFM0fSbNizXjOKhqiQQwvhlspadZokn1KDy0NZFS0wuEubIYAV5/c1/lAr0TaaFXEXzw==}
+
   css-tree@1.1.3:
     resolution: {integrity: sha512-tRpdppF7TRazZrjJ6v3stzv93qxRcSsFmW6cX0Zm2NVKpxE1WV1HblnghVv9TreireHkqI/VDEsfolRF1p6y7Q==}
     engines: {node: '>=8.0.0'}
+
+  css-what@6.2.2:
+    resolution: {integrity: sha512-u/O3vwbptzhMs3L1fQE82ZSLHQQfto5gyZzwteVIEyeaY5Fc7R4dapF/BvRoSYFeqfBk4m0V1Vafq5Pjv25wvA==}
+    engines: {node: '>= 6'}
 
   d@1.0.2:
     resolution: {integrity: sha512-MOqHvMWF9/9MX6nza0KgvFH4HpMU0EF5uUDXqX/BtxtU8NfB0QzRtJ8Oe/6SuS4kbhyzVJwjd97EA4PKrzJ8bw==}
@@ -1631,6 +1641,19 @@ packages:
     resolution: {integrity: sha512-vtcDfH3TOjP8UekytvnHH1o1P4FcUdt4eQ1Y+Abap1tk/OB2MWQvcwS2ClCd1zuIhc3JKOx6p3kod8Vfys3E+A==}
     engines: {node: '>=0.3.1'}
 
+  dom-serializer@2.0.0:
+    resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
+
+  domelementtype@2.3.0:
+    resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
+
+  domhandler@5.0.3:
+    resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
+    engines: {node: '>= 4'}
+
+  domutils@3.2.2:
+    resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
+
   downloadjs@1.4.7:
     resolution: {integrity: sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==}
 
@@ -1647,9 +1670,17 @@ packages:
   encoding@0.1.13:
     resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
 
+  entities@4.5.0:
+    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
+
   entities@7.0.1:
     resolution: {integrity: sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA==}
     engines: {node: '>=0.12'}
+
+  entities@8.1.0:
+    resolution: {integrity: sha512-kxL7msIffSuh9aaFAMD7rxAIuTRMAHMeBtgHW2yUdWw732ZNh4MehkF2gdjvtdmikkaIP9bFDDJOPlsvm7avrA==}
+    engines: {node: '>=20.19.0'}
 
   error-ex@1.3.4:
     resolution: {integrity: sha512-sqQamAnR14VgCr1A618A3sGrygcpK+HEbenA/HiEAkkUwcZIIB/tgWqHFxWgOyDh4nB4JCRimh79dR5Ywc9MDQ==}
@@ -2253,6 +2284,9 @@ packages:
   node-html-better-parser@1.5.9:
     resolution: {integrity: sha512-z1I5UINMezJXYL9cH3h0a9KBth2G978gSLlfkpQ+CQzzVHVQy9gpARgm9eDsz1O4gn1HtgUqjdAIYxKFZm6uHQ==}
 
+  node-html-parser@9.0.4:
+    resolution: {integrity: sha512-reUSrZkF1rO7hEYe5mJwtbVcQ6mB5QrViCZH6Wv+iz3er/PA9Q50gol15dMLQRDfdli4VzqPMPR24HNRFgVKFw==}
+
   node-int64@0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
 
@@ -2267,6 +2301,9 @@ packages:
   npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
     engines: {node: '>=8'}
+
+  nth-check@2.1.1:
+    resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
   onetime@5.1.2:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
@@ -3109,7 +3146,7 @@ snapshots:
 
   '@fiduswriter/bibliography-manager@0.1.35(@pdfme/pdf-lib@6.2.3)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)':
     dependencies:
-      '@fiduswriter/document': 0.3.22(@pdfme/pdf-lib@6.2.3)
+      '@fiduswriter/document': 0.3.24(@pdfme/pdf-lib@6.2.3)
       bibliojson: 4.1.0
       fix-utf8: 2.0.1
       fwtoolkit: 0.2.26(prosemirror-commands@1.7.2)(prosemirror-history@1.5.1)(prosemirror-keymap@1.2.3)(prosemirror-model@1.25.12)(prosemirror-state@1.4.4)(prosemirror-view@1.42.6)
@@ -3124,7 +3161,7 @@ snapshots:
       - prosemirror-state
       - prosemirror-view
 
-  '@fiduswriter/document@0.3.22(@pdfme/pdf-lib@6.2.3)':
+  '@fiduswriter/document@0.3.24(@pdfme/pdf-lib@6.2.3)':
     dependencies:
       '@mathjax/mathjax-newcm-font': 4.1.3
       '@mathjax/src': 4.1.3
@@ -3139,6 +3176,7 @@ snapshots:
       mathlive: 0.110.0
       mathml-to-latex: 1.8.0
       mathml2omml: 0.5.0
+      node-html-parser: 9.0.4
       orderedmap: 2.1.1
       pages-to-pdf: 0.4.1
       paginate-for-print: 1.1.2(@pdfme/pdf-lib@6.2.3)
@@ -3994,6 +4032,8 @@ snapshots:
     dependencies:
       xregexp: 5.1.3
 
+  boolbase@1.0.0: {}
+
   brace-expansion@5.0.12:
     dependencies:
       balanced-match: 4.0.4
@@ -4112,10 +4152,20 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
+  css-select@5.2.2:
+    dependencies:
+      boolbase: 1.0.0
+      css-what: 6.2.2
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      nth-check: 2.1.1
+
   css-tree@1.1.3:
     dependencies:
       mdn-data: 2.0.14
       source-map: 0.6.1
+
+  css-what@6.2.2: {}
 
   d@1.0.2:
     dependencies:
@@ -4148,6 +4198,24 @@ snapshots:
 
   diff@5.2.2: {}
 
+  dom-serializer@2.0.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      entities: 4.5.0
+
+  domelementtype@2.3.0: {}
+
+  domhandler@5.0.3:
+    dependencies:
+      domelementtype: 2.3.0
+
+  domutils@3.2.2:
+    dependencies:
+      dom-serializer: 2.0.0
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+
   downloadjs@1.4.7: {}
 
   electron-to-chromium@1.5.444: {}
@@ -4160,7 +4228,11 @@ snapshots:
     dependencies:
       iconv-lite: 0.6.3
 
+  entities@4.5.0: {}
+
   entities@7.0.1: {}
+
+  entities@8.1.0: {}
 
   error-ex@1.3.4:
     dependencies:
@@ -4982,6 +5054,11 @@ snapshots:
     dependencies:
       html-entities: 2.6.0
 
+  node-html-parser@9.0.4:
+    dependencies:
+      css-select: 5.2.2
+      entities: 8.1.0
+
   node-int64@0.4.0: {}
 
   node-releases@2.0.57: {}
@@ -4991,6 +5068,10 @@ snapshots:
   npm-run-path@4.0.1:
     dependencies:
       path-key: 3.1.1
+
+  nth-check@2.1.1:
+    dependencies:
+      boolbase: 1.0.0
 
   onetime@5.1.2:
     dependencies:

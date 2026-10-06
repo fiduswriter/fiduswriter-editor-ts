@@ -916,6 +916,61 @@ export const headerbarModel = () => ({
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
                 {
+                    title: gettext("TEI"),
+                    type: "action",
+                    tooltip: gettext(
+                        "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+                    ),
+                    order: 4,
+                    action: (editor: Editor) => {
+                        import("@fiduswriter/document/exporter/tei/index").then(
+                            ({TEIExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new TEIExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.app.csl,
+                                    editor.docInfo.updated as Date
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
+                            }
+                        )
+                    },
+                    disabled: (editor: Editor) => editor.app.isOffline()
+                },
+                {
+                    title: gettext("Markdown"),
+                    type: "action",
+                    tooltip: gettext(
+                        "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+                    ),
+                    order: 5,
+                    action: (editor: Editor) => {
+                        import("@fiduswriter/document/exporter/markdown/index").then(
+                            ({MarkdownExporter}) => {
+                                const db = getDB(editor)
+                                const doc = getExportDoc(editor, {
+                                    changes: "acceptAllNoInsertions"
+                                })
+                                const exporter = new MarkdownExporter(
+                                    doc,
+                                    db.bibDB,
+                                    db.imageDB,
+                                    editor.docInfo.updated as Date
+                                )
+                                exporter.progressCallback = exportProgress(doc)
+                                exporter.init()
+                            }
+                        )
+                    },
+                    disabled: (editor: Editor) => editor.app.isOffline()
+                },
+                {
                     title: gettext("Slim FIDUS"),
                     type: "action",
                     tooltip: gettext(
