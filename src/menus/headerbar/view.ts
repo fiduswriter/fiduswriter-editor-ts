@@ -71,6 +71,7 @@ export class HeaderbarView {
         onKeydown?: (event: KeyboardEvent) => void
         onKeyup?: (event: KeyboardEvent) => void
         onFocusout?: (event: FocusEvent) => void
+        onResize?: (event: Event) => void
     }
     parentChain: HeaderbarMenuItem[]
     openMenu: HeaderbarMenuItem | null
@@ -139,6 +140,10 @@ export class HeaderbarView {
         this.editor.dom.addEventListener("keyup", this.listeners.onKeyup)
         this.listeners.onFocusout = event => this.onFocusout(event)
         this.editor.dom.addEventListener("focusout", this.listeners.onFocusout)
+        // A submenu that fit when it was opened can overflow once the
+        // window is made smaller, and vice versa.
+        this.listeners.onResize = () => this.adjustOpenMenus()
+        window.addEventListener("resize", this.listeners.onResize)
     }
 
     destroy(): void {
@@ -155,6 +160,9 @@ export class HeaderbarView {
             "focusout",
             this.listeners.onFocusout!
         )
+        if (this.listeners.onResize) {
+            window.removeEventListener("resize", this.listeners.onResize)
+        }
     }
 
     onclick(event: MouseEvent): void {
@@ -602,12 +610,44 @@ export class HeaderbarView {
         }
         const diff = this.dd.diff(this.headerEl, this.getHeaderHTML())
         this.dd.apply(this.headerEl, diff)
+        this.adjustOpenMenus()
         const model = this.editor.menu.headerbarModel as HeaderbarModel
         if (model.open) {
             this.editor.dom.classList.remove("header-closed")
         } else {
             this.editor.dom.classList.add("header-closed")
         }
+    }
+
+    /**
+     * Flip submenus that reach past the bottom of the viewport upward, so
+     * their items stay reachable on small screens.
+     *
+     * Only submenus are flipped: the top-level menus hang right under the
+     * header bar at the top of the window, so flipping them would move
+     * them off-screen rather than into view. A submenu flips when it
+     * overflows the viewport bottom and there is more room above its
+     * anchor item than below it.
+     */
+    adjustOpenMenus(): void {
+        this.headerEl
+            .querySelectorAll<HTMLElement>(".fw-pulldown.fw-open")
+            .forEach(menuEl => {
+                const anchor = menuEl.closest("li")
+                if (!anchor) {
+                    menuEl.classList.remove("fw-flip-up")
+                    return
+                }
+                const menuRect = menuEl.getBoundingClientRect()
+                const anchorRect = anchor.getBoundingClientRect()
+                const spaceBelow = window.innerHeight - anchorRect.bottom
+                const spaceAbove = anchorRect.top
+                menuEl.classList.toggle(
+                    "fw-flip-up",
+                    menuRect.bottom > window.innerHeight &&
+                        spaceAbove > spaceBelow
+                )
+            })
     }
 
     getPathText(): string {

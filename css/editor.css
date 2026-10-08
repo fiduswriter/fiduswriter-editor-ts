@@ -170,6 +170,15 @@ body.fw-editor {
     border-left: 3px var(--menu-cursor-border-color) solid;
 }
 
+/* A submenu that would reach past the bottom of the viewport is flipped
+   upward: the headerbar view toggles fw-flip-up after measuring the
+   rendered menu, so items stay reachable on small screens. Mirrors the
+   rule of the same name in fwtoolkit's pulldown.css. */
+.fw-pulldown .fw-pulldown.fw-flip-up {
+    top: auto;
+    bottom: 0;
+}
+
 #header-navigation .header-nav-item:hover {
     color: var(--nagivation-link-active-text-color);
     text-shadow: 1px 0 0 var(--nagivation-link-active-text-color);

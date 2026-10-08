@@ -93,7 +93,7 @@
     },
     "dependencies": {
         "@fiduswriter/bibliography-manager": "^0.1.35",
-        "@fiduswriter/document": "^0.3.30",
+        "@fiduswriter/document": "^0.3.32",
         "@fiduswriter/image-manager": "^0.1.28",
         "@fortawesome/fontawesome-free": "^7.3.1",
         "cropperjs": "^1.6.3",
@@ -104,7 +104,7 @@
         "fast-xml-parser": "^4.5.7",
         "fastdom": "^1.0.12",
         "fix-utf8": "^2.0.1",
-        "fwtoolkit": "^0.2.26",
+        "fwtoolkit": "^0.2.27",
         "jszip": "^3.10.2",
         "lingotweaker-wasm": "^0.2.6",
         "mathml-to-latex": "^1.8.0",
