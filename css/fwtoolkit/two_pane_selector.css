@@ -1,0 +1,45 @@
+.fw-ar-container {
+    display: inline-block;
+    width: 338px;
+    height: 360px;
+    background-color: var(--cs-white-background);
+    border: solid 1px var(--cs-white-border);
+    vertical-align: middle;
+    padding: 20px 14px 0;
+    overflow-y: auto;
+    margin-bottom: 16px;
+}
+
+.fw-ar-button {
+    display: inline-block;
+    margin: 0 16px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.fw-two-pane-selector {
+    display: flex;
+    align-items: center;
+}
+
+.fw-two-pane-list {
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.fw-two-pane-item {
+    cursor: pointer;
+}
+
+.fw-two-pane-item.fw-selected {
+    background-color: var(--cs-light-background-hover);
+}
+
+.fw-two-pane-controls {
+    text-align: center;
+}
+
+.fw-two-pane-controls .fw-ar-button {
+    display: block;
+    margin: 8px auto;
+}

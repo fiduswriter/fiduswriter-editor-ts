@@ -1,0 +1,16 @@
+div.fw-faq {
+    line-height: 1.5em;
+}
+
+.fw-faq-answer {
+    padding: 5px;
+    font-size: medium;
+}
+
+.fw-faq-item {
+    padding: 10px;
+}
+
+.fw-faq-question i {
+    padding: 3px;
+}

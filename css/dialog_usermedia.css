@@ -1,0 +1,83 @@
+.img {
+  width: calc(100vw - 100px);
+  height: calc(100vh - 200px);
+  max-width: 640px;
+  max-height: 480px;
+  background: transparent no-repeat center;
+  background-size: contain;
+}
+
+.fw-media-preview-missing {
+  display: table-cell;
+  vertical-align: middle;
+  min-height: 100px;
+  padding: 10px;
+  text-align: center;
+  color: var(--error-background-color, #b00);
+}
+
+/* Image selection dialog table */
+.image-selection-table {
+  width: 100%;
+}
+
+/* The generic fw-small table forces a fixed tbody width that does not fit
+   the selection dialog. */
+.image-selection-table table.fw-data-table.fw-small tbody {
+  width: 100%;
+}
+
+/* Tighter cells so the larger previews still show several rows. */
+.image-selection-table table.fw-data-table tbody td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/* Reserve a fixed slot for the selection checkmark so that selecting a row
+   does not reflow the title column. */
+.image-selection-table table.fw-data-table thead th:last-child,
+.image-selection-table table.fw-data-table tbody td:last-child {
+  box-sizing: border-box;
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.image-selection-table .fa-check {
+  font-size: 1.3em;
+}
+
+/* Image overview icons: stored thumbnails keep their real aspect ratio, so
+   do not stretch them to fill the square icon box. */
+span.fw-usermedia-image > img {
+  min-width: 0;
+  min-height: 0;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.image-selection-table .fw-image-preview {
+  display: block;
+  text-align: center;
+}
+
+.image-selection-table .fw-image-preview img {
+  display: block;
+  /* Fixed-size preview box so all rows line up; images are scaled to fit
+     (contain) rather than shown at their natural size. */
+  width: 150px;
+  height: 100px;
+  object-fit: contain;
+  margin: 0 auto 4px;
+}
+
+.image-selection-table .fw-image-info {
+  display: block;
+  font-size: 0.85em;
+  opacity: 0.7;
+  white-space: nowrap;
+}

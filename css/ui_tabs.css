@@ -1,0 +1,65 @@
+.fw-tabs-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    border-bottom: 2px solid var(--tabs-border-color);
+    height: auto;
+    width: auto;
+}
+
+.fw-tabs-nav > li {
+    position: relative;
+    padding: 6px 18px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--tabs-text-inactive);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition:
+        color 0.15s,
+        border-color 0.15s;
+    float: none;
+    margin-right: 0;
+}
+
+.fw-tabs-nav > li:hover {
+    color: var(--tabs-text-active);
+}
+
+.fw-tabs-nav .fw-button {
+    color: var(--tabs-text-inactive);
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+.fw-tabs-nav .fw-tabs-active,
+.fw-tabs-nav .fw-current-tab {
+    color: var(--tabs-text-active);
+    border-bottom-color: var(--tabs-indicator-color);
+}
+
+.fw-tabs-nav .fw-tabs-active .fw-button,
+.fw-tabs-nav .fw-current-tab .fw-button {
+    color: var(--tabs-text-active);
+    background: transparent;
+}
+
+.fw-tabs-nav > li:hover .fw-button {
+    color: var(--tabs-text-active);
+}
+
+.fw-tabs-panel {
+    height: auto;
+    overflow: auto;
+    min-height: 220px;
+    padding: 0;
+    margin-top: 24px;
+}
+
+.fw-tab-link-inner {
+    display: block;
+    margin-left: 20px;
+    color: var(--cs-light-text-secondary);
+}
