@@ -71,9 +71,39 @@ const exportProgress = (doc: {title: string; path?: string}) => {
     const task = addProgress("info", `${title}: ${gettext("Exporting...")}`, {
         autoClose: 6000
     })
-    return (message: string, percentage?: number | null) =>
+    const callback = (message: string, percentage?: number | null) =>
         task.update(percentage ?? null, message)
+    // Exporters receive the bare callback; a failure handler dismisses the
+    // dialog through close() (the auto-close only fires at 100%).
+    return Object.assign(callback, {close: () => task.close()})
 }
+
+/**
+ * Exporters run asynchronously after the menu action has returned. Without a
+ * catch, a failed export dies as an unhandled rejection: the progress dialog
+ * sticks at its last message and the user never learns that anything went
+ * wrong. Attach this to every export promise; `getProgress` dismisses the
+ * progress dialog the exporter was given.
+ */
+const catchExportError =
+    (editor: Editor, getProgress?: () => {close(): void} | null | undefined) =>
+    (error: unknown): void => {
+        getProgress?.()?.close()
+        console.error("Export failed:", error)
+        let title = ""
+        try {
+            const doc = getExportDoc(editor) as {title: string; path?: string}
+            title = shortFileTitle(doc.title, doc.path || "")
+        } catch {
+            // Reading the document state may itself be part of the failure.
+        }
+        addAlert(
+            "error",
+            `${title ? `${title}: ` : ""}${gettext(
+                "The document could not be exported."
+            )}`
+        )
+    }
 
 const showRequestAccess = (editor: Editor): boolean =>
     editor.user.is_authenticated === true &&
@@ -385,14 +415,18 @@ export const headerbarModel = () => ({
                     order: 4,
                     action: (editor: Editor) => {
                         const db = getDB(editor)
-                        new ExportFidusFile(
-                            editor.app,
-                            getExportDoc(editor),
-                            db.bibDB,
-                            db.imageDB,
-                            true,
-                            editor.docInfo.token
-                        )
+                        // The ExportFidusFile constructor returns its init()
+                        // promise.
+                        Promise.resolve(
+                            new ExportFidusFile(
+                                editor.app,
+                                getExportDoc(editor),
+                                db.bibDB,
+                                db.imageDB,
+                                true,
+                                editor.docInfo.token
+                            )
+                        ).catch(catchExportError(editor))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -406,8 +440,9 @@ export const headerbarModel = () => ({
                     order: 5,
                     keys: "Ctrl-p",
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/print/index").then(
-                            ({PrintExporter}) => {
+                        const progress = exportProgress(getExportDoc(editor))
+                        import("@fiduswriter/document/exporter/print/index")
+                            .then(({PrintExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -419,15 +454,15 @@ export const headerbarModel = () => ({
                                     editor.app.csl,
                                     editor.docInfo.updated as Date as Date,
                                     getDocumentTemplate(editor).documentStyles,
-                                    exportProgress(doc),
+                                    progress,
                                     {
                                         printEngine:
                                             editor.app.settings.PRINT_ENGINE
                                     }
                                 )
-                                exporter.init()
-                            }
-                        )
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     }
                 },
                 {
@@ -638,8 +673,10 @@ export const headerbarModel = () => ({
                     tooltip: gettext("Export the document to an HTML file."),
                     order: 0,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/html/index").then(
-                            async ({HTMLExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/html/index")
+                            .then(async ({HTMLExporter}) => {
                                 const db = getDB(editor)
                                 const dialog = new HtmlExportDialog()
                                 const options = await dialog.init()
@@ -672,10 +709,11 @@ export const headerbarModel = () => ({
                                     getDocumentTemplate(editor).documentStyles,
                                     converterOptions
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                await exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     }
                 },
                 {
@@ -686,8 +724,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 1,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/pdf/index").then(
-                            async ({PdfExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/pdf/index")
+                            .then(async ({PdfExporter}) => {
                                 const db = getDB(editor)
                                 const dialog = new PdfExportDialog()
                                 const options = await dialog.init()
@@ -719,6 +759,7 @@ export const headerbarModel = () => ({
                                         await blob.arrayBuffer()
                                     )
                                 }
+                                progress = exportProgress(doc)
                                 const pdfExporter = new PdfExporter(
                                     doc,
                                     db.bibDB,
@@ -726,7 +767,7 @@ export const headerbarModel = () => ({
                                     editor.app.csl,
                                     editor.docInfo.updated as Date,
                                     getDocumentTemplate(editor).documentStyles,
-                                    exportProgress(doc),
+                                    progress,
                                     {
                                         version: editor.app.settings.VERSION as
                                             string | undefined,
@@ -749,9 +790,9 @@ export const headerbarModel = () => ({
                                             editor.app.settings.PRINT_ENGINE
                                     }
                                 )
-                                pdfExporter.init()
-                            }
-                        )
+                                await pdfExporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -763,8 +804,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 1,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/epub/index").then(
-                            async ({EpubExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/epub/index")
+                            .then(async ({EpubExporter}) => {
                                 const db = getDB(editor)
                                 const dialog = new EpubExportDialog()
                                 const options = await dialog.init()
@@ -797,10 +840,11 @@ export const headerbarModel = () => ({
                                     getDocumentTemplate(editor).documentStyles,
                                     converterOptions
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                await exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -810,8 +854,10 @@ export const headerbarModel = () => ({
                     tooltip: gettext("Export the document to an LaTeX file."),
                     order: 2,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/latex/index").then(
-                            ({LatexExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/latex/index")
+                            .then(({LatexExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -822,10 +868,11 @@ export const headerbarModel = () => ({
                                     db.imageDB,
                                     editor.docInfo.updated as Date
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -837,8 +884,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 2,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/jats/index").then(
-                            ({JATSExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/jats/index")
+                            .then(({JATSExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -851,10 +900,11 @@ export const headerbarModel = () => ({
                                     editor.docInfo.updated as Date,
                                     "article"
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -866,8 +916,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 2,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/jats/index").then(
-                            ({JATSExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/jats/index")
+                            .then(({JATSExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -880,10 +932,11 @@ export const headerbarModel = () => ({
                                     editor.docInfo.updated as Date,
                                     "book-part-wrapper"
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -895,8 +948,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 3,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/pandoc/index").then(
-                            ({PandocExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/pandoc/index")
+                            .then(({PandocExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -908,10 +963,11 @@ export const headerbarModel = () => ({
                                     editor.app.csl,
                                     editor.docInfo.updated as Date
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -923,8 +979,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 4,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/tei/index").then(
-                            ({TEIExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/tei/index")
+                            .then(({TEIExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -936,10 +994,11 @@ export const headerbarModel = () => ({
                                     editor.app.csl,
                                     editor.docInfo.updated as Date
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -951,8 +1010,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 5,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/markdown/index").then(
-                            ({MarkdownExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/markdown/index")
+                            .then(({MarkdownExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -963,10 +1024,11 @@ export const headerbarModel = () => ({
                                     db.imageDB,
                                     editor.docInfo.updated as Date
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -978,8 +1040,10 @@ export const headerbarModel = () => ({
                     ),
                     order: 6,
                     action: (editor: Editor) => {
-                        import("@fiduswriter/document/exporter/typst/index").then(
-                            ({TypstExporter}) => {
+                        let progress: ReturnType<typeof exportProgress> | null =
+                            null
+                        import("@fiduswriter/document/exporter/typst/index")
+                            .then(({TypstExporter}) => {
                                 const db = getDB(editor)
                                 const doc = getExportDoc(editor, {
                                     changes: "acceptAllNoInsertions"
@@ -990,10 +1054,11 @@ export const headerbarModel = () => ({
                                     db.imageDB,
                                     editor.docInfo.updated as Date
                                 )
-                                exporter.progressCallback = exportProgress(doc)
-                                exporter.init()
-                            }
-                        )
+                                progress = exportProgress(doc)
+                                exporter.progressCallback = progress
+                                return exporter.init()
+                            })
+                            .catch(catchExportError(editor, () => progress))
                     },
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
@@ -1006,13 +1071,17 @@ export const headerbarModel = () => ({
                     order: 4,
                     action: (editor: Editor) => {
                         const db = getDB(editor)
-                        new ExportFidusFile(
-                            editor.app,
-                            getExportDoc(editor),
-                            db.bibDB,
-                            db.imageDB,
-                            false
-                        )
+                        // The ExportFidusFile constructor returns its init()
+                        // promise.
+                        Promise.resolve(
+                            new ExportFidusFile(
+                                editor.app,
+                                getExportDoc(editor),
+                                db.bibDB,
+                                db.imageDB,
+                                false
+                            )
+                        ).catch(catchExportError(editor))
                     }
                 }
             ]
