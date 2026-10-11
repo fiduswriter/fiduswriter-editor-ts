@@ -117,6 +117,11 @@ export interface EditorContactsApi {
     add(data: {user_string: string}): Promise<{json: unknown; status: number}>
 }
 
+/** API connector for sending user feedback, where the host provides one. */
+export interface EditorFeedbackApi {
+    send(data: {message: string}): Promise<unknown>
+}
+
 /** API connector for document import/copy operations used by the editor. */
 export interface EditorDocumentImportApi {
     createDoc(
@@ -137,13 +142,14 @@ export interface EditorDocumentImportApi {
 }
 
 /**
- * An extra entry a host adds to the editor's **File** menu.
+ * An extra entry a host adds to one of the editor's menus.
  *
  * Hosts without a Fidus Writer backend have document-level actions that the
  * editor cannot know about — Open, Save as, New — because in a standalone or
  * embedded editor the document lifecycle belongs to the host. Rather than have
  * the host bolt a separate toolbar onto the page, it can pass these and they
- * appear inside the editor's own File menu, above the built-in entries.
+ * appear inside the editor's own menu. Hosts with a backend use the same shape
+ * to extend any other menu.
  *
  * Deliberately mirrors the editor's internal headerbar action-item shape, so
  * there is one menu implementation and one look.
@@ -170,11 +176,48 @@ export interface HostFileMenuItem {
     /** A Font Awesome class name. */
     icon?: string
     /**
-     * Sort weight within the File menu. The editor renders entries in array
+     * Sort weight within the menu. The editor renders entries in array
      * order, so this is only consulted when a host mixes its own entries with
      * its own; it does not reorder the editor's built-in items.
      */
     order?: number
+}
+
+/**
+ * A host's contribution to the editor's menu bar: entries added to one of the
+ * existing top-level menus, or an entirely new top-level menu.
+ *
+ * To extend an existing menu, give its `menuId` ("file", "settings", "tools",
+ * "help", ...). To add a menu of the host's own, give both a `menuId` (any
+ * unique string) and a `menuTitle`; the menu is appended at the far right of
+ * the menu bar.
+ */
+export interface HostMenuContribution {
+    /**
+     * The menu to contribute to. For an existing menu this is its built-in id;
+     * for a new menu, any string unique across the menu bar. When no menu with
+     * this id exists and `menuTitle` is set, a new top-level menu is created.
+     */
+    menuId: string
+    /**
+     * Title of a new top-level menu. Ignored when a menu with `menuId` already
+     * exists. May be a function of the editor, like any menu title.
+     */
+    menuTitle?: string | ((editor: Editor) => string)
+    /**
+     * Where new entries go within the menu: `"start"` (the default, right for
+     * document-lifecycle entries such as New/Open/Save as) or `"end"` (right
+     * for preference-like entries). Entries whose `id` replaces an existing one
+     * always replace in place, whatever this is.
+     */
+    position?: "start" | "end"
+    /**
+     * Keyboard shortcut for a new top-level menu, e.g. "Alt-h". Ignored for
+     * existing menus, which keep their own.
+     */
+    keys?: string
+    /** The entries to add to (or, by id, replace within) the menu. */
+    items: HostFileMenuItem[]
 }
 
 /** Minimal app interface — only the fields the Editor actually uses. */
@@ -190,11 +233,18 @@ export interface EditorApp {
          */
         SHOW_FILE_MENU_ITEMS?: boolean
         /**
-         * Host-provided entries for the File menu, populated from
-         * {@link StaticAppConfig.extraFileMenuItems}. Set by the host plumbing;
-         * hosts should configure it rather than assign it.
+         * Host contributions to any menu, or whole new top-level menus,
+         * populated from {@link StaticAppConfig.extraMenuItems}. Set by the
+         * host plumbing; hosts should configure it rather than assign it.
          */
-        EXTRA_FILE_MENU_ITEMS?: HostFileMenuItem[]
+        EXTRA_MENU_ITEMS?: HostMenuContribution[]
+        /**
+         * The application version, shown in the About dialog. The Fidus Writer
+         * server puts its own version here; standalone hosts can pass theirs
+         * through `StaticAppConfig.version`. Unset means the About dialog does
+         * not show a version line.
+         */
+        VERSION?: string
         /**
          * The pagination engine used by the print and PDF exporters
          * ("paginate-for-print" or "vivliostyle-pdf"). Hosts that select
@@ -240,6 +290,12 @@ export interface EditorApp {
         documentImport: EditorDocumentImportApi
         image: ImageApi
         contacts: EditorContactsApi
+        /**
+         * Present when the host can accept user feedback (the Fidus Writer
+         * server's `feedback` app). When present, the Help menu shows a
+         * "Technical support" entry that opens a feedback form.
+         */
+        feedback?: EditorFeedbackApi
     }
     /**
      * Persist the per-user spell-checker ignore lists (see ModGrammar).

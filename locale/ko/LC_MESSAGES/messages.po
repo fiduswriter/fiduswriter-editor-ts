@@ -52,6 +52,9 @@ msgstr "상호 참조가 대상을 잃었습니다."
 msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "전 세계 대부분에서 사용되는 A4(DIN A4/ISO 216)입니다."
 
+msgid "About Fidus Writer"
+msgstr ""
+
 msgid "Accept"
 msgstr "수용"
 
@@ -141,6 +144,9 @@ msgstr "병합 프로세스 중에 오류가 발생하여 작업 내용을 더 �
 
 msgid "An internal link has lost its target."
 msgstr "내부 링크가 대상을 잃었습니다."
+
+msgid "An online collaborative editor for academics who need to use citations and/or formulas."
+msgstr ""
 
 msgid "Anchor"
 msgstr "앵커"
@@ -421,6 +427,9 @@ msgstr "클립보드에 복사"
 msgid "Copy to clipboard failed. Please copy manually."
 msgstr "클립보드에 복사하지 못했습니다. 수동으로 복사해 주세요."
 
+msgid "Copyright"
+msgstr ""
+
 msgid "Copyright holder"
 msgstr "저작권 보유자"
 
@@ -553,6 +562,9 @@ msgstr "삭제된 키워드: %(keyword)s"
 msgid "Deletion"
 msgstr "삭제"
 
+msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgstr ""
+
 msgid "Description (optional)"
 msgstr "설명(선택사항)"
 
@@ -603,6 +615,9 @@ msgstr "문서 비밀번호가 변경되었습니다. 공동작업자와 새 비
 
 msgid "Document Style"
 msgstr "문서 스타일"
+
+msgid "Documentation"
+msgstr ""
 
 msgid "DOCX export options"
 msgstr ""
@@ -727,6 +742,15 @@ msgstr "문서를 Journal Archiving and Interchange Tag Library NISO JATS 버전
 msgid "Export the document to a Pandoc JSON file."
 msgstr "문서를 Pandoc JSON 파일로 내보내세요."
 
+msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+msgstr ""
+
+msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+msgstr ""
+
+msgid "Export the document to a Typst file with a bibliography file."
+msgstr ""
+
 msgid "Export the document to an Epub electronic reader file."
 msgstr "문서를 Epub 전자책 파일로 내보내세요."
 
@@ -753,6 +777,12 @@ msgstr "내보내는 중..."
 
 msgid "External"
 msgstr "외부"
+
+msgid "Fidus Writer"
+msgstr "피더스 작가"
+
+msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
 
 msgid "Figure"
 msgstr "그림"
@@ -790,6 +820,9 @@ msgstr "형식 변경"
 msgid "Format Change"
 msgstr "형식 변경"
 
+msgid "Forum"
+msgstr ""
+
 msgid "French"
 msgstr "프랑스어"
 
@@ -801,6 +834,9 @@ msgstr "기능"
 
 msgid "German (Germany)"
 msgstr "독일어(독일)"
+
+msgid "Get help in the Fidus Writer forum."
+msgstr ""
 
 msgid "Greek Letters"
 msgstr "그리스 문자"
@@ -825,6 +861,12 @@ msgstr "제목 6"
 
 msgid "Heading level "
 msgstr "제목 수준"
+
+msgid "Help"
+msgstr "도움말"
+
+msgid "Help with Fidus Writer."
+msgstr ""
 
 msgid "High priority"
 msgstr "높은 우선순위"
@@ -979,6 +1021,9 @@ msgstr "일본어"
 msgid "JATS"
 msgstr "자츠"
 
+msgid "Johannes Wilm and Fidus Writer contributors"
+msgstr ""
+
 msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 msgstr ""
 
@@ -1041,6 +1086,9 @@ msgstr "다음과 같이 나열됨"
 
 msgid "Loading…"
 msgstr "로드 중…"
+
+msgid "Markdown"
+msgstr ""
 
 msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
 msgstr ""
@@ -1192,6 +1240,9 @@ msgstr "온라인 문서"
 msgid "Only major comments"
 msgstr "주요댓글만"
 
+msgid "Open the user manual."
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "헤더 메뉴 열기/닫기"
 
@@ -1250,6 +1301,9 @@ msgid "Place figures as page floats"
 msgstr ""
 
 msgid "Place tables as page floats"
+msgstr ""
+
+msgid "Please enter a message first."
 msgstr ""
 
 msgid "Please select at least one citation source!"
@@ -1495,6 +1549,9 @@ msgstr "대상 선택"
 msgid "Selection"
 msgstr "선택"
 
+msgid "Send"
+msgstr ""
+
 msgid "Send a message..."
 msgstr "메시지 보내기..."
 
@@ -1642,6 +1699,12 @@ msgstr "표"
 msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
 msgstr ""
 
+msgid "Technical support"
+msgstr "기술지원"
+
+msgid "TEI"
+msgstr ""
+
 msgid "Text before"
 msgstr "이전에 문자 메시지"
 
@@ -1651,11 +1714,17 @@ msgstr "텍스트 언어"
 msgid "Text replaced successfully"
 msgstr "텍스트가 성공적으로 교체되었습니다."
 
+msgid "Thank you for your feedback!"
+msgstr ""
+
 msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "변경 사항을 자동으로 적용할 수 없습니다. 변경 사항을 복사하려면 복사 옵션을 사용해 보세요."
 
 msgid "The current password is incorrect."
 msgstr "현재 비밀번호가 올바르지 않습니다."
+
+msgid "The document could not be exported."
+msgstr ""
 
 msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
@@ -1744,6 +1813,9 @@ msgstr ""
 msgid "Type formula"
 msgstr "수식 입력"
 
+msgid "Typst"
+msgstr ""
+
 msgid "Underline"
 msgstr "밑줄"
 
@@ -1776,6 +1848,13 @@ msgstr "미국 레터"
 
 msgid "User"
 msgstr "사용자"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "버전"
+
+msgid "Version, copyright and license information."
+msgstr ""
 
 msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "경고! 모든 변경사항이 저장되지 않았습니다! 데이터 손실이 발생할 수 있습니다. 다시 연결을 시도하는 중..."
@@ -1875,6 +1954,9 @@ msgstr "귀하가 오프라인인 동안 귀하의 액세스 권한이 수정되
 
 msgid "Your document was out of sync and has been reset."
 msgstr "문서가 동기화되지 않아 재설정되었습니다."
+
+msgid "Your feedback could not be delivered. Please try again later."
+msgstr ""
 
 msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "개인 암호로 이 문서의 잠금을 해제할 수 있습니다. 새로운 무작위 비밀번호가 자동으로 생성됩니다. 다른 암호 사용자는 자동으로 암호를 받게 됩니다. 암호가 없는 공동작업자는 이를 수동으로 공유해야 합니다."

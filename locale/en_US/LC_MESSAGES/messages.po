@@ -52,6 +52,9 @@ msgstr "A cross reference has lost its target."
 msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "A4 (DIN A4/ISO 216) which is used in most of the world."
 
+msgid "About Fidus Writer"
+msgstr ""
+
 msgid "Accept"
 msgstr "Accept"
 
@@ -141,6 +144,9 @@ msgstr "An error occurred during the merge process, so we cannot save your work 
 
 msgid "An internal link has lost its target."
 msgstr "An internal link has lost its target."
+
+msgid "An online collaborative editor for academics who need to use citations and/or formulas."
+msgstr ""
 
 msgid "Anchor"
 msgstr "Anchor"
@@ -421,6 +427,9 @@ msgstr "Copy to Clipboard"
 msgid "Copy to clipboard failed. Please copy manually."
 msgstr "Copy to clipboard failed. Please copy manually."
 
+msgid "Copyright"
+msgstr ""
+
 msgid "Copyright holder"
 msgstr "Copyright holder"
 
@@ -553,6 +562,9 @@ msgstr "Deleted keyword: %(keyword)s"
 msgid "Deletion"
 msgstr "Deletion"
 
+msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgstr ""
+
 msgid "Description (optional)"
 msgstr "Description (optional)"
 
@@ -603,6 +615,9 @@ msgstr "Document password changed. Remember to share the new password with your 
 
 msgid "Document Style"
 msgstr "Document Style"
+
+msgid "Documentation"
+msgstr ""
 
 msgid "DOCX export options"
 msgstr "DOCX export options"
@@ -727,6 +742,15 @@ msgstr "Export the document to a Journal Archiving and Interchange Tag Library N
 msgid "Export the document to a Pandoc JSON file."
 msgstr "Export the document to a Pandoc JSON file."
 
+msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+msgstr ""
+
+msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+msgstr ""
+
+msgid "Export the document to a Typst file with a bibliography file."
+msgstr ""
+
 msgid "Export the document to an Epub electronic reader file."
 msgstr "Export the document to an Epub electronic reader file."
 
@@ -753,6 +777,12 @@ msgstr "Exporting..."
 
 msgid "External"
 msgstr "External"
+
+msgid "Fidus Writer"
+msgstr "Fidus Writer"
+
+msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
 
 msgid "Figure"
 msgstr "Figure"
@@ -790,6 +820,9 @@ msgstr "Format change"
 msgid "Format Change"
 msgstr "Format Change"
 
+msgid "Forum"
+msgstr ""
+
 msgid "French"
 msgstr "French"
 
@@ -801,6 +834,9 @@ msgstr "Functions"
 
 msgid "German (Germany)"
 msgstr "German (Germany)"
+
+msgid "Get help in the Fidus Writer forum."
+msgstr ""
 
 msgid "Greek Letters"
 msgstr "Greek Letters"
@@ -825,6 +861,12 @@ msgstr "Heading 6"
 
 msgid "Heading level "
 msgstr "Heading level"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Help with Fidus Writer."
+msgstr ""
 
 msgid "High priority"
 msgstr "High priority"
@@ -979,6 +1021,9 @@ msgstr "Japanese"
 msgid "JATS"
 msgstr "JATS"
 
+msgid "Johannes Wilm and Fidus Writer contributors"
+msgstr ""
+
 msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 msgstr "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 
@@ -1041,6 +1086,9 @@ msgstr "Listed as"
 
 msgid "Loading…"
 msgstr "Loading…"
+
+msgid "Markdown"
+msgstr ""
 
 msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
 msgstr "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
@@ -1192,6 +1240,9 @@ msgstr "Online Document"
 msgid "Only major comments"
 msgstr "Only major comments"
 
+msgid "Open the user manual."
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "Open/close header menu"
 
@@ -1250,6 +1301,9 @@ msgid "Place figures as page floats"
 msgstr ""
 
 msgid "Place tables as page floats"
+msgstr ""
+
+msgid "Please enter a message first."
 msgstr ""
 
 msgid "Please select at least one citation source!"
@@ -1495,6 +1549,9 @@ msgstr "Select Target"
 msgid "Selection"
 msgstr "Selection"
 
+msgid "Send"
+msgstr ""
+
 msgid "Send a message..."
 msgstr "Send a message..."
 
@@ -1642,6 +1699,12 @@ msgstr "Table"
 msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
 msgstr ""
 
+msgid "Technical support"
+msgstr "Technical support"
+
+msgid "TEI"
+msgstr ""
+
 msgid "Text before"
 msgstr "Text before"
 
@@ -1651,11 +1714,17 @@ msgstr "Text Language"
 msgid "Text replaced successfully"
 msgstr "Text replaced successfully"
 
+msgid "Thank you for your feedback!"
+msgstr ""
+
 msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 
 msgid "The current password is incorrect."
 msgstr "The current password is incorrect."
+
+msgid "The document could not be exported."
+msgstr ""
 
 msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
@@ -1744,6 +1813,9 @@ msgstr "Trim box"
 msgid "Type formula"
 msgstr "Type formula"
 
+msgid "Typst"
+msgstr ""
+
 msgid "Underline"
 msgstr "Underline"
 
@@ -1776,6 +1848,13 @@ msgstr "US Letter"
 
 msgid "User"
 msgstr "User"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Version"
+
+msgid "Version, copyright and license information."
+msgstr ""
 
 msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
@@ -1875,6 +1954,9 @@ msgstr "Your access rights were modified while you were offline, so we cannot sa
 
 msgid "Your document was out of sync and has been reset."
 msgstr "Your document was out of sync and has been reset."
+
+msgid "Your feedback could not be delivered. Please try again later."
+msgstr ""
 
 msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."

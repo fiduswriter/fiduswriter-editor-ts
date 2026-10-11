@@ -52,6 +52,9 @@ msgstr "En krydsreference har mistet sit mål."
 msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "A4 (DIN A4/ISO 216) som bruges i det meste af verden."
 
+msgid "About Fidus Writer"
+msgstr ""
+
 msgid "Accept"
 msgstr "Acceptere"
 
@@ -141,6 +144,9 @@ msgstr "Der opstod en fejl under fletteprocessen, så vi kan ikke længere gemme
 
 msgid "An internal link has lost its target."
 msgstr "Et internt link har mistet sit mål."
+
+msgid "An online collaborative editor for academics who need to use citations and/or formulas."
+msgstr ""
 
 msgid "Anchor"
 msgstr "Anker"
@@ -421,6 +427,9 @@ msgstr "Kopiér til udklipsholder"
 msgid "Copy to clipboard failed. Please copy manually."
 msgstr "Kopiering til udklipsholder mislykkedes. Kopier venligst manuelt."
 
+msgid "Copyright"
+msgstr ""
+
 msgid "Copyright holder"
 msgstr "Ophavsretsindehaver"
 
@@ -553,6 +562,9 @@ msgstr "Slettet søgeord: %(keyword)s"
 msgid "Deletion"
 msgstr "Sletning"
 
+msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgstr ""
+
 msgid "Description (optional)"
 msgstr "Beskrivelse (valgfrit)"
 
@@ -603,6 +615,9 @@ msgstr "Dokumentadgangskode ændret. Husk at dele den nye adgangskode med dine s
 
 msgid "Document Style"
 msgstr "Dokumentstil"
+
+msgid "Documentation"
+msgstr ""
 
 msgid "DOCX export options"
 msgstr ""
@@ -727,6 +742,15 @@ msgstr "Eksporter dokumentet til en Journal Archiving and Interchange Tag Librar
 msgid "Export the document to a Pandoc JSON file."
 msgstr "Eksporter dokumentet til en Pandoc JSON-fil."
 
+msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+msgstr ""
+
+msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+msgstr ""
+
+msgid "Export the document to a Typst file with a bibliography file."
+msgstr ""
+
 msgid "Export the document to an Epub electronic reader file."
 msgstr "Eksporter dokumentet til en elektronisk Epub-læserfil."
 
@@ -753,6 +777,12 @@ msgstr "Eksporterer..."
 
 msgid "External"
 msgstr "Ekstern"
+
+msgid "Fidus Writer"
+msgstr "Fidus forfatter"
+
+msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
 
 msgid "Figure"
 msgstr "Figur"
@@ -790,6 +820,9 @@ msgstr "Formatændring"
 msgid "Format Change"
 msgstr "Formatændring"
 
+msgid "Forum"
+msgstr ""
+
 msgid "French"
 msgstr "fransk"
 
@@ -801,6 +834,9 @@ msgstr "Funktioner"
 
 msgid "German (Germany)"
 msgstr "tysk (Tyskland)"
+
+msgid "Get help in the Fidus Writer forum."
+msgstr ""
 
 msgid "Greek Letters"
 msgstr "græske bogstaver"
@@ -825,6 +861,12 @@ msgstr "Overskrift 6"
 
 msgid "Heading level "
 msgstr "Overskriftsniveau"
+
+msgid "Help"
+msgstr "Hjælp"
+
+msgid "Help with Fidus Writer."
+msgstr ""
 
 msgid "High priority"
 msgstr "Høj prioritet"
@@ -979,6 +1021,9 @@ msgstr "japansk"
 msgid "JATS"
 msgstr "JATS"
 
+msgid "Johannes Wilm and Fidus Writer contributors"
+msgstr ""
+
 msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 msgstr ""
 
@@ -1041,6 +1086,9 @@ msgstr "Opført som"
 
 msgid "Loading…"
 msgstr "Indlæser..."
+
+msgid "Markdown"
+msgstr ""
 
 msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
 msgstr ""
@@ -1192,6 +1240,9 @@ msgstr "Online dokument"
 msgid "Only major comments"
 msgstr "Kun væsentlige kommentarer"
 
+msgid "Open the user manual."
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "Åbn/luk overskriftsmenu"
 
@@ -1250,6 +1301,9 @@ msgid "Place figures as page floats"
 msgstr ""
 
 msgid "Place tables as page floats"
+msgstr ""
+
+msgid "Please enter a message first."
 msgstr ""
 
 msgid "Please select at least one citation source!"
@@ -1495,6 +1549,9 @@ msgstr "Vælg Mål"
 msgid "Selection"
 msgstr "Udvælgelse"
 
+msgid "Send"
+msgstr ""
+
 msgid "Send a message..."
 msgstr "Send en besked..."
 
@@ -1642,6 +1699,12 @@ msgstr "Tabel"
 msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
 msgstr ""
 
+msgid "Technical support"
+msgstr "Teknisk support"
+
+msgid "TEI"
+msgstr ""
+
 msgid "Text before"
 msgstr "Tekst før"
 
@@ -1651,11 +1714,17 @@ msgstr "Tekstsprog"
 msgid "Text replaced successfully"
 msgstr "Teksten blev erstattet"
 
+msgid "Thank you for your feedback!"
+msgstr ""
+
 msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "Ændringen kunne ikke anvendes automatisk. Overvej venligst at bruge kopieringsmuligheden til at kopiere ændringerne."
 
 msgid "The current password is incorrect."
 msgstr "Den aktuelle adgangskode er forkert."
+
+msgid "The document could not be exported."
+msgstr ""
 
 msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
@@ -1744,6 +1813,9 @@ msgstr ""
 msgid "Type formula"
 msgstr "Skriv formel"
 
+msgid "Typst"
+msgstr ""
+
 msgid "Underline"
 msgstr "Understrege"
 
@@ -1776,6 +1848,13 @@ msgstr "US Brev"
 
 msgid "User"
 msgstr "Bruger"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Version"
+
+msgid "Version, copyright and license information."
+msgstr ""
 
 msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "Advarsel! Ikke alle dine ændringer er blevet gemt! Du kan lide tab af data. Forsøger at oprette forbindelse igen..."
@@ -1875,6 +1954,9 @@ msgstr "Dine adgangsrettigheder blev ændret, mens du var offline, så vi kan ik
 
 msgid "Your document was out of sync and has been reset."
 msgstr "Dit dokument var ude af synkronisering og er blevet nulstillet."
+
+msgid "Your feedback could not be delivered. Please try again later."
+msgstr ""
 
 msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "Din personlige adgangssætning vil stadig låse dette dokument op. En ny tilfældig adgangskode genereres automatisk. Andre adgangssætningsbrugere vil modtage det automatisk; samarbejdspartnere uden adgangskode skal deles med dem manuelt."

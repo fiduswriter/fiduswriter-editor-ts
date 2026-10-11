@@ -10,7 +10,9 @@ import {
     PdfExportDialog,
     RevisionDialog,
     HtmlExportDialog,
-    EpubExportDialog
+    EpubExportDialog,
+    openAboutDialog,
+    openFeedbackDialog
 } from "../../dialogs/index.js"
 import {E2EEKeyManager} from "fwtoolkit/e2ee/key-manager"
 import {PassphraseManager} from "fwtoolkit/e2ee/passphrase-manager"
@@ -21,7 +23,13 @@ import {
     SearchReplaceDialog,
     WordCountDialog
 } from "../../tools/index.js"
-import type {Editor} from "../../types.js"
+import type {Editor, EditorFeedbackApi} from "../../types.js"
+
+/** The Fidus Writer user manual. */
+const DOCUMENTATION_URL = "https://fiduswriter.github.io/manual/"
+
+/** The Fidus Writer support forum. */
+const FORUM_URL = "https://forum.fiduswriter.org/"
 
 interface AccessRightLike {
     holder?: {
@@ -1518,6 +1526,80 @@ export const headerbarModel = () => ({
                     action: (editor: Editor) => {
                         getTrack(editor).rejectAll()
                     }
+                }
+            ]
+        },
+        {
+            id: "help",
+            title: gettext("Help"),
+            type: "menu",
+            tooltip: gettext("Help with Fidus Writer."),
+            order: 5,
+            keys: "Alt-h",
+            content: [
+                {
+                    id: "help_about",
+                    title: gettext("About Fidus Writer"),
+                    type: "action",
+                    tooltip: gettext(
+                        "Version, copyright and license information."
+                    ),
+                    order: 0,
+                    action: (editor: Editor) => openAboutDialog(editor)
+                },
+                {
+                    id: "help_feedback",
+                    title: gettext("Technical support"),
+                    type: "action",
+                    tooltip: gettext(
+                        "Report a problem to this site's operators."
+                    ),
+                    order: 1,
+                    // Only where a backend can receive the feedback — the
+                    // Fidus Writer server's feedback app. Standalone hosts
+                    // have no connector, so they see no entry.
+                    available: (editor: Editor) =>
+                        Boolean(
+                            (
+                                editor.app as {
+                                    apiConnectors?: {
+                                        feedback?: EditorFeedbackApi
+                                    }
+                                }
+                            ).apiConnectors?.feedback
+                        ),
+                    action: (editor: Editor) => openFeedbackDialog(editor)
+                },
+                {
+                    // The separator belongs to the entry above it, so it
+                    // hides together with it.
+                    type: "separator",
+                    available: (editor: Editor) =>
+                        Boolean(
+                            (
+                                editor.app as {
+                                    apiConnectors?: {
+                                        feedback?: EditorFeedbackApi
+                                    }
+                                }
+                            ).apiConnectors?.feedback
+                        )
+                },
+                {
+                    id: "help_documentation",
+                    title: gettext("Documentation"),
+                    type: "action",
+                    tooltip: gettext("Open the user manual."),
+                    order: 3,
+                    action: () => window.open(DOCUMENTATION_URL, "_blank")
+                },
+                {
+                    id: "help_forum",
+                    title: gettext("Forum"),
+                    type: "action",
+                    tooltip: gettext("Get help in the Fidus Writer forum."),
+                    order: 4,
+                    action: () => window.open(FORUM_URL, "_blank")
                 }
             ]
         }

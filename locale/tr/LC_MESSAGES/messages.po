@@ -52,6 +52,9 @@ msgstr "Çapraz referans hedefini kaybetti."
 msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "Dünyanın çoğu yerinde kullanılan A4 (DIN A4/ISO 216)."
 
+msgid "About Fidus Writer"
+msgstr ""
+
 msgid "Accept"
 msgstr "Kabul Et"
 
@@ -141,6 +144,9 @@ msgstr "Birleştirme işlemi sırasında bir hata oluştu, bu nedenle çalışma
 
 msgid "An internal link has lost its target."
 msgstr "Dahili bir bağlantı hedefini kaybetti."
+
+msgid "An online collaborative editor for academics who need to use citations and/or formulas."
+msgstr ""
 
 msgid "Anchor"
 msgstr "Çapa"
@@ -421,6 +427,9 @@ msgstr "Panoya kopyala"
 msgid "Copy to clipboard failed. Please copy manually."
 msgstr "Panoya kopyalama başarısız oldu. Lütfen manuel olarak kopyalayın."
 
+msgid "Copyright"
+msgstr ""
+
 msgid "Copyright holder"
 msgstr "Telif hakkı sahibi"
 
@@ -553,6 +562,9 @@ msgstr "Silinen anahtar kelime: %(keyword)s"
 msgid "Deletion"
 msgstr "Silme"
 
+msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgstr ""
+
 msgid "Description (optional)"
 msgstr "Açıklama (isteğe bağlı)"
 
@@ -603,6 +615,9 @@ msgstr "Belge şifresi değiştirildi. Yeni şifreyi ortak çalıştığınız k
 
 msgid "Document Style"
 msgstr "Belge Stili"
+
+msgid "Documentation"
+msgstr ""
 
 msgid "DOCX export options"
 msgstr ""
@@ -727,6 +742,15 @@ msgstr "Belgeyi Journal Archiving and Interchange Tag Library NISO JATS Sürüm 
 msgid "Export the document to a Pandoc JSON file."
 msgstr "Belgeyi bir Pandoc JSON dosyasına aktarın."
 
+msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+msgstr ""
+
+msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+msgstr ""
+
+msgid "Export the document to a Typst file with a bibliography file."
+msgstr ""
+
 msgid "Export the document to an Epub electronic reader file."
 msgstr "Belgeyi bir Epub elektronik okuyucu dosyasına aktarın."
 
@@ -753,6 +777,12 @@ msgstr "Dışa aktarılıyor..."
 
 msgid "External"
 msgstr "Harici"
+
+msgid "Fidus Writer"
+msgstr "Fidus Yazarı"
+
+msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
 
 msgid "Figure"
 msgstr "Figür"
@@ -790,6 +820,9 @@ msgstr "Biçim değişikliği"
 msgid "Format Change"
 msgstr "Biçim Değişikliği"
 
+msgid "Forum"
+msgstr ""
+
 msgid "French"
 msgstr "Fransızca"
 
@@ -801,6 +834,9 @@ msgstr "Fonksiyonlar"
 
 msgid "German (Germany)"
 msgstr "Almanca (Almanya)"
+
+msgid "Get help in the Fidus Writer forum."
+msgstr ""
 
 msgid "Greek Letters"
 msgstr "Yunan Harfleri"
@@ -825,6 +861,12 @@ msgstr "Başlık 6"
 
 msgid "Heading level "
 msgstr "Başlık düzeyi"
+
+msgid "Help"
+msgstr "Yardım"
+
+msgid "Help with Fidus Writer."
+msgstr ""
 
 msgid "High priority"
 msgstr "Yüksek öncelik"
@@ -979,6 +1021,9 @@ msgstr "Japonca"
 msgid "JATS"
 msgstr "JATS"
 
+msgid "Johannes Wilm and Fidus Writer contributors"
+msgstr ""
+
 msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 msgstr ""
 
@@ -1041,6 +1086,9 @@ msgstr "Şu şekilde listelendi:"
 
 msgid "Loading…"
 msgstr "Yükleniyor…"
+
+msgid "Markdown"
+msgstr ""
 
 msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
 msgstr ""
@@ -1192,6 +1240,9 @@ msgstr "Çevrimiçi Belge"
 msgid "Only major comments"
 msgstr "Yalnızca önemli yorumlar"
 
+msgid "Open the user manual."
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "Başlık menüsünü aç/kapat"
 
@@ -1250,6 +1301,9 @@ msgid "Place figures as page floats"
 msgstr ""
 
 msgid "Place tables as page floats"
+msgstr ""
+
+msgid "Please enter a message first."
 msgstr ""
 
 msgid "Please select at least one citation source!"
@@ -1495,6 +1549,9 @@ msgstr "Hedef Seçin"
 msgid "Selection"
 msgstr "Seçim"
 
+msgid "Send"
+msgstr ""
+
 msgid "Send a message..."
 msgstr "Mesaj gönder..."
 
@@ -1642,6 +1699,12 @@ msgstr "Masa"
 msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
 msgstr ""
 
+msgid "Technical support"
+msgstr "Teknik destek"
+
+msgid "TEI"
+msgstr ""
+
 msgid "Text before"
 msgstr "Önce metin"
 
@@ -1651,11 +1714,17 @@ msgstr "Metin Dili"
 msgid "Text replaced successfully"
 msgstr "Metin başarıyla değiştirildi"
 
+msgid "Thank you for your feedback!"
+msgstr ""
+
 msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "Değişiklik otomatik olarak uygulanamadı. Lütfen değişiklikleri kopyalamak için kopyala seçeneğini kullanmayı düşünün."
 
 msgid "The current password is incorrect."
 msgstr "Mevcut şifre yanlış."
+
+msgid "The document could not be exported."
+msgstr ""
 
 msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
@@ -1744,6 +1813,9 @@ msgstr ""
 msgid "Type formula"
 msgstr "Formül yazın"
 
+msgid "Typst"
+msgstr ""
+
 msgid "Underline"
 msgstr "Altı çizili"
 
@@ -1776,6 +1848,13 @@ msgstr "ABD Mektubu"
 
 msgid "User"
 msgstr "Kullanıcı"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Sürüm"
+
+msgid "Version, copyright and license information."
+msgstr ""
 
 msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "Uyarı! Değişikliklerinizin tümü kaydedilmedi! Veri kaybı yaşayabilirsiniz. Yeniden bağlanmaya çalışılıyor..."
@@ -1875,6 +1954,9 @@ msgstr "Erişim haklarınız siz çevrimdışıyken değiştirildi, dolayısıyl
 
 msgid "Your document was out of sync and has been reset."
 msgstr "Dokümanınız senkronize değildi ve sıfırlandı."
+
+msgid "Your feedback could not be delivered. Please try again later."
+msgstr ""
 
 msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "Kişisel parolanız yine de bu belgenin kilidini açacaktır. Otomatik olarak yeni bir rastgele şifre oluşturulur. Diğer parola kullanıcıları parolayı otomatik olarak alacaktır; parola kullanmayan ortak çalışanların bu parolanın kendileriyle manuel olarak paylaşılmasına ihtiyacı vardır."

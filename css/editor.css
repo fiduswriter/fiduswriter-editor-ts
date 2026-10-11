@@ -1575,3 +1575,23 @@ pre[data-language] {
 math-virtual-keyboard {
     --keyboard-zindex: calc(var(--highest-dialog-z-index, 1000) + 1);
 }
+
+/* About dialog (Help menu) */
+.fw-about-dialog {
+    text-align: center;
+}
+
+.fw-about-dialog h3 {
+    margin: 10px 0;
+}
+
+.fw-about-dialog .fw-about-logo {
+    max-height: 64px;
+    max-width: 100%;
+}
+
+/* Feedback form (Help menu) */
+.fw-feedback-dialog textarea {
+    margin-top: 10px;
+    resize: vertical;
+}

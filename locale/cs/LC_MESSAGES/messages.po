@@ -52,6 +52,9 @@ msgstr "Křížový odkaz ztratil svůj cíl."
 msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "A4 (DIN A4/ISO 216), který se používá ve většině světa."
 
+msgid "About Fidus Writer"
+msgstr ""
+
 msgid "Accept"
 msgstr "Přijmout"
 
@@ -141,6 +144,9 @@ msgstr "Během procesu sloučení došlo k chybě, takže vaši práci již nem�
 
 msgid "An internal link has lost its target."
 msgstr "Interní odkaz ztratil svůj cíl."
+
+msgid "An online collaborative editor for academics who need to use citations and/or formulas."
+msgstr ""
 
 msgid "Anchor"
 msgstr "Kotva"
@@ -421,6 +427,9 @@ msgstr "Kopírovat do schránky"
 msgid "Copy to clipboard failed. Please copy manually."
 msgstr "Kopírování do schránky se nezdařilo. Zkopírujte prosím ručně."
 
+msgid "Copyright"
+msgstr ""
+
 msgid "Copyright holder"
 msgstr "Držitel autorských práv"
 
@@ -553,6 +562,9 @@ msgstr "Smazané klíčové slovo: %(keyword)s"
 msgid "Deletion"
 msgstr "Vymazání"
 
+msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgstr ""
+
 msgid "Description (optional)"
 msgstr "Popis (volitelné)"
 
@@ -603,6 +615,9 @@ msgstr "Heslo dokumentu změněno. Nezapomeňte nové heslo sdílet se svými sp
 
 msgid "Document Style"
 msgstr "Styl dokumentu"
+
+msgid "Documentation"
+msgstr ""
 
 msgid "DOCX export options"
 msgstr ""
@@ -727,6 +742,15 @@ msgstr "Exportujte dokument do souboru Journal Archiving and Interchange Tag Lib
 msgid "Export the document to a Pandoc JSON file."
 msgstr "Exportujte dokument do souboru Pandoc JSON."
 
+msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+msgstr ""
+
+msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+msgstr ""
+
+msgid "Export the document to a Typst file with a bibliography file."
+msgstr ""
+
 msgid "Export the document to an Epub electronic reader file."
 msgstr "Exportujte dokument do souboru elektronické čtečky Epub."
 
@@ -753,6 +777,12 @@ msgstr "Exportování..."
 
 msgid "External"
 msgstr "Externí"
+
+msgid "Fidus Writer"
+msgstr "Spisovatel Fidus"
+
+msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
 
 msgid "Figure"
 msgstr "Postava"
@@ -790,6 +820,9 @@ msgstr "Změna formátu"
 msgid "Format Change"
 msgstr "Změna formátu"
 
+msgid "Forum"
+msgstr ""
+
 msgid "French"
 msgstr "francouzština"
 
@@ -801,6 +834,9 @@ msgstr "Funkce"
 
 msgid "German (Germany)"
 msgstr "němčina (Německo)"
+
+msgid "Get help in the Fidus Writer forum."
+msgstr ""
 
 msgid "Greek Letters"
 msgstr "Řecká písmena"
@@ -825,6 +861,12 @@ msgstr "Nadpis 6"
 
 msgid "Heading level "
 msgstr "Úroveň nadpisu"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "Help with Fidus Writer."
+msgstr ""
 
 msgid "High priority"
 msgstr "Vysoká priorita"
@@ -979,6 +1021,9 @@ msgstr "japonský"
 msgid "JATS"
 msgstr "JATS"
 
+msgid "Johannes Wilm and Fidus Writer contributors"
+msgstr ""
+
 msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 msgstr ""
 
@@ -1041,6 +1086,9 @@ msgstr "Uvedeno jako"
 
 msgid "Loading…"
 msgstr "Načítání…"
+
+msgid "Markdown"
+msgstr ""
 
 msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
 msgstr ""
@@ -1192,6 +1240,9 @@ msgstr "Online dokument"
 msgid "Only major comments"
 msgstr "Pouze zásadní komentáře"
 
+msgid "Open the user manual."
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "Otevřít/zavřít nabídku záhlaví"
 
@@ -1250,6 +1301,9 @@ msgid "Place figures as page floats"
 msgstr ""
 
 msgid "Place tables as page floats"
+msgstr ""
+
+msgid "Please enter a message first."
 msgstr ""
 
 msgid "Please select at least one citation source!"
@@ -1495,6 +1549,9 @@ msgstr "Vyberte možnost Cíl"
 msgid "Selection"
 msgstr "Výběr"
 
+msgid "Send"
+msgstr ""
+
 msgid "Send a message..."
 msgstr "Poslat zprávu..."
 
@@ -1642,6 +1699,12 @@ msgstr "Tabulka"
 msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
 msgstr ""
 
+msgid "Technical support"
+msgstr "Technická podpora"
+
+msgid "TEI"
+msgstr ""
+
 msgid "Text before"
 msgstr "Text předtím"
 
@@ -1651,11 +1714,17 @@ msgstr "Jazyk textu"
 msgid "Text replaced successfully"
 msgstr "Text byl úspěšně nahrazen"
 
+msgid "Thank you for your feedback!"
+msgstr ""
+
 msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "Změnu nebylo možné použít automaticky. Zvažte použití možnosti kopírování ke zkopírování změn."
 
 msgid "The current password is incorrect."
 msgstr "Aktuální heslo je nesprávné."
+
+msgid "The document could not be exported."
+msgstr ""
 
 msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
@@ -1744,6 +1813,9 @@ msgstr ""
 msgid "Type formula"
 msgstr "Zadejte vzorec"
 
+msgid "Typst"
+msgstr ""
+
 msgid "Underline"
 msgstr "Zdůraznit"
 
@@ -1776,6 +1848,13 @@ msgstr "US Letter"
 
 msgid "User"
 msgstr "Uživatel"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "Verze"
+
+msgid "Version, copyright and license information."
+msgstr ""
 
 msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "Varování! Ne všechny vaše změny byly uloženy! Mohli byste utrpět ztrátu dat. Pokus o opětovné připojení..."
@@ -1875,6 +1954,9 @@ msgstr "Vaše přístupová práva byla změněna, když jste byli offline, tak�
 
 msgid "Your document was out of sync and has been reset."
 msgstr "Váš dokument nebyl synchronizován a byl resetován."
+
+msgid "Your feedback could not be delivered. Please try again later."
+msgstr ""
 
 msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "Vaše osobní přístupová fráze bude tento dokument stále odemykat. Nové náhodné heslo se vygeneruje automaticky. Ostatní uživatelé přístupové fráze jej obdrží automaticky; spolupracovníci bez přístupové fráze jej potřebují sdílet s nimi ručně."

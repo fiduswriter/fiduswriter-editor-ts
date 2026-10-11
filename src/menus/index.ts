@@ -1,6 +1,6 @@
 export {
     HeaderbarView,
-    addHostFileMenuItems,
+    addHostMenuItems,
     headerbarModel
 } from "./headerbar/index.js"
 export {ToolbarView, toolbarModel} from "./toolbar/index.js"

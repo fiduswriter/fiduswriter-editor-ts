@@ -99,24 +99,50 @@ npm run typecheck
 - Statically served pages and browser demos that use `createStaticEditor` or
   `createStaticApp` without a backend server.
 
-## Host-provided File-menu entries
+## Host-provided menu entries
 
-`StaticAppConfig.extraFileMenuItems` lets a host add entries to the editor's
-**File** menu, above the built-in ones. A host without a Fidus Writer backend
-owns the document lifecycle — which file is open, where it is saved, what "New"
-means — so the editor cannot supply Open, Save as or New itself. Supplying them
-this way keeps one menu and one look, instead of the host bolting a separate
-toolbar onto the page.
+`StaticAppConfig.extraMenuItems` lets a host extend **any** of the editor's
+menus, or add a top-level menu of its own. A host without a Fidus Writer
+backend owns the document lifecycle — which file is open, where it is saved,
+what "New" means — so the editor cannot supply Open, Save as or New itself.
+Supplying them this way keeps one menu and one look, instead of the host
+bolting a separate toolbar onto the page. Hosts use the same mechanism for
+their own entries elsewhere: the desktop application puts "User preferences"
+at the end of the Settings menu this way.
 
-The shape is `HostFileMenuItem` (`src/types.ts`); the splicing is
-`addHostFileMenuItems` in `src/menus/headerbar/host_items.ts`, applied by the
-`Editor` constructor the same way `document_template` adds its own "Create copy
-as ..." entry. Entries are matched by `id`: an entry whose id matches an existing
-one replaces it **in place**, so overriding cannot reorder the menu and
-rebuilding cannot accumulate duplicates. Give entries ids.
+Each contribution is a `HostMenuContribution` (`src/types.ts`): a `menuId`
+naming an existing menu ("file", "export", "settings", "tools", "help") or a
+new unique one, an optional `menuTitle` (which turns a missing id into a new
+top-level menu, appended at the far right), an optional `position` of
+`"start"` (default) or `"end"` for where new entries go, and the
+`HostFileMenuItem` entries themselves.
 
-The view renders `content` in array order, so genuinely new entries are
-prepended. `order` is not consulted for ordering.
+The splicing is `addHostMenuItems` in `src/menus/headerbar/host_items.ts`,
+applied by the `Editor` constructor the same way `document_template` adds its
+own "Create copy as ..." entry. Entries are matched by `id`: an entry whose id matches an
+existing one replaces it **in place**, so overriding cannot reorder the menu
+and rebuilding cannot accumulate duplicates. Give entries ids.
+
+The view renders `content` in array order, so new entries go to the start or
+end of their menu per `position`. `order` is not consulted for ordering.
+
+## The Help menu
+
+The headerbar model ends with a built-in **Help** menu (`id: "help"`,
+`Alt-h`) holding:
+
+- **About Fidus Writer** — version, copyright, license and website. The
+  version comes from `app.settings.VERSION`; the Fidus Writer server supplies
+  it through the page settings, and static hosts pass
+  `StaticAppConfig.version`.
+- **Technical support** — a feedback form posting through
+  `app.apiConnectors.feedback`. The entry (and its separator) is hidden when
+  the host supplies no such connector — standalone hosts don't.
+- **Documentation** (`https://fiduswriter.github.io/manual/`) and **Forum**
+  (`https://forum.fiduswriter.org/`), each opened in a new tab.
+
+Hosts can add their own entries to the Help menu through
+`extraMenuItems` with `menuId: "help"`.
 
 ## Host-supplied branding
 

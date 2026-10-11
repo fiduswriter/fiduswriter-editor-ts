@@ -49,7 +49,7 @@ import {ModFootnotes} from "./footnotes/index.js"
 import {ModGrammar} from "./grammar/index.js"
 import {buildEditorKeymap} from "./keymap.js"
 import {
-    addHostFileMenuItems,
+    addHostMenuItems,
     codeBlockMenuModel,
     figureMenuModel,
     figureWidthMenuModel,
@@ -100,7 +100,7 @@ import {
     acceptAllNoInsertions,
     amendTransaction
 } from "./track/index.js"
-import type {EditorApp, EditorUser} from "./types.js"
+import type {EditorApp, EditorUser, HostMenuContribution} from "./types.js"
 
 // UUID v4 pattern for share tokens
 const uuid4Pattern =
@@ -245,12 +245,13 @@ export class Editor {
             codeBlockMenuModel: codeBlockMenuModel()
         }
 
-        // Host-provided File-menu entries (Open, Save as, New, ...). Applied
-        // after construction, like `document_template` does for its own entry.
-        addHostFileMenuItems(
+        // Host-provided menu entries: whole menus, or entries for any of the
+        // built-in ones. Applied after construction, like
+        // `document_template` does for its own entry.
+        addHostMenuItems(
             this.menu.headerbarModel,
-            (app.settings as {EXTRA_FILE_MENU_ITEMS?: unknown})
-                .EXTRA_FILE_MENU_ITEMS as never
+            (app.settings as {EXTRA_MENU_ITEMS?: HostMenuContribution[]})
+                .EXTRA_MENU_ITEMS
         )
         this.client_id = Math.floor(Math.random() * 0xffffffff)
         this.clientTimeAdjustment = 0
@@ -1420,7 +1421,9 @@ export type {
     EditorDocumentApi,
     EditorDocumentImportApi,
     EditorContactsApi,
-    HostFileMenuItem
+    EditorFeedbackApi,
+    HostFileMenuItem,
+    HostMenuContribution
 } from "./types.js"
 // Exported so a host can surface the ignored-words dialog from its own UI.
 // The editor reaches it through the Settings menu; a host with its own menu

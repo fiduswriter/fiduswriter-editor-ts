@@ -52,6 +52,9 @@ msgstr "交叉引用失去了目标。"
 msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "A4 (DIN A4/ISO 216) 在世界大部分地区使用。"
 
+msgid "About Fidus Writer"
+msgstr ""
+
 msgid "Accept"
 msgstr "接受"
 
@@ -141,6 +144,9 @@ msgstr "合并过程中发生错误，因此我们无法再将您的工作保存
 
 msgid "An internal link has lost its target."
 msgstr "内部链接失去了目标。"
+
+msgid "An online collaborative editor for academics who need to use citations and/or formulas."
+msgstr ""
 
 msgid "Anchor"
 msgstr "锚"
@@ -421,6 +427,9 @@ msgstr "复制到剪贴板"
 msgid "Copy to clipboard failed. Please copy manually."
 msgstr "复制到剪贴板失败。请手动复制。"
 
+msgid "Copyright"
+msgstr ""
+
 msgid "Copyright holder"
 msgstr "版权所有者"
 
@@ -553,6 +562,9 @@ msgstr "已删除的关键字：%(keyword)s"
 msgid "Deletion"
 msgstr "删除"
 
+msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgstr ""
+
 msgid "Description (optional)"
 msgstr "描述（可选）"
 
@@ -603,6 +615,9 @@ msgstr "文档密码已更改。请记住与您的协作者分享新密码。"
 
 msgid "Document Style"
 msgstr "文档样式"
+
+msgid "Documentation"
+msgstr ""
 
 msgid "DOCX export options"
 msgstr ""
@@ -727,6 +742,15 @@ msgstr "将文档导出到期刊存档和交换标签库 NISO JATS 版本 1.2 �
 msgid "Export the document to a Pandoc JSON file."
 msgstr "将文档导出到 Pandoc JSON 文件。"
 
+msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+msgstr ""
+
+msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+msgstr ""
+
+msgid "Export the document to a Typst file with a bibliography file."
+msgstr ""
+
 msgid "Export the document to an Epub electronic reader file."
 msgstr "将文档导出为 Epub 电子阅读器文件。"
 
@@ -753,6 +777,12 @@ msgstr "出口..."
 
 msgid "External"
 msgstr "外部的"
+
+msgid "Fidus Writer"
+msgstr "菲杜斯作家"
+
+msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
 
 msgid "Figure"
 msgstr "图"
@@ -790,6 +820,9 @@ msgstr "格式变更"
 msgid "Format Change"
 msgstr "格式变更"
 
+msgid "Forum"
+msgstr ""
+
 msgid "French"
 msgstr "法语"
 
@@ -801,6 +834,9 @@ msgstr "功能"
 
 msgid "German (Germany)"
 msgstr "德语（德国）"
+
+msgid "Get help in the Fidus Writer forum."
+msgstr ""
 
 msgid "Greek Letters"
 msgstr "希腊字母"
@@ -825,6 +861,12 @@ msgstr "标题 6"
 
 msgid "Heading level "
 msgstr "标题级别"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "Help with Fidus Writer."
+msgstr ""
 
 msgid "High priority"
 msgstr "高优先级"
@@ -979,6 +1021,9 @@ msgstr "日本人"
 msgid "JATS"
 msgstr "JATS"
 
+msgid "Johannes Wilm and Fidus Writer contributors"
+msgstr ""
+
 msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 msgstr ""
 
@@ -1041,6 +1086,9 @@ msgstr "列为"
 
 msgid "Loading…"
 msgstr "加载中…"
+
+msgid "Markdown"
+msgstr ""
 
 msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
 msgstr ""
@@ -1192,6 +1240,9 @@ msgstr "在线文档"
 msgid "Only major comments"
 msgstr "仅主要评论"
 
+msgid "Open the user manual."
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "打开/关闭标题菜单"
 
@@ -1250,6 +1301,9 @@ msgid "Place figures as page floats"
 msgstr ""
 
 msgid "Place tables as page floats"
+msgstr ""
+
+msgid "Please enter a message first."
 msgstr ""
 
 msgid "Please select at least one citation source!"
@@ -1495,6 +1549,9 @@ msgstr "选择目标"
 msgid "Selection"
 msgstr "选择"
 
+msgid "Send"
+msgstr ""
+
 msgid "Send a message..."
 msgstr "发送消息..."
 
@@ -1642,6 +1699,12 @@ msgstr "表格"
 msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
 msgstr ""
 
+msgid "Technical support"
+msgstr "技术支援"
+
+msgid "TEI"
+msgstr ""
+
 msgid "Text before"
 msgstr "之前的文字"
 
@@ -1651,11 +1714,17 @@ msgstr "文本语言"
 msgid "Text replaced successfully"
 msgstr "文字替换成功"
 
+msgid "Thank you for your feedback!"
+msgstr ""
+
 msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "无法自动应用更改。请考虑使用复制选项来复制更改。"
 
 msgid "The current password is incorrect."
 msgstr "当前密码不正确。"
+
+msgid "The document could not be exported."
+msgstr ""
 
 msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
@@ -1744,6 +1813,9 @@ msgstr ""
 msgid "Type formula"
 msgstr "类型公式"
 
+msgid "Typst"
+msgstr ""
+
 msgid "Underline"
 msgstr "下划线"
 
@@ -1776,6 +1848,13 @@ msgstr "美国信"
 
 msgid "User"
 msgstr "用户"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "版本"
+
+msgid "Version, copyright and license information."
+msgstr ""
 
 msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "警告！并非所有更改都已保存！您可能会丢失数据。正在尝试重新连接..."
@@ -1875,6 +1954,9 @@ msgstr "您的访问权限在您离线时被修改，因此我们无法再将您
 
 msgid "Your document was out of sync and has been reset."
 msgstr "您的文档不同步并已重置。"
+
+msgid "Your feedback could not be delivered. Please try again later."
+msgstr ""
 
 msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "您的个人密码仍将解锁此文档。自动生成新的随机密码。其他密码用户将自动收到；非密码短语协作者需要手动与他们共享。"

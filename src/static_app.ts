@@ -1,4 +1,4 @@
-import type {CSL, EditorImageDB, HostFileMenuItem} from "./types.js"
+import type {CSL, EditorImageDB, HostMenuContribution} from "./types.js"
 import {BibliographyDB} from "@fiduswriter/bibliography-manager/database"
 import type {BibliographyApi} from "@fiduswriter/bibliography-manager"
 import {ImageDB} from "@fiduswriter/image-manager/database"
@@ -110,19 +110,24 @@ export interface StaticAppConfig {
      */
     fileMenuItems?: boolean
     /**
-     * Extra entries for the editor's **File** menu, rendered above the built-in
-     * ones.
+     * Host contributions to any of the editor's menus, or whole new
+     * top-level menus. See {@link HostMenuContribution}: extend an existing
+     * menu by its id ("file", "settings", "tools", "help", ...) or create a
+     * menu of the host's own by adding a `menuTitle`. The desktop application
+     * uses this for New…, Open… and Save as… in the File menu and for "User
+     * preferences" at the end of the Settings menu.
      *
-     * A standalone or embedded host owns the document lifecycle, so the editor
-     * cannot know what Open, Save as or New mean for it. Supplying them here
-     * puts them in the editor's own menu instead of requiring a separate
-     * toolbar: the desktop application uses this for New…, Open… and Save as…,
-     * and an embedded host can do the same.
-     *
-     * An entry whose `id` matches an existing one replaces it, so rebuilding the
-     * menu does not accumulate duplicates.
+     * An entry whose `id` matches an existing one replaces it, so rebuilding
+     * the menu does not accumulate duplicates.
      */
-    extraFileMenuItems?: HostFileMenuItem[]
+    extraMenuItems?: HostMenuContribution[]
+    /**
+     * The application version, shown in the About dialog under Help. The
+     * Fidus Writer server passes its own version through the page settings;
+     * a standalone host passes the version of the application it embeds the
+     * editor into. Omitted means the About dialog shows no version line.
+     */
+    version?: string
     /**
      * URL of a logo to show at the head of the editor's header, before the
      * document title.
@@ -446,8 +451,10 @@ export async function createStaticApp(
             // editor) hide the file-menu items that need one: Share, Save
             // revision, Create copy.
             SHOW_FILE_MENU_ITEMS: config.fileMenuItems ?? true,
-            // Read by the Editor constructor and spliced into the File menu.
-            EXTRA_FILE_MENU_ITEMS: config.extraFileMenuItems ?? [],
+            // Read by the Editor constructor and spliced into the menus.
+            EXTRA_MENU_ITEMS: config.extraMenuItems ?? [],
+            // Shown by the About dialog (Help menu).
+            VERSION: config.version,
             LOGO_URL: config.logoUrl ?? "",
             PRINT_ENGINE: config.printEngine
         },

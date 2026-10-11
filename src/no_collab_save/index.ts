@@ -81,6 +81,13 @@ export class NoCollabSave {
     _focused: boolean
     _online: boolean
     /**
+     * Whether any local edit has been made since the document was loaded.
+     * Unlike `_hasUnsavedChanges()` this does not flip back on save: a host
+     * such as the desktop app uses it to decide whether the window still
+     * holds a document the user has never touched.
+     */
+    _modifiedSinceLoad: boolean
+    /**
      * The document state as last confirmed by the server (at load or after
      * a successful save or merge). Together with the collab plugin's
      * unconfirmed queue it defines the base of the three-way rebase:
@@ -111,6 +118,7 @@ export class NoCollabSave {
         this._noChangeStreak = 0
         this._lastCheckTime = 0
         this._savedBaseDoc = null
+        this._modifiedSinceLoad = false
         this._visible = true
         this._focused = true
         this._online = true
@@ -241,6 +249,7 @@ export class NoCollabSave {
     notifyEdit(): void {
         this._lastEditTime = Date.now()
         this._noChangeStreak = 0
+        this._modifiedSinceLoad = true
         if (!this._running) {
             return
         }
@@ -352,6 +361,14 @@ export class NoCollabSave {
         } finally {
             this.savePromise = null
         }
+    }
+
+    /**
+     * Whether the user has edited the document at all since it was loaded.
+     * Stays true once an edit has happened, even after a save.
+     */
+    wasModified(): boolean {
+        return this._modifiedSinceLoad
     }
 
     /**

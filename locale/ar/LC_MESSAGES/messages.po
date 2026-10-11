@@ -52,6 +52,9 @@ msgstr "لقد فقد المرجع الترافقي هدفه."
 msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "A4 (DIN A4/ISO 216) والذي يستخدم في معظم أنحاء العالم."
 
+msgid "About Fidus Writer"
+msgstr ""
+
 msgid "Accept"
 msgstr "قبول"
 
@@ -141,6 +144,9 @@ msgstr "حدث خطأ أثناء عملية الدمج، لذلك لا يمكن�
 
 msgid "An internal link has lost its target."
 msgstr "لقد فقد الرابط الداخلي هدفه."
+
+msgid "An online collaborative editor for academics who need to use citations and/or formulas."
+msgstr ""
 
 msgid "Anchor"
 msgstr "مِرسَاة"
@@ -421,6 +427,9 @@ msgstr "نسخ إلى الحافظة"
 msgid "Copy to clipboard failed. Please copy manually."
 msgstr "فشل النسخ إلى الحافظة. يرجى النسخ يدويا."
 
+msgid "Copyright"
+msgstr ""
+
 msgid "Copyright holder"
 msgstr "صاحب حقوق الطبع والنشر"
 
@@ -553,6 +562,9 @@ msgstr "الكلمة الرئيسية المحذوفة: %(keyword)s"
 msgid "Deletion"
 msgstr "الحذف"
 
+msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgstr ""
+
 msgid "Description (optional)"
 msgstr "الوصف (اختياري)"
 
@@ -603,6 +615,9 @@ msgstr "تم تغيير كلمة مرور المستند. تذكر مشاركة 
 
 msgid "Document Style"
 msgstr "نمط الوثيقة"
+
+msgid "Documentation"
+msgstr ""
 
 msgid "DOCX export options"
 msgstr ""
@@ -727,6 +742,15 @@ msgstr "قم بتصدير المستند إلى ملف أرشفة دفتر ال�
 msgid "Export the document to a Pandoc JSON file."
 msgstr "قم بتصدير المستند إلى ملف Pandoc JSON."
 
+msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
+msgstr ""
+
+msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
+msgstr ""
+
+msgid "Export the document to a Typst file with a bibliography file."
+msgstr ""
+
 msgid "Export the document to an Epub electronic reader file."
 msgstr "قم بتصدير المستند إلى ملف قارئ إلكتروني Epub."
 
@@ -753,6 +777,12 @@ msgstr "جارٍ التصدير..."
 
 msgid "External"
 msgstr "خارجي"
+
+msgid "Fidus Writer"
+msgstr "كاتب فيدوس"
+
+msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgstr ""
 
 msgid "Figure"
 msgstr "شكل"
@@ -790,6 +820,9 @@ msgstr "تغيير التنسيق"
 msgid "Format Change"
 msgstr "تغيير التنسيق"
 
+msgid "Forum"
+msgstr ""
+
 msgid "French"
 msgstr "فرنسي"
 
@@ -801,6 +834,9 @@ msgstr "وظائف"
 
 msgid "German (Germany)"
 msgstr "الألمانية (ألمانيا)"
+
+msgid "Get help in the Fidus Writer forum."
+msgstr ""
 
 msgid "Greek Letters"
 msgstr "الحروف اليونانية"
@@ -825,6 +861,12 @@ msgstr "العنوان 6"
 
 msgid "Heading level "
 msgstr "مستوى العنوان"
+
+msgid "Help"
+msgstr "مساعدة"
+
+msgid "Help with Fidus Writer."
+msgstr ""
 
 msgid "High priority"
 msgstr "أولوية عالية"
@@ -979,6 +1021,9 @@ msgstr "اليابانية"
 msgid "JATS"
 msgstr "جاتس"
 
+msgid "Johannes Wilm and Fidus Writer contributors"
+msgstr ""
+
 msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
 msgstr ""
 
@@ -1041,6 +1086,9 @@ msgstr "مدرج باسم"
 
 msgid "Loading…"
 msgstr "تحميل…"
+
+msgid "Markdown"
+msgstr ""
 
 msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
 msgstr ""
@@ -1192,6 +1240,9 @@ msgstr "وثيقة على الانترنت"
 msgid "Only major comments"
 msgstr "التعليقات الرئيسية فقط"
 
+msgid "Open the user manual."
+msgstr ""
+
 msgid "Open/close header menu"
 msgstr "فتح/إغلاق القائمة الرئيسية"
 
@@ -1250,6 +1301,9 @@ msgid "Place figures as page floats"
 msgstr ""
 
 msgid "Place tables as page floats"
+msgstr ""
+
+msgid "Please enter a message first."
 msgstr ""
 
 msgid "Please select at least one citation source!"
@@ -1495,6 +1549,9 @@ msgstr "حدد الهدف"
 msgid "Selection"
 msgstr "اختيار"
 
+msgid "Send"
+msgstr ""
+
 msgid "Send a message..."
 msgstr "أرسل رسالة..."
 
@@ -1642,6 +1699,12 @@ msgstr "طاولة"
 msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
 msgstr ""
 
+msgid "Technical support"
+msgstr "الدعم الفني"
+
+msgid "TEI"
+msgstr ""
+
 msgid "Text before"
 msgstr "النص من قبل"
 
@@ -1651,11 +1714,17 @@ msgstr "لغة النص"
 msgid "Text replaced successfully"
 msgstr "تم استبدال النص بنجاح"
 
+msgid "Thank you for your feedback!"
+msgstr ""
+
 msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
 msgstr "لا يمكن تطبيق التغيير تلقائيًا. يرجى النظر في استخدام خيار النسخ لنسخ التغييرات."
 
 msgid "The current password is incorrect."
 msgstr "كلمة المرور الحالية غير صحيحة."
+
+msgid "The document could not be exported."
+msgstr ""
 
 msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
 msgstr ""
@@ -1744,6 +1813,9 @@ msgstr ""
 msgid "Type formula"
 msgstr "اكتب الصيغة"
 
+msgid "Typst"
+msgstr ""
+
 msgid "Underline"
 msgstr "تسطير"
 
@@ -1776,6 +1848,13 @@ msgstr "رسالة أمريكية"
 
 msgid "User"
 msgstr "مستخدم"
+
+#: book/assets/js/modules/books/templates.js:55
+msgid "Version"
+msgstr "إصدار"
+
+msgid "Version, copyright and license information."
+msgstr ""
 
 msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
 msgstr "تحذير! لم يتم حفظ جميع تغييراتك! قد تعاني من فقدان البيانات. جارٍ محاولة إعادة الاتصال..."
@@ -1875,6 +1954,9 @@ msgstr "تم تعديل حقوق الوصول الخاصة بك عندما كن�
 
 msgid "Your document was out of sync and has been reset."
 msgstr "كان مستندك غير متزامن وتمت إعادة تعيينه."
+
+msgid "Your feedback could not be delivered. Please try again later."
+msgstr ""
 
 msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
 msgstr "ستظل عبارة المرور الشخصية الخاصة بك تفتح قفل هذا المستند. يتم إنشاء كلمة مرور عشوائية جديدة تلقائيًا. سوف يستلمها المستخدمون الآخرون لعبارة المرور تلقائيًا؛ يحتاج المتعاونون الذين لا يستخدمون عبارة المرور إلى مشاركتها معهم يدويًا."
