@@ -93,6 +93,17 @@ npm run build
 npm run typecheck
 ```
 
+## Fuzz testing
+
+Property-based fuzz harnesses live in `test/fuzz/` (see `FUZZING.md` for
+details): `npm run test:fuzz` runs them all against the compiled `dist/`
+code with real ProseMirror. `FC_RUNS`/`FC_SEED` control iterations and
+replay; minimized repros of fixed bugs live in `test/fuzz/regressions/` and
+run as part of `npm test`. After changing collab, track changes, comments,
+paste handling, grammar checking or footnote sync, run the relevant harness
+with a few hundred iterations — the Jest suite alone does not cover those
+state machines.
+
 ## Consumers
 
 - `fiduswriter-server-backend/` (the main Fidus Writer Django app).

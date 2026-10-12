@@ -87,6 +87,14 @@ export function getText({
             posMap.push([pos, node.nodeSize - citationText.length])
         } else {
             posMap.push([pos, node.nodeSize])
+            // Matches must not straddle inline nodes without text
+            // (footnotes, equations, hard breaks, images): their text
+            // offsets cannot be translated across the node, and the
+            // length check in filterPMMatches can pass coincidentally
+            // while the quoted content is shifted. Mark the boundary as
+            // untranslatable, exactly like citations and tracked
+            // deletions above.
+            badPos.push([pos, pos])
         }
     })
     return {text, pos}

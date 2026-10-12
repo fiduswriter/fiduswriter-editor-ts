@@ -1,5 +1,5 @@
 import {NodeSelection, Plugin, PluginKey} from "prosemirror-state"
-import {RemoveMarkStep} from "prosemirror-transform"
+import {Mapping, RemoveMarkStep} from "prosemirror-transform"
 import {Decoration, DecorationSet} from "prosemirror-view"
 import type {Node, Mark, NodeType, ResolvedPos} from "prosemirror-model"
 import type {EditorState} from "prosemirror-state"
@@ -720,6 +720,20 @@ ${
                 }
             })
 
+            // Only nodes that did not exist in oldState — i.e. nodes these
+            // transactions created — may receive a freshly generated id.
+            // Nodes that merely kept existing keep their (possibly absent)
+            // id: if two collaborators each assigned a random id to the same
+            // old id-less node, the exchanged steps would last-writer-win
+            // and the documents could never converge again. This is decided
+            // by mapping the node's position back through the triggering
+            // transactions into oldState.
+            const backMap = new Mapping()
+            trs.forEach(tr => {
+                tr.mapping.maps.forEach(map => backMap.appendMap(map))
+            })
+            const inverted = backMap.invert()
+
             const newTr = newState.tr.setMeta("fixIds", true)
 
             newState.doc.descendants((node, pos) => {
@@ -731,11 +745,20 @@ ${
                         node.type.name
                     )
                 ) {
+                    const isNodeNew = (): boolean => {
+                        const oldNode = oldState.doc.nodeAt(
+                            inverted.map(pos, -1)
+                        )
+                        return !oldNode || oldNode.type !== node.type
+                    }
                     if (
-                        ids.includes(node.attrs.id as string) ||
-                        !node.attrs.id
+                        (ids.includes(node.attrs.id as string) &&
+                            node.attrs.id) ||
+                        (!node.attrs.id && isNodeNew())
                     ) {
-                        // Add node if the id is false (default) or it is present twice
+                        // Assign a new id when the current one is used more
+                        // than once anywhere in the document, or when the
+                        // node was created by these transactions.
                         const randomIdGenerator = (
                             node.type as NodeTypeWithGroups
                         ).groups.includes("heading")

@@ -1455,11 +1455,17 @@ export class ModCollabDoc {
     }
 
     setConfirmedDoc(tr: Transaction, stepsLength: number): void {
-        // Find the latest version of the doc without any unconfirmed local changes
-
-        const rebased = tr.getMeta("rebased") as number,
-            docNumber = rebased + stepsLength
-
+        // receiveTransaction returns early (without setting the "rebased"
+        // meta) when the diff contains no foreign steps — an empty ds list
+        // or an echo of steps that are already ours. In that case nothing
+        // was applied and the confirmed context must stay untouched;
+        // indexing tr.docs with the NaN docNumber would clobber it with
+        // undefined.
+        const rebased = tr.getMeta("rebased") as number | undefined
+        if (rebased === undefined) {
+            return
+        }
+        const docNumber = rebased + stepsLength
         this.mod.editor.docInfo.confirmedDoc =
             docNumber === tr.docs.length ? tr.doc : tr.docs[docNumber]
     }
@@ -1527,19 +1533,27 @@ export class ModCollabDoc {
 
     applyDiffs(diffs: unknown[], cid: string | number | undefined): void {
         this.receiving = true
-        const steps = diffs.map(j => Step.fromJSON(this.mod.editor.schema, j))
-        const clientIds = diffs
-            .map(_ => cid)
-            .filter((id): id is string | number => id !== undefined)
-        const tr = receiveTransaction(
-            this.mod.editor.view.state,
-            steps,
-            clientIds
-        )
-        tr.setMeta("remote", true)
-        this.mod.editor.view.dispatch(tr)
-        this.setConfirmedDoc(tr, steps.length)
-        this.receiving = false
+        try {
+            const steps = diffs.map(j =>
+                Step.fromJSON(this.mod.editor.schema, j)
+            )
+            const clientIds = diffs
+                .map(_ => cid)
+                .filter((id): id is string | number => id !== undefined)
+            const tr = receiveTransaction(
+                this.mod.editor.view.state,
+                steps,
+                clientIds
+            )
+            tr.setMeta("remote", true)
+            this.mod.editor.view.dispatch(tr)
+            this.setConfirmedDoc(tr, steps.length)
+        } finally {
+            // A diff that fails to parse or apply must not leave the editor
+            // permanently in "receiving" state — that would silently block
+            // every outgoing diff until reload.
+            this.receiving = false
+        }
         this.sendToCollaborators()
     }
 }
