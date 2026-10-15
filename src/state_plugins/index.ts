@@ -53,6 +53,7 @@ export {
 export {selectionMenuPlugin} from "./selection_menu.js"
 export {settingsPlugin} from "./settings.js"
 export {tablePlugin} from "./table.js"
+export {tableEditingPlugin} from "./table_editing.js"
 export {tagInputPlugin} from "./tag_input/index.js"
 export {tocRenderPlugin} from "./toc_render.js"
 export {toolbarPlugin} from "./toolbar.js"

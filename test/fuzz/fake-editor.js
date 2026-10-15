@@ -20,7 +20,6 @@ import {history} from "prosemirror-history"
 import {EditorState} from "prosemirror-state"
 import {EditorView} from "prosemirror-view"
 import {Step} from "prosemirror-transform"
-import {tableEditing} from "prosemirror-tables"
 
 import {ModCommentStore} from "../../dist/comments/store.js"
 import {ModBibliographyDB} from "../../dist/databases/bibliography.js"
@@ -38,6 +37,7 @@ import {
     linksPlugin,
     orderedListMenuPlugin,
     searchPlugin,
+    tableEditingPlugin,
     tablePlugin,
     trackPlugin
 } from "../../dist/state_plugins/index.js"
@@ -182,7 +182,7 @@ export function makeFakeEditor({
         [history],
         [dropCursor],
         [gapCursor],
-        [tableEditing],
+        [tableEditingPlugin],
         [jumpHiddenNodesPlugin],
         [citationRenderPlugin, () => ({editor})],
         [collabCaretsPlugin, () => ({editor})],

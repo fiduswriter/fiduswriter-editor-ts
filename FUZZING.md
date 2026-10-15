@@ -25,6 +25,28 @@ editor cycle retains ~0.5 MB through happy-dom, so single processes OOM at
 roughly 3000+ editor creations. CI-scale runs (100–500) fit comfortably in
 one process.
 
+`collab.js` reaches that limit far sooner: its properties create up to three
+clients plus a server document per iteration, so one process OOMs (heap-full,
+even at `--max-old-space-size=4096`) somewhere around 1500 runs. This is
+harness retention, not a product leak: memory probes with forced GC show the
+`ModCollabDoc` receive path (diffs, cu/bu/iu, pending timers) staying flat
+across thousands of create/destroy cycles, while the retention reproduces
+whenever generated documents contain citation, equation or code_block nodes —
+their node views keep cycles through the mounted happy-DOM tree that outlive
+`view.destroy()`). Even after every property passed, a full-length run could
+still die _after_ printing its summary: `runHarness` therefore forces
+`process.exit(0)` on success, because V8's allocation-heavy teardown with
+thousands of still-reachable editors can exceed the heap ceiling during
+natural process exit. Run it in batches: `test/fuzz/campaign.sh` loops seeds
+and splits `collab.js` into 600-run windows (one process each, raised
+old-space) while running the other harnesses at full length; or chunk
+manually:
+
+```bash
+for off in 0 600 1200 1800; do FC_RUNS=600 FC_SEED=$((991001+off)) \
+  node --max-old-space-size=4096 test/fuzz/collab.js; done
+```
+
 ## Harnesses
 
 | Harness                  | Target                                                                                                                      | Key invariants                                                                                                            |
@@ -83,3 +105,30 @@ Shared infrastructure:
    removed the node, and the accept/reject walk iterates (bounded) until no
    handled entries remain.
    Regression: `regressions/track-accept-reject-robustness.js`.
+5. **Comment mark resurrected after `deleteComment`** — `deleteComment(id,
+true)` removes the store entry first, then `removeCommentMarks` strips the
+   mark everywhere: inline text via `removeMark` and leaf nodes (e.g.
+   `horizontal_rule`) via `setNodeMarkup`, which produces a `replaceAround`
+   step. The comments plugin's `appendTransaction` scans `replace`/
+   `replaceAround` steps against the _pre-step_ document and misread that
+   "the comment's content was deleted"; with the mark gone from the result
+   document it re-added an `AddMarkStep` via `moveComment` for a comment that
+   no longer existed in the store — breaking the marks↔store invariant. The
+   plugin now only relocates comments that are still in the store.
+   Regression: `regressions/comment-mark-resurrection.js`.
+6. **Table structure divergence on concurrent disjoint edits** — the fidus
+   schema allows schema-valid ragged tables (`table_row` is `table_cell+`),
+   and `table_body` carries `tableRole: "table"` (it is derived from
+   prosemirror-tables' generated table node spec). prosemirror-tables'
+   `tableEditing` normalizes any table that falls in a transaction's changed
+   range — but whether a table is inspected depends on the transaction's
+   _shape_ (`changedDescendants` node-identity alignment), not its content.
+   One merge order's remote-merge transaction (undo/re-apply of a part split)
+   walked the table's children and padded the short row; the other order's
+   aligned the children perfectly and normalized nothing — the two clients
+   permanently disagreed on the row's cell count. `tableEditing` is now
+   wrapped (`src/state_plugins/table_editing.ts`) so table normalization never
+   runs when all triggering transactions carry `remote` meta, the same
+   discipline the comments plugin applies. Local edits still normalize;
+   those steps converge through the normal rebase machinery.
+   Regression: `regressions/table-swap-symmetry.js`.

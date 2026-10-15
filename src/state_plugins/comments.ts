@@ -275,6 +275,18 @@ export const commentsPlugin = (options: CommentPluginOptions) =>
             if (!Object.keys(deletedComments).length) {
                 return null
             }
+            const store = (options.editor.mod.comments as any).store
+                .comments as Record<string | number, unknown>
+            Object.keys(deletedComments).forEach(commentId => {
+                if (!Object.prototype.hasOwnProperty.call(store, commentId)) {
+                    // The comment was deleted from the store (deleteComment /
+                    // removeCommentMarks); do not resurrect its mark.
+                    delete deletedComments[commentId]
+                }
+            })
+            if (!Object.keys(deletedComments).length) {
+                return null
+            }
             let steps: (AddMarkStep | undefined)[] = []
             let tr = state.tr
             Object.entries(deletedComments).forEach(([_id, pos]) => {

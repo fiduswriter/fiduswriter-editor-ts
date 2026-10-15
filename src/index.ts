@@ -34,7 +34,6 @@ import {history} from "prosemirror-history"
 import {keymap} from "prosemirror-keymap"
 import type {Schema} from "prosemirror-model"
 import {EditorState, TextSelection} from "prosemirror-state"
-import {tableEditing} from "prosemirror-tables"
 import {EditorView} from "prosemirror-view"
 
 import {ModCitations} from "./citations/index.js"
@@ -89,6 +88,7 @@ import {
     searchPlugin,
     selectionMenuPlugin,
     settingsPlugin,
+    tableEditingPlugin,
     tablePlugin,
     tagInputPlugin,
     tocRenderPlugin,
@@ -275,7 +275,7 @@ export class Editor {
             [history],
             [dropCursor],
             [gapCursor],
-            [tableEditing],
+            [tableEditingPlugin],
             [jumpHiddenNodesPlugin],
             [placeholdersPlugin, () => ({editor: this})],
             [citationRenderPlugin, () => ({editor: this})],

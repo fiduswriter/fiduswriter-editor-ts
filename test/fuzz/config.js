@@ -57,4 +57,11 @@ export function runHarness(name, properties) {
     if (failed) {
         process.exit(1)
     }
+    // Exit synchronously rather than letting the process wind down on its
+    // own: the harnesses hold on to thousands of happy-dom editor
+    // instances, and V8's allocation-heavy teardown after the summary can
+    // push the heap over --max-old-space-size even though every property
+    // already passed (observed as "Ineffective mark-compacts near heap
+    // limit" after the ok lines in collab.js).
+    process.exit(0)
 }
