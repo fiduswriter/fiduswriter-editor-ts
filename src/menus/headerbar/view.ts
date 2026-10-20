@@ -710,18 +710,22 @@ export class HeaderbarView {
         // A host-supplied logo, rendered before the document title. Hosts that
         // have no branding (the Django backend puts its own in the page chrome)
         // leave this unset and get no empty element.
-        const logo = (this.editor.app.settings as {LOGO_URL?: string}).LOGO_URL
+        const logo = this.editor.app.settings.LOGO_URL
         const logoHTML = logo
             ? `<img id="document-logo" src="${escapeText(
                   logo
               )}" alt="${escapeText(gettext("Fidus Writer"))}" />`
             : ""
-
+        // The fox-face background on the title is the editor's own branding; a
+        // host logo *replaces* it. The two are drawn at the same left offset but
+        // at different sizes and heights, so if both render the header shows two
+        // foxes stacked in its corner.
+        const titleClass = logo ? ' class="host-logo"' : ""
         return `<div>
             ${closeTop}
             <div id="document-top">
                 ${logoHTML}
-                <h1 id="document-title"${this.editor.app.isOffline() || !this.editor.pathEditable ? "" : ' contenteditable="true"'}>${escapeText(this.getPathText())}</h1>
+                <h1 id="document-title"${titleClass}${this.editor.app.isOffline() || !this.editor.pathEditable ? "" : ' contenteditable="true"'}>${escapeText(this.getPathText())}</h1>
                 <nav id="header-navigation">
                     ${this.getHeaderNavHTML()}
                 </nav>

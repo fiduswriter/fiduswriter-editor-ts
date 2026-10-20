@@ -110,10 +110,8 @@ body.fw-editor {
 /* A host-supplied logo, rendered before the document title. The editor has no
    branding of its own, so a standalone host supplies one. Absolutely positioned
    because #document-top is a block whose other children (the nav and the
-   participant list) must keep their own layout.
+   participant list) must keep their own layout. */
 
-   The offsets mirror the fox-face background on the title below, so the two do
-   not collide: 42px in the roomy layout, 14px in the compact one. */
 #document-logo {
     position: absolute;
     left: 42px;
@@ -140,6 +138,15 @@ body.fw-editor {
     white-space: nowrap;
     text-overflow: ellipsis;
     height: 1.45em;
+}
+
+/* A host logo *replaces* the fox-face background: both are branding for the
+   same corner of the header, and the two sit at the same left offset but at
+   different heights and sizes, so letting both render stacks two foxes in it.
+   The view puts `.host-logo` on the title exactly when it also emits the logo
+   element, so this stays in step with the markup. */
+#document-top > h1.host-logo {
+    background: initial;
 }
 
 #header-navigation {

@@ -35,3 +35,6 @@ export const noSpaceTmp = (strings, ...values) =>
         ""
     )
 export const findTarget = (_event, _selector, _el) => false
+export const avatarTemplate = ({user}) =>
+    `<span class="fw-user-avatar">${user?.name ?? user?.username ?? ""}</span>`
+export const cleanPath = path => path

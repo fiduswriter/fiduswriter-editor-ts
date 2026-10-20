@@ -246,6 +246,13 @@ export interface EditorApp {
          */
         VERSION?: string
         /**
+         * A host-supplied branding logo (the fox), rendered at the head of the
+         * document header by `StaticAppConfig.logoUrl`. Unset or empty means no
+         * logo element; the header then keeps the editor's own fox-face
+         * background on the title.
+         */
+        LOGO_URL?: string
+        /**
          * The pagination engine used by the print and PDF exporters
          * ("paginate-for-print" or "vivliostyle-pdf"). Hosts that select
          * "vivliostyle-pdf" must also bundle and register that engine

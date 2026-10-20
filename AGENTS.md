@@ -161,12 +161,18 @@ The editor carries no branding: the Django backend renders its logo in the page
 chrome around the editor, and a standalone or embedded host supplies its own.
 `StaticAppConfig.logoUrl` puts an `<img id="document-logo">` at the head of
 `#document-top`, before the document title, and nothing is rendered when it is
-unset.
+unset. `LOGO_URL` is a declared member of `EditorApp.settings` — read it
+directly, no cast.
 
-`#document-top > h1` also draws a small fox face as a CSS background
-(`static/img/fidus_face.avif`), but a container query drops it below 1023px of
-editor width. `#document-logo` mirrors those offsets — 42px roomy, 14px compact,
-hidden narrow — so the two never overlap.
+`#document-top > h1` draws a small fox face as a CSS background
+(`static/img/fidus_face.avif`); a container query drops it below 1023px of
+editor width, where `#document-logo` is hidden too. **The two are alternatives,
+never both**: when a logo is supplied the view adds `.host-logo` to the title
+and `#document-top > h1.host-logo {background: initial}` drops the fox face —
+they share the 42px (14px compact) left offset but differ in size and vertical
+placement, so rendering both stacks _two foxes_ in the corner of the header.
+`test/headerbar-logo.test.ts` pins both halves (the emitted class and the CSS
+rule keyed to it).
 
 ## Notes
 

@@ -17,7 +17,7 @@ export const FIDUSWRITER_URL = "https://fiduswriter.org"
 
 export function openAboutDialog(editor: Editor): void {
     const version = editor.app.settings.VERSION as string | undefined
-    const logoUrl = editor.app.settings.LOGO_URL as string | undefined
+    const logoUrl = editor.app.settings.LOGO_URL
     const dialog = new Dialog({
         id: "about-fiduswriter",
         title: gettext("About Fidus Writer"),
