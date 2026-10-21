@@ -691,6 +691,16 @@ export class Editor {
                                         )
                                     }
                                     break
+                                case "e2ee_rekey_rejected":
+                                    if (
+                                        this.e2ee &&
+                                        this.e2ee.snapshotManager
+                                    ) {
+                                        this.e2ee.snapshotManager.handleRekeyRejected?.(
+                                            data["rid"]
+                                        )
+                                    }
+                                    break
                                 case "chat_rejected":
                                     addAlert(
                                         "error",
