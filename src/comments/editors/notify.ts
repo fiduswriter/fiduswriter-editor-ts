@@ -6,9 +6,14 @@ export const notifyMentionedUser = (
     documentApi: EditorDocumentApi,
     docId: number,
     userId: number,
-    comment: Node
+    comment: Node,
+    e2ee = false
 ) => {
-    const {html, text} = serializeCommentNode(comment)
+    // comment content is never sent to the notification
+    // endpoint for encrypted documents.
+    const {html, text} = e2ee
+        ? {html: "", text: ""}
+        : serializeCommentNode(comment)
     return documentApi.commentNotify({
         doc_id: docId,
         collaborator_id: userId,
