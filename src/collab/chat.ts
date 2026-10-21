@@ -1,4 +1,4 @@
-import {localizeDate, whenReady} from "fwtoolkit"
+import {addAlert, localizeDate, whenReady} from "fwtoolkit"
 import {E2EEEncryptor} from "fwtoolkit/e2ee/encryptor"
 
 import {messageTemplate} from "./templates.js"
@@ -138,18 +138,23 @@ export class ModCollabChat {
     }
 
     async sendMessage(messageText: string): Promise<void> {
-        // For E2EE documents, encrypt the chat message body.
-        // The server relays encrypted messages without reading them.
-        const isE2EE =
-            this.mod.editor.e2ee &&
-            this.mod.editor.e2ee.encrypted &&
-            this.mod.editor.e2ee.key
-
-        if (isE2EE) {
+        // E2EE rooms fail closed. Without a usable document
+        // key the chat is never sent unencrypted.
+        const e2ee = this.mod.editor.e2ee
+        if (e2ee && e2ee.encrypted) {
+            if (!e2ee.key) {
+                addAlert(
+                    "error",
+                    gettext(
+                        "This document is encrypted but no encryption key is available. The chat message was not sent."
+                    )
+                )
+                return
+            }
             try {
                 const encryptedBody = await E2EEEncryptor.encrypt(
                     messageText,
-                    this.mod.editor.e2ee.key as CryptoKey
+                    e2ee.key as CryptoKey
                 )
                 ;(this.mod.editor.ws as WebSocket).send((() => ({
                     type: "chat",
@@ -158,19 +163,19 @@ export class ModCollabChat {
                 })) as any)
             } catch (error) {
                 console.error("E2EE: Failed to encrypt chat message", error)
-                // Fall back to sending unencrypted (should not happen
-                // in normal operation)
-                ;(this.mod.editor.ws as WebSocket).send((() => ({
-                    type: "chat",
-                    body: messageText
-                })) as any)
+                addAlert(
+                    "error",
+                    gettext(
+                        "The chat message could not be encrypted and was not sent."
+                    )
+                )
             }
-        } else {
-            ;(this.mod.editor.ws as WebSocket).send((() => ({
-                type: "chat",
-                body: messageText
-            })) as any)
+            return
         }
+        ;(this.mod.editor.ws as WebSocket).send((() => ({
+            type: "chat",
+            body: messageText
+        })) as any)
     }
 
     init(): void {
