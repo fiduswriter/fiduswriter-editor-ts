@@ -374,6 +374,7 @@ export class ModCollabDoc {
                         const recoverResult = await new Promise<{
                             recoveryKey: string
                             newPassphrase: string
+                            accountPassword: string
                         } | null>(resolve => {
                             recoverWithKeyDialog(resolve)
                         })
@@ -382,7 +383,8 @@ export class ModCollabDoc {
                                 const {newRecoveryKey} =
                                     (await PassphraseManager.recoverWithRecoveryKey(
                                         recoverResult.recoveryKey,
-                                        recoverResult.newPassphrase
+                                        recoverResult.newPassphrase,
+                                        recoverResult.accountPassword
                                     )) as {newRecoveryKey: string}
                                 const {showRecoveryKeyDialog} =
                                     await import("fwtoolkit/e2ee/passphrase-dialog")

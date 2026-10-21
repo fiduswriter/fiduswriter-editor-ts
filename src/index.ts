@@ -670,6 +670,15 @@ export class Editor {
                                     this.mod.collab.doc.confirmDiff(data["rid"])
                                     break
                                 case "reject_diff":
+                                    if (
+                                        this.e2ee &&
+                                        this.e2ee.snapshotManager &&
+                                        this.e2ee.snapshotManager.handleRekeyRejected?.(
+                                            data["rid"]
+                                        )
+                                    ) {
+                                        break
+                                    }
                                     this.mod.collab.doc.rejectDiff(data["rid"])
                                     break
                                 case "e2ee_rekey_done":
@@ -954,7 +963,8 @@ export class Editor {
                             const {newRecoveryKey} =
                                 (await PassphraseManager.recoverWithRecoveryKey(
                                     (recoverResult as any).recoveryKey,
-                                    (recoverResult as any).newPassphrase
+                                    (recoverResult as any).newPassphrase,
+                                    (recoverResult as any).accountPassword
                                 )) as {newRecoveryKey: string}
                             const {showRecoveryKeyDialog} =
                                 await import("fwtoolkit/e2ee/passphrase-dialog")
