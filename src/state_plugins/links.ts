@@ -13,7 +13,7 @@ import {
 } from "@fiduswriter/document/schema/common/index"
 import {CATS} from "@fiduswriter/document/schema/i18n"
 import type {Track} from "@fiduswriter/document"
-import {addAlert, noSpaceTmp} from "fwtoolkit"
+import {addAlert, escapeText, noSpaceTmp} from "fwtoolkit"
 import {CitationDialog, LinkDialog} from "../dialogs/index.js"
 
 import type {Editor} from "../types.js"
@@ -333,12 +333,12 @@ export const linksPlugin = (options: {editor: Editor}): Plugin => {
                         ? `<div class="drop-up-head">
                         ${
                             linkMark.attrs.title
-                                ? `<div class="link-title">${gettext("Title")}:&amp;nbsp;${linkMark.attrs.title}</div>`
+                                ? `<div class="link-title">${gettext("Title")}:&amp;nbsp;${escapeText(linkMark.attrs.title)}</div>`
                                 : ""
                         }
                         <div class="link-href">
-                            <a class="href${linkType === "internal" ? " internal" : ""}" ${linkType === "external" ? 'target="_blank"' : ""} href="${linkHref}">
-            		            ${linkHref}
+                            <a class="href${linkType === "internal" ? " internal" : ""}" ${linkType === "external" ? 'target="_blank"' : ""} href="${escapeText(linkHref || "")}">
+            		            ${escapeText(linkHref || "")}
             		        </a>
                         </div>
                     </div>

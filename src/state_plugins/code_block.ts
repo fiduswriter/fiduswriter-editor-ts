@@ -1,4 +1,4 @@
-import {ContentMenu} from "fwtoolkit"
+import {ContentMenu, escapeText} from "fwtoolkit"
 import type {ContentMenuInit} from "fwtoolkit/content_menu"
 import {CATS} from "@fiduswriter/document/schema/i18n"
 import {DOMSerializer, type Node} from "prosemirror-model"
@@ -114,10 +114,10 @@ class CodeBlockView implements NodeView {
                 ? `${categoryLabel} ${number}: ${title}`
                 : `${categoryLabel} ${number}`
 
-            label.innerHTML = `<span class="label-text">${labelText}</span>`
+            label.innerHTML = `<span class="label-text">${escapeText(labelText)}</span>`
         } else if (title) {
             // Title without category
-            label.innerHTML = `<span class="label-text">${title}</span>`
+            label.innerHTML = `<span class="label-text">${escapeText(title)}</span>`
         }
 
         this.dom.appendChild(label)

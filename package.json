@@ -105,7 +105,7 @@
         "fast-xml-parser": "^4.5.7",
         "fastdom": "^1.0.12",
         "fix-utf8": "^2.0.1",
-        "fwtoolkit": "^0.2.27",
+        "fwtoolkit": "^0.2.31",
         "jszip": "^3.10.2",
         "lingotweaker-wasm": "^0.2.8",
         "mathml-to-latex": "^1.8.0",

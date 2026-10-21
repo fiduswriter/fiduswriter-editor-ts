@@ -1,7 +1,7 @@
 import type {Node as ProseMirrorNode} from "prosemirror-model"
 import {TextSelection, type NodeSelection} from "prosemirror-state"
 
-import {Dialog} from "fwtoolkit"
+import {Dialog, addAlert, isSafeLinkHref} from "fwtoolkit"
 
 import type {Editor} from "../types.js"
 
@@ -207,6 +207,17 @@ export class LinkDialog {
                             linkEl.value !== this.defaultLink
                         ) {
                             href = linkEl.value
+                        }
+                        if (href && !isSafeLinkHref(href)) {
+                            // Only http(s) links and internal
+                            // anchors may be stored.
+                            addAlert(
+                                "error",
+                                gettext(
+                                    "Links may only start with http://, https:// or #. The link was not saved."
+                                )
+                            )
+                            return
                         }
                         title = (
                             (
