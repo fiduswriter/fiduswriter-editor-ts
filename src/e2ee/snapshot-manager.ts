@@ -30,6 +30,14 @@ export class E2EESnapshotManager {
     editor: Editor
     pendingSave: boolean
     key: CryptoKey | null
+    pendingRekey: {
+        rid: string
+        key: CryptoKey
+        salt: string
+        iterations: number
+        resolve: (message: unknown) => void
+        reject: (error: Error) => void
+    } | null
 
     /**
      * @param editor - The Fidus Writer editor instance
@@ -38,6 +46,7 @@ export class E2EESnapshotManager {
         this.editor = editor
         this.pendingSave = false
         this.key = null
+        this.pendingRekey = null
     }
 
     /**
@@ -280,61 +289,202 @@ export class E2EESnapshotManager {
      * When the user changes the document password, a new key is derived
      * and the entire document must be re-encrypted. This method handles
      * that by collecting the current document state, encrypting it with
-     * the new key, and sending a snapshot.
+     * the new key, and sending a re-key request that also replaces the
+     * wrapped document key of every current holder.
      *
      * @param newKey - The new AES-GCM key derived from the new password
      * @param newSaltBase64 - The new salt (Base64-encoded) to send to the server
      * @param newIterations - The new iteration count
+     * @param newPassword - The new passphrase, wrapped for every holder
      */
     async reEncryptWithNewKey(
         newKey: CryptoKey,
         newSaltBase64: string,
-        newIterations: number
-    ): Promise<void> {
+        newIterations: number,
+        newPassword?: string
+    ): Promise<unknown> {
         if (this.pendingSave) {
             return
         }
         this.pendingSave = true
 
-        const docInfo = this.editor.docInfo
-        const content = ((this.editor.view as any).docView as any).node.toJSON()
-        const comments = (docInfo as any).comments || {}
-        const bibliography = (docInfo as any).bibliography || {}
+        try {
+            if (!newPassword) {
+                throw new Error(
+                    "The new passphrase is required to re-encrypt the document"
+                )
+            }
+            const docInfo = this.editor.docInfo
+            const content = (
+                (this.editor.view as any).docView as any
+            ).node.toJSON()
+            const comments = (docInfo as any).comments || {}
+            const bibliography = (docInfo as any).bibliography || {}
 
-        // Extract the current title from the editor
-        const {title} = this.editor.getDoc() as {title: string}
+            // Extract the current title from the editor
+            const {title} = this.editor.getDoc() as {title: string}
 
-        const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
+            const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
+            const {PassphraseCrypto} =
+                await import("fwtoolkit/e2ee/passphrase-crypto")
+            const {getJson} = await import("fwtoolkit")
 
-        // Encrypt with the new key
-        const encryptedContent = await E2EEEncryptor.encryptObject(
-            content,
-            newKey
-        )
-        const encryptedComments = await E2EEEncryptor.encryptObject(
-            comments,
-            newKey
-        )
-        const encryptedBibliography = await E2EEEncryptor.encryptObject(
-            bibliography,
-            newKey
-        )
-        const encryptedTitle = await E2EEEncryptor.encrypt(title, newKey)
+            // Encrypt with the new key
+            const encryptedContent = await E2EEEncryptor.encryptObject(
+                content,
+                newKey
+            )
+            const encryptedComments = await E2EEEncryptor.encryptObject(
+                comments,
+                newKey
+            )
+            const encryptedBibliography = await E2EEEncryptor.encryptObject(
+                bibliography,
+                newKey
+            )
+            const encryptedTitle = await E2EEEncryptor.encrypt(title, newKey)
 
-        // Update the key
-        this.key = newKey
+            // Build fresh wrapped-key envelopes for every current holder
+            // of the document key (the server requires that a
+            // re-key replaces the envelope of every existing holder).
+            const keys: {
+                holder_id: number
+                encrypted_key: string
+                encrypted_with_master_key: boolean
+            }[] = []
+            const currentUserId = this.editor.user.id
+            const holdersResponse = (await getJson(
+                `/api/document/encryption_key/holders/?document_id=${docInfo.id}`
+            )) as {holders?: {holder_id: number; has_public_key: boolean}[]}
+            const holders = holdersResponse?.holders || []
+            let ownerWrappedWithMasterKey = false
+            for (const holder of holders) {
+                if (holder.holder_id === currentUserId) {
+                    const {masterKey} =
+                        await PassphraseCrypto.getKeysFromSession()
+                    if (!masterKey) {
+                        throw new Error(
+                            "Master key not available in session - cannot re-encrypt document key"
+                        )
+                    }
+                    keys.push({
+                        holder_id: holder.holder_id,
+                        encrypted_key: await PassphraseCrypto.encryptString(
+                            newPassword,
+                            masterKey
+                        ),
+                        encrypted_with_master_key: true
+                    })
+                    ownerWrappedWithMasterKey = true
+                } else {
+                    if (!holder.has_public_key) {
+                        throw new Error(
+                            "One of the collaborators has not set up encryption - the document password cannot be changed without re-sharing the key"
+                        )
+                    }
+                    const pkJson = (await getJson(
+                        `/api/user/encryption_public_key/${holder.holder_id}/`
+                    )) as {public_key: string}
+                    const recipientPublicKey =
+                        await PassphraseCrypto.importPublicKey(
+                            pkJson.public_key
+                        )
+                    const encryptedData =
+                        await PassphraseCrypto.encryptStringWithPublicKey(
+                            newPassword,
+                            recipientPublicKey
+                        )
+                    keys.push({
+                        holder_id: holder.holder_id,
+                        encrypted_key: `${encryptedData.ephemeralPublicKeyJwk}:${encryptedData.encryptedData}`,
+                        encrypted_with_master_key: false
+                    })
+                }
+            }
+            if (!ownerWrappedWithMasterKey) {
+                const {masterKey} = await PassphraseCrypto.getKeysFromSession()
+                if (masterKey) {
+                    keys.push({
+                        holder_id: currentUserId,
+                        encrypted_key: await PassphraseCrypto.encryptString(
+                            newPassword,
+                            masterKey
+                        ),
+                        encrypted_with_master_key: true
+                    })
+                }
+            }
 
-        // Send the re-encrypted snapshot along with the new KDF parameters
-        this.editor.ws!.send(() => ({
-            type: "e2ee_snapshot",
-            v: docInfo.version,
-            content: encryptedContent,
-            comments: encryptedComments,
-            bibliography: encryptedBibliography,
-            e2ee_salt: newSaltBase64,
-            e2ee_iterations: newIterations,
-            title: encryptedTitle
-        }))
-        this.pendingSave = false
+            const rid = `rekey-${Date.now()}`
+
+            return new Promise((resolve, reject) => {
+                const timer = window.setTimeout(() => {
+                    if (this.pendingRekey && this.pendingRekey.rid === rid) {
+                        this.pendingRekey = null
+                        reject(new Error("The re-key timed out"))
+                    }
+                }, 30000)
+                this.pendingRekey = {
+                    rid,
+                    key: newKey,
+                    salt: newSaltBase64,
+                    iterations: newIterations,
+                    resolve: message => {
+                        window.clearTimeout(timer)
+                        resolve(message)
+                    },
+                    reject: error => {
+                        window.clearTimeout(timer)
+                        reject(error)
+                    }
+                }
+                this.editor.ws!.send(() => ({
+                    type: "e2ee_rekey",
+                    rid,
+                    v: docInfo.version,
+                    content: encryptedContent,
+                    comments: encryptedComments,
+                    bibliography: encryptedBibliography,
+                    title: encryptedTitle,
+                    e2ee_salt: newSaltBase64,
+                    e2ee_iterations: newIterations,
+                    keys
+                }))
+            })
+        } finally {
+            this.pendingSave = false
+        }
+    }
+
+    /**
+     * The server accepted an e2ee_rekey. Apply the new epoch locally.
+     */
+    handleRekeyDone(message: unknown): boolean {
+        const pending = this.pendingRekey
+        if (!pending) {
+            return false
+        }
+        this.pendingRekey = null
+        this.key = pending.key
+        if (this.editor.e2ee) {
+            this.editor.e2ee.encryptionSalt = pending.salt
+            this.editor.e2ee.encryptionIterations = pending.iterations
+        }
+        pending.resolve(message)
+        return true
+    }
+
+    /**
+     * The server refused our re-key (arrives as a reject_diff with the
+     * re-key's rid).
+     */
+    handleRekeyRejected(rid: string): boolean {
+        const pending = this.pendingRekey
+        if (!pending || pending.rid !== rid) {
+            return false
+        }
+        this.pendingRekey = null
+        pending.reject(new Error("The server refused the re-key"))
+        return true
     }
 }

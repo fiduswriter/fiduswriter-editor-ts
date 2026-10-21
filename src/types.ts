@@ -506,8 +506,11 @@ export interface EditorE2EE {
         reEncryptWithNewKey(
             newKey: CryptoKey,
             newSaltBase64: string,
-            newIterations: number
-        ): Promise<void>
+            newIterations: number,
+            newPassword?: string
+        ): Promise<unknown>
+        handleRekeyDone?(message: unknown): boolean
+        handleRekeyRejected?(rid: string): boolean
     }
     encrypted?: boolean
     encryptionSalt?: string
