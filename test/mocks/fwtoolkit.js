@@ -6,6 +6,24 @@ export const baseBodyTemplate = () => ""
 export const FeedbackTab = class {}
 export const SiteMenu = class {}
 export const escapeText = s => s
+export const isSafeLinkHref = href => {
+    if (typeof href !== "string") {
+        return false
+    }
+    const trimmed = href.trim()
+    if (!trimmed) {
+        return false
+    }
+    if (trimmed.startsWith("#")) {
+        return true
+    }
+    try {
+        const url = new URL(trimmed, "http://localhost")
+        return ["http:", "https:"].includes(url.protocol)
+    } catch {
+        return false
+    }
+}
 export const shortFileTitle = s => s
 export const gettext = s => s
 export const staticUrl = path => path
