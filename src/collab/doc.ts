@@ -25,7 +25,7 @@ interface IncomingDoc {
     content: unknown
     comments: unknown
     bibliography: unknown
-    images?: Record<string, {copyright?: unknown}>
+    images?: Record<string, {title?: unknown; copyright?: unknown}>
     template?: {content: unknown}
 }
 
@@ -735,15 +735,23 @@ export class ModCollabDoc {
             window.history.replaceState(null, "", newHash)
         }
 
-        // Decrypt image copyright metadata for E2EE documents.
-        // The server stores it as an opaque encrypted string; we decrypt
-        // it here so the image DB receives plaintext objects.
+        // Decrypt image title and copyright metadata for E2EE documents.
+        // The server stores them as opaque encrypted strings; we decrypt
+        // them here so the image DB receives plaintext objects.
         let decryptedImages = doc.images
         if (doc.images) {
             decryptedImages = {}
             const {E2EEEncryptor} = await import("fwtoolkit/e2ee/encryptor")
             for (const [id, image] of Object.entries(doc.images)) {
                 ;(decryptedImages as Record<string, any>)[id] = image
+                if (typeof image.title === "string") {
+                    try {
+                        ;(decryptedImages as Record<string, any>)[id].title =
+                            await E2EEEncryptor.decryptObject(image.title, key)
+                    } catch {
+                        // If decryption fails, leave as-is (legacy plaintext)
+                    }
+                }
                 if (typeof image.copyright === "string") {
                     try {
                         ;(decryptedImages as Record<string, any>)[

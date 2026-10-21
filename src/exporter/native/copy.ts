@@ -2,7 +2,6 @@ import type {
     BibDB,
     ExportDoc,
     ImageDB,
-    ImageDBEntry,
     SaveCopyE2EE,
     Template,
     User
@@ -24,11 +23,16 @@ type ImportDocument = (
     options: Record<string, unknown>
 ) => Promise<{doc: Record<string, unknown>; docInfo: Record<string, unknown>}>
 
-interface ImageEntry extends ImageDBEntry {
+interface ImageEntry {
+    id: number
+    title?: string
+    file_type?: string
+    image: string
+    copyright?: string
     file?: Blob
     checksum?: string
     original_file_type?: string
-    image: string
+    [key: string]: unknown
 }
 
 interface E2EEOptions {
@@ -170,8 +174,40 @@ function createNativeImporterBackend(
             const imageTranslationTable: Record<number | string, number> = {}
             await Promise.all(
                 Object.values(images.db).map(async imageEntry => {
-                    const entry = imageEntry as ImageEntry
+                    const entry = imageEntry as unknown as ImageEntry
                     await maybeDecryptImage(entry, e2ee?.sourceKey)
+                    // Decrypt the metadata of the source document. The
+                    // server stores it as an opaque encrypted string.
+                    if (e2ee?.sourceKey) {
+                        if (
+                            typeof entry.title === "string" &&
+                            entry.title.length > 0
+                        ) {
+                            try {
+                                entry.title =
+                                    (await E2EEEncryptor.decryptObject(
+                                        entry.title,
+                                        e2ee.sourceKey
+                                    )) as string
+                            } catch {
+                                // If decryption fails, leave as-is
+                            }
+                        }
+                        if (
+                            typeof entry.copyright === "string" &&
+                            entry.copyright.length > 0
+                        ) {
+                            try {
+                                entry.copyright =
+                                    (await E2EEEncryptor.decryptObject(
+                                        entry.copyright,
+                                        e2ee.sourceKey
+                                    )) as string
+                            } catch {
+                                // If decryption fails, leave as-is
+                            }
+                        }
+                    }
                     const encryptedFile =
                         e2ee?.enabled && e2ee.key
                             ? await E2EEEncryptor.encryptImage(
@@ -179,6 +215,30 @@ function createNativeImporterBackend(
                                   e2ee.key
                               )
                             : entry.file
+                    // Encrypt the metadata for the target document.
+                    if (e2ee?.enabled && e2ee.key) {
+                        if (entry.copyright) {
+                            try {
+                                entry.copyright =
+                                    await E2EEEncryptor.encryptObject(
+                                        entry.copyright,
+                                        e2ee.key
+                                    )
+                            } catch {
+                                // If encryption fails, keep original
+                            }
+                        }
+                        if (entry.title) {
+                            try {
+                                entry.title = await E2EEEncryptor.encryptObject(
+                                    entry.title,
+                                    e2ee.key
+                                )
+                            } catch {
+                                // If encryption fails, keep original
+                            }
+                        }
+                    }
                     const jsonData: Record<string, unknown> = {
                         doc_id: docId,
                         title: entry.title,
