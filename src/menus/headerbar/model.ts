@@ -376,7 +376,8 @@ export const headerbarModel = () => ({
                     disabled: (editor: Editor) =>
                         editor.docInfo.access_rights !== "write" ||
                         editor.app.isOffline() ||
-                        !!editor.docInfo.token,
+                        !!editor.docInfo.token ||
+                        !!(editor.e2ee && editor.e2ee.encrypted),
                     available: (editor: Editor) =>
                         editor.app.settings.EDITOR_SAVE_MODE !== "external" &&
                         editor.app.settings.SHOW_FILE_MENU_ITEMS !== false
