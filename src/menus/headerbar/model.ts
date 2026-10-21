@@ -1,4 +1,10 @@
-import {Dialog, addAlert, addProgress, shortFileTitle} from "fwtoolkit"
+import {
+    Dialog,
+    addAlert,
+    addProgress,
+    interpolate,
+    shortFileTitle
+} from "fwtoolkit"
 import type {BibDB, ExportDoc, ImageDB} from "@fiduswriter/document"
 import {CopyrightDialog} from "../../copyright_dialog/index.js"
 import {DocumentAccessRightsDialog} from "../../documents/access_rights/index.js"
@@ -389,6 +395,17 @@ export const headerbarModel = () => ({
                     tooltip: gettext("Create a copy of the document."),
                     order: 3,
                     action: (editor: Editor) => {
+                        if (editor.docInfo.e2ee) {
+                            // An E2EE document must never be copied through
+                            // the unencrypted path. Route through the
+                            // copy-as dialog, which defaults to an encrypted
+                            // copy with a fresh DEK and requires explicit
+                            // consent for plaintext.
+                            ;(
+                                editor.mod as any
+                            ).documentTemplate.openCreateCopyAsDialog()
+                            return
+                        }
                         const db = getDB(editor)
                         const copier = new SaveCopy(
                             getExportDoc(editor),
@@ -595,11 +612,28 @@ export const headerbarModel = () => ({
                                         )
 
                                     // Re-encrypt the document with the new key
-                                    await e2ee.snapshotManager!.reEncryptWithNewKey(
-                                        newKey,
-                                        newSaltBase64,
-                                        newIterations
-                                    )
+                                    // and re-share the wrapped document key
+                                    // with every current holder. The server
+                                    // only accepts this as one atomic re-key.
+                                    try {
+                                        await e2ee.snapshotManager!.reEncryptWithNewKey(
+                                            newKey,
+                                            newSaltBase64,
+                                            newIterations,
+                                            newPassword
+                                        )
+                                    } catch (error) {
+                                        addAlert(
+                                            "error",
+                                            interpolate(
+                                                gettext(
+                                                    "The document password could not be changed: %s"
+                                                ),
+                                                [(error as Error).message]
+                                            )
+                                        )
+                                        return
+                                    }
 
                                     // Update local E2EE state
                                     e2ee.encryptionSalt = newSaltBase64

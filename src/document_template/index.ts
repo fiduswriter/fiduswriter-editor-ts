@@ -164,217 +164,205 @@ export class ModDocumentTemplate {
             available: (editor: Editor) =>
                 editor.app.settings.EDITOR_SAVE_MODE !== "external" &&
                 editor.app.settings.SHOW_FILE_MENU_ITEMS !== false,
-            action: (editor: Editor) => {
-                const isE2EE = (editor.docInfo as any).e2ee
-                const e2eeMode = (editor.app.settings as any).E2EE_MODE
-                const canToggleE2EE =
-                    e2eeMode === "enabled" ||
-                    (e2eeMode === "required" && !isE2EE) ||
-                    (e2eeMode === "disabled" && isE2EE)
-
-                let e2eeHtml = ""
-                if (canToggleE2EE) {
-                    e2eeHtml = `
-                        <div class="e2ee-copy-toggle" style="margin-top: 15px;">
-                            <label>
-                                <input type="checkbox" id="e2ee-copy-toggle" ${e2eeMode === "required" || isE2EE ? "checked" : ""}>
-                                ${gettext("Encrypt the copy")}
-                            </label>
-                        </div>
-                    `
-                }
-
-                const selectTemplateDialog = new Dialog({
-                    title: gettext("Choose document template"),
-                    body: `<p>
-                        ${gettext("Select document template for copy.")}
-                        </p>
-                        <select class="fw-button fw-large fw-light">${Object.entries(
-                            (editor.mod as any).documentTemplate
-                                .documentTemplates
-                        )
-                            .map(
-                                ([importId, dt]) =>
-                                    `<option value="${escapeText(importId)}">${escapeText((dt as DocumentTemplate).title)}</option>`
-                            )
-                            .join("")}</select>
-                        ${e2eeHtml}`,
-                    buttons: [
-                        {
-                            text: gettext("Copy"),
-                            classes: "fw-dark",
-                            click: () => {
-                                if (editor.app.isOffline()) {
-                                    addAlert(
-                                        "error",
-                                        "You are offline. Please try again after you are online."
-                                    )
-                                    selectTemplateDialog.close()
-                                    return
-                                }
-
-                                const targetE2EE =
-                                    canToggleE2EE &&
-                                    (
-                                        selectTemplateDialog.dialogEl.querySelector(
-                                            "#e2ee-copy-toggle"
-                                        ) as HTMLInputElement | null
-                                    )?.checked
-
-                                const doCopy = (e2eeOptions: any) => {
-                                    const copier = new SaveCopy(
-                                        editor.getDoc() as any,
-                                        (editor.mod.db as any).bibDB,
-                                        (editor.mod.db as any).imageDB,
-                                        editor.user,
-                                        (
-                                            selectTemplateDialog.dialogEl.querySelector(
-                                                "select"
-                                            ) as HTMLSelectElement
-                                        ).value as any,
-                                        e2eeOptions,
-                                        editor.app.apiConnectors.documentImport
-                                    )
-                                    copier
-                                        .init()
-                                        .then(({docInfo}: any) => {
-                                            const url = targetE2EE
-                                                ? `/document/${docInfo.id}/?e2ee=1`
-                                                : `/document/${docInfo.id}/`
-                                            editor.app.goTo(url)
-                                        })
-                                        .catch(() => false)
-                                    selectTemplateDialog.close()
-                                }
-
-                                if (isE2EE && !targetE2EE) {
-                                    // Decrypting: need source key
-                                    if (editor.e2ee && editor.e2ee.key) {
-                                        doCopy({
-                                            sourceKey: editor.e2ee.key,
-                                            targetE2EE: false
-                                        })
-                                    } else {
-                                        enterPasswordDialog(
-                                            async (password: string) => {
-                                                try {
-                                                    const key =
-                                                        await E2EEKeyManager.deriveKey(
-                                                            password,
-                                                            new Uint8Array(
-                                                                atob(
-                                                                    (
-                                                                        editor.docInfo as any
-                                                                    ).e2ee_salt
-                                                                )
-                                                                    .split("")
-                                                                    .map(c =>
-                                                                        c.charCodeAt(
-                                                                            0
-                                                                        )
-                                                                    )
-                                                            ),
-                                                            (
-                                                                editor.docInfo as any
-                                                            ).e2ee_iterations ||
-                                                                600000
-                                                        )
-                                                    doCopy({
-                                                        sourceKey: key,
-                                                        targetE2EE: false
-                                                    })
-                                                } catch (_err) {
-                                                    addAlert(
-                                                        "error",
-                                                        gettext(
-                                                            "Incorrect password."
-                                                        )
-                                                    )
-                                                }
-                                            }
-                                        )
-                                    }
-                                } else if (!isE2EE && targetE2EE) {
-                                    // Encrypting: need new password
-                                    createPasswordDialog((password: string) => {
-                                        doCopy({
-                                            targetE2EE: true,
-                                            targetPassword: password
-                                        })
-                                    })
-                                } else if (isE2EE && targetE2EE) {
-                                    // E2EE -> E2EE: need source key, then new password
-                                    const handlePasswords = (
-                                        sourceKey: any
-                                    ) => {
-                                        createPasswordDialog(
-                                            (password: string) => {
-                                                doCopy({
-                                                    sourceKey: sourceKey,
-                                                    targetE2EE: true,
-                                                    targetPassword: password
-                                                })
-                                            }
-                                        )
-                                    }
-                                    if (editor.e2ee && editor.e2ee.key) {
-                                        handlePasswords(editor.e2ee.key)
-                                    } else {
-                                        enterPasswordDialog(
-                                            async (password: string) => {
-                                                try {
-                                                    const key =
-                                                        await E2EEKeyManager.deriveKey(
-                                                            password,
-                                                            new Uint8Array(
-                                                                atob(
-                                                                    (
-                                                                        editor.docInfo as any
-                                                                    ).e2ee_salt
-                                                                )
-                                                                    .split("")
-                                                                    .map(c =>
-                                                                        c.charCodeAt(
-                                                                            0
-                                                                        )
-                                                                    )
-                                                            ),
-                                                            (
-                                                                editor.docInfo as any
-                                                            ).e2ee_iterations ||
-                                                                600000
-                                                        )
-                                                    handlePasswords(key)
-                                                } catch (_err) {
-                                                    addAlert(
-                                                        "error",
-                                                        gettext(
-                                                            "Incorrect password."
-                                                        )
-                                                    )
-                                                }
-                                            }
-                                        )
-                                    }
-                                } else {
-                                    // Plain -> plain
-                                    doCopy(null)
-                                }
-                            }
-                        },
-                        {
-                            type: "cancel"
-                        }
-                    ]
-                })
-                selectTemplateDialog.open()
-            },
+            action: () => this.openCreateCopyAsDialog(),
             disabled: (editor: Editor) => editor.app.isOffline()
         })
 
         fileMenu.content = fileMenu.content.sort(
             (a: any, b: any) => a.order - b.order
         )
+    }
+
+    openCreateCopyAsDialog(): void {
+        const editor = this.editor
+        const isE2EE = (editor.docInfo as any).e2ee
+        const e2eeMode = (editor.app.settings as any).E2EE_MODE
+        const canToggleE2EE =
+            e2eeMode === "enabled" ||
+            (e2eeMode === "required" && !isE2EE) ||
+            (e2eeMode === "disabled" && isE2EE)
+
+        let e2eeHtml = ""
+        if (canToggleE2EE) {
+            e2eeHtml = `
+                    <div class="e2ee-copy-toggle" style="margin-top: 15px;">
+                        <label>
+                            <input type="checkbox" id="e2ee-copy-toggle" ${e2eeMode === "required" || isE2EE ? "checked" : ""}>
+                            ${gettext("Encrypt the copy")}
+                        </label>
+                    </div>
+                `
+        }
+
+        const selectTemplateDialog = new Dialog({
+            title: gettext("Choose document template"),
+            body: `<p>
+                    ${gettext("Select document template for copy.")}
+                    </p>
+                    <select class="fw-button fw-large fw-light">${Object.entries(
+                        (editor.mod as any).documentTemplate.documentTemplates
+                    )
+                        .map(
+                            ([importId, dt]) =>
+                                `<option value="${escapeText(importId)}">${escapeText((dt as DocumentTemplate).title)}</option>`
+                        )
+                        .join("")}</select>
+                    ${e2eeHtml}`,
+            buttons: [
+                {
+                    text: gettext("Copy"),
+                    classes: "fw-dark",
+                    click: () => {
+                        if (editor.app.isOffline()) {
+                            addAlert(
+                                "error",
+                                "You are offline. Please try again after you are online."
+                            )
+                            selectTemplateDialog.close()
+                            return
+                        }
+
+                        const targetE2EE =
+                            canToggleE2EE &&
+                            (
+                                selectTemplateDialog.dialogEl.querySelector(
+                                    "#e2ee-copy-toggle"
+                                ) as HTMLInputElement | null
+                            )?.checked
+
+                        const doCopy = (e2eeOptions: any) => {
+                            const copier = new SaveCopy(
+                                editor.getDoc() as any,
+                                (editor.mod.db as any).bibDB,
+                                (editor.mod.db as any).imageDB,
+                                editor.user,
+                                (
+                                    selectTemplateDialog.dialogEl.querySelector(
+                                        "select"
+                                    ) as HTMLSelectElement
+                                ).value as any,
+                                e2eeOptions,
+                                editor.app.apiConnectors.documentImport
+                            )
+                            copier
+                                .init()
+                                .then(({docInfo}: any) => {
+                                    const url = targetE2EE
+                                        ? `/document/${docInfo.id}/?e2ee=1`
+                                        : `/document/${docInfo.id}/`
+                                    editor.app.goTo(url)
+                                })
+                                .catch(() => false)
+                            selectTemplateDialog.close()
+                        }
+
+                        if (isE2EE && !targetE2EE) {
+                            // Decrypting: need source key
+                            if (editor.e2ee && editor.e2ee.key) {
+                                doCopy({
+                                    sourceKey: editor.e2ee.key,
+                                    targetE2EE: false
+                                })
+                            } else {
+                                enterPasswordDialog(
+                                    async (password: string) => {
+                                        try {
+                                            const key =
+                                                await E2EEKeyManager.deriveKey(
+                                                    password,
+                                                    new Uint8Array(
+                                                        atob(
+                                                            (
+                                                                editor.docInfo as any
+                                                            ).e2ee_salt
+                                                        )
+                                                            .split("")
+                                                            .map(c =>
+                                                                c.charCodeAt(0)
+                                                            )
+                                                    ),
+                                                    (editor.docInfo as any)
+                                                        .e2ee_iterations ||
+                                                        600000
+                                                )
+                                            doCopy({
+                                                sourceKey: key,
+                                                targetE2EE: false
+                                            })
+                                        } catch (_err) {
+                                            addAlert(
+                                                "error",
+                                                gettext("Incorrect password.")
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+                        } else if (!isE2EE && targetE2EE) {
+                            // Encrypting: need new password
+                            createPasswordDialog((password: string) => {
+                                doCopy({
+                                    targetE2EE: true,
+                                    targetPassword: password
+                                })
+                            })
+                        } else if (isE2EE && targetE2EE) {
+                            // E2EE -> E2EE: need source key, then new password
+                            const handlePasswords = (sourceKey: any) => {
+                                createPasswordDialog((password: string) => {
+                                    doCopy({
+                                        sourceKey: sourceKey,
+                                        targetE2EE: true,
+                                        targetPassword: password
+                                    })
+                                })
+                            }
+                            if (editor.e2ee && editor.e2ee.key) {
+                                handlePasswords(editor.e2ee.key)
+                            } else {
+                                enterPasswordDialog(
+                                    async (password: string) => {
+                                        try {
+                                            const key =
+                                                await E2EEKeyManager.deriveKey(
+                                                    password,
+                                                    new Uint8Array(
+                                                        atob(
+                                                            (
+                                                                editor.docInfo as any
+                                                            ).e2ee_salt
+                                                        )
+                                                            .split("")
+                                                            .map(c =>
+                                                                c.charCodeAt(0)
+                                                            )
+                                                    ),
+                                                    (editor.docInfo as any)
+                                                        .e2ee_iterations ||
+                                                        600000
+                                                )
+                                            handlePasswords(key)
+                                        } catch (_err) {
+                                            addAlert(
+                                                "error",
+                                                gettext("Incorrect password.")
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+                        } else {
+                            // Plain -> plain
+                            doCopy(null)
+                        }
+                    }
+                },
+                {
+                    type: "cancel"
+                }
+            ]
+        })
+        selectTemplateDialog.open()
     }
 
     addExportTemplateMenuEntries(): void {
