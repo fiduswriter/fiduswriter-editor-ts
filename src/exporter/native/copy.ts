@@ -144,8 +144,11 @@ function createNativeImporterBackend(
                 )?.template,
                 path
             }
+            // The server requires the encryption intent to be stated
+            // explicitly: an omitted flag is rejected, so plaintext
+            // copies must send e2ee: false.
+            jsonData.e2ee = !!e2ee?.enabled
             if (e2ee?.enabled) {
-                jsonData.e2ee = true
                 if (e2ee.salt) {
                     jsonData.e2ee_salt = e2ee.salt
                 }
