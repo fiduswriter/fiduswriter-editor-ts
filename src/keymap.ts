@@ -8,6 +8,7 @@ import {
 import {redo, undo} from "prosemirror-history"
 import {liftListItem} from "prosemirror-schema-list"
 import type {Node, NodeType, Schema} from "prosemirror-model"
+import {TextSelection} from "prosemirror-state"
 import type {Command, EditorState, Transaction} from "prosemirror-state"
 import type {EditorView} from "prosemirror-view"
 
@@ -67,7 +68,50 @@ export function setBlockType(
 }
 
 export const buildEditorKeymap = (schema: Schema) => {
+    // When the caret is at the very end of the title field and the user hits
+    // Enter, move it to the next visible field (subtitle, authors, abstract,
+    // body, ...). Splitting the title is not allowed by the schema, so
+    // without this Enter would do nothing at all.
+    const moveCaretToNextField: Command = (state: EditorState, dispatch) => {
+        const {selection} = state
+        if (!selection.empty || !schema.nodes.title) {
+            return false
+        }
+        const $from = selection.$from
+        if (
+            $from.parent.type !== schema.nodes.title ||
+            $from.parentOffset < $from.parent.content.size
+        ) {
+            // Only applies at the very end of the title field.
+            return false
+        }
+        let $pos = state.doc.resolve($from.after())
+        let node = $pos.nodeAfter
+        while (node?.attrs.hidden) {
+            // Skip fields that are not visible.
+            $pos = state.doc.resolve($pos.pos + node.nodeSize)
+            node = $pos.nodeAfter
+        }
+        if (!node) {
+            // The title is the only content of the document.
+            return false
+        }
+        const nextSelection = TextSelection.near(
+            state.doc.resolve($pos.pos + 1),
+            1
+        )
+        if (nextSelection.from <= $from.after()) {
+            // No caret position further ahead (e.g. only a table of
+            // contents part follows).
+            return false
+        }
+        if (dispatch) {
+            dispatch(state.tr.setSelection(nextSelection).scrollIntoView())
+        }
+        return true
+    }
     const editorKeymap: Record<string, Command> = {
+        Enter: moveCaretToNextField,
         Backspace: (state: EditorState, dispatch, view?: EditorView) =>
             backspace(
                 state,

@@ -68,7 +68,7 @@ The following UI patterns are currently here but may be generic enough for
 │   ├── e2ee/             # End-to-end encryption
 │   ├── footnotes/        # Footnote editor
 │   ├── grammar/          # Built-in spell/grammar checker
-│   ├── keymap.js         # Editor keymap
+│   ├── keymap.ts         # Editor keymap
 │   ├── marginboxes/      # Margin boxes
 │   ├── menus/            # Menus and toolbar
 │   ├── navigator/        # Document navigator
