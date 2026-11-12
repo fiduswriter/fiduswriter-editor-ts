@@ -1483,17 +1483,17 @@ msgstr "Recenze byla sledována"
 msgid "Reviewer"
 msgstr "Recenzent"
 
-msgid "Revision could not be saved."
-msgstr "Revizi se nepodařilo uložit."
+msgid "Snapshot could not be saved."
+msgstr "Snímek se nepodařilo uložit."
 
-msgid "Revision description"
-msgstr "Popis revize"
+msgid "Snapshot description"
+msgstr "Popis snímku"
 
-msgid "Revision file could not be generated."
-msgstr "Soubor revize nelze vygenerovat."
+msgid "Snapshot file could not be generated."
+msgstr "Soubor snímku nelze vygenerovat."
 
-msgid "Revision saved."
-msgstr "Revize uložena."
+msgid "Snapshot saved."
+msgstr "Snímek uložen."
 
 msgid "Revoke"
 msgstr "Zrušit"
@@ -1510,14 +1510,14 @@ msgstr "ruština"
 msgid "Save"
 msgstr "Uložit"
 
-msgid "Save a revision of the document."
-msgstr "Uložte revizi dokumentu."
+msgid "Save a snapshot of the document."
+msgstr "Uložte snímek dokumentu."
 
-msgid "Save revision"
-msgstr "Uložit revizi"
+msgid "Save snapshot"
+msgstr "Uložit snímek"
 
-msgid "Saving revision..."
-msgstr "Ukládání revize..."
+msgid "Saving snapshot..."
+msgstr "Ukládání snímku..."
 
 msgid "Search"
 msgstr "Vyhledávání"

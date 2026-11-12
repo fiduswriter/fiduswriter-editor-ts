@@ -1483,17 +1483,17 @@ msgstr "Review tracked"
 msgid "Reviewer"
 msgstr "Reviewer"
 
-msgid "Revision could not be saved."
-msgstr "Revision could not be saved."
+msgid "Snapshot could not be saved."
+msgstr "Snapshot could not be saved."
 
-msgid "Revision description"
-msgstr "Revision description"
+msgid "Snapshot description"
+msgstr "Snapshot description"
 
-msgid "Revision file could not be generated."
-msgstr "Revision file could not be generated."
+msgid "Snapshot file could not be generated."
+msgstr "Snapshot file could not be generated."
 
-msgid "Revision saved."
-msgstr "Revision saved."
+msgid "Snapshot saved."
+msgstr "Snapshot saved."
 
 msgid "Revoke"
 msgstr "Revoke"
@@ -1510,14 +1510,14 @@ msgstr "Russian"
 msgid "Save"
 msgstr "Save"
 
-msgid "Save a revision of the document."
-msgstr "Save a revision of the document."
+msgid "Save a snapshot of the document."
+msgstr "Save a snapshot of the document."
 
-msgid "Save revision"
-msgstr "Save revision"
+msgid "Save snapshot"
+msgstr "Save snapshot"
 
-msgid "Saving revision..."
-msgstr "Saving revision..."
+msgid "Saving snapshot..."
+msgstr "Saving snapshot..."
 
 msgid "Search"
 msgstr "Search"

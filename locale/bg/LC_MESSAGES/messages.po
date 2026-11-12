@@ -1483,17 +1483,17 @@ msgstr "Проследен отзив"
 msgid "Reviewer"
 msgstr "рецензент"
 
-msgid "Revision could not be saved."
-msgstr "Ревизията не можа да бъде запазена."
+msgid "Snapshot could not be saved."
+msgstr "Снимката не можа да бъде запазена."
 
-msgid "Revision description"
-msgstr "Описание на редакцията"
+msgid "Snapshot description"
+msgstr "Описание на снимката"
 
-msgid "Revision file could not be generated."
-msgstr "Ревизионният файл не можа да бъде генериран."
+msgid "Snapshot file could not be generated."
+msgstr "Файлът за снимка не можа да бъде генериран."
 
-msgid "Revision saved."
-msgstr "Ревизията е запазена."
+msgid "Snapshot saved."
+msgstr "Снимката е запазена."
 
 msgid "Revoke"
 msgstr "Отмени"
@@ -1510,14 +1510,14 @@ msgstr "Руски"
 msgid "Save"
 msgstr "Запази"
 
-msgid "Save a revision of the document."
-msgstr "Запазете редакция на документа."
+msgid "Save a snapshot of the document."
+msgstr "Запазете снимка на документа."
 
-msgid "Save revision"
-msgstr "Запазване на ревизията"
+msgid "Save snapshot"
+msgstr "Запазване на снимката"
 
-msgid "Saving revision..."
-msgstr "Редакцията се запазва..."
+msgid "Saving snapshot..."
+msgstr "Снимката се запазва..."
 
 msgid "Search"
 msgstr "Търсене"

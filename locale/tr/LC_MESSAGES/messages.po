@@ -1483,17 +1483,17 @@ msgstr "İnceleme izlendi"
 msgid "Reviewer"
 msgstr "İnceleyen"
 
-msgid "Revision could not be saved."
-msgstr "Düzeltme kaydedilemedi."
+msgid "Snapshot could not be saved."
+msgstr "Anlık görüntü kaydedilemedi."
 
-msgid "Revision description"
-msgstr "Revizyon açıklaması"
+msgid "Snapshot description"
+msgstr "Anlık görüntü açıklaması"
 
-msgid "Revision file could not be generated."
-msgstr "Revizyon dosyası oluşturulamadı."
+msgid "Snapshot file could not be generated."
+msgstr "Anlık görüntü dosyası oluşturulamadı."
 
-msgid "Revision saved."
-msgstr "Düzeltme kaydedildi."
+msgid "Snapshot saved."
+msgstr "Anlık görüntü kaydedildi."
 
 msgid "Revoke"
 msgstr "Geri çekmek"
@@ -1510,14 +1510,14 @@ msgstr "Rusça"
 msgid "Save"
 msgstr "Kaydet"
 
-msgid "Save a revision of the document."
-msgstr "Belgenin revizyonunu kaydedin."
+msgid "Save a snapshot of the document."
+msgstr "Belgenin anlık görüntüsünü kaydedin."
 
-msgid "Save revision"
-msgstr "Düzeltmeyi kaydet"
+msgid "Save snapshot"
+msgstr "Anlık görüntüyü kaydet"
 
-msgid "Saving revision..."
-msgstr "Düzeltme kaydediliyor..."
+msgid "Saving snapshot..."
+msgstr "Anlık görüntü kaydediliyor..."
 
 msgid "Search"
 msgstr "Ara"

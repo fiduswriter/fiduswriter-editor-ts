@@ -1483,17 +1483,17 @@ msgstr "Anmeldelse spores"
 msgid "Reviewer"
 msgstr "Anmelder"
 
-msgid "Revision could not be saved."
-msgstr "Revisjon kunne ikke lagres."
+msgid "Snapshot could not be saved."
+msgstr "Øyeblikksbildet kunne ikke lagres."
 
-msgid "Revision description"
-msgstr "Revisjonsbeskrivelse"
+msgid "Snapshot description"
+msgstr "Beskrivelse av øyeblikksbilde"
 
-msgid "Revision file could not be generated."
-msgstr "Revisjonsfilen kunne ikke genereres."
+msgid "Snapshot file could not be generated."
+msgstr "Øyeblikksbildefilen kunne ikke genereres."
 
-msgid "Revision saved."
-msgstr "Revisjon lagret."
+msgid "Snapshot saved."
+msgstr "Øyeblikksbilde lagret."
 
 msgid "Revoke"
 msgstr "Oppheve"
@@ -1510,14 +1510,14 @@ msgstr "russisk"
 msgid "Save"
 msgstr "Lagre"
 
-msgid "Save a revision of the document."
-msgstr "Lagre en revisjon av dokumentet."
+msgid "Save a snapshot of the document."
+msgstr "Lagre et øyeblikksbilde av dokumentet."
 
-msgid "Save revision"
-msgstr "Lagre revisjon"
+msgid "Save snapshot"
+msgstr "Lagre øyeblikksbilde"
 
-msgid "Saving revision..."
-msgstr "Lagrer revisjon..."
+msgid "Saving snapshot..."
+msgstr "Lagrer øyeblikksbilde..."
 
 msgid "Search"
 msgstr "Søk"

@@ -87,7 +87,7 @@ export const linkDialogTemplate = ({
             : ""
     }`
 
-/** Dialog to add a note to a revision before saving. */
+/** Dialog to add a note to a snapshot before saving. */
 export const revisionDialogTemplate = ({dir}: {dir: string}): string =>
     `<p>
         <input type="text" class="revision-note" placeholder="${gettext("Description (optional)")}" dir="${dir}">

@@ -21,7 +21,7 @@ export class SaveRevision extends GenericSaveRevision {
         const title = shortFileTitle(doc.title, doc.path || "")
         const task = addProgress(
             "info",
-            `${title}: ${gettext("Saving revision...")}`,
+            `${title}: ${gettext("Saving snapshot...")}`,
             {autoClose: 6000}
         )
         const progressCallback = (
@@ -31,7 +31,7 @@ export class SaveRevision extends GenericSaveRevision {
 
         const onError = (error: unknown) => {
             task.close()
-            addAlert("error", gettext("Revision file could not be generated."))
+            addAlert("error", gettext("Snapshot file could not be generated."))
             if (app.isOffline()) {
                 addAlert(
                     "info",
@@ -90,7 +90,7 @@ export class SaveRevision extends GenericSaveRevision {
                                 )
                             )
                         }
-                        throw new Error(gettext("Revision could not be saved."))
+                        throw new Error(gettext("Snapshot could not be saved."))
                     }
                 )
                 .catch(error => {
@@ -107,7 +107,7 @@ export class SaveRevision extends GenericSaveRevision {
 
     init(): Promise<unknown> {
         return super.init().then(result => {
-            addAlert("success", gettext("Revision saved."))
+            addAlert("success", gettext("Snapshot saved."))
             return result
         })
     }

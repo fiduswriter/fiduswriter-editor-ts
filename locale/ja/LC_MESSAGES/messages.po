@@ -1483,17 +1483,17 @@ msgstr "レビュー履歴付き"
 msgid "Reviewer"
 msgstr "査読者"
 
-msgid "Revision could not be saved."
-msgstr "リビジョンを保存できませんでした。"
+msgid "Snapshot could not be saved."
+msgstr "スナップショットを保存できませんでした。"
 
-msgid "Revision description"
-msgstr "リビジョンの説明"
+msgid "Snapshot description"
+msgstr "スナップショットの説明"
 
-msgid "Revision file could not be generated."
-msgstr "リビジョンファイルを生成できませんでした。"
+msgid "Snapshot file could not be generated."
+msgstr "スナップショットファイルを生成できませんでした。"
 
-msgid "Revision saved."
-msgstr "リビジョンが保存されました。"
+msgid "Snapshot saved."
+msgstr "スナップショットが保存されました。"
 
 msgid "Revoke"
 msgstr "取り消す"
@@ -1510,14 +1510,14 @@ msgstr "ロシア語"
 msgid "Save"
 msgstr "保存"
 
-msgid "Save a revision of the document."
-msgstr "ドキュメントのリビジョンを保存します。"
+msgid "Save a snapshot of the document."
+msgstr "ドキュメントのスナップショットを保存します。"
 
-msgid "Save revision"
-msgstr "リビジョンの保存"
+msgid "Save snapshot"
+msgstr "スナップショットの保存"
 
-msgid "Saving revision..."
-msgstr "リビジョンを保存しています..."
+msgid "Saving snapshot..."
+msgstr "スナップショットを保存しています..."
 
 msgid "Search"
 msgstr "検索"

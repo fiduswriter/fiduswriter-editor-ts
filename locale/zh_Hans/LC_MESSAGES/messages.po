@@ -1483,17 +1483,17 @@ msgstr "已追踪评论"
 msgid "Reviewer"
 msgstr "审稿人"
 
-msgid "Revision could not be saved."
-msgstr "无法保存修订。"
+msgid "Snapshot could not be saved."
+msgstr "无法保存快照。"
 
-msgid "Revision description"
-msgstr "修订说明"
+msgid "Snapshot description"
+msgstr "快照说明"
 
-msgid "Revision file could not be generated."
-msgstr "无法生成修订文件。"
+msgid "Snapshot file could not be generated."
+msgstr "无法生成快照文件。"
 
-msgid "Revision saved."
-msgstr "修订已保存。"
+msgid "Snapshot saved."
+msgstr "快照已保存。"
 
 msgid "Revoke"
 msgstr "撤销"
@@ -1510,14 +1510,14 @@ msgstr "俄语"
 msgid "Save"
 msgstr "保存"
 
-msgid "Save a revision of the document."
-msgstr "保存文档的修订版本。"
+msgid "Save a snapshot of the document."
+msgstr "保存文档的快照。"
 
-msgid "Save revision"
-msgstr "保存修订版本"
+msgid "Save snapshot"
+msgstr "保存快照"
 
-msgid "Saving revision..."
-msgstr "正在保存修订..."
+msgid "Saving snapshot..."
+msgstr "正在保存快照..."
 
 msgid "Search"
 msgstr "搜索"

@@ -1483,17 +1483,17 @@ msgstr "Anmeldelsen spores"
 msgid "Reviewer"
 msgstr "Anmelder"
 
-msgid "Revision could not be saved."
-msgstr "Revisionen kunne ikke gemmes."
+msgid "Snapshot could not be saved."
+msgstr "Snapshot kunne ikke gemmes."
 
-msgid "Revision description"
-msgstr "Revisionsbeskrivelse"
+msgid "Snapshot description"
+msgstr "Snapshotbeskrivelse"
 
-msgid "Revision file could not be generated."
-msgstr "Revisionsfilen kunne ikke genereres."
+msgid "Snapshot file could not be generated."
+msgstr "Snapshotfilen kunne ikke genereres."
 
-msgid "Revision saved."
-msgstr "Revision gemt."
+msgid "Snapshot saved."
+msgstr "Snapshot gemt."
 
 msgid "Revoke"
 msgstr "Tilbagekald"
@@ -1510,14 +1510,14 @@ msgstr "russisk"
 msgid "Save"
 msgstr "Gem"
 
-msgid "Save a revision of the document."
-msgstr "Gem en revision af dokumentet."
+msgid "Save a snapshot of the document."
+msgstr "Gem et snapshot af dokumentet."
 
-msgid "Save revision"
-msgstr "Gem revision"
+msgid "Save snapshot"
+msgstr "Gem snapshot"
 
-msgid "Saving revision..."
-msgstr "Gemmer revision..."
+msgid "Saving snapshot..."
+msgstr "Gemmer snapshot..."
 
 msgid "Search"
 msgstr "Søge"

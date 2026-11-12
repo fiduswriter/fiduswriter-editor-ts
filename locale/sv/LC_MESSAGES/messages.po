@@ -1483,17 +1483,17 @@ msgstr "Granskningen spåras"
 msgid "Reviewer"
 msgstr "Recensent"
 
-msgid "Revision could not be saved."
-msgstr "Revisionen kunde inte sparas."
+msgid "Snapshot could not be saved."
+msgstr "Ögonblicksbilden kunde inte sparas."
 
-msgid "Revision description"
-msgstr "Revisionsbeskrivning"
+msgid "Snapshot description"
+msgstr "Beskrivning av ögonblicksbild"
 
-msgid "Revision file could not be generated."
-msgstr "Revisionsfilen kunde inte genereras."
+msgid "Snapshot file could not be generated."
+msgstr "Ögonblicksbildsfilen kunde inte genereras."
 
-msgid "Revision saved."
-msgstr "Revision sparad."
+msgid "Snapshot saved."
+msgstr "Ögonblicksbild sparad."
 
 msgid "Revoke"
 msgstr "Återkalla"
@@ -1510,14 +1510,14 @@ msgstr "ryska"
 msgid "Save"
 msgstr "Spara"
 
-msgid "Save a revision of the document."
-msgstr "Spara en revidering av dokumentet."
+msgid "Save a snapshot of the document."
+msgstr "Spara en ögonblicksbild av dokumentet."
 
-msgid "Save revision"
-msgstr "Spara revision"
+msgid "Save snapshot"
+msgstr "Spara ögonblicksbild"
 
-msgid "Saving revision..."
-msgstr "Sparar revision..."
+msgid "Saving snapshot..."
+msgstr "Sparar ögonblicksbild..."
 
 msgid "Search"
 msgstr "Söka"

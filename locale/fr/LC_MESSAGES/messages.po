@@ -1483,17 +1483,17 @@ msgstr "Examen suivi"
 msgid "Reviewer"
 msgstr "Critique"
 
-msgid "Revision could not be saved."
-msgstr "La révision n'a pas pu être enregistrée."
+msgid "Snapshot could not be saved."
+msgstr "L'instantané n'a pas pu être enregistré."
 
-msgid "Revision description"
-msgstr "Description de la révision"
+msgid "Snapshot description"
+msgstr "Description de l'instantané"
 
-msgid "Revision file could not be generated."
-msgstr "Le fichier de révision n'a pas pu être généré."
+msgid "Snapshot file could not be generated."
+msgstr "Le fichier de l'instantané n'a pas pu être généré."
 
-msgid "Revision saved."
-msgstr "Révision enregistrée."
+msgid "Snapshot saved."
+msgstr "Instantané enregistré."
 
 msgid "Revoke"
 msgstr "Révoquer"
@@ -1510,14 +1510,14 @@ msgstr "russe"
 msgid "Save"
 msgstr "Enregistrer"
 
-msgid "Save a revision of the document."
-msgstr "Enregistrez une révision du document."
+msgid "Save a snapshot of the document."
+msgstr "Enregistrez un instantané du document."
 
-msgid "Save revision"
-msgstr "Sauvegarder la révision"
+msgid "Save snapshot"
+msgstr "Sauvegarder l'instantané"
 
-msgid "Saving revision..."
-msgstr "Enregistrement de la révision..."
+msgid "Saving snapshot..."
+msgstr "Enregistrement de l'instantané..."
 
 msgid "Search"
 msgstr "Chercher"

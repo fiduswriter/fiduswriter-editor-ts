@@ -1483,17 +1483,17 @@ msgstr "Revisión rastreada"
 msgid "Reviewer"
 msgstr "Reseña"
 
-msgid "Revision could not be saved."
-msgstr "No se pudo guardar esta revisión del documento"
+msgid "Snapshot could not be saved."
+msgstr "No se pudo guardar esta instantánea del documento"
 
-msgid "Revision description"
-msgstr "Descripción de la revisión"
+msgid "Snapshot description"
+msgstr "Descripción de la instantánea"
 
-msgid "Revision file could not be generated."
-msgstr "No se pudo generar el archivo de revisión."
+msgid "Snapshot file could not be generated."
+msgstr "No se pudo generar el archivo de instantánea."
 
-msgid "Revision saved."
-msgstr "Revisión guardada."
+msgid "Snapshot saved."
+msgstr "Instantánea guardada."
 
 msgid "Revoke"
 msgstr "Revocar"
@@ -1510,14 +1510,14 @@ msgstr "Ruso"
 msgid "Save"
 msgstr "Guardar"
 
-msgid "Save a revision of the document."
-msgstr "Guarde una revisión del documento."
+msgid "Save a snapshot of the document."
+msgstr "Guarde una instantánea del documento."
 
-msgid "Save revision"
-msgstr "Guardar revisión"
+msgid "Save snapshot"
+msgstr "Guardar instantánea"
 
-msgid "Saving revision..."
-msgstr "Guardando revisión..."
+msgid "Saving snapshot..."
+msgstr "Guardando instantánea..."
 
 msgid "Search"
 msgstr "Buscar"

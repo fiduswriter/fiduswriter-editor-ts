@@ -1483,17 +1483,17 @@ msgstr "Recenzja śledzona"
 msgid "Reviewer"
 msgstr "Recenzent"
 
-msgid "Revision could not be saved."
-msgstr "Nie można zapisać wersji."
+msgid "Snapshot could not be saved."
+msgstr "Nie można zapisać migawki."
 
-msgid "Revision description"
-msgstr "Opis wersji"
+msgid "Snapshot description"
+msgstr "Opis migawki"
 
-msgid "Revision file could not be generated."
-msgstr "Nie można wygenerować pliku wersji."
+msgid "Snapshot file could not be generated."
+msgstr "Nie można wygenerować pliku migawki."
 
-msgid "Revision saved."
-msgstr "Wersja zapisana."
+msgid "Snapshot saved."
+msgstr "Migawka zapisana."
 
 msgid "Revoke"
 msgstr "Unieważnić"
@@ -1510,14 +1510,14 @@ msgstr "Rosyjski"
 msgid "Save"
 msgstr "Zapisz"
 
-msgid "Save a revision of the document."
-msgstr "Zapisz wersję dokumentu."
+msgid "Save a snapshot of the document."
+msgstr "Zapisz migawkę dokumentu."
 
-msgid "Save revision"
-msgstr "Zapisz wersję"
+msgid "Save snapshot"
+msgstr "Zapisz migawkę"
 
-msgid "Saving revision..."
-msgstr "Zapisywanie wersji..."
+msgid "Saving snapshot..."
+msgstr "Zapisywanie migawki..."
 
 msgid "Search"
 msgstr "Szukaj"

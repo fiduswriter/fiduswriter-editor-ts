@@ -1483,17 +1483,17 @@ msgstr "Отзыв отслеживается"
 msgid "Reviewer"
 msgstr "Рецензент"
 
-msgid "Revision could not be saved."
-msgstr "Не удалось сохранить редакцию."
+msgid "Snapshot could not be saved."
+msgstr "Не удалось сохранить снимок."
 
-msgid "Revision description"
-msgstr "Описание версии"
+msgid "Snapshot description"
+msgstr "Описание снимка"
 
-msgid "Revision file could not be generated."
-msgstr "Не удалось создать файл ревизии."
+msgid "Snapshot file could not be generated."
+msgstr "Не удалось создать файл снимка."
 
-msgid "Revision saved."
-msgstr "Редакция сохранена."
+msgid "Snapshot saved."
+msgstr "Снимок сохранен."
 
 msgid "Revoke"
 msgstr "Отозвать"
@@ -1510,14 +1510,14 @@ msgstr "Русский"
 msgid "Save"
 msgstr "Сохранить"
 
-msgid "Save a revision of the document."
-msgstr "Сохраните редакцию документа."
+msgid "Save a snapshot of the document."
+msgstr "Сохраните снимок документа."
 
-msgid "Save revision"
-msgstr "Сохранить версию"
+msgid "Save snapshot"
+msgstr "Сохранить снимок"
 
-msgid "Saving revision..."
-msgstr "Сохранение версии..."
+msgid "Saving snapshot..."
+msgstr "Сохранение снимка..."
 
 msgid "Search"
 msgstr "Поиск"

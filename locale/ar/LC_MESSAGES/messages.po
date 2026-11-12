@@ -1483,17 +1483,17 @@ msgstr "تم تتبع المراجعة"
 msgid "Reviewer"
 msgstr "المراجع"
 
-msgid "Revision could not be saved."
-msgstr "لا يمكن حفظ المراجعة."
+msgid "Snapshot could not be saved."
+msgstr "لا يمكن حفظ اللقطة."
 
-msgid "Revision description"
-msgstr "وصف المراجعة"
+msgid "Snapshot description"
+msgstr "وصف اللقطة"
 
-msgid "Revision file could not be generated."
-msgstr "لا يمكن إنشاء ملف المراجعة."
+msgid "Snapshot file could not be generated."
+msgstr "لا يمكن إنشاء ملف اللقطة."
 
-msgid "Revision saved."
-msgstr "تم حفظ المراجعة."
+msgid "Snapshot saved."
+msgstr "تم حفظ اللقطة."
 
 msgid "Revoke"
 msgstr "إبطال"
@@ -1510,14 +1510,14 @@ msgstr "الروسية"
 msgid "Save"
 msgstr "حفظ"
 
-msgid "Save a revision of the document."
-msgstr "حفظ مراجعة للمستند."
+msgid "Save a snapshot of the document."
+msgstr "حفظ لقطة للمستند."
 
-msgid "Save revision"
-msgstr "حفظ المراجعة"
+msgid "Save snapshot"
+msgstr "حفظ لقطة"
 
-msgid "Saving revision..."
-msgstr "جارٍ حفظ المراجعة..."
+msgid "Saving snapshot..."
+msgstr "جارٍ حفظ اللقطة..."
 
 msgid "Search"
 msgstr "بحث"

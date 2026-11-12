@@ -7,7 +7,7 @@ export const keyBindingsTemplate = (): string =>
           </li>
           <li class="help-key-unit">
             <kbd class="fw-button fw-light fw-small"><span>CTRL+s</span></kbd>
-            <span class="help-key-def">${gettext("Save revision")}</span>
+            <span class="help-key-def">${gettext("Save snapshot")}</span>
           </li>
           <li class="help-key-unit">
             <kbd class="fw-button fw-light fw-small"><span>Shift+CTRL+/</span></kbd>

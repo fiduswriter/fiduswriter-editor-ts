@@ -104,7 +104,7 @@ export interface StaticAppConfig {
     savePolling?: Partial<PollingOptions>
     /**
      * Whether to show the file-menu items that require a Fidus Writer
-     * backend (Share, Save revision, Create copy). Defaults to `true`.
+     * backend (Share, Save snapshot, Create copy). Defaults to `true`.
      * Standalone hosts (embedded editor without a backend) set this to
      * `false` to match the behavior of a normal external-mode editor.
      */
@@ -449,7 +449,7 @@ export async function createStaticApp(
             LANGUAGE: config.locale,
             // Hosts without a Fidus Writer backend (embedded / standalone
             // editor) hide the file-menu items that need one: Share, Save
-            // revision, Create copy.
+            // snapshot, Create copy.
             SHOW_FILE_MENU_ITEMS: config.fileMenuItems ?? true,
             // Read by the Editor constructor and spliced into the menus.
             EXTRA_MENU_ITEMS: config.extraMenuItems ?? [],

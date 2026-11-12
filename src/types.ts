@@ -228,7 +228,7 @@ export interface EditorApp {
         APPS: string[]
         /**
          * Hosts without a Fidus Writer backend (embedded editors) can hide
-         * the file menu items that require one: Share, Save revision,
+         * the file menu items that require one: Share, Save snapshot,
          * Create copy. Defaults to showing them.
          */
         SHOW_FILE_MENU_ITEMS?: boolean

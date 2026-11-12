@@ -1483,17 +1483,17 @@ msgstr "Beoordeling bijgehouden"
 msgid "Reviewer"
 msgstr "Recensent"
 
-msgid "Revision could not be saved."
-msgstr "Revisie kan niet worden opgeslagen."
+msgid "Snapshot could not be saved."
+msgstr "Momentopname kan niet worden opgeslagen."
 
-msgid "Revision description"
-msgstr "Revisiebeschrijving"
+msgid "Snapshot description"
+msgstr "Beschrijving van momentopname"
 
-msgid "Revision file could not be generated."
-msgstr "Revisiebestand kan niet worden gegenereerd."
+msgid "Snapshot file could not be generated."
+msgstr "Bestand van momentopname kan niet worden gegenereerd."
 
-msgid "Revision saved."
-msgstr "Revisie opgeslagen."
+msgid "Snapshot saved."
+msgstr "Momentopname opgeslagen."
 
 msgid "Revoke"
 msgstr "Herroepen"
@@ -1510,14 +1510,14 @@ msgstr "Russisch"
 msgid "Save"
 msgstr "Opslaan"
 
-msgid "Save a revision of the document."
-msgstr "Sla een revisie van het document op."
+msgid "Save a snapshot of the document."
+msgstr "Sla een momentopname van het document op."
 
-msgid "Save revision"
-msgstr "Revisie opslaan"
+msgid "Save snapshot"
+msgstr "Momentopname opslaan"
 
-msgid "Saving revision..."
-msgstr "Revisie opslaan..."
+msgid "Saving snapshot..."
+msgstr "Momentopname opslaan..."
 
 msgid "Search"
 msgstr "Zoeken"

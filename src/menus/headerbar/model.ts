@@ -359,10 +359,10 @@ export const headerbarModel = () => ({
                     disabled: (editor: Editor) => editor.app.isOffline()
                 },
                 {
-                    title: gettext("Save revision"),
+                    title: gettext("Save snapshot"),
                     type: "action",
                     //icon: 'save',
-                    tooltip: gettext("Save a revision of the document."),
+                    tooltip: gettext("Save a snapshot of the document."),
                     order: 2,
                     keys: "Ctrl-s",
                     action: (editor: Editor) => {
