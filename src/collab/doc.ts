@@ -905,6 +905,17 @@ export class ModCollabDoc {
             const adjustWorker = makeWorker(
                 staticUrl("js/adjust_doc_to_template_worker.js")
             )
+            const finishTemplateAdjustment = () => {
+                // clearing timer for updating message since operation is completed
+                clearTimeout(activateWaitTimer)
+                if (isInitialLoad) {
+                    this.templateAdjustmentPending = false
+                    this.finishInitialLoad()
+                } else {
+                    deactivateWait()
+                }
+                this.setDocSettings()
+            }
             adjustWorker.onmessage = (message: MessageEvent) => {
                 if (message.data.type === "result") {
                     if (message.data.steps.length) {
@@ -915,18 +926,21 @@ export class ModCollabDoc {
                         tr.setMeta("remote", true)
                         this.mod.editor.view.dispatch(tr)
                     }
-                    // clearing timer for updating message since operation is completed
-                    clearTimeout(activateWaitTimer)
-                    if (isInitialLoad) {
-                        this.templateAdjustmentPending = false
-                        this.finishInitialLoad()
-                    } else {
-                        deactivateWait()
-                    }
-                    this.setDocSettings()
+                    finishTemplateAdjustment()
+                } else if (message.data.type === "error") {
+                    // The document stays as-is; the wait cover must not
+                    // outlive the failed adjustment.
+                    console.error(
+                        "Document template adjustment failed:",
+                        message.data.error
+                    )
+                    finishTemplateAdjustment()
                 }
             }
-            adjustWorker.onerror = (error: ErrorEvent) => console.error(error)
+            adjustWorker.onerror = (error: ErrorEvent) => {
+                console.error(error)
+                finishTemplateAdjustment()
+            }
             const schemaExporter = new SchemaExport()
             adjustWorker.postMessage({
                 schemaSpec: JSON.parse(schemaExporter.init()),
