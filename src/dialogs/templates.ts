@@ -89,7 +89,13 @@ export const linkDialogTemplate = ({
 
 /** Dialog to add a note to a snapshot before saving. */
 export const revisionDialogTemplate = ({dir}: {dir: string}): string =>
-    `<p>
+    `<p class="snapshot-autosave-notice">
+        <i class="fa-solid fa-info-circle"></i>
+        ${gettext(
+            "Your document is saved automatically every few seconds. A snapshot creates an additional copy of the current state of the document that you can return to later."
+        )}
+    </p>
+    <p>
         <input type="text" class="revision-note" placeholder="${gettext("Description (optional)")}" dir="${dir}">
     </p>`
 

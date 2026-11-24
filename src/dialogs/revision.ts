@@ -35,8 +35,8 @@ export class RevisionDialog {
         this.dialog = new Dialog({
             title: gettext("Snapshot description"),
             body: revisionDialogTemplate({dir: this.dir}),
-            height: 100,
-            width: 300,
+            height: 180,
+            width: 380,
             buttons,
             restoreActiveElement: false
         })
