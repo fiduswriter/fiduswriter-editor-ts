@@ -30,6 +30,7 @@ import {
     updateFootnoteMarker
 } from "../state_plugins/index.js"
 import {amendTransaction} from "../track/index.js"
+import {buildListIndentKeymap} from "../keymap.js"
 import {accessRightsPlugin} from "./state_plugins/index.js"
 import type {Editor} from "../types.js"
 
@@ -72,6 +73,7 @@ export class ModFootnoteEditor {
             [history],
             [keymap, () => baseKeymap],
             [keymap, () => buildKeymap(this.schema)],
+            [buildListIndentKeymap, () => this.schema],
             [collab, () => ({clientID: this.mod.editor.client_id})],
             [dropCursor],
             [gapCursor],

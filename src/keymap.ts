@@ -6,9 +6,9 @@ import {
     toggleMark
 } from "prosemirror-commands"
 import {redo, undo} from "prosemirror-history"
-import {liftListItem} from "prosemirror-schema-list"
+import {liftListItem, sinkListItem} from "prosemirror-schema-list"
 import type {Node, NodeType, Schema} from "prosemirror-model"
-import {TextSelection} from "prosemirror-state"
+import {Plugin, TextSelection} from "prosemirror-state"
 import type {Command, EditorState, Transaction} from "prosemirror-state"
 import type {EditorView} from "prosemirror-view"
 
@@ -154,4 +154,38 @@ export const buildEditorKeymap = (schema: Schema) => {
         ) => redo(state, tr => dispatch!(addInputType(tr, "historyRedo")), view)
     }
     return editorKeymap
+}
+
+// Tab indents the current list item one level and Shift-Tab lifts it back
+// out, following the convention of desktop word processors. The key is only
+// captured when the caret is inside a list item — everywhere else Tab keeps
+// its regular focus-navigation role, so the editor never becomes a keyboard
+// trap (WCAG 2.1.2; see the "No Keyboard Trap" understanding document, which
+// lists indenting with Tab in a rich text editor as a conforming example).
+// As an escape hatch for documents that consist of one large list, a Tab
+// pressed shortly after Escape is never captured and moves focus out of the
+// editor (same pattern as CodeMirror).
+export function buildListIndentKeymap(schema: Schema): Plugin {
+    const listItem = schema.nodes.list_item
+    let lastEscape = 0
+    return new Plugin({
+        props: {
+            handleKeyDown(view: EditorView, event: KeyboardEvent): boolean {
+                if (event.key === "Escape") {
+                    lastEscape = Date.now()
+                    return false
+                }
+                if (event.key !== "Tab") {
+                    return false
+                }
+                if (Date.now() - lastEscape < 3000) {
+                    return false
+                }
+                const command = event.shiftKey
+                    ? liftListItem(listItem)
+                    : sinkListItem(listItem)
+                return command(view.state, view.dispatch, view)
+            }
+        }
+    })
 }

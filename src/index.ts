@@ -46,7 +46,7 @@ import {E2EESnapshotManager} from "./e2ee/snapshot-manager.js"
 import {ExportFidusFile} from "./exporter/native/file.js"
 import {ModFootnotes} from "./footnotes/index.js"
 import {ModGrammar} from "./grammar/index.js"
-import {buildEditorKeymap} from "./keymap.js"
+import {buildEditorKeymap, buildListIndentKeymap} from "./keymap.js"
 import {
     addHostMenuItems,
     codeBlockMenuModel,
@@ -270,6 +270,7 @@ export class Editor {
             [linksPlugin, () => ({editor: this})],
             [keymap, () => buildEditorKeymap(this.schema)],
             [keymap, () => buildKeymap(this.schema)],
+            [buildListIndentKeymap, () => this.schema],
             [keymap, () => baseKeymap],
             [collab, () => ({clientID: this.client_id})],
             [history],

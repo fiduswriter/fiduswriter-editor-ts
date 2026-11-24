@@ -33,6 +33,10 @@ export const keyBindingsTemplate = (): string =>
             <kbd class="fw-button fw-light fw-small"><span>CTRL+H</span></kbd>
             <span class="help-key-def">${gettext("Search and replace")}</span>
           </li>
+          <li class="help-key-unit">
+            <kbd class="fw-button fw-light fw-small"><span>Esc, then Tab</span></kbd>
+            <span class="help-key-def">${gettext("Move focus out of the editor")}</span>
+          </li>
         </ul><!-- .help-list -->
         <ul class="help-list">
           <li class="help-key-unit">
@@ -44,9 +48,15 @@ export const keyBindingsTemplate = (): string =>
             <span class="help-key-def">${gettext("Italics")}</span>
           </li>
           <li class="help-key-unit">
+            <kbd class="fw-button fw-light fw-small"><span>Tab</span></kbd>
+            <kbd class="fw-button fw-light fw-small"><span>Shift+Tab</span></kbd>
+            <span class="help-key-def">${gettext("Indent/outdent list item")}</span>
+          </li>
+          <li class="help-key-unit">
             <kbd class="fw-button fw-light fw-small"><span>CTRL+[</span></kbd>
+            <kbd class="fw-button fw-light fw-small"><span>CTRL+]</span></kbd>
             <kbd class="fw-button fw-light fw-small"><span>CTRL+&lt;</span></kbd>
-            <span class="help-key-def">${gettext("Lift")}</span>
+            <span class="help-key-def">${gettext("Lift/sink list item")}</span>
           </li>
           <li class="help-key-unit">
             <kbd class="fw-button fw-light fw-small"><span>CTRL+Shift+8</span></kbd>
