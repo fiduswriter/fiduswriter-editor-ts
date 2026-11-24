@@ -17,8 +17,8 @@ export class TextPaste {
     }
 
     init(): void {
-        import("@fiduswriter/bibliography-manager/import").then(
-            ({BibliographyImporter}) => {
+        import("@fiduswriter/bibliography-manager/import")
+            .then(({BibliographyImporter}) => {
                 const bibDB = this.editor.mod.db
                     ?.bibDB as unknown as BibDBCollection
                 const importer = new BibliographyImporter(
@@ -59,7 +59,16 @@ export class TextPaste {
                     false // no messages to end user. Would be confusing if user just wants to paste unrelated text.
                 )
                 importer.init()
-            }
-        )
+            })
+            .catch(() => {
+                // The pasted text has already been inserted; make sure the paste
+                // range does not stay stuck and cancel future pastes.
+                const pasteRange = getPasteRange(this.view.state)
+                if (pasteRange) {
+                    const tr = this.view.state.tr
+                    resetPasteRange(tr)
+                    this.view.dispatch(tr)
+                }
+            })
     }
 }

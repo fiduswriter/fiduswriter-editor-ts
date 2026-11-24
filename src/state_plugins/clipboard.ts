@@ -27,6 +27,18 @@ export const resetPasteRange = (tr: Transaction): void => {
     tr.setMeta(key, {pasteRange: null})
 }
 
+// Plain-text ("paste and match style") pastes bypass the HTML/Text paste
+// pipelines, which are what normally clear the paste range after a paste.
+// Without this, the stale paste range makes the next paste look like an
+// interrupting paste and it gets cancelled silently.
+const schedulePasteRangeReset = (view: EditorView): void => {
+    setTimeout(() => {
+        const tr = view.state.tr
+        resetPasteRange(tr)
+        view.dispatch(tr)
+    }, 0)
+}
+
 // Document section nodes. When content is copied from within the same editor,
 // prosemirror-view records these in the data-pm-slice attribute of the
 // clipboard HTML and wraps the pasted content in them again while parsing it.
@@ -293,6 +305,7 @@ export const clipboardPlugin = (options: {
                     return ""
                 }
                 if (shiftPressed) {
+                    schedulePasteRangeReset(view as EditorView)
                     return inHTML
                 }
                 const ph = new HTMLPaste(
@@ -314,6 +327,7 @@ export const clipboardPlugin = (options: {
                     return ""
                 }
                 if (shiftPressed) {
+                    schedulePasteRangeReset(view as EditorView)
                     return inText
                 }
                 // Chrome on Linux has an encoding problem:
