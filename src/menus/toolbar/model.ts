@@ -760,7 +760,10 @@ export const toolbarModel = () => ({
                     )
                 const nodeType =
                     editor.currentView.state.schema.nodes["ordered_list"]!
-                for (let i = 0; i < depth; i++) {
+                // <= depth: when the selection spans several list items,
+                // the list itself is the shared ancestor and must count
+                // as selected.
+                for (let i = 0; i <= depth; i++) {
                     const node =
                         editor.currentView.state.selection.$head.node(i)
                     if (node.type === nodeType) {
@@ -806,7 +809,10 @@ export const toolbarModel = () => ({
                     )
                 const nodeType =
                     editor.currentView.state.schema.nodes["bullet_list"]!
-                for (let i = 0; i < depth; i++) {
+                // <= depth: when the selection spans several list items,
+                // the list itself is the shared ancestor and must count
+                // as selected.
+                for (let i = 0; i <= depth; i++) {
                     const node =
                         editor.currentView.state.selection.$head.node(i)
                     if (node.type === nodeType) {
@@ -852,7 +858,10 @@ export const toolbarModel = () => ({
                     )
                 const nodeType =
                     editor.currentView.state.schema.nodes["blockquote"]!
-                for (let i = 0; i < depth; i++) {
+                // <= depth: when the selection spans several paragraphs,
+                // the blockquote itself is the shared ancestor and must
+                // count as selected.
+                for (let i = 0; i <= depth; i++) {
                     const node =
                         editor.currentView.state.selection.$head.node(i)
                     if (node.type === nodeType) {
