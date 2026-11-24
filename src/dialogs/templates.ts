@@ -469,7 +469,10 @@ export const figureImageTemplate = ({imageDB}: {imageDB: ImageDB}): string =>
             </tbody>
         </table>
         <div class="dialogSubmit">
-            <button class="edit-image createNew fw-button fw-light">
+            <button
+                class="edit-image createNew fw-button fw-light"
+                title="${gettext("Supported file formats")}: AVIF, JPEG, PNG, SVG, WebP"
+            >
                 ${gettext("Upload")}
                 <span class="fa-solid fa-plus-circle"></span>
             </button>
