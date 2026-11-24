@@ -112,16 +112,16 @@ export const createShareTokenDialogTemplate = (
                     <select id="share-token-rights" class="fw-button fw-light fw-large">
                         ${
                             e2ee
-                                ? `<option value="read">${gettext("Read")}</option>
-                               <option value="read-without-comments">${gettext("Read without comments")}</option>
+                                ? `<option value="read">${gettext("Read only")}</option>
+                               <option value="read-without-comments">${gettext("Read only (no comments)")}</option>
                                <option value="write">${gettext("Write")}</option>`
-                                : `<option value="read">${gettext("Read")}</option>
-                               <option value="read-without-comments">${gettext("Read without comments")}</option>
-                               <option value="review">${gettext("Review")}</option>
-                               <option value="review-tracked">${gettext("Review tracked")}</option>
-                               <option value="comment">${gettext("Comment")}</option>
+                                : `<option value="read">${gettext("Read only")}</option>
+                               <option value="read-without-comments">${gettext("Read only (no comments)")}</option>
+                               <option value="review">${gettext("Comment only (no comments of others)")}</option>
+                               <option value="review-tracked">${gettext("Write tracked only (no comments of others)")}</option>
+                               <option value="comment">${gettext("Comment only")}</option>
                                <option value="write">${gettext("Write")}</option>
-                               <option value="write-tracked">${gettext("Write tracked")}</option>`
+                               <option value="write-tracked">${gettext("Write tracked only")}</option>`
                         }
                     </select>
                     <div class="fw-select-arrow fa-solid fa-caret-down"></div>

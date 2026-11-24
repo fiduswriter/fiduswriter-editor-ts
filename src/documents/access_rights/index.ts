@@ -436,7 +436,7 @@ export class AccessRightsTab {
             },
             {
                 type: "action",
-                title: gettext("Write tracked"),
+                title: gettext("Write tracked only"),
                 icon: "pencil-alt",
                 tooltip: gettext("Write with changes tracked"),
                 right: "write-tracked",
@@ -445,7 +445,7 @@ export class AccessRightsTab {
             },
             {
                 type: "action",
-                title: gettext("Comment"),
+                title: gettext("Comment only"),
                 icon: "comment",
                 tooltip: gettext("Comment"),
                 right: "comment",
@@ -454,7 +454,7 @@ export class AccessRightsTab {
             },
             {
                 type: "action",
-                title: gettext("Read"),
+                title: gettext("Read only"),
                 icon: "eye",
                 tooltip: gettext("Read"),
                 right: "read",
@@ -468,18 +468,7 @@ export class AccessRightsTab {
             },
             {
                 type: "action",
-                title: gettext("No comments"),
-                icon: "eye",
-                tooltip: gettext(
-                    "Read document but not see comments and chats of others"
-                ),
-                right: "read-without-comments",
-                action: () => onChange("read-without-comments"),
-                selected: currentRight === "read-without-comments"
-            },
-            {
-                type: "action",
-                title: gettext("Review"),
+                title: gettext("Comment only"),
                 icon: "comment",
                 tooltip: gettext(
                     "Comment, but not see comments and chats of others"
@@ -487,6 +476,17 @@ export class AccessRightsTab {
                 right: "review",
                 action: () => onChange("review"),
                 selected: currentRight === "review"
+            },
+            {
+                type: "action",
+                title: gettext("Read only"),
+                icon: "eye",
+                tooltip: gettext(
+                    "Read document but not see comments and chats of others"
+                ),
+                right: "read-without-comments",
+                action: () => onChange("read-without-comments"),
+                selected: currentRight === "read-without-comments"
             },
             {
                 type: "action",

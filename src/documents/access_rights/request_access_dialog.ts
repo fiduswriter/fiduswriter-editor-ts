@@ -8,10 +8,10 @@ interface RequestableRight {
 }
 
 const REQUESTABLE_RIGHTS: RequestableRight[] = [
-    {value: "read", label: gettext("Read")},
-    {value: "comment", label: gettext("Comment")},
-    {value: "review", label: gettext("Review")},
-    {value: "write-tracked", label: gettext("Write tracked")},
+    {value: "read", label: gettext("Read only")},
+    {value: "comment", label: gettext("Comment only")},
+    {value: "review", label: gettext("Comment only")},
+    {value: "write-tracked", label: gettext("Write tracked only")},
     {value: "write", label: gettext("Write")}
 ]
 
