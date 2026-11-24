@@ -353,6 +353,10 @@ export class ModMarginboxes {
                         commentId
                     )
                     this.scrollToGlobalComment(commentId)
+                    // Expand the comment text right away if it is
+                    // truncated, so the entire comment is readable
+                    // without an extra click.
+                    await this.expandCommentIfTruncated(commentId)
                     break
                 }
                 case findTarget(event, ".margin-box.track.inactive", el): {
@@ -1185,6 +1189,21 @@ export class ModMarginboxes {
             truncated.style.display = ""
             full.style.display = "none"
             ;(element as HTMLElement).innerText = `${gettext("show more")}`
+        }
+    }
+
+    // Expand the text of a comment if it is currently truncated.
+    async expandCommentIfTruncated(commentId: string | number): Promise<void> {
+        const update = this.updateDOM()
+        if (update) {
+            await update
+        }
+        const box = document.querySelector(
+            `#margin-box-${commentId}, #global-comments #margin-box-${commentId}`
+        )
+        const showMoreButton = box?.querySelector(".show-more-less")
+        if (showMoreButton) {
+            this.toggleShowMore(showMoreButton)
         }
     }
 
