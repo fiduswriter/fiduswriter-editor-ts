@@ -4,9 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
 "Language: ko\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 msgid "(Author, 1998)"
 msgstr "(저자, 1998)"
 
@@ -53,7 +54,7 @@ msgid "A4 (DIN A4/ISO 216) which is used in most of the world."
 msgstr "전 세계 대부분에서 사용되는 A4(DIN A4/ISO 216)입니다."
 
 msgid "About Fidus Writer"
-msgstr ""
+msgstr "Fidus 작가 소개"
 
 msgid "Accept"
 msgstr "수용"
@@ -73,11 +74,26 @@ msgstr "변경 사항 수락"
 msgid "Accept Change"
 msgstr "변경 수락"
 
-msgid "Accepting or rejecting a change in the merge editor in the middle or the offline editor on the right causes a change in the merge editor. You can accept a change by directly clicking on the highlighted text. A dropdown menu will appear and you can then either accept or reject the change. When you click on the highlighted text, it also highlights the changes that will get accepted. %(mergeImage)s As shown in the above image one can click on a highlighted change, and click on accept change. On accepting a change it will be reflected in the merged document editor in the middle. Rejecting a change works in the same way except on reject a change the highlight of the change will be lost, with it the ability to accept, reject or copy a change."
-msgstr "중앙의 병합 편집기나 오른쪽의 오프라인 편집기에서 변경 사항을 수락하거나 거부하면 병합 편집기에 변경 사항이 적용됩니다. 강조 표시된 텍스트를 직접 클릭하여 변경 사항을 수락할 수 있습니다. 드롭다운 메뉴가 나타나면 변경 사항을 수락하거나 거부할 수 있습니다. 강조 표시된 텍스트를 클릭하면 승인될 변경 사항도 강조 표시됩니다. %(mergeImage)s 위 이미지에 표시된 것처럼 강조 표시된 변경 사항을 클릭하고 변경 사항 수락을 클릭할 수 있습니다. 변경 사항을 수락하면 중간에 있는 병합 문서 편집기에 반영됩니다. 변경 거부는 변경 사항을 승인, 거부 또는 복사할 수 있는 기능과 함께 변경 사항의 강조 표시가 손실된다는 점을 제외하면 동일한 방식으로 작동합니다."
+msgid ""
+"Accepting or rejecting a change in the merge editor in the middle or the "
+"offline editor on the right causes a change in the merge editor. You can "
+"accept a change by directly clicking on the highlighted text. A dropdown "
+"menu will appear and you can then either accept or reject the change. When "
+"you click on the highlighted text, it also highlights the changes that will "
+"get accepted. %(mergeImage)s As shown in the above image one can click on a "
+"highlighted change, and click on accept change. On accepting a change it "
+"will be reflected in the merged document editor in the middle. Rejecting a "
+"change works in the same way except on reject a change the highlight of the "
+"change will be lost, with it the ability to accept, reject or copy a change."
+msgstr ""
+"중앙의 병합 편집기나 오른쪽의 오프라인 편집기에서 변경 사항을 수락하거나 거부하면 병합 편집기에 변경 사항이 적용됩니다. 강조 표시된 "
+"텍스트를 직접 클릭하여 변경 사항을 수락할 수 있습니다. 드롭다운 메뉴가 나타나면 변경 사항을 수락하거나 거부할 수 있습니다. 강조 "
+"표시된 텍스트를 클릭하면 승인될 변경 사항도 강조 표시됩니다. %(mergeImage)s 위 이미지에 표시된 것처럼 강조 표시된 변경 "
+"사항을 클릭하고 변경 사항 수락을 클릭할 수 있습니다. 변경 사항을 수락하면 중간에 있는 병합 문서 편집기에 반영됩니다. 변경 거부는 "
+"변경 사항을 승인, 거부 또는 복사할 수 있는 기능과 함께 변경 사항의 강조 표시가 손실된다는 점을 제외하면 동일한 방식으로 작동합니다."
 
 msgid "Access level"
-msgstr ""
+msgstr "액세스 수준"
 
 msgid "Access rights could not be saved"
 msgstr "액세스 권한을 저장할 수 없습니다."
@@ -139,14 +155,21 @@ msgstr "조정"
 msgid "Am I the only one seeing this dialog?"
 msgstr "이 대화창이 보이는 건 저뿐인가요?"
 
-msgid "An error occurred during the merge process, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
-msgstr "병합 프로세스 중에 오류가 발생하여 작업 내용을 더 이상 서버에 저장할 수 없으며 대신 컴퓨터에 다운로드됩니다. 새 문서로 가져오는 것을 고려해 보세요."
+msgid ""
+"An error occurred during the merge process, so we cannot save your work to "
+"the server any longer, and it is downloaded to your computer instead. Please"
+" consider importing it into a new document."
+msgstr ""
+"병합 프로세스 중에 오류가 발생하여 작업 내용을 더 이상 서버에 저장할 수 없으며 대신 컴퓨터에 다운로드됩니다. 새 문서로 가져오는 것을"
+" 고려해 보세요."
 
 msgid "An internal link has lost its target."
 msgstr "내부 링크가 대상을 잃었습니다."
 
-msgid "An online collaborative editor for academics who need to use citations and/or formulas."
-msgstr ""
+msgid ""
+"An online collaborative editor for academics who need to use citations "
+"and/or formulas."
+msgstr "인용 및/또는 공식을 사용해야 하는 학자를 위한 온라인 공동 편집자입니다."
 
 msgid "Anchor"
 msgstr "앵커"
@@ -163,14 +186,18 @@ msgstr "어느"
 msgid "Any/None"
 msgstr "모두/없음"
 
-msgid "Applies all tracked changes so the exported file shows the document as if every change had already been accepted."
-msgstr ""
+msgid ""
+"Applies all tracked changes so the exported file shows the document as if "
+"every change had already been accepted."
+msgstr "내보낸 파일에 모든 변경 사항이 이미 적용된 것처럼 문서가 표시되도록 모든 추적된 변경 사항을 적용합니다."
 
-msgid "Applies all tracked changes so the PDF shows the document as if every change had already been accepted."
-msgstr ""
+msgid ""
+"Applies all tracked changes so the PDF shows the document as if every change"
+" had already been accepted."
+msgstr "모든 변경 사항이 이미 승인된 것처럼 PDF에 문서가 표시되도록 추적된 모든 변경 사항을 적용합니다."
 
 msgid "Archiving and accessibility"
-msgstr ""
+msgstr "보관 및 접근성"
 
 msgid "Assign comment to"
 msgstr "다음에 댓글 할당"
@@ -187,8 +214,11 @@ msgstr "할당됨"
 msgid "Assignee"
 msgstr "양수인"
 
-msgid "Attaches the original HTML of the document to the PDF. Like an embedded Fidus Writer file, this requires the PDF/A-4f variant."
+msgid ""
+"Attaches the original HTML of the document to the PDF. Like an embedded "
+"Fidus Writer file, this requires the PDF/A-4f variant."
 msgstr ""
+"문서의 원본 HTML을 PDF에 첨부합니다. 내장된 Fidus Writer 파일과 마찬가지로 PDF/A-4f 변형이 필요합니다."
 
 msgid "Author"
 msgstr "저자"
@@ -215,10 +245,10 @@ msgid "BITS"
 msgstr "비트"
 
 msgid "Bleed"
-msgstr ""
+msgstr "출혈"
 
 msgid "Bleed box"
-msgstr ""
+msgstr "블리드 박스"
 
 msgid "Block change"
 msgstr "블록 변경"
@@ -281,12 +311,14 @@ msgid "Changed into paragraph"
 msgstr "단락으로 변경됨"
 
 msgid "Changes apply to this session only."
-msgstr ""
+msgstr "변경사항은 이 세션에만 적용됩니다."
 
 msgid "Changes to citation sources are not being tracked!"
 msgstr "인용 출처에 대한 변경 사항이 추적되지 않습니다!"
 
-msgid "Changes you made to the document since going offline will be lost, if you choose to close/refresh the tab or close the browser."
+msgid ""
+"Changes you made to the document since going offline will be lost, if you "
+"choose to close/refresh the tab or close the browser."
 msgstr "탭을 닫거나 새로 고치거나 브라우저를 닫으면 오프라인 상태 이후에 문서에 적용한 변경 사항이 손실됩니다."
 
 msgid "Characters with blanks"
@@ -296,19 +328,19 @@ msgid "Characters without blanks"
 msgstr "공백이 없는 문자"
 
 msgid "Check spelling and grammar automatically as you type."
-msgstr ""
+msgstr "입력할 때 맞춤법과 문법을 자동으로 확인하세요."
 
 msgid "Check spelling and grammar in the document text."
-msgstr ""
+msgstr "문서 텍스트의 철자와 문법을 확인하세요."
 
 msgid "Check text"
-msgstr ""
+msgstr "텍스트 확인"
 
 msgid "Check text for grammar and spelling issues."
-msgstr ""
+msgstr "문법 및 철자 문제가 있는지 텍스트를 확인하세요."
 
 msgid "Checked %s of %s sections..."
-msgstr ""
+msgstr "%s개 섹션 중 %s개를 확인했습니다..."
 
 msgid "Chinese (Simplified)"
 msgstr "중국어(간체)"
@@ -367,6 +399,12 @@ msgstr "열 스타일"
 msgid "Comment"
 msgstr "댓글"
 
+msgid "Comment only"
+msgstr "댓글만"
+
+msgid "Comment only (no comments of others)"
+msgstr "댓글만(다른 사람의 댓글 없음)"
+
 msgid "Comment, but not see comments and chats of others"
 msgstr "댓글을 달 수 있지만 다른 사람의 댓글과 채팅은 볼 수 없습니다."
 
@@ -404,10 +442,14 @@ msgid "Contacts"
 msgstr "연락처"
 
 msgid "Continuous checking"
-msgstr ""
+msgstr "지속적인 점검"
 
-msgid "Converts SVG images to bitmap images in the PDF, which can help when PDF viewers or printers do not render SVG images correctly."
+msgid ""
+"Converts SVG images to bitmap images in the PDF, which can help when PDF "
+"viewers or printers do not render SVG images correctly."
 msgstr ""
+"SVG 이미지를 PDF의 비트맵 이미지로 변환합니다. 이는 PDF 뷰어나 프린터가 SVG 이미지를 올바르게 렌더링하지 못할 때 도움이 될"
+" 수 있습니다."
 
 msgid "Copy"
 msgstr "복사"
@@ -428,7 +470,7 @@ msgid "Copy to clipboard failed. Please copy manually."
 msgstr "클립보드에 복사하지 못했습니다. 수동으로 복사해 주세요."
 
 msgid "Copyright"
-msgstr ""
+msgstr "저작권"
 
 msgid "Copyright holder"
 msgstr "저작권 보유자"
@@ -490,14 +532,19 @@ msgstr "새 공유 링크 만들기"
 msgid "Create share link"
 msgstr "공유 링크 만들기"
 
-msgid "Creates a self-contained, standards-based PDF suited for long-term archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 does not allow embedded files."
+msgid ""
+"Creates a self-contained, standards-based PDF suited for long-term "
+"archiving. If files are embedded in the PDF, PDF/A-4f is used, as PDF/A-4 "
+"does not allow embedded files."
 msgstr ""
+"장기 보관에 적합한 독립형 표준 기반 PDF를 생성합니다. PDF에 파일이 포함된 경우 PDF/A-4f가 사용됩니다. PDF/A-4는 "
+"포함된 파일을 허용하지 않기 때문입니다."
 
 msgid "Creating copy..."
 msgstr "사본을 만드는 중..."
 
 msgid "Crop marks"
-msgstr ""
+msgstr "절단선"
 
 msgid "Cross reference"
 msgstr "상호 참조"
@@ -562,8 +609,13 @@ msgstr "삭제된 키워드: %(keyword)s"
 msgid "Deletion"
 msgstr "삭제"
 
-msgid "Describe the problem you are experiencing, and, if possible, how to reproduce it. The message is sent to the operators of this Fidus Writer installation together with technical information about your setup."
+msgid ""
+"Describe the problem you are experiencing, and, if possible, how to "
+"reproduce it. The message is sent to the operators of this Fidus Writer "
+"installation together with technical information about your setup."
 msgstr ""
+"현재 겪고 있는 문제를 설명하고, 가능하다면 이를 재현하는 방법도 설명하십시오. 메시지는 설정에 대한 기술 정보와 함께 Fidus "
+"Writer 설치 운영자에게 전송됩니다."
 
 msgid "Description (optional)"
 msgstr "설명(선택사항)"
@@ -578,9 +630,11 @@ msgid "Disconnected. Attempting to reconnect..."
 msgstr "연결이 끊어졌습니다. 다시 연결을 시도하는 중..."
 
 msgid "Do not report this rule again, in any document."
-msgstr ""
+msgstr "어떠한 문서에서도 이 규칙을 다시 보고하지 마십시오."
 
-msgid "Do not worry, we can handle such a situation as we will simply show you another merge dialog."
+msgid ""
+"Do not worry, we can handle such a situation as we will simply show you "
+"another merge dialog."
 msgstr "걱정하지 마십시오. 다른 병합 대화 상자를 간단히 표시하므로 그러한 상황을 처리할 수 있습니다."
 
 msgid "Document"
@@ -589,7 +643,9 @@ msgstr "문서"
 msgid "Document comment"
 msgstr "문서 코멘트"
 
-msgid "Document encryption key rotated. Other passphrase users will receive the new key automatically."
+msgid ""
+"Document encryption key rotated. Other passphrase users will receive the new"
+" key automatically."
 msgstr "문서 암호화 키가 순환되었습니다. 다른 암호 사용자는 자동으로 새 키를 받게 됩니다."
 
 msgid "Document has been modified by another user. Please reload the page."
@@ -610,17 +666,19 @@ msgstr "문서 탐색기"
 msgid "Document password"
 msgstr "문서 비밀번호"
 
-msgid "Document password changed. Remember to share the new password with your collaborators."
+msgid ""
+"Document password changed. Remember to share the new password with your "
+"collaborators."
 msgstr "문서 비밀번호가 변경되었습니다. 공동작업자와 새 비밀번호를 공유하는 것을 잊지 마세요."
 
 msgid "Document Style"
 msgstr "문서 스타일"
 
 msgid "Documentation"
-msgstr ""
+msgstr "선적 서류 비치"
 
 msgid "DOCX export options"
-msgstr ""
+msgstr "DOCX 내보내기 옵션"
 
 msgid "Does the order in which I work on merging the changes matter?"
 msgstr "변경 사항을 병합하는 순서가 중요합니까?"
@@ -631,8 +689,10 @@ msgstr "다운로드"
 msgid "Download Document"
 msgstr "문서 다운로드"
 
-msgid "Draws a visible border around hyperlinks in the PDF so they are easier to find."
-msgstr ""
+msgid ""
+"Draws a visible border around hyperlinks in the PDF so they are easier to "
+"find."
+msgstr "쉽게 찾을 수 있도록 PDF의 하이퍼링크 주위에 눈에 띄는 테두리를 그립니다."
 
 msgid "Dutch"
 msgstr "네덜란드 사람"
@@ -659,7 +719,7 @@ msgid "Edit link"
 msgstr "링크 수정"
 
 msgid "Edit the words and rules the spell checker accepts."
-msgstr ""
+msgstr "맞춤법 검사기가 허용하는 단어와 규칙을 편집합니다."
 
 msgid "Email"
 msgstr "이메일"
@@ -668,13 +728,15 @@ msgid "Email is in incorrect format!"
 msgstr "이메일 형식이 잘못되었습니다!"
 
 msgid "Embed a Fidus Writer file of this document in the PDF"
-msgstr ""
+msgstr "이 문서의 Fidus Writer 파일을 PDF에 삽입하세요."
 
 msgid "Embed the source HTML in the PDF"
-msgstr ""
+msgstr "PDF에 소스 HTML 포함"
 
-msgid "Embeds the editable Fidus Writer document inside the PDF so it can be reopened for editing."
-msgstr ""
+msgid ""
+"Embeds the editable Fidus Writer document inside the PDF so it can be "
+"reopened for editing."
+msgstr "편집 가능한 Fidus Writer 문서를 PDF 내에 삽입하여 편집을 위해 다시 열 수 있습니다."
 
 msgid "Emphasis"
 msgstr "기울임"
@@ -704,7 +766,7 @@ msgid "Epub"
 msgstr "이펍"
 
 msgid "EPUB export options"
-msgstr ""
+msgstr "EPUB 내보내기 옵션"
 
 msgid "Equation"
 msgstr "방정식"
@@ -725,9 +787,10 @@ msgid "Export the document as a FIDUS file including its template."
 msgstr "템플릿을 포함하여 문서를 FIDUS 파일로 내보내세요."
 
 msgid "Export the document directly to a PDF file."
-msgstr ""
+msgstr "문서를 PDF 파일로 직접 내보냅니다."
 
-msgid "Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
+msgid ""
+"Export the document to a Book Interchange Tag Set BITS Version 2.1 file."
 msgstr "문서를 BITS 2.1 버전 파일로 내보내세요."
 
 msgid "Export the document to a DOCX file with the given template."
@@ -736,20 +799,26 @@ msgstr "주어진 템플릿을 사용하여 문서를 DOCX 파일로 내보냅�
 msgid "Export the document to a FIDUS file without its template."
 msgstr "템플릿 없이 문서를 FIDUS 파일로 내보내세요."
 
-msgid "Export the document to a Journal Archiving and Interchange Tag Library NISO JATS Version 1.2 file."
-msgstr "문서를 Journal Archiving and Interchange Tag Library NISO JATS 버전 1.2 파일로 내보냅니다."
+msgid ""
+"Export the document to a Journal Archiving and Interchange Tag Library NISO "
+"JATS Version 1.2 file."
+msgstr ""
+"문서를 Journal Archiving and Interchange Tag Library NISO JATS 버전 1.2 파일로 "
+"내보냅니다."
 
 msgid "Export the document to a Pandoc JSON file."
 msgstr "문서를 Pandoc JSON 파일로 내보내세요."
 
-msgid "Export the document to a pandoc-flavoured Markdown file with a bibliography file."
-msgstr ""
+msgid ""
+"Export the document to a pandoc-flavoured Markdown file with a bibliography "
+"file."
+msgstr "문서를 참고문헌 파일과 함께 pandoc 기반 Markdown 파일로 내보냅니다."
 
 msgid "Export the document to a TEI (Text Encoding Initiative) P5 XML file."
-msgstr ""
+msgstr "문서를 TEI(Text Encoding Initiative) P5 XML 파일로 내보냅니다."
 
 msgid "Export the document to a Typst file with a bibliography file."
-msgstr ""
+msgstr "문서를 참고문헌 파일과 함께 Typst 파일로 내보냅니다."
 
 msgid "Export the document to an Epub electronic reader file."
 msgstr "문서를 Epub 전자책 파일로 내보내세요."
@@ -781,14 +850,20 @@ msgstr "외부"
 msgid "Fidus Writer"
 msgstr "피더스 작가"
 
-msgid "Fidus Writer is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
+msgid ""
+"Fidus Writer is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU Affero General Public License as published by the"
+" Free Software Foundation, either version 3 of the License, or (at your "
+"option) any later version."
 msgstr ""
+"Fidus Writer는 무료 소프트웨어입니다. 자유 소프트웨어 재단에서 게시한 GNU Affero General Public "
+"License(라이선스 버전 3 또는 (귀하의 선택에 따라) 이후 버전)의 조건에 따라 재배포 및/또는 수정할 수 있습니다."
 
 msgid "Figure"
 msgstr "그림"
 
 msgid "Figures and tables"
-msgstr ""
+msgstr "그림과 표"
 
 msgid "File"
 msgstr "파일"
@@ -821,7 +896,7 @@ msgid "Format Change"
 msgstr "형식 변경"
 
 msgid "Forum"
-msgstr ""
+msgstr "법정"
 
 msgid "French"
 msgstr "프랑스어"
@@ -836,7 +911,7 @@ msgid "German (Germany)"
 msgstr "독일어(독일)"
 
 msgid "Get help in the Fidus Writer forum."
-msgstr ""
+msgstr "Fidus Writer 포럼에서 도움을 받으세요."
 
 msgid "Greek Letters"
 msgstr "그리스 문자"
@@ -866,7 +941,7 @@ msgid "Help"
 msgstr "도움말"
 
 msgid "Help with Fidus Writer."
-msgstr ""
+msgstr "Fidus Writer에 대한 도움을 받으세요."
 
 msgid "High priority"
 msgstr "높은 우선순위"
@@ -877,14 +952,16 @@ msgstr "횡선"
 msgid "How do I accept or reject a particular change?"
 msgstr "특정 변경 사항을 어떻게 수락하거나 거부합니까?"
 
-msgid "How far, in millimeters, images and colors extend beyond the edge of the page."
-msgstr ""
+msgid ""
+"How far, in millimeters, images and colors extend beyond the edge of the "
+"page."
+msgstr "이미지와 색상이 페이지 가장자리를 넘어 확장되는 거리(밀리미터)입니다."
 
 msgid "HTML"
 msgstr "HTML"
 
 msgid "HTML export options"
-msgstr ""
+msgstr "HTML 내보내기 옵션"
 
 msgid "I cannot accept a particular change. What do I do?"
 msgstr "나는 특정한 변화를 받아들일 수 없습니다. 어떻게 해야 하나요?"
@@ -895,35 +972,49 @@ msgstr "ID 값"
 msgid "ID Value format is incorrect for "
 msgstr "ID 값 형식이 올바르지 않습니다. "
 
-msgid "If the work is not in the public domain, specify the year of the copyright."
+msgid ""
+"If the work is not in the public domain, specify the year of the copyright."
 msgstr "저작물이 공개 도메인에 속하지 않는 경우 저작권 연도를 명시하세요."
 
-msgid "If the work is not in the public domain, specify who the copyright holder is."
+msgid ""
+"If the work is not in the public domain, specify who the copyright holder "
+"is."
 msgstr "저작물이 공개 도메인에 속하지 않는 경우 저작권 보유자가 누구인지 명시하세요."
 
-msgid "If you cannot automatically accept a change into the merge editor, do not worry. You can choose to copy the change either by clicking on the copy button or manually copy the change and then paste it in the merge editor in the middle. It is as simple as that!"
-msgstr "병합 편집기에서 변경 사항을 자동으로 수락할 수 없는 경우 걱정하지 마세요. 복사 버튼을 클릭하여 변경 사항을 복사하거나 변경 사항을 수동으로 복사한 다음 중간에 있는 병합 편집기에 붙여넣을 수 있습니다. 그것은 그렇게 간단합니다!"
+msgid ""
+"If you cannot automatically accept a change into the merge editor, do not "
+"worry. You can choose to copy the change either by clicking on the copy "
+"button or manually copy the change and then paste it in the merge editor in "
+"the middle. It is as simple as that!"
+msgstr ""
+"병합 편집기에서 변경 사항을 자동으로 수락할 수 없는 경우 걱정하지 마세요. 복사 버튼을 클릭하여 변경 사항을 복사하거나 변경 사항을 "
+"수동으로 복사한 다음 중간에 있는 병합 편집기에 붙여넣을 수 있습니다. 그것은 그렇게 간단합니다!"
 
-msgid "If you enter the password above, it will be embedded in the link (after #). Anyone with the link can open the document. Only share such links through secure channels."
-msgstr "위의 비밀번호를 입력하시면 링크(#뒤)에 비밀번호가 삽입됩니다. 링크가 있는 사람은 누구나 문서를 열 수 있습니다. 이러한 링크는 보안 채널을 통해서만 공유하십시오."
+msgid ""
+"If you enter the password above, it will be embedded in the link (after #). "
+"Anyone with the link can open the document. Only share such links through "
+"secure channels."
+msgstr ""
+"위의 비밀번호를 입력하시면 링크(#뒤)에 비밀번호가 삽입됩니다. 링크가 있는 사람은 누구나 문서를 열 수 있습니다. 이러한 링크는 보안 "
+"채널을 통해서만 공유하십시오."
 
 msgid "Ignore rule"
-msgstr ""
+msgstr "규칙 무시"
 
 msgid "Ignored rules"
-msgstr ""
+msgstr "무시된 규칙"
 
 msgid "Ignored words"
-msgstr ""
+msgstr "무시되는 단어"
 
 msgid "Image"
 msgstr "이미지"
 
 msgid "Include tracked changes in the export"
-msgstr ""
+msgstr "내보내기에 추적된 변경 사항 포함"
 
 msgid "Include tracked changes in the PDF"
-msgstr ""
+msgstr "PDF에 추적된 변경 사항 포함"
 
 msgid "Incorrect passphrase."
 msgstr "잘못된 암호입니다."
@@ -933,6 +1024,9 @@ msgstr "잘못된 암호입니다. 다시 시도해 주세요."
 
 msgid "Incorrect password."
 msgstr "비밀번호가 잘못되었습니다."
+
+msgid "Indent/outdent list item"
+msgstr "들여쓰기/내어쓰기 목록 항목"
 
 msgid "Informational"
 msgstr "정보 제공"
@@ -1022,10 +1116,12 @@ msgid "JATS"
 msgstr "자츠"
 
 msgid "Johannes Wilm and Fidus Writer contributors"
-msgstr ""
+msgstr "Johannes Wilm 및 Fidus Writer 기고자"
 
-msgid "Keeps the tracked changes so reviewers can see what was added, removed or altered."
-msgstr ""
+msgid ""
+"Keeps the tracked changes so reviewers can see what was added, removed or "
+"altered."
+msgstr "검토자가 추가, 제거 또는 변경된 내용을 볼 수 있도록 추적된 변경 사항을 유지합니다."
 
 msgid "Keyboard shortcuts"
 msgstr "키보드 단축키"
@@ -1060,8 +1156,8 @@ msgstr "라이선스 URL"
 msgid "License(s)"
 msgstr "라이센스"
 
-msgid "Lift"
-msgstr "승강기"
+msgid "Lift/sink list item"
+msgstr "리프트/싱크 목록 항목"
 
 msgid "Lifted list item"
 msgstr "해제된 목록 항목"
@@ -1078,6 +1174,10 @@ msgstr "링크가 클립보드에 복사되었습니다."
 msgid "Link title"
 msgstr "링크 제목"
 
+msgid ""
+"Links may only start with http://, https:// or #. The link was not saved."
+msgstr "링크는 http://, https:// 또는 #으로만 시작할 수 있습니다. 링크가 저장되지 않았습니다."
+
 msgid "List start"
 msgstr "목록 시작"
 
@@ -1088,13 +1188,15 @@ msgid "Loading…"
 msgstr "로드 중…"
 
 msgid "Markdown"
-msgstr ""
+msgstr "가격 인하"
 
-msgid "Marks the area beyond the final page size where images and colors must extend so no white edges appear after cutting."
-msgstr ""
+msgid ""
+"Marks the area beyond the final page size where images and colors must "
+"extend so no white edges appear after cutting."
+msgstr "절단 후 흰색 가장자리가 나타나지 않도록 이미지와 색상이 확장되어야 하는 최종 페이지 크기 너머의 영역을 표시합니다."
 
 msgid "Marks the final size of the page after it has been cut."
-msgstr ""
+msgstr "페이지를 자른 후 페이지의 최종 크기를 표시합니다."
 
 msgid "Math"
 msgstr "수학"
@@ -1130,16 +1232,23 @@ msgid "Merging Offline Document"
 msgstr "오프라인 문서 병합"
 
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 msgid "More"
 msgstr "더"
 
-msgid "Moves figures to the top of the page instead of interrupting the text flow. A custom document style can override this."
-msgstr ""
+msgid "Move focus out of the editor"
+msgstr "편집기 밖으로 포커스 이동"
 
-msgid "Moves tables to the top of the page instead of interrupting the text flow. A custom document style can override this."
-msgstr ""
+msgid ""
+"Moves figures to the top of the page instead of interrupting the text flow. "
+"A custom document style can override this."
+msgstr "텍스트 흐름을 방해하지 않고 그림을 페이지 상단으로 이동합니다. 사용자 정의 문서 스타일이 이를 재정의할 수 있습니다."
+
+msgid ""
+"Moves tables to the top of the page instead of interrupting the text flow. A"
+" custom document style can override this."
+msgstr "텍스트 흐름을 방해하지 않고 테이블을 페이지 상단으로 이동합니다. 사용자 정의 문서 스타일이 이를 재정의할 수 있습니다."
 
 msgid "My collaborators"
 msgstr "내 공동작업자"
@@ -1174,9 +1283,6 @@ msgstr "다음"
 msgid "No active share links yet."
 msgstr "아직 활성 공유 링크가 없습니다."
 
-msgid "No comments"
-msgstr "댓글 없음"
-
 msgid "No matching sources"
 msgstr "일치하는 소스가 없습니다."
 
@@ -1198,7 +1304,9 @@ msgstr "없음"
 msgid "Normal Text"
 msgstr "일반 텍스트"
 
-msgid "Not all changes have been resolved. Please make sure to review all the changes to before proceeding."
+msgid ""
+"Not all changes have been resolved. Please make sure to review all the "
+"changes to before proceeding."
 msgstr "모든 변경 사항이 해결된 것은 아닙니다. 계속하기 전에 모든 변경 사항을 검토하시기 바랍니다."
 
 msgid "Not tracked"
@@ -1217,7 +1325,7 @@ msgid "Numeric"
 msgstr "숫자"
 
 msgid "ODT export options"
-msgstr ""
+msgstr "ODT 내보내기 옵션"
 
 msgid "Offline Document"
 msgstr "오프라인 문서"
@@ -1225,13 +1333,19 @@ msgstr "오프라인 문서"
 msgid "OK"
 msgstr "확인"
 
-msgid "One of the image(s) you copied could not be found on the server. Please try uploading it again."
+msgid ""
+"One of the image(s) you copied could not be found on the server. Please try "
+"uploading it again."
 msgstr "복사한 이미지 중 하나를 서버에서 찾을 수 없습니다. 다시 업로드해 보세요."
 
-msgid "One of the Image(s) you copied could not be found on the server. Please try uploading it again."
+msgid ""
+"One of the Image(s) you copied could not be found on the server. Please try "
+"uploading it again."
 msgstr "복사한 이미지 중 하나를 서버에서 찾을 수 없습니다. 다시 업로드해 보세요."
 
-msgid "One or more of the image(s) you copied could not be found on the server. Consider re-uploading them once the document is merged."
+msgid ""
+"One or more of the image(s) you copied could not be found on the server. "
+"Consider re-uploading them once the document is merged."
 msgstr "복사한 이미지 중 하나 이상을 서버에서 찾을 수 없습니다. 문서가 병합되면 다시 업로드해 보세요."
 
 msgid "Online Document"
@@ -1241,7 +1355,7 @@ msgid "Only major comments"
 msgstr "주요댓글만"
 
 msgid "Open the user manual."
-msgstr ""
+msgstr "사용 설명서를 엽니다."
 
 msgid "Open/close header menu"
 msgstr "헤더 메뉴 열기/닫기"
@@ -1283,28 +1397,28 @@ msgid "Paste without content detection"
 msgstr "내용 감지 없이 붙여넣기"
 
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 msgid "PDF export options"
-msgstr ""
+msgstr "PDF 내보내기 옵션"
 
 msgid "PDF/A-4 (archival)"
-msgstr ""
+msgstr "PDF/A-4(보관)"
 
 msgid "PDF/UA (accessible, tagged)"
-msgstr ""
+msgstr "PDF/UA(액세스 가능, 태그됨)"
 
 msgid "People"
 msgstr "사람들"
 
 msgid "Place figures as page floats"
-msgstr ""
+msgstr "그림을 페이지 부동으로 배치"
 
 msgid "Place tables as page floats"
-msgstr ""
+msgstr "테이블을 페이지 부동으로 배치"
 
 msgid "Please enter a message first."
-msgstr ""
+msgstr "먼저 메시지를 입력해주세요."
 
 msgid "Please select at least one citation source!"
 msgstr "인용 출처를 하나 이상 선택하세요!"
@@ -1322,13 +1436,15 @@ msgid "Print"
 msgstr "인쇄"
 
 msgid "Print production"
-msgstr ""
+msgstr "인쇄물 제작"
 
 msgid "Print the document using your browser print dialog."
-msgstr ""
+msgstr "브라우저 인쇄 대화 상자를 사용하여 문서를 인쇄하십시오."
 
-msgid "Prints the tracked changes so reviewers can see what was added, removed or altered."
-msgstr ""
+msgid ""
+"Prints the tracked changes so reviewers can see what was added, removed or "
+"altered."
+msgstr "검토자가 추가, 제거 또는 변경된 내용을 볼 수 있도록 추적된 변경 사항을 인쇄합니다."
 
 msgid "Proceed to Login page"
 msgstr "로그인 페이지로 이동"
@@ -1337,7 +1453,7 @@ msgid "Proceed to Merge"
 msgstr "병합을 진행하세요"
 
 msgid "Rasterize SVG images"
-msgstr ""
+msgstr "SVG 이미지 래스터화"
 
 msgid "Read"
 msgstr "읽기"
@@ -1345,8 +1461,11 @@ msgstr "읽기"
 msgid "Read document but not see comments and chats of others"
 msgstr "문서를 읽지만 다른 사람의 댓글과 채팅은 볼 수 없습니다."
 
-msgid "Read without comments"
-msgstr "댓글 없이 읽기"
+msgid "Read only"
+msgstr "읽기 전용"
+
+msgid "Read only (no comments)"
+msgstr "읽기 전용(댓글 없음)"
 
 msgid "Record"
 msgstr "기록"
@@ -1409,13 +1528,13 @@ msgid "Remove image"
 msgstr "이미지 삭제"
 
 msgid "Remove lines left over in the text from language check."
-msgstr ""
+msgstr "언어 검사에서 텍스트에 남은 줄을 제거합니다."
 
 msgid "Remove link"
 msgstr "링크 삭제"
 
 msgid "Remove marks"
-msgstr ""
+msgstr "표시 제거"
 
 msgid "Remove the code block."
 msgstr "코드 블록을 제거합니다."
@@ -1433,7 +1552,7 @@ msgid "Removed code block"
 msgstr "제거된 코드 블록"
 
 msgid "Render formulas as SVG images instead of MathML"
-msgstr ""
+msgstr "MathML 대신 SVG 이미지로 수식 렌더링"
 
 msgid "Replace"
 msgstr "바꾸기"
@@ -1448,7 +1567,7 @@ msgid "replies"
 msgstr "답글"
 
 msgid "Request"
-msgstr ""
+msgstr "요구"
 
 msgid "Request Access"
 msgstr "액세스 요청"
@@ -1463,7 +1582,7 @@ msgid "Resolve comment"
 msgstr "댓글 해결"
 
 msgid "Resolve tracked changes (accept all)"
-msgstr ""
+msgstr "추적된 변경 사항 해결(모두 수락)"
 
 msgid "Resolved comments"
 msgstr "해결된 댓글"
@@ -1482,18 +1601,6 @@ msgstr "추적된 리뷰"
 
 msgid "Reviewer"
 msgstr "리뷰어"
-
-msgid "Snapshot could not be saved."
-msgstr "스냅샷을 저장할 수 없습니다."
-
-msgid "Snapshot description"
-msgstr "스냅샷 설명"
-
-msgid "Snapshot file could not be generated."
-msgstr "스냅샷 파일을 생성할 수 없습니다."
-
-msgid "Snapshot saved."
-msgstr "스냅샷이 저장되었습니다."
 
 msgid "Revoke"
 msgstr "취소"
@@ -1532,7 +1639,7 @@ msgid "See document statistics."
 msgstr "문서 통계를 확인하세요."
 
 msgid "Select a higher access level to request from the document owner."
-msgstr ""
+msgstr "문서 소유자에게 요청하려면 더 높은 액세스 수준을 선택하세요."
 
 msgid "Select document editing tool."
 msgstr "문서 편집 도구를 선택하세요."
@@ -1550,7 +1657,7 @@ msgid "Selection"
 msgstr "선택"
 
 msgid "Send"
-msgstr ""
+msgstr "보내다"
 
 msgid "Send a message..."
 msgstr "메시지 보내기..."
@@ -1610,7 +1717,7 @@ msgid "show less"
 msgstr "간략하게 표시"
 
 msgid "Show link annotation borders"
-msgstr ""
+msgstr "링크 주석 테두리 표시"
 
 msgid "show more"
 msgstr "더 보여줘"
@@ -1636,8 +1743,22 @@ msgstr "가입 또는 로그인"
 msgid "Slim FIDUS"
 msgstr "슬림 FIDUS"
 
-msgid "Small lines at the corners of the page that show printers where to cut the paper."
-msgstr ""
+msgid ""
+"Small lines at the corners of the page that show printers where to cut the "
+"paper."
+msgstr "프린터가 용지를 자를 위치를 알려주는 페이지 모서리의 작은 선입니다."
+
+msgid "Snapshot could not be saved."
+msgstr "스냅샷을 저장할 수 없습니다."
+
+msgid "Snapshot description"
+msgstr "스냅샷 설명"
+
+msgid "Snapshot file could not be generated."
+msgstr "스냅샷 파일을 생성할 수 없습니다."
+
+msgid "Snapshot saved."
+msgstr "스냅샷이 저장되었습니다."
 
 msgid "Spanish"
 msgstr "스페인어"
@@ -1652,13 +1773,13 @@ msgid "Specify whether the work can be accessed without paying a fee."
 msgstr "수수료를 지불하지 않고 저작물에 액세스할 수 있는지 여부를 지정합니다."
 
 msgid "Spell/grammar check finished."
-msgstr ""
+msgstr "맞춤법/문법 검사가 완료되었습니다."
 
 msgid "Spell/grammar check initialized."
-msgstr ""
+msgstr "맞춤법/문법 검사가 초기화되었습니다."
 
 msgid "Spell/grammar checker"
-msgstr ""
+msgstr "철자/문법 검사기"
 
 msgid "Split cell"
 msgstr "셀 분할"
@@ -1687,8 +1808,15 @@ msgstr "아래첨자"
 msgid "Superscript"
 msgstr "위첨자"
 
-msgid "SVG renders consistently across browsers; MathML keeps formulas as text that can be searched and copied, but only newer browsers support it."
+msgid "Supported file formats"
+msgstr "지원되는 파일 형식"
+
+msgid ""
+"SVG renders consistently across browsers; MathML keeps formulas as text that"
+" can be searched and copied, but only newer browsers support it."
 msgstr ""
+"SVG는 여러 브라우저에서 일관되게 렌더링됩니다. MathML은 수식을 검색하고 복사할 수 있는 텍스트로 유지하지만 최신 브라우저에서만 "
+"이를 지원합니다."
 
 msgid "Symbols and Roman Letters"
 msgstr "기호 및 로마자"
@@ -1696,14 +1824,16 @@ msgstr "기호 및 로마자"
 msgid "Table"
 msgstr "표"
 
-msgid "Tags the PDF with a logical structure tree so screen readers can navigate the document."
-msgstr ""
+msgid ""
+"Tags the PDF with a logical structure tree so screen readers can navigate "
+"the document."
+msgstr "화면 판독기가 문서를 탐색할 수 있도록 논리적 구조 트리로 PDF에 태그를 지정합니다."
 
 msgid "Technical support"
 msgstr "기술지원"
 
 msgid "TEI"
-msgstr ""
+msgstr "테이"
 
 msgid "Text before"
 msgstr "이전에 문자 메시지"
@@ -1715,51 +1845,101 @@ msgid "Text replaced successfully"
 msgstr "텍스트가 성공적으로 교체되었습니다."
 
 msgid "Thank you for your feedback!"
-msgstr ""
+msgstr "피드백을 보내주셔서 감사합니다!"
 
-msgid "The change could not be applied automatically. Please consider using the copy option to copy the changes."
+msgid ""
+"The change could not be applied automatically. Please consider using the "
+"copy option to copy the changes."
 msgstr "변경 사항을 자동으로 적용할 수 없습니다. 변경 사항을 복사하려면 복사 옵션을 사용해 보세요."
+
+msgid "The chat message could not be encrypted and was not sent."
+msgstr "채팅 메시지를 암호화할 수 없어 전송되지 않았습니다."
+
+msgid ""
+"The chat message was rejected by the server because this document is "
+"encrypted."
+msgstr "이 문서는 암호화되어 있기 때문에 서버에서 채팅 메시지를 거부했습니다."
 
 msgid "The current password is incorrect."
 msgstr "현재 비밀번호가 올바르지 않습니다."
 
 msgid "The document could not be exported."
-msgstr ""
+msgstr "문서를 내보낼 수 없습니다."
 
-msgid "The document is being edited in another session. Your latest changes could not be saved automatically."
-msgstr ""
+msgid ""
+"The document is being edited in another session. Your latest changes could "
+"not be saved automatically."
+msgstr "문서가 다른 세션에서 편집 중입니다. 최근 변경사항을 자동으로 저장할 수 없습니다."
 
-msgid "The document password was changed by another user. You will need to enter the new password to continue editing."
+msgid "The document password could not be changed: %s"
+msgstr "문서 비밀번호를 변경할 수 없습니다: %s"
+
+msgid ""
+"The document password was changed by another user. You will need to enter "
+"the new password to continue editing."
 msgstr "다른 사용자가 문서 비밀번호를 변경했습니다. 편집을 계속하려면 새 비밀번호를 입력해야 합니다."
 
-msgid "The document was modified substantially by other users while you were offline. We have merged your changes in as tracked changes. You should verify that your edits still make sense."
-msgstr "오프라인 상태에서 다른 사용자가 문서를 상당 부분 수정했습니다. 귀하의 변경 사항을 추적된 변경 사항으로 병합했습니다. 편집 내용이 여전히 유효한지 확인해야 합니다."
-
-msgid "The editors in the middle and on the right will show content that is highlighted in green. They also contain text that is highlighted in red. The text marked in green corresponds to the text that was edited (added) by you or other users. The text marked in red corresponds to text that was deleted by either you or other users. The insertions and deletions made by other users will be marked in the merge editor. The insertions and deletions made by you will be marked in the offline editor on the right."
-msgstr "중앙과 오른쪽의 편집기에는 녹색으로 강조 표시된 콘텐츠가 표시됩니다. 또한 빨간색으로 강조 표시된 텍스트도 포함되어 있습니다. 녹색으로 표시된 텍스트는 본인 또는 다른 사용자가 편집(추가)한 텍스트에 해당합니다. 빨간색으로 표시된 텍스트는 귀하 또는 다른 사용자가 삭제한 텍스트에 해당합니다. 다른 사용자가 삽입하고 삭제한 내용은 병합 편집기에 표시됩니다. 귀하가 삽입하고 삭제한 내용은 오른쪽 오프라인 편집기에 표시됩니다."
-
-msgid "The file is locked by another session. Changes cannot be saved until the lock is released."
+msgid ""
+"The document was modified substantially by other users while you were "
+"offline. We have merged your changes in as tracked changes. You should "
+"verify that your edits still make sense."
 msgstr ""
+"오프라인 상태에서 다른 사용자가 문서를 상당 부분 수정했습니다. 귀하의 변경 사항을 추적된 변경 사항으로 병합했습니다. 편집 내용이 "
+"여전히 유효한지 확인해야 합니다."
+
+msgid ""
+"The editors in the middle and on the right will show content that is "
+"highlighted in green. They also contain text that is highlighted in red. The"
+" text marked in green corresponds to the text that was edited (added) by you"
+" or other users. The text marked in red corresponds to text that was deleted"
+" by either you or other users. The insertions and deletions made by other "
+"users will be marked in the merge editor. The insertions and deletions made "
+"by you will be marked in the offline editor on the right."
+msgstr ""
+"중앙과 오른쪽의 편집기에는 녹색으로 강조 표시된 콘텐츠가 표시됩니다. 또한 빨간색으로 강조 표시된 텍스트도 포함되어 있습니다. 녹색으로 "
+"표시된 텍스트는 본인 또는 다른 사용자가 편집(추가)한 텍스트에 해당합니다. 빨간색으로 표시된 텍스트는 귀하 또는 다른 사용자가 삭제한 "
+"텍스트에 해당합니다. 다른 사용자가 삽입하고 삭제한 내용은 병합 편집기에 표시됩니다. 귀하가 삽입하고 삭제한 내용은 오른쪽 오프라인 "
+"편집기에 표시됩니다."
+
+msgid ""
+"The file is locked by another session. Changes cannot be saved until the "
+"lock is released."
+msgstr "파일이 다른 세션에 의해 잠겨 있습니다. 잠금이 해제될 때까지 변경 사항을 저장할 수 없습니다."
 
 msgid "The format used by the USA and some other American countries."
 msgstr "미국 및 일부 아메리카 국가에서 사용되는 형식입니다."
 
 msgid "The ignore lists could not be saved."
-msgstr ""
+msgstr "무시 목록을 저장할 수 없습니다."
 
 msgid "The language pack for the document language could not be loaded."
-msgstr ""
+msgstr "문서 언어에 대한 언어 팩을 로드할 수 없습니다."
 
-msgid "The recovery key you entered is incorrect, or the recovery process failed. Please try again."
+msgid ""
+"The recovery key you entered is incorrect, or the recovery process failed. "
+"Please try again."
 msgstr "입력한 복구 키가 올바르지 않거나 복구 프로세스가 실패했습니다. 다시 시도해 주세요."
 
-msgid "This document is end-to-end encrypted. Collaborators without a personal passphrase will need the document password shared with them through a secure channel outside of Fidus Writer. Do not send the password through the document chat."
-msgstr "이 문서는 엔드투엔드 암호화되어 있습니다. 개인 암호가 없는 공동작업자는 Fidus Writer 외부의 보안 채널을 통해 문서 비밀번호를 공유해야 합니다. 문서채팅으로 비밀번호를 보내지 마세요."
+msgid ""
+"This document is encrypted but no encryption key is available. The chat "
+"message was not sent."
+msgstr "이 문서는 암호화되어 있지만 사용할 수 있는 암호화 키가 없습니다. 채팅 메시지가 전송되지 않았습니다."
+
+msgid ""
+"This document is end-to-end encrypted. Collaborators without a personal "
+"passphrase will need the document password shared with them through a secure"
+" channel outside of Fidus Writer. Do not send the password through the "
+"document chat."
+msgstr ""
+"이 문서는 엔드투엔드 암호화되어 있습니다. 개인 암호가 없는 공동작업자는 Fidus Writer 외부의 보안 채널을 통해 문서 비밀번호를"
+" 공유해야 합니다. 문서채팅으로 비밀번호를 보내지 마세요."
 
 msgid "This person is already in your contacts!"
 msgstr "이 사람은 이미 연락처에 있습니다!"
 
-msgid "This share link has expired or is invalid. Please ask the document owner for a new link."
+msgid ""
+"This share link has expired or is invalid. Please ask the document owner for"
+" a new link."
 msgstr "이 공유 링크는 만료되었거나 유효하지 않습니다. 문서 소유자에게 새 링크를 요청하세요."
 
 msgid "Title"
@@ -1799,7 +1979,7 @@ msgid "Track changes"
 msgstr "변경 사항 추적"
 
 msgid "Tracked changes"
-msgstr ""
+msgstr "추적된 변경 사항"
 
 msgid "Tracking"
 msgstr "추적"
@@ -1808,13 +1988,13 @@ msgid "Tracking changes to the document"
 msgstr "문서 변경 사항 추적"
 
 msgid "Trim box"
-msgstr ""
+msgstr "트림 상자"
 
 msgid "Type formula"
 msgstr "수식 입력"
 
 msgid "Typst"
-msgstr ""
+msgstr "타이프스트"
 
 msgid "Underline"
 msgstr "밑줄"
@@ -1849,14 +2029,15 @@ msgstr "미국 레터"
 msgid "User"
 msgstr "사용자"
 
-#: book/assets/js/modules/books/templates.js:55
 msgid "Version"
 msgstr "버전"
 
 msgid "Version, copyright and license information."
-msgstr ""
+msgstr "버전, 저작권 및 라이센스 정보."
 
-msgid "Warning! Not all your changes have been saved! You could suffer data loss. Attempting to reconnect..."
+msgid ""
+"Warning! Not all your changes have been saved! You could suffer data loss. "
+"Attempting to reconnect..."
 msgstr "경고! 모든 변경사항이 저장되지 않았습니다! 데이터 손실이 발생할 수 있습니다. 다시 연결을 시도하는 중..."
 
 msgid "Warnings"
@@ -1871,10 +2052,13 @@ msgstr "편집기에서 녹색과 빨간색 하이라이트는 무엇입니까?"
 msgid "What do I do after completing the merge?"
 msgstr "병합을 완료한 후에는 어떻게 해야 하나요?"
 
-msgid "What happens if I try to complete merge without resolving all the changes?"
+msgid ""
+"What happens if I try to complete merge without resolving all the changes?"
 msgstr "모든 변경 사항을 해결하지 않고 병합을 완료하려고 하면 어떻게 되나요?"
 
-msgid "What if my collaborators continue working on the document while I am merging?"
+msgid ""
+"What if my collaborators continue working on the document while I am "
+"merging?"
 msgstr "내가 병합하는 동안 공동작업자가 문서 작업을 계속하면 어떻게 되나요?"
 
 msgid "Why am I seeing this merge dialog?"
@@ -1892,8 +2076,10 @@ msgstr "워드 카운터"
 msgid "Words"
 msgstr "단어"
 
-msgid "Words and word combinations that the spell checker should accept as correct. One word or phrase per line."
-msgstr ""
+msgid ""
+"Words and word combinations that the spell checker should accept as correct."
+" One word or phrase per line."
+msgstr "맞춤법 검사기가 올바른 것으로 받아들여야 하는 단어 및 단어 조합입니다. 한 줄에 하나의 단어 또는 구문입니다."
 
 msgid "Wrap selection in bullet list"
 msgstr "글머리 기호 목록에서 선택 항목 줄 바꿈"
@@ -1907,8 +2093,11 @@ msgstr "인용구로 포장됨"
 msgid "Write"
 msgstr "쓰기"
 
-msgid "Write tracked"
-msgstr "추적된 쓰기"
+msgid "Write tracked only"
+msgstr "추적된 쓰기만 가능"
+
+msgid "Write tracked only (no comments of others)"
+msgstr "추적된 쓰기만 가능(다른 사람의 댓글 없음)"
 
 msgid "Write with changes tracked"
 msgstr "변경 사항을 추적하여 쓰기"
@@ -1919,51 +2108,97 @@ msgstr "변경 사항을 추적하여 작성하지만 다른 사람의 댓글과
 msgid "Year"
 msgstr "년도"
 
-msgid "Yes, you are the only one who can see this dialog. Therefore it would be great if you could ask your collaborators to stop editing the document, so that once you are finished with the merge, it will not lead to more conflicts."
-msgstr "예, 이 대화 상자를 볼 수 있는 유일한 사람은 귀하입니다. 따라서 공동작업자에게 문서 편집을 중지하도록 요청할 수 있으면 병합이 완료되면 더 이상 충돌이 발생하지 않도록 할 수 있다면 좋을 것입니다."
+msgid ""
+"Yes, you are the only one who can see this dialog. Therefore it would be "
+"great if you could ask your collaborators to stop editing the document, so "
+"that once you are finished with the merge, it will not lead to more "
+"conflicts."
+msgstr ""
+"예, 이 대화 상자를 볼 수 있는 유일한 사람은 귀하입니다. 따라서 공동작업자에게 문서 편집을 중지하도록 요청할 수 있으면 병합이 "
+"완료되면 더 이상 충돌이 발생하지 않도록 할 수 있다면 좋을 것입니다."
 
 msgid "You already have the highest possible access level."
-msgstr ""
+msgstr "이미 가능한 가장 높은 액세스 수준을 보유하고 있습니다."
 
 msgid "You are currently offline. Please try again when you are back online."
 msgstr "현재 오프라인 상태입니다. 다시 온라인 상태가 되면 다시 시도해 주세요."
 
-msgid "You are seeing this merge dialog because you were offline for a long time, and the changes you made to the document while you were offline conflicted with the changes made by other users. So it was not possible to merge your edits in automatically."
-msgstr "오랫동안 오프라인 상태였으며 오프라인 상태에서 문서에 적용한 변경 사항이 다른 사용자가 변경한 내용과 충돌했기 때문에 이 병합 대화 상자가 표시되었습니다. 따라서 편집 내용을 자동으로 병합할 수 없었습니다."
+msgid ""
+"You are seeing this merge dialog because you were offline for a long time, "
+"and the changes you made to the document while you were offline conflicted "
+"with the changes made by other users. So it was not possible to merge your "
+"edits in automatically."
+msgstr ""
+"오랫동안 오프라인 상태였으며 오프라인 상태에서 문서에 적용한 변경 사항이 다른 사용자가 변경한 내용과 충돌했기 때문에 이 병합 대화 "
+"상자가 표시되었습니다. 따라서 편집 내용을 자동으로 병합할 수 없었습니다."
 
-msgid "You can edit the content only in the merge editor in the middle. You cannot edit content in the other two editors."
+msgid ""
+"You can edit the content only in the merge editor in the middle. You cannot "
+"edit content in the other two editors."
 msgstr "중간에 있는 병합 편집기에서만 내용을 편집할 수 있습니다. 다른 두 편집기에서는 콘텐츠를 편집할 수 없습니다."
 
 msgid "You cannot add yourself to your contacts!"
 msgstr "연락처에 자신을 추가할 수 없습니다!"
 
-msgid "You do not have access to this document. Select the access level you would like to request from the document owner."
-msgstr ""
+msgid ""
+"You do not have access to this document. Select the access level you would "
+"like to request from the document owner."
+msgstr "이 문서에 대한 액세스 권한이 없습니다. 문서 소유자에게 요청하려는 액세스 수준을 선택하세요."
 
-msgid "You will receive a warning when you try to complete a merge without accepting or rejecting all of the changes. You can still proceed to merge the document. If you do that, all the insertions and deletions in the merge editor in the middle will be accepted automatically, and all the insertions and deletions in the offline editor on the right will be ignored."
+msgid ""
+"You will receive a warning when you try to complete a merge without "
+"accepting or rejecting all of the changes. You can still proceed to merge "
+"the document. If you do that, all the insertions and deletions in the merge "
+"editor in the middle will be accepted automatically, and all the insertions "
+"and deletions in the offline editor on the right will be ignored."
 msgstr ""
+"모든 변경 사항을 수락하거나 거부하지 않고 병합을 완료하려고 하면 경고가 표시됩니다. 계속해서 문서 병합을 진행할 수 있습니다. 그렇게 "
+"하면 중간에 있는 병합 편집기에서 모든 삽입과 삭제가 자동으로 허용되고, 오른쪽 오프라인 편집기에서 모든 삽입과 삭제가 무시됩니다."
 
 msgid "Your access request has been sent to the document owner."
 msgstr "귀하의 액세스 요청이 문서 소유자에게 전송되었습니다."
 
-msgid "Your Access rights have been modified. You now have %(accessRight)s access to this document."
+msgid ""
+"Your Access rights have been modified. You now have %(accessRight)s access "
+"to this document."
 msgstr "귀하의 액세스 권한이 수정되었습니다. 이제 이 문서에 대한 %(accessRight)s 액세스 권한이 있습니다."
 
-msgid "Your access rights were modified while you were offline, so we cannot save your work to the server any longer, and it is downloaded to your computer instead. Please consider importing it into a new document."
-msgstr "귀하가 오프라인인 동안 귀하의 액세스 권한이 수정되었으므로 귀하의 작업을 더 이상 서버에 저장할 수 없으며 대신 귀하의 컴퓨터에 다운로드됩니다. 새 문서로 가져오는 것을 고려해 보세요."
+msgid ""
+"Your access rights were modified while you were offline, so we cannot save "
+"your work to the server any longer, and it is downloaded to your computer "
+"instead. Please consider importing it into a new document."
+msgstr ""
+"귀하가 오프라인인 동안 귀하의 액세스 권한이 수정되었으므로 귀하의 작업을 더 이상 서버에 저장할 수 없으며 대신 귀하의 컴퓨터에 "
+"다운로드됩니다. 새 문서로 가져오는 것을 고려해 보세요."
+
+msgid ""
+"Your document is saved automatically every few seconds. A snapshot creates "
+"an additional copy of the current state of the document that you can return "
+"to later."
+msgstr "문서는 몇 초마다 자동으로 저장됩니다. 스냅샷은 나중에 돌아갈 수 있는 문서의 현재 상태에 대한 추가 복사본을 만듭니다."
 
 msgid "Your document was out of sync and has been reset."
 msgstr "문서가 동기화되지 않아 재설정되었습니다."
 
 msgid "Your feedback could not be delivered. Please try again later."
+msgstr "귀하의 의견을 전달할 수 없습니다. 나중에 다시 시도해 주세요."
+
+msgid ""
+"Your personal passphrase will still unlock this document. A new random "
+"password is generated automatically. Other passphrase users will receive it "
+"automatically; non-passphrase collaborators need it shared with them "
+"manually."
 msgstr ""
+"개인 암호로 이 문서의 잠금을 해제할 수 있습니다. 새로운 무작위 비밀번호가 자동으로 생성됩니다. 다른 암호 사용자는 자동으로 암호를 "
+"받게 됩니다. 암호가 없는 공동작업자는 이를 수동으로 공유해야 합니다."
 
-msgid "Your personal passphrase will still unlock this document. A new random password is generated automatically. Other passphrase users will receive it automatically; non-passphrase collaborators need it shared with them manually."
-msgstr "개인 암호로 이 문서의 잠금을 해제할 수 있습니다. 새로운 무작위 비밀번호가 자동으로 생성됩니다. 다른 암호 사용자는 자동으로 암호를 받게 됩니다. 암호가 없는 공동작업자는 이를 수동으로 공유해야 합니다."
-
-msgid "Your session expired while you were offline, so we cannot save your work to the server any longer, but you can download it to your computer instead. Please consider importing it as a new document after logging in."
-msgstr "오프라인 상태에서 세션이 만료되었으므로 작업 내용을 더 이상 서버에 저장할 수 없지만 대신 컴퓨터에 다운로드할 수 있습니다. 로그인 후 새 문서로 가져오기를 고려해 보세요."
+msgid ""
+"Your session expired while you were offline, so we cannot save your work to "
+"the server any longer, but you can download it to your computer instead. "
+"Please consider importing it as a new document after logging in."
+msgstr ""
+"오프라인 상태에서 세션이 만료되었으므로 작업 내용을 더 이상 서버에 저장할 수 없지만 대신 컴퓨터에 다운로드할 수 있습니다. 로그인 후 "
+"새 문서로 가져오기를 고려해 보세요."
 
 msgid "YYYY-MM-DD or empty"
 msgstr "YYYY-MM-DD 또는 비어 있음"
-
