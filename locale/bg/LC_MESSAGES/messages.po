@@ -1390,7 +1390,7 @@ msgid "Numeric"
 msgstr "Цифрова"
 
 msgid "ODT export options"
-msgstr ""
+msgstr "ODT опции за експортиране"
 
 msgid "Offline Document"
 msgstr "Офлайн документ"

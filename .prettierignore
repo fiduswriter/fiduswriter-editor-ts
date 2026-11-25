@@ -3,3 +3,4 @@ schema.json
 static-libs/
 package-lock.json
 pnpm-lock.yaml
+locale/
